@@ -25,6 +25,14 @@
           </td>
           <td>
             <span class="field-name">
+              hash
+            </span>
+            <span class="number">
+              {{b.hash | startAndEnd }}
+            </span>
+          </td>
+          <td>
+            <span class="field-name">
             target
             </span>
             <span class="number">
