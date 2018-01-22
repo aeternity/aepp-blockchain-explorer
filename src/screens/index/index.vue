@@ -8,7 +8,7 @@
           <p>Search the æternity test network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
         </div>
         <div class='search'>
-          <input class='search-input' placeholder='Explore Block, Transaction, Address' v-model='searchString' type="text">
+          <input class='search-input' placeholder='Explore Block, Address' v-model='searchString' type="text">
           <button class='search-button' @click='search'>
             <img src="@/assets/search.svg" alt=""/>
             </button>
@@ -26,6 +26,11 @@
 import MarketStats from '@/partials/marketStats/marketStats.vue'
 import LatestBlock from '@/partials/latestBlock/latestBlock.vue'
 import RecentBlocks from '@/partials/recentBlocks/recentBlocks.vue'
+
+const blockHeightRegex = RegExp('^[0-9]+')
+const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
+const accountPublicKeyRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{93,94}')
+
 export default {
   data () {
     return {
@@ -39,6 +44,15 @@ export default {
   },
   methods: {
     search () {
+      if ( blockHeightRegex.test(this.searchString) ) {
+        this.$router.push({ path: `/block/${this.searchString}` })
+      } else if (blockHashRegex.test(this.searchString)) {
+        this.$router.push({ path: `/block/${this.searchString}` })
+      } else if (accountPublicKeyRegex.test(this.searchString)) {
+        this.$router.push({ path: `/account/${this.searchString}` })
+      } else {
+        alert('not a valid block hash/height or account public key')
+      }
     }
   }
 }
