@@ -43,6 +43,11 @@ function agoFormat (ts) {
 }
 Vue.filter('agoFormat', agoFormat)
 
+function humanDate (ts) {
+  return new Date(ts).toISOString()
+}
+Vue.filter('humanDate', humanDate)
+
 new Vue({
   el: '#app',
   router,
