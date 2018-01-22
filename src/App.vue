@@ -17,9 +17,12 @@
             Transactions
           </router-link>
         </div>
-        <router-link to='/search'>
-          <img src="@/assets/search.svg" alt=""/>
-        </router-link>
+        <div>
+          <span class='network-name'>TEST NETWORK</span>
+          <!--<router-link to='/search'>-->
+            <!--<img src="@/assets/search.svg" alt=""/>-->
+          <!--</router-link>-->
+        </div>
       </div>
     </nav>
     <main>
@@ -66,6 +69,15 @@ html, body {
   background: #311B58;
 
 }
+.network-name {
+  position:fixed;
+  right:20px;
+  font-size:14px;
+  font-weight:500;
+  padding:5px 7px;
+  background: #F7296E;
+  border-radius: 5px;
+}
 .number ,
 .block-hash,
 .block-number,
@@ -104,7 +116,7 @@ nav {
 }
 nav >.inner >:first-child ,
 nav >.inner >:last-child {
-  width:250px;
+  width:280px;
 }
 nav >.inner >:last-child {
   text-align:right;

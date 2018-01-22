@@ -5,7 +5,7 @@
         <div>
           <img src="@/assets/logo.svg" alt=""/>
           <h1>Blockchain Explorer</h1>
-          <p>Search the æternity blockchain by block, transaction, address. Or go through the last changes or stats.</p>
+          <p>Search the æternity test network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
         </div>
         <div class='search'>
           <input class='search-input' placeholder='Explore Block, Transaction, Address' v-model='searchString' type="text">
