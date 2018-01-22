@@ -19,23 +19,37 @@
           <span class='ago' v-html='$options.filters.agoFormat(ago)'/>
         </div>
       </div>
-      <div class="detail-block-info grid">
-        <div class="height">
-          <div class='field-name'>Height</div>
-          <div class='field-value number'>{{ apiBlock.height }}</div>
+      <div class="detail-block-info">
+        <div class="field hash">
+          <div class='field-name'>Hash</div>
+          <div class='field-value number'>{{ apiBlock.hash }}</div>
         </div>
-        <div class="hash">
+        <div class="grid">
+          <div class="field height">
+            <div class='field-name'>Height</div>
+            <div class='field-value number'>{{ apiBlock.height }}</div>
+          </div>
+          <div class="field rewarded">
+            <div class='field-name'>Target</div>
+            <div class="field-value number">
+              {{ apiBlock.target }}
+            </div>
+          </div>
+          <div class="field time">
+            <div class='field-name'>
+              Time (<span class='number'>{{ apiBlock.time }}</span>)
+            </div>
+            <div class="field-value number">
+              {{ apiBlock.time | humanDate}}
+            </div>
+          </div>
+        </div>
+        <div class="field hash">
           <div class='field-name'>Parent Hash</div>
           <div class="field-value block-hash">
             <router-link :to="'/block/' + apiBlock.prev_hash">
               {{apiBlock.prev_hash | startAndEnd }}
             </router-link>
-          </div>
-        </div>
-        <div class="rewarded">
-          <div class='field-name'>Target</div>
-          <div class="field-value number">
-            {{ apiBlock.target }}
           </div>
         </div>
       </div>
@@ -217,8 +231,9 @@ export default {
 .block-screen .detail-block-info {
   padding: 20px 0;
 }
-.block-screen .detail-block-info > * {
+.block-screen .detail-block-info .field {
   margin-right:50px;
+  margin-bottom:15px;
 }
 .block-screen .account-address {
   color:#F7296E;
