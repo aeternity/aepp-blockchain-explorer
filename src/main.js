@@ -6,7 +6,7 @@ import router from './router'
 Vue.use(VueResource)
 Vue.config.productionTip = false
 
-Vue.http.options.root = 'http://139.59.140.51/api/'
+Vue.http.options.root = '//integration-net-api.aepps.com/api/'
 
 /* eslint-disable no-new */
 function startAndEnd (str, start = 6, end = 6) {
