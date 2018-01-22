@@ -1,7 +1,7 @@
 {
-  "name": "Aeternity Blockchain Explorer",
+  "name": "aepp-blockchain-explorer",
   "version": "0.0.1",
-  "description": "Chain Explorer for the Aeternity Blockchain",
+  "description": "Blockchain Explorer for Aeternity",
   "author": "Philipp Klein <klein.philipp@gmail.com>",
   "private": false,
   "scripts": {
