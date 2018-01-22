@@ -57,6 +57,14 @@
               </router-link>
             </span>
           </td>
+          <td>
+            <span class="field-name">
+              time
+            </span>
+            <span class="number">
+              <span class='' v-html='$options.filters.agoFormat(currentTime - b.time)'/>
+            </span>
+          </td>
         </template>
         <template v-else-if="typeof b.then !== 'undefined'">
           <td colspan="3">
