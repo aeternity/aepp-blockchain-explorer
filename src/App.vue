@@ -3,8 +3,7 @@
     <nav>
       <div class="inner">
         <router-link class='logo' to='/'>
-          <img src="@/assets/logo.svg" alt=""/>
-          <span>aeternity</span>
+          <img src="@/assets/header-logo.svg" alt=""/>
           <span>explorer</span>
         </router-link>
         <div class="links">
@@ -105,7 +104,7 @@ nav {
 }
 nav >.inner >:first-child ,
 nav >.inner >:last-child {
-  width:200px;
+  width:250px;
 }
 nav >.inner >:last-child {
   text-align:right;
@@ -128,6 +127,11 @@ nav a {
   margin:0 10px;
 }
 nav .logo {
+  display:flex;
+}
+nav .logo img + *{
+  margin-top:-12px;
+  margin-left:5px;
 }
 nav a.link {
   opacity:0.6;
