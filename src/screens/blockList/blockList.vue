@@ -105,8 +105,7 @@ export default {
       this.apiBlocks.forEach((x, i) => {
         if (typeof x.then === 'undefined') return
         x.then(resp => {
-          this.apiBlocks[i] = resp.body
-          this.$forceUpdate()
+          this.$set( this.apiBlocks, i, resp.body )
         })
       })
       this.blockHeight = i
