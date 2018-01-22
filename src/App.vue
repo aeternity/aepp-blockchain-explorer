@@ -26,12 +26,17 @@
     <main>
       <router-view/>
     </main>
+    <ae-footer />
   </div>
 </template>
 
 <script>
+import Footer from '@/partials/footer/footer.vue'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    AeFooter: Footer
+  }
 }
 </script>
 
