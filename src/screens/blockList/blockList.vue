@@ -92,15 +92,18 @@ export default {
   },
   computed: {
     averageBlockTime () {
-      let avTime = this.apiBlocks.reduce(
-        (average, block, i, blocks) => {
-          if (blocks.length < i + 2) return average
-          if (typeof block.then !== 'undefined') return average
-          if (typeof blocks[i + 1].then !== 'undefined') return average
-          return Math.round((average + (block.time - blocks[i + 1].time)) / 2)
+      return this.apiBlocks.reduce(
+        (sum, block, i, blocks) => {
+          if (typeof block.then !== 'undefined') {
+            return sum
+          }
+          if (i === 0) {
+            return sum + (new Date() - block.time)
+          }
+          if (typeof blocks[i - 1].then !== 'undefined') return sum
+          return sum + (blocks[i - 1].time - block.time)
         }
-      , 0)
-      return avTime
+        , 0) / this.apiBlocks.filter(b => typeof b.then === 'undefined').length
     },
     lastBlockAgo () {
       if (this.apiBlocks.length > -1 && typeof this.apiBlocks[0].time !== 'undefined') {
