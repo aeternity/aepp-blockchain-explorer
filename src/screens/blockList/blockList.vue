@@ -5,6 +5,10 @@
       <div class='title'>
         Blocks
       </div>
+      <div class="field average-block-time">
+        <span class='field-name'>average block time</span>
+        <span class='ago' v-html='$options.filters.agoFormat(averageBlockTime)'/>
+      </div>
       <div>
         <span class="field-name">
         time since last block
@@ -87,6 +91,17 @@ export default {
     }
   },
   computed: {
+    averageBlockTime () {
+      let avTime = this.apiBlocks.reduce(
+        (average, block, i, blocks) => {
+          if (blocks.length < i + 2) return average
+          if (typeof block.then !== 'undefined') return average
+          if (typeof blocks[i + 1].then !== 'undefined') return average
+          return Math.round((average + (block.time - blocks[i + 1].time)) / 2)
+        }
+      , 0)
+      return avTime
+    },
     lastBlockAgo () {
       if (this.apiBlocks.length > -1 && typeof this.apiBlocks[0].time !== 'undefined') {
         return this.currentTime - this.apiBlocks[0].time
