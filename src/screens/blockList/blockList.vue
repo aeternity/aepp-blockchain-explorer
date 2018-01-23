@@ -6,15 +6,18 @@
         Blocks
       </div>
       <div class="field average-block-time">
-        <span class='field-name'>average block time</span>
+        <span class='field-name'>average rate 1 per </span>
         <span class='ago' v-html='$options.filters.agoFormat(averageBlockTime)'/>
       </div>
       <div>
         <span class="field-name">
-        time since last block
+        last block mined 
         </span>
-        <span class='ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/>
-      </div>
+        <span class='ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/> 
+        <span class="field-name">
+        ago 
+        </span>
+     </div>
     </div>
 
     <table>
