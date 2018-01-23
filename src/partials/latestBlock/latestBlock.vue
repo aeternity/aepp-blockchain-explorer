@@ -2,8 +2,7 @@
   <div class="latest-block-partial">
     <div class="grid" v-if='apiTop'>
       <div class="explanation">
-        <h2 class='title'>Last Block</h2>
-        <p>Contains the information displayed here on the right.</p>
+        <h2 class='title'>Latest Block</h2>
 
         <router-link :to='"/block/" + apiTop.height'>
           view last
@@ -21,8 +20,8 @@
             </router-link>
           </div>
           <div>
-            time since mined
-            <span class='last-block-ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/>
+            mined
+            <span class='last-block-ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/> ago
           </div>
         </div>
         <div class="grid block-extended-info">
