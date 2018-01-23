@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     search () {
-      if ( blockHeightRegex.test(this.searchString) ) {
+      if (blockHeightRegex.test(this.searchString)) {
         this.$router.push({ path: `/block/${this.searchString}` })
       } else if (blockHashRegex.test(this.searchString)) {
         this.$router.push({ path: `/block/${this.searchString}` })
