@@ -2,7 +2,7 @@
   <div class="recent-blocks-partial">
     <div class="inner">
       <h2>Recent blocks</h2>
-      <p>View the latest blocks minder on the aeternity blockchain</p>
+      <p>View the latest blocks on the aeternity blockchain</p>
       <table>
         <tr v-for='b in apiBlocks'>
           <template v-if="typeof b.then === 'undefined'">
