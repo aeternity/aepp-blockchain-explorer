@@ -11,6 +11,7 @@
           <th>address</th>
           <th>top.height</th>
           <th>top.hash </th>
+          <th>top.time </th>
           <th>version.revision</th>
           <th>version.genesis_hash</th>
         </tr>
@@ -18,6 +19,7 @@
           <td><strong>{{node}}</strong></td>
           <td>{{apiNodeTop.height}}</td>
           <td>{{apiNodeTop.hash | startAndEnd }}</td>
+          <td>{{apiNodeTop.time}}</td>
           <td>{{apiNodeVersion.revision | startAndEnd }}</td>
           <td>{{apiNodeVersion.genesis_hash | startAndEnd}}</td>
         </tr>
@@ -26,6 +28,7 @@
           <td>{{p.address}}</td>
           <td>{{p.top.height}}</td>
           <td>{{p.top.hash | startAndEnd }}</td>
+          <td>{{p.top.time}}</td>
           <td>{{p.version.revision | startAndEnd }}</td>
           <td>{{p.version.genesis_hash | startAndEnd}}</td>
           </template>
@@ -123,6 +126,6 @@ export default {
 .status-screen > * {
  max-width:1040px;
  margin:0 auto;
- width:(100% - 40px);
+ width:calc(100% - 40px);
 }
 </style>
