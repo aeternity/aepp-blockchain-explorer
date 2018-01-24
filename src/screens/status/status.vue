@@ -51,43 +51,42 @@ export default {
   methods: {
     getPeerTop (i) {
       return new Promise((resolve, reject) => {
-        this.$http.get(`peer/${i+1}/v2/top`).then(resp => {
+        this.$http.get(`peer/${i + 1}/v2/top`).then(resp => {
           resolve({
             address: resp.headers.get('X-Upstream'),
             body: resp.body
           })
         }, resp => {
-          reject(false)
+          reject(new Error('fail'))
         })
       })
     },
     getPeerVersion (i) {
       return new Promise((resolve, reject) => {
-        this.$http.get(`peer/${i+1}/v2/version`).then(resp => {
+        this.$http.get(`peer/${i + 1}/v2/version`).then(resp => {
           resolve({
             address: resp.headers.get('X-Upstream'),
             body: resp.body
           })
         }, resp => {
-          reject(false)
+          reject(new Error('fail'))
         })
       })
     },
     getPeers (n) {
       this.apiPeers = new Array(n).fill(null)
       for (var i = 0; i < n; i++) {
-        Promise.all([i,this.getPeerTop(i), this.getPeerVersion(i)])
+        Promise.all([i, this.getPeerTop(i), this.getPeerVersion(i)])
           .then((values) => {
             if (values[1].address !== values[2].address) {
               return
             }
-            console.log(values);
             this.$set(this.apiPeers, values[0], {
               address: values[1].address,
               top: values[1].body,
-              version: values[2].body,
+              version: values[2].body
             })
-          });
+          })
       }
     }
   },
