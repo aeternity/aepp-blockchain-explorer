@@ -2,6 +2,7 @@
   <div class="status-screen screen">
     <div>
       <h1>Network Status</h1>
+      Explorer connected to: <strong>{{node}}</strong>
       <table>
         <tr>
           <th>address</th>
@@ -11,7 +12,7 @@
           <th>version.genesis_hash</th>
         </tr>
         <tr v-if='apiNodeTop && apiNodeVersion'>
-          <td>{{$http.options.root}}</td>
+          <td><strong>{{node}}</strong></td>
           <td>{{apiNodeTop.height}}</td>
           <td>{{apiNodeTop.hash | startAndEnd }}</td>
           <td>{{apiNodeVersion.revision}}</td>
@@ -27,13 +28,16 @@
           </template>
         </tr>
       </table>
-      <h2>API Node conf</h2>
+      <h1>Detail</h1>
+      <h2>{{node}} </h2>
+      <h3>epoch.yaml</h3>
       <pre>{{apiNodeConf}}</pre>
-      <h2>API Node /version</h2>
+      <h3>version</h3>
       <pre>{{apiNodeVersion}}</pre>
-      <h2>API Node /top</h2>
+      <h3>top</h3>
       <pre>{{apiNodeTop}}</pre>
-      <h2>API Peers </h2>
+
+      <h2>Peers</h2>
       <pre>{{apiPeers}}</pre>
     </div>
   </div>
@@ -46,6 +50,11 @@ export default {
       apiNodeVersion: null,
       apiNodeTop: null,
       apiPeers: []
+    }
+  },
+  computed: {
+    node () {
+      return this.$http.options.root
     }
   },
   methods: {
@@ -109,6 +118,5 @@ export default {
 </script>
 <style>
 .status-screen h1 {
-  margin-top:0;
 }
 </style>
