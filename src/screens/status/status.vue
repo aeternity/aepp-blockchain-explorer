@@ -1,8 +1,11 @@
 <template>
   <div class="status-screen screen">
     <div>
-      <h1>Network Status</h1>
+      <h1>Status</h1>
+      <p>
       Explorer connected to: <strong>{{node}}</strong>
+      </p>
+      <h2>Node and Peers</h2>
       <table>
         <tr>
           <th>address</th>
@@ -15,7 +18,7 @@
           <td><strong>{{node}}</strong></td>
           <td>{{apiNodeTop.height}}</td>
           <td>{{apiNodeTop.hash | startAndEnd }}</td>
-          <td>{{apiNodeVersion.revision}}</td>
+          <td>{{apiNodeVersion.revision | startAndEnd }}</td>
           <td>{{apiNodeVersion.genesis_hash | startAndEnd}}</td>
         </tr>
         <tr v-for='p in apiPeers'>
@@ -23,7 +26,7 @@
           <td>{{p.address}}</td>
           <td>{{p.top.height}}</td>
           <td>{{p.top.hash | startAndEnd }}</td>
-          <td>{{p.version.revision}}</td>
+          <td>{{p.version.revision | startAndEnd }}</td>
           <td>{{p.version.genesis_hash | startAndEnd}}</td>
           </template>
         </tr>
@@ -117,6 +120,9 @@ export default {
 }
 </script>
 <style>
-.status-screen h1 {
+.status-screen > * {
+ max-width:1040px;
+ margin:0 auto;
+ width:(100% - 40px);
 }
 </style>
