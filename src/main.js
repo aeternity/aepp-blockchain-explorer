@@ -6,7 +6,7 @@ import router from './router'
 Vue.use(VueResource)
 Vue.config.productionTip = false
 
-Vue.http.options.root = '//integration-net-api.aepps.com/api/'
+Vue.http.options.root = process.env.AETERNITY_EPOCH_API_URL
 
 /* eslint-disable no-new */
 function startAndEnd (str, start = 6, end = 6) {
