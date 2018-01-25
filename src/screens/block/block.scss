@@ -1,0 +1,63 @@
+.block-screen {
+  .header {
+    background-color:#311B58;
+    color:white;
+  }
+  .block-transactions,
+  .header > * {
+    max-width:1040px;
+    width:calc(100% - 40px);
+    margin:0 auto;
+  }
+
+  .block-navigation,
+  .basic-block-info {
+    justify-content:space-between;
+  }
+  .basic-block-info {
+    border-bottom:2px solid #F5F5F5;
+    align-items:flex-end;
+    line-height:50px;
+    padding-bottom:20px;
+    margin-bottom:20px;
+  }
+  .block-navigation ,
+  .detail-block-info {
+    padding: 20px 0;
+  }
+  .detail-block-info .field {
+    margin-right:50px;
+    margin-bottom:15px;
+  }
+  .account-address {
+    color:#F7296E;
+  }
+  .block-height {
+    font-size:30px;
+  }
+  .ago .number {
+    font-size:55px;
+  }
+  .ago .unit {
+    font-size:18px;
+  }
+  .ago .unit + .number {
+    margin-left:20px;
+  }
+  .field-name {
+    font-size:14px;
+    opacity:0.4;
+  }
+  .field-value {
+    margin-top:5px;
+    font-size:24px;
+  }
+  .block-transactions .title {
+    margin-top:50px;
+    margin-bottom:30px;
+    font-size:24px;
+    font-weight:normal;
+    padding-bottom:20px;
+    border-bottom:2px solid #311B58;
+  }
+}
