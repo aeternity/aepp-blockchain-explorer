@@ -148,43 +148,4 @@ export default {
   }
 }
 </script>
-<style>
-.block-list-screen {
-  background: #311B58;
-  color:white;;
-}
-.block-list-screen .inner {
-  margin:0 auto;
-  max-width:1040px;
-  width:calc(100% - 40px);
-
-}
-.block-list-screen .field-name {
-  font-size:16px;
-}
-.block-list-screen .grid {
-  border-bottom:2px solid #F5F5F5;
-  justify-content:space-between;
-  align-items:flex-end;
-  padding-bottom:15px;
-}
-.block-list-screen .title {
-  font-weight:500;
-  font-size:30px;
-}
-.block-list-screen .ago .number {
-  font-size:55px;
-}
-.block-list-screen .ago .unit {
-  font-size:18px;
-}
-.block-list-screen .ago .unit + .number {
-  margin-left:20px;
-}
-.block-list-screen .block-number {
-  font-size:30px;
-}
-.block-list-screen .account-address {
-  color:#F7296E;
-}
-</style>
+<style src='./blockList.scss' lang='scss' />

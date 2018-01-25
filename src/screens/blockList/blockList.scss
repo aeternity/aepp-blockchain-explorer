@@ -1,0 +1,38 @@
+.block-list-screen {
+  background: #311B58;
+  color:white;;
+  .inner {
+    margin:0 auto;
+    max-width:1040px;
+    width:calc(100% - 40px);
+
+  }
+  .field-name {
+    font-size:16px;
+  }
+  .grid {
+    border-bottom:2px solid #F5F5F5;
+    justify-content:space-between;
+    align-items:flex-end;
+    padding-bottom:15px;
+  }
+  .title {
+    font-weight:500;
+    font-size:30px;
+  }
+  .ago .number {
+    font-size:55px;
+  }
+  .ago .unit {
+    font-size:18px;
+  }
+  .ago .unit + .number {
+    margin-left:20px;
+  }
+  .block-number {
+    font-size:30px;
+  }
+  .account-address {
+    color:#F7296E;
+  }
+}
