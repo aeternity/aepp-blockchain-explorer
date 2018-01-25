@@ -18,7 +18,7 @@
           </router-link>
         </div>
         <div>
-          <span class='network-name'>TEST NETWORK</span>
+            <span is='router-link' to='/status/' class='network-name'>{{networkName}}</span>
           <!--<router-link to='/search'>-->
             <!--<img src="@/assets/search.svg" alt=""/>-->
           <!--</router-link>-->
@@ -38,6 +38,20 @@ export default {
   name: 'app',
   components: {
     AeFooter: Footer
+  },
+  computed: {
+    networkName () {
+      let url = this.$http.options.root
+      let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
+      if (name) {
+        let shortname = name.replace(/([^.]+)-net-api/, '$1')
+        if (shortname) {
+          return `${shortname} network`
+        }
+        return name
+      }
+      return url
+    }
   }
 }
 </script>
@@ -70,6 +84,7 @@ html, body {
 
 }
 .network-name {
+  text-transform:uppercase;
   position:fixed;
   right:20px;
   font-size:14px;
