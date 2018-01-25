@@ -47,29 +47,4 @@ export default {
   }
 }
 </script>
-<style>
-.market-stats-partial {
-  text-align:center;
-  background: #FFFFFF;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
-  border-radius: 10px;
-  width:calc(100% - 50px);
-  max-width:1030px;
-  padding:30px 0;
-}
-.market-stats-partial .grid {
-  justify-content:center;
-}
-.market-stats-partial .grid > * {
-  padding:30px;
-}
-.market-stats-partial .grid > * + * {
-  border-left:2px solid #F0F0F0;
-}
-.market-stats-partial .number {
-  font-size:30px;
-}
-.market-stats-partial .unit {
-  font-size:14px;
-}
-</style>
+<style src='./marketStats.scss' lang='scss' />

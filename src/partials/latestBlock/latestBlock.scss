@@ -1,0 +1,62 @@
+.latest-block-partial {
+  background:white;
+  margin-top:80px;
+  > .grid {
+    margin:0 auto;
+    max-width:1040px;
+    width:calc(100% - 40px);
+  }
+  .last-block-ago .number {
+    font-size:50px;
+  }
+  .last-block-ago .unit {
+    font-size:18px;
+  }
+  .explanation {
+    padding:50px 100px 50px 0;
+    max-width:250px;
+  }
+  .explanation .title {
+    margin-top:0;
+    font-size:40px;
+  }
+  .block-data {
+    /* Rectangle 3: */
+    flex-grow:1;
+    background: #311B58;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
+    border-radius: 10px;
+    color:white;
+    padding:50px;
+    margin-top:-40px;
+    margin-bottom:-40px;
+  }
+  .block-data .grid {
+    justify-content:space-between;
+    align-items:flex-end;
+  }
+  .block-basic-info {
+    line-height:40px;
+    vertical-align:bottom;
+    border-bottom:2px solid #F5F5F5;
+    padding-bottom:20px;
+    margin-bottom:20px;
+  }
+  .chain-height {
+    font-size:30px;
+  }
+  .field {
+    margin-bottom:20px;
+  }
+  .field-name {
+    font-size:14px;
+    opacity:0.4;
+  }
+  .field-value {
+    margin-top:5px;
+    font-size:24px;
+  }
+  .account-address {
+    color:#F7296E;
+  }
+}

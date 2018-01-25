@@ -1,0 +1,21 @@
+.recent-blocks-partial {
+  margin-top:80px;
+  background:white;;
+  > .inner {
+    box-sizing: border-box;
+    max-width:1040px;
+    width:calc(100% - 40px);
+    background: #311B58;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
+    border-radius: 10px;
+    color:white;
+    padding:50px;
+    margin:0 auto;
+  }
+  .block-number a {
+    font-size:30px;
+  }
+  .account-address {
+    color: #F7296E
+  }
+}
