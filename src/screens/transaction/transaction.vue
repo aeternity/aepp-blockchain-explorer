@@ -149,33 +149,4 @@ export default {
   }
 }
 </script>
-<style>
-.transaction-screen {
-}
-.transaction-screen .title {
-  font-weight:normal;
-  font-size:30px;
-  border-bottom:2px solid #311B58;
-  padding-bottom:20px;
-  margin-bottom:20px;
-}
-.transaction-screen .inner {
-  margin:0 auto;
-  max-width:1040px;
-  width:calc(100% - 40px);
-}
-.transaction-screen .grid {
-  border-bottom:2px solid #F5F5F5;
-  align-items:flex-end;
-  padding-bottom:15px;
-}
-.transaction-screen .grid > *{
-  padding-right:10px;
-}
-.load-more {
-}
-.transaction-screen .account-address {
-  color:#F7296E;
-}
-
-</style>
+<style src='./transaction.scss' lang='scss' />
