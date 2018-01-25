@@ -36,8 +36,8 @@
       </table>
       <h1>Detail</h1>
       <h2>{{node}} </h2>
-      <h3>epoch.yaml</h3>
-      <pre>{{apiNodeConf}}</pre>
+      <!--<h3>epoch.yaml</h3>-->
+      <!--<pre>{{apiNodeConf}}</pre>-->
       <h3>version</h3>
       <pre>{{apiNodeVersion}}</pre>
       <h3>top</h3>
