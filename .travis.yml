@@ -12,7 +12,7 @@ deploy:
   skip_cleanup: true
   script: rsync -r --delete-after -v $TRAVIS_BUILD_DIR/dist/* deploy@139.59.142.164:/var/www/html/explorer.aepps.com/
   on:
-    branch: master
+    branch: explorer
 - provider: script
   skip_cleanup: true
   script: rsync -r --delete-after -v $TRAVIS_BUILD_DIR/dist/* deploy@139.59.142.164:/var/www/html/stage-explorer.aepps.com/
