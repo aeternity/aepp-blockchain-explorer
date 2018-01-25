@@ -11,11 +11,11 @@
       </div>
       <div>
         <span class="field-name">
-        last block mined 
+        last block mined
         </span>
-        <span class='ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/> 
+        <span class='ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/>
         <span class="field-name">
-        ago 
+        ago
         </span>
      </div>
     </div>
@@ -34,9 +34,10 @@
             <span class="field-name">
               hash
             </span>
-            <span class="number">
+            <span v-if='b.hash' class="number">
               {{b.hash | startAndEnd }}
             </span>
+            <span v-else>n/a</span>
           </td>
           <td>
             <span class="field-name">

@@ -22,7 +22,8 @@
       <div class="detail-block-info">
         <div class="field hash">
           <div class='field-name'>Hash</div>
-          <div class='field-value number'>{{ apiBlock.hash }}</div>
+          <div v-if='apiBlock.hash' class='field-value number'>{{ apiBlock.hash }}</div>
+          <div v-else class='field-value number'>N/A</div>
         </div>
         <div class="grid">
           <div class="field height">
