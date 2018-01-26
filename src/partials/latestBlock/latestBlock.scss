@@ -1,5 +1,5 @@
 .latest-block-partial {
-  background:white;
+  background:$white;
   margin-top:80px;
   > .grid {
     margin:0 auto;
@@ -26,7 +26,7 @@
     background: $aubergin;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
     border-radius: 10px;
-    color:white;
+    color:$white;
     padding:50px;
     margin-top:-40px;
     margin-bottom:-40px;

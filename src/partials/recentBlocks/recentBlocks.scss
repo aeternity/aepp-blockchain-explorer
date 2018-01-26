@@ -1,6 +1,6 @@
 .recent-blocks-partial {
   margin-top:80px;
-  background:white;;
+  background:$white;;
   > .inner {
     box-sizing: border-box;
     max-width:1040px;
@@ -8,7 +8,7 @@
     background: $aubergin;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
     border-radius: 10px;
-    color:white;
+    color:$white;
     padding:50px;
     margin:0 auto;
   }

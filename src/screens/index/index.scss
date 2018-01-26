@@ -1,7 +1,7 @@
 .index-screen {
   header {
     background-image: linear-gradient(-134deg, $aubergineLight 0%, $aubergin 100%);
-    color: $black;
+    color: $white;
     padding-bottom:200px;
   }
   header h1 {
@@ -42,7 +42,7 @@
     box-shadow: 0 4px 8px 0 rgba(60,60,60,0.10);
     border-radius: 0 50px 50px 0;
     border:none;
-    color:white;
+    color:$white;
     padding:15px 25px 15px 20px;
   }
   .market-stats-partial{
