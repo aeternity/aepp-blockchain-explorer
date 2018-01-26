@@ -2,7 +2,7 @@
   .title {
     font-weight:normal;
     font-size:30px;
-    border-bottom:2px solid #311B58;
+    border-bottom:2px solid $aubergin;
     padding-bottom:20px;
     margin-bottom:20px;
   }
@@ -12,7 +12,7 @@
     width:calc(100% - 40px);
   }
   .grid {
-    border-bottom:2px solid #F5F5F5;
+    border-bottom:2px solid $smoke;
     align-items:flex-end;
     padding-bottom:15px;
   }
@@ -22,6 +22,6 @@
   .load-more {
   }
   .account-address {
-    color:#F7296E;
+    color:$magaenta;
   }
 }

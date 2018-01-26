@@ -1,7 +1,7 @@
 .index-screen {
   header {
-    background-image: linear-gradient(-134deg, #6F53A1 0%, #311B58 100%);
-    color: #FFFFFF;
+    background-image: linear-gradient(-134deg, $aubergineLight 0%, $aubergin 100%);
+    color: $black;
     padding-bottom:200px;
   }
   header h1 {
@@ -29,7 +29,7 @@
   }
   .search-input {
     /* background: */
-    background: #F5F5F5;
+    background: $smoke;
     box-shadow: 0 4px 8px 0 rgba(60,60,60,0.10);
     border-radius: 100px 0 00px 100px;
     width:100%;
@@ -38,7 +38,7 @@
     font-size:16px;
   }
   .search-button {
-    background: #F7296E;
+    background: $magaenta;
     box-shadow: 0 4px 8px 0 rgba(60,60,60,0.10);
     border-radius: 0 50px 50px 0;
     border:none;

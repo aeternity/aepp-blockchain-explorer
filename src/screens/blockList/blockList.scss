@@ -1,5 +1,5 @@
 .block-list-screen {
-  background: #311B58;
+  background: $aubergin;
   color:white;;
   .inner {
     margin:0 auto;
@@ -11,7 +11,7 @@
     font-size:16px;
   }
   .grid {
-    border-bottom:2px solid #F5F5F5;
+    border-bottom:2px solid $smoke;
     justify-content:space-between;
     align-items:flex-end;
     padding-bottom:15px;
@@ -33,6 +33,6 @@
     font-size:30px;
   }
   .account-address {
-    color:#F7296E;
+    color:$magaenta;
   }
 }

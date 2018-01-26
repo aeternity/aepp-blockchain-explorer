@@ -1,6 +1,6 @@
 .block-screen {
   .header {
-    background-color:#311B58;
+    background-color:$aubergin;
     color:white;
   }
   .block-transactions,
@@ -15,7 +15,7 @@
     justify-content:space-between;
   }
   .basic-block-info {
-    border-bottom:2px solid #F5F5F5;
+    border-bottom:2px solid $smoke;
     align-items:flex-end;
     line-height:50px;
     padding-bottom:20px;
@@ -30,7 +30,7 @@
     margin-bottom:15px;
   }
   .account-address {
-    color:#F7296E;
+    color:$magaenta;
   }
   .block-height {
     font-size:30px;
@@ -58,6 +58,6 @@
     font-size:24px;
     font-weight:normal;
     padding-bottom:20px;
-    border-bottom:2px solid #311B58;
+    border-bottom:2px solid $aubergin;
   }
 }

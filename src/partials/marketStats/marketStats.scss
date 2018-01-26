@@ -1,6 +1,6 @@
 .market-stats-partial {
   text-align:center;
-  background: #FFFFFF;
+  background: $black;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
   border-radius: 10px;
   width:calc(100% - 50px);
@@ -13,7 +13,7 @@
     padding:30px;
   }
   .grid > * + * {
-    border-left:2px solid #F0F0F0;
+    border-left:2px solid $silver;
   }
   .number {
     font-size:30px;

@@ -23,7 +23,7 @@
   .block-data {
     /* Rectangle 3: */
     flex-grow:1;
-    background: #311B58;
+    background: $aubergin;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
     border-radius: 10px;
     color:white;
@@ -38,7 +38,7 @@
   .block-basic-info {
     line-height:40px;
     vertical-align:bottom;
-    border-bottom:2px solid #F5F5F5;
+    border-bottom:2px solid $smoke;
     padding-bottom:20px;
     margin-bottom:20px;
   }
@@ -57,6 +57,6 @@
     font-size:24px;
   }
   .account-address {
-    color:#F7296E;
+    color:$magaenta;
   }
 }
