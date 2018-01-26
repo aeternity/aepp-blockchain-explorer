@@ -33,6 +33,15 @@ html, body {
   padding:5px 7px;
   background: #F7296E;
   border-radius: 5px;
+  @media screen and (max-width:600px) {
+    width:100%;
+    bottom:0;
+    left:0;
+    border-radius:0;
+    padding:15px 0;
+    margin:0;
+    text-align:center;
+  }
 }
 .number ,
 .block-hash,
@@ -72,7 +81,9 @@ nav {
 }
 nav >.inner >:first-child ,
 nav >.inner >:last-child {
-  width:280px;
+  @media screen and (min-width:600px) {
+    width:280px;
+  }
 }
 nav >.inner >:last-child {
   text-align:right;
@@ -96,6 +107,9 @@ nav a {
 }
 nav .logo {
   display:flex;
+  @media screen and (max-width:600px) {
+    display:none;
+  }
 }
 nav .logo img + *{
   margin-top:-12px;
