@@ -14,23 +14,55 @@
     border-bottom:2px solid $smoke;
     justify-content:space-between;
     align-items:flex-end;
+    flex-wrap:wrap;
     padding-bottom:15px;
+    @media screen and (max-width:600px) {
+      display:block;
+    }
   }
   .title {
     font-weight:500;
     font-size:30px;
+    @media screen and (max-width:600px) {
+      font-size:20px;
+    }
   }
   .ago .number {
     font-size:55px;
+    @media screen and (max-width:600px) {
+      font-size:35px;
+    }
   }
   .ago .unit {
     font-size:18px;
+    @media screen and (max-width:600px) {
+      font-size:16px;
+    }
   }
   .ago .unit + .number {
     margin-left:20px;
   }
   .block-number {
     font-size:30px;
+    @media screen and (max-width:600px) {
+      font-size:22px;
+    }
+  }
+  @media screen and (max-width:600px) {
+    table, td {
+      display:block;
+    }
+    tr {
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    tr + tr {
+      margin-top:10px;
+    }
+    tr td:first-child {
+      width:100%;
+    }
   }
   .account-address {
     color:$magaenta;
