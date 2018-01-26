@@ -1,0 +1,33 @@
+.footer {
+  padding-top:50px;
+  padding-bottom:50px;
+  border-bottom:5px solid #F7296E;
+  >.inner {
+    margin:0 auto;
+    max-width:1040px;
+    width:calc(100% - 40px);
+  }
+  .logo {
+    margin-top:10px;
+  }
+  .claim {
+    max-width:250px;
+  }
+  .grid {
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .grid > * {
+    margin-right:40px;
+    min-width:200px;
+  }
+  a {
+    height:50px;
+    display:flex;
+    align-items:center;
+
+  }
+  a img {
+    margin-right:20px;
+  }
+}

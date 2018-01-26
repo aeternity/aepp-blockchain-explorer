@@ -29,38 +29,4 @@
     </div>
   </footer>
 </template>
-<style>
-.footer {
-  padding-top:50px;
-  padding-bottom:50px;
-  border-bottom:5px solid #F7296E;
-}
-.footer >.inner {
-  margin:0 auto;
-  max-width:1040px;
-  width:calc(100% - 40px);
-}
-.footer .logo {
-  margin-top:10px;
-}
-.footer .claim {
-  max-width:250px;
-}
-.footer .grid {
-  justify-content:space-between;
-  flex-wrap:wrap;
-}
-.footer .grid > * {
-  margin-right:40px;
-  min-width:200px;
-}
-.footer a {
-  height:50px;
-  display:flex;
-  align-items:center;
-
-}
-.footer a img {
-  margin-right:20px;
-}
-</style>
+<style src='./footer.scss' lang='scss' />
