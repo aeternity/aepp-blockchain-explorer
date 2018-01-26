@@ -122,10 +122,4 @@ export default {
   }
 }
 </script>
-<style>
-.status-screen > * {
- max-width:1040px;
- margin:0 auto;
- width:calc(100% - 40px);
-}
-</style>
+<style src='./status.scss' lang='scss' />
