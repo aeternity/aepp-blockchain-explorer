@@ -5,6 +5,9 @@
     margin:0 auto;
     max-width:1040px;
     width:calc(100% - 40px);
+    @media screen and (max-width:600px) {
+      flex-direction:column;
+    }
   }
   .last-block-ago .number {
     font-size:50px;
@@ -30,6 +33,9 @@
     padding:50px;
     margin-top:-40px;
     margin-bottom:-40px;
+    @media screen and (max-width:600px) {
+      padding:20px;
+    }
   }
   .block-data .grid {
     justify-content:space-between;

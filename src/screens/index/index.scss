@@ -16,9 +16,18 @@
     margin:0 auto;
     padding-top:50px;
     max-width:1040px;
+    @media screen and (max-width:600px) {
+      flex-direction:column;
+      //width:calc(100% - 20px);
+    }
   }
   header .grid > * {
-    width:calc(50% - 50px);
+    @media screen and (min-width:600px) {
+      width:calc(50% - 50px);
+    }
+    @media screen and (max-width:600px) {
+      width:100%;
+    }
   }
   header .grid > * > :last-child {
     margin-bottom:0;
@@ -26,6 +35,9 @@
   header .grid .search {
     display:flex;
     justify-content:flex-end;
+    @media screen and (max-width:600px) {
+      margin-top:40px;
+    }
   }
   .search-input {
     /* background: */

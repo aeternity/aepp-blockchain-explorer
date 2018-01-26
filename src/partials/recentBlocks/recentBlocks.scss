@@ -11,6 +11,9 @@
     color:$white;
     padding:50px;
     margin:0 auto;
+    @media screen and (max-width:600px) {
+      padding:20px;
+    }
   }
   .block-number a {
     font-size:30px;

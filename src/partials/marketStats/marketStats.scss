@@ -8,12 +8,22 @@
   padding:30px 0;
   .grid {
     justify-content:center;
+    @media screen and (max-width:600px) {
+      flex-direction:column;
+    }
   }
   .grid > * {
-    padding:30px;
+    @media screen and (min-width:600px) {
+      padding:30px;
+    }
+    @media screen and (max-width:600px) {
+      padding:20px;
+    }
   }
   .grid > * + * {
-    border-left:2px solid $silver;
+    @media screen and (min-width:600px) {
+      border-left:2px solid $silver;
+    }
   }
   .number {
     font-size:30px;
