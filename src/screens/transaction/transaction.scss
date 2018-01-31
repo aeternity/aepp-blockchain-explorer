@@ -19,7 +19,22 @@
   }
   .load-more {
   }
+  .field-name {
+    @include font-size(s);
+  }
   .account-address {
     color:$magaenta;
+  }
+  .transaction {
+    margin:20px 0;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .transaction > div:first-child {
+    width:100%;
+  }
+  .transaction > div {
+    margin:4px 0;
   }
 }
