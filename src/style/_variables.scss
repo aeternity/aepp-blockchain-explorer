@@ -7,3 +7,17 @@ $smoke : #F5F5F5;
 $magaenta : #F7296E;
 $white : #FFFFFF;
 $black : #000000;
+
+$phone-width : 600px;
+$desktop-width : 900px;
+
+$base-font-size: 18px;
+$font-sizes: (
+  xxs: (11px / $base-font-size) * 1em, //0.6111111111111112em
+  xs:  (14px / $base-font-size) * 1em, //0.7777777777777778em
+  s:   (16px / $base-font-size) * 1em, //0.8888888888888888em
+  m:   (18px / $base-font-size) * 1em, //1em
+  l:   (24px / $base-font-size) * 1em, //1.3333333333333333em
+  xl:  (30px / $base-font-size) * 1em, //1.6666666666666667em
+  xxl: (50px / $base-font-size) * 1em, //2.7777777777777777em
+);
