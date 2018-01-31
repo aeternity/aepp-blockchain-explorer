@@ -8,20 +8,20 @@
   padding:30px 0;
   .grid {
     justify-content:center;
-    @media screen and (max-width:600px) {
+    @include only-phone {
       flex-direction:column;
     }
   }
   .grid > * {
-    @media screen and (min-width:600px) {
+    @include tablet-and-desktop {
       padding:30px;
     }
-    @media screen and (max-width:600px) {
+    @include only-phone {
       padding:20px;
     }
   }
   .grid > * + * {
-    @media screen and (min-width:600px) {
+    @include tablet-and-desktop {
       border-left:2px solid $silver;
     }
   }

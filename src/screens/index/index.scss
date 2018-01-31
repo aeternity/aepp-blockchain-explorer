@@ -16,16 +16,16 @@
     margin:0 auto;
     padding-top:50px;
     max-width:1040px;
-    @media screen and (max-width:600px) {
+    @include only-phone {
       flex-direction:column;
       //width:calc(100% - 20px);
     }
   }
   header .grid > * {
-    @media screen and (min-width:600px) {
+    @include tablet-and-desktop {
       width:calc(50% - 50px);
     }
-    @media screen and (max-width:600px) {
+    @include only-phone {
       width:100%;
     }
   }
@@ -35,7 +35,7 @@
   header .grid .search {
     display:flex;
     justify-content:flex-end;
-    @media screen and (max-width:600px) {
+    @include only-phone {
       margin-top:40px;
     }
   }

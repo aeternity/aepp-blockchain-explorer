@@ -5,19 +5,19 @@
     margin:0 auto;
     max-width:1040px;
     width:calc(100% - 40px);
-    @media screen and (max-width:600px) {
+    @include only-phone {
       flex-direction:column;
     }
   }
   .last-block-ago .number {
     @include font-size(xxl);
-    @media screen and (max-width:600px) {
+    @include only-phone {
       @include font-size(xl);
     }
   }
   .last-block-ago .unit {
     @include font-size(m);
-    @media screen and (max-width:600px) {
+    @include only-phone {
       @include font-size(s);
     }
   }
@@ -28,7 +28,7 @@
   .explanation .title {
     margin-top:0;
     @include font-size(xxl);
-    @media screen and (max-width:600px) {
+    @include only-phone {
       @include font-size(xl);
     }
   }
@@ -42,14 +42,14 @@
     padding:50px;
     margin-top:-40px;
     margin-bottom:-40px;
-    @media screen and (max-width:600px) {
+    @include only-phone {
       padding:20px;
     }
   }
   .block-data .grid {
     justify-content:space-between;
     align-items:flex-end;
-    @media screen and (max-width:600px) {
+    @include only-phone {
       flex-wrap:wrap;
     }
   }
@@ -76,7 +76,7 @@
   .field-value {
     margin-top:5px;
     @include font-size(l);
-    @media screen and (max-width:600px) {
+    @include only-phone {
       @include font-size(m);
     }
   }
