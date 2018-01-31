@@ -21,4 +21,23 @@
   .account-address {
     color: $magaenta
   }
+  @media screen and (max-width:600px) {
+    table, td {
+      display:block;
+    }
+    tr {
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    tr + tr {
+      margin-top:20px;
+    }
+    tr td:first-child {
+      width:100%;
+    }
+    tr td:first-child + td {
+      font-size:18px;
+    }
+  }
 }

@@ -14,14 +14,14 @@
               </div>
             </td>
             <td>
-              <span class='number'>
+              <span class='field-name'>Transactions</span>
+              <span class='field-value number'>
                 {{b.transactions.length}}
               </span>
-              Transaction(s)
             </td>
             <td>
-              mined by
-              <span class="account-address">
+              <span class='field-name'>mined by</span>
+              <span class="field-value account-address">
                 <router-link :to='"/account/" + b.transactions[0].tx.account'>
                   {{b.transactions[0].tx.account | startAndEnd}}
                 </router-link>
