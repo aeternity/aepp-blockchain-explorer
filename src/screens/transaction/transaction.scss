@@ -1,7 +1,7 @@
 .transaction-screen {
   .title {
     font-weight:normal;
-    font-size:30px;
+    @include font-size(xl);
     border-bottom:2px solid $aubergin;
     padding-bottom:20px;
     margin-bottom:20px;

@@ -8,7 +8,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $aubergin;
-  font-size:18px;
+  font-size: $base-font-size;
   position:relative;
   z-index:1;
 }
@@ -28,7 +28,7 @@ html, body {
   text-transform:uppercase;
   position:fixed;
   right:20px;
-  font-size:14px;
+  @include font-size(xs);
   font-weight:500;
   padding:5px 7px;
   background: #F7296E;
@@ -61,7 +61,7 @@ table {
   width:100%;
 }
 table th {
-  font-size:16px;
+  @include font-size(s);
   font-weight:normal;
   text-align:left;
   opacity:0.6;
@@ -99,11 +99,11 @@ nav .inner {
 nav .links > * {
 }
 nav a {
+  @include font-size(m);
   position:relative;
   display:inline-block;
   color:inherit;
   text-decoration:none;
-  font-size:18px;
   margin:0 10px;
   @media screen and (max-width:600px) {
     margin:0 10px 0 0;

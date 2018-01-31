@@ -5,7 +5,7 @@
     padding-bottom:200px;
   }
   header h1 {
-    font-size:50px;
+    @include font-size(xxl);
     font-weight:500;
     margin:0;
   }
@@ -47,7 +47,7 @@
     width:100%;
 
     padding:15px 0 15px 20px;
-    font-size:16px;
+    @include font-size(s);
   }
   .search-button {
     background: $magaenta;

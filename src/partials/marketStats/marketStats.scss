@@ -26,9 +26,9 @@
     }
   }
   .number {
-    font-size:30px;
+    @include font-size(xl);
   }
   .unit {
-    font-size:14px;
+    @include font-size(xs);
   }
 }

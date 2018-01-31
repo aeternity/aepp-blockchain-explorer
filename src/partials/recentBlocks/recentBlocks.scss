@@ -16,7 +16,7 @@
     }
   }
   .block-number a {
-    font-size:30px;
+    @include font-size(xl);
   }
   .account-address {
     color: $magaenta
@@ -37,7 +37,7 @@
       width:100%;
     }
     tr td:first-child + td {
-      font-size:18px;
+      @include font-size(m);
     }
   }
 }

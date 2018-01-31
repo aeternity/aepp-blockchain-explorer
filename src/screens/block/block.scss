@@ -33,29 +33,29 @@
     color:$magaenta;
   }
   .block-height {
-    font-size:30px;
+    @include font-size(xl);
   }
   .ago .number {
-    font-size:55px;
+    @include font-size(xxl);
   }
   .ago .unit {
-    font-size:18px;
+    @include font-size(m);
   }
   .ago .unit + .number {
     margin-left:20px;
   }
   .field-name {
-    font-size:14px;
+    @include font-size(xs);
     opacity:0.4;
   }
   .field-value {
     margin-top:5px;
-    font-size:24px;
+    @include font-size(l);
   }
   .block-transactions .title {
     margin-top:50px;
     margin-bottom:30px;
-    font-size:24px;
+    @include font-size(l);
     font-weight:normal;
     padding-bottom:20px;
     border-bottom:2px solid $aubergin;

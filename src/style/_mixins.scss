@@ -1,8 +1,8 @@
-@mixin fs($name) {
+@mixin font-size($name) {
 	@if map_has_key($font-sizes, $name) {
 		font-size: map-get($font-sizes, $name);
 	} @else {
-		@error "#{$name} is not an event icon.";
+		@error "#{$name} is not valid font size.";
 	}
 }
 

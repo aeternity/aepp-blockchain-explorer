@@ -8,7 +8,7 @@
 
   }
   .field-name {
-    font-size:16px;
+    @include font-size(s);
   }
   .grid {
     border-bottom:2px solid $smoke;
@@ -22,31 +22,28 @@
   }
   .title {
     font-weight:500;
-    font-size:30px;
+    @include font-size(xl);
     @media screen and (max-width:600px) {
-      font-size:20px;
+      @include font-size(l);
     }
   }
   .ago .number {
-    font-size:55px;
+    @include font-size(xxl);
     @media screen and (max-width:600px) {
-      font-size:35px;
+      @include font-size(l);
     }
   }
   .ago .unit {
-    font-size:18px;
+    @include font-size(m);
     @media screen and (max-width:600px) {
-      font-size:16px;
+      @include font-size(s);
     }
   }
   .ago .unit + .number {
     margin-left:20px;
   }
   .block-number {
-    font-size:30px;
-    @media screen and (max-width:600px) {
-      font-size:22px;
-    }
+    @include font-size(xl);
   }
   @media screen and (max-width:600px) {
     table, td {

@@ -10,15 +10,15 @@
     }
   }
   .last-block-ago .number {
-    font-size:50px;
+    @include font-size(xxl);
     @media screen and (max-width:600px) {
-      font-size:30px;
+      @include font-size(xl);
     }
   }
   .last-block-ago .unit {
-    font-size:18px;
+    @include font-size(m);
     @media screen and (max-width:600px) {
-      font-size:16px;
+      @include font-size(s);
     }
   }
   .explanation {
@@ -27,9 +27,9 @@
   }
   .explanation .title {
     margin-top:0;
-    font-size:40px;
+    @include font-size(xxl);
     @media screen and (max-width:600px) {
-      font-size:30px;
+      @include font-size(xl);
     }
   }
   .block-data {
@@ -64,20 +64,20 @@
     background-color:red;
   }
   .chain-height {
-    font-size:30px;
+    @include font-size(xl);
   }
   .field {
     margin-bottom:20px;
   }
   .field-name {
-    font-size:14px;
+    @include font-size(xs);
     opacity:0.4;
   }
   .field-value {
     margin-top:5px;
-    font-size:24px;
+    @include font-size(l);
     @media screen and (max-width:600px) {
-      font-size:18px;
+      @include font-size(m);
     }
   }
   .account-address {
