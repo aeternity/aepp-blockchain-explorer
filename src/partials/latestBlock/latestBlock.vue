@@ -3,7 +3,6 @@
     <div class="grid" v-if='apiTop'>
       <div class="explanation">
         <h2 class='title'>Latest Block</h2>
-
         <router-link :to='"/block/" + apiTop.height'>
           view last
         </router-link>

@@ -11,9 +11,15 @@
   }
   .last-block-ago .number {
     font-size:50px;
+    @media screen and (max-width:600px) {
+      font-size:30px;
+    }
   }
   .last-block-ago .unit {
     font-size:18px;
+    @media screen and (max-width:600px) {
+      font-size:16px;
+    }
   }
   .explanation {
     padding:50px 100px 50px 0;
@@ -22,6 +28,9 @@
   .explanation .title {
     margin-top:0;
     font-size:40px;
+    @media screen and (max-width:600px) {
+      font-size:30px;
+    }
   }
   .block-data {
     /* Rectangle 3: */
@@ -40,6 +49,9 @@
   .block-data .grid {
     justify-content:space-between;
     align-items:flex-end;
+    @media screen and (max-width:600px) {
+      flex-wrap:wrap;
+    }
   }
   .block-basic-info {
     line-height:40px;
@@ -47,6 +59,9 @@
     border-bottom:2px solid $smoke;
     padding-bottom:20px;
     margin-bottom:20px;
+  }
+  .block-basic-info.grid > .foo {
+    background-color:red;
   }
   .chain-height {
     font-size:30px;
@@ -61,6 +76,9 @@
   .field-value {
     margin-top:5px;
     font-size:24px;
+    @media screen and (max-width:600px) {
+      font-size:18px;
+    }
   }
   .account-address {
     color:$magaenta;
