@@ -105,6 +105,9 @@ nav a {
   text-decoration:none;
   font-size:18px;
   margin:0 10px;
+  @media screen and (max-width:600px) {
+    margin:0 10px 0 0;
+  }
 }
 nav .logo {
   display:flex;
