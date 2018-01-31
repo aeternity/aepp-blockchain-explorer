@@ -90,9 +90,8 @@ nav >.inner >:last-child {
   text-align:right;
 }
 nav .inner {
-  /*max-width:1040px;*/
-  width:calc(100% - 40px);
   margin:0 auto;
+  width:calc(100% - #{2 * $content-margin});
   display:flex;
   justify-content:space-between;
 }

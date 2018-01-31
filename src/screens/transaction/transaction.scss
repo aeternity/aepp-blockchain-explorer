@@ -7,9 +7,7 @@
     margin-bottom:20px;
   }
   .inner {
-    margin:0 auto;
-    max-width:1040px;
-    width:calc(100% - 40px);
+    @include content-max-width;
   }
   .grid {
     border-bottom:2px solid $smoke;

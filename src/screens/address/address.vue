@@ -56,25 +56,4 @@ export default {
   }
 }
 </script>
-<style>
-.account-screen {
-
-}
-.account-screen > * {
-  max-width:1040px;
-  margin:0 auto;
-  width:calc(100% - 40px);
-}
-.account-screen .title {
-  margin-top:0;
-  font-size:30px;
-  border-bottom:2px solid #311B58;
-  padding-bottom:20px;
-  margin-bottom:20px;
-}
-.account-screen .field{
-  margin-bottom:20px;
-}
-
-
-</style>
+<style src='./address.scss' lang='scss' />

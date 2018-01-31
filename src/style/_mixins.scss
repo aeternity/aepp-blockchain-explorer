@@ -1,3 +1,8 @@
+@mixin content-max-width {
+  max-width:$content-max-width;
+  width:calc(100% - #{2 * $content-margin});
+  margin:0 auto;
+}
 @mixin font-size($name) {
 	@if map_has_key($font-sizes, $name) {
 		font-size: map-get($font-sizes, $name);

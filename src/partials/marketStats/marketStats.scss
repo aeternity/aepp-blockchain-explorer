@@ -1,10 +1,9 @@
 .market-stats-partial {
+  @include content-max-width;
   text-align:center;
   background: $white;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
   border-radius: 10px;
-  width:calc(100% - 50px);
-  max-width:1030px;
   padding:30px 0;
   .grid {
     justify-content:center;

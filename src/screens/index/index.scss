@@ -12,10 +12,8 @@
   header .grid {
     align-items:flex-end;
     justify-content:space-between;
-    width:calc(100% - 40px);
-    margin:0 auto;
     padding-top:50px;
-    max-width:1040px;
+    @include content-max-width;
     @include only-phone {
       flex-direction:column;
       //width:calc(100% - 20px);

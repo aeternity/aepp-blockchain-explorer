@@ -2,10 +2,7 @@
   background: $aubergin;
   color:$white;;
   .inner {
-    margin:0 auto;
-    max-width:1040px;
-    width:calc(100% - 40px);
-
+    @include content-max-width;
   }
   .field-name {
     @include font-size(s);

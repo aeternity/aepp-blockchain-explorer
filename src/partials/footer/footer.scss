@@ -3,9 +3,7 @@
   padding-bottom:50px;
   border-bottom:5px solid $magaenta;
   >.inner {
-    margin:0 auto;
-    max-width:1040px;
-    width:calc(100% - 40px);
+    @include content-max-width;
   }
   .logo {
     margin-top:10px;

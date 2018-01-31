@@ -1,8 +1,6 @@
 .account-screen {
   > * {
-    max-width:1040px;
-    margin:0 auto;
-    width:calc(100% - 40px);
+    @include content-max-width;
   }
   .title {
     margin-top:0;

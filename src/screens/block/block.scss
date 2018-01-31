@@ -5,9 +5,7 @@
   }
   .block-transactions,
   .header > * {
-    max-width:1040px;
-    width:calc(100% - 40px);
-    margin:0 auto;
+    @include content-max-width;
   }
 
   .block-navigation,

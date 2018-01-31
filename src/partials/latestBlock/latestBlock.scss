@@ -2,9 +2,7 @@
   background:$white;
   margin-top:80px;
   > .grid {
-    margin:0 auto;
-    max-width:1040px;
-    width:calc(100% - 40px);
+    @include content-max-width;
     @include only-phone {
       flex-direction:column;
     }
