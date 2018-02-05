@@ -118,7 +118,6 @@ export default {
   },
   methods: {
     getBlocks (count) {
-      console.log('x')
       let i
       for (i = this.blockHeight; i > this.blockHeight - count; i--) {
         let x = this.$http.get('internal/v2/block/height/' + i + '?tx_encoding=json', { })
@@ -131,7 +130,6 @@ export default {
         })
       })
       this.blockHeight = i
-      console.log(i)
     }
   },
   mounted () {
