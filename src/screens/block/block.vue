@@ -79,7 +79,7 @@
         </thead>
         <tbody>
           <tr v-for='t in apiBlock.transactions'>
-            <template v-if="t.tx.type === 'CoinbaseTxObject'">
+            <template v-if="t.tx.type === 'coinbase'">
               <td>Coinbase</td>
               <td>-</td>
               <td>
@@ -92,7 +92,7 @@
               <td>block reward</td>
               <td>-</td>
             </template>
-            <template v-else-if="t.tx.type === 'SpendTxObject'">
+            <template v-else-if="t.tx.type === 'spend'">
               <td>Spend</td>
               <td>
                 <router-link :to='"/account/" + t.tx.sender'>
@@ -113,7 +113,7 @@
                 <span class="unit">AE</span>
               </td>
             </template>
-            <template v-else-if='t.tx.type === "OracleRegisterTxObject"'>
+            <template v-else-if='t.tx.type === "oracleregister"'>
               <td>OracleRegister</td>
               <td>
                 <span class="account-address">
@@ -152,7 +152,7 @@ export default {
   },
   computed: {
     minedBy () {
-      return this.apiBlock.transactions.filter(t => t.tx.type === 'CoinbaseTxObject')[0].tx.account
+      return this.apiBlock.transactions.filter(t => t.tx.type === 'coinbase')[0].tx.account
     },
     ago () {
       if (!this.apiBlock) { return null }
@@ -180,7 +180,7 @@ export default {
       }
     },
     getBlockByHeight (height) {
-      this.$http.get('internal/v2/block/height/' + height + '?tx_objects=true', {
+      this.$http.get('internal/v2/block/height/' + height + '?tx_encoding=json', {
       }).then(response => {
         this.apiBlock = response.body
       }, response => {
@@ -188,7 +188,7 @@ export default {
       })
     },
     getBlockByHash (hash) {
-      this.$http.get('internal/v2/block/hash/' + hash + '?tx_objects=true', {
+      this.$http.get('internal/v2/block/hash/' + hash + '?tx_encoding=json', {
       }).then(response => {
         this.apiBlock = response.body
       }, response => {

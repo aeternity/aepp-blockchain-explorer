@@ -49,14 +49,13 @@ export default {
       console.log('x')
       let i
       for (i = this.blockHeight; i > this.blockHeight - count; i--) {
-        let x = this.$http.get('internal/v2/block/height/' + i + '?tx_objects=true', { })
+        let x = this.$http.get('internal/v2/block/height/' + i + '?tx_encoding=json', { })
         this.apiBlocks.push(x)
       }
       this.apiBlocks.forEach((x, i) => {
         if (typeof x.then === 'undefined') return
         x.then(resp => {
-          this.apiBlocks[i] = resp.body
-          this.$forceUpdate()
+          this.$set(this.apiBlocks, i, resp.body)
         })
       })
       this.blockHeight = i

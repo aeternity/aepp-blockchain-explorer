@@ -19,7 +19,7 @@
 
       <div class='transaction-list'>
         <div v-for='t in apiTransactions' class='transaction'>
-          <template v-if='t.tx.type === "CoinbaseTxObject"'>
+          <template v-if='t.tx.type === "coinbase"'>
             <div>
               <span class='field-name'>type</span>
               Coinbase
@@ -43,7 +43,7 @@
               <span class='field-name'>no fee</span>
             </div>
           </template>
-          <template v-else-if='t.tx.type === "SpendTxObject"'>
+          <template v-else-if='t.tx.type === "spend"'>
             <div>
               <span class='field-name'>type</span>
               Spend
@@ -75,7 +75,7 @@
               <span class="unit">AE</span>
             </div>
           </template>
-          <template v-else-if='t.tx.type === "OracleRegisterTxObject"'>
+          <template v-else-if='t.tx.type === "oracleregister"'>
             <div>
               <span class='field-name'>type</span>
               OracleRegister
@@ -125,7 +125,7 @@ export default {
       if (from < 0) {
         from = 0
       }
-      this.$http.get(`internal/v2/block/txs/list/height?from=${from}&to=${this.to}&tx_objects=true`
+      this.$http.get(`internal/v2/block/txs/list/height?from=${from}&to=${this.to}&tx_encoding=json`
       ).then(resp => {
         this.apiTransactions = this.apiTransactions.concat(resp.body.transactions)
         this.to = from

@@ -95,7 +95,7 @@ export default {
     },
     getCoinBaseTx () {
       this.$http.get(
-      'internal/v2/block/tx/latest/1?tx_objects=true'
+      'internal/v2/block/tx/latest/1?tx_encoding=json'
       ).then(resp => {
         this.apiTxCoinBase = resp.body
       }, resp => {
