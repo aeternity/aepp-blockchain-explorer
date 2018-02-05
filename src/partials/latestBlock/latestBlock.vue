@@ -40,7 +40,7 @@
           </div>
           <div class='field'>
             <div class='field-name'>Mined by</div>
-            <div class="field-value account-address">
+            <div v-if='apiTxCoinBase' class="field-value account-address">
               <router-link :to='"/account/" + apiTxCoinBase.transaction.tx.account'>
               {{apiTxCoinBase.transaction.tx.account | startAndEnd }}
               </router-link>
