@@ -35,19 +35,20 @@
           <div class='field'>
             <div class='field-name'>Transactions</div>
             <div class="field-value number">
-                {{apiTxCount}}
+                {{txCount}}
             </div>
           </div>
           <div class='field'>
             <div class='field-name'>Mined by</div>
-            <div v-if='apiTxCoinBase' class="field-value account-address">
-              <router-link :to='"/account/" + apiTxCoinBase.transaction.tx.account'>
-              {{apiTxCoinBase.transaction.tx.account | startAndEnd }}
+            <div v-if='minedBy' class="field-value account-address">
+              <router-link :to='"/account/" + minedBy'>
+              {{minedBy | startAndEnd }}
               </router-link>
             </div>
           </div>
         </div>
-        <ae-button type='exciting' invert size='small' @click='getTop'>refresh</ae-button>
+        <ae-button type='exciting' invert size='small' @click='getLatestBlock'>refresh </ae-button>
+        updated {{autoUpdateIn }} sek ago
       </div>
     </div>
   </div>
@@ -63,20 +64,33 @@ export default {
   data () {
     return {
       apiTop: null,
-      apiTxCount: null,
-      apiTxCoinBase: null,
-      currentTime: null
+      currentTime: null,
+      lastUpdate: null
     }
   },
   computed: {
     lastBlockAgo () {
       if (!this.apiTop) { return null }
       return this.currentTime - this.apiTop.time
+    },
+    txCount () {
+      if (!this.apiTop) return null
+      return this.apiTop.transactions.length
+    },
+    minedBy () {
+      if (!this.apiTop) return null
+      if (!this.apiTop.transactions.length > 0) return null
+      return this.apiTop.transactions[0].tx.account
+    },
+    autoUpdateIn () {
+      if (!this.lastUpdate) return "..."
+      if (!this.currentTime) return "..."
+      return Math.round( (this.currentTime - this.lastUpdate) / 1000 )
     }
   },
   methods: {
-    getTop () {
-      this.$http.get('external/v2/top', {
+    getLatestBlock () {
+      this.$http.get('internal/v2/block/latest?tx_encoding=json', {
         before (request) {
           if (this.previousRequest) {
             this.previousRequest.abort()
@@ -86,36 +100,20 @@ export default {
 
       }).then(response => {
         this.apiTop = response.body
+        this.lastUpdate = new Date()
       }, response => {
         // error callback
-      })
-    },
-    getTxCount () {
-      this.$http.get(
-      'internal/v2/block/txs/count/latest'
-      ).then(resp => {
-        this.apiTxCount = resp.body.count
-      }, resp => {
-        alert('error')
-      })
-    },
-    getCoinBaseTx () {
-      this.$http.get(
-      'internal/v2/block/tx/latest/1?tx_encoding=json'
-      ).then(resp => {
-        this.apiTxCoinBase = resp.body
-      }, resp => {
-        alert('error')
       })
     }
   },
   created () {
-    this.getTop()
-    this.getCoinBaseTx()
-    this.getTxCount()
+    this.getLatestBlock()
     setInterval(() => {
       this.currentTime = new Date()
     }, 1000)
+    setInterval(() => {
+      this.getLatestBlock()
+    }, 9000)
   }
 }
 </script>
