@@ -23,7 +23,7 @@
       </div>
 
       <div class='transaction-list'>
-        <ae-panel v-for='t in apiTransactions'>
+        <ae-panel v-for='t in apiTransactions' :key='t.signatures[0]'>
           <div class='transaction'>
             <template v-if='t.tx.type === "coinbase"'>
               <div>
