@@ -6,7 +6,7 @@
     padding-bottom:20px;
     margin-bottom:20px;
   }
-  .inner {
+  > .inner {
     @include content-max-width;
   }
   .grid {
@@ -15,7 +15,7 @@
     padding-bottom:15px;
   }
   .grid > *{
-    padding-right:10px;
+    margin-right:10px;
   }
   .load-more {
   }
@@ -26,7 +26,6 @@
     color:$magaenta;
   }
   .transaction {
-    margin:20px 0;
     display:flex;
     justify-content:space-between;
     flex-wrap:wrap;
@@ -36,5 +35,9 @@
   }
   .transaction > div {
     margin:4px 0;
+  }
+  .center {
+    display:flex;
+    justify-content:center;
   }
 }

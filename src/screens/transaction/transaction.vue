@@ -7,110 +7,129 @@
         <div>
           load all transactions from block
         </div>
-        <div>
 
-        <input v-model='loadFrom' type="number" name="startBlock" id="startBlock"/>
+        <div>
+          <input v-model='loadFrom' type="number" name="startBlock" id="startBlock"/>
         </div>
+
         <div>
           to: <span class='block-number number'>{{loadFrom - 10}}</span>
         </div>
-        <button @click='reset'>load</button>
+
+        <ae-button size='small' type='exciting' @click='reset'>
+          load
+        </ae-button>
+
       </div>
 
       <div class='transaction-list'>
-        <div v-for='t in apiTransactions' class='transaction'>
-          <template v-if='t.tx.type === "coinbase"'>
-            <div>
-              <span class='field-name'>type</span>
-              Coinbase
-            </div>
-            <div>
-              <!----->
-            </div>
-            <div>
-              <span class='field-name'>receiver</span>
-              <span class="account-address">
-                <router-link :to='"/account/" + t.tx.account'>
-                  {{t.tx.account | startAndEnd}}
-                </router-link>
-              </span>
-            </div>
-            <div>
-              <span class='field-name'>amount</span>
-              block reward
-            </div>
-            <div>
-              <span class='field-name'>no fee</span>
-            </div>
-          </template>
-          <template v-else-if='t.tx.type === "spend"'>
-            <div>
-              <span class='field-name'>type</span>
-              Spend
-            </div>
-            <div>
-              <span class='field-name'>sender</span>
-              <div class="account-address">
-                <router-link :to='"/account/" + t.tx.sender'>
-                  {{t.tx.sender| startAndEnd}}
-                </router-link>
+        <ae-panel v-for='t in apiTransactions'>
+          <div class='transaction'>
+            <template v-if='t.tx.type === "coinbase"'>
+              <div>
+                <span class='field-name'>type</span>
+                Coinbase
               </div>
-            </div>
-            <div>
-              <span class='field-name'>recipient</span>
-              <div class="account-address">
-                <router-link :to='"/account/" + t.tx.recipient'>
-                  {{t.tx.recipient| startAndEnd}}
-                </router-link>
+              <div>
+                <!----->
               </div>
-            </div>
-            <div>
-              <span class='field-name'>amount</span>
-              <span class='number'>{{ t.tx.amount }}</span>
-              <span class="unit">AE</span>
-            </div>
-            <div>
-              <span class='field-name'>fee</span>
-              <span class='number'>{{ t.tx.fee }}</span>
-              <span class="unit">AE</span>
-            </div>
-          </template>
-          <template v-else-if='t.tx.type === "oracleregister"'>
-            <div>
-              <span class='field-name'>type</span>
-              OracleRegister
-            </div>
-            <div>
-              <span class='field-name'>account</span>
-              <div class="account-address">
-                <router-link :to='"/account/" + t.tx.account'>
-                  {{t.tx.account | startAndEnd}}
-                </router-link>
+              <div>
+                <span class='field-name'>receiver</span>
+                <span class="account-address">
+                  <router-link :to='"/account/" + t.tx.account'>
+                    {{t.tx.account | startAndEnd}}
+                  </router-link>
+                </span>
               </div>
-            </div>
+              <div>
+                <span class='field-name'>amount</span>
+                block reward
+              </div>
+              <div>
+                <span class='field-name'>no fee</span>
+              </div>
+            </template>
+            <template v-else-if='t.tx.type === "spend"'>
+              <div>
+                <span class='field-name'>type</span>
+                Spend
+              </div>
+              <div>
+                <span class='field-name'>sender</span>
+                <div class="account-address">
+                  <router-link :to='"/account/" + t.tx.sender'>
+                    {{t.tx.sender| startAndEnd}}
+                  </router-link>
+                </div>
+              </div>
+              <div>
+                <span class='field-name'>recipient</span>
+                <div class="account-address">
+                  <router-link :to='"/account/" + t.tx.recipient'>
+                    {{t.tx.recipient| startAndEnd}}
+                  </router-link>
+                </div>
+              </div>
+              <div>
+                <span class='field-name'>amount</span>
+                <span class='number'>{{ t.tx.amount }}</span>
+                <span class="unit">AE</span>
+              </div>
+              <div>
+                <span class='field-name'>fee</span>
+                <span class='number'>{{ t.tx.fee }}</span>
+                <span class="unit">AE</span>
+              </div>
+            </template>
+            <template v-else-if='t.tx.type === "oracleregister"'>
+              <div>
+                <span class='field-name'>type</span>
+                OracleRegister
+              </div>
+              <div>
+                <span class='field-name'>account</span>
+                <div class="account-address">
+                  <router-link :to='"/account/" + t.tx.account'>
+                    {{t.tx.account | startAndEnd}}
+                  </router-link>
+                </div>
+              </div>
+              <div>
+                <span class='field-name'>fee</span>
+                <span class='number'>{{ t.tx.fee }}</span>
+                <span class="unit">AE</span>
+              </div>
+            </template>
+            <template v-else>
+              {{t}}
+            </template>
             <div>
-              <span class='field-name'>fee</span>
-              <span class='number'>{{ t.tx.fee }}</span>
-              <span class="unit">AE</span>
+              <span class='field-name'>block</span>
+              n/a
             </div>
-          </template>
-          <template v-else>
-            {{t}}
-          </template>
-          <div>
-            <span class='field-name'>block</span>
-            n/a
           </div>
-        </div>
+        </ae-panel>
       </div>
-      <button @click='getTransactions' class="load-more">Load 10 blocks more</button>
+      <div class='center'>
+        <ae-button type='exciting' @click='getTransactions' class="load-more">
+          Load more
+        </ae-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import {
+  AeButton,
+  AePanel
+} from '@aeternity/aepp-components'
 const paginationStep = 10
 export default {
+  components: {
+    AeButton,
+    AePanel
+  },
   data () {
     return {
       blockHeight: null,
