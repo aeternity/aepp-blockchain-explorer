@@ -17,6 +17,7 @@ function startAndEnd (str, start = 6, end = 6) {
 Vue.filter('startAndEnd', startAndEnd)
 
 function agoFormat (ts) {
+  if (ts < 0) return null
   let sec = Math.floor(ts / 1000)
   let min = 0
   let hours = 0
@@ -33,11 +34,20 @@ function agoFormat (ts) {
     days = Math.floor(hours / 24)
     hours = hours - (days * 24)
   }
+  if (min > 0) {
+    sec = ("00" + sec).slice(-2)
+  }
+  if (hours > 0) {
+    min = ("00" + min).slice(-2)
+  }
+  if (days > 0) {
+    hours = ("00" + hours).slice(-2)
+  }
   let strarr = []
-  if (days > 0) { strarr.push(`<span class='number'>${days}</span><span class='unit'>d</span>`) }
-  if (hours > 0) { strarr.push(`<span class='number'>${hours}</span><span class='unit'>h</span>`) }
-  if (min > 0) { strarr.push(`<span class='number'>${min}</span><span class='unit'>m</span>`) }
-  if (sec > 0) { strarr.push(`<span class='number'>${sec}</span><span class='unit'>s</span>`) }
+  if (days) { strarr.push(`<span class='number'>${days}</span><span class='unit'>d</span>`) }
+  if (hours) { strarr.push(`<span class='number'>${hours}</span><span class='unit'>h</span>`) }
+  if (min) { strarr.push(`<span class='number'>${min}</span><span class='unit'>m</span>`) }
+  if (sec) { strarr.push(`<span class='number'>${sec}</span><span class='unit'>s</span>`) }
 
   return strarr.join(' ')
 }
