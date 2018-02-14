@@ -58,6 +58,12 @@ function humanDate (ts) {
 }
 Vue.filter('humanDate', humanDate)
 
+function round(number, precision=2) {
+  var factor = Math.pow(10, precision);
+  return Math.round(number * factor) / factor;
+}
+Vue.filter('round', round)
+
 new Vue({
   el: '#app',
   router,
