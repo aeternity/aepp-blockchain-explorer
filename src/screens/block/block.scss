@@ -25,6 +25,15 @@
   }
   .detail-block-info .field {
     margin-bottom:15px;
+    @include only-phone {
+      width:100%;
+    }
+  }
+  @include only-phone {
+    .basic-block-info.grid,
+    .detail-block-info .grid {
+      display:block;
+    }
   }
   .detail-block-info .grid .field {
     margin-right:50px;
@@ -33,13 +42,23 @@
     color:$magaenta;
   }
   .block-height {
-    @include font-size(xl);
+    @include font-size(xxl);
+    @include only-phone {
+      //@include font-size(l);
+    }
   }
   .ago .number {
     @include font-size(xxl);
+    @include only-phone {
+      @include font-size(xl);
+      //@include font-size(l);
+    }
   }
   .ago .unit {
     @include font-size(m);
+    @include only-phone {
+      //@include font-size(s);
+    }
   }
   .ago .unit + .number {
     margin-left:20px;
@@ -48,13 +67,16 @@
     @include font-size(xs);
     opacity:0.4;
   }
+  .scroll ,
   .field-value {
     margin-top:5px;
     @include font-size(l);
+    @include only-phone {
+      @include font-size(m);
+    }
   }
   .scroll {
     margin-top:10px;
-    @include font-size(l);
     padding:12px;
     background-color:white;
     color:$aubergin;

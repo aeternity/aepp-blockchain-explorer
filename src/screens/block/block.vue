@@ -2,7 +2,7 @@
   <div  v-if='apiBlock' class="block-screen screen">
     <div class="header">
       <div class="basic-block-info grid">
-        <div class='block-height'>
+        <div class=''>
           <span>Block</span>
           <span class='number block-height'>{{apiBlock.height}}</span>
         </div>
