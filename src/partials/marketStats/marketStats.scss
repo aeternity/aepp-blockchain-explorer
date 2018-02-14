@@ -4,7 +4,7 @@
   background: $white;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.11);
   border-radius: 10px;
-  padding:30px 0;
+  padding:20px 0;
   .grid {
     justify-content:center;
     @include only-phone {
@@ -12,6 +12,7 @@
     }
   }
   .grid > * {
+    flex:1;
     @include tablet-and-desktop {
       padding:30px;
     }
@@ -29,5 +30,13 @@
   }
   .unit {
     @include font-size(xs);
+    display:block;
+  }
+  .source {
+    opacity:0.6;
+    @include font-size(xxs);
+  }
+  .source a {
+    text-decoration:underline;
   }
 }
