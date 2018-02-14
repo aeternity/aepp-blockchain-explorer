@@ -3,11 +3,22 @@
     @include content-max-width;
   }
   .title {
+    display:flex;
+    align-items:center;
     margin-top:0;
     @include font-size(xl);
     border-bottom:2px solid $aubergin;
     padding-bottom:20px;
     margin-bottom:20px;
+  }
+  .title .ae-identity-avatar {
+    margin-right:20px;
+
+  }
+  .account-address {
+    overflow:scroll;
+    padding:12px;
+    background:white;
   }
   .field{
     margin-bottom:20px;
