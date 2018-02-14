@@ -24,8 +24,10 @@
     padding: 20px 0;
   }
   .detail-block-info .field {
-    margin-right:50px;
     margin-bottom:15px;
+  }
+  .detail-block-info .grid .field {
+    margin-right:50px;
   }
   .account-address {
     color:$magaenta;
@@ -49,6 +51,14 @@
   .field-value {
     margin-top:5px;
     @include font-size(l);
+  }
+  .scroll {
+    margin-top:10px;
+    @include font-size(l);
+    padding:12px;
+    background-color:white;
+    color:$aubergin;
+    overflow:scroll;
   }
   .block-transactions .title {
     margin-top:50px;
