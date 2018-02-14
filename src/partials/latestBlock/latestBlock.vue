@@ -18,9 +18,10 @@
             {{apiTop.height}}
             </router-link>
           </div>
-          <div>
-            mined
-            <span class='last-block-ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/> ago
+          <div class='ago'>
+            <span>mined</span>
+            <span class='last-block-ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/>
+            <span>ago</span>
           </div>
         </div>
         <div class="grid block-extended-info">

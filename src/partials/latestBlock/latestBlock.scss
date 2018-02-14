@@ -9,13 +9,13 @@
   }
   .last-block-ago .number {
     @include font-size(xxl);
-    @include only-phone {
+    @include phone-and-tablet {
       @include font-size(xl);
     }
   }
   .last-block-ago .unit {
     @include font-size(m);
-    @include only-phone {
+    @include phone-and-tablet {
       @include font-size(s);
     }
   }
@@ -46,7 +46,6 @@
   }
   .block-data .grid {
     justify-content:space-between;
-    align-items:flex-end;
     @include only-phone {
       flex-wrap:wrap;
     }
@@ -62,7 +61,15 @@
     background-color:red;
   }
   .chain-height {
-    @include font-size(xl);
+    display:flex;
+    @include font-size(xxl);
+    @include phone-and-tablet {
+      @include font-size(xl);
+    }
+    img {
+      margin-right:10px;
+      margin-top:-5px;
+    }
   }
   .field {
     margin-bottom:20px;
@@ -80,5 +87,8 @@
   }
   .account-address {
     color:$magaenta;
+  }
+  .block-extended-info {
+    margin-bottom:20px;
   }
 }
