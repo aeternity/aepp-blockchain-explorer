@@ -1,7 +1,7 @@
 .block-list-screen {
   background: $aubergin;
   color:$white;;
-  .inner {
+  >.inner {
     @include content-max-width;
   }
   .field-name {
@@ -60,5 +60,8 @@
   }
   .account-address {
     color:$magaenta;
+  }
+  .transactions {
+    margin-bottom:50px;
   }
 }
