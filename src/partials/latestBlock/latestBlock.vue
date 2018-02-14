@@ -84,9 +84,9 @@ export default {
       return this.apiTop.transactions[0].tx.account
     },
     autoUpdateIn () {
-      if (!this.lastUpdate) return "..."
-      if (!this.currentTime) return "..."
-      return Math.round( (this.currentTime - this.lastUpdate) / 1000 )
+      if (!this.lastUpdate) return '...'
+      if (!this.currentTime) return '...'
+      return Math.round((this.currentTime - this.lastUpdate) / 1000)
     }
   },
   methods: {

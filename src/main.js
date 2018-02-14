@@ -35,13 +35,13 @@ function agoFormat (ts) {
     hours = hours - (days * 24)
   }
   if (min > 0) {
-    sec = ("00" + sec).slice(-2)
+    sec = ('00' + sec).slice(-2)
   }
   if (hours > 0) {
-    min = ("00" + min).slice(-2)
+    min = ('00' + min).slice(-2)
   }
   if (days > 0) {
-    hours = ("00" + hours).slice(-2)
+    hours = ('00' + hours).slice(-2)
   }
   let strarr = []
   if (days) { strarr.push(`<span class='number'>${days}</span><span class='unit'>d</span>`) }
@@ -58,9 +58,9 @@ function humanDate (ts) {
 }
 Vue.filter('humanDate', humanDate)
 
-function round(number, precision=2) {
-  var factor = Math.pow(10, precision);
-  return Math.round(number * factor) / factor;
+function round (number, precision = 2) {
+  var factor = Math.pow(10, precision)
+  return Math.round(number * factor) / factor
 }
 Vue.filter('round', round)
 
