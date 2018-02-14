@@ -3,12 +3,12 @@
     <div class="grid" v-if='apiTop'>
       <div class="explanation">
         <h2 class='title'>Latest Block</h2>
-        <router-link :to='"/block/" + apiTop.height'>
+        <ae-button type='exciting' size='small' :to='"/block/" + apiTop.height'>
           view last
-        </router-link>
-        <router-link to='/blocks'>
+        </ae-button>
+        <ae-button type='exciting' size='small' to='/blocks'>
           view all
-        </router-link>
+        </ae-button>
       </div>
       <div class="block-data">
         <div class="grid block-basic-info">
@@ -47,13 +47,19 @@
             </div>
           </div>
         </div>
-        <button @click='getTop'>refresh</button>
+        <ae-button type='exciting' invert size='small' @click='getTop'>refresh</ae-button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import {
+  AeButton
+} from '@aeternity/aepp-components'
 export default {
+  components: {
+    AeButton
+  },
   data () {
     return {
       apiTop: null,
