@@ -152,7 +152,7 @@ export default {
       this.$http.get(`internal/v2/block/txs/list/height?from=${from}&to=${this.to}&tx_encoding=json`
       ).then(resp => {
         this.apiTransactions = this.apiTransactions.concat(resp.body.transactions)
-        this.to = from
+        this.to = from - 1
       }, resp => {
         alert('Error')
       })
