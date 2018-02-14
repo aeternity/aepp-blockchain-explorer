@@ -105,7 +105,12 @@
             </template>
             <div>
               <span class='field-name'>block</span>
-              n/a
+              <router-link v-if='t.block_height' :to='"/block/" + t.block_height'>
+                {{ t.block_height }}
+              </router-link>
+              <template v-else>
+                n/a
+              </template>
             </div>
           </div>
         </ae-panel>
