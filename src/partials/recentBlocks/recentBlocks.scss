@@ -1,7 +1,8 @@
 .recent-blocks-partial {
   margin-top:80px;
-  background:$white;;
+  position:relative;
   > .inner {
+    position:relative;
     box-sizing: border-box;
     @include content-max-width;
     background: $aubergin;
@@ -12,6 +13,16 @@
     @include only-phone {
       padding:20px;
     }
+  }
+  &:before {
+    content:"";
+    display:block;
+    position:absolute;
+    background-color:$white;
+    top:40px;
+    bottom:40px;
+    left:0;
+    width:100%;
   }
   .block-number a {
     @include font-size(xl);
