@@ -25,15 +25,4 @@
   .account-address {
     color:$magaenta;
   }
-  .transaction {
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-  }
-  .transaction > div:first-child {
-    width:100%;
-  }
-  .transaction > div {
-    margin:4px 0;
-  }
 }
