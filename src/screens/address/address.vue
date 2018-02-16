@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     getBalance () {
-      this.$http.get('external/v2/account/balance?pub_key=' + this.address, {
+      this.$http.get('internal/v2/account/balance/' + this.address, {
         before (request) {
           if (this.previousRequest) {
             this.previousRequest.abort()
