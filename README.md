@@ -1,3 +1,6 @@
+---
+---
+
 # Aeternity Blockchain Explorer
 This is a early stage MVP of a Chain Explorer for the Aeternity Blockchain.
 The underlying API is currently being developed and improved by the day. The Explorer is designed to work with the latest changes (HEAD master) of `aeternity/epoch`.
