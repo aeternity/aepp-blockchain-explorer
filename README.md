@@ -1,4 +1,7 @@
 ---
+layout: page
+title: Introduction
+navigation: 2
 ---
 
 # Aeternity Blockchain Explorer
