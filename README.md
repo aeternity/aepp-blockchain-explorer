@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Introduction
+title: Blockchain Explorer
 navigation: 2
 ---
 
