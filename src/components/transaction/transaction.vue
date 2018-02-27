@@ -121,13 +121,14 @@
           <div>
             <span class='field-name'>QueryId</span>
             <div class="">
-              {{ transaction.tx.query_id | startAndEnd }}
+              {{ transaction.tx.query_id }}
             </div>
           </div>
         </div>
         <div>
           <span class='field-name'>Response</span>
-          <pre class="response">{{ transaction.tx.response }}</pre>
+          <pre v-if='responsePrettyJson ' class="response">{{ responsePrettyJson }}</pre>
+          <pre v-else class="response">{{ transaction.tx.response }}</pre>
         </div>
       </template>
 
@@ -186,11 +187,30 @@
   </div>
 </template>
 <script>
+function isJson(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
 export default {
   name: 'transaction',
   props: [
     'transaction'
-  ]
+  ],
+  computed: {
+    responsePrettyJson() {
+      if (!this.transaction) return null
+      if (!this.transaction.tx.response) return null
+      try {
+        return JSON.parse(this.transaction.tx.response);
+      } catch (e) {
+        return null;
+      }
+    }
+  }
 }
 </script>
 <style src='./transaction.scss' lang='scss' />
