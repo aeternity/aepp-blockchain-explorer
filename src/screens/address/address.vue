@@ -72,7 +72,7 @@ export default {
       })
     },
     getTxs () {
-      this.$http.get(`internal/v2/account/txs/${this.address}?tx_encoding=json` ).then(response => {
+      this.$http.get(`internal/v2/account/txs/${this.address}?tx_encoding=json`).then(response => {
         console.log(response.body)
         this.transactions = response.body.transactions
       }, response => {

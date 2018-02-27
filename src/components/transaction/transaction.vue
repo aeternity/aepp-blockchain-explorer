@@ -187,27 +187,19 @@
   </div>
 </template>
 <script>
-function isJson(str) {
-  try {
-    JSON.parse(str);
-  } catch (e) {
-    return false;
-  }
-  return true;
-}
 export default {
   name: 'transaction',
   props: [
     'transaction'
   ],
   computed: {
-    responsePrettyJson() {
+    responsePrettyJson () {
       if (!this.transaction) return null
       if (!this.transaction.tx.response) return null
       try {
-        return JSON.parse(this.transaction.tx.response);
+        return JSON.parse(this.transaction.tx.response)
       } catch (e) {
-        return null;
+        return null
       }
     }
   }

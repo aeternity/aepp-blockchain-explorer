@@ -70,18 +70,9 @@
         <span class='number'>{{txCount}}</span> Transaction(s)
       </h2>
       <div v-if='apiBlock.transactions'>
-        <!--<thead>-->
-          <!--<tr>-->
-            <!--<th>Type</th>-->
-            <!--<th>From</th>-->
-            <!--<th>To</th>-->
-            <!--<th>Amount</th>-->
-            <!--<th>Fee</th>-->
-          <!--</tr>-->
-        <!--</thead>-->
         <ae-panel v-for='t in apiBlock.transactions'>
           <transaction :transaction='t'/>
-          </ae-panel>
+        </ae-panel>
       </div>
     </div>
   </div>
