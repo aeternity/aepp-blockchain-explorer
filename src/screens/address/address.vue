@@ -22,7 +22,7 @@
       </div>
     </div>
     <h2>Transactions</h2>
-    <ae-panel v-for='t in transactions'>
+    <ae-panel :key='t.hash' v-for='t in transactions'>
       <transaction :transaction='t'/>
     </ae-panel>
 

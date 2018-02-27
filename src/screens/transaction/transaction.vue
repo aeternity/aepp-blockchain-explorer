@@ -23,7 +23,7 @@
       </div>
 
       <div class='transaction-list'>
-        <ae-panel v-for='t in apiTransactions' :key='t.signatures[0]'>
+        <ae-panel v-for='t in apiTransactions' :key='t.hash'>
           <transaction :transaction='t'/>
         </ae-panel>
       </div>

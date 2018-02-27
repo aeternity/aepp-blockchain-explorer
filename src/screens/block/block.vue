@@ -70,7 +70,7 @@
         <span class='number'>{{txCount}}</span> Transaction(s)
       </h2>
       <div v-if='apiBlock.transactions'>
-        <ae-panel v-for='t in apiBlock.transactions'>
+        <ae-panel :key='t.hash' v-for='t in apiBlock.transactions'>
           <transaction :transaction='t'/>
         </ae-panel>
       </div>
