@@ -12,7 +12,7 @@
           {{ transaction.tx.nonce }}
         </div>
       </div>
-      <div v-if=' transaction.tx.fee '>
+      <div v-if='transaction.tx.fee'>
         <div class='field-name'>fee</div>
         <div>
           <span class='number'>{{ transaction.tx.fee }}</span>
