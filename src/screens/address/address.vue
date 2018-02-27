@@ -21,26 +21,33 @@
         <ae-address :show-avatar='false' :address='address'/>
       </div>
     </div>
+    <h2>Transactions</h2>
+    <ae-panel v-for='t in transactions'>
+      <transaction :transaction='t'/>
+    </ae-panel>
 
     <!--<h2>List of Transactions:</h2>-->
   </div>
 </template>
 <script>
-// ak$3MUyXbU7Dzf6Urgn4wnKocxG5LH4rRrrMrXXPXB9sh7BkrRhiupwxLW92zmj2KtLvABzBb76LQtQKAdos7sFyX4do3EKto
-// const addressRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{94}')
+import Transaction from '../../components/transaction/transaction.vue'
 import {
   AeAddress,
-  AeIdentityAvatar
+  AeIdentityAvatar,
+  AePanel
 } from '@aeternity/aepp-components'
 export default {
   name: 'Address',
   components: {
+    Transaction,
     AeAddress,
-    AeIdentityAvatar
+    AeIdentityAvatar,
+    AePanel
   },
   data () {
     return {
-      balance: null
+      balance: null,
+      transactions: null
     }
   },
   computed: {
@@ -63,10 +70,19 @@ export default {
       }, response => {
         // error callback
       })
+    },
+    getTxs () {
+      this.$http.get(`internal/v2/account/txs/${this.address}?tx_encoding=json` ).then(response => {
+        console.log(response.body)
+        this.transactions = response.body.transactions
+      }, response => {
+        // error callback
+      })
     }
   },
   created () {
     this.getBalance()
+    this.getTxs()
   }
 }
 </script>
