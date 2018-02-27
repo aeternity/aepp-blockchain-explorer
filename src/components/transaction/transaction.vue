@@ -131,7 +131,7 @@
         </div>
       </template>
 
-      <template v-else-if='transaction.tx.type === "oracle_query"'>
+      <template v-else-if='transaction.tx.type === "aec_oracle_query_tx"'>
         <div class="grid">
           <div>
             <div class='field-name'>Oracle</div>
