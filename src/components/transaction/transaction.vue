@@ -33,7 +33,7 @@
     </div>
     <div class='transaction-body'>
 
-      <template v-if='transaction.tx.type === "coinbase"'>
+      <template v-if='transaction.tx.type === "aec_coinbase_tx"'>
         <div class="grid">
           <div>
             <div class='field-name'>receiver</div>
@@ -50,7 +50,7 @@
         </div>
       </template>
 
-      <template v-else-if='transaction.tx.type === "spend"'>
+      <template v-else-if='transaction.tx.type === "aec_spend_tx"'>
         <div class="grid">
         <div>
           <span class='field-name'>sender</span>
@@ -76,7 +76,7 @@
         </div>
       </template>
 
-      <template v-else-if='transaction.tx.type === "oracle_register"'>
+      <template v-else-if='transaction.tx.type === "aec_oracle_register_tx"'>
         <div class="grid">
           <div>
             <span class='field-name'>account</span>
@@ -108,7 +108,7 @@
         </div>
       </template>
 
-      <template v-else-if='transaction.tx.type === "oracle_response"'>
+      <template v-else-if='transaction.tx.type === "aec_oracle_response_tx"'>
         <div class="grid">
           <div>
             <span class='field-name'>Oracle</span>
