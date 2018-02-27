@@ -108,7 +108,7 @@ export default {
   },
   computed: {
     minedBy () {
-      return this.apiBlock.transactions.filter(t => t.tx.type === 'coinbase')[0].tx.account
+      return this.apiBlock.transactions.filter(t => t.tx.type === 'aec_coinbase_tx')[0].tx.account
     },
     ago () {
       if (!this.apiBlock) { return null }
