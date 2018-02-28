@@ -4,8 +4,8 @@ title: Blockchain Explorer
 navigation: 2
 ---
 
-# Aeternity Blockchain Explorer
-This is a early stage MVP of a Chain Explorer for the Aeternity Blockchain.
+# æternity Blockchain Explorer
+This is a early stage MVP of a Chain Explorer for the æternity Blockchain.
 The underlying API is currently being developed and improved by the day. The Explorer is designed to work with the latest changes (HEAD master) of `aeternity/epoch`.
 
 ## Features
@@ -16,13 +16,13 @@ The underlying API is currently being developed and improved by the day. The Exp
 - view an account and see balance
 - search for accounts by public key
 - search for blocks by hash and height
-- aeternity token market stats via coinmarketcap.com api
+- æternity token market stats via coinmarketcap.com api
 
 ## Requirements
-
 You need a running node of `aeternity/epoch` with api v2. You should expose the internal API with a proxy server and set CORS related headers.
 
 NGINX Example:
+
 ```
 # /etc/nginx/sites-available/default
 server {
@@ -67,18 +67,16 @@ server {
                         add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
                         add_header 'Access-Control-Expose-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
                 }
-
 ```
 
 ## Build Setup
-
 adjust url to epoch proxy in `src/main.js`
+
 ```
 Vue.http.options.root = 'http://139.59.140.51/api/'
-
 ```
 
-``` bash
+```bash
 # install dependencies
 npm install
 
@@ -90,5 +88,4 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
-
 ```
