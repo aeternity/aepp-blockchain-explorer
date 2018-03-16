@@ -1,22 +1,32 @@
-# Aeternity Blockchain Explorer
-This is a early stage MVP of a Chain Explorer for the Aeternity Blockchain.
-The underlying API is currently being developed and improved by the day. The Explorer is designed to work with the latest changes (HEAD master) of `aeternity/epoch`.
+---
+layout: page
+title: Blockchain Explorer
+navigation: 2
+---
+
+# æternity Blockchain Explorer
+
+## Overview
+This is an explorer for the æternity blockchain.
+
+The underlying API is currently being developed and improved. The Explorer is designed to work with the latest features of [Epoch](https://github.com/aeternity/epoch).
 
 ## Features
-- uses API v2
-- view a block with transactions
-- view list of blocks from latest to genesis
-- view list of transactions from latest to genesis
-- view an account and see balance
+- view a block and its transactions
+- view the list of blocks from the latest all the way back to the genesis block
+- view list of transactions for each block
+- view an account and see its balance
 - search for accounts by public key
-- search for blocks by hash and height
-- aeternity token market stats via coinmarketcap.com api
+- search for blocks by their hash and by their position in the blockchain
+- view æternity token market exchange rates via coinmarketcap.com api
 
 ## Requirements
+You need a running Epoch node, later than version 0.7.0. 
 
-You need a running node of `aeternity/epoch` with api v2. You should expose the internal API with a proxy server and set CORS related headers.
+You must expose the internal API with a proxy server and set appropriate [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) headers.
 
 NGINX Example:
+
 ```
 # /etc/nginx/sites-available/default
 server {
@@ -61,18 +71,17 @@ server {
                         add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
                         add_header 'Access-Control-Expose-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
                 }
-
 ```
 
 ## Build Setup
 
-adjust url to epoch proxy in `src/main.js`
+Change the url `src/main.js` to that of your Epoch proxy:
 ```
 Vue.http.options.root = 'http://139.59.140.51/api/'
-
 ```
+Then do the following setup:
 
-``` bash
+```bash
 # install dependencies
 npm install
 
@@ -84,5 +93,4 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
-
 ```
