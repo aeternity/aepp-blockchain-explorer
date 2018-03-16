@@ -44,8 +44,9 @@
             </div>
           </div>
           <div>
-            <div class='field-name'>amount</div>
-            block reward
+            <div class='field-name'>reward</div>
+              <span class="number">{{transaction.tx.reward}}</span>
+              <span class="unit">AE</span>
           </div>
         </div>
       </template>
