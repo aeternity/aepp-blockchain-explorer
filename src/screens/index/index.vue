@@ -7,7 +7,7 @@
           <h1>Blockchain Explorer</h1>
           <p>Search the æternity test network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
         </div>
-        <div class='search'>
+        <div class='search' v-on:keyup.enter='search()'>
           <input class='search-input' placeholder='Explore Block, Address' v-model='searchString' type="text">
           <button class='search-button' @click='search'>
             <img src="@/assets/search.svg" alt=""/>
