@@ -27,9 +27,9 @@ import MarketStats from '@/partials/marketStats/marketStats.vue'
 import LatestBlock from '@/partials/latestBlock/latestBlock.vue'
 import RecentBlocks from '@/partials/recentBlocks/recentBlocks.vue'
 
-const blockHeightRegex = RegExp('^[0-9]+')
-const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
-const accountPublicKeyRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{93,94}')
+const blockHeightRegex = RegExp('^[0-9]+$')
+const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}$')
+const accountPublicKeyRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{93,94}$')
 
 export default {
   data () {
