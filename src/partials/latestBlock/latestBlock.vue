@@ -20,7 +20,7 @@
           </div>
           <div class='ago'>
             <span>mined</span>
-            <span class='last-block-ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/>
+            <relative-time :ts="lastBlockAgo" big />
             <span>ago</span>
           </div>
         </div>
@@ -58,9 +58,11 @@
 import {
   AeButton
 } from '@aeternity/aepp-components'
+import RelativeTime from '../../components/relativeTime.vue'
 export default {
   components: {
-    AeButton
+    AeButton,
+    RelativeTime
   },
   data () {
     return {

@@ -7,13 +7,13 @@
       </div>
       <div class="field average-block-time">
         <span class='field-name'>average rate 1 per </span>
-        <span class='ago' v-html='$options.filters.agoFormat(averageBlockTime)'/>
+        <relative-time :ts="averageBlockTime" big spaced />
       </div>
       <div>
         <span class="field-name">
         last block mined
         </span>
-        <span class='ago' v-html='$options.filters.agoFormat(lastBlockAgo)'/>
+        <relative-time :ts="lastBlockAgo" big spaced />
         <span class="field-name">
         ago
         </span>
@@ -70,7 +70,7 @@
               time
             </span>
             <span class="number">
-              <span class='' v-html='$options.filters.agoFormat(currentTime - b.time)'/>
+              <relative-time :ts="currentTime - b.time" />
             </span>
           </td>
         </template>
@@ -93,9 +93,11 @@
 import {
   AeButton
 } from '@aeternity/aepp-components'
+import RelativeTime from '../../components/relativeTime.vue'
 export default {
   components: {
-    AeButton
+    AeButton,
+    RelativeTime
   },
   data () {
     return {

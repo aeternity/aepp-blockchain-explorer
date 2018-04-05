@@ -47,22 +47,6 @@
       //@include font-size(l);
     }
   }
-  .ago .number {
-    @include font-size(xxl);
-    @include only-phone {
-      @include font-size(xl);
-      //@include font-size(l);
-    }
-  }
-  .ago .unit {
-    @include font-size(m);
-    @include only-phone {
-      //@include font-size(s);
-    }
-  }
-  .ago .unit + .number {
-    margin-left:20px;
-  }
   .field-name {
     @include font-size(xs);
     opacity:0.4;

@@ -16,7 +16,7 @@
         </div>
         <div>
           <span class='field-name'>time since mined</span>
-          <span class='ago' v-html='$options.filters.agoFormat(ago)'/>
+          <relative-time :ts="ago" big spaced />
         </div>
       </div>
       <div class="detail-block-info">
@@ -80,6 +80,7 @@
 
 <script>
 import Transaction from '../../components/transaction/transaction.vue'
+import RelativeTime from '../../components/relativeTime.vue'
 import {
   AePanel
 } from '@aeternity/aepp-components'
@@ -89,7 +90,8 @@ export default {
   name: 'Block',
   components: {
     AePanel,
-    Transaction
+    Transaction,
+    RelativeTime
   },
   data () {
     return {

@@ -7,18 +7,6 @@
       flex-direction:column;
     }
   }
-  .last-block-ago .number {
-    @include font-size(xxl);
-    @include phone-and-tablet {
-      @include font-size(xl);
-    }
-  }
-  .last-block-ago .unit {
-    @include font-size(m);
-    @include phone-and-tablet {
-      @include font-size(s);
-    }
-  }
   .explanation {
     padding:50px 100px 50px 0;
     max-width:250px;
