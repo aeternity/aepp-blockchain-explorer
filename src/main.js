@@ -1,12 +1,9 @@
 import Vue from 'vue'
 import App from './App'
-import VueResource from 'vue-resource'
 import router from './router'
+import store from './store'
 
-Vue.use(VueResource)
 Vue.config.productionTip = false
-
-Vue.http.options.root = process.env.AETERNITY_EPOCH_API_URL
 
 /* eslint-disable no-new */
 function startAndEnd (str, start = 6, end = 6) {
@@ -30,5 +27,6 @@ Vue.filter('round', round)
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })

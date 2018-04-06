@@ -26,6 +26,7 @@
 import MarketStats from '@/partials/marketStats/marketStats.vue'
 import LatestBlock from '@/partials/latestBlock/latestBlock.vue'
 import RecentBlocks from '@/partials/recentBlocks/recentBlocks.vue'
+import pollAction from '@/mixins/pollAction'
 
 const blockHeightRegex = RegExp('^[0-9]+$')
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}$')
@@ -42,6 +43,7 @@ export default {
     LatestBlock: LatestBlock,
     RecentBlocks: RecentBlocks
   },
+  mixins: [pollAction('loadLastBlocks', [4])],
   methods: {
     search () {
       if (blockHeightRegex.test(this.searchString)) {

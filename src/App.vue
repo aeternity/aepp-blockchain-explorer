@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     networkName () {
-      let url = this.$http.options.root
+      let url = process.env.AETERNITY_EPOCH_API_URL
       let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
       if (name) {
         let shortname = name.replace(/([^.]+)-net-api/, '$1')

@@ -1,5 +1,5 @@
 <template>
-  <div class='account-screen screen'>
+  <div v-if="account" class='account-screen screen'>
     <h1 class='title'>
       <ae-identity-avatar :address="address"/>
       <ae-address size='compact' :show-avatar='false' :address='address'/>
@@ -8,7 +8,7 @@
     <div class="field">
       <div class='field-name'>Balance</div>
       <div>
-        <span class="number">{{balance}}</span>
+        <span class="number">{{account.balance}}</span>
         <span class="unit">AE</span>
       </div>
     </div>
@@ -22,7 +22,7 @@
       </div>
     </div>
     <h2>Transactions</h2>
-    <ae-panel :key='t.hash' v-for='t in transactions'>
+    <ae-panel :key='t.hash' v-for='t in account.transactions'>
       <transaction :transaction='t'/>
     </ae-panel>
 
@@ -30,7 +30,9 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Transaction from '../../components/transaction/transaction.vue'
+import pollAction from '../../mixins/pollAction'
 import {
   AeAddress,
   AeIdentityAvatar,
@@ -44,46 +46,13 @@ export default {
     AeIdentityAvatar,
     AePanel
   },
-  data () {
-    return {
-      balance: null,
-      transactions: null
+  props: ['address'],
+  mixins: [pollAction('fetchAccount', function () { return [this.address] })],
+  computed: mapState({
+    account (state) {
+      return state.accounts[this.address]
     }
-  },
-  computed: {
-    address () {
-      return this.$route.params.address
-    }
-  },
-  methods: {
-    getBalance () {
-      this.$http.get('internal/v2/account/balance/' + this.address, {
-        before (request) {
-          if (this.previousRequest) {
-            this.previousRequest.abort()
-          }
-          this.previousRequest = request
-        }
-
-      }).then(response => {
-        this.balance = response.body.balance
-      }, response => {
-        // error callback
-      })
-    },
-    getTxs () {
-      this.$http.get(`internal/v2/account/txs/${this.address}?tx_encoding=json`).then(response => {
-        console.log(response.body)
-        this.transactions = response.body.transactions
-      }, response => {
-        // error callback
-      })
-    }
-  },
-  created () {
-    this.getBalance()
-    this.getTxs()
-  }
+  })
 }
 </script>
 <style src='./address.scss' lang='scss' />

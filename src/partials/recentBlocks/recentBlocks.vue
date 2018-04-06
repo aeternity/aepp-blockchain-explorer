@@ -4,8 +4,8 @@
       <h2>Recent blocks</h2>
       <p>View the latest blocks on the aeternity blockchain</p>
       <table>
-        <tr v-for='b in apiBlocks'>
-          <template v-if="typeof b.then === 'undefined'">
+        <tr v-for='b in recentBlocks'>
+          <template v-if="b">
             <td>
               <div class="block-number">
                 <router-link :to='"/block/" + b.height'>
@@ -22,13 +22,13 @@
             <td>
               <span class='field-name'>mined by</span>
               <span class="field-value account-address">
-                <router-link :to='"/account/" + b.transactions[0].tx.account'>
-                  {{b.transactions[0].tx.account | startAndEnd}}
+                <router-link :to='"/account/" + b.minedBy'>
+                  {{b.minedBy | startAndEnd}}
                 </router-link>
               </span>
             </td>
           </template>
-          <template v-else-if="typeof b.then !== 'undefined'">
+          <template v-else>
             Loading..
           </template>
         </tr>
@@ -37,39 +37,12 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+import _ from 'lodash'
 export default {
-  data () {
-    return {
-      blockHeight: null,
-      apiBlocks: []
-    }
-  },
-  methods: {
-    getBlocks (count) {
-      console.log('x')
-      let i
-      for (i = this.blockHeight; i > this.blockHeight - count; i--) {
-        let x = this.$http.get('internal/v2/block/height/' + i + '?tx_encoding=json', { })
-        this.apiBlocks.push(x)
-      }
-      this.apiBlocks.forEach((x, i) => {
-        if (typeof x.then === 'undefined') return
-        x.then(resp => {
-          this.$set(this.apiBlocks, i, resp.body)
-        })
-      })
-      this.blockHeight = i
-      console.log(i)
-    }
-  },
-  mounted () {
-    this.$http.get(`internal/v2/block/number`
-    ).then(resp => {
-      this.blockHeight = resp.body.height
-      this.getBlocks(3)
-    }, resp => {
-    })
-  }
+  computed: mapState({
+    recentBlocks: state => _.times(3, idx => state.blocks[state.height - idx - 1])
+  })
 }
 </script>
 <style src='./recentBlocks.scss' lang='scss' />

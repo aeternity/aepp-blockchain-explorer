@@ -1,9 +1,9 @@
 <template>
   <div class="latest-block-partial">
-    <div class="grid" v-if='apiTop'>
+    <div class="grid">
       <div class="explanation">
         <h2 class='title'>Latest Block</h2>
-        <ae-button type='exciting' size='small' :to='"/block/" + apiTop.height'>
+        <ae-button type='exciting' size='small' :to='"/block/" + block.height'>
           view last
         </ae-button>
         <ae-button type='exciting' size='small' to='/blocks'>
@@ -14,13 +14,13 @@
         <div class="grid block-basic-info">
           <div class='number chain-height'>
             <img src="@/assets/block.svg" alt=""/>
-            <router-link :to="'/block/'+apiTop.height">
-            {{apiTop.height}}
+            <router-link :to="'/block/'+block.height">
+              {{block.height}}
             </router-link>
           </div>
           <div class='ago'>
             <span>mined</span>
-            <relative-time :ts="lastBlockAgo" big />
+            <relative-time :ts="currentTime - block.time" big />
             <span>ago</span>
           </div>
         </div>
@@ -28,33 +28,32 @@
           <div class='field'>
             <div class="field-name">Hash</div>
             <div class='field-value block-hash'>
-              <router-link :to="'/block/'+apiTop.hash">
-                {{apiTop.hash | startAndEnd }}
+              <router-link :to="'/block/'+block.hash">
+                {{block.hash | startAndEnd}}
               </router-link>
             </div>
           </div>
           <div class='field'>
             <div class='field-name'>Transactions</div>
             <div class="field-value number">
-                {{txCount}}
+                {{block.transactions.length}}
             </div>
           </div>
           <div class='field'>
             <div class='field-name'>Mined by</div>
-            <div v-if='minedBy' class="field-value account-address">
-              <router-link :to='"/account/" + minedBy'>
-              {{minedBy | startAndEnd }}
+            <div class="field-value account-address">
+              <router-link :to='"/account/" + block.minedBy'>
+              {{block.minedBy | startAndEnd}}
               </router-link>
             </div>
           </div>
         </div>
-        <ae-button type='exciting' invert size='small' @click='getLatestBlock'>refresh </ae-button>
-        updated {{autoUpdateIn }} sek ago
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import {
   AeButton
 } from '@aeternity/aepp-components'
@@ -65,57 +64,15 @@ export default {
     AeButton,
     RelativeTime
   },
-  data () {
-    return {
-      apiTop: null,
-      lastUpdate: null
-    }
-  },
   mixins: [currentTime],
-  computed: {
-    lastBlockAgo () {
-      if (!this.apiTop) { return null }
-      return this.currentTime - this.apiTop.time
-    },
-    txCount () {
-      if (!this.apiTop) return null
-      return this.apiTop.transactions.length
-    },
-    minedBy () {
-      if (!this.apiTop) return null
-      if (!this.apiTop.transactions.length > 0) return null
-      return this.apiTop.transactions[0].tx.account
-    },
-    autoUpdateIn () {
-      if (!this.lastUpdate) return '...'
-      if (!this.currentTime) return '...'
-      return Math.round((this.currentTime - this.lastUpdate) / 1000)
+  computed: mapState({
+    block: state => state.blocks[state.height] || {
+      height: state.height,
+      hash: '',
+      minedBy: '',
+      transactions: []
     }
-  },
-  methods: {
-    getLatestBlock () {
-      this.$http.get('internal/v2/block/latest?tx_encoding=json', {
-        before (request) {
-          if (this.previousRequest) {
-            this.previousRequest.abort()
-          }
-          this.previousRequest = request
-        }
-
-      }).then(response => {
-        this.apiTop = response.body
-        this.lastUpdate = new Date()
-      }, response => {
-        // error callback
-      })
-    }
-  },
-  created () {
-    this.getLatestBlock()
-    setInterval(() => {
-      this.getLatestBlock()
-    }, 9000)
-  }
+  })
 }
 </script>
 <style src='./latestBlock.scss' lang='scss' />
