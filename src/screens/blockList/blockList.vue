@@ -94,6 +94,7 @@ import {
   AeButton
 } from '@aeternity/aepp-components'
 import RelativeTime from '../../components/relativeTime.vue'
+import currentTime from '../../mixins/currentTime'
 export default {
   components: {
     AeButton,
@@ -101,11 +102,11 @@ export default {
   },
   data () {
     return {
-      currentTime: null,
       blockHeight: null,
       apiBlocks: []
     }
   },
+  mixins: [currentTime],
   computed: {
     averageBlockTime () {
       return this.apiBlocks.reduce(
@@ -145,10 +146,6 @@ export default {
     }
   },
   mounted () {
-    setInterval(() => {
-      this.currentTime = new Date()
-    }, 1000)
-
     this.$http.get(`internal/v2/block/number`
     ).then(resp => {
       this.blockHeight = resp.body.height
