@@ -24,8 +24,6 @@
         <a href="https://twitter.com/aetrnty" target="_blank"><img src="@/assets/twitter.svg" alt=""/>Twitter</a>
         <a href="https://www.linkedin.com/company/aeternity" target="_blank"><img src="@/assets/linkedin.svg" alt=""/>Linkedin</a>
       </div>
-
-      </div>
     </div>
   </footer>
 </template>
