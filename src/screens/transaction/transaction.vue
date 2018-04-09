@@ -38,7 +38,7 @@
       </div>
       <div class='center'>
         <ae-button
-          @click="heightFrom -= 10"
+          :to="{ name: 'Transaction', params: { heightFrom: heightFrom - 10, heightTo } }"
           type='exciting' class="load-more"
         >
           Load more
@@ -61,10 +61,9 @@ export default {
     AePanel,
     Transaction
   },
+  props: ['heightFrom', 'heightTo'],
   data () {
     return {
-      heightFrom: 0,
-      heightTo: 0,
       newHeightFrom: 0,
       newHeightTo: 0
     }
@@ -81,24 +80,34 @@ export default {
   }),
   methods: {
     setNewHeight () {
-      this.heightFrom = this.newHeightFrom
+      this.$router.push({
+        name: 'Transaction',
+        params: {
+          heightFrom: this.newHeightFrom || this.heightFrom,
+          heightTo: this.newHeightTo || this.heightTo
+        }
+      })
       this.newHeightFrom = 0
-      this.heightTo = this.newHeightTo
       this.newHeightTo = 0
     },
     async checkParamsAndLoadTransactions () {
       const { heightFrom, heightTo } = this
       const { height } = this.$store.state
-      if (!heightFrom || !heightTo) {
-        this.heightFrom = height - 10
-        this.heightTo = height
+
+      const params =
+        ((!heightFrom || !heightTo) && {
+          heightFrom: height - 10,
+          heightTo: height
+        }) ||
+        ((heightFrom > heightTo || heightTo > height) && {
+          heightFrom: Math.min(heightFrom, heightTo, height),
+          heightTo: Math.min(Math.max(heightFrom, heightTo), height)
+        })
+      if (params) {
+        this.$router.replace({ name: 'Transaction', params })
         return
       }
-      if (heightFrom > heightTo || heightTo > height) {
-        this.heightFrom = Math.min(heightFrom, heightTo, height)
-        this.heightTo = Math.min(Math.max(heightFrom, heightTo), height)
-        return
-      }
+
       for (let height = this.heightFrom; height <= this.heightTo; height++) {
         this.$store.dispatch('loadBlock', { height })
       }
