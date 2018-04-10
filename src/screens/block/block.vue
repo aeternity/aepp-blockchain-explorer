@@ -81,6 +81,7 @@
 <script>
 import Transaction from '../../components/transaction/transaction.vue'
 import RelativeTime from '../../components/relativeTime.vue'
+import currentTime from '../../mixins/currentTime'
 import {
   AePanel
 } from '@aeternity/aepp-components'
@@ -95,10 +96,10 @@ export default {
   },
   data () {
     return {
-      currentTime: null,
       apiBlock: null
     }
   },
+  mixins: [currentTime],
   computed: {
     minedBy () {
       return this.apiBlock.transactions.filter(t => t.tx.type === 'coinbase_tx')[0].tx.account
@@ -147,9 +148,6 @@ export default {
   },
   mounted () {
     this.getBlock()
-    setInterval(() => {
-      this.currentTime = new Date()
-    }, 1000)
   }
 }
 </script>

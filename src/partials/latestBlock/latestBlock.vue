@@ -59,6 +59,7 @@ import {
   AeButton
 } from '@aeternity/aepp-components'
 import RelativeTime from '../../components/relativeTime.vue'
+import currentTime from '../../mixins/currentTime'
 export default {
   components: {
     AeButton,
@@ -67,10 +68,10 @@ export default {
   data () {
     return {
       apiTop: null,
-      currentTime: null,
       lastUpdate: null
     }
   },
+  mixins: [currentTime],
   computed: {
     lastBlockAgo () {
       if (!this.apiTop) { return null }
@@ -111,9 +112,6 @@ export default {
   },
   created () {
     this.getLatestBlock()
-    setInterval(() => {
-      this.currentTime = new Date()
-    }, 1000)
     setInterval(() => {
       this.getLatestBlock()
     }, 9000)
