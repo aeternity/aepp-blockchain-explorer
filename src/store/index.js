@@ -59,8 +59,8 @@ const store = new Vuex.Store({
     },
     async fetchAccount ({ state, commit }, address) {
       const [{ balance }, { transactions }] = await Promise.all([
-        fetchJson(`${BASE_URL}internal/v2/account/balance/${address}`),
-        fetchJson(`${BASE_URL}internal/v2/account/txs/${address}?tx_encoding=json`)
+        fetchJson(`${BASE_URL}v2/account/balance/${address}`),
+        fetchJson(`${BASE_URL}v2/account/txs/${address}?tx_encoding=json`)
       ])
       const account = { address, balance, transactions }
       if (_.isEqual(state.accounts[address], account)) return
