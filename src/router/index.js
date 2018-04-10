@@ -20,7 +20,8 @@ export default new Router({
     {
       path: '/account/:address',
       name: 'Address',
-      component: Address
+      component: Address,
+      props: true
     },
     {
       path: '/blocks',
@@ -28,9 +29,10 @@ export default new Router({
       component: BlockList
     },
     {
-      path: '/block/:block',
+      path: '/block/:blockId',
       name: 'Block',
-      component: Block
+      component: Block,
+      props: true
     },
     {
       path: '/tx',

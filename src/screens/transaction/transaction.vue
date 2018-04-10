@@ -3,32 +3,44 @@
     <div class="inner">
 
       <h1 class='title'>Transactions</h1>
-      <div class="grid">
+      <form class="grid" @submit.prevent="setNewHeight">
         <div>
           load all transactions from block
         </div>
 
         <div>
-          <input v-model='loadFrom' type="number" name="startBlock" id="startBlock"/>
+          <input
+            :value="newHeightFrom || heightFrom"
+            @input="newHeightFrom = $event.target.value"
+            type="number"
+          />
         </div>
 
         <div>
-          to: <span class='block-number number'>{{loadFrom - 10}}</span>
+          to:
+          <input
+            :value="newHeightTo || heightTo"
+            @input="newHeightTo = $event.target.value"
+            type="number"
+          />
         </div>
 
-        <ae-button size='small' type='exciting' @click='reset'>
+        <ae-button size='small' type='exciting'>
           load
         </ae-button>
 
-      </div>
+      </form>
 
       <div class='transaction-list'>
-        <ae-panel v-for='t in apiTransactions' :key='t.hash'>
+        <ae-panel v-for='t in transactions' :key='t.hash'>
           <transaction :transaction='t'/>
         </ae-panel>
       </div>
       <div class='center'>
-        <ae-button type='exciting' @click='getTransactions' class="load-more">
+        <ae-button
+          @click="heightFrom -= 10"
+          type='exciting' class="load-more"
+        >
           Load more
         </ae-button>
       </div>
@@ -37,12 +49,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import {
   AeButton,
   AePanel
 } from '@aeternity/aepp-components'
 import Transaction from '../../components/transaction/transaction.vue'
-const paginationStep = 10
 export default {
   components: {
     AeButton,
@@ -51,47 +63,56 @@ export default {
   },
   data () {
     return {
-      blockHeight: null,
-      loadFrom: 0,
-      apiTransactions: [],
-      to: null
+      heightFrom: 0,
+      heightTo: 0,
+      newHeightFrom: 0,
+      newHeightTo: 0
     }
   },
+  computed: mapState({
+    transactions (state) {
+      const blocks = []
+      for (let height = this.heightFrom; height <= this.heightTo; height++) {
+        if (!state.blocks[height]) continue
+        blocks.unshift(state.blocks[height].transactions)
+      }
+      return blocks.reduce((p, n) => [...p, ...n], [])
+    }
+  }),
   methods: {
-    getTransactions () {
-      let from = this.to - paginationStep
-      if (from < 0) {
-        from = 0
-      }
-      this.$http.get(`internal/v2/block/txs/list/height?from=${from}&to=${this.to}&tx_encoding=json`
-      ).then(resp => {
-        this.apiTransactions = this.apiTransactions.concat(resp.body.transactions)
-        this.to = from - 1
-      }, resp => {
-        alert('Error')
-      })
+    setNewHeight () {
+      this.heightFrom = this.newHeightFrom
+      this.newHeightFrom = 0
+      this.heightTo = this.newHeightTo
+      this.newHeightTo = 0
     },
-    reset () {
-      if (this.loadFrom > this.blockHeight) {
-        this.loadFrom = this.blockHeight
+    async checkParamsAndLoadTransactions () {
+      const { heightFrom, heightTo } = this
+      const { height } = this.$store.state
+      if (!heightFrom || !heightTo) {
+        this.heightFrom = height - 10
+        this.heightTo = height
+        return
       }
-      if (this.loadFrom < paginationStep) {
-        this.loadFrom = paginationStep
+      if (heightFrom > heightTo || heightTo > height) {
+        this.heightFrom = Math.min(heightFrom, heightTo, height)
+        this.heightTo = Math.min(Math.max(heightFrom, heightTo), height)
+        return
       }
-      this.apiTransactions = []
-      this.to = this.loadFrom
-      this.getTransactions()
+      for (let height = this.heightFrom; height <= this.heightTo; height++) {
+        this.$store.dispatch('loadBlock', { height })
+      }
     }
   },
-  created () {
-    this.$http.get(`internal/v2/block/number`
-    ).then(resp => {
-      this.blockHeight = resp.body.height
-      this.to = this.blockHeight
-      this.loadFrom = this.blockHeight
-      this.getTransactions()
-    }, resp => {
-    })
+  async mounted () {
+    if (!this.$store.state.height) {
+      await this.$store.dispatch('fetchHeight')
+    }
+    this.$watch(
+      function () { return [this.heightFrom, this.heightTo] },
+      this.checkParamsAndLoadTransactions,
+      { immediate: true }
+    )
   }
 }
 </script>

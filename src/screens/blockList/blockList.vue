@@ -21,8 +21,8 @@
     </div>
 
     <table class='transactions'>
-      <tr v-for='b in apiBlocks'>
-        <template v-if="typeof b.then === 'undefined'">
+      <tr v-for='b in blocks'>
+        <template v-if="b">
           <td>
             <div class="block-number">
               <router-link :to='"/block/" + b.height'>
@@ -74,7 +74,7 @@
             </span>
           </td>
         </template>
-        <template v-else-if="typeof b.then !== 'undefined'">
+        <template v-else>
           <td colspan="3">
           Loading..
           </td>
@@ -82,7 +82,7 @@
       </tr>
     </table>
     <div class="center">
-      <ae-button invert type='exciting' @click='getBlocks(10)'>
+      <ae-button invert type='exciting' @click='loadMore'>
         load more
       </ae-button>
     </div>
@@ -90,71 +90,49 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import {
   AeButton
 } from '@aeternity/aepp-components'
 import RelativeTime from '../../components/relativeTime.vue'
+import currentTime from '../../mixins/currentTime'
+import pollAction from '../../mixins/pollAction'
 export default {
   components: {
     AeButton,
     RelativeTime
   },
-  data () {
-    return {
-      currentTime: null,
-      blockHeight: null,
-      apiBlocks: []
-    }
-  },
+  mixins: [currentTime, pollAction('loadLastBlocks', [10])],
   computed: {
-    averageBlockTime () {
-      return this.apiBlocks.reduce(
-        (sum, block, i, blocks) => {
-          if (typeof block.then !== 'undefined') {
-            return sum
-          }
-          if (i === 0) {
-            return sum + (new Date() - block.time)
-          }
-          if (typeof blocks[i - 1].then !== 'undefined') return sum
-          return sum + (blocks[i - 1].time - block.time)
+    ...mapState({
+      blocks: state => {
+        const blocks = []
+        let height = Math.max(...Object.keys(state.blocks).filter(i => !isNaN(+i)))
+        while (state.blocks[height]) {
+          blocks.push(state.blocks[height])
+          height--
         }
-        , 0) / this.apiBlocks.filter(b => typeof b.then === 'undefined').length
+        return blocks
+      }
+    }),
+    averageBlockTime () {
+      const blockTimes = this.blocks.map((block, idx, blocks) =>
+        idx + 1 < blocks.length && blocks[idx].time - blocks[idx + 1].time)
+      blockTimes.pop()
+      return blockTimes.reduce((a, b) => a + b, 0) / blockTimes.length
     },
     lastBlockAgo () {
-      if (this.apiBlocks.length > -1 && typeof this.apiBlocks[0].time !== 'undefined') {
-        return this.currentTime - this.apiBlocks[0].time
-      }
-      return null
+      return this.blocks[0] ? this.currentTime - this.blocks[0].time : null
     }
   },
   methods: {
-    getBlocks (count) {
-      let i
-      for (i = this.blockHeight; i > this.blockHeight - count; i--) {
-        let x = this.$http.get('internal/v2/block/height/' + i + '?tx_encoding=json', { })
-        this.apiBlocks.push(x)
-      }
-      this.apiBlocks.forEach((x, i) => {
-        if (typeof x.then === 'undefined') return
-        x.then(resp => {
-          this.$set(this.apiBlocks, i, resp.body)
+    loadMore () {
+      for (let i = 1; i <= 10; i++) {
+        this.$store.dispatch('loadBlock', {
+          height: this.blocks[this.blocks.length - 1].height - i
         })
-      })
-      this.blockHeight = i
+      }
     }
-  },
-  mounted () {
-    setInterval(() => {
-      this.currentTime = new Date()
-    }, 1000)
-
-    this.$http.get(`internal/v2/block/number`
-    ).then(resp => {
-      this.blockHeight = resp.body.height
-      this.getBlocks(10)
-    }, resp => {
-    })
   }
 }
 </script>
