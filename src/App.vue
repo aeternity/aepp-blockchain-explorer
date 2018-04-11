@@ -7,13 +7,13 @@
           <span>explorer</span>
         </router-link>
         <div class="links">
-          <router-link class='link' to='/'>
+          <router-link to='/'>
             Dashboard
           </router-link>
-          <router-link class='link'  to='/blocks'>
+          <router-link to='/blocks'>
             Blocks
           </router-link>
-          <router-link class='link' to='/tx'>
+          <router-link to='/tx'>
             Transactions
           </router-link>
         </div>

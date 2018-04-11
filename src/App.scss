@@ -99,7 +99,22 @@ nav .inner {
   display:flex;
   justify-content:space-between;
 }
-nav .links > * {
+nav .links a {
+  opacity:0.6;
+
+  &.router-link-exact-active, &:not(:first-child).router-link-active {
+    opacity:1.0;
+
+    &:after {
+      content: "";
+      display:block;
+      position:absolute;
+      width:calc(100% - 20px);
+      left:10px;
+      border-top:3px solid #F7296E;
+      bottom:-8px;
+    }
+  }
 }
 nav a {
   @include font-size(m);
@@ -121,21 +136,6 @@ nav .logo {
 nav .logo img + *{
   margin-top:-12px;
   margin-left:5px;
-}
-nav a.link {
-  opacity:0.6;
-}
-nav a.router-link-exact-active {
-  opacity:1.0;
-}
-nav a.router-link-exact-active.link:after {
-  content: "";
-  display:block;
-  position:absolute;
-  width:calc(100% - 20px);
-  left:10px;
-  border-top:3px solid #F7296E;
-  bottom:-8px;
 }
 .screen {
   padding-bottom:130px;
