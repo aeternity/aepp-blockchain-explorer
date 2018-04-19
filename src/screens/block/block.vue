@@ -113,10 +113,25 @@ export default {
       } else if (blockHashRegex.test(this.blockId)) {
         this.$store.dispatch('loadBlock', { hash: this.blockId })
       }
+    },
+    keyWatcher () {
+      let self = this
+      window.addEventListener('keyup', function(ev) {
+        self.blockNavigation(ev)
+      })
+    },
+    blockNavigation (ev) {
+      if (ev.keyCode === 39) {
+        this.$router.push(`/block/${this.block.height + 1}`)
+      }
+      if (ev.keyCode === 37) {
+        this.$router.push(`/block/${this.block.height - 1}`)      
+      }
     }
   },
   mounted () {
     this.getBlock()
+    this.keyWatcher()
   }
 }
 </script>
