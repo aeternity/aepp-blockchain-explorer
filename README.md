@@ -7,7 +7,7 @@ navigation: 2
 # æternity Blockchain Explorer
 
 ## Overview
-This is an explorer for the æternity blockchain.
+This is an explorer for the æternity blockchain. [Here](https://github.com/aeternity/aepp-blockchain-explorer) is the github repository.
 
 The underlying API is currently being developed and improved. The Explorer is designed to work with the latest features of [Epoch](https://github.com/aeternity/epoch).
 
