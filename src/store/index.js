@@ -68,8 +68,8 @@ const store = new Vuex.Store({
     },
     async fetchNodeStatus ({ state, commit }) {
       const [nodeTop, nodeVersion, peers] = await Promise.all([
-        fetchJson(`${BASE_URL}external/v2/top`),
-        fetchJson(`${BASE_URL}external/v2/version`),
+        fetchJson(`${BASE_URL}v2/top`),
+        fetchJson(`${BASE_URL}v2/version`),
         Promise.all(_.times(3, async (i) => {
           const [[top, address], version] = await Promise.all([
             fetch(`${BASE_URL}peer/${i + 1}/v2/top`).then(async response => {
