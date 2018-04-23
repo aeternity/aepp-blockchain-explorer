@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "@aeternity/aepp-components": "^2.0.3",
+    "@aeternity/aepp-components": "^2.0.8",
     "lodash": "^4.17.5",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
