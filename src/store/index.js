@@ -17,6 +17,7 @@ const store = new Vuex.Store({
     height: 0,
     marketStats: null,
     blocks: {},
+    txs: {},
     accounts: {},
     nodeStatus: null
   },
@@ -37,6 +38,9 @@ const store = new Vuex.Store({
     },
     setNodeStatus (state, nodeStatus) {
       state.nodeStatus = nodeStatus
+    },
+    setTx (state, tx) {
+      Vue.set(state.txs, tx.hash, tx)
     }
   },
 
@@ -96,6 +100,12 @@ const store = new Vuex.Store({
       for (let i = 0; i < numberOfBlocks; i++) {
         dispatch('loadBlock', { height: state.height - i })
       }
+    },
+    async loadTx ({ state, commit }, hash) {
+      if (state.txs[hash]) return
+      const query = `${hash}`
+      const tx = await fetchJson(`${BASE_URL}v2/tx/${query}?tx_encoding=json`)
+      commit('setTx', tx)
     }
   }
 })

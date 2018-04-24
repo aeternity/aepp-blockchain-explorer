@@ -1,5 +1,5 @@
 <template>
-  <div :class='transaction.tx.type' class='transaction'>
+  <div :class='transaction.tx.type' @click='openDetail()' class='transaction'>
     <div class="transaction-header">
       <div>
         <div :class='transaction.tx.type' class="transaction-type">
@@ -193,6 +193,11 @@ export default {
   props: [
     'transaction'
   ],
+  methods: {
+    openDetail () {
+      this.$router.push({name: 'TransactionDetail', params: { txId: this.transaction.hash }})
+    }
+  },
   computed: {
     responsePrettyJson () {
       if (!this.transaction) return null
