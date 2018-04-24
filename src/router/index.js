@@ -6,6 +6,7 @@ import Address from '@/screens/address/address.vue'
 import BlockList from '@/screens/blockList/blockList.vue'
 import Block from '@/screens/block/block.vue'
 import Transaction from '@/screens/transaction/transaction.vue'
+import TransactionDetail from '@/screens/transactionDetail/transactionDetail.vue'
 import Status from '@/screens/status/status.vue'
 
 Vue.use(Router)
@@ -38,6 +39,12 @@ export default new Router({
       path: '/tx',
       name: 'Transaction',
       component: Transaction
+    },
+    {
+      path: '/tx/:txId',
+      name: 'TransactionDetail',
+      component: TransactionDetail,
+      props: true
     },
     {
       path: '/status',
