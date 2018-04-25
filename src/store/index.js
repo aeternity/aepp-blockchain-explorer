@@ -18,7 +18,8 @@ const store = new Vuex.Store({
     marketStats: null,
     blocks: {},
     accounts: {},
-    nodeStatus: null
+    nodeStatus: null,
+    env: process.env
   },
 
   mutations: {
