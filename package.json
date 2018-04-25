@@ -14,9 +14,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "@aeternity/aepp-components": "^2.0.8",
+    "@aeternity/aepp-components": "github:aeternity/aepp-components#blockchain-explorer",
     "lodash": "^4.17.5",
     "vue": "^2.5.2",
+    "vue-popperjs": "^1.2.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
