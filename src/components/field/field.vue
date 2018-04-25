@@ -20,8 +20,7 @@ export default {
 }
 .field-name {
   @include font-size(s);
-  color:$black;
-  opacity:0.7;
+  color: rgba($black, .7);
 }
 .field-value {
   @include font-size(m);
