@@ -40,7 +40,6 @@ export default {
   },
   computed: {
     displayAddress () {
-      if (this.type === 'full') { return this.hash }
       if (this.type === 'chunked') { return this.hash.match(/.{1,7}/g) }
       return this.hash
     }
