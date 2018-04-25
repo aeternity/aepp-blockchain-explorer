@@ -2,7 +2,7 @@
   <div v-if="account" class='account-screen screen'>
     <h1 class='title'>
       <ae-identity-avatar :address="address"/>
-      <ae-address size='compact' :show-avatar='false' :address='address'/>
+      <named-address :address='address'/>
     </h1>
 
     <div class="field">
@@ -32,6 +32,7 @@
 <script>
 import { mapState } from 'vuex'
 import Transaction from '../../components/transaction/transaction.vue'
+import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 import pollAction from '../../mixins/pollAction'
 import {
   AeAddress,
@@ -42,16 +43,21 @@ export default {
   name: 'Address',
   components: {
     Transaction,
+    NamedAddress,
     AeAddress,
     AeIdentityAvatar,
     AePanel
   },
   props: ['address'],
-  mixins: [pollAction('fetchAccount', function () { return [this.address] })],
+  mixins: [
+    pollAction('fetchAccount', function () { return [this.address] }),
+    pollAction('fetchAccountName', function () { return this.address })
+  ],
   computed: mapState({
     account (state) {
       return state.accounts[this.address]
-    }
+    },
+    env: state => state.env
   })
 }
 </script>
