@@ -12,7 +12,7 @@
       </ae-button>
     </popper>
 
-    <textarea rows=1 :class="[showHash ? 'showHash':'', 'text']" readonly v-model="text" ref="text" required>{{text}}</textarea>
+    <textarea rows=1 class="text" readonly v-model="text" ref="text" required>{{text}}</textarea>
     <ae-button @click.prevent="copy" size="small" plain>
       <ae-icon slot="icon" name="copy"/>
     </ae-button>
@@ -34,7 +34,6 @@ export default {
   },
   data () {
     return {
-      showHash: false,
       popperOptions: {
         placement: 'top',
         modifiers: {
@@ -78,7 +77,5 @@ textarea {
   max-width:80vw;
   margin-bottom:10px;
   overflow:scroll;
-}
-.popper .inner{
 }
 </style>
