@@ -5,6 +5,7 @@ import _ from 'lodash'
 Vue.use(Vuex)
 
 const BASE_URL = process.env.AETERNITY_EPOCH_API_URL
+const NAME_LOOKUP_MIDDLEWARE_URL = process.env.NAME_LOOKUP_MIDDLEWARE_URL
 const fetchJson = async (...args) => {
   const response = await fetch(...args)
   return response.json()
@@ -19,6 +20,7 @@ const store = new Vuex.Store({
     blocks: {},
     txs: {},
     accounts: {},
+    accountNames: {},
     nodeStatus: null,
     env: process.env
   },
@@ -36,6 +38,9 @@ const store = new Vuex.Store({
     },
     setAccount (state, account) {
       Vue.set(state.accounts, account.address, account)
+    },
+    setAccountName (state, account) {
+      Vue.set(state.accountNames, account.address, account.name)
     },
     setNodeStatus (state, nodeStatus) {
       state.nodeStatus = nodeStatus
@@ -70,6 +75,13 @@ const store = new Vuex.Store({
       const account = { address, balance, transactions }
       if (_.isEqual(state.accounts[address], account)) return
       commit('setAccount', account)
+    },
+    async fetchAccountName ({ state, commit }, address) {
+      if (!NAME_LOOKUP_MIDDLEWARE_URL) return
+      const {name} = await fetchJson(`${NAME_LOOKUP_MIDDLEWARE_URL}${address}`)
+      const account = { address, name }
+      if (_.isEqual(state.accountNames[address], account)) return
+      commit('setAccountName', account)
     },
     async fetchNodeStatus ({ state, commit }) {
       const [nodeTop, nodeVersion, peers] = await Promise.all([
