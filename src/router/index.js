@@ -35,9 +35,10 @@ export default new Router({
       props: true
     },
     {
-      path: '/tx',
+      path: '/tx/:heightFrom?/:heightTo?',
       name: 'Transaction',
-      component: Transaction
+      component: Transaction,
+      props: true
     },
     {
       path: '/status',
