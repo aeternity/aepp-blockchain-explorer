@@ -25,7 +25,6 @@ export default {
 .field-value {
   @include font-size(m);
   font-family:'Roboto Mono', monospace;
-  align-items:center;
   font-weight:500;
   display:flex;
   vertical-align:middle;
