@@ -82,11 +82,13 @@ const store = new Vuex.Store({
         const diff = new Date().getTime() - state.accountNames[address].ts
         if (diff < 10000) return
       }
-      commit('setAccountName', {
-        address: address,
-        name: null,
-        ts: new Date().getTime()
-      })
+      if (!state.accountNames[address]) {
+        commit('setAccountName', {
+          address: address,
+          name: null,
+          ts: new Date().getTime()
+        })
+      }
       const {name} = await fetchJson(`${NAME_LOOKUP_MIDDLEWARE_URL}${address}`)
       const account = {
         address: address,
