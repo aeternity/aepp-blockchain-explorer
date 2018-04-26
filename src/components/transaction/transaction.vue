@@ -2,16 +2,15 @@
   <div :class='transaction.tx.type' @click='openDetail()' class='transaction'>
     <div class="transaction-header">
       <div>
-        <div :class='transaction.tx.type' class="transaction-type">
-          {{ transaction.tx.type }}
-        </div>
+        <tx-type type='badge' :txtype=' transaction.tx.type '/>
       </div>
-      <div v-if='transaction.tx.nonce'>
-        <div class='field-name'>nonce</div>
+
+      <field name='nonce' v-if='transaction.tx.nonce'>
         <div class="number">
           {{ transaction.tx.nonce }}
         </div>
-      </div>
+      </field>
+
       <div v-if='transaction.tx.fee'>
         <div class='field-name'>fee</div>
         <div>
@@ -57,7 +56,7 @@
           <span class='field-name'>sender</span>
           <div class="account-address">
             <router-link :to='"/account/" + transaction.tx.sender'>
-              {{transaction.tx.sender| startAndEnd}}
+              <named-address :address='transaction.tx.sender'/>
             </router-link>
           </div>
         </div>
@@ -65,7 +64,7 @@
           <span class='field-name'>recipient</span>
           <div class="account-address">
             <router-link :to='"/account/" + transaction.tx.recipient'>
-              {{transaction.tx.recipient| startAndEnd}}
+              <named-address :address='transaction.tx.recipient'/>
             </router-link>
           </div>
         </div>
@@ -83,7 +82,7 @@
             <span class='field-name'>account</span>
             <div class="account-address">
               <router-link :to='"/account/" + transaction.tx.account'>
-                {{transaction.tx.account | startAndEnd}}
+                <named-address :address='transaction.tx.account'/>
               </router-link>
             </div>
           </div>
@@ -115,7 +114,7 @@
             <span class='field-name'>Oracle</span>
             <div class="account-address">
               <router-link :to='"/account/" + transaction.tx.account'>
-                {{transaction.tx.oracle | startAndEnd}}
+                <named-address :address='transaction.tx.account'/>
               </router-link>
             </div>
           </div>
@@ -179,6 +178,34 @@
         </div>
       </template>
 
+      <template v-else-if='transaction.tx.type === "name_update_tx"'>
+        <router-link :to='"/account/" + transaction.tx.account'>
+          <named-address :address='transaction.tx.account'/>
+        </router-link>
+        <field name='Name Hash'>
+          <ae-hash :hash='transaction.tx.name_hash'/>
+        </field>
+        <field name='Name Hash'>
+        {{transaction.tx.name_ttl}}
+        </field>
+        {{transaction.tx.pointers.account_pubkey}}
+        {{transaction.tx.ttl}}
+      </template>
+      <template v-else-if='transaction.tx.type === "name_claim_tx"'>
+        <router-link :to='"/account/" + transaction.tx.account'>
+          <named-address :address='transaction.tx.account'/>
+        </router-link>
+        {{transaction.tx.name}}
+        {{transaction.tx.name_salt}}
+      </template>
+      <template v-else-if='transaction.tx.type === "name_preclaim_tx"'>
+        <router-link :to='"/account/" + transaction.tx.account'>
+          <named-address :address='transaction.tx.account'/>
+        </router-link>
+        {{transaction.tx.commitment}}
+        {{transaction.tx.fee}}
+      </template>
+
       <template v-else>
         {{transaction}}
       </template>
@@ -188,6 +215,10 @@
   </div>
 </template>
 <script>
+import NamedAddress from '../../components/namedAddress/namedAddress.vue'
+import TxType from '../../components/txType/txType.vue'
+import AeHash from '../../components/aeHash/aeHash.vue'
+import Field from '../../components/field/field.vue'
 export default {
   name: 'transaction',
   props: [
@@ -197,6 +228,12 @@ export default {
     openDetail () {
       this.$router.push({name: 'TransactionDetail', params: { txId: this.transaction.hash }})
     }
+  },
+  components: {
+    NamedAddress,
+    TxType,
+    Field,
+    AeHash
   },
   computed: {
     responsePrettyJson () {

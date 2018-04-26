@@ -40,7 +40,7 @@ const store = new Vuex.Store({
       Vue.set(state.accounts, account.address, account)
     },
     setAccountName (state, account) {
-      Vue.set(state.accountNames, account.address, account.name)
+      Vue.set(state.accountNames, account.address, account)
     },
     setNodeStatus (state, nodeStatus) {
       state.nodeStatus = nodeStatus
@@ -69,8 +69,8 @@ const store = new Vuex.Store({
     },
     async fetchAccount ({ state, commit }, address) {
       const [{ balance }, { transactions }] = await Promise.all([
-        fetchJson(`${BASE_URL}v2/account/balance/${address}`),
-        fetchJson(`${BASE_URL}v2/account/txs/${address}?tx_encoding=json`)
+        fetchJson(`${BASE_URL}internal/v2/account/balance/${address}`),
+        fetchJson(`${BASE_URL}internal/v2/account/txs/${address}?tx_encoding=json`)
       ])
       const account = { address, balance, transactions }
       if (_.isEqual(state.accounts[address], account)) return
@@ -78,8 +78,21 @@ const store = new Vuex.Store({
     },
     async fetchAccountName ({ state, commit }, address) {
       if (!NAME_LOOKUP_MIDDLEWARE_URL) return
+      if (state.accountNames[address]) {
+        const diff = new Date().getTime() - state.accountNames[address].ts
+        if (diff < 10000) return
+      }
+      commit('setAccountName', {
+        address: address,
+        name: null,
+        ts: new Date().getTime()
+      })
       const {name} = await fetchJson(`${NAME_LOOKUP_MIDDLEWARE_URL}${address}`)
-      const account = { address, name }
+      const account = {
+        address: address,
+        name: name,
+        ts: new Date().getTime()
+      }
       if (_.isEqual(state.accountNames[address], account)) return
       commit('setAccountName', account)
     },

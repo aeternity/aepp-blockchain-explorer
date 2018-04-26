@@ -10,7 +10,8 @@
 </template>
 <script>
 import {
-  mapState
+  mapState,
+  mapActions
 } from 'vuex'
 import {
   AeAddress,
@@ -23,12 +24,24 @@ export default {
     AeAddress,
     AeIdentityAvatar
   },
+  watch: {
+    address (oldAddr, newAddr) {
+      this.fetchAccountName(this.address)
+    }
+  },
+  methods: mapActions([
+    'fetchAccountName'
+  ]),
   computed: {
     ...mapState({
       name (state) {
-        return state.accountNames[this.address]
+        if (!state.accountNames[this.address]) return
+        return state.accountNames[this.address].name
       }
     })
+  },
+  mounted () {
+    this.fetchAccountName(this.address)
   }
 }
 </script>
