@@ -1,6 +1,6 @@
 <template>
   <div class="field">
-    <div class="field-name">{{name}}</div>
+    <div v-if='name' class="field-name">{{name}}</div>
     <div class="field-value">
       <slot/>
     </div>
