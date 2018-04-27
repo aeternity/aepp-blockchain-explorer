@@ -1,5 +1,5 @@
 <template>
-  <div :class='transaction.tx.type' @click='openDetail()' class='transaction'>
+  <div :class='transaction.tx.type' class='transaction'>
     <div class="header">
       <field>
         <tx-type type='badge' :txtype=' transaction.tx.type '/>
@@ -26,6 +26,11 @@
             n/a
           </template>
         </div>
+      </field>
+      <field v-if='transaction.hash' name='tx hash'>
+        <router-link :to='"/tx/" + transaction.hash'>
+          <ae-hash type="short" :hash='transaction.hash'/>
+        </router-link>
       </field>
     </div>
     <div class='body'>
@@ -240,11 +245,6 @@ export default {
   props: [
     'transaction'
   ],
-  methods: {
-    openDetail () {
-      this.$router.push({name: 'TransactionDetail', params: { txId: this.transaction.hash }})
-    }
-  },
   components: {
     NamedAddress,
     TxType,

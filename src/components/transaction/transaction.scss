@@ -6,8 +6,10 @@
   .header ,
   .body .grid {
     display:flex;
-    justify-content:space-between;
     flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .body .grid {
   }
   .header > * ,
   .body .grid > * {
@@ -18,7 +20,7 @@
     min-width:240px;
   }
   .field {
-    display:block;
+    display:block !important;
   }
   .field-value .ae-address,
   .field-value {
