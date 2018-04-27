@@ -13,14 +13,27 @@
   }
   .title .ae-identity-avatar {
     margin-right:20px;
-
   }
-  .account-address {
+  .header .field {
+    display:block;
+  }
+  .header .field {
+    margin-bottom:10px;
+  }
+  h2 {
+    margin-top:60px;
+    margin-bottom:20px;
+  }
+  .accoint-public-key {
     overflow:scroll;
     padding:12px;
+    margin-top:5px;
     background:white;
   }
-  .field{
-    margin-bottom:20px;
+  .ae-panel .content {
+    padding:0px 15px!important;
+  }
+  .transactions .transaction:nth-child(odd) {
+    background:white;
   }
 }
