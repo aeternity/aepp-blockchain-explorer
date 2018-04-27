@@ -57,7 +57,8 @@
           </field>
 
           <field v-if='transaction.tx.commitment' name="Commitment">
-            {{transaction.tx.commitment}}
+            <ae-hash type='short' :hash="transaction.tx.commitment" />
+            <view-and-copy :text='transaction.tx.commitment'/>
           </field>
 
           <field v-if='transaction.tx.name' name="Name">
