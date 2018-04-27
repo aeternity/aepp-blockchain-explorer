@@ -11,8 +11,8 @@
         <span class="unit">AE</span>
       </field>
 
-      <field name="Public Key">
-        <div class='accoint-public-key'>
+      <field class='pubkey' name="Public Key">
+        <div class='account-public-key'>
           <ae-address :address='address'/>
         </div>
       </field>
@@ -29,6 +29,7 @@
 import { mapState } from 'vuex'
 import Transaction from '../../components/transaction/transaction.vue'
 import NamedAddress from '../../components/namedAddress/namedAddress.vue'
+import ViewAndCopy from '../../components/viewAndCopy/viewAndCopy.vue'
 import Field from '../../components/field/field.vue'
 import pollAction from '../../mixins/pollAction'
 import {
@@ -41,6 +42,7 @@ export default {
   components: {
     Transaction,
     Field,
+    ViewAndCopy,
     NamedAddress,
     AeAddress,
     AeIdentityAvatar,

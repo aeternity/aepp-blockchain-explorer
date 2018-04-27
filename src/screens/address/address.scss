@@ -24,11 +24,17 @@
     margin-top:60px;
     margin-bottom:20px;
   }
-  .accoint-public-key {
+  .pubkey .field-value {
+    display:flex;
+  }
+  .account-public-key {
     overflow:scroll;
     padding:12px;
     margin-top:5px;
     background:white;
+    .ae-address {
+      @include font-size(m);
+    }
   }
   .ae-panel .content {
     padding:0px 15px!important;
