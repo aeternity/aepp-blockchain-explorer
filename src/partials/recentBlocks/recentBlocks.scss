@@ -28,7 +28,17 @@
     @include font-size(xl);
   }
   .account-address {
-    color: $magaenta
+    color:$magaenta;
+    a {
+      display:inline-block;
+    }
+    .named-address {
+      display:inline-block;
+    }
+    .named-address .ae-address {
+      display:inline-block;
+      @include font-size(m);
+    }
   }
   @include only-phone {
     table, td {
