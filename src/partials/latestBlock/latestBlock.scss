@@ -75,6 +75,16 @@
   }
   .account-address {
     color:$magaenta;
+    a {
+      display:inline-block;
+    }
+    .named-address {
+      display:inline-block;
+    }
+    .named-address .ae-address {
+      display:inline-block;
+      @include font-size(l);
+    }
   }
   .block-extended-info {
     margin-bottom:20px;
