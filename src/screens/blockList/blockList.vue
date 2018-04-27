@@ -61,7 +61,7 @@
             </span>
             <span class="account-address">
               <router-link :to='"/account/" + b.transactions[0].tx.account'>
-                {{b.transactions[0].tx.account | startAndEnd}}
+                <named-address :address='b.transactions[0].tx.account'/>
               </router-link>
             </span>
           </td>
@@ -95,11 +95,13 @@ import {
   AeButton
 } from '@aeternity/aepp-components'
 import RelativeTime from '../../components/relativeTime.vue'
+import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 import currentTime from '../../mixins/currentTime'
 import pollAction from '../../mixins/pollAction'
 export default {
   components: {
     AeButton,
+    NamedAddress,
     RelativeTime
   },
   mixins: [currentTime, pollAction('loadLastBlocks', [10])],
