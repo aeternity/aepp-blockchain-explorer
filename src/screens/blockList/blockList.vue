@@ -35,7 +35,7 @@
               hash
             </span>
             <span v-if='b.hash' class="number">
-              {{b.hash | startAndEnd }}
+              <ae-hash type='short' :hash='b.hash'/>
             </span>
             <span v-else>n/a</span>
           </td>
@@ -96,11 +96,13 @@ import {
 } from '@aeternity/aepp-components'
 import RelativeTime from '../../components/relativeTime.vue'
 import NamedAddress from '../../components/namedAddress/namedAddress.vue'
+import AeHash from '../../components/aeHash/aeHash.vue'
 import currentTime from '../../mixins/currentTime'
 import pollAction from '../../mixins/pollAction'
 export default {
   components: {
     AeButton,
+    AeHash,
     NamedAddress,
     RelativeTime
   },
