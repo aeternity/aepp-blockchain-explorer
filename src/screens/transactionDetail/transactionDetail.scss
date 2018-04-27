@@ -20,6 +20,7 @@
     font-weight:normal;
     border-bottom:2px solid $black;
   }
+  .named-address ,
   .ae-address {
     @include font-size(m);
   }
