@@ -1,28 +1,30 @@
 .transaction {
-  .transaction-header {
-    border-bottom:1px solid $aubergin;
-    padding-bottom:20px;
-    align-items:flex-end;
+  padding:20px 00px;
+  .header {
+    align-items:top;
   }
-  .transaction-header ,
-  .transaction-body .grid {
-    margin-bottom:10px;
-    margin-top:10px;
+  .header ,
+  .body .grid {
     display:flex;
     justify-content:space-between;
     flex-wrap:wrap;
   }
-  .transaction-type.coinbase {
-    background-color:$magaenta;
+  .header > * ,
+  .body .grid > * {
+    margin:0 20px;
   }
-  .transaction-type {
-    padding:7px 15px;
-    border-radius:2px;
-    background-color:$aubergin;
-    color:$white;
+  .header .field:first-child {
+    width:35%;
+    min-width:240px;
   }
-
-  .account-address {
+  .field {
+    display:block;
+  }
+  .field-value .ae-address,
+  .field-value {
+    @include font-size(m);
+  }
+  a {
     color:$magaenta;
   }
   .query-spec,
