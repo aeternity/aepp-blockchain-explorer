@@ -32,6 +32,7 @@ import {mapState} from 'vuex'
 const blockHeightRegex = RegExp('^[0-9]+$')
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}$')
 const accountPublicKeyRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{93,94}$')
+const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
   data () {
@@ -49,15 +50,44 @@ export default {
     ...mapState(['env'])
   },
   methods: {
-    search () {
+    async search () {
       if (blockHeightRegex.test(this.searchString)) {
         this.$router.push({ path: `/block/${this.searchString}` })
       } else if (blockHashRegex.test(this.searchString)) {
         this.$router.push({ path: `/block/${this.searchString}` })
       } else if (accountPublicKeyRegex.test(this.searchString)) {
         this.$router.push({ path: `/account/${this.searchString}` })
+      } else if (nameRegex.test(this.searchString)) {
+        // check if name
+        const pubKey = await this.fetchDomain(this.searchString)
+        if (pubKey) {
+          this.$router.push({ path: `/account/${pubKey}` })
+        } else {
+          alert('not a valid block hash/height, account public key or domain name')
+        }
       } else {
         alert('not a valid block hash/height or account public key')
+      }
+    },
+    async fetchDomain (domain) {
+      const BASE_URL = process.env.AETERNITY_EPOCH_API_URL
+      domain = domain.toLowerCase().trim()
+      if (!domain.endsWith('.aet')) {
+        domain += '.aet'
+      }
+      try {
+        const fetchResult = await fetch(`${BASE_URL}/v2/name?name=${domain}`)
+        const fetchJson = await fetchResult.json()
+        if (fetchJson && fetchJson.pointers && typeof fetchJson.pointers === 'string') {
+          fetchJson.pointers = JSON.parse(fetchJson.pointers)
+        }
+        if (fetchJson.pointers && fetchJson.pointers.account_pubkey) {
+          return fetchJson.pointers.account_pubkey
+        }
+        return null
+      } catch (e) {
+        console.log(e)
+        return null
       }
     }
   }
