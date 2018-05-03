@@ -99,6 +99,9 @@ export default {
   computed: mapState({
     block (state) {
       return state.blocks[this.blockId]
+    },
+    height (state) {
+      return state.height
     }
   }),
   watch: {
@@ -116,16 +119,18 @@ export default {
     },
     keyWatcher () {
       let self = this
-      window.addEventListener('keyup', function(ev) {
+      window.addEventListener('keyup', function (ev) {
         self.blockNavigation(ev)
       })
     },
     blockNavigation (ev) {
-      if (ev.keyCode === 39) {
-        this.$router.push(`/block/${this.block.height + 1}`)
-      }
-      if (ev.keyCode === 37) {
-        this.$router.push(`/block/${this.block.height - 1}`)      
+      if (this.$route.name === 'Block') {
+        if (ev.keyCode === 39 && this.height > this.block.height) {
+          this.blockId++
+        }
+        if (ev.keyCode === 37) {
+          this.blockId--
+        }
       }
     }
   },
