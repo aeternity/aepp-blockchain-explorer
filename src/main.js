@@ -24,6 +24,8 @@ function round (number, precision = 2) {
 }
 Vue.filter('round', round)
 
+Vue.use(require('vue-shortkey'))
+
 new Vue({
   el: '#app',
   router,

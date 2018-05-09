@@ -1,5 +1,7 @@
 <template>
-  <div  v-if='block' class="block-screen screen">
+  <div  v-if='block' class="block-screen screen" 
+  v-shortkey="{left: ['arrowleft'], right: ['arrowright']}" 
+  @shortkey='takeAction($event)'>
     <div class="header">
       <div class="basic-block-info grid">
         <div class=''>
@@ -132,7 +134,16 @@ export default {
       //     this.blockId--
       //   }
       // }
-      console.log(keyCode)
+      //
+    },
+    takeAction (event) {
+      console.log(event.srcKey)
+      if (event.srcKey === 'right') {
+        console.log('next block')
+      }
+      if (event.srcKey === 'left') {
+        console.log('prev block')
+      }
     }
   },
   mounted () {
@@ -140,10 +151,10 @@ export default {
     // window.addEventListener('keyup', (ev) => {
     //   this.blockNavigation(ev)
     // })
-    window.addEventListener('keyup', (ev) => {
-      console.log(ev.keyCode)
-    })
-    console.log(this.$el)
+    // window.addEventListener('keyup', (ev) => {
+    //   console.log(ev.keyCode)
+    // })
+    // console.log(this.$el)
     // this.keyWatcher()
     // let self = this
     // window.addEventListener('keyup', function (ev) {
@@ -162,14 +173,13 @@ export default {
     // blockScreenEl.removeEventListener('keyup', (ev) => {
     //   this.blockNavigation(ev)
     // })
-    window.onkeyup = null
-    window.removeEventListener('keyup', (ev) => {
-      console.log(ev.keyCode)
-    })
+    // window.removeEventListener('keyup', (ev) => {
+    //   console.log(ev.keyCode)
+    // })
   },
   destroyed () {
     console.log('dest')
-    window.onkeyup = null
+    // window.onkeyup = null
     // this.$off(['keyup'])
   }
 }
