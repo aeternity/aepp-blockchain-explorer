@@ -119,23 +119,6 @@ export default {
         this.$store.dispatch('loadBlock', { hash: this.blockId })
       }
     },
-    // keyWatcher () {
-    //   let self = this
-    //   window.addEventListener('keyup', function (ev) {
-    //     self.blockNavigation(ev)
-    //   })
-    // },
-    blockNavigation () {
-      // if (this.$route.name === 'Block') {
-      //   if (ev.keyCode === 39 && this.height > this.block.height) {
-      //     this.blockId++
-      //   }
-      //   if (ev.keyCode === 37) {
-      //     this.blockId--
-      //   }
-      // }
-      //
-    },
     takeAction (event) {
       console.log(event.srcKey)
       if (event.srcKey === 'right') {
@@ -148,39 +131,6 @@ export default {
   },
   mounted () {
     this.getBlock()
-    // window.addEventListener('keyup', (ev) => {
-    //   this.blockNavigation(ev)
-    // })
-    // window.addEventListener('keyup', (ev) => {
-    //   console.log(ev.keyCode)
-    // })
-    // console.log(this.$el)
-    // this.keyWatcher()
-    // let self = this
-    // window.addEventListener('keyup', function (ev) {
-    //   self.blockNavigation(ev)
-    // })
-    // window.addEventListener('keyup', this.blockNavigatior())
-    // window.addEventListener('keyup', this.blockNavigation())
-  },
-  beforeDestroy () {
-    console.log('destroyed')
-    // window.removeEventListener('keyup', function (ev) {
-    //     console.log('rem')
-    //     self.blockNavigation(ev)
-    //   }, false)
-    // let blockScreenEl = document.querySelector('.block-screen')
-    // blockScreenEl.removeEventListener('keyup', (ev) => {
-    //   this.blockNavigation(ev)
-    // })
-    // window.removeEventListener('keyup', (ev) => {
-    //   console.log(ev.keyCode)
-    // })
-  },
-  destroyed () {
-    console.log('dest')
-    // window.onkeyup = null
-    // this.$off(['keyup'])
   }
 }
 </script>
