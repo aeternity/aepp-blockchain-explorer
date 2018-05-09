@@ -120,12 +120,11 @@ export default {
       }
     },
     takeAction (event) {
-      console.log(event.srcKey)
       if (event.srcKey === 'right') {
-        console.log('next block')
+        this.$router.push(`/block/${this.block.height + 1}`)
       }
       if (event.srcKey === 'left') {
-        console.log('prev block')
+        this.$router.push(`/block/${this.block.height - 1}`)
       }
     }
   },
