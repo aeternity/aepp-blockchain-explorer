@@ -123,7 +123,7 @@ export default {
     //     self.blockNavigation(ev)
     //   })
     // },
-    blockNavigation (ev) {
+    blockNavigation () {
       // if (this.$route.name === 'Block') {
       //   if (ev.keyCode === 39 && this.height > this.block.height) {
       //     this.blockId++
@@ -132,13 +132,16 @@ export default {
       //     this.blockId--
       //   }
       // }
-      console.log(ev.keyCode)
+      console.log(keyCode)
     }
   },
   mounted () {
     this.getBlock()
+    // window.addEventListener('keyup', (ev) => {
+    //   this.blockNavigation(ev)
+    // })
     window.addEventListener('keyup', (ev) => {
-      this.blockNavigation(ev)
+      console.log(ev.keyCode)
     })
     console.log(this.$el)
     // this.keyWatcher()
@@ -155,13 +158,18 @@ export default {
     //     console.log('rem')
     //     self.blockNavigation(ev)
     //   }, false)
+    // let blockScreenEl = document.querySelector('.block-screen')
+    // blockScreenEl.removeEventListener('keyup', (ev) => {
+    //   this.blockNavigation(ev)
+    // })
+    window.onkeyup = null
     window.removeEventListener('keyup', (ev) => {
-      this.blockNavigation(ev)
+      console.log(ev.keyCode)
     })
   },
   destroyed () {
     console.log('dest')
-    window.removeEventListener('keyup', this.blockNavigation)
+    window.onkeyup = null
     // this.$off(['keyup'])
   }
 }
