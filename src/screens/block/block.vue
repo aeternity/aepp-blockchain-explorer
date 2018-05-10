@@ -102,7 +102,7 @@ export default {
     block (state) {
       return state.blocks[this.blockId]
     },
-    height (state) {
+    latestHeight (state) {
       return state.height
     }
   }),
@@ -120,16 +120,20 @@ export default {
       }
     },
     takeAction (event) {
-      if (event.srcKey === 'right') {
+      if (event.srcKey === 'right' && this.block.height < this.latestHeight) {
         this.$router.push(`/block/${this.block.height + 1}`)
       }
-      if (event.srcKey === 'left') {
+      if (event.srcKey === 'left' && this.block.height > 1) {
         this.$router.push(`/block/${this.block.height - 1}`)
       }
+    },
+    getLatestBlockHeight () {
+      this.$store.dispatch('loadLastBlocks')
     }
   },
   mounted () {
     this.getBlock()
+    this.getLatestBlockHeight()
   }
 }
 </script>
