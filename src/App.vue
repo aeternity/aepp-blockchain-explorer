@@ -18,7 +18,7 @@
           </router-link>
         </div>
         <div>
-            <span is='router-link' to='/status/' class='network-name'>{{networkName}}</span>
+            <span v-if='env.SHOW_NETWORK_STATS' is='router-link' to='/status/' class='network-name'>{{networkName}}</span>
           <!--<router-link to='/search'>-->
             <!--<img src="@/assets/search.svg" alt=""/>-->
           <!--</router-link>-->
@@ -34,14 +34,16 @@
 
 <script>
 import Footer from '@/partials/footer/footer.vue'
+import {mapState} from 'vuex'
 export default {
   name: 'app',
   components: {
     AeFooter: Footer
   },
   computed: {
+    ...mapState(['env']),
     networkName () {
-      let url = process.env.AETERNITY_EPOCH_API_URL
+      let url = this.env.AETERNITY_EPOCH_API_URL
       let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
       if (name) {
         let shortname = name.replace(/([^.]+)-net-api/, '$1')

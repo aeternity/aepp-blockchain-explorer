@@ -10,7 +10,6 @@
     @include content-max-width;
   }
   .grid {
-    border-bottom:2px solid $smoke;
     align-items:flex-end;
     padding-bottom:15px;
   }
@@ -21,5 +20,11 @@
   }
   .field-name {
     @include font-size(s);
+  }
+  .transactions {
+    margin-bottom:50px;
+  }
+  .transactions .transaction:nth-child(odd) {
+    background:white;
   }
 }

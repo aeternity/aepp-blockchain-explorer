@@ -1,0 +1,35 @@
+.transaction-detail-screen.screen {
+  >.inner > div {
+    background:$white;
+    max-width:777px;
+    margin:30px auto 0 auto;
+    padding:35px 70px;
+  }
+  .title {
+    margin-top:0;
+    margin-bottom:0;
+    @include font-size(xxl);
+    color:$black;
+  }
+  .title + .tx-type {
+    margin-top:0.3em;
+    padding-bottom:1.3rem;
+    margin-bottom:1.3rem;
+    @include font-size(xl);
+    color:$black;
+    font-weight:normal;
+    border-bottom:2px solid $black;
+  }
+  .named-address ,
+  .ae-address {
+    @include font-size(m);
+  }
+  .ae-hash {
+    letter-spacing: 2.1px;
+  }
+  .field .field-value .view-and-copy {
+    margin-left:10px;
+
+  }
+
+}

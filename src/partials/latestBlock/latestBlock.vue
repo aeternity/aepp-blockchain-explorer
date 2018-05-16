@@ -29,7 +29,7 @@
             <div class="field-name">Hash</div>
             <div class='field-value block-hash'>
               <router-link :to="'/block/'+block.hash">
-                {{block.hash | startAndEnd}}
+                <ae-hash type='short' :hash='block.hash'/>
               </router-link>
             </div>
           </div>
@@ -43,7 +43,7 @@
             <div class='field-name'>Mined by</div>
             <div class="field-value account-address">
               <router-link :to='"/account/" + block.minedBy'>
-              {{block.minedBy | startAndEnd}}
+              <named-address :address='block.minedBy' />
               </router-link>
             </div>
           </div>
@@ -59,10 +59,14 @@ import {
 } from '@aeternity/aepp-components'
 import RelativeTime from '../../components/relativeTime.vue'
 import currentTime from '../../mixins/currentTime'
+import NamedAddress from '../../components/namedAddress/namedAddress.vue'
+import AeHash from '../../components/aeHash/aeHash.vue'
 export default {
   components: {
     AeButton,
-    RelativeTime
+    RelativeTime,
+    AeHash,
+    NamedAddress
   },
   mixins: [currentTime],
   computed: mapState({

@@ -1,37 +1,36 @@
 <template>
   <div v-if="account" class='account-screen screen'>
-    <h1 class='title'>
-      <ae-identity-avatar :address="address"/>
-      <ae-address size='compact' :show-avatar='false' :address='address'/>
-    </h1>
+    <header class="header">
+      <h1 class='title'>
+        <ae-identity-avatar :address="address"/>
+        <named-address :address='address'/>
+      </h1>
 
-    <div class="field">
-      <div class='field-name'>Balance</div>
-      <div>
+      <field name="Balance">
         <span class="number">{{account.balance}}</span>
         <span class="unit">AE</span>
-      </div>
-    </div>
+      </field>
 
-    <div class="field">
-      <div class="field-name">
-        Public Key
-      </div>
-      <div class='account-address'>
-        <ae-address :show-avatar='false' :address='address'/>
-      </div>
-    </div>
+      <field class='pubkey' name="Public Key">
+        <div class='account-public-key'>
+          <ae-address :address='address'/>
+        </div>
+      </field>
+    </header>
+
     <h2>Transactions</h2>
-    <ae-panel :key='t.hash' v-for='t in account.transactions'>
-      <transaction :transaction='t'/>
-    </ae-panel>
+    <div class="transactions">
+      <transaction :key='t.hash' v-for='t in account.transactions' :transaction='t'/>
+    </div>
 
-    <!--<h2>List of Transactions:</h2>-->
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 import Transaction from '../../components/transaction/transaction.vue'
+import NamedAddress from '../../components/namedAddress/namedAddress.vue'
+import ViewAndCopy from '../../components/viewAndCopy/viewAndCopy.vue'
+import Field from '../../components/field/field.vue'
 import pollAction from '../../mixins/pollAction'
 import {
   AeAddress,
@@ -42,16 +41,23 @@ export default {
   name: 'Address',
   components: {
     Transaction,
+    Field,
+    ViewAndCopy,
+    NamedAddress,
     AeAddress,
     AeIdentityAvatar,
     AePanel
   },
   props: ['address'],
-  mixins: [pollAction('fetchAccount', function () { return [this.address] })],
+  mixins: [
+    pollAction('fetchAccount', function () { return [this.address] }),
+    pollAction('fetchAccountName', function () { return this.address })
+  ],
   computed: mapState({
     account (state) {
       return state.accounts[this.address]
-    }
+    },
+    env: state => state.env
   })
 }
 </script>

@@ -1,71 +1,74 @@
 .block-screen {
-  .header {
+  .block-header {
     background-color:$aubergin;
     color:$white;
   }
   .block-transactions,
-  .header > * {
+  .block-header > * {
     @include content-max-width;
   }
 
-  .block-navigation,
-  .basic-block-info {
-    justify-content:space-between;
-  }
-  .basic-block-info {
-    border-bottom:2px solid $smoke;
-    align-items:flex-end;
-    line-height:50px;
-    padding-bottom:20px;
-    margin-bottom:20px;
-  }
-  .block-navigation ,
-  .detail-block-info {
-    padding: 20px 0;
-  }
-  .detail-block-info .field {
-    margin-bottom:15px;
+  .block-header {
+    .block-navigation,
+    .basic-block-info {
+      justify-content:space-between;
+    }
+    .basic-block-info {
+      border-bottom:2px solid $smoke;
+      align-items:flex-end;
+      line-height:50px;
+      padding-bottom:20px;
+      margin-bottom:20px;
+    }
+    .block-navigation ,
+    .detail-block-info {
+      padding: 20px 0;
+    }
+    .detail-block-info .field {
+      margin-bottom:15px;
+      @include only-phone {
+        width:100%;
+      }
+    }
     @include only-phone {
-      width:100%;
+      .basic-block-info.grid,
+      .detail-block-info .grid {
+        display:block;
+      }
+    }
+    .detail-block-info .grid .field {
+      margin-right:50px;
+    }
+    .account-address {
+      color:$magaenta;
+    }
+    .block-height {
+      @include font-size(xxl);
+      @include only-phone {
+        //@include font-size(l);
+      }
+    }
+    .field-name {
+      @include font-size(xs);
+      opacity:0.4;
+    }
+    .scroll ,
+    .field-value {
+      margin-top:5px;
+      @include font-size(l);
+      @include only-phone {
+        @include font-size(m);
+      }
+    }
+    .scroll {
+      margin-top:10px;
+      padding:12px;
+      background-color:white;
+      color:$aubergin;
+      overflow:scroll;
     }
   }
-  @include only-phone {
-    .basic-block-info.grid,
-    .detail-block-info .grid {
-      display:block;
-    }
-  }
-  .detail-block-info .grid .field {
-    margin-right:50px;
-  }
-  .account-address {
-    color:$magaenta;
-  }
-  .block-height {
-    @include font-size(xxl);
-    @include only-phone {
-      //@include font-size(l);
-    }
-  }
-  .field-name {
-    @include font-size(xs);
-    opacity:0.4;
-  }
-  .scroll ,
-  .field-value {
-    margin-top:5px;
-    @include font-size(l);
-    @include only-phone {
-      @include font-size(m);
-    }
-  }
-  .scroll {
-    margin-top:10px;
-    padding:12px;
-    background-color:white;
-    color:$aubergin;
-    overflow:scroll;
-  }
+
   .block-transactions .title {
     margin-top:50px;
     margin-bottom:30px;
@@ -73,5 +76,8 @@
     font-weight:normal;
     padding-bottom:20px;
     border-bottom:2px solid $aubergin;
+  }
+  .transactions .transaction:nth-child(odd) {
+    background:white;
   }
 }

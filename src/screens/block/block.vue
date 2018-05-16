@@ -2,7 +2,7 @@
   <div v-if='block' class="block-screen screen" 
     v-shortkey="{left: ['arrowleft'], right: ['arrowright']}" 
     @shortkey='takeAction'>
-    <div class="header">
+    <div class="block-header">
       <div class="basic-block-info grid">
         <div class=''>
           <span>Block</span>
