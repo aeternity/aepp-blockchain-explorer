@@ -52,7 +52,8 @@ const store = new Vuex.Store({
 
   actions: {
     async fetchHeight ({ state, commit }) {
-      const { height } = await fetchJson(`${BASE_URL}internal/v2/block/number`)
+      // const { height } = await fetchJson(`${BASE_URL}internal/v2/block/number`)
+      const { height } = await fetchJson(`${BASE_URL}v2/top`)
       if (height === state.height) return
       commit('setHeight', height)
     },
@@ -69,8 +70,8 @@ const store = new Vuex.Store({
     },
     async fetchAccount ({ state, commit }, address) {
       const [{ balance }, { transactions }] = await Promise.all([
-        fetchJson(`${BASE_URL}internal/v2/account/balance/${address}`),
-        fetchJson(`${BASE_URL}internal/v2/account/txs/${address}?tx_encoding=json`)
+        fetchJson(`${BASE_URL}v2/account/balance/${address}`),
+        fetchJson(`${BASE_URL}v2/account/txs/${address}?tx_encoding=json`)
       ])
       const account = { address, balance, transactions }
       if (_.isEqual(state.accounts[address], account)) return
@@ -117,7 +118,7 @@ const store = new Vuex.Store({
     async loadBlock ({ state, commit }, { hash, height }) {
       if (state.blocks[hash || height]) return
       const query = `${hash ? 'hash' : 'height'}/${hash || height}`
-      const block = await fetchJson(`${BASE_URL}internal/v2/block/${query}?tx_encoding=json`)
+      const block = await fetchJson(`${BASE_URL}v2/block/${query}?tx_encoding=json`)
       commit('setBlock', {
         ...block,
         minedBy: block.transactions.find(tx => tx.tx.type === 'coinbase_tx').tx.account
