@@ -121,10 +121,10 @@ export default {
     },
     takeAction (event) {
       if (event.srcKey === 'right' && this.block.height < this.latestHeight) {
-        this.$router.push(`/block/${this.block.height + 1}`)
+        this.$router.push({name: 'Block', params: {blockId: this.block.height + 1}})
       }
       if (event.srcKey === 'left' && this.block.height > 1) {
-        this.$router.push(`/block/${this.block.height - 1}`)
+        this.$router.push({name: 'Block', params: {blockId: this.block.height - 1}})
       }
     },
     getLatestBlockHeight () {
@@ -133,7 +133,9 @@ export default {
   },
   mounted () {
     this.getBlock()
-    this.getLatestBlockHeight()
+    if (this.$store.state.height === 0) {
+      this.getLatestBlockHeight()
+    }
   }
 }
 </script>
