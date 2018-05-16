@@ -19,6 +19,7 @@
     "vue": "^2.5.2",
     "vue-popperjs": "^1.2.6",
     "vue-router": "^3.0.1",
+    "vue-shortkey": "^3.1.4",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

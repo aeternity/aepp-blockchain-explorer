@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import shortkey from 'vue-shortkey'
 
 Vue.config.productionTip = false
 
@@ -23,6 +24,8 @@ function round (number, precision = 2) {
   return Math.round(number * factor) / factor
 }
 Vue.filter('round', round)
+
+Vue.use(shortkey)
 
 new Vue({
   el: '#app',

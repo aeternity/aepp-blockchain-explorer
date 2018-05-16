@@ -1,5 +1,7 @@
 <template>
-  <div  v-if='block' class="block-screen screen">
+  <div v-if='block' class="block-screen screen" 
+    v-shortkey="{left: ['arrowleft'], right: ['arrowright']}" 
+    @shortkey='takeAction'>
     <div class="block-header">
       <div class="basic-block-info grid">
         <div class=''>
@@ -68,8 +70,10 @@
       <h2 class='title'>
         <span class='number'>{{block.transactions.length}}</span> Transaction(s)
       </h2>
-      <div class='transactions'>
-        <transaction :key='t.hash' v-for='t in block.transactions' :transaction='t'/>
+      <div>
+        <ae-panel :key='t.hash' v-for='t in block.transactions'>
+          <transaction :transaction='t'/>
+        </ae-panel>
       </div>
     </div>
   </div>
@@ -97,6 +101,9 @@ export default {
   computed: mapState({
     block (state) {
       return state.blocks[this.blockId]
+    },
+    latestHeight (state) {
+      return state.height
     }
   }),
   watch: {
@@ -111,12 +118,26 @@ export default {
       } else if (blockHashRegex.test(this.blockId)) {
         this.$store.dispatch('loadBlock', { hash: this.blockId })
       }
+    },
+    takeAction (event) {
+      if (event.srcKey === 'right' && this.block.height < this.latestHeight) {
+        this.$router.push({name: 'Block', params: {blockId: this.block.height + 1}})
+      }
+      if (event.srcKey === 'left' && this.block.height > 1) {
+        this.$router.push({name: 'Block', params: {blockId: this.block.height - 1}})
+      }
+    },
+    getLatestBlockHeight () {
+      this.$store.dispatch('fetchHeight')
     }
   },
   mounted () {
     this.getBlock()
+    if (this.$store.state.height === 0) {
+      this.getLatestBlockHeight()
+    }
   }
 }
 </script>
 
-<style scoped src='./block.scss' lang='scss' />
+<style src='./block.scss' lang='scss' />
