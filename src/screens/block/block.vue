@@ -1,7 +1,7 @@
 <template>
-  <div  v-if='block' class="block-screen screen" 
-  v-shortkey="{left: ['arrowleft'], right: ['arrowright']}" 
-  @shortkey='takeAction($event)'>
+  <div v-if='block' class="block-screen screen" 
+    v-shortkey="{left: ['arrowleft'], right: ['arrowright']}" 
+    @shortkey='takeAction'>
     <div class="header">
       <div class="basic-block-info grid">
         <div class=''>
@@ -128,7 +128,7 @@ export default {
       }
     },
     getLatestBlockHeight () {
-      this.$store.dispatch('loadLastBlocks')
+      this.$store.dispatch('fetchHeight')
     }
   },
   mounted () {
