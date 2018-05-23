@@ -1,6 +1,6 @@
 <template>
   <div  v-if='block' class="block-screen screen">
-    <div class="header">
+    <div class="block-header">
       <div class="basic-block-info grid">
         <div class=''>
           <span>Block</span>
@@ -68,10 +68,8 @@
       <h2 class='title'>
         <span class='number'>{{block.transactions.length}}</span> Transaction(s)
       </h2>
-      <div>
-        <ae-panel :key='t.hash' v-for='t in block.transactions'>
-          <transaction :transaction='t'/>
-        </ae-panel>
+      <div class='transactions'>
+        <transaction :key='t.hash' v-for='t in block.transactions' :transaction='t'/>
       </div>
     </div>
   </div>
@@ -121,4 +119,4 @@ export default {
 }
 </script>
 
-<style src='./block.scss' lang='scss' />
+<style scoped src='./block.scss' lang='scss' />

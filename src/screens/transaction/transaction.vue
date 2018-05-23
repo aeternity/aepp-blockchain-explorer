@@ -31,10 +31,8 @@
 
       </form>
 
-      <div class='transaction-list'>
-        <ae-panel v-for='t in transactions' :key='t.hash'>
-          <transaction :transaction='t'/>
-        </ae-panel>
+      <div class='transactions'>
+        <transaction v-for='t in transactions' :key='t.hash' :transaction='t'/>
       </div>
       <div class='center'>
         <ae-button

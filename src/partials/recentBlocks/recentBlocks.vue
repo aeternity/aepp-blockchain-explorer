@@ -23,7 +23,7 @@
               <span class='field-name'>mined by</span>
               <span class="field-value account-address">
                 <router-link :to='"/account/" + b.minedBy'>
-                  {{b.minedBy | startAndEnd}}
+                  <named-address :address='b.minedBy' />
                 </router-link>
               </span>
             </td>
@@ -37,9 +37,13 @@
   </div>
 </template>
 <script>
+import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 import { mapState } from 'vuex'
 import _ from 'lodash'
 export default {
+  components: {
+    NamedAddress
+  },
   computed: mapState({
     recentBlocks: state => _.times(3, idx => state.blocks[state.height - idx - 1])
   })

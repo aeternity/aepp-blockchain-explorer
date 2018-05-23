@@ -1,7 +1,8 @@
 html, body {
   margin:0;
   padding:0;
-  background-color: $smoke
+  background-color: $smoke;
+  font-size: 18px;
 }
 #app {
   font-family: 'Roboto', sans-serif;
@@ -46,6 +47,7 @@ html, body {
 }
 .number ,
 .block-hash,
+.ae-hash,
 .block-number,
 .account-address {
   font-family: 'Roboto Mono', monospace;
