@@ -58,4 +58,4 @@ export default {
 }
 </script>
 
-<style src='./App.scss' lang='scss' />
+<style src='./app.scss' lang='scss' />

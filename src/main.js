@@ -1,32 +1,41 @@
+/**
+ * Vue
+ */
 import Vue from 'vue'
-import App from './App'
+
+/**
+ * Global imports
+ */
+import 'filters'
+
+/**
+ * Application logic
+ */
+import app from './app'
 import router from './router'
 import store from './store'
 
+/**
+ * Vue configs
+ * @type {boolean}
+ */
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-function startAndEnd (str, start = 6, end = 6) {
-  return str.substr(0, start + 2) +
-    '…' +
-    str.substr(str.length - end, str.length)
-}
-Vue.filter('startAndEnd', startAndEnd)
-
-function humanDate (ts) {
-  return new Date(ts).toISOString()
-}
-Vue.filter('humanDate', humanDate)
-
-function round (number, precision = 2) {
-  var factor = Math.pow(10, precision)
-  return Math.round(number * factor) / factor
-}
-Vue.filter('round', round)
-
-new Vue({
-  el: '#app',
+/**
+ * We export the instance of the app
+ * so that if we ever need to have a
+ * reference of the application itself
+ * somewhere, we can simply `import` it
+ */
+export default new Vue({
+  /**
+   * Vue plugins
+   */
   router,
   store,
-  render: h => h(App)
-})
+
+  /**
+   * Render app
+   */
+  render: h => h(app)
+}).$mount('#app')
