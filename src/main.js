@@ -4,6 +4,11 @@
 import Vue from 'vue'
 
 /**
+ * Vue Plugins
+ */
+import VueLoading from 'vuex-loading'
+
+/**
  * Global imports
  */
 import './filters'
@@ -14,6 +19,31 @@ import './filters'
 import app from './app'
 import router from './router'
 import store from './store'
+
+/**
+ * Applying VueLoading
+ */
+Vue.use(VueLoading)
+
+/**
+ * Creating the Vuex Loader
+ */
+const vueLoading = new VueLoading({
+  /**
+   * boolean value, false by default, use this
+   * value for enabling integration with Vuex store
+   * When this value is true VueLoading will store
+   * data in Vuex store and all changes to this
+   * data will be made by dispatching actions to store
+   */
+  useVuex: true,
+
+  /**
+   * boolean value, true by default,
+   * register v-loading components.
+   */
+  registerComponents: true
+})
 
 /**
  * Vue configs
@@ -33,6 +63,7 @@ export default new Vue({
    */
   router,
   store,
+  vueLoading,
 
   /**
    * Render app

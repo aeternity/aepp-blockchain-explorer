@@ -1,6 +1,9 @@
 <template>
   <div class="market-stats-partial">
-    <div class="grid">
+    <div v-if="$vueLoading.isLoading('_marketStats/get')">
+      Is Loading!
+    </div>
+    <div class="grid" v-else>
       <div class="market-cap">
         <div>Market Cap</div>
         <span v-if="marketCapChf" class="number">

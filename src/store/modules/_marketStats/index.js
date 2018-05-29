@@ -30,19 +30,20 @@ export default {
      * get market stats of the overall blockchain
      * @param {Object} state
      * @param {Function} commit
+     * @param {Function} dispatch
      * @return {Promise<void>}
      */
-    async get ({ state, commit }) {
+    async get ({ state, commit, dispatch }) {
       /**
        * Start vuex-loading
        */
-      startLoading('_marketStats/get')
+      startLoading(dispatch, '_marketStats/get')
 
       /**
        * Pulling market stats
        * @type {Response}
        */
-      const market = await fetch('https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF');
+      const market = await fetch('https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF')
 
       /**
        * Renaming variables
@@ -56,7 +57,7 @@ export default {
       /**
        * end vuex-loading
        */
-      endLoading('_marketStats/get')
+      endLoading(dispatch, '_marketStats/get')
 
       /**
        * committing to the state
