@@ -1,5 +1,5 @@
 /**
- * Importing API
+ * Importing
  */
 import { createActionHelpers } from 'vuex-loading'
 
@@ -31,7 +31,7 @@ export default {
      * @param {Object} state
      * @param {Function} commit
      * @param {Function} dispatch
-     * @return {Promise<void>}
+     * @return {Object}
      */
     async get ({ state, commit, dispatch }) {
       /**

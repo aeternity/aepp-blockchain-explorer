@@ -11,7 +11,9 @@ export default {
 
   // TODO: Update later
   height: 0,
-  marketStats: null,
+
+  // marketStats: null,
+
   blocks: {},
   txs: {},
   accounts: {},

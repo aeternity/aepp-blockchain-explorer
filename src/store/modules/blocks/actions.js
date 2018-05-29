@@ -15,31 +15,36 @@ const { startLoading, endLoading } = createActionHelpers({
  */
 export default {
   /**
-   * Template
+   * height fetches the blockheight
+   * @param {Object} state
    * @param {Function} commit
    * @param {Function} dispatch
-   * @param {*} payload
-   * @return {Promise<any>}
+   * @return {Object}
    */
-  template: function ({ commit, dispatch }, payload) {
+  async height ({ state, commit, dispatch }) {
     /**
-     * start load state
+     * Start vuex-loading
      */
-    startLoading(dispatch, 'blocks/template')
+    startLoading(dispatch, 'blocks/height')
 
     /**
-     * Return New Promise
+     * Fetch the top block
      */
-    return new Promise((resolve, reject) => {
-      /**
-       * End Loading State
-       */
-      endLoading(dispatch, 'blocks/template')
+    const block = await fetch(`${process.env.AETERNITY_EPOCH_API_URL}v2/top`)
 
-      /**
-       * Resolve template
-       */
-      return resolve('template')
-    })
+    /**
+     * Get the hight of the response
+     */
+    const { height } = await block.json()
+
+    /**
+     * Start vuex-loading
+     */
+    endLoading(dispatch, 'blocks/height')
+
+    /**
+     * Commit the updates
+     */
+    return commit('setHeight', height)
   }
 }

@@ -13,6 +13,7 @@ const { startLoading, endLoading } = createActionHelpers({
 
 const BASE_URL = process.env.AETERNITY_EPOCH_API_URL
 const NAME_LOOKUP_MIDDLEWARE_URL = process.env.NAME_LOOKUP_MIDDLEWARE_URL
+
 const fetchJson = async (...args) => {
   const response = await fetch(...args)
   return response.json()
@@ -43,17 +44,17 @@ export default {
     commit('setHeight', height)
   },
 
-  async fetchMarketStats ({ state, commit }) {
-    const body = (await fetchJson(
-      'https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF'))[0]
-    const marketStats = {
-      marketCapChf: body.market_cap_chf,
-      priceBtc: body.price_btc,
-      priceChf: body.price_chf
-    }
-    if (_.isEqual(state.marketStats, marketStats)) return
-    commit('setMarketStats', marketStats)
-  },
+  //async fetchMarketStats ({ state, commit }) {
+  //  const body = (await fetchJson(
+  //    'https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF'))[0]
+  //  const marketStats = {
+  //    marketCapChf: body.market_cap_chf,
+  //    priceBtc: body.price_btc,
+  //    priceChf: body.price_chf
+  //  }
+  //  if (_.isEqual(state.marketStats, marketStats)) return
+  //  commit('setMarketStats', marketStats)
+  //},
 
   async fetchAccount ({ state, commit }, address) {
     const [{ balance }, { transactions }] = await Promise.all([

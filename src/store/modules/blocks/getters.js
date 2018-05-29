@@ -9,5 +9,13 @@ export default {
    */
   blocks: function (state) {
     return state.blocks
+  },
+
+  /**
+   * Return max block height
+   * @return {*}
+   */
+  height: function (state) {
+    return state.height
   }
 }
