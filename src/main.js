@@ -6,7 +6,7 @@ import Vue from 'vue'
 /**
  * Global imports
  */
-import 'filters'
+import './filters'
 
 /**
  * Application logic

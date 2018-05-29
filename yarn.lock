@@ -7641,6 +7641,10 @@ vue@^2.5.2:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
+vuex-loading@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/vuex-loading/-/vuex-loading-0.3.0.tgz#f72aed111b629a782fa15fd44c9c4ea37932d0fc"
+
 vuex@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"

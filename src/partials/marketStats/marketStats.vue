@@ -3,23 +3,23 @@
     <div class="grid">
       <div class="market-cap">
         <div>Market Cap</div>
-        <span v-if="marketStats" class="number">
-          {{marketStats.marketCapChf / 1000000 | round}}
+        <span v-if="marketCapChf" class="number">
+          {{marketCapChf / 1000000 | round}}
           M
         </span>
         <span class="unit">CHF</span>
       </div>
       <div class="div btc-price">
         <div>1 AE</div>
-        <span v-if="marketStats" class="number">
-          {{marketStats.priceBtc | round(6)}}
+        <span v-if="priceBtc" class="number">
+          {{priceBtc | round(6)}}
         </span>
         <span class="unit">BTC</span>
       </div>
       <div class="chf-price">
         <div>1 AE</div>
-        <span v-if="marketStats" class="number">
-          {{marketStats.priceChf | round}}
+        <span v-if="priceChf" class="number">
+          {{priceChf | round}}
         </span>
         <span class="unit">CHF</span>
       </div>
@@ -30,11 +30,35 @@
   </div>
 </template>
 <script>
+/**
+ * Importing libraries
+ */
 import { mapState } from 'vuex'
+
+/**
+ * Import mixins
+ */
 import pollAction from '@/mixins/pollAction'
+
+/**
+ * Export component
+ */
 export default {
-  mixins: [pollAction('fetchMarketStats')],
-  computed: mapState(['marketStats'])
+  /**
+   * Mixins
+   */
+  mixins: [
+    pollAction('_marketStats/get')
+  ],
+
+  /**
+   * Computed properties
+   */
+  computed: mapState('_marketStats', [
+    'priceChf',
+    'marketCapChf',
+    'priceBtc'
+  ])
 }
 </script>
 <style src='./marketStats.scss' lang='scss' />
