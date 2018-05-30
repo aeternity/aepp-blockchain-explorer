@@ -26,12 +26,12 @@
           <div class="burger" @click='expandMenu'>
             <img src="@/assets/burger.svg" alt="" />
           </div>
-          <div class="mobile-nav-fixed" :class="{ active: isOpened}">
+          <div class="mobile-nav-fixed" :class="{ active: isOpened}" @click="expandMenu">
             <div class="mobile-nav-fixed-holder">
               <div class="inner">
-                <div class="mobile-nav-fixed-action">
-                  <span @click='expandMenu'>
-                    <img src="@/assets/close.svg" alt="" />
+                <div class="mobile-nav-fixed-action" @click='this.isOpened = false' >
+                  <span>
+                    <img src="@/assets/close.svg" alt=""/>
                   </span>
                 </div>
                 <div class="mobile-nav-fixed-main-links">
@@ -59,30 +59,30 @@
                 <div class="mobile-nav-fixed-socials-links">
                   <div class="mobile-nav-fixed-socials-links-row">
                     <router-link to='/'>
-                      <img src="@/assets/github.svg" alt="">
+                      <img src="@/assets/light/github-light.svg" alt="">
                     </router-link>
                     <router-link to='/'>
-                      <img src="@/assets/github.svg" alt="">
+                      <img src="@/assets/light/medium-light.svg" alt="">
                     </router-link>
                     <router-link to='/'>
-                      <img src="@/assets/github.svg" alt="">
+                      <img src="@/assets/light/telegram-light.svg" alt="">
                     </router-link>
                     <router-link to='/'>
-                      <img src="@/assets/github.svg" alt="">
+                      <img src="@/assets/light/twitter-light.svg" alt="">
                     </router-link>
                   </div>
                   <div class="mobile-nav-fixed-socials-links-row">
                     <router-link to='/'>
-                      <img src="@/assets/github.svg" alt="">
+                      <img src="@/assets/light/reddit-light.svg" alt="">
                     </router-link>
                     <router-link to='/'>
-                      <img src="@/assets/github.svg" alt="">
+                      <img src="@/assets/light/slack-light.svg" alt="">
                     </router-link>
                     <router-link to='/'>
-                      <img src="@/assets/github.svg" alt="">
+                      <img src="@/assets/light/facebook-light.svg" alt="">
                     </router-link>
                     <router-link to='/'>
-                      <img src="@/assets/github.svg" alt="">
+                      <img src="@/assets/light/linkedin-light.svg" alt="">
                     </router-link>
                   </div>
                 </div>
@@ -138,7 +138,6 @@ export default {
   },
   methods: {
     expandMenu: function () {
-      console.log('in')
       this.isOpened = !this.isOpened
     }
   }
