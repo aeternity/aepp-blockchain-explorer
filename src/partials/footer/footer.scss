@@ -28,4 +28,11 @@
   a img {
     margin-right:20px;
   }
+  .footer-social-links {
+    display: flex;
+    width: 100%;
+    div {
+      flex: 1;
+    }
+  }
 }
