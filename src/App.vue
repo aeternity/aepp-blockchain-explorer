@@ -21,7 +21,7 @@
           <div class="pageName">
             <strong v-if="$route.name === 'Index'">Dashboard</strong>
             <strong v-if="$route.name === 'BlockList'">Blocks</strong>
-            <strong v-if="$route.name === 'Transactions'">Transactions</strong>
+            <strong v-if="$route.name === 'Transaction'">Transactions</strong>
           </div>
           <div class="burger" @click='expandMenu'>
             <img src="@/assets/burger.svg" alt="" />
