@@ -172,6 +172,7 @@ nav .mobile-nav {
       position: fixed;
       top: 0;
       left: 0;
+      animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
       .mobile-nav-fixed-action {
         text-align: right;
       }
@@ -220,4 +221,15 @@ nav .mobile-nav {
 }
 nav + main > .screen > :first-child{
   padding-top:100px;
+}
+// animations
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
