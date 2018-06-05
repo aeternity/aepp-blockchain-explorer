@@ -28,3 +28,8 @@
     background:white;
   }
 }
+.transaction-screen .grid {
+  @include only-phone {
+    flex-wrap: wrap;
+  }
+}
