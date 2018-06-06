@@ -144,4 +144,4 @@ export default {
 }
 </script>
 
-<style src='./app.scss' lang='scss' />
+<style src='./App.scss' lang='scss' />
