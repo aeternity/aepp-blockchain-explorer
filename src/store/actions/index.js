@@ -3,6 +3,7 @@
  */
 import { createActionHelpers } from 'vuex-loading'
 import _ from 'lodash'
+import Ae from '@aeternity/aepp-sdk'
 
 /**
  * Setting up start/end Loading helper methods
@@ -18,6 +19,8 @@ const fetchJson = async (...args) => {
   const response = await fetch(...args)
   return response.json()
 }
+
+const ae = Ae.create(BASE_URL)
 
 /**
  * Exporting Actions
@@ -57,9 +60,10 @@ export default {
   //},
 
   async fetchAccount ({ state, commit }, address) {
+    const client = await ae
     const [{ balance }, { transactions }] = await Promise.all([
-      fetchJson(`${BASE_URL}v2/account/balance/${address}`),
-      fetchJson(`${BASE_URL}v2/account/txs/${address}?tx_encoding=json`)
+      await client.api.getAccountBalance(address),
+      await client.api.getAccountTransactions(address)
     ])
     const account = { address, balance, transactions }
     if (_.isEqual(state.accounts[address], account)) return
