@@ -101,8 +101,6 @@ nav .inner {
   display:flex;
   justify-content:space-between;
 }
-nav .links > * {
-}
 nav .links {
   @include only-phone {
     display: none;
@@ -148,11 +146,9 @@ nav a.router-link-exact-active.link:after {
 }
 nav .inner {
   @include only-phone {
-    .links + .mobile-nav {
-      flex: 1;
-    }
+    .links + .mobile-nav,
     .mobile-nav {
-      flex:1;
+      flex: 1;
     }
   }
 }
@@ -225,7 +221,7 @@ nav + main > .screen > :first-child{
 // animations
 @keyframes slide-in-top {
   0% {
-    transform: translateY(-1000px);
+    transform: translateY(-100vh);
     opacity: 0;
   }
   100% {
