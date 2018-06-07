@@ -112,8 +112,8 @@ export default {
 
   async loadBlock ({ state, commit }, { hash, height }) {
     if (state.blocks[hash || height]) return
-    const query = `${hash ? 'hash' : 'height'}/${hash || height}`
-    const block = await fetchJson(`${BASE_URL}v2/block/${query}?tx_encoding=json`)
+    const client = await ae
+    const block = hash ? await client.api.getBlockByHash(hash, {txEncoding: 'json'}) : await client.api.getBlockByHeight(height, {txEncoding: 'json'})
 
     commit('setBlock', {
       ...block,
@@ -130,6 +130,10 @@ export default {
 
   async loadTx ({ state, commit }, hash) {
     if (state.txs[hash]) return
+
+    // const client = await ae
+    // console.log('client', client)
+
     const query = `${hash}`
     const tx = await fetchJson(`${BASE_URL}v2/tx/${query}?tx_encoding=json`)
     commit('setTx', tx)
