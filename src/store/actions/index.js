@@ -41,8 +41,8 @@ export default {
 
   // TODO: update
   async fetchHeight ({ state, commit }) {
-    // const { height } = await fetchJson(`${BASE_URL}internal/v2/block/number`)
-    const { height } = await fetchJson(`${BASE_URL}v2/top`)
+    const client = await ae
+    const height = await client.height()
     if (height === state.height) return
     commit('setHeight', height)
   },
@@ -114,9 +114,10 @@ export default {
     if (state.blocks[hash || height]) return
     const query = `${hash ? 'hash' : 'height'}/${hash || height}`
     const block = await fetchJson(`${BASE_URL}v2/block/${query}?tx_encoding=json`)
+
     commit('setBlock', {
       ...block,
-      minedBy: block.transactions.find(tx => tx.tx.type === 'coinbase_tx').tx.account
+      minedBy: block.miner
     })
   },
 
