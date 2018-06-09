@@ -39,7 +39,7 @@ export default {
     return commit('template', state)
   },
 
-  // TODO: update
+  // done
   async fetchHeight ({ state, commit }) {
     const client = await ae
     const height = await client.height()
@@ -47,6 +47,7 @@ export default {
     commit('setHeight', height)
   },
 
+  // done
   //async fetchMarketStats ({ state, commit }) {
   //  const body = (await fetchJson(
   //    'https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF'))[0]
@@ -110,6 +111,7 @@ export default {
     commit('setNodeStatus', { nodeTop, nodeVersion, peers })
   },
 
+  // done
   async loadBlock ({ state, commit }, { hash, height }) {
     if (state.blocks[hash || height]) return
     const client = await ae
@@ -121,6 +123,7 @@ export default {
     })
   },
 
+  // done
   async loadLastBlocks ({ state, dispatch }, numberOfBlocks) {
     await dispatch('fetchHeight')
     for (let i = 0; i < numberOfBlocks; i++) {
