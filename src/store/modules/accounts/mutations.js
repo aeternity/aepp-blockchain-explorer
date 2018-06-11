@@ -3,12 +3,21 @@
  */
 export default {
   /**
-   * Set blocks
+   * setAccount
    * @param {Object} state
-   * @param {Boolean} blocks
+   * @param {Boolean} account
    * @return {Object}
    */
-  setBlocks: function (state, blocks) {
-    return Object.assign(state, { blocks })
+  setAccount: function (state, account) {
+    return Object.assign(state, { account })
+  },
+
+  /**
+   * setName
+   * @param {Object} state
+   * @param {String} name
+   */
+  setName: function (state, name) {
+    return Object.assign(state, { name })
   }
 }

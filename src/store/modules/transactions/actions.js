@@ -1,5 +1,5 @@
 /**
- * Importing API
+ * Importing Libraries
  */
 import { createActionHelpers } from 'vuex-loading'
 
@@ -15,31 +15,27 @@ const { startLoading, endLoading } = createActionHelpers({
  */
 export default {
   /**
-   * Template
+   * get the transactions of a specific hash
+   * @param {Object} state
    * @param {Function} commit
    * @param {Function} dispatch
-   * @param {*} payload
-   * @return {Promise<any>}
+   * @param {String} hash
+   * @return {*}
    */
-  template: function ({ commit, dispatch }, payload) {
+  async get ({ state, commit, dispatch }, hash) {
     /**
      * start load state
      */
-    startLoading(dispatch, 'transactions/template')
+    startLoading(dispatch, 'transactions/get')
 
     /**
-     * Return New Promise
+     * Commit the update on the state
      */
-    return new Promise((resolve, reject) => {
-      /**
-       * End Loading State
-       */
-      endLoading(dispatch, 'transactions/template')
+    commit('setTransactions', [])
 
-      /**
-       * Resolve template
-       */
-      return resolve('template')
-    })
+    /**
+     * End Loading State
+     */
+    return endLoading(dispatch, 'transactions/get')
   }
 }
