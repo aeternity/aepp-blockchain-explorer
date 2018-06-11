@@ -18,6 +18,9 @@
   .grid > * {
     margin-right:40px;
     min-width:200px;
+    @include only-phone {
+      margin-right: 0;
+    }
   }
   a {
     height:50px;
