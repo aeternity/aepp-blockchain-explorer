@@ -1,24 +1,26 @@
 <template>
   <div class='index-screen screen'>
-    <header>
-      <div class="grid">
-        <div>
-          <img src="@/assets/logo.svg" alt=""/>
-          <h1>Blockchain Explorer</h1>
-          <p>Search the æternity test network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
-        </div>
-        <div class='search' v-on:keyup.enter='search()'>
-          <input class='search-input' placeholder='Explore Block, Address' v-model='searchString' type="text">
-          <button class='search-button' @click='search'>
-            <img src="@/assets/search.svg" alt=""/>
-            </button>
-        </div>
-      </div>
-    </header>
+    <!--<header>-->
+      <!--<div class="grid">-->
+        <!--<div>-->
+          <!--<img src="@/assets/logo.svg" alt=""/>-->
+          <!--<h1>Blockchain Explorer</h1>-->
+          <!--<p>Search the æternity test network blockchain by block, transaction, address. Or go through the last changes or stats.</p>-->
+        <!--</div>-->
+        <!--<div class='search' v-on:keyup.enter='search()'>-->
+          <!--<input class='search-input' placeholder='Explore Block, Address' v-model='searchString' type="text">-->
+          <!--<button class='search-button' @click='search'>-->
+            <!--<img src="@/assets/search.svg" alt=""/>-->
+            <!--</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</header>-->
 
-    <market-stats v-if='env.SHOW_MARKET_STATS'/>
+    <!--<market-stats v-if='env.SHOW_MARKET_STATS'/>-->
+
     <latest-block />
-    <recent-blocks />
+
+    <!--<recent-blocks />-->
   </div>
 </template>
 
@@ -41,56 +43,56 @@ export default {
     }
   },
   components: {
-    MarketStats: MarketStats,
+    // MarketStats: MarketStats,
     LatestBlock: LatestBlock,
-    RecentBlocks: RecentBlocks
+    // RecentBlocks: RecentBlocks
   },
-  mixins: [pollAction('loadLastBlocks', [4])],
-  computed: {
-    ...mapState(['env'])
-  },
-  methods: {
-    async search () {
-      if (blockHeightRegex.test(this.searchString)) {
-        this.$router.push({ path: `/block/${this.searchString}` })
-      } else if (blockHashRegex.test(this.searchString)) {
-        this.$router.push({ path: `/block/${this.searchString}` })
-      } else if (accountPublicKeyRegex.test(this.searchString)) {
-        this.$router.push({ path: `/account/${this.searchString}` })
-      } else if (nameRegex.test(this.searchString)) {
-        // check if name
-        const pubKey = await this.fetchDomain(this.searchString)
-        if (pubKey) {
-          this.$router.push({ path: `/account/${pubKey}` })
-        } else {
-          alert('not a valid block hash/height, account public key or domain name')
-        }
-      } else {
-        alert('not a valid block hash/height or account public key')
-      }
-    },
-    async fetchDomain (domain) {
-      const BASE_URL = process.env.AETERNITY_EPOCH_API_URL
-      domain = domain.toLowerCase().trim()
-      if (!domain.endsWith('.aet')) {
-        domain += '.aet'
-      }
-      try {
-        const fetchResult = await fetch(`${BASE_URL}/v2/name?name=${domain}`)
-        const fetchJson = await fetchResult.json()
-        if (fetchJson && fetchJson.pointers && typeof fetchJson.pointers === 'string') {
-          fetchJson.pointers = JSON.parse(fetchJson.pointers)
-        }
-        if (fetchJson.pointers && fetchJson.pointers.account_pubkey) {
-          return fetchJson.pointers.account_pubkey
-        }
-        return null
-      } catch (e) {
-        console.log(e)
-        return null
-      }
-    }
-  }
+  // mixins: [pollAction('loadLastBlocks', [4])],
+  //computed: {
+  //  ...mapState(['env'])
+  //},
+  //methods: {
+  //  async search () {
+  //    if (blockHeightRegex.test(this.searchString)) {
+  //      this.$router.push({ path: `/block/${this.searchString}` })
+  //    } else if (blockHashRegex.test(this.searchString)) {
+  //      this.$router.push({ path: `/block/${this.searchString}` })
+  //    } else if (accountPublicKeyRegex.test(this.searchString)) {
+  //      this.$router.push({ path: `/account/${this.searchString}` })
+  //    } else if (nameRegex.test(this.searchString)) {
+  //      // check if name
+  //      const pubKey = await this.fetchDomain(this.searchString)
+  //      if (pubKey) {
+  //        this.$router.push({ path: `/account/${pubKey}` })
+  //      } else {
+  //        alert('not a valid block hash/height, account public key or domain name')
+  //      }
+  //    } else {
+  //      alert('not a valid block hash/height or account public key')
+  //    }
+  //  },
+  //  async fetchDomain (domain) {
+  //    const BASE_URL = process.env.AETERNITY_EPOCH_API_URL
+  //    domain = domain.toLowerCase().trim()
+  //    if (!domain.endsWith('.aet')) {
+  //      domain += '.aet'
+  //    }
+  //    try {
+  //      const fetchResult = await fetch(`${BASE_URL}/v2/name?name=${domain}`)
+  //      const fetchJson = await fetchResult.json()
+  //      if (fetchJson && fetchJson.pointers && typeof fetchJson.pointers === 'string') {
+  //        fetchJson.pointers = JSON.parse(fetchJson.pointers)
+  //      }
+  //      if (fetchJson.pointers && fetchJson.pointers.account_pubkey) {
+  //        return fetchJson.pointers.account_pubkey
+  //      }
+  //      return null
+  //    } catch (e) {
+  //      console.log(e)
+  //      return null
+  //    }
+  //  }
+  //}
 }
 </script>
 <style src='./index.scss' lang='scss' />

@@ -2,5 +2,6 @@
  * Exporting State
  */
 export default {
-  blocks: []
+  name: {},
+  account: {}
 }

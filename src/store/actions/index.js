@@ -39,13 +39,13 @@ export default {
     return commit('template', state)
   },
 
-  // done
-  async fetchHeight ({ state, commit }) {
-    const client = await ae
-    const height = await client.height()
-    if (height === state.height) return
-    commit('setHeight', height)
-  },
+  //// done
+  //async fetchHeight ({ state, commit }) {
+  //  const client = await ae
+  //  const height = await client.height()
+  //  if (height === state.height) return
+  //  commit('setHeight', height)
+  //},
 
   // done
   //async fetchMarketStats ({ state, commit }) {
@@ -60,39 +60,39 @@ export default {
   //  commit('setMarketStats', marketStats)
   //},
 
-  async fetchAccount ({ state, commit }, address) {
-    const client = await ae
-    const [{ balance }, { transactions }] = await Promise.all([
-      await client.api.getAccountBalance(address),
-      await client.api.getAccountTransactions(address)
-    ])
-    const account = { address, balance, transactions }
-    if (_.isEqual(state.accounts[address], account)) return
-    commit('setAccount', account)
-  },
-
-  async fetchAccountName ({ state, commit }, address) {
-    if (!NAME_LOOKUP_MIDDLEWARE_URL) return
-    if (state.accountNames[address]) {
-      const diff = new Date().getTime() - state.accountNames[address].ts
-      if (diff < 10000) return
-    }
-    if (!state.accountNames[address]) {
-      commit('setAccountName', {
-        address: address,
-        name: null,
-        ts: new Date().getTime()
-      })
-    }
-    const {name} = await fetchJson(`${NAME_LOOKUP_MIDDLEWARE_URL}${address}`)
-    const account = {
-      address: address,
-      name: name,
-      ts: new Date().getTime()
-    }
-    if (_.isEqual(state.accountNames[address], account)) return
-    commit('setAccountName', account)
-  },
+  //async fetchAccount ({ state, commit }, address) {
+  //  const client = await ae
+  //  const [{ balance }, { transactions }] = await Promise.all([
+  //    await client.api.getAccountBalance(address),
+  //    await client.api.getAccountTransactions(address)
+  //  ])
+  //  const account = { address, balance, transactions }
+  //  if (_.isEqual(state.accounts[address], account)) return
+  //  commit('setAccount', account)
+  //},
+  //
+  //async fetchAccountName ({ state, commit }, address) {
+  //  if (!NAME_LOOKUP_MIDDLEWARE_URL) return
+  //  if (state.accountNames[address]) {
+  //    const diff = new Date().getTime() - state.accountNames[address].ts
+  //    if (diff < 10000) return
+  //  }
+  //  if (!state.accountNames[address]) {
+  //    commit('setAccountName', {
+  //      address: address,
+  //      name: null,
+  //      ts: new Date().getTime()
+  //    })
+  //  }
+  //  const {name} = await fetchJson(`${NAME_LOOKUP_MIDDLEWARE_URL}${address}`)
+  //  const account = {
+  //    address: address,
+  //    name: name,
+  //    ts: new Date().getTime()
+  //  }
+  //  if (_.isEqual(state.accountNames[address], account)) return
+  //  commit('setAccountName', account)
+  //},
 
   async fetchNodeStatus ({ state, commit }) {
     const [nodeTop, nodeVersion, peers] = await Promise.all([
@@ -110,26 +110,26 @@ export default {
     ])
     commit('setNodeStatus', { nodeTop, nodeVersion, peers })
   },
-
-  // done
-  async loadBlock ({ state, commit }, { hash, height }) {
-    if (state.blocks[hash || height]) return
-    const client = await ae
-    const block = hash ? await client.api.getBlockByHash(hash, {txEncoding: 'json'}) : await client.api.getBlockByHeight(height, {txEncoding: 'json'})
-
-    commit('setBlock', {
-      ...block,
-      minedBy: block.miner
-    })
-  },
-
-  // done
-  async loadLastBlocks ({ state, dispatch }, numberOfBlocks) {
-    await dispatch('fetchHeight')
-    for (let i = 0; i < numberOfBlocks; i++) {
-      dispatch('loadBlock', { height: state.height - i })
-    }
-  },
+  //
+  //// done
+  //async loadBlock ({ state, commit }, { hash, height }) {
+  //  if (state.blocks[hash || height]) return
+  //  const client = await ae
+  //  const block = hash ? await client.api.getBlockByHash(hash, {txEncoding: 'json'}) : await client.api.getBlockByHeight(height, {txEncoding: 'json'})
+  //
+  //  commit('setBlock', {
+  //    ...block,
+  //    minedBy: block.miner
+  //  })
+  //},
+  //
+  //// done
+  //async loadLastBlocks ({ state, dispatch }, numberOfBlocks) {
+  //  await dispatch('fetchHeight')
+  //  for (let i = 0; i < numberOfBlocks; i++) {
+  //    dispatch('loadBlock', { height: state.height - i })
+  //  }
+  //},
 
   async loadTx ({ state, commit }, hash) {
     if (state.txs[hash]) return
