@@ -149,6 +149,7 @@ nav .inner {
     .links + .mobile-nav,
     .mobile-nav {
       flex: 1;
+      align-items: center;
     }
   }
 }
@@ -162,13 +163,12 @@ nav .mobile-nav {
       width: 100vw;
       height: 100vh;
     }
-    .mobile-nav-fixed.active {
+    .mobile-nav-fixed {
       display: block;
       z-index: 1;
       position: fixed;
       top: 0;
       left: 0;
-      animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
       .mobile-nav-fixed-action {
         text-align: right;
       }
@@ -211,6 +211,10 @@ nav .mobile-nav {
 .mobile-nav .pageName {
   flex:1;
   text-align: right;
+  padding-right: 3vw;
+}
+.mobile-nav .burger {
+  display: flex;
 }
 .screen {
   padding-bottom:130px;
@@ -218,7 +222,7 @@ nav .mobile-nav {
 nav + main > .screen > :first-child{
   padding-top:100px;
 }
-// animations
+
 @keyframes slide-in-top {
   0% {
     transform: translateY(-100vh);
@@ -228,4 +232,8 @@ nav + main > .screen > :first-child{
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.slide-in-top {
+  animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }

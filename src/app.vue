@@ -19,77 +19,77 @@
         </div>
         <div class="mobile-nav">
           <div class="pageName">
-            <strong v-if="$route.name === 'Index'">Dashboard</strong>
-            <strong v-if="$route.name === 'BlockList'">Blocks</strong>
-            <strong v-if="$route.name === 'Transaction'">Transactions</strong>
+            <strong>{{pageName}}</strong>
           </div>
-          <div class="burger" @click='expandMenu'>
+          <div class="burger" @click='toggleMenu'>
             <img src="@/assets/burger.svg" alt="" />
           </div>
-          <div class="mobile-nav-fixed" :class="{ active: isOpened}" @click="expandMenu">
-            <div class="mobile-nav-fixed-holder">
-              <div class="inner">
-                <div class="mobile-nav-fixed-action" @click='this.isOpened = false' >
-                  <span>
-                    <img src="@/assets/close.svg" alt=""/>
-                  </span>
-                </div>
-                <div class="mobile-nav-fixed-main-links">
-                  <router-link to='/'>
-                    Dashboard
-                  </router-link>
-                  <router-link to='/blocks'>
-                    Blocks
-                  </router-link>
-                  <router-link to='/tx'>
-                    Transactions
-                  </router-link>
-                </div>
-                <div class="mobile-nav-fixed-secondary-links">
-                  <router-link to='/'>
-                    imprint
-                  </router-link>
-                  <router-link to='/'>
-                    get started
-                  </router-link>
-                  <router-link to='/'>
-                    aeternity.com
-                  </router-link>
-                </div>
-                <div class="mobile-nav-fixed-socials-links">
-                  <div class="mobile-nav-fixed-socials-links-row">
+          <transition name='custom-toggle-trans' enter-active-class='slide-in-top'>
+            <div class="mobile-nav-fixed" v-if="isOpened">
+              <div class="mobile-nav-fixed-holder">
+                <div class="inner">
+                  <div class="mobile-nav-fixed-action" @click='isOpened = false'>
+                    <span>
+                      <img src="@/assets/close.svg" alt="" />
+                    </span>
+                  </div>
+                  <div class="mobile-nav-fixed-main-links" @click='isOpened = false'>
                     <router-link to='/'>
-                      <img src="@/assets/light/github-light.svg" alt="">
+                      Dashboard
                     </router-link>
-                    <router-link to='/'>
-                      <img src="@/assets/light/medium-light.svg" alt="">
+                    <router-link to='/blocks'>
+                      Blocks
                     </router-link>
-                    <router-link to='/'>
-                      <img src="@/assets/light/telegram-light.svg" alt="">
-                    </router-link>
-                    <router-link to='/'>
-                      <img src="@/assets/light/twitter-light.svg" alt="">
+                    <router-link to='/tx'>
+                      Transactions
                     </router-link>
                   </div>
-                  <div class="mobile-nav-fixed-socials-links-row">
+                  <div class="mobile-nav-fixed-secondary-links">
                     <router-link to='/'>
-                      <img src="@/assets/light/reddit-light.svg" alt="">
+                      imprint
                     </router-link>
                     <router-link to='/'>
-                      <img src="@/assets/light/slack-light.svg" alt="">
+                      get started
                     </router-link>
                     <router-link to='/'>
-                      <img src="@/assets/light/facebook-light.svg" alt="">
-                    </router-link>
-                    <router-link to='/'>
-                      <img src="@/assets/light/linkedin-light.svg" alt="">
+                      aeternity.com
                     </router-link>
                   </div>
+                  <div class="mobile-nav-fixed-socials-links">
+                    <div class="mobile-nav-fixed-socials-links-row">
+                      <router-link to='/'>
+                        <img src="@/assets/light/github-light.svg" alt="">
+                      </router-link>
+                      <router-link to='/'>
+                        <img src="@/assets/light/medium-light.svg" alt="">
+                      </router-link>
+                      <router-link to='/'>
+                        <img src="@/assets/light/telegram-light.svg" alt="">
+                      </router-link>
+                      <router-link to='/'>
+                        <img src="@/assets/light/twitter-light.svg" alt="">
+                      </router-link>
+                    </div>
+                    <div class="mobile-nav-fixed-socials-links-row">
+                      <router-link to='/'>
+                        <img src="@/assets/light/reddit-light.svg" alt="">
+                      </router-link>
+                      <router-link to='/'>
+                        <img src="@/assets/light/slack-light.svg" alt="">
+                      </router-link>
+                      <router-link to='/'>
+                        <img src="@/assets/light/facebook-light.svg" alt="">
+                      </router-link>
+                      <router-link to='/'>
+                        <img src="@/assets/light/linkedin-light.svg" alt="">
+                      </router-link>
+                    </div>
+                  </div>
                 </div>
-
               </div>
             </div>
-          </div>
+          </transition>
+
         </div>
         <div>
           <span v-if='env.SHOW_NETWORK_STATS' is='router-link' to='/status/' class='network-name'>{{networkName}}</span>
@@ -105,8 +105,6 @@
     <ae-footer />
   </div>
 </template>
-
-
 
 <script>
 import Footer from '@/partials/footer/footer.vue'
@@ -134,10 +132,17 @@ export default {
         return name
       }
       return url
+    },
+    pageName () {
+      return ({
+        'Index': 'Dashboard',
+        'BlockList': 'Blocks',
+        'Transaction': 'Transactions'
+      })[this.$route.name]
     }
   },
   methods: {
-    expandMenu: function () {
+    toggleMenu: function () {
       this.isOpened = !this.isOpened
     }
   }
