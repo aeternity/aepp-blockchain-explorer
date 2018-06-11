@@ -9,14 +9,15 @@ export default {
   $version: '0.0.0',
   $platform: 'Blockchain Explorer',
   $language: 'en',
+  $nodeStatus: {}
 
   // TODO: Update later
-  height: 0,
+  // height: 0,
   // marketStats: null,
   // blocks: {},
-  txs: {},
-  accounts: {},
-  accountNames: {},
-  nodeStatus: null,
-  env: process.env
+  // txs: {},
+  // accounts: {},
+  // accountNames: {},
+  // nodeStatus: null,
+  // env: process.env
 }

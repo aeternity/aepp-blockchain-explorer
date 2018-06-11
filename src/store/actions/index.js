@@ -1,9 +1,8 @@
 /**
- * Importing API
+ * Importing Libraries
  */
+import times from 'lodash/times'
 import { createActionHelpers } from 'vuex-loading'
-import _ from 'lodash'
-import Ae from '@aeternity/aepp-sdk'
 
 /**
  * Setting up start/end Loading helper methods
@@ -12,15 +11,13 @@ const { startLoading, endLoading } = createActionHelpers({
   moduleName: 'loading'
 })
 
-const BASE_URL = process.env.AETERNITY_EPOCH_API_URL
-const NAME_LOOKUP_MIDDLEWARE_URL = process.env.NAME_LOOKUP_MIDDLEWARE_URL
-
+/**
+ * Fetch JSON
+ */
 const fetchJson = async (...args) => {
   const response = await fetch(...args)
   return response.json()
 }
-
-const ae = Ae.create(BASE_URL)
 
 /**
  * Exporting Actions
@@ -33,11 +30,39 @@ export default {
    * @param {{}} payload
    * @return {*}
    */
-  template: function ({ commit, state }) {
-    startLoading('template')
-    endLoading('template')
-    return commit('template', state)
-  },
+  async getNodeStatus ({ state, commit, dispatch }) {
+    /**
+     * start load state
+     */
+    startLoading(dispatch, 'getNodeStatus')
+
+    /**
+     * Pull node state, version and peers
+     */
+    const [nodeTop, nodeVersion, peers] = await Promise.all([
+      fetchJson(`${process.env.AETERNITY_EPOCH_API_URL}v2/top`),
+      fetchJson(`${process.env.AETERNITY_EPOCH_API_URL}v2/version`),
+      Promise.all(times(3, async (i) => {
+        const [[top, address], version] = await Promise.all([
+          fetch(`${process.env.AETERNITY_EPOCH_API_URL}peer/${i + 1}/v2/top`).then(async response => {
+            return [await response.json(), response.headers.get('X-Upstream')]
+          }),
+          fetchJson(`${process.env.AETERNITY_EPOCH_API_URL}peer/${i + 1}/v2/version`)
+        ])
+        return { top, version, address }
+      }))
+    ])
+
+    /**
+     * Commit the update on the state
+     */
+    commit('setNodeStatus', { nodeTop, nodeVersion, peers })
+
+    /**
+     * End Loading State
+     */
+    return endLoading(dispatch, 'getNodeStatus')
+  }
 
   //// done
   //async fetchHeight ({ state, commit }) {
@@ -94,22 +119,24 @@ export default {
   //  commit('setAccountName', account)
   //},
 
-  async fetchNodeStatus ({ state, commit }) {
-    const [nodeTop, nodeVersion, peers] = await Promise.all([
-      fetchJson(`${BASE_URL}v2/top`),
-      fetchJson(`${BASE_URL}v2/version`),
-      Promise.all(_.times(3, async (i) => {
-        const [[top, address], version] = await Promise.all([
-          fetch(`${BASE_URL}peer/${i + 1}/v2/top`).then(async response => {
-            return [await response.json(), response.headers.get('X-Upstream')]
-          }),
-          fetchJson(`${BASE_URL}peer/${i + 1}/v2/version`)
-        ])
-        return { top, version, address }
-      }))
-    ])
-    commit('setNodeStatus', { nodeTop, nodeVersion, peers })
-  },
+  //async fetchNodeStatus ({ state, commit }) {
+  //  const [nodeTop, nodeVersion, peers] = await Promise.all([
+  //    fetchJson(`${BASE_URL}v2/top`),
+  //    fetchJson(`${BASE_URL}v2/version`),
+  //    Promise.all(_.times(3, async (i) => {
+  //      const [[top, address], version] = await Promise.all([
+  //        fetch(`${BASE_URL}peer/${i + 1}/v2/top`).then(async response => {
+  //          return [await response.json(), response.headers.get('X-Upstream')]
+  //        }),
+  //        fetchJson(`${BASE_URL}peer/${i + 1}/v2/version`)
+  //      ])
+  //      return { top, version, address }
+  //    }))
+  //  ])
+  //
+  //  commit('setNodeStatus', { nodeTop, nodeVersion, peers })
+  //},
+
   //
   //// done
   //async loadBlock ({ state, commit }, { hash, height }) {
@@ -131,14 +158,14 @@ export default {
   //  }
   //},
 
-  async loadTx ({ state, commit }, hash) {
-    if (state.txs[hash]) return
-
-    // const client = await ae
-    // console.log('client', client)
-
-    const query = `${hash}`
-    const tx = await fetchJson(`${BASE_URL}v2/tx/${query}?tx_encoding=json`)
-    commit('setTx', tx)
-  }
+  //async loadTx ({ state, commit }, hash) {
+  //  if (state.txs[hash]) return
+  //
+  //  // const client = await ae
+  //  // console.log('client', client)
+  //
+  //  const query = `${hash}`
+  //  const tx = await fetchJson(`${BASE_URL}v2/tx/${query}?tx_encoding=json`)
+  //  commit('setTx', tx)
+  //}
 }
