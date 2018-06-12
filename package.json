@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@aeternity/aepp-components": "github:aeternity/aepp-components#blockchain-explorer",
+    "@aeternity/aepp-sdk": "github:aeternity/aepp-sdk-js#feature/sweet-api",
     "lodash": "^4.17.5",
     "vue": "^2.5.2",
     "vue-popperjs": "^1.2.6",

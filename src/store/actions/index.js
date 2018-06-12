@@ -3,6 +3,7 @@
  */
 import { createActionHelpers } from 'vuex-loading'
 import _ from 'lodash'
+import Ae from '@aeternity/aepp-sdk'
 
 /**
  * Setting up start/end Loading helper methods
@@ -18,6 +19,8 @@ const fetchJson = async (...args) => {
   const response = await fetch(...args)
   return response.json()
 }
+
+const ae = Ae.create(BASE_URL)
 
 /**
  * Exporting Actions
@@ -38,8 +41,8 @@ export default {
 
   // TODO: update
   async fetchHeight ({ state, commit }) {
-    // const { height } = await fetchJson(`${BASE_URL}internal/v2/block/number`)
-    const { height } = await fetchJson(`${BASE_URL}v2/top`)
+    const client = await ae
+    const height = await client.height()
     if (height === state.height) return
     commit('setHeight', height)
   },
@@ -57,9 +60,10 @@ export default {
   //},
 
   async fetchAccount ({ state, commit }, address) {
+    const client = await ae
     const [{ balance }, { transactions }] = await Promise.all([
-      fetchJson(`${BASE_URL}v2/account/balance/${address}`),
-      fetchJson(`${BASE_URL}v2/account/txs/${address}?tx_encoding=json`)
+      await client.api.getAccountBalance(address),
+      await client.api.getAccountTransactions(address)
     ])
     const account = { address, balance, transactions }
     if (_.isEqual(state.accounts[address], account)) return
@@ -108,11 +112,12 @@ export default {
 
   async loadBlock ({ state, commit }, { hash, height }) {
     if (state.blocks[hash || height]) return
-    const query = `${hash ? 'hash' : 'height'}/${hash || height}`
-    const block = await fetchJson(`${BASE_URL}v2/block/${query}?tx_encoding=json`)
+    const client = await ae
+    const block = hash ? await client.api.getBlockByHash(hash, {txEncoding: 'json'}) : await client.api.getBlockByHeight(height, {txEncoding: 'json'})
+
     commit('setBlock', {
       ...block,
-      minedBy: block.transactions.find(tx => tx.tx.type === 'coinbase_tx').tx.account
+      minedBy: block.miner
     })
   },
 
@@ -125,6 +130,10 @@ export default {
 
   async loadTx ({ state, commit }, hash) {
     if (state.txs[hash]) return
+
+    // const client = await ae
+    // console.log('client', client)
+
     const query = `${hash}`
     const tx = await fetchJson(`${BASE_URL}v2/tx/${query}?tx_encoding=json`)
     commit('setTx', tx)

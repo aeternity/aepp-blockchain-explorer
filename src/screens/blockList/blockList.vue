@@ -60,8 +60,8 @@
               mined by
             </span>
             <span class="account-address">
-              <router-link :to='"/account/" + b.transactions[0].tx.account'>
-                <named-address :address='b.transactions[0].tx.account'/>
+              <router-link :to='"/account/" + b.miner'>
+                <named-address :address='b.miner'/>
               </router-link>
             </span>
           </td>
