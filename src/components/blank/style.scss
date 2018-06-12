@@ -4,9 +4,20 @@
 // *****************************
 //------------------------------
 
-.tag-blank {
-  @include center-both;
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
 
+  #{$property}: $value;
+}
+
+.tag-blank {
+  @include prefix(transform, translate(-50%, -50%), 'webkit' 'ms');
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
   display: flex;
   justify-content: center;
   align-items: center;

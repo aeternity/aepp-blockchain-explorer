@@ -15,13 +15,13 @@
   },
   "dependencies": {
     "@aeternity/aepp-components": "github:aeternity/aepp-components#blockchain-explorer",
-    "@aeternity/aepp-sdk": "github:aeternity/aepp-sdk-js#feature/sweet-api",
+    "@aeternity/aepp-sdk": "github:aeternity/aepp-sdk-js#develop",
     "lodash": "^4.17.5",
     "vue": "^2.5.2",
     "vue-popperjs": "^1.2.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "vuex-loading": "^0.3.0"
+    "vuex-loading": "^0.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

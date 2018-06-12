@@ -21,6 +21,16 @@ import router from './router'
 import store from './store'
 
 /**
+ * Vue Application custom Tags
+ */
+import * as components from './components'
+
+/**
+ * Import global components
+ */
+Vue.use(components)
+
+/**
  * Applying VueLoading
  */
 Vue.use(VueLoading)
