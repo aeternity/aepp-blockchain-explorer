@@ -77,8 +77,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import Transaction from '../../components/transaction/transaction.vue'
-import RelativeTime from '../../components/relativeTime.vue'
 import currentTime from '../../mixins/currentTime'
 import {
   AePanel
@@ -87,11 +85,7 @@ const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
 const blockHeightRegex = RegExp('^[0-9]+')
 export default {
   name: 'Block',
-  components: {
-    AePanel,
-    Transaction,
-    RelativeTime
-  },
+  components: { AePanel },
   mixins: [currentTime],
   props: ['blockId'],
   computed: mapState({

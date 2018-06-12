@@ -94,18 +94,10 @@ import { mapState } from 'vuex'
 import {
   AeButton
 } from '@aeternity/aepp-components'
-import RelativeTime from '../../components/relativeTime.vue'
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
-import AeHash from '../../components/aeHash/aeHash.vue'
 import currentTime from '../../mixins/currentTime'
 import pollAction from '../../mixins/pollAction'
 export default {
-  components: {
-    AeButton,
-    AeHash,
-    NamedAddress,
-    RelativeTime
-  },
+  components: { AeButton },
   mixins: [currentTime, pollAction('loadLastBlocks', [10])],
   computed: {
     ...mapState({
