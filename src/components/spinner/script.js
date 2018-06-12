@@ -5,7 +5,7 @@ export default {
   /*
    * Component Name
    */
-  name: 'tag-spinner',
+  name: 'spinner',
 
   /*
    * Prop Names
@@ -15,7 +15,7 @@ export default {
       default: '100px'
     },
     background: {
-      default: '#CCD2D8'
+      default: '#FFFFFF'
     },
     duration: {
       default: '1.2s'

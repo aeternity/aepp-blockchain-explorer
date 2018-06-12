@@ -40,7 +40,6 @@
 <script>
 import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 import { mapState } from 'vuex'
-import _ from 'lodash'
 
 export default {
   components: { NamedAddress },

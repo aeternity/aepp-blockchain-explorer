@@ -5,5 +5,5 @@ export default {
   /*
    * Component Name
    */
-  name: 'tag-blank'
+  name: 'blank'
 };
