@@ -24,7 +24,7 @@
           <div class="burger" @click='toggleMenu'>
             <img src="@/assets/burger.svg" alt="" />
           </div>
-          <transition name='custom-toggle-trans' enter-active-class='slide-in-top'>
+          <transition name='custom-toggle-trans' enter-active-class='slide-in-top' leave-active-class='slide-in-top-out'>
             <div class="mobile-nav-fixed" v-if="isOpened">
               <div class="mobile-nav-fixed-holder">
                 <div class="inner">
