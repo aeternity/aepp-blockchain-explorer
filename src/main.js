@@ -38,22 +38,7 @@ Vue.use(VueLoading)
 /**
  * Creating the Vuex Loader
  */
-const vueLoading = new VueLoading({
-  /**
-   * boolean value, false by default, use this
-   * value for enabling integration with Vuex store
-   * When this value is true VueLoading will store
-   * data in Vuex store and all changes to this
-   * data will be made by dispatching actions to store
-   */
-  useVuex: true,
-
-  /**
-   * boolean value, true by default,
-   * register v-loading components.
-   */
-  registerComponents: true
-})
+const vueLoading = new VueLoading({ useVuex: true })
 
 /**
  * Vue configs

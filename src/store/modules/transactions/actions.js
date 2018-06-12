@@ -23,19 +23,10 @@ export default {
    * @return {*}
    */
   async get ({ state, commit, dispatch }, hash) {
-    /**
-     * start load state
-     */
     startLoading(dispatch, 'transactions/get')
 
-    /**
-     * Commit the update on the state
-     */
     commit('setTransactions', [])
 
-    /**
-     * End Loading State
-     */
     return endLoading(dispatch, 'transactions/get')
   }
 }

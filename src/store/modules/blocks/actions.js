@@ -36,7 +36,6 @@ export default {
     }
 
     commit('setHeight', height)
-
     endLoading(dispatch, 'blocks/height')
 
     return height
@@ -63,7 +62,6 @@ export default {
     }
 
     commit('setBlock', block)
-
     endLoading(dispatch, 'blocks/getBlockFromHash')
 
     return block
@@ -89,7 +87,6 @@ export default {
     }
 
     commit('setBlock', block)
-
     endLoading(dispatch, 'blocks/getBlockFromHeight')
 
     return block
@@ -108,7 +105,6 @@ export default {
     startLoading(dispatch, 'blocks/getLatestBlocks')
 
     await dispatch('height')
-
     const blocks = await Promise.all(
       times(size, (index) => dispatch('getBlockFromHeight', state.height - index))
     )
@@ -119,7 +115,6 @@ export default {
     }
 
     commit('setBlocks', blocks)
-
     endLoading(dispatch, 'blocks/getLatestBlocks')
 
     return blocks
