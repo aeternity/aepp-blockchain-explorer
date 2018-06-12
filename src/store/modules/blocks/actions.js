@@ -25,35 +25,21 @@ export default {
    * @return {Object}
    */
   async height ({ state, commit, dispatch }) {
-    /**
-     * Start vuex-loading
-     */
     startLoading(dispatch, 'blocks/height')
 
-    /**
-     * Await for the SDK promise
-     */
     const client = await ae
-
-    /**
-     * Fetch the height of the block
-     */
     const height = await client.height()
 
-    /**
-     * Don't change the state if has similar state
-     */
-    if (height === state.height) return endLoading(dispatch, 'blocks/height')
+    if (height === state.height) {
+      endLoading(dispatch, 'blocks/height')
+      return state.height
+    }
 
-    /**
-     * Commit the updates
-     */
     commit('setHeight', height)
 
-    /**
-     * End vuex-loading
-     */
-    return endLoading(dispatch, 'blocks/height')
+    endLoading(dispatch, 'blocks/height')
+
+    return height
   },
 
   /**
@@ -66,36 +52,21 @@ export default {
    * @return {*}
    */
   async getBlockFromHash ({ state, commit, dispatch }, hash) {
-    /**
-     * Start vuex-loading
-     */
     startLoading(dispatch, 'blocks/getBlockFromHash')
 
-    /**
-     * Await for the SDK promise
-     */
     const client = await ae
-
-    /**
-     * Define the block constant holder
-     */
     const block = await client.api.getBlockByHash(hash, { txEncoding: 'json' })
 
-    /**
-     * Check if the pulled block is equal to the current block
-     * if it is, stop the loading and don't commit
-     */
-    if (isEqual(state.block, block)) return endLoading(dispatch, 'blocks/getBlockFromHash')
+    if (isEqual(state.block, block)) {
+      endLoading(dispatch, 'blocks/getBlockFromHash')
+      return state.block
+    }
 
-    /**
-     * Commit the block to the state
-     */
     commit('setBlock', block)
 
-    /**
-     * End vuex-loading
-     */
-    return endLoading(dispatch, 'blocks/getBlockFromHash')
+    endLoading(dispatch, 'blocks/getBlockFromHash')
+
+    return block
   },
 
   /**
@@ -107,36 +78,21 @@ export default {
    * @return {*}
    */
   async getBlockFromHeight ({ state, commit, dispatch }, height) {
-    /**
-     * Start vuex-loading
-     */
     startLoading(dispatch, 'blocks/getBlockFromHeight')
 
-    /**
-     * Await for the SDK promise
-     */
     const client = await ae
-
-    /**
-     * Define the block constant holder
-     */
     const block = await client.api.getBlockByHeight(height, { txEncoding: 'json' })
 
-    /**
-     * Check if the pulled block is equal to the current block
-     * if it is, stop the loading and don't commit
-     */
-    if (isEqual(state.block, block)) return endLoading(dispatch, 'blocks/getBlockFromHeight')
+    if (isEqual(state.block, block)) {
+      endLoading(dispatch, 'blocks/getBlockFromHeight')
+      return state.block
+    }
 
-    /**
-     * Commit the block to the state
-     */
     commit('setBlock', block)
 
-    /**
-     * End vuex-loading
-     */
-    return endLoading(dispatch, 'blocks/getBlockFromHeight')
+    endLoading(dispatch, 'blocks/getBlockFromHeight')
+
+    return block
   },
 
   /**
@@ -149,35 +105,23 @@ export default {
    * @return {*}
    */
   async getLatestBlocks ({ state, commit, dispatch }, size) {
-    /**
-     * Start vuex-loading
-     */
     startLoading(dispatch, 'blocks/getLatestBlocks')
 
-    /**
-     * Get latest block-height
-     */
     await dispatch('height')
 
-    /**
-     * Pull all blocks through a promise.all/await
-     */
-    const blocks = await Promise.all(times(size, (index) => dispatch('getBlockFromHeight', state.height - index)))
+    const blocks = await Promise.all(
+      times(size, (index) => dispatch('getBlockFromHeight', state.height - index))
+    )
 
-    /**
-     * Check if the array is not empty, if it's empty
-     * then don't modify the state
-     */
-    if (!blocks.length) return endLoading(dispatch, 'blocks/getLatestBlocks')
+    if (!blocks.length) {
+      endLoading(dispatch, 'blocks/getLatestBlocks')
+      return state.blocks
+    }
 
-    /**
-     * Commit the block to the state
-     */
     commit('setBlocks', blocks)
 
-    /**
-     * End vuex-loading
-     */
-    return endLoading(dispatch, 'blocks/getLatestBlocks')
+    endLoading(dispatch, 'blocks/getLatestBlocks')
+
+    return blocks
   }
 }
