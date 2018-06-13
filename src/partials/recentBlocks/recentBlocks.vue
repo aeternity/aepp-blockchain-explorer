@@ -22,10 +22,9 @@
             <td>
               <span class='field-name'>mined by</span>
               <span class="field-value account-address">
-                <!--<router-link :to='"/account/" + b.minedBy'>-->
-                  <!--<named-address :address='b.minedBy' />-->
-                <!--</router-link>-->
-                {{ b.minedBy }}
+                <router-link :to='"/account/" + b.miner'>
+                  <named-address :address='b.miner' />
+                </router-link>
               </span>
             </td>
           </template>
@@ -38,12 +37,19 @@
   </div>
 </template>
 <script>
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 import { mapState } from 'vuex'
 
 export default {
-  components: { NamedAddress },
-  computed: mapState('blocks', ['blocks']),
+  /*
+   * Map blocks to the component
+   */
+  computed: mapState('blocks', [
+    'blocks'
+  ]),
+
+  /*
+   * Get the last 3 blocks on mount
+   */
   mounted: function () {
     return this
     .$store

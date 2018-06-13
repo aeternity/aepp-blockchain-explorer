@@ -1,49 +1,74 @@
 <template>
   <div class="named-address">
-    <template v-if='address'>
-      <template v-if='name'>
-        {{name}}
-      </template>
-      <ae-address v-else size='compact' :show-avatar='false' :address='address'/>
+    <template v-if='name'>
+      {{ name }}
     </template>
+    <ae-address :address="address" :show-avatar="false" size="compact" v-else />
   </div>
 </template>
 <script>
-import {
-  mapState,
-  mapActions
-} from 'vuex'
-import {
-  AeAddress,
-  AeIdentityAvatar
-} from '@aeternity/aepp-components'
+import { mapGetters } from 'vuex'
+import { AeAddress, AeIdentityAvatar } from '@aeternity/aepp-components'
+
 export default {
+  /*
+   * Name
+   */
   name: 'named-address',
-  props: ['address'],
+
+  /*
+   * Component props
+   */
+  props: [
+    'address'
+  ],
+
+  /*
+   * Components
+   */
   components: {
     AeAddress,
     AeIdentityAvatar
   },
-  watch: {
-    address (oldAddr, newAddr) {
-      this.fetchAccountName(this.address)
+
+  /*
+   * Computed Properties
+   */
+  computed: {
+    /*
+     * Map accounts getter for name
+     */
+    ...mapGetters('accounts', [
+      'getName'
+    ]),
+
+    /*
+     * Computed prop for name
+     */
+    name: function () {
+      return this.getName(this.address)
     }
   },
-  methods: mapActions([
-    'fetchAccountName'
-  ]),
-  computed: {
-    ...mapState({
-      name (state) {
-        if (!state.accountNames[this.address]) return
-        return state.accountNames[this.address].name
-      }
-    })
+
+  /*
+   * Watch for property changes
+   */
+  watch: {
+    address: function (oldAddress, newAddress) {
+      return this
+      .$store
+      .dispatch('accounts/name', newAddress)
+    }
   },
+
+  /*
+   * When mounted pull the account name
+   */
   mounted () {
-    this.fetchAccountName(this.address)
+    return this
+    .$store
+    .dispatch('accounts/name', this.address)
   }
 }
 </script>
-<style>
-</style>
+<style></style>

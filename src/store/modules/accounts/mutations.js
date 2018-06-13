@@ -5,19 +5,20 @@ export default {
   /**
    * setAccount
    * @param {Object} state
-   * @param {Boolean} account
+   * @param {Object} payload
    * @return {Object}
    */
-  setAccount: function (state, account) {
-    return Object.assign(state, { account })
+  setAccount: function (state, payload) {
+    return Object.assign(state.accounts, { [payload.address]: payload })
   },
 
   /**
    * setName
    * @param {Object} state
-   * @param {String} name
+   * @param {Object} payload
+   * @return {*}
    */
-  setName: function (state, name) {
-    return Object.assign(state, { name })
+  setName: function (state, payload) {
+    return Object.assign(state.names, { [payload.address]: payload })
   }
 }
