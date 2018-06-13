@@ -48,12 +48,12 @@
 import { mapState } from 'vuex'
 import pollAction from '@/mixins/pollAction'
 export default {
-  mixins: [pollAction('fetchNodeStatus')],
+  mixins: [pollAction('getNodeStatus')],
   data: () => ({
     node: process.env.AETERNITY_EPOCH_API_URL
   }),
   computed: mapState({
-    s: 'nodeStatus'
+    s: '$nodeStatus'
   })
 }
 </script>

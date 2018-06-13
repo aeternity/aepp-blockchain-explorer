@@ -2,6 +2,6 @@
  * Exporting State
  */
 export default {
-  name: {},
-  account: {}
+  accounts: {},
+  names: {}
 }

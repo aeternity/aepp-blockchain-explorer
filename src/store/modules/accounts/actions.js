@@ -26,38 +26,45 @@ export default {
    * @return {*}
    */
   async get ({ state, commit, dispatch }, address) {
-    startLoading(dispatch, 'accounts/get')
+    // startLoading(dispatch, 'accounts/get')
 
     const client = await ae
 
     const [{ balance }, { transactions }] = await Promise.all([
-      await client.api.getAccountBalance(address),
-      await client.api.getAccountTransactions(address)
+      client.api.getAccountBalance(address),
+      client.api.getAccountTransactions(address)
     ])
 
     const account = { address, balance, transactions }
 
-    if (isEqual(state.account, account)) return
+    if (isEqual(state.accounts[address], account)) return
 
     commit('setAccount', account)
 
-    return endLoading(dispatch, 'accounts/get')
+    // endLoading(dispatch, 'accounts/get')
+
+    return account
   },
 
   async name ({ state, commit, dispatch }, address) {
-    startLoading(dispatch, 'accounts/name')
+    // startLoading(dispatch, 'accounts/name')
 
     if (!process.env.NAME_LOOKUP_MIDDLEWARE_URL) return
-    if (!isEmpty(state.name)) if (new Date().getTime() - state.name.ts < 10000) return
-    if (isEmpty(state.name)) commit('setAccountName', { address, ts: new Date().getTime(), name: null })
+
+    if (!isEmpty(state.names[address]) && (Date.now() - state.names[address].ts < 10000)) return
+
+    if (isEmpty(state.names[address])) commit('setName', { address, ts: Date.now(), name: null })
 
     const { name } = await fetch(`${process.env.NAME_LOOKUP_MIDDLEWARE_URL}${address}`)
-    const account = { address, name, ts: new Date().getTime() }
 
-    if (isEqual(state.name, account)) return
+    const account = { address, ts: Date.now(), name }
+
+    if (isEqual(state.names[address], account)) return
 
     commit('setName', account)
 
-    return endLoading(dispatch, 'accounts/name')
+    // endLoading(dispatch, 'accounts/name')
+
+    return account
   }
 }

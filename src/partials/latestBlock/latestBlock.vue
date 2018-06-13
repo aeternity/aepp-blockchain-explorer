@@ -6,7 +6,7 @@
         <ae-button type="exciting" size="small" :to="`/block/${height}`">view last</ae-button>
         <ae-button type="exciting" size="small" to="/blocks">view all</ae-button>
       </div>
-      <div class="block-data">
+      <div class="block-data" v-if="!$loading.isLoading(['blocks/height', 'blocks/getBlockFromHeight'])">
         <div class="grid block-basic-info">
           <div class="number chain-height">
             <img src="@/assets/block.svg"/>
@@ -41,6 +41,11 @@
           </div>
         </div>
       </div>
+      <div class="block-data" style="position: relative" v-else>
+        <blank>
+          <spinner />
+        </blank>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +63,7 @@ export default {
   /*
    * Section Mixins
    */
-  mixins: [currentTime],
+  mixins: [ currentTime ],
 
   /*
    * Computed Properties

@@ -61,6 +61,11 @@ export default {
     /**
      * End Loading State
      */
-    return endLoading(dispatch, 'getNodeStatus')
+    endLoading(dispatch, 'getNodeStatus')
+
+    /**
+     * Return node status
+     */
+    return { nodeTop, nodeVersion, peers }
   }
 }
