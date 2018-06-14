@@ -47,7 +47,7 @@ export default {
     LatestBlock: LatestBlock,
     RecentBlocks: RecentBlocks
   },
-  mixins: [pollAction('blocks/getLatestBlocks', [3])],
+  mixins: [pollAction('blocks/getBlocksBySize', [3])],
   computed: {
     ...mapState(['env'])
   },

@@ -26,10 +26,21 @@ export default {
   /**
    * setBlocks mutates the array of blocks
    * @param {Object} state
-   * @param {Boolean} blocks
+   * @param {Array} blocks
    * @return {Object}
    */
   setBlocks: function (state, blocks) {
     return Object.assign(state, { blocks })
+  },
+
+  /**
+   * addBlocks appends to the end of the array
+   * the blocks assigned
+   * @param {Object} state
+   * @param {Array} blocks
+   * @return {*}
+   */
+  addBlocks: function (state, blocks) {
+    return Object.assign(state, { blocks: state.blocks.concat(blocks) })
   }
 }
