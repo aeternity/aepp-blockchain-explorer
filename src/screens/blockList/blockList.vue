@@ -23,9 +23,7 @@
               </div>
             </td>
             <td>
-              <span class="field-name">
-                hash
-              </span>
+              <span class="field-name">hash</span>
               <span v-if="b.hash" class="number">
                 <ae-hash type="short" :hash="b.hash"/>
               </span>
@@ -115,7 +113,7 @@ export default {
    */
   methods: {
     loadMore: function () {
-      return this.$store.dispatch('blocks/getLatestBlocks', this.blocks.length + 10);
+      return this.$store.dispatch('blocks/getLatestBlocks', this.blocks.length + 10)
     }
   }
 }

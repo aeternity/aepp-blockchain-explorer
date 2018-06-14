@@ -78,11 +78,11 @@
 <script>
 import { mapState } from 'vuex'
 import currentTime from '../../mixins/currentTime'
-import {
-  AePanel
-} from '@aeternity/aepp-components'
+import { AePanel } from '@aeternity/aepp-components'
+
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
 const blockHeightRegex = RegExp('^[0-9]+')
+
 export default {
   name: 'Block',
   components: { AePanel },

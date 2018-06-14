@@ -118,5 +118,33 @@ export default {
     endLoading(dispatch, 'blocks/getLatestBlocks')
 
     return blocks
+  },
+
+  /**
+   * addBlocksByHeightAndSize pulls a list of blocks based on the
+   * specified height and size of the pull requested
+   * @param {Object} state
+   * @param {Function} commit
+   * @param {Function} dispatch
+   * @param {Number} height
+   * @param {Number} size
+   * @return {*}
+   */
+  async addBlocksByHeightAndSize ({ state, commit, dispatch }, {height, size}) {
+    startLoading(dispatch, 'blocks/addBlocksByHeightAndSize')
+
+    const blocks = await Promise.all(
+      times(size, (index) => dispatch('getBlockFromHeight', height - index))
+    )
+
+    if (!blocks.length) {
+      endLoading(dispatch, 'blocks/addBlocksByHeightAndSize')
+      return state.blocks
+    }
+
+    commit('addBlocks', blocks)
+    endLoading(dispatch, 'blocks/addBlocksByHeightAndSize')
+
+    return blocks
   }
 }
