@@ -59,7 +59,7 @@
         <router-link :to="`/block/${(block.height - 1)}`">
           prev: {{ block.height - 1 }}
         </router-link>
-        <router-link :to="`/block/${(block.height + 1)}`">
+        <router-link :to="`/block/${(block.height + 1)}`" v-if="block.height > height">
           next: {{ block.height + 1 }}
         </router-link>
       </div>
@@ -110,6 +110,7 @@ export default {
    * Computed Properties
    */
   computed: mapState('blocks', [
+    'height',
     'block'
   ]),
 
@@ -119,7 +120,7 @@ export default {
   methods: {
     getBlock () {
       if (blockHeightRegex.test(this.blockId)) {
-        this.$store.dispatch('blocks/getBlockFromHeight', this.blockId)
+        this.$store.dispatch('blocks/getBlockFromHeight', Number(this.blockId))
       } else if (blockHashRegex.test(this.blockId)) {
         this.$store.dispatch('blocks/getBlockFromHash', this.blockId)
       }
