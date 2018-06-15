@@ -1,6 +1,6 @@
 <template>
-  <div class="named-address">
-    <template v-if='name'>
+  <div class="named-address" v-if="address">
+    <template v-if="name">
       {{ name }}
     </template>
     <ae-address :address="address" :show-avatar="false" size="compact" v-else />
