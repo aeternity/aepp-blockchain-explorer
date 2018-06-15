@@ -4,7 +4,7 @@
       <h2>Recent blocks</h2>
       <p>View the latest blocks on the aeternity blockchain</p>
       <table>
-        <tr v-for='b in blocks'>
+        <tr v-for='b in blocks.slice(0, 3)' v-if="blocks.length">
           <template v-if="b">
             <td>
               <div class="block-number">
@@ -53,7 +53,7 @@ export default {
   mounted: function () {
     return this
     .$store
-    .dispatch('blocks/getLatestBlocks', 3)
+    .dispatch('blocks/getLatestBlocks', 10)
   }
 }
 </script>
