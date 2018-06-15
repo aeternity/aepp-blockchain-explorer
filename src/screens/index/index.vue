@@ -47,10 +47,8 @@ export default {
     LatestBlock: LatestBlock,
     RecentBlocks: RecentBlocks
   },
-  mixins: [pollAction('blocks/getLatestBlocks', [3])],
-  computed: {
-    ...mapState(['env'])
-  },
+  mixins: [pollAction('blocks/getLatestBlocks', [10])],
+  computed: { ...mapState(['env']) },
   methods: {
     async search () {
       if (blockHeightRegex.test(this.searchString)) {
