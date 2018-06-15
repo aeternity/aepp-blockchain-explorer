@@ -34,8 +34,8 @@
           <div class="field">
             <div class="field-name">Mined by</div>
             <div class="field-value account-address">
-              <router-link :to="`/account/${block.minedBy}`">
-                <named-address :address="block.minedBy" />
+              <router-link :to="`/account/${block.miner}`">
+                <named-address :address="block.miner" />
               </router-link>
             </div>
           </div>
