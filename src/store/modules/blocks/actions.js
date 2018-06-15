@@ -105,8 +105,11 @@ export default {
     startLoading(dispatch, 'blocks/getLatestBlocks')
 
     await dispatch('height')
+    const client = await ae
     const blocks = await Promise.all(
-      times(size, (index) => dispatch('getBlockFromHeight', state.height - index))
+      times(size, (index) => client
+      .api
+      .getBlockByHeight(state.height - index, { txEncoding: 'json' }))
     )
 
     if (!blocks.length) {
@@ -133,8 +136,11 @@ export default {
   async addBlocksByHeightAndSize ({ state, commit, dispatch }, {height, size}) {
     startLoading(dispatch, 'blocks/addBlocksByHeightAndSize')
 
+    const client = await ae
     const blocks = await Promise.all(
-      times(size, (index) => dispatch('getBlockFromHeight', height - index))
+      times(size, (index) => client
+      .api
+      .getBlockByHeight(height - index, { txEncoding: 'json' }))
     )
 
     if (!blocks.length) {
