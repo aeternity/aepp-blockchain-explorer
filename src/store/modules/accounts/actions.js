@@ -4,14 +4,14 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 import ae from '../../aeppsdk'
-import { createActionHelpers } from 'vuex-loading'
+//import { createActionHelpers } from 'vuex-loading'
 
 /**
  * Setting up start/end Loading helper methods
  */
-const { startLoading, endLoading } = createActionHelpers({
-  moduleName: 'loading'
-})
+//const { startLoading, endLoading } = createActionHelpers({
+//  moduleName: 'loading'
+//})
 
 /**
  * Exporting Actions
@@ -37,7 +37,7 @@ export default {
 
     const account = { address, balance, transactions }
 
-    if (isEqual(state.accounts[address], account)) return
+    if (isEqual(state.accounts[address], account)) return account
 
     commit('setAccount', account)
 
@@ -59,7 +59,7 @@ export default {
 
     const account = { address, ts: Date.now(), name }
 
-    if (isEqual(state.names[address], account)) return
+    if (isEqual(state.names[address], account)) return account
 
     commit('setName', account)
 

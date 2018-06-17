@@ -1,4 +1,14 @@
 /**
+ * Importing Libraries
+ *
+ * Note: We use vue in this case
+ * to define a reactive state for the
+ * inner objects, so it triggers change
+ * within the vue components
+ */
+import Vue from 'vue'
+
+/**
  * Exporting Mutations
  */
 export default {
@@ -9,7 +19,7 @@ export default {
    * @return {Object}
    */
   setAccount: function (state, payload) {
-    return Object.assign(state.accounts, { [payload.address]: payload })
+    return Vue.set(state, 'accounts', { [payload.address]: payload })
   },
 
   /**
@@ -19,6 +29,6 @@ export default {
    * @return {*}
    */
   setName: function (state, payload) {
-    return Object.assign(state.names, { [payload.address]: payload })
+    return Vue.set(state, 'names', { [payload.address]: payload })
   }
 }
