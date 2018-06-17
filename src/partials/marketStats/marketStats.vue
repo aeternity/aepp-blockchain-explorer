@@ -34,31 +34,35 @@
  * Importing libraries
  */
 import { mapState } from 'vuex'
+import polling from '../../functions/polling'
 
-/**
- * Import mixins
+/*
+ * Creating polling instance
  */
-import pollAction from '@/mixins/pollAction'
+const poll = polling()
 
 /**
  * Export component
  */
 export default {
-  /**
-   * Mixins
-   */
-  mixins: [
-    pollAction('_marketStats/get')
-  ],
-
-  /**
+  /*
    * Computed properties
    */
   computed: mapState('_marketStats', [
     'priceChf',
     'marketCapChf',
     'priceBtc'
-  ])
+  ]),
+
+  /*
+   * Create poll function for market-stats
+   */
+  mounted: function () {
+    return poll.fetch.call(this, '_marketStats/get')
+  },
+  destroyed: function () {
+    return poll.close('blocks/getLatestBlocks')
+  }
 }
 </script>
 <style src='./marketStats.scss' lang='scss' />
