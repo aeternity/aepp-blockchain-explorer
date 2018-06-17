@@ -66,13 +66,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import { AeButton } from '@aeternity/aepp-components'
-import polling from '../../functions/polling'
 import currentTime from '../../mixins/currentTime'
-
-/*
- * Creating polling instance
- */
-const poll = polling()
 
 export default {
   /*
@@ -117,19 +111,13 @@ export default {
   },
 
   /*
-   * Before and After route events
+   * Fetch last 10 blocks from node
    */
-  beforeRouteEnter (to, from, next) {
-    // called before the route that renders this component is confirmed.
-    // does NOT have access to `this` component instance,
-    // because it has not been created yet when this guard is called!
-    return next((vm) => poll.fetch.call(vm, 'blocks/getLatestBlocks', 10))
+  mounted: function () {
+    return this.$store.dispatch('blocks/getLatestBlocks', 10)
   },
-  beforeRouteLeave (to, from, next) {
-    // called when the route that renders this component is about to
-    // be navigated away from.
-    // has access to `this` component instance.
-    return poll.close('blocks/getLatestBlocks', () => next())
+  activated: function () {
+    return this.$store.dispatch('blocks/getLatestBlocks', 10)
   }
 }
 </script>
