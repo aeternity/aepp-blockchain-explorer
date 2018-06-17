@@ -24,11 +24,13 @@ import store from './store'
  * Vue Application custom Tags
  */
 import * as components from './components'
+import * as partials from './partials'
 
 /**
  * Import global components
  */
 Vue.use(components)
+Vue.use(partials)
 
 /**
  * Applying VueLoading
