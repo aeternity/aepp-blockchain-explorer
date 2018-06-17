@@ -104,6 +104,12 @@ export default {
   },
 
   async mounted () {
+
+    this.$store.dispatch('transactions/getTxsFromBlocksByHeightRange', {
+      from: 1000,
+      to: 1005
+    }).then((res) => console.log(res))
+
     if (!this.$store.state.height) {
       await this.$store.dispatch('fetchHeight')
     }
