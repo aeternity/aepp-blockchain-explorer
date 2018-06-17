@@ -30,7 +30,7 @@ export default function () {
      * @param ms
      * @return {Promise<*>}
      */
-    fetch (action, args, ms = 10000) {
+    fetch (action, args = null, ms = 10000) {
       if (typeof args === 'function') {
         this.$watch(args, args => (
           intervals[action] = interval.call(this, action, args, ms)
@@ -48,7 +48,7 @@ export default function () {
      * @param callback
      * @return {*}
      */
-    close (action, callback) {
+    close (action, callback = function () {}) {
       /*
        * If interval is undefined
        * continue with normal flow
