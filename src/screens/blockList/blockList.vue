@@ -65,9 +65,14 @@
 </template>
 <script>
 import { mapState, mapGetters } from 'vuex';
-import { AeButton } from '@aeternity/aepp-components';
-import currentTime from '../../mixins/currentTime';
-import pollAction from '../../mixins/pollAction';
+import { AeButton } from '@aeternity/aepp-components'
+import polling from '../../functions/polling'
+import currentTime from '../../mixins/currentTime'
+
+/*
+ * Creating polling instance
+ */
+const poll = polling()
 
 export default {
   /*
@@ -78,13 +83,7 @@ export default {
   /*
    * Screen Mixins
    */
-  mixins: [
-    currentTime,
-    // Currently this looks more like a hack
-    // would be good to improve the way we poll
-    // data and refresh the page
-    pollAction('blocks/getLatestBlocks', [10])
-  ],
+  mixins: [currentTime],
 
   /*
    * Computed Properties
@@ -115,6 +114,22 @@ export default {
     loadMore: function () {
       return this.$store.dispatch('blocks/getLatestBlocks', this.blocks.length + 10)
     }
+  },
+
+  /*
+  * Before and After route events
+  */
+  beforeRouteEnter (to, from, next) {
+    // called before the route that renders this component is confirmed.
+    // does NOT have access to `this` component instance,
+    // because it has not been created yet when this guard is called!
+    return next((vm) => poll.fetch.call(vm, 'blocks/getLatestBlocks', 10))
+  },
+  beforeRouteLeave (to, from, next) {
+    // called when the route that renders this component is about to
+    // be navigated away from.
+    // has access to `this` component instance.
+    return poll.close('blocks/getLatestBlocks', () => next())
   }
 }
 </script>

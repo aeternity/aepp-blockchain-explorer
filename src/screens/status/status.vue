@@ -33,7 +33,12 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import pollAction from '@/mixins/pollAction'
+import polling from '../../functions/polling'
+
+/*
+ * Creating polling instance
+ */
+const poll = polling()
 
 export default {
   /*
@@ -44,18 +49,27 @@ export default {
   },
 
   /*
-   * Mixins
-   */
-  mixins: [
-    pollAction('getNodeStatus')
-  ],
-
-  /*
    * Computed Properties
    */
   computed: mapState({
     nodeStatus: '$nodeStatus'
-  })
+  }),
+
+  /*
+   * Before and After route events
+   */
+  beforeRouteEnter (to, from, next) {
+    // called before the route that renders this component is confirmed.
+    // does NOT have access to `this` component instance,
+    // because it has not been created yet when this guard is called!
+    return next((vm) => poll.fetch.call(vm, 'getNodeStatus'))
+  },
+  beforeRouteLeave (to, from, next) {
+    // called when the route that renders this component is about to
+    // be navigated away from.
+    // has access to `this` component instance.
+    return poll.close('getNodeStatus', () => next())
+  }
 }
 </script>
 <style src='./status.scss' lang='scss' />

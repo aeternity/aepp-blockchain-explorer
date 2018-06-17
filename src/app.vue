@@ -35,19 +35,13 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import Footer from '@/partials/footer/footer.vue'
+import { mapState } from 'vuex'
 
 export default {
   /*
    * Component name
    */
   name: 'app',
-
-  /*
-   * Importing components
-   */
-  components: { AeFooter: Footer },
 
   /*
    * Computed Props
