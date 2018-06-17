@@ -104,7 +104,6 @@ export default {
   },
 
   async mounted () {
-
     this.$store.dispatch('transactions/getTxsFromBlocksByHeightRange', {
       from: 1000,
       to: 1005

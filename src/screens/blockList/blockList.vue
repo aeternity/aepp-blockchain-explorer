@@ -64,7 +64,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex'
 import { AeButton } from '@aeternity/aepp-components'
 import polling from '../../functions/polling'
 import currentTime from '../../mixins/currentTime'
@@ -117,8 +117,8 @@ export default {
   },
 
   /*
-  * Before and After route events
-  */
+   * Before and After route events
+   */
   beforeRouteEnter (to, from, next) {
     // called before the route that renders this component is confirmed.
     // does NOT have access to `this` component instance,

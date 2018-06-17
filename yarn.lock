@@ -13,9 +13,9 @@
     string-loader "0.0.1"
     vue-clickaway "^2.1.0"
 
-"@aeternity/aepp-sdk@github:aeternity/aepp-sdk-js#feature/sweet-api":
-  version "0.14.0-0.1.0-alpha.1"
-  resolved "https://codeload.github.com/aeternity/aepp-sdk-js/tar.gz/8dbad4eb72004115f9bbf1d822b8460a36ad8df1"
+"@aeternity/aepp-sdk@github:aeternity/aepp-sdk-js#develop":
+  version "0.15.0-0.1.0"
+  resolved "https://codeload.github.com/aeternity/aepp-sdk-js/tar.gz/7cda8877e9f69a6584105749febc10ccb7dfbb89"
   dependencies:
     "@babel/runtime" "^7.0.0-beta.46"
     aes-js "^3.1.1"
@@ -7720,9 +7720,9 @@ vue@^2.5.2:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
-vuex-loading@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/vuex-loading/-/vuex-loading-0.3.0.tgz#f72aed111b629a782fa15fd44c9c4ea37932d0fc"
+vuex-loading@^0.2.2:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/vuex-loading/-/vuex-loading-0.2.6.tgz#8e77bc28ad786c62fbb0ca595900db2ae2c9e510"
 
 vuex@^3.0.1:
   version "3.0.1"
