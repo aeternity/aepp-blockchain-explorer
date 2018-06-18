@@ -13,7 +13,7 @@
           <router-link class="link"  to="/blocks">
             Blocks
           </router-link>
-          <router-link class="link" to="/tx">
+          <router-link class="link" to="/tx" v-if="false">
             Transactions
           </router-link>
         </div>
