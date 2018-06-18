@@ -59,7 +59,7 @@
         <router-link :to="`/block/${(block.height - 1)}`">
           prev: {{ block.height - 1 }}
         </router-link>
-        <router-link :to="`/block/${(block.height + 1)}`" v-if="block.height > height">
+        <router-link :to="`/block/${(block.height + 1)}`" v-if="block.height < height">
           next: {{ block.height + 1 }}
         </router-link>
       </div>
