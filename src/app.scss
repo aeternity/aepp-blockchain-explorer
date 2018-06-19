@@ -1,172 +1,243 @@
 html, body {
-  margin: 0;
-  padding: 0;
+  margin:0;
+  padding:0;
   background-color: $smoke;
   font-size: 18px;
 }
-
 #app {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $aubergin;
   font-size: $base-font-size;
-  position: relative;
-  z-index: 1;
+  position:relative;
+  z-index:1;
 }
-
 #app:before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  content: "";
-  display: block;
-  width: 100%;
-  height: 80px;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:-1;
+  content:"";
+  display:block;
+  width:100%;
+  height:80px;
   background: $aubergin;
-}
 
+}
 .network-name {
-  text-transform: uppercase;
-  position: fixed;
-  right: 20px;
+  text-transform:uppercase;
+  position:fixed;
+  right:20px;
   @include font-size(xs);
-  font-weight: 500;
-  padding: 5px 7px;
+  font-weight:500;
+  padding:5px 7px;
   background: #F7296E;
   border-radius: 5px;
-
   @include only-phone {
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    border-radius: 0;
-    padding: 15px 0;
-    margin: 0;
-    text-align: center;
-    z-index: 1;
+    width:100%;
+    bottom:0;
+    left:0;
+    border-radius:0;
+    padding:15px 0;
+    margin:0;
+    text-align:center;
+    z-index:1;
   }
 }
-
-.number,
+.number ,
 .block-hash,
 .ae-hash,
 .block-number,
 .account-address {
   font-family: 'Roboto Mono', monospace;
-  font-weight: 500;
+  font-weight:500;
 }
-
 .field-name {
-  opacity: 0.6;
+  opacity:0.6;
 }
-
 .grid {
-  display: flex;
+  display:flex;
 }
-
 .center {
-  display: flex;
-  justify-content: center;
+  display:flex;
+  justify-content:center;
 }
-
 table {
-  width: 100%;
+  width:100%;
 }
-
 table th {
   @include font-size(s);
-
-  font-weight: normal;
-  text-align: left;
-  opacity: 0.6;
+  font-weight:normal;
+  text-align:left;
+  opacity:0.6;
 }
-
 table tr td {
-  padding: 5px 0;
+  padding:5px 0;
 }
-
 a {
-  color: inherit;
-  text-decoration: none;
+  color:inherit;
+  text-decoration:none;
 }
-
 nav {
-  padding: 30px 0px;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  color: $white;
+  padding:30px 0px;
+  position:absolute;
+  top:0;
+  width:100%;
+  color:$white;
 }
-
-nav > .inner > :first-child,
-nav > .inner > :last-child {
+nav >.inner >:first-child ,
+nav >.inner >:last-child {
   @include tablet-and-desktop {
-    width: 280px;
+    width:280px;
   }
 }
-
-nav > .inner > :last-child {
-  text-align: right;
+nav >.inner >:last-child {
+  text-align:right;
 }
-
 nav .inner {
-  margin: 0 auto;
-  width: calc(100% - #{2 * $content-margin});
-  display: flex;
-  justify-content: space-between;
+  margin:0 auto;
+  width:calc(100% - #{2 * $content-margin});
+  display:flex;
+  justify-content:space-between;
 }
-
-nav .links > * {
-}
-
-nav a {
-  @include font-size(m);
-  position: relative;
-  display: inline-block;
-  color: inherit;
-  text-decoration: none;
-  margin: 0 10px;
-  @include only-phone {
-    margin: 0 10px 0 0;
-  }
-}
-
-nav .logo {
-  display: flex;
+nav .links {
   @include only-phone {
     display: none;
   }
 }
-
-nav .logo img + * {
-  margin-top: -12px;
-  margin-left: 5px;
+nav a {
+  @include font-size(m);
+  position:relative;
+  display:inline-block;
+  color:inherit;
+  text-decoration:none;
+  margin:0 10px;
+  @include only-phone {
+    margin:0 10px 0 0;
+  }
 }
-
+nav .logo {
+  display:flex;
+  @include only-phone {
+    .app-name {
+      display:none;
+    }
+  }
+}
+nav .logo img + *{
+  margin-top:-12px;
+  margin-left:5px;
+}
 nav a.link {
-  opacity: 0.6;
+  opacity:0.6;
 }
-
 nav a.router-link-exact-active {
-  opacity: 1.0;
+  opacity:1.0;
 }
-
 nav a.router-link-exact-active.link:after {
   content: "";
-  display: block;
-  position: absolute;
-  width: calc(100% - 20px);
-  left: 10px;
-  border-top: 3px solid #F7296E;
-  bottom: -8px;
+  display:block;
+  position:absolute;
+  width:calc(100% - 20px);
+  left:10px;
+  border-top:3px solid #F7296E;
+  bottom:-8px;
 }
-
+nav .inner {
+  @include only-phone {
+    .links + .mobile-nav,
+    .mobile-nav {
+      flex: 1;
+      align-items: center;
+    }
+  }
+}
+nav .mobile-nav {
+  display: none;
+  @include only-phone {
+    display: flex;
+    .mobile-nav-fixed {
+      background-color: #311b58;
+      display: none;
+      width: 100vw;
+      height: 100vh;
+    }
+    .mobile-nav-fixed {
+      display: block;
+      z-index: 1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      .mobile-nav-fixed-action {
+        text-align: right;
+      }
+      .mobile-nav-fixed-holder a {
+        display: block;
+        text-align: right;
+        font-size: 30px;
+        font-weight: 700;
+        margin: 0;
+        line-height: 2;
+      }
+      .mobile-nav-fixed-secondary-links a {
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 2.5;
+      }
+    }
+  }
+}
+.mobile-nav-fixed-holder .inner {
+  flex-direction: column;
+  margin-top: 5vh;
+}
+.mobile-nav-fixed-socials-links a {
+  text-align: right;
+  flex:1;
+}
+.mobile-nav-fixed-socials-links-row {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  a {
+    flex:0;
+    margin: 10px 10px !important;
+    img {
+      display: block;
+    }
+  }
+}
+.mobile-nav .pageName {
+  flex:1;
+  text-align: right;
+  padding-right: 3vw;
+}
+.mobile-nav .burger {
+  display: flex;
+}
 .screen {
-  padding-bottom: 130px;
+  padding-bottom:130px;
+}
+nav + main > .screen > :first-child{
+  padding-top:100px;
 }
 
-nav + main > .screen > :first-child {
-  padding-top: 100px;
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-top,
+.slide-in-top-out {
+  animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.slide-in-top-out {
+  animation-direction: reverse;
 }

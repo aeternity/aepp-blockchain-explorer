@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '8'
 env:
-- AETERNITY_EPOCH_API_URL='//republica.aepps.com/' NAME_LOOKUP_MIDDLEWARE_URL='//republica-pos.aepps.com/rest/name/' SHOW_MARKET_STATS=false SHOW_NETWORK_STATS=false
+- AETERNITY_EPOCH_API_URL='//test-net-api.aepps.com/api/' SHOW_MARKET_STATS=true SHOW_NETWORK_STATS=true
 install:
 - npm install
 script:
