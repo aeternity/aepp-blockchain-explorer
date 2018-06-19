@@ -19,7 +19,7 @@ export default {
    * @return {Object}
    */
   setAccount: function (state, payload) {
-    return Vue.set(state, 'accounts', { [payload.address]: payload })
+    return Vue.set(state.accounts, payload.address, payload)
   },
 
   /**
@@ -29,6 +29,6 @@ export default {
    * @return {*}
    */
   setName: function (state, payload) {
-    return Vue.set(state, 'names', { [payload.address]: payload })
+    return Vue.set(state.names, payload.address, payload)
   }
 }
