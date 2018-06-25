@@ -48,17 +48,14 @@
 
 <script>
 import { mapState } from 'vuex'
-import {
-  AeButton,
-  AePanel
-} from '@aeternity/aepp-components'
-import Transaction from '../../components/transaction/transaction.vue'
+import { AeButton, AePanel } from '@aeternity/aepp-components'
+
 export default {
   components: {
     AeButton,
-    AePanel,
-    Transaction
+    AePanel
   },
+
   data () {
     return {
       heightFrom: 0,
@@ -67,6 +64,7 @@ export default {
       newHeightTo: 0
     }
   },
+
   computed: mapState({
     transactions (state) {
       const blocks = []
@@ -77,6 +75,7 @@ export default {
       return blocks.reduce((p, n) => [...p, ...n], [])
     }
   }),
+
   methods: {
     setNewHeight () {
       this.heightFrom = this.newHeightFrom
@@ -84,6 +83,7 @@ export default {
       this.heightTo = this.newHeightTo
       this.newHeightTo = 0
     },
+
     async checkParamsAndLoadTransactions () {
       const { heightFrom, heightTo } = this
       const { height } = this.$store.state
@@ -102,7 +102,13 @@ export default {
       }
     }
   },
+
   async mounted () {
+    this.$store.dispatch('transactions/getTxsFromBlocksByHeightRange', {
+      from: 1000,
+      to: 1005
+    }).then((res) => console.log(res))
+
     if (!this.$store.state.height) {
       await this.$store.dispatch('fetchHeight')
     }

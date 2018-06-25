@@ -12,44 +12,36 @@ import Status from '@/screens/status/status.vue'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Index',
-      component: Index
-    },
-    {
-      path: '/account/:address',
-      name: 'Address',
-      component: Address,
-      props: true
-    },
-    {
-      path: '/blocks',
-      name: 'BlockList',
-      component: BlockList
-    },
-    {
-      path: '/block/:blockId',
-      name: 'Block',
-      component: Block,
-      props: true
-    },
-    {
-      path: '/tx',
-      name: 'Transaction',
-      component: Transaction
-    },
-    {
-      path: '/tx/:txId',
-      name: 'TransactionDetail',
-      component: TransactionDetail,
-      props: true
-    },
-    {
-      path: '/status',
-      name: 'Status',
-      component: Status
-    }
-  ]
+  routes: [{
+    name: 'Index',
+    path: '/',
+    component: Index
+  }, {
+    name: 'Address',
+    path: '/account/:address',
+    component: Address,
+    props: true
+  }, {
+    name: 'BlockList',
+    path: '/blocks',
+    component: BlockList
+  }, {
+    name: 'Block',
+    path: '/block/:blockId',
+    component: Block,
+    props: true
+  }, {
+    name: 'Transaction',
+    path: '/tx',
+    component: Transaction
+  }, {
+    name: 'TransactionDetail',
+    path: '/tx/:txId',
+    component: TransactionDetail,
+    props: true
+  }, {
+    name: 'Status',
+    path: '/status',
+    component: Status
+  }]
 })

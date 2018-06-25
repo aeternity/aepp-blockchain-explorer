@@ -18,6 +18,9 @@
   .grid > * {
     margin-right:40px;
     min-width:200px;
+    @include only-phone {
+      margin-right: 0;
+    }
   }
   a {
     height:50px;
@@ -27,5 +30,14 @@
   }
   a img {
     margin-right:20px;
+  }
+  .footer-social-links {
+    @include only-phone {
+      display: flex;
+      width: 100%;
+      div {
+        flex: 1;
+      }
+    }    
   }
 }

@@ -101,7 +101,10 @@ nav .inner {
   display:flex;
   justify-content:space-between;
 }
-nav .links > * {
+nav .links {
+  @include only-phone {
+    display: none;
+  }
 }
 nav a {
   @include font-size(m);
@@ -117,7 +120,9 @@ nav a {
 nav .logo {
   display:flex;
   @include only-phone {
-    display:none;
+    .app-name {
+      display:none;
+    }
   }
 }
 nav .logo img + *{
@@ -139,9 +144,100 @@ nav a.router-link-exact-active.link:after {
   border-top:3px solid #F7296E;
   bottom:-8px;
 }
+nav .inner {
+  @include only-phone {
+    .links + .mobile-nav,
+    .mobile-nav {
+      flex: 1;
+      align-items: center;
+    }
+  }
+}
+nav .mobile-nav {
+  display: none;
+  @include only-phone {
+    display: flex;
+    .mobile-nav-fixed {
+      background-color: #311b58;
+      display: none;
+      width: 100vw;
+      height: 100vh;
+    }
+    .mobile-nav-fixed {
+      display: block;
+      z-index: 1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      .mobile-nav-fixed-action {
+        text-align: right;
+      }
+      .mobile-nav-fixed-holder a {
+        display: block;
+        text-align: right;
+        font-size: 30px;
+        font-weight: 700;
+        margin: 0;
+        line-height: 2;
+      }
+      .mobile-nav-fixed-secondary-links a {
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 2.5;
+      }
+    }
+  }
+}
+.mobile-nav-fixed-holder .inner {
+  flex-direction: column;
+  margin-top: 5vh;
+}
+.mobile-nav-fixed-socials-links a {
+  text-align: right;
+  flex:1;
+}
+.mobile-nav-fixed-socials-links-row {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  a {
+    flex:0;
+    margin: 10px 10px !important;
+    img {
+      display: block;
+    }
+  }
+}
+.mobile-nav .pageName {
+  flex:1;
+  text-align: right;
+  padding-right: 3vw;
+}
+.mobile-nav .burger {
+  display: flex;
+}
 .screen {
   padding-bottom:130px;
 }
 nav + main > .screen > :first-child{
   padding-top:100px;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-top,
+.slide-in-top-out {
+  animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.slide-in-top-out {
+  animation-direction: reverse;
 }
