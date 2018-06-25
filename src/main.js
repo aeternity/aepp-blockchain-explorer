@@ -21,6 +21,18 @@ import router from './router'
 import store from './store'
 
 /**
+ * Vue Application custom Tags
+ */
+import * as components from './components'
+import * as partials from './partials'
+
+/**
+ * Import global components
+ */
+Vue.use(components)
+Vue.use(partials)
+
+/**
  * Applying VueLoading
  */
 Vue.use(VueLoading)
@@ -28,22 +40,7 @@ Vue.use(VueLoading)
 /**
  * Creating the Vuex Loader
  */
-const vueLoading = new VueLoading({
-  /**
-   * boolean value, false by default, use this
-   * value for enabling integration with Vuex store
-   * When this value is true VueLoading will store
-   * data in Vuex store and all changes to this
-   * data will be made by dispatching actions to store
-   */
-  useVuex: true,
-
-  /**
-   * boolean value, true by default,
-   * register v-loading components.
-   */
-  registerComponents: true
-})
+const vueLoading = new VueLoading({ useVuex: true })
 
 /**
  * Vue configs

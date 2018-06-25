@@ -4,7 +4,7 @@
       <h2>Recent blocks</h2>
       <p>View the latest blocks on the aeternity blockchain</p>
       <table>
-        <tr v-for='b in recentBlocks'>
+        <tr v-for='b in blocks.slice(0, 3)' v-if="blocks.length">
           <template v-if="b">
             <td>
               <div class="block-number">
@@ -22,8 +22,8 @@
             <td>
               <span class='field-name'>mined by</span>
               <span class="field-value account-address">
-                <router-link :to='"/account/" + b.minedBy'>
-                  <named-address :address='b.minedBy' />
+                <router-link :to='"/account/" + b.miner'>
+                  <named-address :address='b.miner' />
                 </router-link>
               </span>
             </td>
@@ -37,16 +37,24 @@
   </div>
 </template>
 <script>
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 import { mapState } from 'vuex'
-import _ from 'lodash'
+
 export default {
-  components: {
-    NamedAddress
-  },
-  computed: mapState({
-    recentBlocks: state => _.times(3, idx => state.blocks[state.height - idx - 1])
-  })
+  /*
+   * Map blocks to the component
+   */
+  computed: mapState('blocks', [
+    'blocks'
+  ]),
+
+  /*
+   * Get the last 3 blocks on mount
+   */
+  mounted: function () {
+    return this
+    .$store
+    .dispatch('blocks/getLatestBlocks', 10)
+  }
 }
 </script>
 <style src='./recentBlocks.scss' lang='scss' />

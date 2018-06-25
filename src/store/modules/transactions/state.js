@@ -2,5 +2,7 @@
  * Exporting State
  */
 export default {
-  transactions: []
+  transaction: {},
+  transactions: [],
+  mempoolTxs: []
 }
