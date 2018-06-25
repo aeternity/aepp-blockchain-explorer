@@ -3,7 +3,6 @@
  */
 import ae from '../../aeppsdk'
 import { createActionHelpers } from 'vuex-loading'
-window.ae = ae
 
 /**
  * Setting up start/end Loading helper methods
