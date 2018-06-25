@@ -3,6 +3,7 @@
  */
 import ae from '../../aeppsdk'
 import { createActionHelpers } from 'vuex-loading'
+window.ae = ae
 
 /**
  * Setting up start/end Loading helper methods
@@ -102,5 +103,26 @@ export default {
     endLoading(dispatch, 'transactions/getTxsFromBlocksByHeightRange')
 
     return transactions
+  },
+
+  /**
+   *
+   * @param state
+   * @param commit
+   * @param dispatch
+   * @param hash
+   * @return {Promise<*>}
+   */
+  async getTxByHash ({ state, commit, dispatch }, hash) {
+    startLoading(dispatch, 'transactions/getTxByHash')
+
+    const client = await ae
+    const { transaction } = await client.api.getTx(hash, { txEncoding: 'json' })
+
+    commit('setTransaction', transaction)
+
+    endLoading(dispatch, 'transactions/getTxByHash')
+
+    return transaction
   }
 }

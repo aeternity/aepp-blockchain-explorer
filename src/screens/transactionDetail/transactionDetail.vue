@@ -122,7 +122,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import {
   AeAddress,
   AeBadge
@@ -144,14 +144,16 @@ export default {
     TxType,
     ViewAndCopy
   },
-  computed: mapState({
-    transaction (state) {
-      if (!state.txs[this.ixId]) return null
-      return state.txs[this.ixId].transaction
+  computed: {
+    ...mapGetters('transactions', [
+      'getTxByHash'
+    ]),
+    transaction () {
+      return this.getTxByHash(this.txId)
     }
-  }),
+  },
   async mounted () {
-    this.$store.dispatch('loadTx', this.txId)
+    return this.$store.dispatch('transactions/getTxByHash', this.txId)
   }
 }
 </script>
