@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '8'
 env:
-- AETERNITY_EPOCH_API_URL='//test-net-api.aepps.com/api/' SHOW_MARKET_STATS=true SHOW_NETWORK_STATS=true
+- AETERNITY_EPOCH_API_URL='//sdk-testnet.aepps.com/' SHOW_MARKET_STATS=true SHOW_NETWORK_STATS=true
 install:
 - npm install
 script:
