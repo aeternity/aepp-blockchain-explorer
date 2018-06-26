@@ -19,8 +19,8 @@
       </field>
       <field name='block'>
         <div class='number'>
-          <router-link v-if='transaction.block_height' :to='"/block/" + transaction.block_height'>
-            {{ transaction.block_height }}
+          <router-link v-if='transaction.blockHeight' :to='"/block/" + transaction.blockHeight'>
+            {{ transaction.blockHeight }}
           </router-link>
           <template v-else>
             n/a
