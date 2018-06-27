@@ -35,249 +35,11 @@
     </div>
     <div class='body'>
 
-      <template v-if='transaction.tx.type === "coinbase_tx"'>
-        <div class="grid">
-          <div>
-            <div class='field-name'>receiver</div>
-            <div class="account-address">
-              <router-link :to='"/account/" + transaction.tx.account'>
-                {{transaction.tx.account | startAndEnd}}
-              </router-link>
-            </div>
-          </div>
-          <div>
-            <div class='field-name'>reward</div>
-              <span class="number">{{transaction.tx.reward}}</span>
-              <span class="unit">AE</span>
-          </div>
-        </div>
-      </template>
-
-      <template v-else-if='transaction.tx.type === "spend_tx"'>
-        <div class="grid">
-          <field name="sender">
-            <div class="account-address">
-              <router-link :to='"/account/" + transaction.tx.sender'>
-                <named-address :address='transaction.tx.sender'/>
-              </router-link>
-            </div>
-          </field>
-          <field name='recipient'>
-            <div class="account-address">
-              <router-link :to='"/account/" + transaction.tx.recipient'>
-                <named-address :address='transaction.tx.recipient'/>
-              </router-link>
-            </div>
-          </field>
-          <field name='amount'>
-            <span class='number'>{{ transaction.tx.amount }}</span>
-            <span class="unit">AE</span>
-          </field>
-        </div>
-      </template>
-
-      <template v-else-if='transaction.tx.type === "oracle_register_tx"'>
-        <div class="grid">
-          <field name="">
-            <span class='field-name'>account</span>
-            <div class="account-address">
-              <router-link :to='"/account/" + transaction.tx.account'>
-                <named-address :address='transaction.tx.account'/>
-              </router-link>
-            </div>
-          </field>
-          <field name="">
-            <div class='field-name'>TTL</div>
-            {{ transaction.tx.ttl.type}}
-            <span class='number'>{{ transaction.tx.ttl.value }}</span>
-          </field>
-          <field name="" v-if='transaction.tx.query_fee'>
-            <div class='field-name'>QueryFee</div>
-            <span class='number'>{{ transaction.tx.query_fee }}</span>
-            <span class="unit">AE</span>
-          </field>
-        </div>
-
-        <field>
-          <div class='field-name'>QuerySpec </div>
-          <pre class="query-spec">{{ transaction.tx.query_spec }}</pre>
-        </field>
-        <field>
-          <div class='field-name'>ResponseSpec </div>
-          <pre class="response-spec">{{ transaction.tx.response_spec }}</pre>
-        </field>
-      </template>
-
-      <template v-else-if='transaction.tx.type === "oracle_response_tx"'>
-        <div class="grid">
-          <field>
-            <span class='field-name'>Oracle</span>
-            <div class="account-address">
-              <router-link :to='"/account/" + transaction.tx.account'>
-                <named-address :address='transaction.tx.account'/>
-              </router-link>
-            </div>
-          </field>
-          <field>
-            <span class='field-name'>QueryId</span>
-            <div class="">
-              {{ transaction.tx.query_id }}
-            </div>
-          </field>
-        </div>
-        <field>
-          <span class='field-name'>Response</span>
-          <pre v-if='responsePrettyJson ' class="response">{{ responsePrettyJson }}</pre>
-          <pre v-else class="response">{{ transaction.tx.response }}</pre>
-        </field>
-      </template>
-
-      <template v-else-if='transaction.tx.type === "oracle_query_tx"'>
-        <div class="grid">
-          <field>
-            <div class='field-name'>Oracle</div>
-            <div class="account-address">
-              <router-link :to='"/account/" + transaction.tx.oracle'>
-                {{transaction.tx.oracle | startAndEnd}}
-              </router-link>
-            </div>
-          </field>
-          <field>
-            <div class='field-name'>sender</div>
-            <div class="account-address">
-              <router-link :to='"/account/" + transaction.tx.sender'>
-                {{transaction.tx.sender | startAndEnd}}
-              </router-link>
-            </div>
-          </field>
-        </div>
-        <div class="grid">
-          <field>
-            <div class='field-name'>QueryTTL</div>
-            {{ transaction.tx.query_ttl.type }}
-            <span class="number">
-              {{ transaction.tx.query_ttl.value }}
-            </span>
-          </field>
-          <field>
-            <div class='field-name'>ResponseTTL</div>
-            {{ transaction.tx.response_ttl.type}}
-            <span class="number">
-              {{ transaction.tx.response_ttl.value }}
-            </span>
-          </field>
-          <field v-if='transaction.tx.query_fee'>
-            <div class='field-name'>QueryFee</div>
-            <span class='number'>{{ transaction.tx.query_fee }}</span>
-            <span class="unit">AE</span>
-          </field>
-        </div>
-        <field>
-          <div class='field-name'>Query</div>
-          <pre class="query">{{ transaction.tx.query }}</pre>
-        </field>
-      </template>
-
-      <template v-else-if='transaction.tx.type === "name_update_tx"'>
-        <div class="grid">
-          <field name='Account'>
-            <router-link :to='"/account/" + transaction.tx.account'>
-              <named-address :address='transaction.tx.account'/>
-            </router-link>
-          </field>
-          <field name='Name Hash'>
-            <ae-hash type="short" :hash='transaction.tx.name_hash'/>
-          </field>
-          <field name="Name TTL">
-            {{transaction.tx.name_ttl}}
-          </field>
-          <field name="TTL">
-            {{transaction.tx.ttl}}
-          </field>
-        </div>
-      </template>
-      <template v-else-if='transaction.tx.type === "name_claim_tx"'>
-        <div class="grid">
-          <field name="account">
-            <router-link :to='"/account/" + transaction.tx.account'>
-              <named-address :address='transaction.tx.account'/>
-            </router-link>
-          </field>
-          <field name="name">
-            {{transaction.tx.name}}
-          </field>
-          <field name="name_salt">
-            {{transaction.tx.name_salt}}
-          </field>
-        </div>
-      </template>
-      <template v-else-if='transaction.tx.type === "name_preclaim_tx"'>
-        <div class="grid">
-          <field name="account">
-            <router-link :to='"/account/" + transaction.tx.account'>
-              <named-address :address='transaction.tx.account'/>
-            </router-link>
-          </field>
-          <field name="commitment">
-            <ae-hash type='short' :hash="transaction.tx.commitment" />
-          </field>
-          <field name="fee">
-            {{transaction.tx.fee}}
-          </field>
-        </div>
-      </template>
-
-      <template v-else-if='transaction.tx.type === "contract_call_tx"'>
-        <div class="grid">
-          <field name="contract">
-            <router-link :to='"/account/" + transaction.tx.contract'>
-              <named-address :address='transaction.tx.contract'/>
-            </router-link>
-          </field>
-          <field name="caller">
-            <router-link :to='"/account/" + transaction.tx.caller'>
-              <named-address :address='transaction.tx.caller'/>
-            </router-link>
-          </field>
-          <field name='amount'>
-            <span class='number'>{{ transaction.tx.amount }}</span>
-            <span class="unit">AE</span>
-          </field>
-          <field name="gas">
-            {{transaction.tx.gas}}
-          </field>
-          <field name="gasPrice">
-            {{transaction.tx.gasPrice}}
-          </field>
-          <field name="ttl">
-            {{transaction.tx.ttl}}
-          </field>
-        </div>
-      </template>
-
-      <template v-else-if='transaction.tx.type === "contract_create_tx"'>
-        <div class="grid">
-          <field v-if='transaction.tx.owner' name="Account">
-            <router-link :to='`/account/${transaction.tx.owner}`'>
-              <named-address size='short' :address='transaction.tx.owner'/>
-            </router-link>
-          </field>
-          <field name="TTL">
-            <div class="number">{{transaction.tx.ttl}}</div>
-          </field>
-          <field name="Deposit">
-            <span class='number'>{{transaction.tx.deposit}}</span>
-            <span class="unit">AE</span>
-          </field>
-          <field name="Gas">
-            {{transaction.tx.gas}}
-          </field>
-          <field name="Gas price">
-            {{transaction.tx.gasPrice}}
-          </field>
-        </div>
-      </template>
-
+      <component
+        v-if="componentForTx"
+        :is="componentForTx"
+        :transaction="transaction"
+      />
       <template v-else>
         {{transaction}}
       </template>
@@ -291,6 +53,29 @@ import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 import TxType from '../../components/txType/txType.vue'
 import AeHash from '../../components/aeHash/aeHash.vue'
 import Field from '../../components/field/field.vue'
+
+import SpendTx from './spendTx.vue'
+import OracleRegisterTx from './oracleRegisterTx.vue'
+import OracleResponseTx from './oracleResponseTx.vue'
+import OracleQueryTx from './oracleQueryTx.vue'
+import NameUpdateTx from './nameUpdateTx.vue'
+import NameClaimTx from './nameClaimTx.vue'
+import NamePreclaimTx from './namePreclaimTx.vue'
+import ContractCallTx from './contractCallTx.vue'
+import ContractCreateTx from './contractCreateTx.vue'
+
+const txTypesComponentsMap = {
+  'contract_call_tx': ContractCallTx,
+  'contract_create_tx': ContractCreateTx,
+  'name_claim_tx': NameClaimTx,
+  'name_preclaim_tx': NamePreclaimTx,
+  'name_update_tx': NameUpdateTx,
+  'oracle_query_tx': OracleQueryTx,
+  'oracle_register_tx': OracleRegisterTx,
+  'oracle_response_tx': OracleResponseTx,
+  'spend_tx': SpendTx
+}
+
 export default {
   name: 'transaction',
   props: [
@@ -300,9 +85,21 @@ export default {
     NamedAddress,
     TxType,
     Field,
-    AeHash
+    AeHash,
+    SpendTx,
+    OracleRegisterTx,
+    OracleResponseTx,
+    OracleQueryTx,
+    NameUpdateTx,
+    NameClaimTx,
+    NamePreclaimTx,
+    ContractCallTx,
+    ContractCreateTx
   },
   computed: {
+    componentForTx () {
+      return txTypesComponentsMap[ this.transaction.tx.type ]
+    },
     responsePrettyJson () {
       if (!this.transaction) return null
       if (!this.transaction.tx.response) return null
