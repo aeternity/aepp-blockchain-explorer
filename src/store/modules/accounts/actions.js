@@ -32,7 +32,7 @@ export default {
 
     const [{ balance }, { transactions }] = await Promise.all([
       client.api.getAccountBalance(address),
-      client.api.getAccountTransactions(address)
+      client.api.getAccountTransactions(address, { txEncoding: 'json' })
     ])
 
     const account = { address, balance, transactions }
