@@ -1,20 +1,10 @@
 <template>
-  <div class='code-view'>
-    {{codeHex}}
-  </div>
+  <div v-html='code' class='code-view'/>
 </template>
 <script>
 export default {
   name: 'code-view',
-  props: ['code'],
-  computed: {
-    codeHex () {
-      //return '0x' + this.code.map(c => c.toString(16)).join('')
-      //return this.code.map(c => c.toString())
-      //return this.code
-      return this.code.map(d => String.fromCharCode(d)).join('')
-    }
-  }
+  props: ['code']
 }
 </script>
 <style lang='scss'>

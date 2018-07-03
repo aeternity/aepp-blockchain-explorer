@@ -23,16 +23,18 @@
         <contract-code :contract-code='transaction.tx.code'/>
       </field>
       <field name="Call Data">
-        <contract-code :contract-code='transaction.tx.callData'/>
+        <call-data :call-data='transaction.tx.callData'/>
       </field>
   </div>
 </template>
 <script>
 import ContractCode from '../../components/contractCode/contractCode.vue'
+import CallData from '../../components/callData/callData.vue'
 export default {
   name: 'contract-create-tx',
   props: ['transaction'],
   components: {
+    CallData,
     ContractCode
   }
 }

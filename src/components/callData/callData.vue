@@ -1,6 +1,6 @@
 <template>
   <div class='call-data'>
-    <code-view :code='contractCode'/>
+    <code-view :code='hexCode'/>
   </div>
 </template>
 <script>
@@ -10,6 +10,11 @@ export default {
   props: ['callData'],
   components: {
     CodeView
+  },
+  computed: {
+    hexCode () {
+      return this.callData.map(d => String.fromCharCode(d)).join('')
+    }
   }
 }
 </script>
