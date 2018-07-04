@@ -7,7 +7,7 @@ cache:
 env:
 - AETERNITY_EPOCH_API_URL='//sdk-testnet.aepps.com/' SHOW_MARKET_STATS=true SHOW_NETWORK_STATS=true
 install:
-- npm install
+- travis_wait npm install
 script:
 - npm run build
 deploy:
