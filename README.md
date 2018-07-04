@@ -21,9 +21,9 @@ The underlying API is currently being developed and improved. The Explorer is de
 - view æternity token market exchange rates via coinmarketcap.com api
 
 ## Requirements
-You need a running Epoch node, later than version 0.7.0. 
+You need a running Epoch node, later than version 0.15.0
 
-You must expose the internal API with a proxy server and set appropriate [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) headers.
+You must expose the external API with a proxy server and set appropriate [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) headers.
 
 NGINX Example:
 
@@ -36,14 +36,6 @@ server {
         index index.html index.htm index.nginx-debian.html;
         server_name _;
         location / {
-                try_files $uri $uri/ =404;
-        }
-        location /api/internal/v1/ {
-                include cors.conf;
-                proxy_bind 127.0.0.1;
-                proxy_pass http://localhost:3103/v1/;
-        }
-        location /api/external/v1/ {
                 include cors.conf;
                 proxy_bind 127.0.0.1;
                 proxy_pass http://localhost:3003/v1/;
@@ -75,21 +67,17 @@ server {
 
 ## Build Setup
 
-Change the url `src/main.js` to that of your Epoch proxy:
-```
-Vue.http.options.root = 'http://139.59.140.51/api/'
-```
-Then do the following setup:
+The epoch api url can be configured with the environment variable `AETERNITY_EPOCH_API_URL`.
 
 ```bash
 # install dependencies
 npm install
 
 # serve with hot reload at localhost:8080
-npm run dev
+AETERNITY_EPOCH_API_URL='//sdk-testnet.aepps.com/' npm run dev
 
 # build for production with minification
-npm run build
+AETERNITY_EPOCH_API_URL='//sdk-testnet.aepps.com/' npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report

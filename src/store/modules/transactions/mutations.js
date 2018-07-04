@@ -9,7 +9,9 @@ export default {
    * @return {Object}
    */
   setTransaction: function (state, transaction) {
-    return Object.assign(state, { transaction })
+    const tx = state.transactions.find(tx => tx.hash === transaction.hash)
+    if (tx) return tx
+    return Object.assign(state, { transactions: state.transactions.concat(transaction) })
   },
 
   /**

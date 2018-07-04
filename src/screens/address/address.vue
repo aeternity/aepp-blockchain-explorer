@@ -1,6 +1,5 @@
 <template>
   <div v-if="account" class="account-screen screen">
-    {{ account }}
     <header class="header">
       <h1 class="title">
         <ae-identity-avatar :address="address"/>
