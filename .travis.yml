@@ -1,6 +1,9 @@
 language: node_js
 node_js:
 - '8'
+cache:
+  directories:
+   - node_modules
 env:
 - AETERNITY_EPOCH_API_URL='//sdk-testnet.aepps.com/' SHOW_MARKET_STATS=true SHOW_NETWORK_STATS=true
 install:
