@@ -37,7 +37,7 @@ import CodeView from '../../components/codeView/codeView.vue'
 export default {
   name: 'contract-call-tx',
   props: ['transaction'],
-  data() {
+  data () {
     return {
       contractCall: null
     }

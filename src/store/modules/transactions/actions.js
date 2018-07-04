@@ -133,7 +133,7 @@ export default {
    * @param hash
    * @return {Promise<*>}
    */
-  async getContractCallFromTx({ state, commit, dispatch }, hash) {
+  async getContractCallFromTx ({ dispatch }, hash) {
     startLoading(dispatch, 'transactions/getContractCallFromTx')
 
     const client = await ae
