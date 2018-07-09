@@ -123,5 +123,24 @@ export default {
     endLoading(dispatch, 'transactions/getTxByHash')
 
     return transaction
+  },
+
+  /**
+   *
+   * @param state
+   * @param commit
+   * @param dispatch
+   * @param hash
+   * @return {Promise<*>}
+   */
+  async getContractCallFromTx ({ dispatch }, hash) {
+    startLoading(dispatch, 'transactions/getContractCallFromTx')
+
+    const client = await ae
+    const call = await client.api.getContractCallFromTx(hash)
+
+    endLoading(dispatch, 'transactions/getContractCallFromTx')
+
+    return call
   }
 }
