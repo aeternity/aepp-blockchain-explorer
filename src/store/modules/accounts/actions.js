@@ -28,14 +28,20 @@ export default {
   async get ({ state, commit, dispatch }, address) {
     // startLoading(dispatch, 'accounts/get')
 
+    // const [{ balance }, { transactions }] = await Promise.all([
+    //   client.api.getAccountBalance(address),
+    //   client.api.getAccountTransactions(address, {txEncoding: 'json', limit: 100})
+    // ])
+    //
+    // const account = { address, balance, transactions }
+    //TODO implement transactions after middleware endpoints are available
     const client = await ae
 
-    const [{ balance }, { transactions }] = await Promise.all([
-      client.api.getAccountBalance(address),
-      client.api.getAccountTransactions(address, {txEncoding: 'json', limit: 100})
+    const [{ balance }] = await Promise.all([
+      client.api.getAccountBalance(address)
     ])
 
-    const account = { address, balance, transactions }
+    const account = { address, balance }
 
     if (isEqual(state.accounts[address], account)) return account
 
