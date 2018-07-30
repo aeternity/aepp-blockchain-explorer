@@ -69,16 +69,27 @@ export default {
   ]),
 
   /*
-   * updated get the latest height of the
+   * mounted get the latest height of the
    * blockchain, then get block data
    */
-  updated: function () {
+  mounted: function () {
     return this
     .$store
     .dispatch('blocks/height')
     .then((blockHeight) => this
     .$store
     .dispatch('blocks/getBlockFromHeight', blockHeight))
+  },
+
+  watch: {
+    height: function (val) {
+      return this
+        .$store
+        .dispatch('blocks/height')
+        .then((val) => this
+          .$store
+          .dispatch('blocks/getBlockFromHeight', val))
+    }
   }
 }
 </script>
