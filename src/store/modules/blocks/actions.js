@@ -54,7 +54,7 @@ export default {
     startLoading(dispatch, 'blocks/getBlockFromHash')
 
     const client = await ae
-    const block = await client.api.getBlockByHash(hash, { txEncoding: 'json' })
+    const block = await client.api.getKeyBlockByHash(hash, { txEncoding: 'json' })
 
     if (isEqual(state.block, block)) {
       endLoading(dispatch, 'blocks/getBlockFromHash')
@@ -76,10 +76,10 @@ export default {
    * @return {*}
    */
   async getBlockFromHeight ({ state, commit, dispatch }, height) {
-    startLoading(dispatch, 'blocks/getBlockFromHeight')
+    startLoading(dispatch, 'blocks/getKeyBlockFromHeight')
 
     const client = await ae
-    const block = await client.api.getBlockByHeight(height, { txEncoding: 'json' })
+    const block = await client.api.getKeyBlockByHeight(height, { txEncoding: 'json' })
 
     if (isEqual(state.block, block)) {
       endLoading(dispatch, 'blocks/getBlockFromHeight')
@@ -109,7 +109,7 @@ export default {
     const blocks = await Promise.all(
       times(size, (index) => client
       .api
-      .getBlockByHeight(state.height - index, { txEncoding: 'json' }))
+      .getKeyBlockByHeight(state.height - index, { txEncoding: 'json' }))
     )
 
     if (!blocks.length) {
@@ -140,7 +140,7 @@ export default {
     const blocks = await Promise.all(
       times(size, (index) => client
       .api
-      .getBlockByHeight(height - index, { txEncoding: 'json' }))
+      .getKeyBlockByHeight(height - index, { txEncoding: 'json' }))
     )
 
     if (!blocks.length) {
