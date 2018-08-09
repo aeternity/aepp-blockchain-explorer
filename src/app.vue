@@ -10,8 +10,8 @@
           <router-link class="link" to="/">
             Dashboard
           </router-link>
-          <router-link class="link"  to="/blocks">
-            Blocks
+          <router-link class="link"  to="/generations">
+            Generations
           </router-link>
           <router-link class="link" to="/tx" v-if="false">
             Transactions
@@ -37,8 +37,8 @@
                     <router-link to='/'>
                       Dashboard
                     </router-link>
-                    <router-link to='/blocks'>
-                      Blocks
+                    <router-link to='/generations'>
+                      Generations
                     </router-link>
                     <router-link to='/tx'>
                       Transactions
@@ -153,7 +153,7 @@ export default {
     pageName () {
       return ({
         'Index': 'Dashboard',
-        'BlockList': 'Blocks',
+        'GenerationList': 'Generations',
         'Transaction': 'Transactions'
       })[this.$route.name]
     }

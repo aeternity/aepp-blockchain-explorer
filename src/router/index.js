@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 import Index from '@/screens/index/index.vue'
 import Address from '@/screens/address/address.vue'
-import BlockList from '@/screens/blockList/blockList.vue'
+import GenerationList from '@/screens/generationList/generationList.vue'
+import Generation from '@/screens/generation/generation.vue'
 import Block from '@/screens/block/block.vue'
 import Transaction from '@/screens/transaction/transaction.vue'
 import TransactionDetail from '@/screens/transactionDetail/transactionDetail.vue'
@@ -22,9 +23,14 @@ export default new Router({
     component: Address,
     props: true
   }, {
-    name: 'BlockList',
-    path: '/blocks',
-    component: BlockList
+    name: 'GenerationList',
+    path: '/generations',
+    component: GenerationList
+  }, {
+    name: 'Generation',
+    path: '/generation/:generationId',
+    component: Generation,
+    props: true
   }, {
     name: 'Block',
     path: '/block/:blockId',

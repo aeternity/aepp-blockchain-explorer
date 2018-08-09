@@ -1,4 +1,4 @@
-.block-list-screen {
+.generation-list-screen {
   background: $aubergin;
   color:$white;;
   >.inner {
@@ -24,8 +24,8 @@
       @include font-size(l);
     }
   }
-  .block-number {
-    @include font-size(xl);
+  .height {
+    @include font-size(l);
   }
   @include only-phone {
     table, td {

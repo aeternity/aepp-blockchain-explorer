@@ -1,54 +1,56 @@
 <template>
-  <div class="block-list-screen screen">
+  <div class="generation-list-screen screen">
     <div class="inner">
       <div class="grid">
-        <div class="title">Blocks</div>
+        <div class="title">Generations</div>
         <div class="field average-block-time">
           <span class="field-name">average rate 1 per </span>
           <relative-time :ts="getAverageBlockTime" big spaced/>
         </div>
         <div>
-          <span class="field-name">last block mined</span>
+          <span class="field-name">last key block mined</span>
           <relative-time :ts="getLastMinedBlockTime(this.currentTime)" big spaced/>
           <span class="field-name">ago</span>
         </div>
       </div>
 
       <table class="transactions">
-        <tr v-for="b in blocks">
+        <tr v-for="b in generations">
           <template v-if="b">
             <td>
-              <div class="block-number">
-                <router-link :to="`/block/${b.height}`">{{ b.height }}</router-link>
+              <div class="height">
+                <router-link :to="`/generation/${b.keyBlock.height}`">
+                  {{ b.keyBlock.height }}
+                </router-link>
               </div>
             </td>
             <td>
-              <span class="field-name">hash</span>
-              <span v-if="b.hash" class="number">
-                <ae-hash type="short" :hash="b.hash"/>
+              <span class="field-name">key-hash</span>
+              <span v-if="b.keyBlock.hash" class="number">
+                <ae-hash type="short" :hash="b.keyBlock.hash"/>
               </span>
               <span v-else>n/a</span>
             </td>
             <td>
-              <span class="field-name">target</span>
-              <span class="number">{{b.target}}</span>
+              <span class="number">{{ b.micros.length }}</span>
+              <span class="field-name">Micro Blocks</span>
             </td>
             <td>
-              <span class="number">{{ b.transactions.length }}</span>
+              <span class="number">{{ b.transactionNumber }}</span>
               <span class="field-name">Transaction(s)</span>
             </td>
             <td>
               <span class="field-name">mined by</span>
               <span class="account-address">
-                <router-link :to="`/account/${b.miner}`">
-                  <named-address :address="b.miner"/>
+                <router-link :to="`/account/${b.keyBlock.miner}`">
+                  <named-address :address="b.keyBlock.miner"/>
                 </router-link>
               </span>
             </td>
             <td>
               <span class="field-name">time</span>
               <span class="number">
-                <relative-time :ts="currentTime - b.time"/>
+                <relative-time :ts="currentTime - b.keyBlock.time"/>
               </span>
             </td>
           </template>
@@ -84,11 +86,11 @@ export default {
    */
   computed: {
     /*
-     * map blocks unto computed
+     * map generations unto computed
      * properties
      */
     ...mapState('blocks', [
-      'blocks'
+      'generations'
     ]),
 
     /*
@@ -106,7 +108,7 @@ export default {
    */
   methods: {
     loadMore: function () {
-      return this.$store.dispatch('blocks/getLatestBlocks', this.blocks.length + 10)
+      return this.$store.dispatch('blocks/getLatestGenerations', this.generations.length + 10)
     }
   },
 
@@ -114,11 +116,11 @@ export default {
    * Fetch last 10 blocks from node
    */
   mounted: function () {
-    return this.$store.dispatch('blocks/getLatestBlocks', 10)
+    return this.$store.dispatch('blocks/getLatestGenerations', 10)
   },
   activated: function () {
-    return this.$store.dispatch('blocks/getLatestBlocks', 10)
+    return this.$store.dispatch('blocks/getLatestGenerations', 10)
   }
 }
 </script>
-<style src='./blockList.scss' lang='scss'/>
+<style src='./generationList.scss' lang='scss'/>

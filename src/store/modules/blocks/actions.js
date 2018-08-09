@@ -42,6 +42,42 @@ export default {
   },
 
   /**
+   * getGenerationFromHash fetches the block from the blockchain
+   * from a single hash argument
+   * @param {Object} state
+   * @param {Function} commit
+   * @param {Function} dispatch
+   * @param {String} hash
+   * @return {*}
+   */
+  async getGenerationFromHash ({ state, commit, dispatch }, hash) {
+    startLoading(dispatch, 'blocks/getGenerationFromHash')
+
+    const client = await ae
+    const generation = await client.api.getGenerationByHash(hash, { txEncoding: 'json' })
+    const microBlocksHashes = generation.microBlocks
+
+    const microBlocks = await Promise.all(
+      microBlocksHashes.map(
+        async (hash) => {
+          return client.api.getBlockByHash(hash, { txEncoding: 'json' })
+        }
+      )
+    )
+
+    generation.micros = microBlocks
+
+    if (isEqual(state.generation, generation)) {
+      endLoading(dispatch, 'blocks/getGenerationFromHash')
+      return state.generation
+    }
+
+    commit('setGeneration', generation)
+    endLoading(dispatch, 'blocks/getGenerationFromHash')
+    return generation
+  },
+
+  /**
    * getBlockFromHash fetches the block from the blockchain
    * from a single hash argument
    * @param {Object} state
@@ -75,8 +111,44 @@ export default {
    * @param {String} height
    * @return {*}
    */
+  async getGenerationFromHeight ({ state, commit, dispatch }, height) {
+    startLoading(dispatch, 'blocks/getGenerationFromHeight')
+
+    const client = await ae
+    const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
+    const microBlocksHashes = generation.microBlocks
+
+    const microBlocks = await Promise.all(
+      microBlocksHashes.map(
+        async (hash) => {
+          return client.api.getBlockByHash(hash, { txEncoding: 'json' })
+        }
+      )
+    )
+
+    generation.micros = microBlocks
+
+    if (isEqual(state.block, generation)) {
+      endLoading(dispatch, 'blocks/getGenerationFromHeight')
+      return state.block
+    }
+
+    commit('setGeneration', generation)
+    endLoading(dispatch, 'blocks/getGenerationFromHeight')
+
+    return generation
+  },
+
+  /**
+   * Fetches the head of the blockchain
+   * @param {Object} state
+   * @param {Function} commit
+   * @param {Function} dispatch
+   * @param {String} height
+   * @return {*}
+   */
   async getBlockFromHeight ({ state, commit, dispatch }, height) {
-    startLoading(dispatch, 'blocks/getKeyBlockFromHeight')
+    startLoading(dispatch, 'blocks/getBlockFromHeight')
 
     const client = await ae
     const block = await client.api.getKeyBlockByHeight(height, { txEncoding: 'json' })
