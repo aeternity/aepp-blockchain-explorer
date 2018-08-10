@@ -30,12 +30,9 @@ export default {
 
     const client = await ae
 
-    const [{ balance }, { transactions }] = await Promise.all([
-      client.api.getAccountBalance(address),
-      client.api.getAccountTransactions(address, {txEncoding: 'json', limit: 100})
-    ])
+    const {balance} = await client.api.getAccountBalance(address)
 
-    const account = { address, balance, transactions }
+    const account = { address, balance }
 
     if (isEqual(state.accounts[address], account)) return account
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="account" class="account-screen screen">
+  <div class="account-screen screen">
     <header class="header">
       <h1 class="title">
         <ae-identity-avatar :address="address"/>
@@ -7,7 +7,7 @@
       </h1>
 
       <field name="Balance">
-        <span class="number">{{ account.balance }}</span>
+        <span class="number">{{ account ? account.balance : 0 }}</span>
         <span class="unit">AE</span>
       </field>
 
@@ -18,10 +18,6 @@
       </field>
     </header>
 
-    <h2>Transactions</h2>
-    <div class="transactions">
-      <transaction :key="t.hash" v-for="t in account.transactions" :transaction="t"/>
-    </div>
   </div>
 </template>
 <script>
@@ -68,15 +64,14 @@ export default {
    * Before and After route events
    */
   beforeRouteEnter (to, from, next) {
-    // called before the route that renders this component is confirmed.
-    // does NOT have access to `this` component instance,
-    // because it has not been created yet when this guard is called!
     return next((vm) => poll.fetch.call(vm, 'accounts/get', to.params.address))
   },
+  beforeRouteUpdate (to, from, next) {
+    poll.close('accounts/get')
+    poll.fetch.call(this, 'accounts/get', to.params.address)
+    return next()
+  },
   beforeRouteLeave (to, from, next) {
-    // called when the route that renders this component is about to
-    // be navigated away from.
-    // has access to `this` component instance.
     return poll.close('accounts/get', () => next())
   }
 }
