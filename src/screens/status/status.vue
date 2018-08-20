@@ -35,39 +35,19 @@
 import { mapState } from 'vuex'
 import polling from '../../functions/polling'
 
-/*
- * Creating polling instance
- */
 const poll = polling()
 
 export default {
-  /*
-   * Component data
-   */
   data: function () {
     return { node: process.env.VUE_APP_EPOCH_URL }
   },
-
-  /*
-   * Computed Properties
-   */
   computed: mapState({
     nodeStatus: '$nodeStatus'
   }),
-
-  /*
-   * Before and After route events
-   */
   beforeRouteEnter (to, from, next) {
-    // called before the route that renders this component is confirmed.
-    // does NOT have access to `this` component instance,
-    // because it has not been created yet when this guard is called!
     return next((vm) => poll.fetch.call(vm, 'getNodeStatus'))
   },
   beforeRouteLeave (to, from, next) {
-    // called when the route that renders this component is about to
-    // be navigated away from.
-    // has access to `this` component instance.
     return poll.close('getNodeStatus', () => next())
   }
 }

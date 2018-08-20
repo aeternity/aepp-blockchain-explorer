@@ -13,9 +13,6 @@ const interval = function (action, args, ms) {
 }
 
 export default function () {
-  /*
-   * List of intervals
-   */
   const intervals = {}
 
   /*
@@ -54,20 +51,8 @@ export default function () {
        * continue with normal flow
        */
       if (!intervals[action]) return callback()
-
-      /*
-       * Clear the interval
-       */
       clearInterval(intervals[action])
-
-      /*
-       * Delete reference
-       */
       delete intervals[action]
-
-      /*
-       * Callback
-       */
       return callback()
     }
   }

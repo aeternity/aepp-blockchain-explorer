@@ -46,16 +46,9 @@
 import { mapState } from 'vuex'
 
 export default {
-  /*
-   * Map blocks to the component
-   */
   computed: mapState('blocks', [
     'generations'
   ]),
-
-  /*
-   * Get the last 3 blocks on mount
-   */
   mounted: function () {
     return this
       .$store

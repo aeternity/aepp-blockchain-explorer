@@ -1,10 +1,4 @@
-/**
- * Exporting Tags
- */
 export const install = function (Vue, options) {
-  /**
-   * Component List
-   */
   const components = {
     'ae-hash': () => import(/* webpackChunkName: "ae-hash" */'./aeHash/aeHash.vue'),
     'blank': () => import(/* webpackChunkName: "ae-hash" */'./blank/index.vue'),
@@ -17,8 +11,5 @@ export const install = function (Vue, options) {
     'view-and-copy': () => import(/* webpackChunkName: "view-and-copy" */'./viewAndCopy/viewAndCopy.vue')
   }
 
-  /**
-   * Register Global Tags
-   */
   return Object.keys(components).forEach((id) => Vue.component(id, components[id]))
 }

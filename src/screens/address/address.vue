@@ -25,44 +25,22 @@ import { mapState } from 'vuex'
 import { AeAddress, AeIdentityAvatar, AePanel } from '@aeternity/aepp-components'
 import polling from '../../functions/polling'
 
-/*
- * Creating polling instance
- */
 const poll = polling()
 
 // TODO: There is a reactivity problem in here, The v-if does not work
 export default {
-  /*
-   * Name
-   */
   name: 'Address',
-
-  /*
-   * Component Props
-   */
   props: ['address'],
-
-  /*
-   * Components
-   */
   components: {
     AeAddress,
     AeIdentityAvatar,
     AePanel
   },
-
-  /*
-   * Computed Props
-   */
   computed: mapState('accounts', {
     'account': function (state) {
       return state.accounts[this.address]
     }
   }),
-
-  /*
-   * Before and After route events
-   */
   beforeRouteEnter (to, from, next) {
     return next((vm) => poll.fetch.call(vm, 'accounts/get', to.params.address))
   },

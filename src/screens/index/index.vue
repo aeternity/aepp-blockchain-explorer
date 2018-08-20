@@ -26,37 +26,20 @@
 import { mapState } from 'vuex'
 import polling from '../../functions/polling'
 
-/*
- * Creating polling instance
- */
 const poll = polling()
 
-/*
- * Regular expressions
- */
 const blockHeightRegex = RegExp('^[0-9]+$')
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const accountPublicKeyRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
-  /*
-   * View Data
-   */
   data: function () {
     return {
       searchString: ''
     }
   },
-
-  /*
-   * Computed Properties
-   */
   computed: mapState(['env']),
-
-  /*
-   * View Methods
-   */
   methods: {
     async search () {
       if (blockHeightRegex.test(this.searchString)) {
@@ -99,20 +82,10 @@ export default {
       }
     }
   },
-
-  /*
-   * Before and After route events
-   */
   beforeRouteEnter (to, from, next) {
-    // called before the route that renders this component is confirmed.
-    // does NOT have access to `this` component instance,
-    // because it has not been created yet when this guard is called!
     return next((vm) => poll.fetch.call(vm, 'blocks/getLatestBlocks', 10))
   },
   beforeRouteLeave (to, from, next) {
-    // called when the route that renders this component is about to
-    // be navigated away from.
-    // has access to `this` component instance.
     return poll.close('blocks/getLatestBlocks', () => next())
   }
 }

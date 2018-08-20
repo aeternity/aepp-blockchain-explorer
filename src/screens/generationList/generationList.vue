@@ -71,50 +71,22 @@ import { AeButton } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 
 export default {
-  /*
-   * Screen Components
-   */
   components: { AeButton },
-
-  /*
-   * Screen Mixins
-   */
   mixins: [currentTime],
-
-  /*
-   * Computed Properties
-   */
   computed: {
-    /*
-     * map generations unto computed
-     * properties
-     */
     ...mapState('blocks', [
       'generations'
     ]),
-
-    /*
-     * map block getters into
-     * the computed properties
-     */
     ...mapGetters('blocks', [
       'getAverageBlockTime',
       'getLastMinedBlockTime'
     ])
   },
-
-  /*
-   * Screen methods
-   */
   methods: {
     loadMore: function () {
       return this.$store.dispatch('blocks/getLatestGenerations', this.generations.length + 10)
     }
   },
-
-  /*
-   * Fetch last 10 blocks from node
-   */
   mounted: function () {
     return this.$store.dispatch('blocks/getLatestGenerations', 10)
   },
