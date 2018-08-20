@@ -15,13 +15,7 @@ const vueLoading = new VueLoading({ useVuex: true })
 
 Vue.config.productionTip = false
 
-/**
- * We export the instance of the app
- * so that if we ever need to have a
- * reference of the application itself
- * somewhere, we can simply `import` it
- */
-export default new Vue({
+new Vue({
   router,
   store,
   vueLoading,
