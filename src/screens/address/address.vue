@@ -23,11 +23,9 @@
 <script>
 import { mapState } from 'vuex'
 import { AeAddress, AeIdentityAvatar, AePanel } from '@aeternity/aepp-components'
-import polling from '../../functions/polling'
+import pollAction from '../../mixins/pollAction'
 import NamedAddress from '../../components/namedAddress/namedAddress'
 import Field from '../../components/field/field'
-
-const poll = polling()
 
 // TODO: There is a reactivity problem in here, The v-if does not work
 export default {
@@ -40,22 +38,12 @@ export default {
     NamedAddress,
     Field
   },
+  mixins: [pollAction('accounts/get', ({ address }) => address)],
   computed: mapState('accounts', {
     'account': function (state) {
       return state.accounts[this.address]
     }
-  }),
-  beforeRouteEnter (to, from, next) {
-    return next((vm) => poll.fetch.call(vm, 'accounts/get', to.params.address))
-  },
-  beforeRouteUpdate (to, from, next) {
-    poll.close('accounts/get')
-    poll.fetch.call(this, 'accounts/get', to.params.address)
-    return next()
-  },
-  beforeRouteLeave (to, from, next) {
-    return poll.close('accounts/get', () => next())
-  }
+  })
 }
 </script>
 <style src='./address.scss' lang='scss' />

@@ -24,12 +24,10 @@
 
 <script>
 import { mapState } from 'vuex'
-import polling from '../../functions/polling'
+import pollAction from '../../mixins/pollAction'
 import MarketStats from '../../partials/marketStats/marketStats'
 import LatestBlock from '../../partials/latestBlock/latestBlock'
 import RecentBlocks from '../../partials/recentBlocks/recentBlocks'
-
-const poll = polling()
 
 const blockHeightRegex = RegExp('^[0-9]+$')
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,50}$')
@@ -43,6 +41,7 @@ export default {
       searchString: ''
     }
   },
+  mixins: [pollAction('blocks/getLatestBlocks', 10)],
   computed: mapState(['env']),
   methods: {
     async search () {
@@ -85,12 +84,6 @@ export default {
         return null
       }
     }
-  },
-  beforeRouteEnter (to, from, next) {
-    return next((vm) => poll.fetch.call(vm, 'blocks/getLatestBlocks', 10))
-  },
-  beforeRouteLeave (to, from, next) {
-    return poll.close('blocks/getLatestBlocks', () => next())
   }
 }
 </script>
