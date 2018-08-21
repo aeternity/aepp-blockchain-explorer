@@ -14,6 +14,33 @@ const { startLoading, endLoading } = createActionHelpers({
 })
 
 /**
+ * @param height
+ * @returns {Promise<*>}
+ */
+async function getGenerationFromHeightWrapper (height) {
+  const client = await ae
+  const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
+  const microBlocksHashes = generation.microBlocks
+  let transactionNumber = 0
+
+  let microBlocks = await Promise.all(
+    microBlocksHashes.map(
+      async (hash) => {
+        return client.api.getBlockByHash(hash, { txEncoding: 'json' })
+      }
+    )
+  )
+  for (const index in microBlocks) {
+    transactionNumber += microBlocks[index].transactions.length
+  }
+
+  generation.micros = microBlocks
+  generation.transactionNumber = transactionNumber
+
+  return generation
+}
+
+/**
  * Exporting Actions
  */
 export default {
@@ -42,13 +69,11 @@ export default {
   },
 
   /**
-   * getGenerationFromHash fetches the block from the blockchain
-   * from a single hash argument
-   * @param {Object} state
-   * @param {Function} commit
-   * @param {Function} dispatch
-   * @param {String} hash
-   * @return {*}
+   * @param state
+   * @param commit
+   * @param dispatch
+   * @param hash
+   * @returns {Promise<*>}
    */
   async getGenerationFromHash ({ state, commit, dispatch }, hash) {
     startLoading(dispatch, 'blocks/getGenerationFromHash')
@@ -56,6 +81,7 @@ export default {
     const client = await ae
     const generation = await client.api.getGenerationByHash(hash, { txEncoding: 'json' })
     const microBlocksHashes = generation.microBlocks
+    let transactionNumber = 0
 
     const microBlocks = await Promise.all(
       microBlocksHashes.map(
@@ -64,8 +90,12 @@ export default {
         }
       )
     )
+    for (const index in microBlocks) {
+      transactionNumber += microBlocks[index].transactions.length
+    }
 
     generation.micros = microBlocks
+    generation.transactionNumber = transactionNumber
 
     if (isEqual(state.generation, generation)) {
       endLoading(dispatch, 'blocks/getGenerationFromHash')
@@ -105,28 +135,17 @@ export default {
 
   /**
    * Fetches the head of the blockchain
-   * @param {Object} state
-   * @param {Function} commit
-   * @param {Function} dispatch
-   * @param {String} height
+   * @param {Object} store
+   * @param {Object} store.state
+   * @param {Function} store.commit
+   * @param {Function} store.dispatch
+   * @param {String} store.height
    * @return {*}
    */
   async getGenerationFromHeight ({ state, commit, dispatch }, height) {
     startLoading(dispatch, 'blocks/getGenerationFromHeight')
 
-    const client = await ae
-    const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
-    const microBlocksHashes = generation.microBlocks
-
-    const microBlocks = await Promise.all(
-      microBlocksHashes.map(
-        async (hash) => {
-          return client.api.getBlockByHash(hash, { txEncoding: 'json' })
-        }
-      )
-    )
-
-    generation.micros = microBlocks
+    const generation = await getGenerationFromHeightWrapper(height)
 
     if (isEqual(state.block, generation)) {
       endLoading(dispatch, 'blocks/getGenerationFromHeight')
@@ -193,6 +212,34 @@ export default {
     endLoading(dispatch, 'blocks/getLatestBlocks')
 
     return blocks
+  },
+
+  /**
+   * getLatestBlocks pulls a list of blocks based on the
+   * size of the payload
+   * @param {Object} state
+   * @param {Function} commit
+   * @param {Function} dispatch
+   * @param {Number} size
+   * @return {*}
+   */
+  async getLatestGenerations ({ state, commit, dispatch }, size) {
+    startLoading(dispatch, 'blocks/getLatestGenerations')
+
+    await dispatch('height')
+    const generations = await Promise.all(
+      times(size, (index) => getGenerationFromHeightWrapper(state.height - index))
+    )
+
+    if (!generations.length) {
+      endLoading(dispatch, 'blocks/getLatestGenerations')
+      return state.blocks
+    }
+
+    commit('setGenerations', generations)
+    endLoading(dispatch, 'blocks/getLatestGenerations')
+
+    return generations
   },
 
   /**
