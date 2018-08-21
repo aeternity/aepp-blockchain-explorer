@@ -182,6 +182,25 @@ nav .mobile-nav {
         margin: 0;
         line-height: 2;
       }
+
+      .mobile-nav-fixed-holder .social-links {
+        align-self: flex-end;
+        $imageWidth: 21px;
+        $margin: 15px;
+        width: ($imageWidth + $margin * 2) * 4;
+
+        a {
+          display: inline-block;
+          margin: $margin;
+          font-size: unset;
+          line-height: unset;
+
+          img {
+            width: $imageWidth;
+          }
+        }
+      }
+
       .mobile-nav-fixed-secondary-links a {
         font-weight: 300;
         font-size: 20px;
@@ -193,22 +212,6 @@ nav .mobile-nav {
 .mobile-nav-fixed-holder .inner {
   flex-direction: column;
   margin-top: 5vh;
-}
-.mobile-nav-fixed-socials-links a {
-  text-align: right;
-  flex:1;
-}
-.mobile-nav-fixed-socials-links-row {
-  display: flex;
-  justify-content: flex-end;
-  text-align: right;
-  a {
-    flex:0;
-    margin: 10px 10px !important;
-    img {
-      display: block;
-    }
-  }
 }
 .mobile-nav .pageName {
   flex:1;
