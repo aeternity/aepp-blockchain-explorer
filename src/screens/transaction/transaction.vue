@@ -49,11 +49,13 @@
 <script>
 import { mapState } from 'vuex'
 import { AeButton, AePanel } from '@aeternity/aepp-components'
+import Transaction from '../../components/transaction/transaction'
 
 export default {
   components: {
     AeButton,
-    AePanel
+    AePanel,
+    Transaction
   },
 
   data () {

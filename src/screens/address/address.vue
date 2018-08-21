@@ -24,6 +24,8 @@
 import { mapState } from 'vuex'
 import { AeAddress, AeIdentityAvatar, AePanel } from '@aeternity/aepp-components'
 import polling from '../../functions/polling'
+import NamedAddress from '../../components/namedAddress/namedAddress'
+import Field from '../../components/field/field'
 
 const poll = polling()
 
@@ -34,7 +36,9 @@ export default {
   components: {
     AeAddress,
     AeIdentityAvatar,
-    AePanel
+    AePanel,
+    NamedAddress,
+    Field
   },
   computed: mapState('accounts', {
     'account': function (state) {

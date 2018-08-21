@@ -110,9 +110,11 @@
 
 <script>
 import { mapState } from 'vuex'
+import AeFooter from './partials/footer/footer'
 
 export default {
   name: 'app',
+  components: { AeFooter },
   data () {
     return {
       isOpened: false

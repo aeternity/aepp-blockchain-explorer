@@ -46,8 +46,11 @@
   </div>
 </template>
 <script>
+import Field from '../field/field'
+
 export default {
   name: 'oracle-query-tx',
+  components: { Field },
   props: [
     'transaction'
   ]

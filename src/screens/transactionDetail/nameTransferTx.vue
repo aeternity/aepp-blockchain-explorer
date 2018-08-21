@@ -13,8 +13,14 @@
   </div>
 </template>
 <script>
+import Field from '../../components/field/field'
+import AeHash from '../../components/aeHash/aeHash'
+import ViewAndCopy from '../../components/viewAndCopy/viewAndCopy'
+import NamedAddress from '../../components/namedAddress/namedAddress'
+
 export default {
   name: 'name-transfer-tx',
+  components: { Field, AeHash, ViewAndCopy, NamedAddress },
   props: ['transaction']
 }
 </script>

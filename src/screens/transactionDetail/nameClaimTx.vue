@@ -9,8 +9,11 @@
   </div>
 </template>
 <script>
+import Field from '../../components/field/field.vue'
+
 export default {
   name: 'name-claim-tx',
+  components: { Field },
   props: ['transaction']
 }
 </script>

@@ -44,8 +44,10 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import NamedAddress from '../../components/namedAddress/namedAddress'
 
 export default {
+  components: { NamedAddress },
   computed: mapState('blocks', [
     'generations'
   ]),

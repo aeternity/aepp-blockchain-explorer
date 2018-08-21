@@ -32,8 +32,12 @@
   </div>
 </template>
 <script>
+import Field from '../field/field'
+import NamedAddress from '../namedAddress/namedAddress'
+
 export default {
   name: 'oracle-register-tx',
+  components: { Field, NamedAddress },
   props: [
     'transaction'
   ]

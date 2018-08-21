@@ -63,9 +63,12 @@
 import { mapState } from 'vuex'
 import { AeButton } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
+import RelativeTime from '../../components/relativeTime/relativeTime'
+import AeHash from '../../components/aeHash/aeHash'
+import NamedAddress from '../../components/namedAddress/namedAddress'
 
 export default {
-  components: { AeButton },
+  components: { AeButton, RelativeTime, AeHash, NamedAddress },
   mixins: [ currentTime ],
   computed: mapState('blocks', [
     'generation',
