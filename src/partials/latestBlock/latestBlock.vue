@@ -1,5 +1,5 @@
 <template>
-  <div class="latest-block-partial" v-else>
+  <div class="latest-block-partial">
     <div class="grid">
       <div class="explanation">
         <h2 class="title">Latest Block</h2>

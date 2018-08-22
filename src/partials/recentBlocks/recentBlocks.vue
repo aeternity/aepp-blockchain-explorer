@@ -4,7 +4,7 @@
       <h2>Recent blocks</h2>
       <p>View the latest blocks on the aeternity blockchain</p>
       <table>
-        <tr v-for='b in blocks.slice(0, 3)' v-if="blocks.length">
+        <tr v-for='(b, i) in blocks.slice(0, 3)' :key="i">
           <template v-if="b">
             <td>
               <div class="block-number">

@@ -15,7 +15,7 @@
       </div>
 
       <table class="transactions">
-        <tr v-for="b in blocks">
+        <tr v-for="(b, i) in blocks" :key="i">
           <template v-if="b">
             <td>
               <div class="block-number">

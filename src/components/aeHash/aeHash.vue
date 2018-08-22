@@ -4,7 +4,7 @@
       {{displayAddress | startAndEnd}}
     </div>
     <div v-else-if="type === 'chunked'">
-      <div v-for="chunk of displayAddress" class="chunk">
+      <div v-for="chunk of displayAddress" :key="chunk" class="chunk">
         {{chunk}}
       </div>
     </div>

@@ -2,7 +2,8 @@
   <span class="relative-time" :class="{ big, spaced }">
     <template v-for="(item, idx) in items">
       {{idx ? ' ' : ''}}
-      <span class="number">{{item.number}}</span><span class="unit">{{item.unit}}</span>
+      <span :key="`${item.unit}-number`" class="number">{{item.number}}</span>
+      <span :key="item.unit" class="unit">{{item.unit}}</span>
     </template>
   </span>
 </template>
