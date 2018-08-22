@@ -9,6 +9,7 @@ env:
 install:
 - travis_wait npm install
 script:
+- npm run test
 - npm run build
 deploy:
 - provider: script
