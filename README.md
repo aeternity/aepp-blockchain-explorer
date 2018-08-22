@@ -67,17 +67,17 @@ server {
 
 ## Build Setup
 
-The epoch api url can be configured with the environment variable `AETERNITY_EPOCH_API_URL`.
+The epoch api url can be configured with the environment variable `VUE_APP_EPOCH_URL`.
 
 ```bash
 # install dependencies
 npm install
 
 # serve with hot reload at localhost:8080
-AETERNITY_EPOCH_API_URL='//sdk-testnet.aepps.com/' npm run dev
+VUE_APP_EPOCH_URL='//sdk-testnet.aepps.com/' npm run dev
 
 # build for production with minification
-AETERNITY_EPOCH_API_URL='//sdk-testnet.aepps.com/' npm run build
+VUE_APP_EPOCH_URL='//sdk-testnet.aepps.com/' npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report

@@ -16,7 +16,7 @@ const AeClient = Chain
   // .debugSwagger(true)
 
 const ae = AeClient({
-  url: process.env.AETERNITY_EPOCH_API_URL,
+  url: process.env.VUE_APP_EPOCH_URL,
   keypair: generateKeyPair()
 })
 

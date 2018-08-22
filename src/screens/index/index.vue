@@ -16,7 +16,7 @@
       </div>
     </header>
 
-    <market-stats v-if='env.SHOW_MARKET_STATS'/>
+    <market-stats v-if='env.VUE_APP_SHOW_MARKET_STATS'/>
     <latest-block />
     <recent-blocks />
   </div>
@@ -78,7 +78,7 @@ export default {
       }
     },
     async fetchDomain (domain) {
-      const BASE_URL = process.env.AETERNITY_EPOCH_API_URL
+      const BASE_URL = process.env.VUE_APP_EPOCH_URL
       domain = domain.toLowerCase().trim()
       if (!domain.endsWith('.aet')) {
         domain += '.aet'

@@ -92,7 +92,7 @@
 
         </div>
         <div>
-          <span v-if="env.SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>
+          <span v-if="env.VUE_APP_SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>
             {{ networkName }}
           </span>
           <!--<router-link to='/search'>-->
@@ -139,7 +139,7 @@ export default {
      * Network
      */
     networkName () {
-      let url = this.env.AETERNITY_EPOCH_API_URL
+      let url = this.env.VUE_APP_EPOCH_URL
       let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
       if (name) {
         let shortname = name.replace(/([^.]+)-net-api/, '$1')
