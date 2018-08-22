@@ -4,14 +4,14 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 import ae from '../../aeppsdk'
-//import { createActionHelpers } from 'vuex-loading'
+// import { createActionHelpers } from 'vuex-loading'
 
 /**
  * Setting up start/end Loading helper methods
  */
-//const { startLoading, endLoading } = createActionHelpers({
+// const { startLoading, endLoading } = createActionHelpers({
 //  moduleName: 'loading'
-//})
+// })
 
 /**
  * Exporting Actions

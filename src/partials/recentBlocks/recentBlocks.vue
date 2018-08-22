@@ -52,8 +52,8 @@ export default {
    */
   mounted: function () {
     return this
-    .$store
-    .dispatch('blocks/getLatestBlocks', 10)
+      .$store
+      .dispatch('blocks/getLatestBlocks', 10)
   }
 }
 </script>
