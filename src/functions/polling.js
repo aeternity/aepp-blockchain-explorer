@@ -8,8 +8,8 @@ const interval = function (action, args, ms) {
    * Setting the interval and returning the id
    */
   return setInterval(() => this
-  .$store
-  .dispatch(action, args), ms)
+    .$store
+    .dispatch(action, args), ms)
 }
 
 export default function () {

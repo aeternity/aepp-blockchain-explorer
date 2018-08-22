@@ -15,7 +15,7 @@
       </div>
 
       <table class="transactions">
-        <tr v-for="b in generations">
+        <tr v-for="(b, i) in generations" :key="i">
           <template v-if="b">
             <td>
               <div class="height">

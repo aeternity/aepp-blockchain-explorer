@@ -13,6 +13,8 @@ export default {
 }
 </script>
 <style scoped lang='scss'>
+@import '../../style/mixins';
+
 .field {
   display:flex;
   justify-content:space-between;

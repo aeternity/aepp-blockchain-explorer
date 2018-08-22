@@ -12,7 +12,7 @@
 
     <div v-if='transaction.tx.pointers'>
       <h2>Pointers</h2>
-      <field :name="`${key}`" :key="key" v-for='pointer, key in transaction.tx.pointers'>
+      <field :name="`${key}`" :key="key" v-for='(pointer, key) in transaction.tx.pointers'>
         <ae-hash type='short' :hash='pointer' />
         <view-and-copy :text='pointer'/>
       </field>

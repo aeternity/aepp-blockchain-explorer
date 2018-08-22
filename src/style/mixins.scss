@@ -1,0 +1,45 @@
+@import 'variables';
+
+@mixin content-max-width {
+  max-width: $content-max-width;
+  width: calc(100% - #{2 * $content-margin});
+  margin: 0 auto;
+}
+
+@mixin font-size($name) {
+  @if map_has_key($font-sizes, $name) {
+    font-size: map-get($font-sizes, $name);
+  } @else {
+    @error "#{$name} is not valid font size.";
+  }
+}
+
+@mixin only-phone {
+  @media (max-width: #{$phone-width}) {
+    @content;
+  }
+}
+
+@mixin phone-and-tablet {
+  @media (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin only-tablet {
+  @media (min-width: #{$phone-width + 1px}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-and-desktop {
+  @media (min-width: #{$phone-width + 1px}) {
+    @content;
+  }
+}
+
+@mixin only-desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}

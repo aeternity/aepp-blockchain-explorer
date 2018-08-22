@@ -56,8 +56,8 @@ export default {
   watch: {
     address: function (oldAddress, newAddress) {
       return this
-      .$store
-      .dispatch('accounts/name', newAddress)
+        .$store
+        .dispatch('accounts/name', newAddress)
     }
   },
 
@@ -66,8 +66,8 @@ export default {
    */
   mounted () {
     return this
-    .$store
-    .dispatch('accounts/name', this.address)
+      .$store
+      .dispatch('accounts/name', this.address)
   }
 }
 </script>

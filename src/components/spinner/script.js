@@ -27,4 +27,4 @@ export default {
       return { width: this.size, height: this.size }
     }
   }
-};
+}

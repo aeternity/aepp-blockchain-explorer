@@ -12,7 +12,7 @@
       </ae-button>
     </popper>
 
-    <textarea rows=1 class="text" readonly v-model="text" ref="text" required>{{text}}</textarea>
+    <textarea rows=1 class="text" readonly v-model="text" ref="text" required />
     <ae-button @click.prevent="copy" size="small" plain>
       <ae-icon slot="icon" name="copy"/>
     </ae-button>
@@ -61,6 +61,8 @@ export default {
 }
 </script>
 <style scoped lang='scss'>
+@import '../../style/mixins';
+
 textarea {
   position:absolute;
   z-index:-100;

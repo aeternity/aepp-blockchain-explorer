@@ -162,7 +162,7 @@ var codes = {
   0xff: ['SELFDESTRUCT', 5000, 1, 0, false, true]
 }
 
-module.exports = function (op, full) {
+export default function (op, full) {
   var code = codes[op] ? codes[op] : ['INVALID', 0, 0, 0, false, false]
   var opcode = code[0]
 
