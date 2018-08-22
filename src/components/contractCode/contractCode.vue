@@ -39,6 +39,8 @@ export default {
 }
 </script>
 <style lang='scss'>
+@import '../../style/variables';
+
 .contract-code {
   .code-view-toggle {
     padding-right:20px;

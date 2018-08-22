@@ -8,6 +8,8 @@ export default {
 }
 </script>
 <style lang='scss'>
+@import '../../style/variables';
+
 .code-view {
   font-family: 'Roboto Mono', monospace;
   background:lighten($black, 20);

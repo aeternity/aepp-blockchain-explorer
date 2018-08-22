@@ -61,6 +61,8 @@ export default {
 }
 </script>
 <style scoped lang='scss'>
+@import '../../style/mixins';
+
 textarea {
   position:absolute;
   z-index:-100;

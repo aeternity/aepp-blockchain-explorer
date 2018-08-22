@@ -38,6 +38,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '../../style/mixins';
+
 .relative-time {
   &.big {
     .number {
