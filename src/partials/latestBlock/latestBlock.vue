@@ -1,42 +1,57 @@
 <template>
-  <div class="latest-block-partial" v-else>
+  <div class="latest-generation-partial" v-else>
     <div class="grid">
       <div class="explanation">
-        <h2 class="title">Latest Block</h2>
-        <ae-button type="exciting" size="small" :to="`/block/${height}`">view last</ae-button>
-        <ae-button type="exciting" size="small" to="/blocks">view all</ae-button>
+        <h2 class="title">Latest Generation</h2>
+        <ae-button type="exciting" size="small" :to="`/generation/${height}`">view last</ae-button>
+        <ae-button type="exciting" size="small" to="/generations">view all</ae-button>
       </div>
-      <div class="block-data">
-        <div class="grid block-basic-info">
-          <div class="number chain-height">
-            <img src="@/assets/block.svg"/>
-            <router-link :to="`/block/${height}`">{{ height }}</router-link>
+      <div class="generation-data">
+        <h2>Generation</h2>
+        <div class="grid generation">
+          <div class="field">
+            <div class="field-name">
+              Height
+
+            </div>
+            <div class="field-value number" v-if="generation">
+              <router-link :to="`/generation/${height}`">{{ height }}</router-link>
+            </div>
           </div>
-          <div class="ago">
-            <span>mined</span>
-              <relative-time :ts="currentTime - block.time" big />
-            <span>ago</span>
+          <div class="field">
+            <div class="field-name">Micro Blocks</div>
+            <div class="field-value number" >{{ generation.micros.length}}</div>
           </div>
+          <div class="field">
+            <div class="field-name">Transactions</div>
+            <div class="field-value number" >{{ generation.transactionNumber }}</div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <h2>Key Block</h2>
         </div>
         <div class="grid block-extended-info">
           <div class="field">
             <div class="field-name">Hash</div>
             <div class="field-value block-hash">
-              <router-link :to="`/block/${block.hash}`" v-if="block.hash">
-                <ae-hash type='short' :hash="block.hash"/>
+              <router-link :to="`/block/${generation.keyBlock.hash}`" v-if="generation.keyBlock.hash">
+                <ae-hash type='short' :hash="generation.keyBlock.hash"/>
               </router-link>
             </div>
           </div>
           <div class="field">
-            <div class="field-name">Transactions</div>
-            <div class="field-value number" v-if="block.transactions">{{ block.transactions.length }}</div>
-          </div>
-          <div class="field">
             <div class="field-name">Mined by</div>
             <div class="field-value account-address">
-              <router-link :to="`/account/${block.miner}`">
-                <named-address :address="block.miner" />
+              <router-link :to="`/account/${generation.keyBlock.miner}`">
+                <named-address :address="generation.keyBlock.miner" />
               </router-link>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-name">Time since mined</div>
+            <div class="field-value number">
+              <relative-time :ts="currentTime - generation.keyBlock.time" />
             </div>
           </div>
         </div>
@@ -64,7 +79,7 @@ export default {
    * Computed Properties
    */
   computed: mapState('blocks', [
-    'block',
+    'generation',
     'height'
   ]),
 
@@ -75,7 +90,7 @@ export default {
   watch: {
     height: {
       handler (val) {
-        this.$store.dispatch('blocks/getBlockFromHeight', val)
+        this.$store.dispatch('blocks/getGenerationFromHeight', val)
       },
       immediate: true
     }

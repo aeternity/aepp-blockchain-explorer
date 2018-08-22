@@ -1,4 +1,4 @@
-.latest-block-partial {
+.latest-generation-partial {
   background:$white;
   margin-top:80px;
   > .grid {
@@ -18,7 +18,7 @@
       @include font-size(xl);
     }
   }
-  .block-data {
+  .generation-data {
     /* Rectangle 3: */
     flex-grow:1;
     background: $aubergin;
@@ -32,31 +32,10 @@
       padding:20px;
     }
   }
-  .block-data .grid {
+  .generation-data .grid {
     justify-content:space-between;
     @include only-phone {
       flex-wrap:wrap;
-    }
-  }
-  .block-basic-info {
-    line-height:40px;
-    vertical-align:bottom;
-    border-bottom:2px solid $smoke;
-    padding-bottom:20px;
-    margin-bottom:20px;
-  }
-  .block-basic-info.grid > .foo {
-    background-color:red;
-  }
-  .chain-height {
-    display:flex;
-    @include font-size(xxl);
-    @include phone-and-tablet {
-      @include font-size(xl);
-    }
-    img {
-      margin-right:10px;
-      margin-top:-5px;
     }
   }
   .field {
@@ -88,5 +67,10 @@
   }
   .block-extended-info {
     margin-bottom:20px;
+    border-bottom:2px solid $smoke;
+  }
+
+  .generation-info {
+    border-bottom:2px solid $smoke;
   }
 }

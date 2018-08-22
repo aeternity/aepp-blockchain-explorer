@@ -24,6 +24,16 @@ export default {
   },
 
   /**
+   * setGeneration Mutates the head generation object
+   * @param {Object} state
+   * @param {Object} generation
+   * @return {Object}
+   */
+  setGeneration: function (state, generation) {
+    return Object.assign(state, { generation })
+  },
+
+  /**
    * setBlocks mutates the array of blocks
    * @param {Object} state
    * @param {Array} blocks
@@ -31,6 +41,16 @@ export default {
    */
   setBlocks: function (state, blocks) {
     return Object.assign(state, { blocks })
+  },
+
+  /**
+   * setGenerations mutates the array of generations
+   * @param {Object} state
+   * @param {Array} generations
+   * @return {Object}
+   */
+  setGenerations: function (state, generations) {
+    return Object.assign(state, { generations })
   },
 
   /**

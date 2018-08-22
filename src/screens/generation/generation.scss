@@ -1,27 +1,33 @@
-.block-screen {
-  .block-header {
+.generation-screen {
+  padding-top: 10px;
+  .title-left {
+    margin-left: 10%;
+    margin-bottom: 5px;
+  }
+
+  .generation-header {
+    width:80%;
+    margin: 0 auto 30px;
     background-color:$aubergin;
     color:$white;
+    border-radius: 5px;
+    padding-top: 20px;
   }
   .block-transactions,
   .block-micros,
-  .block-header > * {
+  .generation-header > * {
     @include content-max-width;
   }
 
-  .block-header {
-    .block-navigation,
-    .basic-block-info {
+  .generation-header {
+    .gen-navigation,
+    .basic-gen-info {
       justify-content:space-between;
     }
-    .basic-block-info {
-      border-bottom:2px solid $smoke;
+    .basic-gen-info {
       align-items:flex-end;
-      line-height:50px;
-      padding-bottom:20px;
-      margin-bottom:20px;
     }
-    .block-navigation ,
+    .gen-navigation ,
     .detail-block-info {
       padding: 20px 0;
     }
@@ -32,7 +38,7 @@
       }
     }
     @include only-phone {
-      .basic-block-info.grid,
+      .basic-gen-info.grid,
       .detail-block-info .grid {
         display:block;
       }
@@ -43,30 +49,19 @@
     .account-address {
       color:$magaenta;
     }
-    .block-height {
-      @include font-size(xxl);
-      @include only-phone {
-        //@include font-size(l);
-      }
+    .field {
+      margin-bottom:20px;
     }
     .field-name {
       @include font-size(xs);
       opacity:0.4;
     }
-    .scroll ,
     .field-value {
       margin-top:5px;
       @include font-size(l);
       @include only-phone {
         @include font-size(m);
       }
-    }
-    .scroll {
-      margin-top:10px;
-      padding:12px;
-      background-color:white;
-      color:$aubergin;
-      overflow:scroll;
     }
   }
 
@@ -86,7 +81,15 @@
       margin-right:50px;
     }
   }
-  .transactions .transaction:nth-child(odd) {
-    background:white;
+  .transactions .transaction:nth-child(even) {
+    background:$smoke;
+  }
+
+  .micro-block {
+    background: white;
+    color: black;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
   }
 }
