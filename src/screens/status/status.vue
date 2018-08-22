@@ -45,7 +45,7 @@ export default {
    * Component data
    */
   data: function () {
-    return { node: process.env.AETERNITY_EPOCH_API_URL }
+    return { node: process.env.VUE_APP_EPOCH_URL }
   },
 
   /*

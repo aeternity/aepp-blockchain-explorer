@@ -2,22 +2,20 @@
  * adopted from https://github.com/ethereum/remix
  * licensed under "The MIT License"
  */
-'use strict'
+import { parseCode } from './codeUtils'
 
-var parseCode = require('./codeUtils').parseCode
-
-//function hexConvertArray (ints) {
-  //var ret = '0x'
-  //for (var i = 0; i < ints.length; i++) {
-    //var h = ints[i]
-    //if (h) {
-      //ret += (h <= 0xf ? '0' : '') + h.toString(16)
-    //} else {
-      //ret += '00'
-    //}
-  //}
-  //return ret
-//}
+// function hexConvertArray (ints) {
+// var ret = '0x'
+// for (var i = 0; i < ints.length; i++) {
+// var h = ints[i]
+// if (h) {
+// ret += (h <= 0xf ? '0' : '') + h.toString(16)
+// } else {
+// ret += '00'
+// }
+// }
+// return ret
+// }
 function hexConvert (n) {
   var ret = '0x'
   if (n) {
@@ -67,7 +65,7 @@ var createExpressions = function (instructions) {
   }
   return expressions
 }
-//c => c.toString(16)
+// c => c.toString(16)
 
 var toString = function (expr) {
   if (expr.name.slice(0, 4) === 'PUSH') {
@@ -81,14 +79,10 @@ var toString = function (expr) {
   }
 }
 
-var disassemble = function (input) {
+/**
+ * Disassembler that turns bytecode (as a hex string) into Solidity inline assembly.
+ */
+export function disassemble (input) {
   var code = parseCode(hexToIntArray(input))
-  return createExpressions(code).map(toString)//.join('\n')
-}
-
-module.exports = {
- /**
-  * Disassembler that turns bytecode (as a hex string) into Solidity inline assembly.
-  */
-  disassemble: disassemble
+  return createExpressions(code).map(toString)// .join('\n')
 }

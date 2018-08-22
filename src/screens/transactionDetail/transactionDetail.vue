@@ -54,8 +54,8 @@
 
           <div v-if='transaction.signatures'>
             <h3>Signatures</h3>
-            <field :name="`${n}`" :key='n' v-for='signature, n in transaction.signatures'>
-            <ae-hash type='short' :hash='signature' />
+            <field :name="`${n}`" :key='n' v-for='(signature, n) in transaction.signatures'>
+              <ae-hash type='short' :hash='signature' />
               <view-and-copy :text='signature'/>
             </field>
           </div>

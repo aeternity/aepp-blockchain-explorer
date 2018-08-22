@@ -1,7 +1,6 @@
 <template>
   <div>
 
-
     <field v-if='transaction.tx.sender' name="Sender">
       <router-link :to='`/account/${transaction.tx.sender}`'>
         <named-address size='short' :address='transaction.tx.sender'/>

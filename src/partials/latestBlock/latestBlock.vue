@@ -1,5 +1,5 @@
 <template>
-  <div class="latest-generation-partial" v-else>
+  <div class="latest-generation-partial">
     <div class="grid">
       <div class="explanation">
         <h2 class="title">Latest Generation</h2>
