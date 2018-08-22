@@ -2,9 +2,7 @@
  * adopted from https://github.com/ethereum/remix
  * licensed under "The MIT License"
  */
-'use strict'
-
-var parseCode = require('./codeUtils').parseCode
+import { parseCode } from './codeUtils'
 
 // function hexConvertArray (ints) {
 // var ret = '0x'
@@ -81,14 +79,10 @@ var toString = function (expr) {
   }
 }
 
-var disassemble = function (input) {
+/**
+ * Disassembler that turns bytecode (as a hex string) into Solidity inline assembly.
+ */
+export function disassemble (input) {
   var code = parseCode(hexToIntArray(input))
   return createExpressions(code).map(toString)// .join('\n')
-}
-
-module.exports = {
-  /**
-  * Disassembler that turns bytecode (as a hex string) into Solidity inline assembly.
-  */
-  disassemble: disassemble
 }
