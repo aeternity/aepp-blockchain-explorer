@@ -29,6 +29,7 @@
       <h3>top</h3>
       <pre>{{ nodeStatus.top }}</pre>
     </div>
+    <div v-else>Loading...</div>
   </div>
 </template>
 <script>

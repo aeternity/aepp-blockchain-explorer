@@ -1,6 +1,6 @@
 <template>
   <div class="latest-generation-partial">
-    <div class="grid">
+    <div class="grid" v-if="generation.keyBlock">
       <div class="explanation">
         <h2 class="title">Latest Generation</h2>
         <ae-button type="exciting" size="small" :to="`/generation/${height}`">view last</ae-button>
@@ -57,6 +57,7 @@
         </div>
       </div>
     </div>
+    <div v-else>Loading...</div>
   </div>
 </template>
 <script>
