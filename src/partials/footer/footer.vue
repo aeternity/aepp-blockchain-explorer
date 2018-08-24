@@ -18,7 +18,7 @@
 </template>
 
 <script>
-const SocialLinks = () => import('../socialLinks/socialLinks')
+import SocialLinks from '../socialLinks/socialLinks'
 
 export default {
   components: { SocialLinks }

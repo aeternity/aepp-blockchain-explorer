@@ -82,8 +82,7 @@
 <script>
 import { mapState } from 'vuex'
 import AeFooter from './partials/footer/footer'
-
-const SocialLinks = () => import('./partials/socialLinks/socialLinks')
+import SocialLinks from './partials/socialLinks/socialLinks'
 
 export default {
   name: 'app',
