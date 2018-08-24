@@ -8,9 +8,6 @@
  */
 import Vue from 'vue'
 
-/**
- * Exporting Mutations
- */
 export default {
   /**
    * setAccount

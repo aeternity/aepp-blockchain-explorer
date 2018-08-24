@@ -40,9 +40,6 @@ async function getGenerationFromHeightWrapper (height) {
   return generation
 }
 
-/**
- * Exporting Actions
- */
 export default {
   /**
    * height fetches the block-height

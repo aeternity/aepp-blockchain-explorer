@@ -1,6 +1,3 @@
-/**
- * Exporting Mutations
- */
 export default {
   /**
    * setNodeStatus

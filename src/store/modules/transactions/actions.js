@@ -11,9 +11,6 @@ const { startLoading, endLoading } = createActionHelpers({
   moduleName: 'loading'
 })
 
-/**
- * Exporting Actions
- */
 export default {
   /**
    * get the transactions in the mempool

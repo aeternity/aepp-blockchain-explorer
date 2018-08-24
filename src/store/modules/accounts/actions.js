@@ -13,9 +13,6 @@ import ae from '../../aeppsdk'
 //  moduleName: 'loading'
 // })
 
-/**
- * Exporting Actions
- */
 export default {
   /**
    * get the account details based on an address

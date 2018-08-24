@@ -10,9 +10,6 @@ const { startLoading, endLoading } = createActionHelpers({
   moduleName: 'loading'
 })
 
-/**
- * Exporting Vuex Module
- */
 export default {
   namespaced: true,
   state: {

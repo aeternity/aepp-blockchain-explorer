@@ -1,6 +1,3 @@
-/**
- * Exporting Getters
- */
 export default {
   /**
    * getAccount based on the address
