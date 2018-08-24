@@ -1,6 +1,3 @@
-/**
- * Importing
- */
 import { createActionHelpers } from 'vuex-loading'
 
 /**

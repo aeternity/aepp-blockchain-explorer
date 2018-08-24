@@ -1,6 +1,3 @@
-/**
- * Importing Libraries
- */
 import ae from '../../aeppsdk'
 import { createActionHelpers } from 'vuex-loading'
 

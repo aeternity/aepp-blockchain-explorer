@@ -1,6 +1,3 @@
-/**
- * Importing Libraries
- */
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 import ae from '../../aeppsdk'
