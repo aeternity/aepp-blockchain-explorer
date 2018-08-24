@@ -112,32 +112,14 @@
 import { mapState } from 'vuex'
 
 export default {
-  /*
-   * Component name
-   */
   name: 'app',
-
-  /*
-   * Data props
-   */
   data () {
     return {
       isOpened: false
     }
   },
-
-  /*
-   * Computed Props
-   */
   computed: {
-    /*
-     * Mapping env
-     */
     ...mapState(['env']),
-
-    /*
-     * Network
-     */
     networkName () {
       let url = this.env.VUE_APP_EPOCH_URL
       let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')

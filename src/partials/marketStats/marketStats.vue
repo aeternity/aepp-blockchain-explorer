@@ -30,33 +30,17 @@
   </div>
 </template>
 <script>
-/**
- * Importing libraries
- */
 import { mapState } from 'vuex'
 import polling from '../../functions/polling'
 
-/*
- * Creating polling instance
- */
 const poll = polling()
 
-/**
- * Export component
- */
 export default {
-  /*
-   * Computed properties
-   */
   computed: mapState('_marketStats', [
     'priceChf',
     'marketCapChf',
     'priceBtc'
   ]),
-
-  /*
-   * Create poll function for market-stats
-   */
   mounted: function () {
     return poll.fetch.call(this, '_marketStats/get')
   },

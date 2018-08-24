@@ -1,6 +1,3 @@
-/**
- * Importing Libraries
- */
 import Chain from '@aeternity/aepp-sdk/es/chain/epoch'
 import Tx from '@aeternity/aepp-sdk/es/tx/epoch'
 import Contract from '@aeternity/aepp-sdk/es/ae/contract'
@@ -21,7 +18,4 @@ const ae = AeClient({
 })
 
 window.ae = ae
-/**
- * Exporting AEPP SDK Instance
- */
 export default ae

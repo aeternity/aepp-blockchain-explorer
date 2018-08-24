@@ -121,39 +121,16 @@ const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
-  /*
-   * Component Name
-   */
   name: 'Block',
-
-  /*
-   * Props
-   */
   props: [
     'blockId'
   ],
-
-  /*
-   * Intenal Components
-   */
   components: { AePanel },
-
-  /*
-   * Mixins
-   */
   mixins: [currentTime],
-
-  /*
-   * Computed Properties
-   */
   computed: mapState('blocks', [
     'height',
     'generation'
   ]),
-
-  /*
-   * Component Methods
-   */
   methods: {
     getBlock () {
       if (blockHeightRegex.test(this.blockId)) {
@@ -163,19 +140,11 @@ export default {
       }
     }
   },
-
-  /*
-   * Watch Methods
-   */
   watch: {
     blockId () {
       this.getBlock()
     }
   },
-
-  /*
-   * Mounted lifecycle
-   */
   mounted () {
     this.getBlock()
   }

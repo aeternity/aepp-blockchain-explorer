@@ -1,6 +1,3 @@
-/**
- * Exporting Getters
- */
 export default {
   /**
    * TODO: Refactor this function

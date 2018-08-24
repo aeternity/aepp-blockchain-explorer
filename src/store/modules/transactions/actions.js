@@ -1,6 +1,3 @@
-/**
- * Importing Libraries
- */
 import ae from '../../aeppsdk'
 import { createActionHelpers } from 'vuex-loading'
 
@@ -11,9 +8,6 @@ const { startLoading, endLoading } = createActionHelpers({
   moduleName: 'loading'
 })
 
-/**
- * Exporting Actions
- */
 export default {
   /**
    * get the transactions in the mempool

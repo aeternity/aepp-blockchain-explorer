@@ -1,6 +1,3 @@
-/**
- * Importing Libraries
- */
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 import ae from '../../aeppsdk'
@@ -13,9 +10,6 @@ import ae from '../../aeppsdk'
 //  moduleName: 'loading'
 // })
 
-/**
- * Exporting Actions
- */
 export default {
   /**
    * get the account details based on an address

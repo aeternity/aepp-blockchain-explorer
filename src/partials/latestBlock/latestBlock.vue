@@ -65,28 +65,12 @@ import { AeButton } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 
 export default {
-  /*
-   * Section Components
-   */
   components: { AeButton },
-
-  /*
-   * Section Mixins
-   */
   mixins: [ currentTime ],
-
-  /*
-   * Computed Properties
-   */
   computed: mapState('blocks', [
     'generation',
     'height'
   ]),
-
-  /*
-   * get the latest height of the
-   * blockchain, then get block data
-   */
   watch: {
     height: {
       handler (val) {
