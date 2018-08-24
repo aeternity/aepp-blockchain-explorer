@@ -30,12 +30,16 @@
 <script>
 import ContractCode from '../../components/contractCode/contractCode.vue'
 import CallData from '../../components/callData/callData.vue'
+import Field from '../../components/field/field.vue'
+import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 export default {
   name: 'contract-create-tx',
   props: ['transaction'],
   components: {
     CallData,
-    ContractCode
+    ContractCode,
+    Field,
+    NamedAddress
   }
 }
 </script>

@@ -34,6 +34,8 @@
 <script>
 import CallData from '../../components/callData/callData.vue'
 import CodeView from '../../components/codeView/codeView.vue'
+import Field from '../../components/field/field.vue'
+import NamedAddress from '../../components/namedAddress/namedAddress.vue'
 export default {
   name: 'contract-call-tx',
   props: ['transaction'],
@@ -44,7 +46,9 @@ export default {
   },
   components: {
     CallData,
-    CodeView
+    CodeView,
+    Field,
+    NamedAddress
   },
   async mounted () {
     this.contractCall = await this.$store.dispatch('transactions/getContractCallFromTx', this.transaction.hash)

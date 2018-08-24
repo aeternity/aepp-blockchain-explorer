@@ -22,8 +22,13 @@
   </div>
 </template>
 <script>
+import Field from '../../components/field/field'
+import NamedAddress from '../../components/namedAddress/namedAddress'
+import ViewAndCopy from '../../components/viewAndCopy/viewAndCopy'
+
 export default {
   name: 'spend-tx',
+  components: { Field, NamedAddress, ViewAndCopy },
   props: ['transaction']
 }
 </script>

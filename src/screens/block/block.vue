@@ -116,6 +116,8 @@
 import { mapState } from 'vuex'
 import { AePanel } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
+import RelativeTime from '../../components/relativeTime/relativeTime'
+import Transaction from '../../components/transaction/transaction'
 
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -125,7 +127,7 @@ export default {
   props: [
     'blockId'
   ],
-  components: { AePanel },
+  components: { AePanel, RelativeTime, Transaction },
   mixins: [currentTime],
   computed: mapState('blocks', [
     'height',

@@ -26,19 +26,17 @@
   }
   a {
     height:50px;
-    display:flex;
-    align-items:center;
-
+    display: block;
+    line-height: 50px;
   }
   a img {
     margin-right:20px;
   }
-  .footer-social-links {
+  .social-links {
     @include only-phone {
-      display: flex;
-      width: 100%;
-      div {
-        flex: 1;
+      a {
+        width: 50%;
+        display: inline-block;
       }
     }
   }

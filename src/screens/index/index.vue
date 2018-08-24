@@ -25,6 +25,9 @@
 <script>
 import { mapState } from 'vuex'
 import polling from '../../functions/polling'
+import MarketStats from '../../partials/marketStats/marketStats'
+import LatestBlock from '../../partials/latestBlock/latestBlock'
+import RecentBlocks from '../../partials/recentBlocks/recentBlocks'
 
 const poll = polling()
 
@@ -34,6 +37,7 @@ const accountPublicKeyRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
+  components: { MarketStats, LatestBlock, RecentBlocks },
   data: function () {
     return {
       searchString: ''

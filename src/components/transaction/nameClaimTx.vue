@@ -16,8 +16,12 @@
   </div>
 </template>
 <script>
+import Field from '../field/field'
+import NamedAddress from '../namedAddress/namedAddress'
+
 export default {
   name: 'name-claim-tx',
+  components: { Field, NamedAddress },
   props: [
     'transaction'
   ]

@@ -55,36 +55,7 @@
                       aeternity.com
                     </router-link>
                   </div>
-                  <div class="mobile-nav-fixed-socials-links">
-                    <div class="mobile-nav-fixed-socials-links-row">
-                      <router-link to='/'>
-                        <img src="@/assets/light/github-light.svg" alt="">
-                      </router-link>
-                      <router-link to='/'>
-                        <img src="@/assets/light/medium-light.svg" alt="">
-                      </router-link>
-                      <router-link to='/'>
-                        <img src="@/assets/light/telegram-light.svg" alt="">
-                      </router-link>
-                      <router-link to='/'>
-                        <img src="@/assets/light/twitter-light.svg" alt="">
-                      </router-link>
-                    </div>
-                    <div class="mobile-nav-fixed-socials-links-row">
-                      <router-link to='/'>
-                        <img src="@/assets/light/reddit-light.svg" alt="">
-                      </router-link>
-                      <router-link to='/'>
-                        <img src="@/assets/light/slack-light.svg" alt="">
-                      </router-link>
-                      <router-link to='/'>
-                        <img src="@/assets/light/facebook-light.svg" alt="">
-                      </router-link>
-                      <router-link to='/'>
-                        <img src="@/assets/light/linkedin-light.svg" alt="">
-                      </router-link>
-                    </div>
-                  </div>
+                  <social-links light hide-names />
                 </div>
               </div>
             </div>
@@ -110,9 +81,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import AeFooter from './partials/footer/footer'
+import SocialLinks from './partials/socialLinks/socialLinks'
 
 export default {
   name: 'app',
+  components: { AeFooter, SocialLinks },
   data () {
     return {
       isOpened: false

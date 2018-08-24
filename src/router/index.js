@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Index from '@/screens/index/index.vue'
 import Address from '@/screens/address/address.vue'
-import GenerationList from '@/screens/generationList/generationList.vue'
-import Generation from '@/screens/generation/generation.vue'
-import Block from '@/screens/block/block.vue'
-import Transaction from '@/screens/transaction/transaction.vue'
-import TransactionDetail from '@/screens/transactionDetail/transactionDetail.vue'
 import Status from '@/screens/status/status.vue'
+import GenerationList from '@/screens/generationList/generationList.vue'
+
+const Index = () => import(/* webpackChunkName: 'index' */'@/screens/index/index.vue')
+const Generation = () =>
+  import(/* webpackChunkName: 'transaction' */'@/screens/generation/generation.vue')
+const Block = () => import(/* webpackChunkName: 'transaction' */'@/screens/block/block.vue')
+const Transaction = () =>
+  import(/* webpackChunkName: 'transaction' */'@/screens/transaction/transaction.vue')
+const TransactionDetail = () =>
+  import(/* webpackChunkName: 'transaction-detail' */'@/screens/transactionDetail/transactionDetail.vue')
 
 Vue.use(Router)
 

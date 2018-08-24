@@ -16,8 +16,13 @@
   </div>
 </template>
 <script>
+import Field from '../field/field'
+import NamedAddress from '../namedAddress/namedAddress'
+import AeHash from '../aeHash/aeHash'
+
 export default {
   name: 'name-preclaim-tx',
+  components: { Field, NamedAddress, AeHash },
   props: [
     'transaction'
   ]

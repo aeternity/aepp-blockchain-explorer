@@ -21,8 +21,13 @@
   </div>
 </template>
 <script>
+import Field from '../../components/field/field'
+import AeHash from '../../components/aeHash/aeHash'
+import ViewAndCopy from '../../components/viewAndCopy/viewAndCopy'
+
 export default {
   name: 'name-update-tx',
+  components: { Field, AeHash, ViewAndCopy },
   props: ['transaction']
 }
 </script>
