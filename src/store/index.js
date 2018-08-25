@@ -17,10 +17,6 @@ export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
 
   state: {
-    $environment: process.env.NODE_ENV,
-    $version: '0.0.0',
-    $platform: 'Blockchain Explorer',
-    $language: 'en',
     $nodeStatus: {},
     env: process.env
   },
