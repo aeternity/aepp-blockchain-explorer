@@ -1,26 +1,19 @@
 <template>
-  <div :class="['ae-hash', `_type_${type}`]">
-    <div v-if="type === 'short'">
-      {{displayAddress | startAndEnd}}
-    </div>
-    <div v-else-if="type === 'chunked'">
-      <div v-for="chunk of displayAddress" :key="chunk" class="chunk">
-        {{chunk}}
-      </div>
-    </div>
-    <div v-else>
-      {{displayAddress}}
-    </div>
-  </div>
+  <span class="ae-hash">
+    {{ displayHash }}
+  </span>
 </template>
+
 <script>
+import startAndEnd from '../../filters/startAndEnd'
+
 export default {
   name: 'ae-hash',
   props: {
     /**
      * The hash to display.
      */
-    'hash': {
+    hash: {
       type: String,
       required: true
     },
@@ -28,21 +21,29 @@ export default {
     /**
      * Show the 'full' hash, 'chunked' (full hash grouped by chunks ) or 'short' (show first 6 and last 6 characters)
      */
-    'type': {
+    type: {
       type: String,
       default: 'full'
     }
   },
-  data () {
-    return {
-      showHash: false
-    }
-  },
   computed: {
-    displayAddress () {
-      if (this.type === 'chunked') { return this.hash.match(/.{1,7}/g) }
-      return this.hash
+    displayHash () {
+      switch (this.type) {
+        case 'short':
+          return startAndEnd(this.hash)
+        case 'chunked':
+          return this.hash.match(/.{1,7}/g).join(' ')
+        default:
+          return this.hash
+      }
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.ae-hash {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+}
+</style>
