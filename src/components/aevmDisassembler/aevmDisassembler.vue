@@ -1,26 +1,19 @@
 <template>
   <div class='aevm-disassembler'>
-    <code-view :code='disassembledCode'/>
+    <code-view :code='contractCode | aevmDisassembler'/>
   </div>
 </template>
 <script>
 import CodeView from '../codeView/codeView.vue'
+import aevmDisassembler from '../../filters/aevmDisassembler'
 
-import { disassemble } from './disassembler.js'
 export default {
   name: 'aevm-disassembler',
   props: ['contractCode'],
   components: {
     CodeView
   },
-  computed: {
-    codeHex () {
-      return this.contractCode.map(d => String.fromCharCode(d)).join('')
-    },
-    disassembledCode () {
-      return disassemble(this.codeHex).join('<br/>')
-    }
-  }
+  filters: { aevmDisassembler }
 }
 </script>
 <style lang='scss'>
