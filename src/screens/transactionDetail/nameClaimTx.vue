@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import Field from '../../components/field/field.vue'
+import Field from '../../components/field.vue'
 
 export default {
   name: 'name-claim-tx',

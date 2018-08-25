@@ -28,10 +28,10 @@
   </div>
 </template>
 <script>
-import ContractCode from '../../components/contractCode/contractCode.vue'
-import CodeView from '../../components/codeView/codeView.vue'
-import Field from '../../components/field/field.vue'
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
+import ContractCode from '../../components/contractCode.vue'
+import CodeView from '../../components/codeView.vue'
+import Field from '../../components/field.vue'
+import NamedAddress from '../../components/namedAddress.vue'
 import numbersToString from '../../filters/numbersToString'
 
 export default {

@@ -44,7 +44,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import NamedAddress from '../../components/namedAddress/namedAddress'
+import NamedAddress from '../../components/namedAddress'
 
 export default {
   components: { NamedAddress },

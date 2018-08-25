@@ -69,9 +69,9 @@
 import { mapState, mapGetters } from 'vuex'
 import { AeButton } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
-import RelativeTime from '../../components/relativeTime/relativeTime'
-import NamedAddress from '../../components/namedAddress/namedAddress'
-import AeHash from '../../components/aeHash/aeHash'
+import RelativeTime from '../../components/relativeTime'
+import NamedAddress from '../../components/namedAddress'
+import AeHash from '../../components/aeHash'
 
 export default {
   components: { AeButton, RelativeTime, NamedAddress, AeHash },

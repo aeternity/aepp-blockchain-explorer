@@ -22,9 +22,9 @@
   </div>
 </template>
 <script>
-import Field from '../../components/field/field'
-import NamedAddress from '../../components/namedAddress/namedAddress'
-import ViewAndCopy from '../../components/viewAndCopy/viewAndCopy'
+import Field from '../../components/field'
+import NamedAddress from '../../components/namedAddress'
+import ViewAndCopy from '../../components/viewAndCopy'
 
 export default {
   name: 'spend-tx',

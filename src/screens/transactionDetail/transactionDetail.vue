@@ -83,10 +83,10 @@ import NameUpdateTx from './nameUpdateTx.vue'
 import ContractCallTx from './contractCallTx.vue'
 import ContractCreateTx from './contractCreateTx.vue'
 
-import AeHash from '../../components/aeHash/aeHash.vue'
-import Field from '../../components/field/field.vue'
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
-import ViewAndCopy from '../../components/viewAndCopy/viewAndCopy.vue'
+import AeHash from '../../components/aeHash.vue'
+import Field from '../../components/field.vue'
+import NamedAddress from '../../components/namedAddress.vue'
+import ViewAndCopy from '../../components/viewAndCopy.vue'
 import txTypeToName from '../../filters/txTypeToName'
 
 const txTypesComponentsMap = {

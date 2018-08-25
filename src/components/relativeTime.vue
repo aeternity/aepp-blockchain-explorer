@@ -39,7 +39,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../style/mixins';
+@import '../style/mixins';
 
 .relative-time {
   &.big {

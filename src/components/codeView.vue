@@ -10,7 +10,7 @@ export default {
 </script>
 
 <style lang='scss'>
-@import '../../style/variables';
+@import '../style/variables';
 
 .code-view {
   display: block;

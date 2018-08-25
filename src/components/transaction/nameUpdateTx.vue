@@ -19,9 +19,9 @@
   </div>
 </template>
 <script>
-import Field from '../field/field'
-import NamedAddress from '../namedAddress/namedAddress'
-import AeHash from '../aeHash/aeHash'
+import Field from '../field'
+import NamedAddress from '../namedAddress'
+import AeHash from '../aeHash'
 
 export default {
   name: 'name-update-tx',

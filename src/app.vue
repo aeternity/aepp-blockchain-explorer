@@ -81,7 +81,7 @@
 
 <script>
 import AeFooter from './partials/footer/footer'
-import SocialLinks from './partials/socialLinks/socialLinks'
+import SocialLinks from './partials/socialLinks'
 
 export default {
   name: 'app',

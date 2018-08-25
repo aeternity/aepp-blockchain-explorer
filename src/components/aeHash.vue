@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import startAndEnd from '../../filters/startAndEnd'
+import startAndEnd from '../filters/startAndEnd'
 
 export default {
   name: 'ae-hash',

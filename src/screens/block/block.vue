@@ -116,7 +116,7 @@
 import { mapState } from 'vuex'
 import { AePanel } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
-import RelativeTime from '../../components/relativeTime/relativeTime'
+import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
 
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')

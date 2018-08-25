@@ -50,9 +50,9 @@
 </template>
 <script>
 import { AeBadge } from '@aeternity/aepp-components'
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
-import AeHash from '../../components/aeHash/aeHash.vue'
-import Field from '../../components/field/field.vue'
+import NamedAddress from '../namedAddress.vue'
+import AeHash from '../aeHash.vue'
+import Field from '../field.vue'
 import txTypeToName from '../../filters/txTypeToName'
 
 import SpendTx from './spendTx.vue'

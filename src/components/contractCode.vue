@@ -15,9 +15,9 @@
 
 <script>
 import { AeSwitch } from '@aeternity/aepp-components'
-import CodeView from '../codeView/codeView.vue'
-import numbersToString from '../../filters/numbersToString'
-import aevmDisassembler from '../../filters/aevmDisassembler'
+import CodeView from './codeView.vue'
+import numbersToString from '../filters/numbersToString'
+import aevmDisassembler from '../filters/aevmDisassembler/index'
 
 export default {
   name: 'contract-code',
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../style/variables';
+@import '../style/variables';
 
 .contract-code {
   .ae-switch {
