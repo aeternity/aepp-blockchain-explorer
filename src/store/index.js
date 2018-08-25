@@ -17,8 +17,7 @@ export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
 
   state: {
-    $nodeStatus: {},
-    env: process.env
+    $nodeStatus: {}
   },
 
   mutations: {

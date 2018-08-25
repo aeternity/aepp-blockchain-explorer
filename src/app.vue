@@ -63,7 +63,7 @@
 
         </div>
         <div>
-          <span v-if="env.VUE_APP_SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>
+          <span v-if="VUE_APP_SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>
             {{ networkName }}
           </span>
           <!--<router-link to='/search'>-->
@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import AeFooter from './partials/footer/footer'
 import SocialLinks from './partials/socialLinks/socialLinks'
 
@@ -89,13 +88,13 @@ export default {
   components: { AeFooter, SocialLinks },
   data () {
     return {
-      isOpened: false
+      isOpened: false,
+      VUE_APP_SHOW_NETWORK_STATS: process.env.VUE_APP_SHOW_NETWORK_STATS
     }
   },
   computed: {
-    ...mapState(['env']),
     networkName () {
-      let url = this.env.VUE_APP_EPOCH_URL
+      let url = process.env.VUE_APP_EPOCH_URL
       let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
       if (name) {
         let shortname = name.replace(/([^.]+)-net-api/, '$1')

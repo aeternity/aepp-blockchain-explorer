@@ -16,14 +16,13 @@
       </div>
     </header>
 
-    <market-stats v-if='env.VUE_APP_SHOW_MARKET_STATS'/>
+    <market-stats v-if='VUE_APP_SHOW_MARKET_STATS'/>
     <latest-block />
     <recent-blocks />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import pollAction from '../../mixins/pollAction'
 import MarketStats from '../../partials/marketStats/marketStats'
 import LatestBlock from '../../partials/latestBlock/latestBlock'
@@ -38,11 +37,11 @@ export default {
   components: { MarketStats, LatestBlock, RecentBlocks },
   data: function () {
     return {
-      searchString: ''
+      searchString: '',
+      VUE_APP_SHOW_MARKET_STATS: process.env.VUE_APP_SHOW_MARKET_STATS
     }
   },
   mixins: [pollAction('blocks/getLatestBlocks', 10)],
-  computed: mapState(['env']),
   methods: {
     async search () {
       if (blockHeightRegex.test(this.searchString)) {
