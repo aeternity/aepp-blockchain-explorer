@@ -1,5 +1,5 @@
 <template>
-  <div v-html='code' class='code-view'/>
+  <div class="code-view">{{ code }}</div>
 </template>
 <script>
 export default {
@@ -20,5 +20,6 @@ export default {
   width:60vw;
   max-width:620px;
   word-wrap:break-word;
+  white-space: pre-line;
 }
 </style>
