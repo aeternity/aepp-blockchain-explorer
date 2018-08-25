@@ -2,7 +2,7 @@
   <div :class='transaction.tx.type' class='transaction'>
     <div class="header">
       <field>
-        <tx-type type='badge' :txtype=' transaction.tx.type '/>
+        <ae-badge>{{ transaction.tx.type | txTypeToName }}</ae-badge>
       </field>
 
       <field name='nonce' v-if='transaction.tx.nonce'>
@@ -49,10 +49,11 @@
   </div>
 </template>
 <script>
+import { AeBadge } from '@aeternity/aepp-components'
 import NamedAddress from '../../components/namedAddress/namedAddress.vue'
-import TxType from '../../components/txType/txType.vue'
 import AeHash from '../../components/aeHash/aeHash.vue'
 import Field from '../../components/field/field.vue'
+import txTypeToName from '../../filters/txTypeToName'
 
 import SpendTx from './spendTx.vue'
 import OracleRegisterTx from './oracleRegisterTx.vue'
@@ -82,8 +83,8 @@ export default {
     'transaction'
   ],
   components: {
+    AeBadge,
     NamedAddress,
-    TxType,
     Field,
     AeHash,
     SpendTx,
@@ -96,6 +97,7 @@ export default {
     ContractCallTx,
     ContractCreateTx
   },
+  filters: { txTypeToName },
   computed: {
     componentForTx () {
       return txTypesComponentsMap[ this.transaction.tx.type ]
