@@ -10,21 +10,20 @@
       ]"
       :default="hex"
     />
-    <code-view v-if='view === "hex"' :code='hexCode'/>
-    <aevm-disassembler v-if='view === "opcode"' :contractCode='contractCode'/>
+    <code-view :code="code" />
   </div>
 </template>
 <script>
 import CodeView from '../codeView/codeView.vue'
 import { AeSwitch } from '@aeternity/aepp-components'
-import AevmDisassembler from '../aevmDisassembler/aevmDisassembler.vue'
+import numbersToString from '../../filters/numbersToString'
+import aevmDisassembler from '../../filters/aevmDisassembler'
 export default {
   name: 'contract-code',
   props: ['contractCode'],
   components: {
     AeSwitch,
-    CodeView,
-    AevmDisassembler
+    CodeView
   },
   data () {
     return {
@@ -32,8 +31,11 @@ export default {
     }
   },
   computed: {
-    hexCode () {
-      return this.contractCode.map(d => String.fromCharCode(d)).join('')
+    code () {
+      switch (this.view) {
+        case 'opcode': return aevmDisassembler(this.contractCode)
+        default: return numbersToString(this.contractCode)
+      }
     }
   }
 }
