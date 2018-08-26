@@ -27,7 +27,7 @@ export default new Vuex.Store({
      * @param $nodeStatus
      */
     setNodeStatus (state, $nodeStatus) {
-      return Object.assign(state, { $nodeStatus })
+      Object.assign(state, { $nodeStatus })
     }
   },
 
