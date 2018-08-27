@@ -33,23 +33,16 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import polling from '../../functions/polling'
-
-const poll = polling()
+import pollAction from '../../mixins/pollAction'
 
 export default {
   data: function () {
     return { node: process.env.VUE_APP_EPOCH_URL }
   },
+  mixins: [pollAction('getNodeStatus')],
   computed: mapState({
     nodeStatus: '$nodeStatus'
-  }),
-  beforeRouteEnter (to, from, next) {
-    return next((vm) => poll.fetch.call(vm, 'getNodeStatus'))
-  },
-  beforeRouteLeave (to, from, next) {
-    return poll.close('getNodeStatus', () => next())
-  }
+  })
 }
 </script>
 <style src='./status.scss' lang='scss' />

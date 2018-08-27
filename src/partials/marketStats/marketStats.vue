@@ -31,22 +31,15 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import polling from '../../functions/polling'
-
-const poll = polling()
+import pollAction from '../../mixins/pollAction'
 
 export default {
+  mixins: [pollAction('_marketStats/get')],
   computed: mapState('_marketStats', [
     'priceChf',
     'marketCapChf',
     'priceBtc'
-  ]),
-  mounted: function () {
-    return poll.fetch.call(this, '_marketStats/get')
-  },
-  destroyed: function () {
-    return poll.close('blocks/getLatestBlocks')
-  }
+  ])
 }
 </script>
 <style src='./marketStats.scss' lang='scss' />
