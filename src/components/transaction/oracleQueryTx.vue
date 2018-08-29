@@ -46,7 +46,7 @@
   </div>
 </template>
 <script>
-import Field from '../field/field'
+import Field from '../field'
 
 export default {
   name: 'oracle-query-tx',

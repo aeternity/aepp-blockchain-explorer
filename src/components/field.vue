@@ -13,7 +13,7 @@ export default {
 }
 </script>
 <style scoped lang='scss'>
-@import '../../style/mixins';
+@import '../style/mixins';
 
 .field {
   display:flex;

@@ -8,7 +8,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { AeAddress, AeIdentityAvatar } from '@aeternity/aepp-components'
+import { AeAddress } from '@aeternity/aepp-components'
 
 export default {
   name: 'named-address',
@@ -16,8 +16,7 @@ export default {
     'address'
   ],
   components: {
-    AeAddress,
-    AeIdentityAvatar
+    AeAddress
   },
   computed: {
     ...mapGetters('accounts', [

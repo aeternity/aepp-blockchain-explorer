@@ -28,8 +28,8 @@
   </div>
 </template>
 <script>
-import Field from '../field/field'
-import NamedAddress from '../namedAddress/namedAddress'
+import Field from '../field'
+import NamedAddress from '../namedAddress'
 
 export default {
   name: 'contract-call-tx',

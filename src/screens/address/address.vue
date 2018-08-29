@@ -24,8 +24,8 @@
 import { mapState } from 'vuex'
 import { AeAddress, AeIdentityAvatar, AePanel } from '@aeternity/aepp-components'
 import pollAction from '../../mixins/pollAction'
-import NamedAddress from '../../components/namedAddress/namedAddress'
-import Field from '../../components/field/field'
+import NamedAddress from '../../components/namedAddress'
+import Field from '../../components/field'
 
 // TODO: There is a reactivity problem in here, The v-if does not work
 export default {

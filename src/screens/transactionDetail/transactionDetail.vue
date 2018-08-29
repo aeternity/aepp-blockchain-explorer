@@ -3,11 +3,11 @@
     <div class="inner">
       <div>
         <h1 class='title'>Transaction Detail</h1>
-        <tx-type v-if='transaction' type='h2' :txtype='transaction.tx.type'/>
+        <h2>{{ transaction.tx.type | txTypeToName }}</h2>
         <div v-if='transaction'>
 
           <field v-if='transaction.tx.type' name="Type">
-            <tx-type type='badge' :txtype='transaction.tx.type'/>
+            <ae-badge>{{ transaction.tx.type | txTypeToName }}</ae-badge>
           </field>
 
           <field v-if='transaction.hash' name="Hash">
@@ -83,11 +83,11 @@ import NameUpdateTx from './nameUpdateTx.vue'
 import ContractCallTx from './contractCallTx.vue'
 import ContractCreateTx from './contractCreateTx.vue'
 
-import AeHash from '../../components/aeHash/aeHash.vue'
-import Field from '../../components/field/field.vue'
-import TxType from '../../components/txType/txType.vue'
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
-import ViewAndCopy from '../../components/viewAndCopy/viewAndCopy.vue'
+import AeHash from '../../components/aeHash.vue'
+import Field from '../../components/field.vue'
+import NamedAddress from '../../components/namedAddress.vue'
+import ViewAndCopy from '../../components/viewAndCopy.vue'
+import txTypeToName from '../../filters/txTypeToName'
 
 const txTypesComponentsMap = {
   'contract_call_tx': ContractCallTx,
@@ -111,7 +111,6 @@ export default {
     AeHash,
     NamedAddress,
     Field,
-    TxType,
     ViewAndCopy,
     SpendTx,
     OracleRegisterTx,
@@ -124,6 +123,7 @@ export default {
     ContractCallTx,
     ContractCreateTx
   },
+  filters: { txTypeToName },
   computed: {
     ...mapGetters('transactions', [
       'getTxByHash'

@@ -15,10 +15,10 @@
       {{contractCall.gasUsed}}
     </field>
     <field name="VM Version">
-      <call-data :call-data='transaction.tx.vmVersion'/>
+      <code-view :code="transaction.tx.vmVersion | numbersToString" />
     </field>
     <field name="Call Data">
-      <call-data :call-data='transaction.tx.callData'/>
+      <code-view :code="transaction.tx.callData | numbersToString" />
     </field>
     <field name="Return Type">
       <code-view :code='contractCall.returnType'/>
@@ -32,10 +32,11 @@
   </div>
 </template>
 <script>
-import CallData from '../../components/callData/callData.vue'
-import CodeView from '../../components/codeView/codeView.vue'
-import Field from '../../components/field/field.vue'
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
+import CodeView from '../../components/codeView.vue'
+import Field from '../../components/field.vue'
+import NamedAddress from '../../components/namedAddress.vue'
+import numbersToString from '../../filters/numbersToString'
+
 export default {
   name: 'contract-call-tx',
   props: ['transaction'],
@@ -45,11 +46,11 @@ export default {
     }
   },
   components: {
-    CallData,
     CodeView,
     Field,
     NamedAddress
   },
+  filters: { numbersToString },
   async mounted () {
     this.contractCall = await this.$store.dispatch('transactions/getContractCallFromTx', this.transaction.hash)
   }

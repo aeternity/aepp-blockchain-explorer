@@ -16,7 +16,7 @@ export default {
   },
   mutations: {
     setMarketStats (state, stats) {
-      return Object.assign(state, stats)
+      Object.assign(state, stats)
     }
   },
   actions: {

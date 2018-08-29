@@ -23,23 +23,26 @@
         <contract-code :contract-code='transaction.tx.code'/>
       </field>
       <field name="Call Data">
-        <call-data :call-data='transaction.tx.callData'/>
+        <code-view :code="transaction.tx.callData | numbersToString" />
       </field>
   </div>
 </template>
 <script>
-import ContractCode from '../../components/contractCode/contractCode.vue'
-import CallData from '../../components/callData/callData.vue'
-import Field from '../../components/field/field.vue'
-import NamedAddress from '../../components/namedAddress/namedAddress.vue'
+import ContractCode from '../../components/contractCode.vue'
+import CodeView from '../../components/codeView.vue'
+import Field from '../../components/field.vue'
+import NamedAddress from '../../components/namedAddress.vue'
+import numbersToString from '../../filters/numbersToString'
+
 export default {
   name: 'contract-create-tx',
   props: ['transaction'],
   components: {
-    CallData,
+    CodeView,
     ContractCode,
     Field,
     NamedAddress
-  }
+  },
+  filters: { numbersToString }
 }
 </script>
