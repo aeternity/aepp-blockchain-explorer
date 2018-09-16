@@ -20,7 +20,7 @@
           </div>
           <div class="field">
             <div class="field-name">Micro Blocks</div>
-            <div class="field-value number" >{{ generation.micros.length}}</div>
+            <div class="field-value number" v-if="generation.micros" >{{ generation.micros.length}}</div>
           </div>
           <div class="field">
             <div class="field-name">Transactions</div>
@@ -35,7 +35,7 @@
           <div class="field">
             <div class="field-name">Hash</div>
             <div class="field-value block-hash">
-              <router-link :to="`/block/${generation.keyBlock.hash}`" v-if="generation.keyBlock.hash">
+              <router-link :to="`/block/${generation.keyBlock.hash}`" v-if="generation.keyBlock">
                 <ae-hash type='short' :hash="generation.keyBlock.hash"/>
               </router-link>
             </div>
@@ -43,7 +43,7 @@
           <div class="field">
             <div class="field-name">Mined by</div>
             <div class="field-value account-address">
-              <router-link :to="`/account/${generation.keyBlock.miner}`">
+              <router-link :to="`/account/${generation.keyBlock.miner}`" v-if="generation.keyBlock">
                 <named-address :address="generation.keyBlock.miner" />
               </router-link>
             </div>
@@ -51,7 +51,7 @@
           <div class="field">
             <div class="field-name">Time since mined</div>
             <div class="field-value number">
-              <relative-time :ts="currentTime - generation.keyBlock.time" />
+              <relative-time :ts="currentTime - generation.keyBlock.time" v-if="generation.keyBlock" />
             </div>
           </div>
         </div>
