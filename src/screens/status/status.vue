@@ -1,8 +1,17 @@
 <template>
   <div class="status-screen screen">
     <div v-if='nodeStatus.top && nodeStatus.version'>
+      <h2>Change Connected Network</h2>
+      <ae-input placeholder="Network to connect to: " v-model="newNetworkName"/>
+      <ae-button
+        type="exciting"
+        size="medium"
+        @click="changeNetwork"
+        >
+        connect
+      </ae-button>
       <h1>Status</h1>
-      <p>Explorer connected to: <strong>{{ node }}</strong></p>
+      <p>Explorer connected to: <strong>{{ this.$store.state.baseUrl }}</strong></p>
       <h2>Node and Peers</h2>
       <table>
         <tr>
@@ -14,7 +23,7 @@
           <th>version.genesis_hash</th>
         </tr>
         <tr>
-          <td><strong>{{ node }}</strong></td>
+          <td><strong>{{ this.$store.state.baseUrl }}</strong></td>
           <td>{{ nodeStatus.top.height }}</td>
           <td>{{ nodeStatus.top.hash | startAndEnd }}</td>
           <td>{{ nodeStatus.top.time }}</td>
@@ -23,7 +32,7 @@
         </tr>
       </table>
       <h1>Detail</h1>
-      <h2>{{ node }} </h2>
+      <h2>{{ this.$store.state.baseUrl }} </h2>
       <h3>version</h3>
       <pre>{{ nodeStatus.version }}</pre>
       <h3>top</h3>
@@ -34,15 +43,29 @@
 <script>
 import { mapState } from 'vuex'
 import pollAction from '../../mixins/pollAction'
+import {
+  AeButton,
+  AeInput
+} from '@aeternity/aepp-components'
 
 export default {
   data: function () {
-    return { node: process.env.VUE_APP_EPOCH_URL }
+    return { newNetworkName: '' }
   },
   mixins: [pollAction('getNodeStatus')],
   computed: mapState({
     nodeStatus: '$nodeStatus'
-  })
+  }),
+  components: {
+    AeButton,
+    AeInput
+  },
+  methods: {
+    changeNetwork () {
+      this.$store.commit('changeNetwork', this.newNetworkName)
+      this.newNetworkName = ''
+    }
+  }
 }
 </script>
 <style src='./status.scss' lang='scss' />
