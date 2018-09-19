@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav>
+    <nav class="app-nav">
       <div class="inner">
         <router-link class="logo" to="/">
           <img src="@/assets/header-logo.svg" />
