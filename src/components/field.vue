@@ -16,13 +16,16 @@ export default {
 @import '../style/mixins';
 
 .field {
-  display:flex;
-  justify-content:space-between;
+  display: block;
   padding:8px 0;
 }
 .field-name {
-  @include font-size(s);
-  color: rgba($black, .7);
+  @include font-size(xs);
+  color: inherit;
+  &:first-letter{
+    text-transform: uppercase;
+  }
+
 }
 .field-value {
   @include font-size(m);
