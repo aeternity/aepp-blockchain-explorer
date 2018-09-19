@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import { createActionHelpers } from 'vuex-loading'
 import modules from './modules'
 import ae from './aeppsdk'
+import VueWait from 'vue-wait'
+Vue.use(VueWait)
 
 Vue.use(Vuex)
 
@@ -14,11 +16,13 @@ const { startLoading, endLoading } = createActionHelpers({
 })
 
 const watchNetworkChange = store => {
-  store.subscribe((mutation, state) => {
+  store.subscribe(async (mutation, state) => {
     if (mutation.type === 'changeNetwork') {
-      store.dispatch('blocks/height')
-      store.dispatch('getNodeStatus')
-      store.dispatch('blocks/getLatestGenerations', 10)
+      store.dispatch('wait/start', 'changing network', { root: true })
+      await store.dispatch('blocks/height')
+      await store.dispatch('getNodeStatus')
+      await store.dispatch('blocks/getLatestGenerations', 10)
+      store.dispatch('wait/end', 'changing network', { root: true })
     }
   })
 }
