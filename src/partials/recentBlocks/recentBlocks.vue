@@ -3,7 +3,7 @@
     <div class="inner">
       <h2>Recent generations</h2>
       <p>View the latest generations on the aeternity blockchain</p>
-      <table>
+      <table v-if="generations.length">
         <tr v-for='(b, i) in generations.slice(0, 3)' :key="i" v-if="generations.length">
           <template v-if="b">
             <td>
@@ -39,6 +39,7 @@
           </template>
         </tr>
       </table>
+      <span v-else>Loading...</span>
     </div>
   </div>
 </template>
