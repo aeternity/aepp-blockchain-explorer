@@ -94,7 +94,7 @@ export default {
   },
   computed: {
     networkName () {
-      let url = this.$store.state.baseUrl
+      let url = this.$store.state.epochUrl
       let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
       if (name) {
         let shortname = name.replace(/([^.]+)-net-api/, '$1')

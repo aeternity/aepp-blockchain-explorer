@@ -14,10 +14,9 @@ const AeClient = Chain
 
 const ae = function (url = process.env.VUE_APP_EPOCH_URL) {
   return AeClient({
-    url: url,
+    url,
     keypair: generateKeyPair()
   })
 }
 
-window.ae = ae()
 export default ae

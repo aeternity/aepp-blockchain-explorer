@@ -53,5 +53,21 @@ export default {
    */
   addBlocks (state, blocks) {
     Object.assign(state, { blocks: state.blocks.concat(blocks) })
+  },
+
+  /***
+   * resetAll reset the state of 'blocks' module
+   * @param {Object} state
+   */
+  resetState (state) {
+    Object.assign(state,
+      {
+        height: 0,
+        generation: {},
+        block: {},
+        blocks: [],
+        generations: []
+      }
+    )
   }
 }

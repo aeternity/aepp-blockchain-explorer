@@ -26,5 +26,19 @@ export default {
    */
   setMempoolTxs (state, mempoolTxs) {
     Object.assign(state, { mempoolTxs })
+  },
+
+  /***
+   * resetAll reset the state of 'transactions' module
+   * @param {Object} state
+   */
+  resetState (state) {
+    Object.assign(state,
+      {
+        transaction: {},
+        transactions: [],
+        mempoolTxs: []
+      }
+    )
   }
 }

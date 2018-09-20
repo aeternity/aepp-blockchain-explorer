@@ -3,8 +3,6 @@ import Vuex from 'vuex'
 import { createActionHelpers } from 'vuex-loading'
 import modules from './modules'
 import ae from './aeppsdk'
-import VueWait from 'vue-wait'
-Vue.use(VueWait)
 
 Vue.use(Vuex)
 
@@ -15,24 +13,12 @@ const { startLoading, endLoading } = createActionHelpers({
   moduleName: 'loading'
 })
 
-const watchNetworkChange = store => {
-  store.subscribe(async (mutation, state) => {
-    if (mutation.type === 'changeNetwork') {
-      store.dispatch('wait/start', 'changing network', { root: true })
-      await store.dispatch('blocks/height')
-      await store.dispatch('getNodeStatus')
-      await store.dispatch('blocks/getLatestGenerations', 10)
-      store.dispatch('wait/end', 'changing network', { root: true })
-    }
-  })
-}
-
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
 
   state: {
     $nodeStatus: {},
-    baseUrl: process.env.VUE_APP_EPOCH_URL
+    epochUrl: process.env.VUE_APP_EPOCH_URL
   },
 
   mutations: {
@@ -47,10 +33,10 @@ const store = new Vuex.Store({
     /**
      * changeNetwork
      * @param state
-     * @param baseUrl
+     * @param epochUrl
      */
-    changeNetwork (state, baseUrl) {
-      state.baseUrl = baseUrl
+    changeNetworkUrl (state, epochUrl) {
+      state.epochUrl = epochUrl
     }
   },
 
@@ -65,7 +51,7 @@ const store = new Vuex.Store({
     async getNodeStatus ({ state, commit, dispatch }) {
       startLoading(dispatch, 'getNodeStatus')
 
-      const client = await ae(state.baseUrl)
+      const client = await ae(state.epochUrl)
 
       const [top, version] = await Promise.all([
         client.api.getTop(),
@@ -80,8 +66,7 @@ const store = new Vuex.Store({
     }
   },
 
-  modules,
-  plugins: [watchNetworkChange]
+  modules
 })
 
 export default store

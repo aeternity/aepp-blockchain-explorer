@@ -3,7 +3,7 @@
     <div v-if='nodeStatus.top && nodeStatus.version'>
       <h2>Change Connected Network</h2>
       <form @submit.prevent="changeNetwork">
-        <ae-input placeholder="Network to connect to: " v-model="newNetworkName" @keyup.enter="changeNetwork"/>
+        <ae-input placeholder="Network to connect to: " v-model="newNetworkUrl" @keyup.enter="changeNetwork"/>
         <ae-button
           type="exciting"
           size="medium"
@@ -12,9 +12,7 @@
         </ae-button>
       </form>
       <v-wait for="changing network">
-        <template slot='waiting'>
-          <spinner message="Loading... Please wait" />
-        </template>
+        <ae-loader slot="waiting" class="loader"/>
         <h1>Status</h1>
         <p>Explorer connected to: <strong>{{ node }}</strong></p>
         <h2>Node and Peers</h2>
@@ -51,32 +49,39 @@ import { mapState } from 'vuex'
 import pollAction from '../../mixins/pollAction'
 import {
   AeButton,
-  AeInput
+  AeInput,
+  AeLoader
 } from '@aeternity/aepp-components'
-import Spinner from 'vue-simple-spinner'
 
 export default {
   data: function () {
-    return { newNetworkName: '' }
+    return { newNetworkUrl: '' }
   },
   mixins: [pollAction('getNodeStatus')],
-  computed: {
-    ...mapState({
-      nodeStatus: '$nodeStatus'
-    }),
-    node: function () {
-      return this.$store.state.baseUrl
-    }
-  },
+  computed: mapState({
+    nodeStatus: '$nodeStatus',
+    node: 'epochUrl'
+  }),
   components: {
     AeButton,
     AeInput,
-    Spinner
+    AeLoader
   },
   methods: {
-    changeNetwork () {
-      this.$store.commit('changeNetwork', this.newNetworkName)
-      this.newNetworkName = ''
+    async changeNetwork () {
+      this.$store.commit('changeNetworkUrl', this.newNetworkUrl)
+      this.newNetworkUrl = ''
+      this.$store.commit('blocks/resetState')
+      this.$store.commit('accounts/resetState')
+      this.$store.commit('transactions/resetState')
+
+      this.$store.dispatch('wait/start', 'changing network', { root: true })
+      await Promise.all([
+        this.$store.dispatch('blocks/height'),
+        this.$store.dispatch('getNodeStatus')
+      ])
+      this.$store.dispatch('wait/end', 'changing network', { root: true })
+      this.$store.dispatch('blocks/getLatestGenerations', 10)
     }
   }
 }
