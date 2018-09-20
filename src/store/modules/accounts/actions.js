@@ -24,7 +24,13 @@ export default {
 
     const client = await ae
 
-    const {balance} = await client.api.getAccountBalance(address)
+    let balance = 0
+
+    try {
+      balance = await client.api.getAccountBalance(address)
+    } catch (e) {
+      balance = 0
+    }
 
     const account = { address, balance }
 
