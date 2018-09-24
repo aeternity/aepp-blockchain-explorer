@@ -5,18 +5,15 @@
     </h3>
     <div class="generation-header">
       <div class="basic-gen-info grid">
-        <div>
-          <div class="field-name">Height</div>
-          <div class="number">{{ generation.keyBlock.height }}</div>
-        </div>
-        <div>
-          <div class="field-name">Micro Blocks</div>
-          <div class="number">{{ generation.micros.length }}</div>
-        </div>
-        <div>
-          <div class="field-name">Transactions</div>
-          <div class="number">{{ generation.transactionNumber }}</div>
-        </div>
+        <field name="Height">
+            <div class="number">{{ generation.keyBlock.height }}</div>
+        </field>
+        <field name="Micro Blocks">
+           <div class="number">{{ generation.micros.length }}</div>
+        </field>
+        <field name="Transactions">
+            <div class="number">{{ generation.transactionNumber }}</div>
+        </field>
       </div>
       <div class="gen-navigation grid">
         <router-link :to="`/generation/${(generation.keyBlock.height - 1)}`">
@@ -32,51 +29,42 @@
     </h3>
     <div class="generation-header">
       <div class="basic-gen-info grid">
-        <div>
-          <div class="field-name">mined by</div>
-          <div class="account-address">
-            <router-link :to="`/account/${generation.keyBlock.miner}`">
-              {{ generation.keyBlock.miner | startAndEnd }}
-            </router-link>
-          </div>
-        </div>
-        <div>
-          <div class="field-name">time since mined</div>
+        <field name="mined by">
+          <router-link :to="`/account/${generation.keyBlock.miner}`" class="account-address">
+             <ae-hash type="short" :hash="generation.keyBlock.miner"/>
+          </router-link>
+          <view-and-copy :text='generation.keyBlock.miner'/>
+        </field>
+        <field name="time since mined">
           <relative-time :ts="currentTime - generation.keyBlock.time" spaced />
-        </div>
+        </field>
       </div>
       <div class="detail-block-info">
-        <div class="field hash">
-          <div class="field-name">Hash</div>
-          <div class="block-hash">
+        <field name="Hash" class="hash">
             <router-link :to="`/block/${generation.keyBlock.hash}`">
-              {{ generation.keyBlock.hash }}
+              <ae-hash type="short" :hash="generation.keyBlock.hash"/>
             </router-link>
-          </div>
-        </div>
+            <view-and-copy :text='generation.keyBlock.hash'/>
+        </field>
         <div class="grid">
-          <div class="field rewarded">
-            <div class="field-name">Target</div>
+          <field name="target" class="rewarded">
             <div class="field-value number">
               {{ generation.keyBlock.target }}
             </div>
-          </div>
-          <div class="field time">
-            <div class="field-name">
-              Time (<span class="number">{{ generation.keyBlock.time }}</span>)
-            </div>
-            <div class="field-value number">
+          </field>
+          <field name="time" :content="generation.keyBlock.time" class="time">
+            <time :timedate="generation.keyBlock.time | humanDate" class="field-value number">
               {{ generation.keyBlock.time | humanDate }}
-            </div>
-          </div>
-          <div class="field hash">
-            <div class="field-name">Parent Hash</div>
+            </time>
+          </field>
+          <field name="parent hash" class="hash">
             <div class="field-value block-hash">
               <router-link :to="`/block/${generation.keyBlock.prevHash}`">
-                {{ generation.keyBlock.prevHash | startAndEnd }}
+                <ae-hash type="short" :hash="generation.keyBlock.prevHash"/>
               </router-link>
+              <view-and-copy :text='generation.keyBlock.prevHash'/>
             </div>
-          </div>
+          </field>
         </div>
       </div>
     </div>
@@ -93,36 +81,28 @@
         </h4>
         <div class="micro-block">
           <div class="grid">
-            <div class="field hash">
-              <div class="field-name">Hash</div>
-              <div class="block-hash">
+            <field name="hash" class="hash">
                 <router-link :to="`/block/${m.hash}`">
-                  {{ m.hash }}
+                   <ae-hash type="short" :hash="m.hash"/>
                 </router-link>
-              </div>
-            </div>
-            <div class="field" >
-              <div class="field-name">Time since mined</div>
+                <view-and-copy :text='m.hash'/>
+            </field>
+            <field name="time since mined">
               <relative-time :ts="currentTime - m.time" spaced />
-            </div>
+            </field>
           </div>
           <div class="grid">
-            <div class="field time">
-              <div class="field-name">
-                Time (<span class="number">{{ m.time }}</span>)
-              </div>
-              <div class="field-value number">
+            <field name="time" class="time">
+              <time :timedate="m.time | humanDate" class="field-value number">
                 {{ m.time | humanDate }}
-              </div>
-            </div>
-            <div class="field hash">
-              <div class="field-name">Parent Hash</div>
-              <div class="field-value block-hash">
+              </time>
+            </field>
+            <field name="parent hash" class="hash">
                 <router-link :to="`/block/${m.prevHash}`">
-                  {{ m.prevHash | startAndEnd }}
+                  <ae-hash type="short" :hash="m.prevHash"/>
                 </router-link>
-              </div>
-            </div>
+                <view-and-copy :text='m.prevHash'/>
+            </field>
           </div>
           <div class="block-transactions">
             <h2 class="title">
@@ -133,7 +113,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -145,6 +124,9 @@ import { AePanel } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
+import Field from '../../components/field'
+import AeHash from '../../components/aeHash'
+import ViewAndCopy from '../../components/viewAndCopy.vue'
 
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -165,7 +147,7 @@ export default {
   /*
    * Intenal Components
    */
-  components: { AePanel, RelativeTime, Transaction },
+  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy },
 
   /*
    * Mixins
