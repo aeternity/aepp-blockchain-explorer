@@ -3,7 +3,10 @@
     <div class="inner">
       <h2>Recent generations</h2>
       <p>View the latest generations on the aeternity blockchain</p>
-      <table>
+      <v-wait for="loading recent generations">
+        <ae-loader slot="waiting" class="loader"/>
+
+        <table>
         <tr v-for='(b, i) in generations.slice(0, 3)' :key="i" v-if="generations.length">
           <template v-if="b">
             <td>
@@ -39,22 +42,24 @@
           </template>
         </tr>
       </table>
+      </v-wait>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 import NamedAddress from '../../components/namedAddress'
+import { AeLoader } from '@aeternity/aepp-components'
 
 export default {
-  components: { NamedAddress },
+  components: { NamedAddress, AeLoader },
   computed: mapState('blocks', [
     'generations'
   ]),
-  mounted: function () {
-    return this
-      .$store
-      .dispatch('blocks/getLatestGenerations', 10)
+  mounted: async function () {
+    this.$store.dispatch('wait/start', 'loading recent generations', { root: true })
+    await this.$store.dispatch('blocks/getLatestGenerations', 10)
+    this.$store.dispatch('wait/end', 'loading recent generations', { root: true })
   }
 }
 </script>

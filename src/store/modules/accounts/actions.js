@@ -12,7 +12,6 @@ export default {
    * @return {*}
    */
   async get ({ state, commit, dispatch }, address) {
-
     const client = await ae(this.state.epochUrl)
 
     let balance = 0

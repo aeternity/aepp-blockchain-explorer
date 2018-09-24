@@ -16,65 +16,70 @@
 
       <table class="transactions">
         <tr v-for="(b, i) in generations" :key="i">
-          <template v-if="b">
-            <td>
-              <div class="height">
-                <router-link :to="`/generation/${b.keyBlock.height}`">
-                  {{ b.keyBlock.height }}
-                </router-link>
-              </div>
-            </td>
-            <td>
-              <span class="field-name">key-hash</span>
-              <span v-if="b.keyBlock.hash" class="number">
-                <ae-hash type="short" :hash="b.keyBlock.hash"/>
-              </span>
-              <span v-else>n/a</span>
-            </td>
-            <td>
-              <span class="number">{{ b.micros.length }}</span>
-              <span class="field-name">Micro Blocks</span>
-            </td>
-            <td>
-              <span class="number">{{ b.transactionNumber }}</span>
-              <span class="field-name">Transaction(s)</span>
-            </td>
-            <td>
-              <span class="field-name">mined by</span>
-              <span class="account-address">
-                <router-link :to="`/account/${b.keyBlock.miner}`">
-                  <named-address :address="b.keyBlock.miner"/>
-                </router-link>
-              </span>
-            </td>
-            <td>
-              <span class="field-name">time</span>
-              <span class="number">
-                <relative-time :ts="currentTime - b.keyBlock.time"/>
-              </span>
-            </td>
-          </template>
-          <template v-else>
-            <td colspan="3">Loading..</td>
+          <template>
+            <v-wait for="loading generation list">
+              <td slot="waiting">
+                <ae-loader slot="waiting"/>
+              </td>
+              <td>
+                <div class="height">
+                  <router-link :to="`/generation/${b.keyBlock.height}`">
+                    {{ b.keyBlock.height }}
+                  </router-link>
+                </div>
+              </td>
+              <td>
+                <span class="field-name">key-hash</span>
+                <span v-if="b.keyBlock.hash" class="number">
+                  <ae-hash type="short" :hash="b.keyBlock.hash"/>
+                </span>
+                <span v-else>n/a</span>
+              </td>
+              <td>
+                <span class="number">{{ b.micros.length }}</span>
+                <span class="field-name">Micro Blocks</span>
+              </td>
+              <td>
+                <span class="number">{{ b.transactionNumber }}</span>
+                <span class="field-name">Transaction(s)</span>
+              </td>
+              <td>
+                <span class="field-name">mined by</span>
+                <span class="account-address">
+                  <router-link :to="`/account/${b.keyBlock.miner}`">
+                    <named-address :address="b.keyBlock.miner"/>
+                  </router-link>
+                </span>
+              </td>
+              <td>
+                <span class="field-name">time</span>
+                <span class="number">
+                  <relative-time :ts="currentTime - b.keyBlock.time"/>
+                </span>
+              </td>
+            </v-wait>
           </template>
         </tr>
       </table>
       <div class="center">
-        <ae-button invert type="exciting" @click="loadMore">load more</ae-button>
+        <v-wait for="loading more generations">
+          <ae-loader slot="waiting" class="loader"/>
+          <ae-button type="dramatic" @click="loadMore">load more</ae-button>
+        </v-wait>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { AeButton } from '@aeternity/aepp-components'
+import { AeButton, AeLoader } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
 import NamedAddress from '../../components/namedAddress'
 import AeHash from '../../components/aeHash'
 
 export default {
-  components: { AeButton, RelativeTime, NamedAddress, AeHash },
+  components: { AeButton, RelativeTime, NamedAddress, AeHash, AeLoader },
   mixins: [currentTime],
   computed: {
     ...mapState('blocks', [
@@ -86,15 +91,19 @@ export default {
     ])
   },
   methods: {
-    loadMore: function () {
-      return this.$store.dispatch('blocks/getLatestGenerations', this.generations.length + 10)
+    loadMore: async function () {
+      this.$store.dispatch('wait/start', 'loading more generations', { root: true })
+      await this.$store.dispatch('blocks/getLatestGenerations', this.generations.length + 10)
+      this.$store.dispatch('wait/end', 'loading more generations', { root: true })
     }
   },
-  mounted: function () {
-    return this.$store.dispatch('blocks/getLatestGenerations', 10)
+  mounted: async function () {
+    this.$store.dispatch('wait/start', 'loading generation list', { root: true })
+    await this.$store.dispatch('blocks/getLatestGenerations', 10)
+    this.$store.dispatch('wait/end', 'loading generation list', { root: true })
   },
   activated: function () {
-    return this.$store.dispatch('blocks/getLatestGenerations', 10)
+    this.$store.dispatch('blocks/getLatestGenerations', 10)
   }
 }
 </script>

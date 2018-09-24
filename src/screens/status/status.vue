@@ -42,6 +42,7 @@
       </template>
       <ae-loader v-else class="loader"/>
     </div>
+    <ae-loader v-else class="loader" />
   </div>
 </template>
 <script>
