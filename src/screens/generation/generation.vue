@@ -42,12 +42,10 @@
         </div>
         <div class="detail-block-info">
           <field name="Hash" class="hash">
-            <div class="block-hash">
               <router-link :to="`/block/${generation.keyBlock.hash}`">
                 <ae-hash type="short" :hash="generation.keyBlock.hash"/>
               </router-link>
               <view-and-copy :text='generation.keyBlock.hash'/>
-            </div>
           </field>
           <div class="grid">
             <field name="target" class="rewarded">
