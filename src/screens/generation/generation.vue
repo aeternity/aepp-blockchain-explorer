@@ -83,7 +83,13 @@
 
     <div class="block-micros">
       <h2 class="title">
-        <span class="number">{{ generation.micros.length }}</span> Micro Block(s)
+        <span class="number">{{ generation.micros.length }}</span>
+        <span v-if="generation.micros.length < 1">
+          Micro Blocks
+        </span>
+        <span v-else>
+          Micro Block
+        </span>
       </h2>
       <div :key="m.hash" v-for="(m, index) in generation.micros">
         <h4>
