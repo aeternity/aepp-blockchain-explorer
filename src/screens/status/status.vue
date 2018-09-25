@@ -11,8 +11,7 @@
           connect
         </ae-button>
       </form>
-      <v-wait for="changing network">
-        <ae-loader slot="waiting" class="loader"/>
+      <template v-if="!isNetworkChanging" for="changing network">
         <h1>Status</h1>
         <p>Explorer connected to: <strong>{{ node }}</strong></p>
         <h2>Node and Peers</h2>
@@ -40,7 +39,8 @@
         <pre>{{ nodeStatus.version }}</pre>
         <h3>top</h3>
         <pre>{{ nodeStatus.top }}</pre>
-      </v-wait>
+      </template>
+      <ae-loader v-else class="loader"/>
     </div>
   </div>
 </template>
@@ -55,7 +55,10 @@ import {
 
 export default {
   data: function () {
-    return { newNetworkUrl: '' }
+    return {
+      newNetworkUrl: '',
+      isNetworkChanging: false
+    }
   },
   mixins: [pollAction('getNodeStatus')],
   computed: mapState({
@@ -69,18 +72,18 @@ export default {
   },
   methods: {
     async changeNetwork () {
+      this.isNetworkChanging = true
       this.$store.commit('changeNetworkUrl', this.newNetworkUrl)
       this.newNetworkUrl = ''
       this.$store.commit('blocks/resetState')
       this.$store.commit('accounts/resetState')
       this.$store.commit('transactions/resetState')
 
-      this.$store.dispatch('wait/start', 'changing network', { root: true })
       await Promise.all([
         this.$store.dispatch('blocks/height'),
         this.$store.dispatch('getNodeStatus')
       ])
-      this.$store.dispatch('wait/end', 'changing network', { root: true })
+      this.isNetworkChanging = false
       this.$store.dispatch('blocks/getLatestGenerations', 10)
     }
   }
