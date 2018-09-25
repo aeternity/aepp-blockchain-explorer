@@ -1,12 +1,30 @@
 @import '../../style/mixins';
-.generation-screen {
-  padding-top: 10px;
-  .title-left {
-    margin-left: 10%;
-    margin-bottom: 5px;
-  }
 
-  .generation-header {
+.title {
+
+    @include font-size(l);
+   font-weight: bold;
+
+    &-main{
+
+    }
+    &-sub {
+     font-weight: normal;
+    }
+    &-numbers{
+      @include font-size(m);
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+    }
+
+}
+
+.generation-header {
+  .title {
+    margin-left: 10%;
+    padding-left: 20px;
+  }
+  &__section {
     width:80%;
     margin: 0 auto 30px;
     background-color:$aubergin;
@@ -14,11 +32,16 @@
     border-radius: 5px;
     padding-top: 20px;
   }
+}
+
+.generation-screen {
+  padding-top: 10px;
   .block-transactions,
   .block-micros,
-  .generation-header > * {
+  .generation-header__section > * {
     @include content-max-width;
   }
+
 
   .generation-header {
     .gen-navigation,
@@ -26,7 +49,7 @@
       justify-content:space-between;
     }
     .basic-gen-info {
-      align-items:flex-end;
+      align-items: baseline;
     }
     .gen-navigation ,
     .detail-block-info {
@@ -44,35 +67,46 @@
         display:block;
       }
     }
-    .detail-block-info .grid .field {
+    .detail-block-info .grid .field:not(:last-child) {
       margin-right:50px;
     }
     .account-address {
       color:$magaenta;
+
     }
-    .field {
-      margin-bottom:20px;
+  }
+  
+  @include only-phone {
+    .basic-gen-info.grid,
+    .detail-block-info .grid {
+      display:block;
     }
-    .field-name {
-      @include font-size(xs);
-      opacity:0.4;
-    }
-    .field-value {
-      margin-top:5px;
-      @include font-size(l);
-      @include only-phone {
-        @include font-size(m);
-      }
+  }
+  .detail-block-info .grid .field:not(:last-child) {
+    margin-right:50px;
+  }
+  .account-address {
+    color:$magaenta;
+  }
+  .field {
+    margin-bottom:20px;
+  }
+  .field-name {
+    @include font-size(xs);
+    opacity:0.4;
+  }
+  .field-value {
+    margin-top:5px;
+    @include font-size(l);
+    @include only-phone {
+      @include font-size(m);
     }
   }
 
-
   .block-transactions, .block-micros{
-    .title {
+    .title-sub {
       margin-top: 50px;
       margin-bottom: 30px;
-      @include font-size(l);
-      font-weight: normal;
       padding-bottom: 20px;
       border-bottom: 2px solid $aubergin;
     }

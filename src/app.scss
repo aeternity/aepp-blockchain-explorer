@@ -27,26 +27,7 @@ html, body {
   background: $aubergin;
 
 }
-.network-name {
-  text-transform:uppercase;
-  position:fixed;
-  right:20px;
-  @include font-size(xs);
-  font-weight:500;
-  padding:5px 7px;
-  background: #F7296E;
-  border-radius: 5px;
-  @include only-phone {
-    width:100%;
-    bottom:0;
-    left:0;
-    border-radius:0;
-    padding:15px 0;
-    margin:0;
-    text-align:center;
-    z-index:1;
-  }
-}
+
 .number ,
 .block-hash,
 .block-number,
@@ -80,34 +61,34 @@ a {
   color:inherit;
   text-decoration:none;
 }
-nav {
+.app-nav {
   padding:30px 0px;
   position:absolute;
   top:0;
   width:100%;
   color:$white;
 }
-nav >.inner >:first-child ,
-nav >.inner >:last-child {
+.app-nav >.inner >:first-child ,
+.app-nav >.inner >:last-child {
   @include tablet-and-desktop {
     width:280px;
   }
 }
-nav >.inner >:last-child {
+.app-nav >.inner >:last-child {
   text-align:right;
 }
-nav .inner {
+.app-nav .inner {
   margin:0 auto;
   width:calc(100% - #{2 * $content-margin});
   display:flex;
   justify-content:space-between;
 }
-nav .links {
+.app-nav .links {
   @include only-phone {
     display: none;
   }
 }
-nav a {
+.app-nav .link {
   @include font-size(m);
   position:relative;
   display:inline-block;
@@ -118,7 +99,7 @@ nav a {
     margin:0 10px 0 0;
   }
 }
-nav .logo {
+.app-nav .logo {
   display:flex;
   @include only-phone {
     .app-name {
@@ -126,17 +107,17 @@ nav .logo {
     }
   }
 }
-nav .logo img + *{
+.app-nav .logo img + *{
   margin-top:-12px;
   margin-left:5px;
 }
-nav a.link {
+.app-nav a.link {
   opacity:0.6;
 }
-nav a.router-link-exact-active {
+.app-nav a.router-link-exact-active {
   opacity:1.0;
 }
-nav a.router-link-exact-active.link:after {
+.app-nav a.router-link-exact-active.link:after {
   content: "";
   display:block;
   position:absolute;
@@ -145,7 +126,7 @@ nav a.router-link-exact-active.link:after {
   border-top:3px solid #F7296E;
   bottom:-8px;
 }
-nav .inner {
+.app-nav .inner {
   @include only-phone {
     .links + .mobile-nav,
     .mobile-nav {
@@ -154,7 +135,7 @@ nav .inner {
     }
   }
 }
-nav .mobile-nav {
+.app-nav .mobile-nav {
   display: none;
   @include only-phone {
     display: flex;
@@ -223,7 +204,7 @@ nav .mobile-nav {
 .screen {
   padding-bottom:130px;
 }
-nav + main > .screen > :first-child{
+.app-nav + main > .screen > :first-child{
   padding-top:100px;
 }
 
@@ -244,4 +225,24 @@ nav + main > .screen > :first-child{
 }
 .slide-in-top-out {
   animation-direction: reverse;
+}
+.network-name {
+  text-transform:uppercase;
+  position:fixed;
+  right:20px;
+  @include font-size(xs);
+  font-weight:500;
+  padding:5px 7px;
+  background: #F7296E;
+  border-radius: 5px;
+  @include only-phone {
+    width:100%;
+    bottom:0;
+    left:0;
+    border-radius:0;
+    padding:15px 0;
+    margin:0;
+    text-align:center;
+    z-index:1;
+  }
 }
