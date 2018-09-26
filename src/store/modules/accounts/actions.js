@@ -22,7 +22,7 @@ export default {
   async get ({ state, commit, dispatch }, address) {
     // startLoading(dispatch, 'accounts/get')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
 
     let balance = 0
 

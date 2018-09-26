@@ -20,7 +20,7 @@ export default {
   async get ({ state, commit, dispatch }, hash) {
     startLoading(dispatch, 'transactions/get')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const transactions = await client.api.getTxs()
 
     commit('setTransactions', transactions)
@@ -41,7 +41,7 @@ export default {
   async mempool ({ state, commit, dispatch }, hash) {
     startLoading(dispatch, 'transactions/mempool')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const mempoolTxs = await client.api.getTxs()
 
     commit('setMempoolTxs', mempoolTxs)
@@ -62,7 +62,7 @@ export default {
   async getTransactionsFromBlockHash ({ state, commit, dispatch }, hash) {
     startLoading(dispatch, 'transactions/getTransactionsFromBlockHash')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const transactions = await client.api.getTxs()
 
     commit('setTransactions', transactions)
@@ -84,7 +84,7 @@ export default {
   async getTxsFromBlocksByHeightRange ({ state, commit, dispatch }, { from, to }) {
     startLoading(dispatch, 'transactions/getTxsFromBlocksByHeightRange')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const transactions = await client.api.getTxsListFromBlockRangeByHeight({
       from,
       to,
@@ -109,7 +109,7 @@ export default {
   async getTxByHash ({ state, commit, dispatch }, hash) {
     startLoading(dispatch, 'transactions/getTxByHash')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const { transaction } = await client.api.getTx(hash, { txEncoding: 'json' })
 
     commit('setTransaction', transaction)
@@ -121,8 +121,6 @@ export default {
 
   /**
    *
-   * @param state
-   * @param commit
    * @param dispatch
    * @param hash
    * @return {Promise<*>}
@@ -130,7 +128,7 @@ export default {
   async getContractCallFromTx ({ dispatch }, hash) {
     startLoading(dispatch, 'transactions/getContractCallFromTx')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const call = await client.api.getContractCallFromTx(hash)
 
     endLoading(dispatch, 'transactions/getContractCallFromTx')

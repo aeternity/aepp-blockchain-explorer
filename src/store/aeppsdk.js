@@ -12,10 +12,11 @@ const AeClient = Chain
   .compose(Account)
   // .debugSwagger(true)
 
-const ae = AeClient({
-  url: process.env.VUE_APP_EPOCH_URL,
-  keypair: generateKeyPair()
-})
+const ae = function (url = process.env.VUE_APP_EPOCH_URL) {
+  return AeClient({
+    url,
+    keypair: generateKeyPair()
+  })
+}
 
-window.ae = ae
 export default ae

@@ -13,11 +13,12 @@ const { startLoading, endLoading } = createActionHelpers({
   moduleName: 'loading'
 })
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
 
   state: {
-    $nodeStatus: {}
+    $nodeStatus: {},
+    epochUrl: process.env.VUE_APP_EPOCH_URL
   },
 
   mutations: {
@@ -28,6 +29,14 @@ export default new Vuex.Store({
      */
     setNodeStatus (state, $nodeStatus) {
       Object.assign(state, { $nodeStatus })
+    },
+    /**
+     * changeNetwork
+     * @param state
+     * @param epochUrl
+     */
+    changeNetworkUrl (state, epochUrl) {
+      state.epochUrl = epochUrl
     }
   },
 
@@ -42,7 +51,7 @@ export default new Vuex.Store({
     async getNodeStatus ({ state, commit, dispatch }) {
       startLoading(dispatch, 'getNodeStatus')
 
-      const client = await ae
+      const client = await ae(state.epochUrl)
 
       const [top, version] = await Promise.all([
         client.api.getTop(),
@@ -59,3 +68,5 @@ export default new Vuex.Store({
 
   modules
 })
+
+export default store

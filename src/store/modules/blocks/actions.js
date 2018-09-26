@@ -12,10 +12,11 @@ const { startLoading, endLoading } = createActionHelpers({
 
 /**
  * @param height
+ * @param epochUrl
  * @returns {Promise<*>}
  */
-async function getGenerationFromHeightWrapper (height) {
-  const client = await ae
+async function getGenerationFromHeightWrapper (height, epochUrl) {
+  const client = await ae(epochUrl)
   const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
   const microBlocksHashes = generation.microBlocks
   let transactionNumber = 0
@@ -48,7 +49,7 @@ export default {
   async height ({ state, commit, dispatch }) {
     startLoading(dispatch, 'blocks/height')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const height = await client.height()
 
     if (height === state.height) {
@@ -72,7 +73,7 @@ export default {
   async getGenerationFromHash ({ state, commit, dispatch }, hash) {
     startLoading(dispatch, 'blocks/getGenerationFromHash')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const generation = await client.api.getGenerationByHash(hash, { txEncoding: 'json' })
     const microBlocksHashes = generation.microBlocks
     let transactionNumber = 0
@@ -113,7 +114,7 @@ export default {
   async getBlockFromHash ({ state, commit, dispatch }, hash) {
     startLoading(dispatch, 'blocks/getBlockFromHash')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const block = await client.api.getKeyBlockByHash(hash, { txEncoding: 'json' })
 
     if (isEqual(state.block, block)) {
@@ -139,7 +140,7 @@ export default {
   async getGenerationFromHeight ({ state, commit, dispatch }, height) {
     startLoading(dispatch, 'blocks/getGenerationFromHeight')
 
-    const generation = await getGenerationFromHeightWrapper(height)
+    const generation = await getGenerationFromHeightWrapper(height, this.state.epochUrl)
 
     if (isEqual(state.block, generation)) {
       endLoading(dispatch, 'blocks/getGenerationFromHeight')
@@ -163,7 +164,7 @@ export default {
   async getBlockFromHeight ({ state, commit, dispatch }, height) {
     startLoading(dispatch, 'blocks/getBlockFromHeight')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const block = await client.api.getKeyBlockByHeight(height, { txEncoding: 'json' })
 
     if (isEqual(state.block, block)) {
@@ -190,7 +191,7 @@ export default {
     startLoading(dispatch, 'blocks/getLatestBlocks')
 
     await dispatch('height')
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
@@ -222,7 +223,7 @@ export default {
 
     await dispatch('height')
     const generations = await Promise.all(
-      times(size, (index) => getGenerationFromHeightWrapper(state.height - index))
+      times(size, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
     )
 
     if (!generations.length) {
@@ -249,7 +250,7 @@ export default {
   async addBlocksByHeightAndSize ({ state, commit, dispatch }, {height, size}) {
     startLoading(dispatch, 'blocks/addBlocksByHeightAndSize')
 
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
