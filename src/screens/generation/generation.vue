@@ -83,13 +83,8 @@
 
     <div class="block-micros">
       <h2 class="title">
-        <span class="number">{{ generation.micros.length }}</span>
-        <span v-if="generation.micros.length < 1">
-          Micro Blocks
-        </span>
-        <span v-else>
-          Micro Block
-        </span>
+        <span class="number">{{ generation.micros.length  }}</span>
+          Micro Block{{ generation.micros.length !== 1 ? 's' : '' }}
       </h2>
       <div :key="m.hash" v-for="(m, index) in generation.micros">
         <h4>
@@ -132,7 +127,7 @@
           </div>
           <div class="block-transactions">
             <h2 class="title">
-              <span class="number">{{ m.transactions.length }}</span> Transaction(s)
+              <span class="number">{{ m.transactions.length }}</span> Transaction{{ m.transactions.length !== 1 ? 's' : '' }}
             </h2>
             <div class="transactions">
               <transaction :key="t.hash" v-for="t in m.transactions" :transaction="t"/>
