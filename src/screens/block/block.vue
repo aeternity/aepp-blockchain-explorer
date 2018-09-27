@@ -1,7 +1,6 @@
 <template>
-  <div  v-if="generation.keyBlock" class="block-screen screen">
-    <v-wait for="loading block">
-      <ae-loader slot="waiting" class="loader"/>
+  <div class="block-screen screen">
+    <div  v-if="generation.keyBlock">
       <div class="block-header">
         <div class="basic-block-info grid">
           <div>
@@ -110,7 +109,10 @@
           </div>
         </div>
       </div>
-    </v-wait>
+    </div>
+    <div v-else>
+      <ae-loader class="loader"/>
+    </div>
   </div>
 </template>
 
@@ -136,14 +138,12 @@ export default {
     'generation'
   ]),
   methods: {
-    async getBlock () {
-      this.$store.dispatch('wait/start', 'loading block', { root: true })
+    getBlock () {
       if (blockHeightRegex.test(this.blockId)) {
-        await this.$store.dispatch('blocks/getGenerationFromHeight', Number(this.blockId))
+        this.$store.dispatch('blocks/getGenerationFromHeight', Number(this.blockId))
       } else if (blockHashRegex.test(this.blockId)) {
-        await this.$store.dispatch('blocks/getGenerationFromHash', this.blockId)
+        this.$store.dispatch('blocks/getGenerationFromHash', this.blockId)
       }
-      this.$store.dispatch('wait/end', 'loading block', { root: true })
     }
   },
   watch: {

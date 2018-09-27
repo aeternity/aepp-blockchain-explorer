@@ -14,58 +14,52 @@
         </div>
       </div>
 
-      <table class="transactions">
+      <table class="transactions" v-if="generations.length">
         <tr v-for="(b, i) in generations" :key="i">
-          <template>
-            <v-wait for="loading generation list">
-              <td slot="waiting">
-                <ae-loader slot="waiting"/>
-              </td>
-              <td>
-                <div class="height">
-                  <router-link :to="`/generation/${b.keyBlock.height}`">
-                    {{ b.keyBlock.height }}
-                  </router-link>
-                </div>
-              </td>
-              <td>
-                <span class="field-name">key-hash</span>
-                <span v-if="b.keyBlock.hash" class="number">
-                  <ae-hash type="short" :hash="b.keyBlock.hash"/>
-                </span>
-                <span v-else>n/a</span>
-              </td>
-              <td>
-                <span class="number">{{ b.micros.length }}</span>
-                <span class="field-name">Micro Blocks</span>
-              </td>
-              <td>
-                <span class="number">{{ b.transactionNumber }}</span>
-                <span class="field-name">Transaction(s)</span>
-              </td>
-              <td>
-                <span class="field-name">mined by</span>
-                <span class="account-address">
-                  <router-link :to="`/account/${b.keyBlock.miner}`">
-                    <named-address :address="b.keyBlock.miner"/>
-                  </router-link>
-                </span>
-              </td>
-              <td>
-                <span class="field-name">time</span>
-                <span class="number">
-                  <relative-time :ts="currentTime - b.keyBlock.time"/>
-                </span>
-              </td>
-            </v-wait>
-          </template>
+          <td>
+            <div class="height">
+              <router-link :to="`/generation/${b.keyBlock.height}`">
+                {{ b.keyBlock.height }}
+              </router-link>
+            </div>
+          </td>
+          <td>
+            <span class="field-name">key-hash</span>
+            <span v-if="b.keyBlock.hash" class="number">
+                <ae-hash type="short" :hash="b.keyBlock.hash"/>
+              </span>
+            <span v-else>n/a</span>
+          </td>
+          <td>
+            <span class="number">{{ b.micros.length }}</span>
+            <span class="field-name">Micro Blocks</span>
+          </td>
+          <td>
+            <span class="number">{{ b.transactionNumber }}</span>
+            <span class="field-name">Transaction(s)</span>
+          </td>
+          <td>
+            <span class="field-name">mined by</span>
+            <span class="account-address">
+                <router-link :to="`/account/${b.keyBlock.miner}`">
+                  <named-address :address="b.keyBlock.miner"/>
+                </router-link>
+              </span>
+          </td>
+          <td>
+            <span class="field-name">time</span>
+            <span class="number">
+                <relative-time :ts="currentTime - b.keyBlock.time"/>
+              </span>
+          </td>
         </tr>
       </table>
+      <td v-else>
+        <ae-loader class="loader"/>
+      </td>
       <div class="center">
-        <v-wait for="loading more generations">
-          <ae-loader slot="waiting" class="loader"/>
-          <ae-button type="dramatic" @click="loadMore">load more</ae-button>
-        </v-wait>
+        <ae-loader v-if="isLoadingMore"  class=""/>
+        <ae-button v-else type="dramatic" @click="loadMore">load more</ae-button>
       </div>
     </div>
   </div>
@@ -81,6 +75,11 @@ import AeHash from '../../components/aeHash'
 export default {
   components: { AeButton, RelativeTime, NamedAddress, AeHash, AeLoader },
   mixins: [currentTime],
+  data: function () {
+    return {
+      isLoadingMore: false
+    }
+  },
   computed: {
     ...mapState('blocks', [
       'generations'
@@ -92,17 +91,15 @@ export default {
   },
   methods: {
     loadMore: async function () {
-      this.$store.dispatch('wait/start', 'loading more generations', { root: true })
+      this.isLoadingMore = true
       await this.$store.dispatch('blocks/getLatestGenerations', this.generations.length + 10)
-      this.$store.dispatch('wait/end', 'loading more generations', { root: true })
+      this.isLoadingMore = false
     }
   },
   mounted: async function () {
-    this.$store.dispatch('wait/start', 'loading generation list', { root: true })
-    await this.$store.dispatch('blocks/getLatestGenerations', 10)
-    this.$store.dispatch('wait/end', 'loading generation list', { root: true })
+    this.$store.dispatch('blocks/getLatestGenerations', 10)
   },
-  activated: function () {
+  activated: async function () {
     this.$store.dispatch('blocks/getLatestGenerations', 10)
   }
 }

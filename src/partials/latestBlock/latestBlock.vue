@@ -7,9 +7,7 @@
         <ae-button type="exciting" size="small" to="/generations">view all</ae-button>
       </div>
       <div class="generation-data">
-        <v-wait for="loading latest generation">
-          <ae-loader slot="waiting" class="loader"/>
-
+        <template v-if="generation.keyBlock">
           <h2>Generation</h2>
           <div class="grid generation">
             <div class="field">
@@ -57,7 +55,8 @@
               </div>
             </div>
           </div>
-        </v-wait>
+        </template>
+        <ae-loader v-else class="loader"/>
       </div>
     </div>
   </div>
@@ -79,10 +78,8 @@ export default {
   ]),
   watch: {
     height: {
-      async handler (val) {
-        this.$store.dispatch('wait/start', 'loading latest generation', { root: true })
-        await this.$store.dispatch('blocks/getGenerationFromHeight', val)
-        this.$store.dispatch('wait/end', 'loading latest generation', { root: true })
+      handler (val) {
+        this.$store.dispatch('blocks/getGenerationFromHeight', val)
       },
       immediate: true
     }

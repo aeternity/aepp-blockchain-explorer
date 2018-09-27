@@ -1,134 +1,140 @@
 <template>
-  <article  v-if="generation.keyBlock" class="generation-screen screen">
-    <header class="generation-header">
-      <h1 class="title title-main">
-        Generation:
-      </h1>
-      <section class="generation-header__section">
-        <div class="basic-gen-info grid">
-          <field name="Height">
-            <div class="number">{{ generation.keyBlock.height }}</div>
-          </field>
-          <field name="Micro Blocks">
-            <div class="number">{{ generation.micros.length }}</div>
-          </field>
-          <field name="Transactions">
-            <div class="number">{{ generation.transactionNumber }}</div>
-          </field>
-        </div>
-        <nav class="gen-navigation grid">
-          <router-link :to="`/generation/${(generation.keyBlock.height - 1)}`">
-            prev: {{ generation.keyBlock.height - 1 }}
-          </router-link>
-          <router-link :to="`/generation/${(generation.keyBlock.height + 1)}`" v-if="generation.keyBlock.height">
-            next: {{ generation.keyBlock.height + 1 }}
-          </router-link>
-        </nav>
-      </section>
-      <h2 class="title title-main">
-      Key Block:
-      </h2>
-      <section class="generation-header__section">
-        <div class="basic-gen-info grid">
-          <field name="mined by">
-            <router-link :to="`/account/${generation.keyBlock.miner}`" class="account-address">
-              <ae-hash type="short" :hash="generation.keyBlock.miner"/>
+  <article  class="generation-screen screen">
+    <section v-if="generation.keyBlock">
+      <header class="generation-header">
+        <h1 class="title title-main">
+          Generation:
+        </h1>
+        <section class="generation-header__section">
+          <div class="basic-gen-info grid">
+            <field name="Height">
+              <div class="number">{{ generation.keyBlock.height }}</div>
+            </field>
+            <field name="Micro Blocks">
+              <div class="number">{{ generation.micros.length }}</div>
+            </field>
+            <field name="Transactions">
+              <div class="number">{{ generation.transactionNumber }}</div>
+            </field>
+          </div>
+          <nav class="gen-navigation grid">
+            <router-link :to="`/generation/${(generation.keyBlock.height - 1)}`">
+              prev: {{ generation.keyBlock.height - 1 }}
             </router-link>
-            <view-and-copy :text='generation.keyBlock.miner'/>
-          </field>
-          <field name="time since mined">
-            <relative-time :ts="currentTime - generation.keyBlock.time" spaced />
-          </field>
-        </div>
-        <div class="detail-block-info">
-          <field name="Hash" class="hash">
+            <router-link :to="`/generation/${(generation.keyBlock.height + 1)}`" v-if="generation.keyBlock.height">
+              next: {{ generation.keyBlock.height + 1 }}
+            </router-link>
+          </nav>
+        </section>
+        <h2 class="title title-main">
+          Key Block:
+        </h2>
+        <section class="generation-header__section">
+          <div class="basic-gen-info grid">
+            <field name="mined by">
+              <router-link :to="`/account/${generation.keyBlock.miner}`" class="account-address">
+                <ae-hash type="short" :hash="generation.keyBlock.miner"/>
+              </router-link>
+              <view-and-copy :text='generation.keyBlock.miner'/>
+            </field>
+            <field name="time since mined">
+              <relative-time :ts="currentTime - generation.keyBlock.time" spaced />
+            </field>
+          </div>
+          <div class="detail-block-info">
+            <field name="Hash" class="hash">
               <router-link :to="`/block/${generation.keyBlock.hash}`">
                 <ae-hash type="short" :hash="generation.keyBlock.hash"/>
               </router-link>
               <view-and-copy :text='generation.keyBlock.hash'/>
-          </field>
-          <div class="grid">
-            <field name="target" class="rewarded">
-              <div class="field-value number">
-                {{ generation.keyBlock.target }}
-              </div>
             </field>
-            <field name="time" :content="generation.keyBlock.time" class="time">
-              <time :timedate="generation.keyBlock.time | humanDate" class="field-value number">
-                {{ generation.keyBlock.time | humanDate }}
-              </time>
-            </field>
-            <field name="parent hash" class="hash">
-              <div class="field-value block-hash">
-                <router-link :to="`/block/${generation.keyBlock.prevHash}`">
-                  <ae-hash type="short" :hash="generation.keyBlock.prevHash"/>
-                </router-link>
-                <view-and-copy :text='generation.keyBlock.prevHash'/>
-              </div>
-            </field>
+            <div class="grid">
+              <field name="target" class="rewarded">
+                <div class="field-value number">
+                  {{ generation.keyBlock.target }}
+                </div>
+              </field>
+              <field name="time" :content="generation.keyBlock.time" class="time">
+                <time :timedate="generation.keyBlock.time | humanDate" class="field-value number">
+                  {{ generation.keyBlock.time | humanDate }}
+                </time>
+              </field>
+              <field name="parent hash" class="hash">
+                <div class="field-value block-hash">
+                  <router-link :to="`/block/${generation.keyBlock.prevHash}`">
+                    <ae-hash type="short" :hash="generation.keyBlock.prevHash"/>
+                  </router-link>
+                  <view-and-copy :text='generation.keyBlock.prevHash'/>
+                </div>
+              </field>
+            </div>
           </div>
-        </div>
-      </section>
-    </header>
+        </section>
+      </header>
 
-    <section class="block-micros">
-      <h2 class="title title-sub">
-        <span class="number">{{ generation.micros.length }}</span> Micro Block(s)
-      </h2>
+      <section class="block-micros">
+        <h2 class="title title-sub">
+          <span class="number">{{ generation.micros.length }}</span> Micro Block(s)
+        </h2>
 
-      <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.micros">
-        <h3 class="title title-numbers">
+        <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.micros">
+          <h3 class="title title-numbers">
             Micro Block No. {{index+1}}
-        </h3>
-        <section class="micro-block">
+          </h3>
+          <section class="micro-block">
 
-          <div class="grid">
-            <field name="hash" class="hash">
+            <div class="grid">
+              <field name="hash" class="hash">
                 <router-link :to="`/block/${m.hash}`">
-                   <ae-hash type="short" :hash="m.hash"/>
+                  <ae-hash type="short" :hash="m.hash"/>
                 </router-link>
                 <view-and-copy :text='m.hash'/>
-            </field>
-            <field name="time since mined">
-              <relative-time :ts="currentTime - m.time" spaced />
-            </field>
-          </div>
-          <div class="grid">
-            <field name="time" class="time">
-              <time :timedate="m.time | humanDate" class="field-value number">
-                {{ m.time | humanDate }}
-              </time>
-            </field>
-            <field name="parent hash" class="hash">
+              </field>
+              <field name="time since mined">
+                <relative-time :ts="currentTime - m.time" spaced />
+              </field>
+            </div>
+            <div class="grid">
+              <field name="time" class="time">
+                <time :timedate="m.time | humanDate" class="field-value number">
+                  {{ m.time | humanDate }}
+                </time>
+              </field>
+              <field name="parent hash" class="hash">
                 <router-link :to="`/block/${m.prevHash}`">
                   <ae-hash type="short" :hash="m.prevHash"/>
                 </router-link>
                 <view-and-copy :text='m.prevHash'/>
-            </field>
-          </div>
-
-          <article class="block-transactions">
-            <header class="block-transactions__header">
-              <h2 class="title title-sub">
-                <span class="number">{{ m.transactions.length }}</span> Transaction(s)
-              </h2>
-            </header>
-            <div class="transactions">
-              <transaction :key="t.hash" v-for="t in m.transactions" :transaction="t"/>
+              </field>
             </div>
-          </article>
 
-        </section>
-      </article>
+            <article class="block-transactions">
+              <header class="block-transactions__header">
+                <h2 class="title title-sub">
+                  <span class="number">{{ m.transactions.length }}</span> Transaction(s)
+                </h2>
+              </header>
+              <div class="transactions">
+                <transaction :key="t.hash" v-for="t in m.transactions" :transaction="t"/>
+              </div>
+            </article>
 
+          </section>
+        </article>
+
+      </section>
     </section>
+
+    <div v-else>
+      <ae-loader class="loader"/>
+    </div>
 
   </article>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { AePanel } from '@aeternity/aepp-components'
+import { AePanel, AeLoader } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
@@ -155,7 +161,7 @@ export default {
   /*
    * Intenal Components
    */
-  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy },
+  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, AeLoader },
 
   /*
    * Mixins
