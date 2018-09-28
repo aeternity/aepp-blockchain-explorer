@@ -40,7 +40,7 @@
         </tr>
       </table>
       <div v-else>
-        <ae-loader slot="waiting" class="loader"/>
+        <loader/>
       </div>
     </div>
   </div>
@@ -48,10 +48,10 @@
 <script>
 import { mapState } from 'vuex'
 import NamedAddress from '../../components/namedAddress'
-import { AeLoader } from '@aeternity/aepp-components'
+import Loader from '../../components/loader'
 
 export default {
-  components: { NamedAddress, AeLoader },
+  components: { NamedAddress, Loader },
   computed: mapState('blocks', [
     'generations'
   ]),

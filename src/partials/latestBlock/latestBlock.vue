@@ -56,21 +56,22 @@
             </div>
           </div>
         </template>
-        <ae-loader v-else class="loader"/>
+        <loader v-else />
       </div>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
-import { AeButton, AeLoader } from '@aeternity/aepp-components'
+import { AeButton } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
 import AeHash from '../../components/aeHash'
 import NamedAddress from '../../components/namedAddress'
+import Loader from '../../components/loader'
 
 export default {
-  components: { AeButton, RelativeTime, AeHash, NamedAddress, AeLoader },
+  components: { AeButton, RelativeTime, AeHash, NamedAddress, Loader },
   mixins: [ currentTime ],
   computed: mapState('blocks', [
     'generation',

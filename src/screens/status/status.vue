@@ -40,10 +40,10 @@
         <h3>top</h3>
         <pre>{{ nodeStatus.top }}</pre>
       </template>
-      <ae-loader v-else class="loader"/>
+      <loader v-else class="loader"/>
     </div>
     <div v-else>
-      <ae-loader class="loader" />
+      <loader/>
     </div>
   </div>
 </template>
@@ -52,9 +52,9 @@ import { mapState } from 'vuex'
 import pollAction from '../../mixins/pollAction'
 import {
   AeButton,
-  AeInput,
-  AeLoader
+  AeInput
 } from '@aeternity/aepp-components'
+import Loader from '../../components/loader'
 
 export default {
   data: function () {
@@ -71,7 +71,7 @@ export default {
   components: {
     AeButton,
     AeInput,
-    AeLoader
+    Loader
   },
   methods: {
     async changeNetwork () {

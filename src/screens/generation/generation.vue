@@ -126,7 +126,7 @@
     </section>
 
     <div v-else>
-      <ae-loader class="loader"/>
+      <loader/>
     </div>
 
   </article>
@@ -134,13 +134,14 @@
 
 <script>
 import { mapState } from 'vuex'
-import { AePanel, AeLoader } from '@aeternity/aepp-components'
+import { AePanel } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
 import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
+import Loader from '../../components/loader'
 
 const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -155,7 +156,7 @@ export default {
   props: [
     'generationId'
   ],
-  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, AeLoader },
+  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader },
   mixins: [currentTime],
   computed: mapState('blocks', [
     'height',

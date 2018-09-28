@@ -55,10 +55,10 @@
         </tr>
       </table>
       <td v-else>
-        <ae-loader class="loader"/>
+        <loader/>
       </td>
       <div class="center">
-        <ae-loader v-if="isLoadingMore"  class=""/>
+        <loader v-if="isLoadingMore" />
         <ae-button v-else type="dramatic" @click="loadMore">load more</ae-button>
       </div>
     </div>
@@ -66,14 +66,15 @@
 </template>
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { AeButton, AeLoader } from '@aeternity/aepp-components'
+import { AeButton } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
 import NamedAddress from '../../components/namedAddress'
 import AeHash from '../../components/aeHash'
+import Loader from '../../components/loader'
 
 export default {
-  components: { AeButton, RelativeTime, NamedAddress, AeHash, AeLoader },
+  components: { AeButton, RelativeTime, NamedAddress, AeHash, Loader },
   mixins: [currentTime],
   data: function () {
     return {
