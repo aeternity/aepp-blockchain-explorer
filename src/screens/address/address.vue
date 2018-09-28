@@ -1,13 +1,13 @@
 <template>
   <div class="account-screen screen">
-    <header class="header">
+    <header class="header" v-if="account">
       <h1 class="title">
         <ae-identity-avatar :address="address"/>
         <named-address :address="address"/>
       </h1>
 
       <field name="Balance">
-        <span class="number">{{ account ? account.balance : 0 }}</span>
+        <span class="number">{{ account.balance }}</span>
         <span class="unit">AE</span>
       </field>
 
@@ -17,12 +17,15 @@
         </div>
       </field>
     </header>
+    <div v-else>
+      <ae-loader class="loader"/>
+    </div>
 
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
-import { AeAddress, AeIdentityAvatar, AePanel } from '@aeternity/aepp-components'
+import { AeAddress, AeIdentityAvatar, AePanel, AeLoader } from '@aeternity/aepp-components'
 import pollAction from '../../mixins/pollAction'
 import NamedAddress from '../../components/namedAddress'
 import Field from '../../components/field'
@@ -36,7 +39,8 @@ export default {
     AeIdentityAvatar,
     AePanel,
     NamedAddress,
-    Field
+    Field,
+    AeLoader
   },
   mixins: [pollAction('accounts/get', ({ address }) => address)],
   computed: mapState('accounts', {
