@@ -1,6 +1,6 @@
 <template>
   <article  class="generation-screen screen">
-    <section v-if="generation.keyBlock">
+    <section v-if="!isLoading">
       <header class="generation-header">
         <h1 class="title title-main">
           Generation:
@@ -146,61 +146,37 @@ const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
-  /*
-   * Component Name
-   */
   name: 'Generation',
-
-  /*
-   * Props
-   */
+  data: function () {
+    return {
+      isLoading: true
+    }
+  },
   props: [
     'generationId'
   ],
-
-  /*
-   * Intenal Components
-   */
   components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, AeLoader },
-
-  /*
-   * Mixins
-   */
   mixins: [currentTime],
-
-  /*
-   * Computed Properties
-   */
   computed: mapState('blocks', [
     'height',
     'generation'
   ]),
-
-  /*
-   * Component Methods
-   */
   methods: {
-    getGeneration () {
+    async getGeneration () {
+      this.isLoading = true
       if (blockHeightRegex.test(this.generationId)) {
-        this.$store.dispatch('blocks/getGenerationFromHeight', Number(this.generationId))
+        await this.$store.dispatch('blocks/getGenerationFromHeight', Number(this.generationId))
       } else if (blockHashRegex.test(this.generationId)) {
-        this.$store.dispatch('blocks/getGenerationFromHash', this.generationId)
+        await this.$store.dispatch('blocks/getGenerationFromHash', this.generationId)
       }
+      this.isLoading = false
     }
   },
-
-  /*
-   * Watch Methods
-   */
   watch: {
     generationId () {
       this.getGeneration()
     }
   },
-
-  /*
-   * Mounted lifecycle
-   */
   mounted () {
     this.getGeneration()
   }
