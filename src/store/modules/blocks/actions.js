@@ -142,9 +142,9 @@ export default {
 
     const generation = await getGenerationFromHeightWrapper(height, this.state.epochUrl)
 
-    if (isEqual(state.block, generation)) {
+    if (isEqual(state.generation, generation)) {
       endLoading(dispatch, 'blocks/getGenerationFromHeight')
-      return state.block
+      return state.generation
     }
 
     commit('setGeneration', generation)
@@ -228,7 +228,7 @@ export default {
 
     if (!generations.length) {
       endLoading(dispatch, 'blocks/getLatestGenerations')
-      return state.blocks
+      return state.generations
     }
 
     commit('setGenerations', generations)
