@@ -40,11 +40,9 @@
         <h3>top</h3>
         <pre>{{ nodeStatus.top }}</pre>
       </template>
-      <loader v-else class="loader"/>
+      <loader v-else/>
     </div>
-    <div v-else>
-      <loader/>
-    </div>
+    <loader v-else/>
   </div>
 </template>
 <script>

@@ -110,9 +110,7 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      <loader/>
-    </div>
+    <loader v-else/>
   </div>
 </template>
 

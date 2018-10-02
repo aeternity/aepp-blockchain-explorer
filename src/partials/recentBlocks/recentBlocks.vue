@@ -39,9 +39,7 @@
           </template>
         </tr>
       </table>
-      <div v-else>
-        <loader/>
-      </div>
+      <loader v-else/>
     </div>
   </div>
 </template>

@@ -125,9 +125,7 @@
       </section>
     </section>
 
-    <div v-else>
-      <loader/>
-    </div>
+    <loader v-else/>
 
   </article>
 </template>

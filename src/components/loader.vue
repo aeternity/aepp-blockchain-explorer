@@ -1,5 +1,7 @@
 <template>
-  <ae-loader />
+  <div>
+    <ae-loader />
+  </div>
 </template>
 
 <script>

@@ -54,9 +54,7 @@
           </td>
         </tr>
       </table>
-      <td v-else>
-        <loader/>
-      </td>
+      <loader v-else/>
       <div class="center">
         <loader v-if="isLoadingMore" />
         <ae-button v-else type="dramatic" @click="loadMore">load more</ae-button>
