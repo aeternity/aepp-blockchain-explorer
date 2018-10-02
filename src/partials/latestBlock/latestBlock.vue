@@ -77,7 +77,9 @@ export default {
   watch: {
     height: {
       handler (val) {
-        this.$store.dispatch('blocks/getGenerationFromHeight', val)
+        if (val !== 0) {
+          this.$store.dispatch('blocks/getGenerationFromHeight', val)
+        }
       },
       immediate: true
     }
