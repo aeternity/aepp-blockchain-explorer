@@ -5,35 +5,33 @@
       <p>View the latest generations on the aeternity blockchain</p>
       <table v-if="generations.length">
         <tr v-for='(b, i) in generations' :key="i">
-          <template v-if="b">
-            <td>
-              <div class="block-number">
-                <router-link :to='"/generation/" + b.keyBlock.height'>
-                  {{b.keyBlock.height}}
-                </router-link>
-              </div>
-            </td>
-            <td>
-              <span class='field-name'>Micro Blocks</span>
-              <span class='field-value number'>
-                {{b.micros.length}}
-              </span>
-            </td>
-            <td>
-              <span class='field-name'>Transactions</span>
-              <span class='field-value number'>
-                {{b.transactionNumber}}
-              </span>
-            </td>
-            <td>
-              <span class='field-name'>mined by</span>
-              <span class="field-value account-address">
-                <router-link :to='"/account/" + b.keyBlock.miner'>
-                  <named-address :address='b.keyBlock.miner' />
-                </router-link>
-              </span>
-            </td>
-          </template>
+          <td>
+            <div class="block-number">
+              <router-link :to='"/generation/" + b.keyBlock.height'>
+                {{b.keyBlock.height}}
+              </router-link>
+            </div>
+          </td>
+          <td>
+            <span class='field-name'>Micro Blocks</span>
+            <span class='field-value number'>
+              {{b.micros.length}}
+            </span>
+          </td>
+          <td>
+            <span class='field-name'>Transactions</span>
+            <span class='field-value number'>
+              {{b.transactionNumber}}
+            </span>
+          </td>
+          <td>
+            <span class='field-name'>mined by</span>
+            <span class="field-value account-address">
+              <router-link :to='"/account/" + b.keyBlock.miner'>
+                <named-address :address='b.keyBlock.miner' />
+              </router-link>
+            </span>
+          </td>
         </tr>
       </table>
       <loader v-else/>
