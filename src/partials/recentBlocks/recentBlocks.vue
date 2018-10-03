@@ -4,7 +4,7 @@
       <h2>Recent generations</h2>
       <p>View the latest generations on the aeternity blockchain</p>
       <table v-if="generations.length">
-        <tr v-for='(b, i) in generations.slice(0, 3)' :key="i">
+        <tr v-for='(b, i) in generations' :key="i">
           <template v-if="b">
             <td>
               <div class="block-number">
@@ -47,12 +47,9 @@ import Loader from '../../components/loader'
 
 export default {
   components: { NamedAddress, Loader },
-  computed: mapState('blocks', [
-    'generations'
-  ]),
-  mounted: function () {
-    this.$store.dispatch('blocks/getLatestGenerations', 10)
-  }
+  computed: mapState('blocks', {
+    generations: ({ generations }) => generations.slice(1, 4)
+  })
 }
 </script>
 <style src='./recentBlocks.scss' lang='scss' />

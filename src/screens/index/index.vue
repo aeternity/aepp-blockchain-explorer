@@ -41,7 +41,7 @@ export default {
       VUE_APP_SHOW_MARKET_STATS: process.env.VUE_APP_SHOW_MARKET_STATS
     }
   },
-  mixins: [pollAction('blocks/getLatestGenerations', 10)],
+  mixins: [pollAction('blocks/getLatestGenerations', 4)],
   methods: {
     async search () {
       if (blockHeightRegex.test(this.searchString)) {

@@ -73,18 +73,10 @@ import Loader from '../../components/loader'
 export default {
   components: { AeButton, RelativeTime, AeHash, NamedAddress, Loader },
   mixins: [ currentTime ],
-  computed: mapState('blocks', [
-    'generation',
-    'height'
-  ]),
-  watch: {
-    height: {
-      handler (val) {
-        this.$store.dispatch('blocks/getGenerationFromHeight', val)
-      },
-      immediate: true
-    }
-  }
+  computed: mapState('blocks', {
+    generation: ({ generations }) => generations[0],
+    height: ({ height }) => height
+  })
 }
 </script>
 <style src='./latestBlock.scss' lang='scss' />
