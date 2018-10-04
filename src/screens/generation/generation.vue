@@ -73,16 +73,17 @@
       </header>
 
       <section class="block-micros">
-        <h2 class="title title-sub">
-          <span class="number">{{ generation.micros.length }}</span> Micro Block(s)
+        <h2 class="title">
+          <span class="number">{{ generation.micros.length  }}</span>
+          Micro Block{{ generation.micros.length !== 1 ? 's' : '' }}
         </h2>
-
         <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.micros">
-          <h3 class="title title-numbers">
-            Micro Block No. {{index+1}}
-          </h3>
+          <h4>
+            <span class="number">
+              Micro Block No. {{index+1}}
+            </span>
+          </h4>
           <section class="micro-block">
-
             <div class="grid">
               <field name="hash" class="hash">
                 <router-link :to="`/block/${m.hash}`">
@@ -107,11 +108,11 @@
                 <view-and-copy :text='m.prevHash'/>
               </field>
             </div>
-
+            
             <article class="block-transactions">
               <header class="block-transactions__header">
                 <h2 class="title title-sub">
-                  <span class="number">{{ m.transactions.length }}</span> Transaction(s)
+                  <span class="number">{{ m.transactions.length }}</span> Transaction{{ m.transactions.length !== 1 ? 's' : '' }}
                 </h2>
               </header>
               <div class="transactions">
