@@ -1,14 +1,6 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 import ae from '../../aeppsdk'
-// import { createActionHelpers } from 'vuex-loading'
-
-/**
- * Setting up start/end Loading helper methods
- */
-// const { startLoading, endLoading } = createActionHelpers({
-//  moduleName: 'loading'
-// })
 
 export default {
   /**
@@ -20,8 +12,6 @@ export default {
    * @return {*}
    */
   async get ({ state, commit, dispatch }, address) {
-    // startLoading(dispatch, 'accounts/get')
-
     const client = await ae(this.state.epochUrl)
 
     let balance = 0
@@ -38,14 +28,10 @@ export default {
 
     commit('setAccount', account)
 
-    // endLoading(dispatch, 'accounts/get')
-
     return account
   },
 
   async name ({ state, commit, dispatch }, address) {
-    // startLoading(dispatch, 'accounts/name')
-
     if (!process.env.VUE_APP_MIDDLEWARE_URL) return
 
     if (!isEmpty(state.names[address]) && (Date.now() - state.names[address].ts < 10000)) return
@@ -59,8 +45,6 @@ export default {
     if (isEqual(state.names[address], account)) return account
 
     commit('setName', account)
-
-    // endLoading(dispatch, 'accounts/name')
 
     return account
   }

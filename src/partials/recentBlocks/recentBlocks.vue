@@ -3,8 +3,8 @@
     <div class="inner">
       <h2>Recent generations</h2>
       <p>View the latest generations on the aeternity blockchain</p>
-      <table>
-        <tr v-for='(b, i) in generations.slice(0, 3)' :key="i" v-if="generations.length">
+      <table v-if="generations.length">
+        <tr v-for='(b, i) in generations.slice(0, 3)' :key="i">
           <template v-if="b">
             <td>
               <div class="block-number">
@@ -34,27 +34,24 @@
               </span>
             </td>
           </template>
-          <template v-else>
-            Loading..
-          </template>
         </tr>
       </table>
+      <loader v-else/>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 import NamedAddress from '../../components/namedAddress'
+import Loader from '../../components/loader'
 
 export default {
-  components: { NamedAddress },
+  components: { NamedAddress, Loader },
   computed: mapState('blocks', [
     'generations'
   ]),
   mounted: function () {
-    return this
-      .$store
-      .dispatch('blocks/getLatestGenerations', 10)
+    this.$store.dispatch('blocks/getLatestGenerations', 10)
   }
 }
 </script>

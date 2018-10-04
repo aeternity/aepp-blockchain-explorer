@@ -1,12 +1,3 @@
-import { createActionHelpers } from 'vuex-loading'
-
-/**
- * Setting up start/end Loading helper methods
- */
-const { startLoading, endLoading } = createActionHelpers({
-  moduleName: 'loading'
-})
-
 export default {
   namespaced: true,
   state: {
@@ -29,11 +20,6 @@ export default {
      */
     async get ({ state, commit, dispatch }) {
       /**
-       * Start vuex-loading
-       */
-      startLoading(dispatch, '_marketStats/get')
-
-      /**
        * Pulling market stats
        * @type {Response}
        */
@@ -47,11 +33,6 @@ export default {
         market_cap_chf: marketCapChf,
         price_chf: priceChf
       } = (await market.json())[0]
-
-      /**
-       * end vuex-loading
-       */
-      endLoading(dispatch, '_marketStats/get')
 
       /**
        * committing to the state
