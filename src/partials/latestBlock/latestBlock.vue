@@ -7,20 +7,20 @@
         <ae-button type="exciting" size="small" to="/generations">view all</ae-button>
       </div>
       <div class="generation-data">
-        <template v-if="generation.keyBlock">
+        <template v-if="generation">
           <h2>Generation</h2>
           <div class="grid generation">
             <div class="field">
               <div class="field-name">
                 Height
               </div>
-              <div class="field-value number" v-if="generation">
+              <div class="field-value number">
                 <router-link :to="`/generation/${height}`">{{ height }}</router-link>
               </div>
             </div>
             <div class="field">
               <div class="field-name">Micro Blocks</div>
-              <div class="field-value number" v-if="generation.micros" >{{ generation.micros.length}}</div>
+              <div class="field-value number">{{ generation.micros.length}}</div>
             </div>
             <div class="field">
               <div class="field-name">Transactions</div>
@@ -35,7 +35,7 @@
             <div class="field">
               <div class="field-name">Hash</div>
               <div class="field-value block-hash">
-                <router-link :to="`/block/${generation.keyBlock.hash}`" v-if="generation.keyBlock">
+                <router-link :to="`/block/${generation.keyBlock.hash}`">
                   <ae-hash type='short' :hash="generation.keyBlock.hash"/>
                 </router-link>
               </div>
@@ -43,7 +43,7 @@
             <div class="field">
               <div class="field-name">Mined by</div>
               <div class="field-value account-address">
-                <router-link :to="`/account/${generation.keyBlock.miner}`" v-if="generation.keyBlock">
+                <router-link :to="`/account/${generation.keyBlock.miner}`">
                   <named-address :address="generation.keyBlock.miner" />
                 </router-link>
               </div>
@@ -51,7 +51,7 @@
             <div class="field">
               <div class="field-name">Time since mined</div>
               <div class="field-value number">
-                <relative-time :ts="currentTime - generation.keyBlock.time" v-if="generation.keyBlock" />
+                <relative-time :ts="currentTime - generation.keyBlock.time" />
               </div>
             </div>
           </div>
@@ -73,18 +73,10 @@ import Loader from '../../components/loader'
 export default {
   components: { AeButton, RelativeTime, AeHash, NamedAddress, Loader },
   mixins: [ currentTime ],
-  computed: mapState('blocks', [
-    'generation',
-    'height'
-  ]),
-  watch: {
-    height: {
-      handler (val) {
-        this.$store.dispatch('blocks/getGenerationFromHeight', val)
-      },
-      immediate: true
-    }
-  }
+  computed: mapState('blocks', {
+    generation: ({ generations }) => generations[0],
+    height: ({ height }) => height
+  })
 }
 </script>
 <style src='./latestBlock.scss' lang='scss' />
