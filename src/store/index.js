@@ -1,23 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { createActionHelpers } from 'vuex-loading'
 import modules from './modules'
 import ae from './aeppsdk'
 
 Vue.use(Vuex)
 
-/**
- * Setting up start/end Loading helper methods
- */
-const { startLoading, endLoading } = createActionHelpers({
-  moduleName: 'loading'
-})
-
-export default new Vuex.Store({
+const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
 
   state: {
-    $nodeStatus: {}
+    $nodeStatus: {},
+    epochUrl: process.env.VUE_APP_EPOCH_URL
   },
 
   mutations: {
@@ -28,6 +21,14 @@ export default new Vuex.Store({
      */
     setNodeStatus (state, $nodeStatus) {
       Object.assign(state, { $nodeStatus })
+    },
+    /**
+     * changeNetwork
+     * @param state
+     * @param epochUrl
+     */
+    changeNetworkUrl (state, epochUrl) {
+      state.epochUrl = epochUrl
     }
   },
 
@@ -40,9 +41,7 @@ export default new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ state, commit, dispatch }) {
-      startLoading(dispatch, 'getNodeStatus')
-
-      const client = await ae
+      const client = await ae(state.epochUrl)
 
       const [top, version] = await Promise.all([
         client.api.getTop(),
@@ -51,11 +50,11 @@ export default new Vuex.Store({
 
       commit('setNodeStatus', { top, version })
 
-      endLoading(dispatch, 'getNodeStatus')
-
       return { top, version }
     }
   },
 
   modules
 })
+
+export default store

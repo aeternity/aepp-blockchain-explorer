@@ -17,5 +17,18 @@ export default {
    */
   setName (state, payload) {
     Vue.set(state.names, payload.address, payload)
+  },
+
+  /***
+   * resetAll reset the state of 'accounts' module
+   * @param {Object} state
+   */
+  resetState (state) {
+    Object.assign(state,
+      {
+        accounts: {},
+        names: {}
+      }
+    )
   }
 }

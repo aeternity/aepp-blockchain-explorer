@@ -11,14 +11,13 @@
     "test": "npm run lint"
   },
   "dependencies": {
-    "@aeternity/aepp-components": "2.0.11",
+    "@aeternity/aepp-components": "2.0.13",
     "@aeternity/aepp-sdk": "0.18.0-0.1.1",
     "lodash": "^4.17.5",
     "vue": "^2.5.17",
     "vue-popperjs": "^1.2.6",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "vuex-loading": "^0.2.2"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",

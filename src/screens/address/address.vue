@@ -1,13 +1,13 @@
 <template>
   <div class="account-screen screen">
-    <header class="header">
+    <header class="header" v-if="account">
       <h1 class="title">
         <ae-identity-avatar :address="address"/>
         <named-address :address="address"/>
       </h1>
 
       <field name="Balance">
-        <span class="number">{{ account ? account.balance : 0 }}</span>
+        <span class="number">{{ account.balance }}</span>
         <span class="unit">AE</span>
       </field>
 
@@ -17,6 +17,7 @@
         </div>
       </field>
     </header>
+    <loader/>
 
   </div>
 </template>
@@ -26,6 +27,7 @@ import { AeAddress, AeIdentityAvatar, AePanel } from '@aeternity/aepp-components
 import pollAction from '../../mixins/pollAction'
 import NamedAddress from '../../components/namedAddress'
 import Field from '../../components/field'
+import Loader from '../../components/loader'
 
 // TODO: There is a reactivity problem in here, The v-if does not work
 export default {
@@ -36,7 +38,8 @@ export default {
     AeIdentityAvatar,
     AePanel,
     NamedAddress,
-    Field
+    Field,
+    Loader
   },
   mixins: [pollAction('accounts/get', ({ address }) => address)],
   computed: mapState('accounts', {

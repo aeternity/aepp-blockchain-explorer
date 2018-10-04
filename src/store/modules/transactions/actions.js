@@ -1,12 +1,4 @@
 import ae from '../../aeppsdk'
-import { createActionHelpers } from 'vuex-loading'
-
-/**
- * Setting up start/end Loading helper methods
- */
-const { startLoading, endLoading } = createActionHelpers({
-  moduleName: 'loading'
-})
 
 export default {
   /**
@@ -18,14 +10,10 @@ export default {
    * @return {*}
    */
   async get ({ state, commit, dispatch }, hash) {
-    startLoading(dispatch, 'transactions/get')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const transactions = await client.api.getTxs()
 
     commit('setTransactions', transactions)
-
-    endLoading(dispatch, 'transactions/get')
 
     return transactions
   },
@@ -39,14 +27,10 @@ export default {
    * @return {*}
    */
   async mempool ({ state, commit, dispatch }, hash) {
-    startLoading(dispatch, 'transactions/mempool')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const mempoolTxs = await client.api.getTxs()
 
     commit('setMempoolTxs', mempoolTxs)
-
-    endLoading(dispatch, 'transactions/mempool')
 
     return mempoolTxs
   },
@@ -60,14 +44,10 @@ export default {
    * @return {Promise<*>}
    */
   async getTransactionsFromBlockHash ({ state, commit, dispatch }, hash) {
-    startLoading(dispatch, 'transactions/getTransactionsFromBlockHash')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const transactions = await client.api.getTxs()
 
     commit('setTransactions', transactions)
-
-    endLoading(dispatch, 'transactions/getTransactionsFromBlockHash')
 
     return transactions
   },
@@ -82,9 +62,7 @@ export default {
    * @return {Promise<*>}
    */
   async getTxsFromBlocksByHeightRange ({ state, commit, dispatch }, { from, to }) {
-    startLoading(dispatch, 'transactions/getTxsFromBlocksByHeightRange')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const transactions = await client.api.getTxsListFromBlockRangeByHeight({
       from,
       to,
@@ -92,8 +70,6 @@ export default {
     })
 
     commit('setTransactions', transactions)
-
-    endLoading(dispatch, 'transactions/getTxsFromBlocksByHeightRange')
 
     return transactions
   },
@@ -107,33 +83,23 @@ export default {
    * @return {Promise<*>}
    */
   async getTxByHash ({ state, commit, dispatch }, hash) {
-    startLoading(dispatch, 'transactions/getTxByHash')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const { transaction } = await client.api.getTx(hash, { txEncoding: 'json' })
 
     commit('setTransaction', transaction)
-
-    endLoading(dispatch, 'transactions/getTxByHash')
 
     return transaction
   },
 
   /**
    *
-   * @param state
-   * @param commit
    * @param dispatch
    * @param hash
    * @return {Promise<*>}
    */
   async getContractCallFromTx ({ dispatch }, hash) {
-    startLoading(dispatch, 'transactions/getContractCallFromTx')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const call = await client.api.getContractCallFromTx(hash)
-
-    endLoading(dispatch, 'transactions/getContractCallFromTx')
 
     return call
   }

@@ -1,21 +1,14 @@
 import times from 'lodash/times'
 import isEqual from 'lodash/isEqual'
 import ae from '../../aeppsdk'
-import { createActionHelpers } from 'vuex-loading'
-
-/**
- * Setting up start/end Loading helper methods
- */
-const { startLoading, endLoading } = createActionHelpers({
-  moduleName: 'loading'
-})
 
 /**
  * @param height
+ * @param epochUrl
  * @returns {Promise<*>}
  */
-async function getGenerationFromHeightWrapper (height) {
-  const client = await ae
+async function getGenerationFromHeightWrapper (height, epochUrl) {
+  const client = await ae(epochUrl)
   const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
   const microBlocksHashes = generation.microBlocks
   let transactionNumber = 0
@@ -46,18 +39,14 @@ export default {
    * @return {Object}
    */
   async height ({ state, commit, dispatch }) {
-    startLoading(dispatch, 'blocks/height')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const height = await client.height()
 
     if (height === state.height) {
-      endLoading(dispatch, 'blocks/height')
       return state.height
     }
 
     commit('setHeight', height)
-    endLoading(dispatch, 'blocks/height')
 
     return height
   },
@@ -70,9 +59,7 @@ export default {
    * @returns {Promise<*>}
    */
   async getGenerationFromHash ({ state, commit, dispatch }, hash) {
-    startLoading(dispatch, 'blocks/getGenerationFromHash')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const generation = await client.api.getGenerationByHash(hash, { txEncoding: 'json' })
     const microBlocksHashes = generation.microBlocks
     let transactionNumber = 0
@@ -92,12 +79,10 @@ export default {
     generation.transactionNumber = transactionNumber
 
     if (isEqual(state.generation, generation)) {
-      endLoading(dispatch, 'blocks/getGenerationFromHash')
       return state.generation
     }
 
     commit('setGeneration', generation)
-    endLoading(dispatch, 'blocks/getGenerationFromHash')
     return generation
   },
 
@@ -111,18 +96,14 @@ export default {
    * @return {*}
    */
   async getBlockFromHash ({ state, commit, dispatch }, hash) {
-    startLoading(dispatch, 'blocks/getBlockFromHash')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const block = await client.api.getKeyBlockByHash(hash, { txEncoding: 'json' })
 
     if (isEqual(state.block, block)) {
-      endLoading(dispatch, 'blocks/getBlockFromHash')
       return state.block
     }
 
     commit('setBlock', block)
-    endLoading(dispatch, 'blocks/getBlockFromHash')
 
     return block
   },
@@ -137,17 +118,13 @@ export default {
    * @return {*}
    */
   async getGenerationFromHeight ({ state, commit, dispatch }, height) {
-    startLoading(dispatch, 'blocks/getGenerationFromHeight')
-
-    const generation = await getGenerationFromHeightWrapper(height)
+    const generation = await getGenerationFromHeightWrapper(height, this.state.epochUrl)
 
     if (isEqual(state.block, generation)) {
-      endLoading(dispatch, 'blocks/getGenerationFromHeight')
       return state.block
     }
 
     commit('setGeneration', generation)
-    endLoading(dispatch, 'blocks/getGenerationFromHeight')
 
     return generation
   },
@@ -161,18 +138,14 @@ export default {
    * @return {*}
    */
   async getBlockFromHeight ({ state, commit, dispatch }, height) {
-    startLoading(dispatch, 'blocks/getBlockFromHeight')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const block = await client.api.getKeyBlockByHeight(height, { txEncoding: 'json' })
 
     if (isEqual(state.block, block)) {
-      endLoading(dispatch, 'blocks/getBlockFromHeight')
       return state.block
     }
 
     commit('setBlock', block)
-    endLoading(dispatch, 'blocks/getBlockFromHeight')
 
     return block
   },
@@ -187,10 +160,8 @@ export default {
    * @return {*}
    */
   async getLatestBlocks ({ state, commit, dispatch }, size) {
-    startLoading(dispatch, 'blocks/getLatestBlocks')
-
     await dispatch('height')
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
@@ -198,12 +169,10 @@ export default {
     )
 
     if (!blocks.length) {
-      endLoading(dispatch, 'blocks/getLatestBlocks')
       return state.blocks
     }
 
     commit('setBlocks', blocks)
-    endLoading(dispatch, 'blocks/getLatestBlocks')
 
     return blocks
   },
@@ -218,20 +187,16 @@ export default {
    * @return {*}
    */
   async getLatestGenerations ({ state, commit, dispatch }, size) {
-    startLoading(dispatch, 'blocks/getLatestGenerations')
-
     await dispatch('height')
     const generations = await Promise.all(
-      times(size, (index) => getGenerationFromHeightWrapper(state.height - index))
+      times(size, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
     )
 
     if (!generations.length) {
-      endLoading(dispatch, 'blocks/getLatestGenerations')
       return state.blocks
     }
 
     commit('setGenerations', generations)
-    endLoading(dispatch, 'blocks/getLatestGenerations')
 
     return generations
   },
@@ -247,9 +212,7 @@ export default {
    * @return {*}
    */
   async addBlocksByHeightAndSize ({ state, commit, dispatch }, {height, size}) {
-    startLoading(dispatch, 'blocks/addBlocksByHeightAndSize')
-
-    const client = await ae
+    const client = await ae(this.state.epochUrl)
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
@@ -257,12 +220,10 @@ export default {
     )
 
     if (!blocks.length) {
-      endLoading(dispatch, 'blocks/addBlocksByHeightAndSize')
       return state.blocks
     }
 
     commit('addBlocks', blocks)
-    endLoading(dispatch, 'blocks/addBlocksByHeightAndSize')
 
     return blocks
   }
