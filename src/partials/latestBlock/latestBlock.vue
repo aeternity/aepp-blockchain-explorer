@@ -7,7 +7,7 @@
         <ae-button type="exciting" size="small" to="/generations">view all</ae-button>
       </div>
       <div class="generation-data">
-        <template v-if="generation">
+        <template v-if="generation" v-cloak>
           <h2>Generation</h2>
           <div class="grid generation">
             <div class="field">
