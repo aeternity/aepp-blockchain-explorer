@@ -74,7 +74,7 @@ The epoch api url can be configured with the environment variable `VUE_APP_EPOCH
 npm install
 
 # serve with hot reload at localhost:8080
-VUE_APP_EPOCH_URL='//sdk-testnet.aepps.com/' npm run dev
+VUE_APP_EPOCH_URL='//sdk-testnet.aepps.com/' npm run serve
 
 # build for production with minification
 VUE_APP_EPOCH_URL='//sdk-testnet.aepps.com/' npm run build
