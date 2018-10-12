@@ -1,6 +1,6 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
-import ae from '../../aeppsdk'
+import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
 
 export default {
   /**
@@ -12,7 +12,9 @@ export default {
    * @return {*}
    */
   async get ({ state, commit, dispatch }, address) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
 
     let balance = 0
 

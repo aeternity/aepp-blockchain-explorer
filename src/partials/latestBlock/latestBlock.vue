@@ -24,7 +24,7 @@
             </div>
             <div class="field">
               <div class="field-name">Transactions</div>
-              <div class="field-value number" >{{ generation.transactionNumber }}</div>
+              <div class="field-value number" >{{ generation.transactions.length }}</div>
             </div>
           </div>
 

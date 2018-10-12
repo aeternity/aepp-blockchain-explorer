@@ -14,7 +14,7 @@
               <div class="number">{{ generation.micros.length }}</div>
             </field>
             <field name="Transactions">
-              <div class="number">{{ generation.transactionNumber }}</div>
+              <div class="number">{{ generation.transactions.length }}</div>
             </field>
           </div>
           <nav class="gen-navigation grid">
@@ -108,15 +108,15 @@
                 <view-and-copy :text='m.prevHash'/>
               </field>
             </div>
-            
+
             <article class="block-transactions">
               <header class="block-transactions__header">
                 <h2 class="title title-sub">
-                  <span class="number">{{ m.transactions.length }}</span> Transaction{{ m.transactions.length !== 1 ? 's' : '' }}
+                  <span class="number">{{ generation.transactions[index].transactions.length }}</span> Transaction{{ generation.transactions[index].transactions.length !== 1 ? 's' : '' }}
                 </h2>
               </header>
               <div class="transactions">
-                <transaction :key="t.hash" v-for="t in m.transactions" :transaction="t"/>
+                <transaction :key="t.hash" v-for="t in generation.transactions[index].transactions" :transaction="t"/>
               </div>
             </article>
 

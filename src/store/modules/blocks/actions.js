@@ -1,6 +1,6 @@
 import times from 'lodash/times'
 import isEqual from 'lodash/isEqual'
-import ae from '../../aeppsdk'
+import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
 
 /**
  * @param height
@@ -8,25 +8,28 @@ import ae from '../../aeppsdk'
  * @returns {Promise<*>}
  */
 async function getGenerationFromHeightWrapper (height, epochUrl) {
-  const client = await ae(epochUrl)
+  const client = await EpochChain({
+    url: epochUrl
+  })
   const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
   const microBlocksHashes = generation.microBlocks
-  let transactionNumber = 0
-
   let microBlocks = await Promise.all(
     microBlocksHashes.map(
       async (hash) => {
-        return client.api.getBlockByHash(hash, { txEncoding: 'json' })
+        return client.api.getMicroBlockHeaderByHash(hash, { txEncoding: 'json' })
       }
     )
   )
-  for (const index in microBlocks) {
-    transactionNumber += microBlocks[index].transactions.length
-  }
+  let transactions = await Promise.all(
+    microBlocksHashes.map(
+      async (hash) => {
+        return client.api.getMicroBlockTransactionsByHash(hash, { txEncoding: 'json' })
+      }
+    )
+  )
 
   generation.micros = microBlocks
-  generation.transactionNumber = transactionNumber
-
+  generation.transactions = transactions
   return generation
 }
 
@@ -39,7 +42,9 @@ export default {
    * @return {Object}
    */
   async height ({ state, commit, dispatch }) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const height = await client.height()
 
     if (height === state.height) {
@@ -59,24 +64,29 @@ export default {
    * @returns {Promise<*>}
    */
   async getGenerationFromHash ({ state, commit, dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const generation = await client.api.getGenerationByHash(hash, { txEncoding: 'json' })
     const microBlocksHashes = generation.microBlocks
-    let transactionNumber = 0
 
     const microBlocks = await Promise.all(
       microBlocksHashes.map(
         async (hash) => {
-          return client.api.getBlockByHash(hash, { txEncoding: 'json' })
+          return client.api.getMicroBlockHeaderByHash(hash, { txEncoding: 'json' })
         }
       )
     )
-    for (const index in microBlocks) {
-      transactionNumber += microBlocks[index].transactions.length
-    }
+    let transactions = await Promise.all(
+      microBlocksHashes.map(
+        async (hash) => {
+          return client.api.getMicroBlockTransactionsByHash(hash, { txEncoding: 'json' })
+        }
+      )
+    )
 
     generation.micros = microBlocks
-    generation.transactionNumber = transactionNumber
+    generation.transactions = transactions
 
     if (isEqual(state.generation, generation)) {
       return state.generation
@@ -96,7 +106,9 @@ export default {
    * @return {*}
    */
   async getBlockFromHash ({ state, commit, dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const block = await client.api.getKeyBlockByHash(hash, { txEncoding: 'json' })
 
     if (isEqual(state.block, block)) {
@@ -138,7 +150,9 @@ export default {
    * @return {*}
    */
   async getBlockFromHeight ({ state, commit, dispatch }, height) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const block = await client.api.getKeyBlockByHeight(height, { txEncoding: 'json' })
 
     if (isEqual(state.block, block)) {
@@ -161,7 +175,9 @@ export default {
    */
   async getLatestBlocks ({ state, commit, dispatch }, size) {
     await dispatch('height')
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
@@ -212,7 +228,9 @@ export default {
    * @return {*}
    */
   async addBlocksByHeightAndSize ({ state, commit, dispatch }, {height, size}) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const blocks = await Promise.all(
       times(size, (index) => client
         .api

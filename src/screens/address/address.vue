@@ -17,7 +17,7 @@
         </div>
       </field>
     </header>
-    <loader/>
+    <loader v-else/>
 
   </div>
 </template>

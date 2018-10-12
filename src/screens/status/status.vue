@@ -22,15 +22,15 @@
             <th>top.hash</th>
             <th>top.time</th>
             <th>version.revision</th>
-            <th>version.genesis_hash</th>
+            <th>version.genesis_KeyBlock_hash</th>
           </tr>
           <tr>
             <td><strong>{{ node }}</strong></td>
             <td>{{ nodeStatus.top.height }}</td>
             <td>{{ nodeStatus.top.hash | startAndEnd }}</td>
             <td>{{ nodeStatus.top.time }}</td>
-            <td>{{ nodeStatus.version.revision | startAndEnd }}</td>
-            <td>{{ nodeStatus.version.genesisHash | startAndEnd }}</td>
+            <td>{{ nodeStatus.version.nodeRevision | startAndEnd }}</td>
+            <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
           </tr>
         </table>
         <h1>Detail</h1>

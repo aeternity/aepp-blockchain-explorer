@@ -21,7 +21,7 @@
           <td>
             <span class='field-name'>Transactions</span>
             <span class='field-value number'>
-              {{b.transactionNumber}}
+              {{b.transactions.length}}
             </span>
           </td>
           <td>
