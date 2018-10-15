@@ -3,15 +3,15 @@
     <div class="grid">
       <field name="sender">
       <div class="account-address">
-        <router-link :to='"/account/" + transaction.tx.sender'>
-          <named-address :address='transaction.tx.sender'/>
+        <router-link :to='"/account/" + transaction.tx.senderId'>
+          <named-address :address='transaction.tx.senderId'/>
         </router-link>
       </div>
       </field>
       <field name='recipient'>
       <div class="account-address">
-        <router-link :to='"/account/" + transaction.tx.recipient'>
-          <named-address :address='transaction.tx.recipient'/>
+        <router-link :to='"/account/" + transaction.tx.recipientId'>
+          <named-address :address='transaction.tx.recipientId'/>
         </router-link>
       </div>
       </field>

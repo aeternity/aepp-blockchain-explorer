@@ -64,18 +64,17 @@
             next: {{ block.height + 1 }}
           </router-link>
         </div>
-
-        <div class="block-transactions" v-if="!isKeyBlock">
-          <h2 class="title">
-            <span class="number">{{ block.transactions.length }}</span> Transaction(s)
-          </h2>
-          <div class="transactions">
-            <transaction :key="t.hash" v-for="t in block.transactions" :transaction="t"/>
-          </div>
-        </div>
+      </div>
+      <div class="block-transactions" v-if="!isKeyBlock">
+        <h2 class="title">
+          <span class="number">{{ block.transactions.length }}</span> Transaction(s)
+        </h2>
+        <div class="transactions">
+          <transaction :key="t.hash" v-for="t in block.transactions" :transaction="t"/>
         </div>
       </div>
-    <loader v-else/>
+    </div>
+  <loader v-else/>
   </div>
 </template>
 
