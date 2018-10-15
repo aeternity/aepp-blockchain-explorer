@@ -29,7 +29,7 @@ import LatestBlock from '../../partials/latestBlock/latestBlock'
 import RecentBlocks from '../../partials/recentBlocks/recentBlocks'
 
 const blockHeightRegex = RegExp('^[0-9]+$')
-const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,50}$')
+const blockHashRegex = RegExp('^kh|mh')
 const accountPublicKeyRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
 
