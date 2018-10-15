@@ -1,115 +1,80 @@
 <template>
   <div class="block-screen screen">
-    <div  v-if="generation.keyBlock">
+    <div  v-if="block.height">
       <div class="block-header">
         <div class="basic-block-info grid">
           <div>
             <span>Block</span>
-            <span class="number block-height">{{ generation.keyBlock.height }}</span>
+            <span class="number block-height">{{ block.height }}</span>
           </div>
           <div>
             <span class="field-name">mined by</span>
             <span class="account-address">
-              <router-link :to="`/account/${generation.keyBlock.miner}`">
-                {{ generation.keyBlock.miner | startAndEnd }}
+              <router-link :to="`/account/${block.miner}`">
+                {{ block.miner | startAndEnd }}
               </router-link>
             </span>
           </div>
           <div>
             <span class="field-name">time since mined</span>
-            <relative-time :ts="currentTime - generation.keyBlock.time" big spaced />
+            <relative-time :ts="currentTime - block.time" big spaced />
           </div>
         </div>
         <div class="detail-block-info">
           <div class="field hash">
             <div class="field-name">Hash</div>
             <div class="scroll">
-              <div class="number">{{ generation.keyBlock.hash }}</div>
+              <div class="number">{{ block.hash }}</div>
             </div>
           </div>
           <div class="grid">
             <div class="field height">
               <div class="field-name">Height</div>
-              <div class="field-value number">{{ generation.keyBlock.height }}</div>
+              <div class="field-value number">{{ block.height }}</div>
             </div>
             <div class="field rewarded">
               <div class="field-name">Target</div>
               <div class="field-value number">
-                {{ generation.keyBlock.target }}
+                {{ block.target }}
               </div>
             </div>
             <div class="field time">
               <div class="field-name">
-                Time (<span class="number">{{ generation.keyBlock.time }}</span>)
+                Time (<span class="number">{{ block.time }}</span>)
               </div>
               <div class="field-value number">
-                {{ generation.keyBlock.time | humanDate }}
+                {{ block.time | humanDate }}
               </div>
             </div>
           </div>
           <div class="field hash">
             <div class="field-name">Parent Hash</div>
             <div class="field-value block-hash">
-              <router-link :to="`/block/${generation.keyBlock.prevHash}`">
-                {{ generation.keyBlock.prevHash | startAndEnd }}
+              <router-link :to="`/block/${block.prevHash}`">
+                {{ block.prevHash | startAndEnd }}
               </router-link>
             </div>
           </div>
         </div>
         <div class="block-navigation grid">
-          <router-link :to="`/block/${(generation.keyBlock.height - 1)}`">
-            prev: {{ generation.keyBlock.height - 1 }}
+          <router-link :to="`/block/${(block.height - 1)}`">
+            prev: {{ block.height - 1 }}
           </router-link>
-          <router-link :to="`/block/${(generation.keyBlock.height + 1)}`" v-if="generation.keyBlock.height < height">
-            next: {{ generation.keyBlock.height + 1 }}
+          <router-link :to="`/block/${(block.height + 1)}`" v-if="block.height">
+            next: {{ block.height + 1 }}
           </router-link>
         </div>
-      </div>
 
-      <div class="block-micros">
-        <h2 class="title">
-          <span class="number">{{ generation.micros.length }}</span> Micro Block(s)
-        </h2>
-        <div :key="m.hash" v-for="m in generation.micros">
-          <div>
-            <span class="field-name">time since mined</span>
-            <relative-time :ts="currentTime - m.time" big spaced />
-          </div>
-          <div class="field hash">
-            <div class="field-name">Hash</div>
-            <div class="scroll">
-              <div class="number">{{ m.hash }}</div>
-            </div>
-          </div>
-          <div class="grid">
-            <div class="field time">
-              <div class="field-name">
-                Time (<span class="number">{{ m.time }}</span>)
-              </div>
-              <div class="field-value number">
-                {{ m.time | humanDate }}
-              </div>
-            </div>
-            <div class="field hash">
-              <div class="field-name">Parent Hash</div>
-              <div class="field-value block-hash">
-                <router-link :to="`/block/${m.prevHash}`">
-                  {{ m.prevHash | startAndEnd }}
-                </router-link>
-              </div>
-            </div>
-          </div>
-          <div class="block-transactions">
-            <h2 class="title">
-              <span class="number">{{ m.transactions.length }}</span> Transaction(s)
-            </h2>
-            <div class="transactions">
-              <transaction :key="t.hash" v-for="t in m.transactions" :transaction="t"/>
-            </div>
+        <div class="block-transactions" v-if="!isKeyBlock">
+          <h2 class="title">
+            <span class="number">{{ block.transactions.length }}</span> Transaction(s)
+          </h2>
+          <div class="transactions">
+            <transaction :key="t.hash" v-for="t in block.transactions" :transaction="t"/>
           </div>
         </div>
+        </div>
       </div>
-    </div>
     <loader v-else/>
   </div>
 </template>
@@ -122,7 +87,7 @@ import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
 import Loader from '../../components/loader'
 
-const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
+const blockHashRegex = RegExp('^kh|mh')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
@@ -132,16 +97,26 @@ export default {
   ],
   components: { AePanel, RelativeTime, Transaction, Loader },
   mixins: [currentTime],
-  computed: mapState('blocks', [
-    'height',
-    'generation'
-  ]),
+  computed: {
+    ...mapState('blocks', {
+      block: ({ block }) => block,
+      height: ({ height }) => height
+    }),
+    isKeyBlock () {
+      if (blockHashRegex.test(this.blockId)) {
+        if (this.blockId.substr(0, 2) === 'mh') {
+          return false
+        }
+      }
+      return true
+    }
+  },
   methods: {
     getBlock () {
       if (blockHeightRegex.test(this.blockId)) {
-        this.$store.dispatch('blocks/getGenerationFromHeight', Number(this.blockId))
+        this.$store.dispatch('blocks/getBlockFromHeight', Number(this.blockId))
       } else if (blockHashRegex.test(this.blockId)) {
-        this.$store.dispatch('blocks/getGenerationFromHash', this.blockId)
+        this.$store.dispatch('blocks/getBlockFromHash', this.blockId)
       }
     }
   },

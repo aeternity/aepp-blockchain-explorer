@@ -109,7 +109,14 @@ export default {
     const client = await EpochChain({
       url: this.state.epochUrl
     })
-    const block = await client.api.getKeyBlockByHash(hash, { txEncoding: 'json' })
+    const isKeyBlock = hash.substr(0, 2) === 'kh'
+    var block
+    if (isKeyBlock) {
+      block = await client.api.getKeyBlockByHash(hash, {txEncoding: 'json'})
+    } else {
+      block = await client.api.getMicroBlockHeaderByHash(hash, {txEncoding: 'json'})
+      block.transactions = (await client.api.getMicroBlockTransactionsByHash(hash, {txEncoding: 'json'})).transactions
+    }
 
     if (isEqual(state.block, block)) {
       return state.block
