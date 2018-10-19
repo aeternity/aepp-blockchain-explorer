@@ -1,6 +1,6 @@
 <template>
   <div class="status-screen screen">
-    <div v-if='nodeStatus.top && nodeStatus.version'>
+    <div>
       <h2>Change Connected Network</h2>
       <form @submit.prevent="changeNetwork">
         <ae-input placeholder="Network to connect to: " v-model="newNetworkUrl" @keyup.enter="changeNetwork"/>
@@ -11,9 +11,16 @@
           connect
         </ae-button>
       </form>
-      <template v-if="!isNetworkChanging" for="changing network">
+      <template for="changing network">
         <h1>Status</h1>
-        <p>Explorer connected to: <strong>{{ node }}</strong></p>
+        <p>Explorer connected to:
+          <strong v-if="!isLoading">
+            {{ node }}
+          </strong>
+          <strong class="fill-dummy-grey" v-else>
+            &nbsp;
+          </strong>
+        </p>
         <h2>Node and Peers</h2>
         <table>
           <tr>
@@ -24,7 +31,7 @@
             <th>version.revision</th>
             <th>version.genesis_KeyBlock_hash</th>
           </tr>
-          <tr>
+          <tr v-if="!isLoading">
             <td><strong>{{ node }}</strong></td>
             <td>{{ nodeStatus.top.keyBlock.height }}</td>
             <td>{{ nodeStatus.top.keyBlock.hash | startAndEnd }}</td>
@@ -32,17 +39,38 @@
             <td>{{ nodeStatus.version.nodeRevision | startAndEnd }}</td>
             <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
           </tr>
+          <tr v-else>
+            <td><span class="fill-dummy-grey">&nbsp;</span></td>
+            <td><span class="fill-dummy-grey">&nbsp;</span></td>
+            <td><span class="fill-dummy-grey">&nbsp;</span></td>
+            <td><span class="fill-dummy-grey">&nbsp;</span></td>
+            <td><span class="fill-dummy-grey">&nbsp;</span></td>
+            <td><span class="fill-dummy-grey">&nbsp;</span></td>
+          </tr>
         </table>
         <h1>Detail</h1>
-        <h2>{{ node }} </h2>
+        <h2 v-if="!isLoading">
+          {{ node }}
+        </h2>
+        <h2 class="fill-dummy-grey-big" v-else>
+          &nbsp;
+        </h2>
         <h3>version</h3>
-        <pre>{{ nodeStatus.version }}</pre>
+        <pre v-if="!isLoading">
+          {{ nodeStatus.version }}
+        </pre>
+        <pre class="fill-dummy-grey-big" v-else>
+          &nbsp;
+        </pre>
         <h3>top</h3>
-        <pre>{{ nodeStatus.top }}</pre>
+        <pre v-if="!isLoading">
+          {{ nodeStatus.top }}
+        </pre>
+        <pre class="fill-dummy-grey-big" v-else>
+          &nbsp;
+        </pre>
       </template>
-      <loader v-else/>
     </div>
-    <loader v-else/>
   </div>
 </template>
 <script>
@@ -62,10 +90,15 @@ export default {
     }
   },
   mixins: [pollAction('getNodeStatus')],
-  computed: mapState({
-    nodeStatus: '$nodeStatus',
-    node: 'epochUrl'
-  }),
+  computed: {
+    ...mapState({
+      nodeStatus: '$nodeStatus',
+      node: 'epochUrl'
+    }),
+    isLoading () {
+      return this.isNetworkChanging || !(this.nodeStatus.top && this.nodeStatus.version)
+    }
+  },
   components: {
     AeButton,
     AeInput,

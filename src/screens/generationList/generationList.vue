@@ -14,47 +14,64 @@
         </div>
       </div>
 
-      <table class="transactions" v-if="generations.length">
-        <tr v-for="(b, i) in generations" :key="i">
+      <table class="transactions">
+        <tr v-for="i in numGenerations" :key="i">
           <td>
-            <div class="height">
-              <router-link :to="`/generation/${b.keyBlock.height}`">
-                {{ b.keyBlock.height }}
+            <div class="height" v-if="generations.length">
+              <router-link :to="`/generation/${generations[i-1].keyBlock.height}`">
+                {{ generations[i-1].keyBlock.height }}
               </router-link>
             </div>
-            </td>
-          <td>
-            <span class="field-name">key-hash</span>
-            <span v-if="b.keyBlock.hash" class="number">
-                <ae-hash type="short" :hash="b.keyBlock.hash"/>
-              </span>
-            <span v-else>n/a</span>
           </td>
           <td>
-            <span class="number">{{ b.microBlocksDetailed.length }}</span>
+            <span class="field-name">key-hash</span>
+            <span v-if="generations.length" class="number">
+                <ae-hash type="short" :hash="generations[i-1].keyBlock.hash"/>
+              </span>
+            <span class="fill-dummy" v-else>
+              &nbsp;
+            </span>
+          </td>
+          <td>
+            <span class="number" v-if="generations.length">
+              {{ generations[i-1].microBlocksDetailed.length }}
+            </span>
+            <span class="fill-dummy" v-else>
+              &nbsp;
+            </span>
             <span class="field-name">Micro Blocks</span>
           </td>
           <td>
-            <span class="number">{{ b.numTransactions }}</span>
+            <span class="number" v-if="generations.length">
+              {{ generations[i-1].numTransactions }}
+            </span>
+            <span class="fill-dummy" v-else>
+              &nbsp;
+            </span>
             <span class="field-name">Transaction(s)</span>
           </td>
           <td>
             <span class="field-name">mined by</span>
-            <span class="account-address">
-                <router-link :to="`/account/${b.keyBlock.miner}`">
-                  <named-address :address="b.keyBlock.miner"/>
-                </router-link>
-              </span>
+            <span class="account-address" v-if="generations.length">
+              <router-link :to="`/account/${generations[i-1].keyBlock.miner}`">
+                <named-address :address="generations[i-1].keyBlock.miner"/>
+              </router-link>
+            </span>
+            <span class="fill-dummy" v-else>
+              &nbsp;
+            </span>
           </td>
           <td>
             <span class="field-name">time</span>
-            <span class="number">
-                <relative-time :ts="currentTime - b.keyBlock.time"/>
-              </span>
+            <span class="number" v-if="generations.length">
+              <relative-time :ts="currentTime - generations[i-1].keyBlock.time"/>
+            </span>
+            <span class="fill-dummy" v-else>
+              &nbsp;
+            </span>
           </td>
         </tr>
       </table>
-      <loader v-else/>
       <div class="center">
         <loader v-if="isLoadingMore" />
         <ae-button v-else type="dramatic" @click="loadMore">load more</ae-button>
@@ -76,7 +93,8 @@ export default {
   mixins: [currentTime],
   data: function () {
     return {
-      isLoadingMore: false
+      isLoadingMore: false,
+      numGenerations: 4
     }
   },
   computed: {
@@ -93,12 +111,15 @@ export default {
       this.isLoadingMore = true
       await this.$store.dispatch('blocks/getLatestGenerations', this.generations.length + 10)
       this.isLoadingMore = false
+      this.numGenerations += 10
     }
   },
   mounted: async function () {
+    this.numGenerations = 10
     this.$store.dispatch('blocks/getLatestGenerations', 10)
   },
   activated: async function () {
+    this.numGenerations = 10
     this.$store.dispatch('blocks/getLatestGenerations', 10)
   }
 }
