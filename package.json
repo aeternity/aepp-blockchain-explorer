@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@aeternity/aepp-components": "2.0.13",
-    "@aeternity/aepp-sdk": "^0.22.0-0.1.0-beta.1",
+    "@aeternity/aepp-sdk": "0.24.0-0.1.0",
     "lodash": "^4.17.5",
     "vue": "^2.5.17",
     "vue-popperjs": "^1.2.6",
