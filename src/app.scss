@@ -246,3 +246,24 @@ a {
     z-index:1;
   }
 }
+
+.fill-dummy{
+  display: inline-block;
+  width:80px;
+  height: 15px;
+  border-radius: 2px;
+  margin: 5px 0px 5px 5px;
+  animation: pulse 2s infinite ease-in-out;
+
+  @keyframes pulse {
+    0% {
+      background-color: rgba(256, 256, 256, 0.1)
+    }
+    50% {
+      background-color: rgba(256, 256, 256, 0.3)
+    }
+    100% {
+      background-color: rgba(256, 256, 256, 0.1)
+    }
+  }
+}
