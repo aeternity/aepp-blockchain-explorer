@@ -39,7 +39,7 @@
             <span class="number" v-if="generations[i-1]">
               {{ generations[i-1].microBlocksDetailed.length }}
             </span>
-            <span class="fill-dummy" v-else>
+            <span class="fill-dummy-small" v-else>
               &nbsp;
             </span>
             <span class="field-name">Micro Blocks</span>
@@ -48,7 +48,7 @@
             <span class="number" v-if="generations[i-1]">
               {{ generations[i-1].numTransactions }}
             </span>
-            <span class="fill-dummy" v-else>
+            <span class="fill-dummy-small" v-else>
               &nbsp;
             </span>
             <span class="field-name">Transaction(s)</span>
