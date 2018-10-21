@@ -74,7 +74,7 @@
         </div>
       </div>
     </div>
-  <loader v-else/>
+    <loader v-else/>
   </div>
 </template>
 
@@ -86,7 +86,7 @@ import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
 import Loader from '../../components/loader'
 
-const blockHashRegex = RegExp('^kh|mh')
+const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
@@ -97,17 +97,9 @@ export default {
   components: { AePanel, RelativeTime, Transaction, Loader },
   mixins: [currentTime],
   computed: {
-    ...mapState('blocks', {
-      block: ({ block }) => block,
-      height: ({ height }) => height
-    }),
+    ...mapState('blocks', ['block', 'height']),
     isKeyBlock () {
-      if (blockHashRegex.test(this.blockId)) {
-        if (this.blockId.substr(0, 2) === 'mh') {
-          return false
-        }
-      }
-      return true
+      return this.blockId.startsWith('kh')
     }
   },
   methods: {

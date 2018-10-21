@@ -14,7 +14,7 @@
               <div class="number">{{ generation.micros.length }}</div>
             </field>
             <field name="Transactions">
-              <div class="number">{{ generation.transactions.length }}</div>
+              <div class="number">{{ numTransactions }}</div>
             </field>
           </div>
           <nav class="gen-navigation grid">
@@ -112,11 +112,11 @@
             <article class="block-transactions">
               <header class="block-transactions__header">
                 <h2 class="title title-sub">
-                  <span class="number">{{ generation.transactions[index].transactions.length }}</span> Transaction{{ generation.transactions[index].transactions.length !== 1 ? 's' : '' }}
+                  <span class="number">{{ m.transactions.length }}</span> Transaction{{ m.transactions.length !== 1 ? 's' : '' }}
                 </h2>
               </header>
               <div class="transactions">
-                <transaction :key="t.hash" v-for="t in generation.transactions[index].transactions" :transaction="t"/>
+                <transaction :key="t.hash" v-for="t in m.transactions" :transaction="t"/>
               </div>
             </article>
 
@@ -142,7 +142,7 @@ import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import Loader from '../../components/loader'
 
-const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
+const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
@@ -157,10 +157,17 @@ export default {
   ],
   components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader },
   mixins: [currentTime],
-  computed: mapState('blocks', [
-    'height',
-    'generation'
-  ]),
+  computed: {
+    ...mapState('blocks', [
+      'height',
+      'generation'
+    ]),
+    numTransactions(){
+      return this.generation.micros.reduce(
+        (accumulator, currentValue)  => accumulator + currentValue.transactions.length,0
+      )
+    }
+  },
   methods: {
     async getGeneration () {
       this.isLoading = true

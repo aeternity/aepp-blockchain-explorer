@@ -16,20 +16,13 @@ async function getGenerationFromHeightWrapper (height, epochUrl) {
   let microBlocks = await Promise.all(
     microBlocksHashes.map(
       async (hash) => {
-        return client.api.getMicroBlockHeaderByHash(hash, { txEncoding: 'json' })
+        let micro_block = await client.api.getMicroBlockHeaderByHash(hash, { txEncoding: 'json' })
+        micro_block.transactions = (await client.api.getMicroBlockTransactionsByHash(hash, {txEncoding: 'json'})).transactions
+        return micro_block
       }
     )
   )
-  let transactions = await Promise.all(
-    microBlocksHashes.map(
-      async (hash) => {
-        return client.api.getMicroBlockTransactionsByHash(hash, { txEncoding: 'json' })
-      }
-    )
-  )
-
   generation.micros = microBlocks
-  generation.transactions = transactions
   return generation
 }
 
