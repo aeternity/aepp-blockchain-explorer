@@ -17,15 +17,18 @@
       <table class="transactions">
         <tr v-for="i in numGenerations" :key="i">
           <td>
-            <div class="height" v-if="generations.length">
+            <div class="height" v-if="generations[i-1]">
               <router-link :to="`/generation/${generations[i-1].keyBlock.height}`">
                 {{ generations[i-1].keyBlock.height }}
               </router-link>
             </div>
+            <div class="fill-dummy" v-else>
+              &nbsp;
+            </div>
           </td>
           <td>
             <span class="field-name">key-hash</span>
-            <span v-if="generations.length" class="number">
+            <span v-if="generations[i-1]" class="number">
                 <ae-hash type="short" :hash="generations[i-1].keyBlock.hash"/>
               </span>
             <span class="fill-dummy" v-else>
@@ -33,7 +36,7 @@
             </span>
           </td>
           <td>
-            <span class="number" v-if="generations.length">
+            <span class="number" v-if="generations[i-1]">
               {{ generations[i-1].microBlocksDetailed.length }}
             </span>
             <span class="fill-dummy" v-else>
@@ -42,7 +45,7 @@
             <span class="field-name">Micro Blocks</span>
           </td>
           <td>
-            <span class="number" v-if="generations.length">
+            <span class="number" v-if="generations[i-1]">
               {{ generations[i-1].numTransactions }}
             </span>
             <span class="fill-dummy" v-else>
@@ -52,7 +55,7 @@
           </td>
           <td>
             <span class="field-name">mined by</span>
-            <span class="account-address" v-if="generations.length">
+            <span class="account-address" v-if="generations[i-1]">
               <router-link :to="`/account/${generations[i-1].keyBlock.miner}`">
                 <named-address :address="generations[i-1].keyBlock.miner"/>
               </router-link>
@@ -63,7 +66,7 @@
           </td>
           <td>
             <span class="field-name">time</span>
-            <span class="number" v-if="generations.length">
+            <span class="number" v-if="generations[i-1]">
               <relative-time :ts="currentTime - generations[i-1].keyBlock.time"/>
             </span>
             <span class="fill-dummy" v-else>
@@ -109,9 +112,9 @@ export default {
   methods: {
     loadMore: async function () {
       this.isLoadingMore = true
+      this.numGenerations += 10
       await this.$store.dispatch('blocks/getLatestGenerations', this.generations.length + 10)
       this.isLoadingMore = false
-      this.numGenerations += 10
     }
   },
   mounted: async function () {
