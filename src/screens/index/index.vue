@@ -30,7 +30,7 @@ import RecentBlocks from '../../partials/recentBlocks/recentBlocks'
 
 const blockHeightRegex = RegExp('^[0-9]+$')
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
-const accountPublicKeyRegex = RegExp('^ak\\$[1-9A-HJ-NP-Za-km-z]{48,50}$')
+const accountPublicKeyRegex = RegExp('^ak_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {

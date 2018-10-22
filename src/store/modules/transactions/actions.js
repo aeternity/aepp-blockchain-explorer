@@ -73,8 +73,7 @@ export default {
     })
     const transactions = await client.api.getTxsListFromBlockRangeByHeight({
       from,
-      to,
-      txEncoding: 'json'
+      to
     })
 
     commit('setTransactions', transactions)
@@ -94,7 +93,7 @@ export default {
     const client = await EpochChain({
       url: this.state.epochUrl
     })
-    const transaction = await client.api.getTransactionByHash(hash, { txEncoding: 'json' })
+    const transaction = await client.api.getTransactionByHash(hash)
 
     commit('setTransaction', transaction)
 

@@ -26,9 +26,9 @@
           </tr>
           <tr>
             <td><strong>{{ node }}</strong></td>
-            <td>{{ nodeStatus.top.height }}</td>
-            <td>{{ nodeStatus.top.hash | startAndEnd }}</td>
-            <td>{{ nodeStatus.top.time }}</td>
+            <td>{{ nodeStatus.top.keyBlock.height }}</td>
+            <td>{{ nodeStatus.top.keyBlock.hash | startAndEnd }}</td>
+            <td>{{ nodeStatus.top.keyBlock.time }}</td>
             <td>{{ nodeStatus.version.nodeRevision | startAndEnd }}</td>
             <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
           </tr>

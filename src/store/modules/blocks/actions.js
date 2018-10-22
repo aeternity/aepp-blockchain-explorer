@@ -11,13 +11,13 @@ async function getGenerationFromHeightWrapper (height, epochUrl) {
   const client = await EpochChain({
     url: epochUrl
   })
-  const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
+  const generation = await client.api.getGenerationByHeight(height)
   const microBlocksHashes = generation.microBlocks
   generation.microBlocksDetailed = await Promise.all(
     microBlocksHashes.map(
       async (hash) => {
-        let microBlock = await client.api.getMicroBlockHeaderByHash(hash, {txEncoding: 'json'})
-        microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash, {txEncoding: 'json'})).transactions
+        let microBlock = await client.api.getMicroBlockHeaderByHash(hash)
+        microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash)).transactions
         return microBlock
       }
     )
@@ -62,13 +62,13 @@ export default {
     const client = await EpochChain({
       url: this.state.epochUrl
     })
-    const generation = await client.api.getGenerationByHash(hash, { txEncoding: 'json' })
+    const generation = await client.api.getGenerationByHash(hash)
     const microBlocksHashes = generation.microBlocks
     generation.microBlocksDetailed = await Promise.all(
       microBlocksHashes.map(
         async (hash) => {
-          let microBlock = await client.api.getMicroBlockHeaderByHash(hash, {txEncoding: 'json'})
-          microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash, {txEncoding: 'json'})).transactions
+          let microBlock = await client.api.getMicroBlockHeaderByHash(hash)
+          microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash)).transactions
           return microBlock
         }
       )
@@ -101,10 +101,10 @@ export default {
     const isKeyBlock = hash.substr(0, 2) === 'kh'
     var block
     if (isKeyBlock) {
-      block = await client.api.getKeyBlockByHash(hash, {txEncoding: 'json'})
+      block = await client.api.getKeyBlockByHash(hash)
     } else {
-      block = await client.api.getMicroBlockHeaderByHash(hash, {txEncoding: 'json'})
-      block.transactions = (await client.api.getMicroBlockTransactionsByHash(hash, {txEncoding: 'json'})).transactions
+      block = await client.api.getMicroBlockHeaderByHash(hash)
+      block.transactions = (await client.api.getMicroBlockTransactionsByHash(hash)).transactions
     }
 
     if (isEqual(state.block, block)) {
@@ -149,7 +149,7 @@ export default {
     const client = await EpochChain({
       url: this.state.epochUrl
     })
-    const block = await client.api.getKeyBlockByHeight(height, { txEncoding: 'json' })
+    const block = await client.api.getKeyBlockByHeight(height)
 
     if (isEqual(state.block, block)) {
       return state.block
@@ -177,7 +177,7 @@ export default {
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
-        .getKeyBlockByHeight(state.height - index, { txEncoding: 'json' }))
+        .getKeyBlockByHeight(state.height - index))
     )
 
     if (!blocks.length) {
@@ -230,7 +230,7 @@ export default {
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
-        .getKeyBlockByHeight(height - index, { txEncoding: 'json' }))
+        .getKeyBlockByHeight(height - index))
     )
 
     if (!blocks.length) {
