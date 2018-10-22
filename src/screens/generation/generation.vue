@@ -11,10 +11,10 @@
               <div class="number">{{ generation.keyBlock.height }}</div>
             </field>
             <field name="Micro Blocks">
-              <div class="number">{{ generation.micros.length }}</div>
+              <div class="number">{{ generation.microBlocksDetailed.length }}</div>
             </field>
             <field name="Transactions">
-              <div class="number">{{ numTransactions }}</div>
+              <div class="number">{{ generation.numTransactions }}</div>
             </field>
           </div>
           <nav class="gen-navigation grid">
@@ -72,12 +72,12 @@
         </section>
       </header>
 
-      <section class="block-micros">
+      <section class="block-micro-detailed">
         <h2 class="title">
-          <span class="number">{{ generation.micros.length  }}</span>
-          Micro Block{{ generation.micros.length !== 1 ? 's' : '' }}
+          <span class="number">{{ generation.microBlocksDetailed.length  }}</span>
+          Micro Block{{ generation.microBlocksDetailed.length !== 1 ? 's' : '' }}
         </h2>
-        <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.micros">
+        <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.microBlocksDetailed">
           <h4>
             <span class="number">
               Micro Block No. {{index+1}}
@@ -157,17 +157,10 @@ export default {
   ],
   components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader },
   mixins: [currentTime],
-  computed: {
-    ...mapState('blocks', [
-      'height',
-      'generation'
-    ]),
-    numTransactions(){
-      return this.generation.micros.reduce(
-        (accumulator, currentValue)  => accumulator + currentValue.transactions.length,0
-      )
-    }
-  },
+  computed: mapState('blocks', [
+    'height',
+    'generation'
+  ]),
   methods: {
     async getGeneration () {
       this.isLoading = true

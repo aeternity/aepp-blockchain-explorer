@@ -31,11 +31,11 @@
             <span v-else>n/a</span>
           </td>
           <td>
-            <span class="number">{{ b.micros.length }}</span>
+            <span class="number">{{ b.microBlocksDetailed.length }}</span>
             <span class="field-name">Micro Blocks</span>
           </td>
           <td>
-            <span class="number">{{ b.transactions.length }}</span>
+            <span class="number">{{ b.numTransactions }}</span>
             <span class="field-name">Transaction(s)</span>
           </td>
           <td>

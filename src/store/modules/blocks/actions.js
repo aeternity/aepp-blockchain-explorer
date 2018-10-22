@@ -13,16 +13,18 @@ async function getGenerationFromHeightWrapper (height, epochUrl) {
   })
   const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
   const microBlocksHashes = generation.microBlocks
-  let microBlocks = await Promise.all(
+  generation.microBlocksDetailed = await Promise.all(
     microBlocksHashes.map(
       async (hash) => {
-        let micro_block = await client.api.getMicroBlockHeaderByHash(hash, { txEncoding: 'json' })
-        micro_block.transactions = (await client.api.getMicroBlockTransactionsByHash(hash, {txEncoding: 'json'})).transactions
-        return micro_block
+        let microBlock = await client.api.getMicroBlockHeaderByHash(hash, {txEncoding: 'json'})
+        microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash, {txEncoding: 'json'})).transactions
+        return microBlock
       }
     )
   )
-  generation.micros = microBlocks
+  generation.numTransactions = generation.microBlocksDetailed.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
+  )
   return generation
 }
 
@@ -62,24 +64,18 @@ export default {
     })
     const generation = await client.api.getGenerationByHash(hash, { txEncoding: 'json' })
     const microBlocksHashes = generation.microBlocks
-
-    const microBlocks = await Promise.all(
+    generation.microBlocksDetailed = await Promise.all(
       microBlocksHashes.map(
         async (hash) => {
-          return client.api.getMicroBlockHeaderByHash(hash, { txEncoding: 'json' })
+          let microBlock = await client.api.getMicroBlockHeaderByHash(hash, {txEncoding: 'json'})
+          microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash, {txEncoding: 'json'})).transactions
+          return microBlock
         }
       )
     )
-    let transactions = await Promise.all(
-      microBlocksHashes.map(
-        async (hash) => {
-          return client.api.getMicroBlockTransactionsByHash(hash, { txEncoding: 'json' })
-        }
-      )
+    generation.numTransactions = generation.microBlocksDetailed.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
     )
-
-    generation.micros = microBlocks
-    generation.transactions = transactions
 
     if (isEqual(state.generation, generation)) {
       return state.generation
@@ -132,8 +128,8 @@ export default {
   async getGenerationFromHeight ({ state, commit, dispatch }, height) {
     const generation = await getGenerationFromHeightWrapper(height, this.state.epochUrl)
 
-    if (isEqual(state.block, generation)) {
-      return state.block
+    if (isEqual(state.generation, generation)) {
+      return state.generation
     }
 
     commit('setGeneration', generation)
@@ -209,7 +205,7 @@ export default {
     )
 
     if (!generations.length) {
-      return state.blocks
+      return state.generations
     }
 
     commit('setGenerations', generations)
