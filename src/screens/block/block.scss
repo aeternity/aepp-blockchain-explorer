@@ -6,7 +6,7 @@
     color:$white;
   }
   .block-transactions,
-  .block-micros,
+  .block-micro-detailed,
   .block-header > * {
     @include content-max-width;
   }
@@ -73,7 +73,7 @@
   }
 
 
-  .block-transactions, .block-micros{
+  .block-transactions, .block-micro-detailed{
     .title {
       margin-top: 50px;
       margin-bottom: 30px;

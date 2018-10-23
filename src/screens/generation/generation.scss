@@ -37,7 +37,7 @@
 .generation-screen {
   padding-top: 10px;
   .block-transactions,
-  .block-micros,
+  .block-micro-detailed,
   .generation-header__section > * {
     @include content-max-width;
   }
@@ -75,7 +75,7 @@
 
     }
   }
-  
+
   @include only-phone {
     .basic-gen-info.grid,
     .detail-block-info .grid {
@@ -103,7 +103,7 @@
     }
   }
 
-  .block-transactions, .block-micros{
+  .block-transactions, .block-micro-detailed{
     .title-sub {
       margin-top: 50px;
       margin-bottom: 30px;

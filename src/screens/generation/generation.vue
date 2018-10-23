@@ -11,10 +11,10 @@
               <div class="number">{{ generation.keyBlock.height }}</div>
             </field>
             <field name="Micro Blocks">
-              <div class="number">{{ generation.micros.length }}</div>
+              <div class="number">{{ generation.microBlocksDetailed.length }}</div>
             </field>
             <field name="Transactions">
-              <div class="number">{{ generation.transactionNumber }}</div>
+              <div class="number">{{ generation.numTransactions }}</div>
             </field>
           </div>
           <nav class="gen-navigation grid">
@@ -72,12 +72,12 @@
         </section>
       </header>
 
-      <section class="block-micros">
+      <section class="block-micro-detailed">
         <h2 class="title">
-          <span class="number">{{ generation.micros.length  }}</span>
-          Micro Block{{ generation.micros.length !== 1 ? 's' : '' }}
+          <span class="number">{{ generation.microBlocksDetailed.length  }}</span>
+          Micro Block{{ generation.microBlocksDetailed.length !== 1 ? 's' : '' }}
         </h2>
-        <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.micros">
+        <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.microBlocksDetailed">
           <h4>
             <span class="number">
               Micro Block No. {{index+1}}
@@ -108,7 +108,7 @@
                 <view-and-copy :text='m.prevHash'/>
               </field>
             </div>
-            
+
             <article class="block-transactions">
               <header class="block-transactions__header">
                 <h2 class="title title-sub">
@@ -142,7 +142,7 @@ import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import Loader from '../../components/loader'
 
-const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
+const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {

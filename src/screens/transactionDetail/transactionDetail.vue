@@ -25,8 +25,8 @@
           </field>
 
           <component
-            v-if="componentForTx"
-            :is="componentForTx"
+            v-if="transaction.tx.type"
+            :is="transaction.tx.type"
             :transaction="transaction"
           />
 
@@ -89,19 +89,6 @@ import NamedAddress from '../../components/namedAddress.vue'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import txTypeToName from '../../filters/txTypeToName'
 
-const txTypesComponentsMap = {
-  'contract_call_tx': ContractCallTx,
-  'contract_create_tx': ContractCreateTx,
-  'name_claim_tx': NameClaimTx,
-  'name_preclaim_tx': NamePreclaimTx,
-  'name_update_tx': NameUpdateTx,
-  'name_transfer_tx': NameTransferTx,
-  'oracle_query_tx': OracleQueryTx,
-  'oracle_register_tx': OracleRegisterTx,
-  'oracle_response_tx': OracleResponseTx,
-  'spend_tx': SpendTx
-}
-
 export default {
   name: 'transaction-detail',
   props: ['txId'],
@@ -130,9 +117,6 @@ export default {
     ]),
     transaction () {
       return this.getTxByHash(this.txId)
-    },
-    componentForTx () {
-      return txTypesComponentsMap[ this.transaction.tx.type ]
     }
   },
   async mounted () {

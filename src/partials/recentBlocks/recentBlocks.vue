@@ -15,13 +15,13 @@
           <td>
             <span class='field-name'>Micro Blocks</span>
             <span class='field-value number'>
-              {{b.micros.length}}
+              {{b.microBlocksDetailed.length}}
             </span>
           </td>
           <td>
             <span class='field-name'>Transactions</span>
             <span class='field-value number'>
-              {{b.transactionNumber}}
+              {{b.numTransactions}}
             </span>
           </td>
           <td>

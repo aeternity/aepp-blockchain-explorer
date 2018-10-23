@@ -20,11 +20,11 @@
             </div>
             <div class="field">
               <div class="field-name">Micro Blocks</div>
-              <div class="field-value number">{{ generation.micros.length}}</div>
+              <div class="field-value number">{{ generation.microBlocksDetailed.length}}</div>
             </div>
             <div class="field">
               <div class="field-name">Transactions</div>
-              <div class="field-value number" >{{ generation.transactionNumber }}</div>
+              <div class="field-value number" >{{ generation.numTransactions }}</div>
             </div>
           </div>
 

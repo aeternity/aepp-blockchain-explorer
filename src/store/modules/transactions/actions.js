@@ -1,4 +1,4 @@
-import ae from '../../aeppsdk'
+import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
 
 export default {
   /**
@@ -10,7 +10,9 @@ export default {
    * @return {*}
    */
   async get ({ state, commit, dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const transactions = await client.api.getTxs()
 
     commit('setTransactions', transactions)
@@ -27,7 +29,9 @@ export default {
    * @return {*}
    */
   async mempool ({ state, commit, dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const mempoolTxs = await client.api.getTxs()
 
     commit('setMempoolTxs', mempoolTxs)
@@ -44,7 +48,9 @@ export default {
    * @return {Promise<*>}
    */
   async getTransactionsFromBlockHash ({ state, commit, dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const transactions = await client.api.getTxs()
 
     commit('setTransactions', transactions)
@@ -62,11 +68,12 @@ export default {
    * @return {Promise<*>}
    */
   async getTxsFromBlocksByHeightRange ({ state, commit, dispatch }, { from, to }) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const transactions = await client.api.getTxsListFromBlockRangeByHeight({
       from,
-      to,
-      txEncoding: 'json'
+      to
     })
 
     commit('setTransactions', transactions)
@@ -83,8 +90,10 @@ export default {
    * @return {Promise<*>}
    */
   async getTxByHash ({ state, commit, dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
-    const { transaction } = await client.api.getTx(hash, { txEncoding: 'json' })
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
+    const transaction = await client.api.getTransactionByHash(hash)
 
     commit('setTransaction', transaction)
 
@@ -98,7 +107,9 @@ export default {
    * @return {Promise<*>}
    */
   async getContractCallFromTx ({ dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const call = await client.api.getContractCallFromTx(hash)
 
     return call

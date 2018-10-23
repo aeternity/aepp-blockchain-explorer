@@ -22,7 +22,7 @@
                 {{ b.keyBlock.height }}
               </router-link>
             </div>
-          </td>
+            </td>
           <td>
             <span class="field-name">key-hash</span>
             <span v-if="b.keyBlock.hash" class="number">
@@ -31,11 +31,11 @@
             <span v-else>n/a</span>
           </td>
           <td>
-            <span class="number">{{ b.micros.length }}</span>
+            <span class="number">{{ b.microBlocksDetailed.length }}</span>
             <span class="field-name">Micro Blocks</span>
           </td>
           <td>
-            <span class="number">{{ b.transactionNumber }}</span>
+            <span class="number">{{ b.numTransactions }}</span>
             <span class="field-name">Transaction(s)</span>
           </td>
           <td>

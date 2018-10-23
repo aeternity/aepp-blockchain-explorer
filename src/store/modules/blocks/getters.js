@@ -7,10 +7,9 @@ export default {
    * @return {number}
    */
   getAverageBlockTime: function (state) {
-    const blockTimes = state.blocks.map(
-      (block, idx, blocks) => idx + 1 < blocks.length && blocks[idx].time - blocks[idx + 1].time
+    const blockTimes = state.generations.map(
+      (generation, idx, generations) => idx + 1 < generations.length && generations[idx].keyBlock.time - generations[idx + 1].keyBlock.time
     )
-    // no idea what this does
     blockTimes.pop()
     return (blockTimes.reduce((a, b) => a + b, 0) / blockTimes.length)
   },
@@ -22,7 +21,7 @@ export default {
    */
   getLastMinedBlockTime: function (state) {
     return function (time) {
-      return state.blocks[0] ? time - state.blocks[0].time : null
+      return state.generations[0] ? time - state.generations[0].keyBlock.time : null
     }
   }
 }
