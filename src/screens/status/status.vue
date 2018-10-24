@@ -59,16 +59,21 @@
         <pre v-if="!isLoading">
           {{ nodeStatus.version }}
         </pre>
-        <pre class="fill-dummy-grey-big" v-else>
-          &nbsp;
-        </pre>
+        <div v-else>
+          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
+          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
+          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
+        </div>
+
         <h3>top</h3>
         <pre v-if="!isLoading">
           {{ nodeStatus.top }}
         </pre>
-        <pre class="fill-dummy-grey-big" v-else>
-          &nbsp;
-        </pre>
+        <div v-else>
+          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
+          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
+          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
+        </div>
       </template>
     </div>
   </div>

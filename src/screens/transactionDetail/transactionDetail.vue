@@ -1,18 +1,23 @@
 <template>
   <div class="transaction-detail-screen screen">
     <div class="inner">
-      <div>
+      <div v-if="transaction">
         <h1 class='title'>Transaction Detail</h1>
-        <h2>{{ transaction.tx.type | txTypeToName }}</h2>
+        <h2 v-if="transaction">{{ transaction.tx.type | txTypeToName }}</h2>
+        <span class="fill-dummy-grey-big" v-else>&nbsp;</span>
         <div v-if='transaction'>
 
-          <field v-if='transaction.tx.type' name="Type">
-            <ae-badge>{{ transaction.tx.type | txTypeToName }}</ae-badge>
+          <field name="Type">
+            <ae-badge v-if='transaction.tx.type'>
+              {{ transaction.tx.type | txTypeToName }}
+            </ae-badge>
+            <span class="fill-dummy-grey" v-else>&nbsp;</span>
           </field>
 
-          <field v-if='transaction.hash' name="Hash">
-            <ae-hash type='short' :hash='transaction.hash'/>
-            <view-and-copy :text='transaction.hash'/>
+          <field name="Hash">
+            <ae-hash type='short' :hash='transaction.hash' v-if='transaction.hash'/>
+            <view-and-copy :text='transaction.hash' v-if='transaction.hash'/>
+            <span class="fill-dummy-grey" v-else>&nbsp;</span>
           </field>
 
           <hr>
