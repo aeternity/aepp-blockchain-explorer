@@ -1,8 +1,8 @@
 <template>
   <div>
-      <field v-if='transaction.tx.owner' name="Account">
-        <router-link :to='`/account/${transaction.tx.owner}`'>
-          <named-address size='short' :address='transaction.tx.owner'/>
+      <field v-if='transaction.tx.ownerId' name="Account">
+        <router-link :to='`/account/${transaction.tx.ownerId}`'>
+          <named-address size='short' :address='transaction.tx.ownerId'/>
         </router-link>
       </field>
       <field name="TTL">

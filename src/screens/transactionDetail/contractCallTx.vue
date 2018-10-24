@@ -12,7 +12,7 @@
       {{transaction.tx.gasPrice}}
     </field>
     <field name="Gas Used">
-      {{contractCall.gasUsed}}
+      {{transaction.tx.gas}}
     </field>
     <field name="VM Version">
       <code-view :code="transaction.tx.vmVersion | numbersToString" />

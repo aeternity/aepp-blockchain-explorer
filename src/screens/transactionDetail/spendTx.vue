@@ -1,18 +1,18 @@
 <template>
   <div>
 
-    <field v-if='transaction.tx.sender' name="Sender">
-      <router-link :to='`/account/${transaction.tx.sender}`'>
-        <named-address size='short' :address='transaction.tx.sender'/>
+    <field v-if='transaction.tx.senderId' name="Sender">
+      <router-link :to='`/account/${transaction.tx.senderId}`'>
+        <named-address size='short' :address='transaction.tx.senderId'/>
       </router-link>
-      <view-and-copy :text='transaction.tx.sender'/>
+      <view-and-copy :text='transaction.tx.senderIdA'/>
     </field>
 
-    <field v-if='transaction.tx.recipient' name="Recipient">
-      <router-link :to='`/account/${transaction.tx.recipient}`'>
-        <named-address size='short' :address='transaction.tx.recipient'/>
+    <field v-if='transaction.tx.recipientId' name="Recipient">
+      <router-link :to='`/account/${transaction.tx.recipientId}`'>
+        <named-address size='short' :address='transaction.tx.recipientId'/>
       </router-link>
-      <view-and-copy :text='transaction.tx.recipient'/>
+      <view-and-copy :text='transaction.tx.recipientId'/>
     </field>
 
     <field v-if='transaction.tx.amount' name="Amount">
