@@ -296,6 +296,15 @@ a {
   animation: pulse-grey 2s infinite ease-in-out;
 }
 
+.fill-dummy-grey-small{
+  display: inline-block;
+  width:30px;
+  height: 15px;
+  border-radius: 2px;
+  margin: 5px 0px 2px 5px;
+  animation: pulse-grey 2s infinite ease-in-out;
+}
+
 @keyframes pulse-grey {
   0% {
     background-color: rgba(49, 27, 50, 0.1)

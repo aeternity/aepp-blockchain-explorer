@@ -1,70 +1,83 @@
 <template>
   <div class="transaction-detail-screen screen">
     <div class="inner">
-      <div v-if="transaction">
+      <div>
         <h1 class='title'>Transaction Detail</h1>
-        <h2 v-if="transaction">{{ transaction.tx.type | txTypeToName }}</h2>
-        <span class="fill-dummy-grey-big" v-else>&nbsp;</span>
-        <div v-if='transaction'>
+        <h2 >
+          <span v-if="transaction">{{ transaction.tx.type | txTypeToName }}</span>
+          <span class="fill-dummy-grey-big" v-else>&nbsp;</span>
+        </h2>
+        <div>
 
           <field name="Type">
-            <ae-badge v-if='transaction.tx.type'>
+            <ae-badge v-if='transaction'>
               {{ transaction.tx.type | txTypeToName }}
             </ae-badge>
             <span class="fill-dummy-grey" v-else>&nbsp;</span>
           </field>
 
           <field name="Hash">
-            <ae-hash type='short' :hash='transaction.hash' v-if='transaction.hash'/>
-            <view-and-copy :text='transaction.hash' v-if='transaction.hash'/>
+            <ae-hash type='short' :hash='transaction.hash' v-if='transaction'/>
+            <view-and-copy :text='transaction.hash' v-if='transaction'/>
             <span class="fill-dummy-grey" v-else>&nbsp;</span>
           </field>
 
           <hr>
 
-          <field v-if='transaction.tx.account' name="Account">
-            <router-link :to='`/account/${transaction.tx.account}`'>
-              <named-address size='short' :address='transaction.tx.account'/>
-            </router-link>
-            <view-and-copy :text='transaction.tx.account'/>
-          </field>
-
-          <component
-            v-if="transaction.tx.type"
-            :is="transaction.tx.type"
-            :transaction="transaction"
-          />
-
-          <field v-if='transaction.tx.data_schema' name='Data Schema'>
-            {{transaction.tx.data_schema}}
-          </field>
-
-          <field v-if='transaction.tx.reward' name="Reward">
-            {{transaction.tx.reward}}
-          </field>
-
-          <hr>
-
-          <field v-if='transaction.tx.nonce' name="Nonce">
-            {{transaction.tx.nonce}}
-          </field>
-
-          <field v-if='transaction.tx.ttl' name="TTL">
-            {{transaction.tx.ttl}}
-          </field>
-
-          <field v-if='transaction.tx.vsn' name="Vsn">
-            {{transaction.tx.vsn}}
-          </field>
-
-          <div v-if='transaction.signatures'>
-            <h3>Signatures</h3>
-            <field :name="`${n}`" :key='n' v-for='(signature, n) in transaction.signatures'>
-              <ae-hash type='short' :hash='signature' />
-              <view-and-copy :text='signature'/>
+          <div v-if="transaction">
+            <field v-if='transaction.tx.account' name="Account">
+              <router-link :to='`/account/${transaction.tx.account}`'>
+                <named-address size='short' :address='transaction.tx.account'/>
+              </router-link>
+              <view-and-copy :text='transaction.tx.account'/>
             </field>
-          </div>
 
+            <component
+              v-if="transaction.tx.type"
+              :is="transaction.tx.type"
+              :transaction="transaction"
+            />
+
+            <field v-if='transaction.tx.data_schema' name='Data Schema'>
+              {{transaction.tx.data_schema}}
+            </field>
+
+            <field v-if='transaction.tx.reward' name="Reward">
+              {{transaction.tx.reward}}
+            </field>
+
+            <hr>
+
+            <field v-if='transaction.tx.nonce' name="Nonce">
+              {{transaction.tx.nonce}}
+            </field>
+
+            <field v-if='transaction.tx.ttl' name="TTL">
+              {{transaction.tx.ttl}}
+            </field>
+
+            <field v-if='transaction.tx.vsn' name="Vsn">
+              {{transaction.tx.vsn}}
+            </field>
+
+            <div v-if='transaction.signatures'>
+              <h3>Signatures</h3>
+              <field :name="`${n}`" :key='n' v-for='(signature, n) in transaction.signatures'>
+                <ae-hash type='short' :hash='signature' />
+                <view-and-copy :text='signature'/>
+              </field>
+            </div>
+          </div>
+          <div v-else>
+            <div><span class="fill-dummy-grey">&nbsp;</span></div>
+            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+            <div><span class="fill-dummy-grey">&nbsp;</span></div>
+            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+          </div>
         </div>
       </div>
     </div>

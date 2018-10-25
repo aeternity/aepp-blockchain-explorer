@@ -1,23 +1,26 @@
 <template>
   <div class="account-screen screen">
-    <header class="header" v-if="account">
+    <header class="header" >
       <h1 class="title">
-        <ae-identity-avatar :address="address"/>
-        <named-address :address="address"/>
+        <ae-identity-avatar :address="address" v-if="account"/>
+        <ae-identity-avatar :address="'0'" v-else/>
+        <named-address v-if="account" :address="address"/>
+        <div v-else class="fill-dummy-grey-big">&nbsp;</div>
       </h1>
 
       <field name="Balance">
-        <span class="number">{{ account.balance }}</span>
+        <span class="number" v-if="account">{{ account.balance }}</span>
+        <span class="fill-dummy-grey-small" v-else>&nbsp;</span>
         <span class="unit">AE</span>
       </field>
 
       <field class="pubkey" name="Public Key">
-        <div class="account-public-key">
+        <div class="account-public-key" v-if="account">
           <ae-address :address="address"/>
         </div>
+        <div v-else class="fill-dummy-grey-big">&nbsp;</div>
       </field>
     </header>
-    <loader v-else/>
 
   </div>
 </template>
