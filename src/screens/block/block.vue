@@ -3,7 +3,7 @@
     <div>
       <div class="block-header">
         <div class="basic-block-info grid">
-          <div>
+          <div class="center">
             <span class="field-name">Block: </span>
             <span class="number" v-if="block.height">{{ block.height }}</span>
             <span class="fill-dummy" v-else> &nbsp; </span>
@@ -16,7 +16,7 @@
               </router-link>
             </span>
           </div>
-          <div>
+          <div class="center">
             <span class="field-name">time since mined: </span>
             <relative-time :ts="currentTime - block.time" number spaced v-if="block.height" />
             <span class="fill-dummy" v-else> &nbsp; </span>
