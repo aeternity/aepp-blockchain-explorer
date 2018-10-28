@@ -15,19 +15,10 @@
       {{transaction.tx.gas}}
     </field>
     <field name="VM Version">
-      <code-view :code="transaction.tx.vmVersion | numbersToString" />
+      <code-view :code="transaction.tx.vmVersion " />
     </field>
     <field name="Call Data">
-      <code-view :code="transaction.tx.callData | numbersToString" />
-    </field>
-    <field name="Return Type">
-      <code-view :code='contractCall.returnType'/>
-    </field>
-    <field name="Return Value">
-      <code-view :code='contractCall.returnValue'/>
-    </field>
-    <field name="Caller Nonce">
-      {{ contractCall.callerNonce }}
+      <code-view :code="transaction.tx.callData " />
     </field>
   </div>
 </template>
@@ -35,24 +26,14 @@
 import CodeView from '../../components/codeView.vue'
 import Field from '../../components/field.vue'
 import NamedAddress from '../../components/namedAddress.vue'
-import numbersToString from '../../filters/numbersToString'
 
 export default {
   name: 'contract-call-tx',
   props: ['transaction'],
-  data () {
-    return {
-      contractCall: null
-    }
-  },
   components: {
     CodeView,
     Field,
     NamedAddress
-  },
-  filters: { numbersToString },
-  async mounted () {
-    this.contractCall = await this.$store.dispatch('transactions/getContractCallFromTx', this.transaction.hash)
   }
 }
 </script>

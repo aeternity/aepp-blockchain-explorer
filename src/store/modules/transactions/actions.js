@@ -98,20 +98,5 @@ export default {
     commit('setTransaction', transaction)
 
     return transaction
-  },
-
-  /**
-   *
-   * @param dispatch
-   * @param hash
-   * @return {Promise<*>}
-   */
-  async getContractCallFromTx ({ dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
-    const call = await client.api.getContractCallFromTx(hash)
-
-    return call
   }
 }

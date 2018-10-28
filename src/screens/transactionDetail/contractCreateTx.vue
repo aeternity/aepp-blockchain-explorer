@@ -23,7 +23,7 @@
         <contract-code :contract-code='transaction.tx.code'/>
       </field>
       <field name="Call Data">
-        <code-view :code="transaction.tx.callData | numbersToString" />
+        <code-view :code="transaction.tx.callData " />
       </field>
   </div>
 </template>
@@ -32,7 +32,6 @@ import ContractCode from '../../components/contractCode.vue'
 import CodeView from '../../components/codeView.vue'
 import Field from '../../components/field.vue'
 import NamedAddress from '../../components/namedAddress.vue'
-import numbersToString from '../../filters/numbersToString'
 
 export default {
   name: 'contract-create-tx',
@@ -42,7 +41,6 @@ export default {
     ContractCode,
     Field,
     NamedAddress
-  },
-  filters: { numbersToString }
+  }
 }
 </script>
