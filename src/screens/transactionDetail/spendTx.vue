@@ -5,7 +5,7 @@
       <router-link :to='`/account/${transaction.tx.senderId}`'>
         <named-address size='short' :address='transaction.tx.senderId'/>
       </router-link>
-      <view-and-copy :text='transaction.tx.senderIdA'/>
+      <view-and-copy :text='transaction.tx.senderId'/>
     </field>
 
     <field v-if='transaction.tx.recipientId' name="Recipient">
