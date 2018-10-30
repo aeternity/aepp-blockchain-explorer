@@ -191,9 +191,7 @@ export default wrapActionsWithResolvedEpoch({
     if (!generations.length) {
       return state.generations
     }
-
     commit('setGenerations', generations)
-
     return generations
   },
 
