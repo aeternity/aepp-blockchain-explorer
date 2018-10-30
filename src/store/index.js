@@ -44,9 +44,8 @@ const store = new Vuex.Store({
       const client = await EpochChain({
         url: this.state.epochUrl
       })
-
       const [top, version] = await Promise.all([
-        client.api.getTopBlock(),
+        client.api.getCurrentGeneration(),
         client.api.getStatus()
       ])
 
