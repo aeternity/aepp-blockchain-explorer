@@ -199,17 +199,32 @@ export default {
    * @return {*}
    */
   async getLatestGenerations ({ state, commit, dispatch }, size) {
-    await dispatch('height')
-    const generations = await Promise.all(
-      times(size, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
-    )
-
-    if (!generations.length) {
-      return state.generations
+    let height = await dispatch('height')
+    let genListHeight = state.generations[0] ? state.generations[0].keyBlock.height : 0
+    let genListLength = state.generations.length
+    let generations = []
+    if (height === genListHeight && size <= genListLength) {
+      // if height is same, only the top generation and second needs to refreshed to get latest micros-blocks
+      let tempGenerations = await Promise.all(
+        times(2, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
+      )
+      generations = tempGenerations.concat(state.generations.splice(2))
+    } else if (height === genListHeight && size > genListLength) {
+      // load some more previous generations
+      const numToFetch = size - genListLength
+      let tempGenerations = await Promise.all(
+        times(numToFetch, (index) => getGenerationFromHeightWrapper(genListHeight - genListLength - index, this.state.epochUrl))
+      )
+      generations = state.generations.concat(tempGenerations)
+    } else {
+      // load when new generations has been added
+      let heightDiff = (height - genListHeight > size) ? size : height - genListHeight
+      let tempGenerations = await Promise.all(
+        times(heightDiff, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
+      )
+      generations = tempGenerations.concat(state.generations).slice(0, size)
     }
-
     commit('setGenerations', generations)
-
     return generations
   },
 
