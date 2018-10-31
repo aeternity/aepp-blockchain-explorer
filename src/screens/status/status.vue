@@ -38,12 +38,7 @@
             <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
           </tr>
           <tr v-else>
-            <td><fill-dummy color="grey"/></td>
-            <td><fill-dummy color="grey"/></td>
-            <td><fill-dummy color="grey"/></td>
-            <td><fill-dummy color="grey"/></td>
-            <td><fill-dummy color="grey"/></td>
-            <td><fill-dummy color="grey"/></td>
+            <td v-for="i in 6" :key="i"><fill-dummy color="grey"/></td>
           </tr>
         </table>
         <h1>Detail</h1>
@@ -56,9 +51,7 @@
           {{ nodeStatus.version }}
         </pre>
         <div v-else>
-          <div> <fill-dummy color="grey"/> </div>
-          <div> <fill-dummy color="grey"/> </div>
-          <div> <fill-dummy color="grey"/> </div>
+          <div v-for="i in 3" :key="i"> <fill-dummy color="grey"/> </div>
         </div>
 
         <h3>top</h3>
@@ -66,9 +59,7 @@
           {{ nodeStatus.top }}
         </pre>
         <div v-else>
-          <div> <fill-dummy color="grey"/> </div>
-          <div> <fill-dummy color="grey"/> </div>
-          <div> <fill-dummy color="grey"/> </div>
+          <div v-for="i in 3" :key="i"> <fill-dummy color="grey"/> </div>
         </div>
       </template>
     </div>

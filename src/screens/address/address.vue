@@ -2,8 +2,7 @@
   <div class="account-screen screen">
     <header class="header" >
       <h1 class="title">
-        <ae-identity-avatar :address="address" v-if="account"/>
-        <ae-identity-avatar :address="'0'" v-else/>
+        <ae-identity-avatar :address="account ? address : '0'"/>
         <named-address v-if="account" :address="address"/>
         <fill-dummy color="grey" size="big" v-else/>
       </h1>
