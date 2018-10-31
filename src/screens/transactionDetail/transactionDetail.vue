@@ -5,7 +5,7 @@
         <h1 class='title'>Transaction Detail</h1>
         <h2 >
           <span v-if="transaction">{{ transaction.tx.type | txTypeToName }}</span>
-          <span class="fill-dummy-grey-big" v-else>&nbsp;</span>
+          <fill-dummy size="big" color="grey" v-else/>
         </h2>
         <div>
 
@@ -13,13 +13,13 @@
             <ae-badge v-if='transaction'>
               {{ transaction.tx.type | txTypeToName }}
             </ae-badge>
-            <span class="fill-dummy-grey" v-else>&nbsp;</span>
+            <fill-dummy color="grey" v-else/>
           </field>
 
           <field name="Hash">
             <ae-hash type='short' :hash='transaction.hash' v-if='transaction'/>
             <view-and-copy :text='transaction.hash' v-if='transaction'/>
-            <span class="fill-dummy-grey" v-else>&nbsp;</span>
+            <fill-dummy color="grey" v-else/>
           </field>
 
           <hr>
@@ -69,14 +69,14 @@
             </div>
           </div>
           <div v-else>
-            <div><span class="fill-dummy-grey">&nbsp;</span></div>
-            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-            <div><span class="fill-dummy-grey">&nbsp;</span></div>
-            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-            <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+            <div><fill-dummy color="grey"/></div>
+            <div><fill-dummy color="grey" size="big"/></div>
+            <div><fill-dummy color="grey" size="big"/></div>
+            <div><fill-dummy color="grey" size="big"/></div>
+            <div><fill-dummy color="grey"/></div>
+            <div><fill-dummy color="grey" size="big"/></div>
+            <div><fill-dummy color="grey" size="big"/></div>
+            <div><fill-dummy color="grey" size="big"/></div>
           </div>
         </div>
       </div>
@@ -106,6 +106,7 @@ import Field from '../../components/field.vue'
 import NamedAddress from '../../components/namedAddress.vue'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import txTypeToName from '../../filters/txTypeToName'
+import FillDummy from '../../components/fillDummy'
 
 export default {
   name: 'transaction-detail',
@@ -126,7 +127,8 @@ export default {
     NamePreclaimTx,
     NameTransferTx,
     ContractCallTx,
-    ContractCreateTx
+    ContractCreateTx,
+    FillDummy
   },
   filters: { txTypeToName },
   computed: {

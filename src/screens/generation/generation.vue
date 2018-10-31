@@ -11,30 +11,30 @@
               <div v-if="!isLoading" class="number">
                 {{ generation.keyBlock.height }}
               </div>
-              <div class="fill-dummy-small" v-else> &nbsp; </div>
+              <fill-dummy v-else size="small"/>
             </field>
             <field name="Micro Blocks">
               <div v-if="!isLoading" class="number">
                 {{ generation.microBlocksDetailed.length }}
               </div>
-              <div class="fill-dummy-small" v-else> &nbsp; </div>
+              <fill-dummy v-else size="small"/>
             </field>
             <field name="Transactions">
               <div v-if="!isLoading" class="number">
                 {{ generation.numTransactions }}
               </div>
-              <div class="fill-dummy-small" v-else> &nbsp; </div>
+              <fill-dummy v-else size="small"/>
             </field>
           </div>
           <nav class="gen-navigation grid">
             <router-link :to="`/generation/${(generation.keyBlock.height - 1)}`" v-if="!isLoading">
               prev: {{ generation.keyBlock.height - 1 }}
             </router-link>
-            <div class="fill-dummy" v-else> &nbsp; </div>
+            <fill-dummy v-else/>
             <router-link :to="`/generation/${(generation.keyBlock.height + 1)}`" v-if="!isLoading">
               next: {{ generation.keyBlock.height + 1 }}
             </router-link>
-            <div class="fill-dummy" v-else> &nbsp; </div>
+            <fill-dummy v-else/>
           </nav>
         </section>
         <h2 class="title title-main">
@@ -47,11 +47,11 @@
                 <ae-hash type="short" :hash="generation.keyBlock.miner"/>
               </router-link>
               <view-and-copy :text='generation.keyBlock.miner' v-if="!isLoading"/>
-              <div class="fill-dummy" v-else> &nbsp; </div>
+              <fill-dummy v-else/>
             </field>
             <field name="time since mined">
               <relative-time :ts="currentTime - generation.keyBlock.time" spaced v-if="!isLoading" />
-              <div class="fill-dummy" v-else> &nbsp; </div>
+              <fill-dummy v-else/>
             </field>
           </div>
           <div class="detail-block-info">
@@ -60,20 +60,20 @@
                 <ae-hash type="short" :hash="generation.keyBlock.hash"/>
               </router-link>
               <view-and-copy :text='generation.keyBlock.hash' v-if="!isLoading"/>
-              <div class="fill-dummy" v-else> &nbsp; </div>
+              <fill-dummy v-else/>
             </field>
             <div class="grid">
               <field name="target" class="rewarded">
                 <div class="field-value number" v-if="!isLoading">
                   {{ generation.keyBlock.target }}
                 </div>
-                <div class="fill-dummy-big" v-else> &nbsp; </div>
+                <fill-dummy v-else size="big"/>
               </field>
               <field name="time" class="time">
                 <time :timedate="generation.keyBlock.time | humanDate" class="field-value number" v-if="!isLoading">
                   {{ generation.keyBlock.time | humanDate }}
                 </time>
-                <div class="fill-dummy-big" v-else> &nbsp; </div>
+                <fill-dummy v-else size="big"/>
               </field>
               <field name="parent hash" class="hash">
                 <div class="field-value block-hash">
@@ -81,7 +81,7 @@
                     <ae-hash type="short" :hash="generation.keyBlock.prevHash"/>
                   </router-link>
                   <view-and-copy :text='generation.keyBlock.prevHash' v-if="!isLoading"/>
-                  <div class="fill-dummy-big" v-else> &nbsp; </div>
+                  <fill-dummy v-else size="big"/>
                 </div>
               </field>
             </div>
@@ -95,10 +95,10 @@
           Micro Block{{ generation.microBlocksDetailed.length !== 1 ? 's' : '' }}
         </h2>
         <div v-else>
-          <div><span class="fill-dummy-grey">&nbsp;</span></div>
-          <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-          <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-          <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+          <div><fill-dummy color="grey"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
         </div>
         <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.microBlocksDetailed" v-if="!isLoading">
           <h4>
@@ -161,6 +161,7 @@ import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import Loader from '../../components/loader'
+import FillDummy from '../../components/fillDummy'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -175,7 +176,7 @@ export default {
   props: [
     'generationId'
   ],
-  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader },
+  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader, FillDummy },
   mixins: [currentTime],
   computed: mapState('blocks', [
     'height',

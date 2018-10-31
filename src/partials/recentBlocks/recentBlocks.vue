@@ -11,27 +11,21 @@
                 {{generations[i-1].keyBlock.height}}
               </router-link>
             </div>
-            <div class="fill-dummy" v-else>
-              &nbsp;
-            </div>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>Micro Blocks</span>
             <span class='field-value number' v-if="generations.length">
               {{generations[i-1].microBlocksDetailed.length}}
             </span>
-            <span class="fill-dummy" v-else>
-              &nbsp;
-            </span>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>Transactions</span>
             <span class='field-value number' v-if="generations.length">
               {{generations[i-1].numTransactions}}
             </span>
-            <span class="fill-dummy" v-else>
-              &nbsp;
-            </span>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>mined by</span>
@@ -40,9 +34,7 @@
                 <named-address :address='generations[i-1].keyBlock.miner' />
               </router-link>
             </span>
-            <span class="fill-dummy" v-else>
-              &nbsp;
-            </span>
+            <fill-dummy v-else/>
           </td>
         </tr>
       </table>
@@ -52,10 +44,10 @@
 <script>
 import { mapState } from 'vuex'
 import NamedAddress from '../../components/namedAddress'
-import Loader from '../../components/loader'
+import FillDummy from '../../components/fillDummy'
 
 export default {
-  components: { NamedAddress, Loader },
+  components: { NamedAddress, FillDummy },
   computed: mapState('blocks', {
     generations: ({ generations }) => generations.slice(1, 4)
   })

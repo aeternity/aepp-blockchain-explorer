@@ -17,9 +17,7 @@
           <strong v-if="!isLoading">
             {{ node }}
           </strong>
-          <strong class="fill-dummy-grey" v-else>
-            &nbsp;
-          </strong>
+          <fill-dummy color="grey" v-else/>
         </p>
         <h2>Node and Peers</h2>
         <table>
@@ -40,29 +38,27 @@
             <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
           </tr>
           <tr v-else>
-            <td><span class="fill-dummy-grey">&nbsp;</span></td>
-            <td><span class="fill-dummy-grey">&nbsp;</span></td>
-            <td><span class="fill-dummy-grey">&nbsp;</span></td>
-            <td><span class="fill-dummy-grey">&nbsp;</span></td>
-            <td><span class="fill-dummy-grey">&nbsp;</span></td>
-            <td><span class="fill-dummy-grey">&nbsp;</span></td>
+            <td><fill-dummy color="grey"/></td>
+            <td><fill-dummy color="grey"/></td>
+            <td><fill-dummy color="grey"/></td>
+            <td><fill-dummy color="grey"/></td>
+            <td><fill-dummy color="grey"/></td>
+            <td><fill-dummy color="grey"/></td>
           </tr>
         </table>
         <h1>Detail</h1>
         <h2 v-if="!isLoading">
           {{ node }}
         </h2>
-        <h2 class="fill-dummy-grey-big" v-else>
-          &nbsp;
-        </h2>
+        <fill-dummy color="grey" size="big"/>
         <h3>version</h3>
         <pre v-if="!isLoading">
           {{ nodeStatus.version }}
         </pre>
         <div v-else>
-          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
-          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
-          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
+          <div> <fill-dummy color="grey"/> </div>
+          <div> <fill-dummy color="grey"/> </div>
+          <div> <fill-dummy color="grey"/> </div>
         </div>
 
         <h3>top</h3>
@@ -70,9 +66,9 @@
           {{ nodeStatus.top }}
         </pre>
         <div v-else>
-          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
-          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
-          <div> <span class="fill-dummy-grey">&nbsp;</span> </div>
+          <div> <fill-dummy color="grey"/> </div>
+          <div> <fill-dummy color="grey"/> </div>
+          <div> <fill-dummy color="grey"/> </div>
         </div>
       </template>
     </div>
@@ -85,7 +81,7 @@ import {
   AeButton,
   AeInput
 } from '@aeternity/aepp-components'
-import Loader from '../../components/loader'
+import FillDummy from '../../components/fillDummy'
 
 export default {
   data: function () {
@@ -107,7 +103,7 @@ export default {
   components: {
     AeButton,
     AeInput,
-    Loader
+    FillDummy
   },
   methods: {
     async changeNetwork () {

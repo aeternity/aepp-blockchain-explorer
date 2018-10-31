@@ -6,7 +6,7 @@
           <div class="center">
             <span class="field-name">Block: </span>
             <span class="number" v-if="block.height">{{ block.height }}</span>
-            <span class="fill-dummy" v-else> &nbsp; </span>
+            <fill-dummy v-else/>
           </div>
           <div v-if="block.miner">
             <span class="field-name">mined by</span>
@@ -19,7 +19,7 @@
           <div class="center">
             <span class="field-name">time since mined: </span>
             <relative-time :ts="currentTime - block.time" number spaced v-if="block.height" />
-            <span class="fill-dummy" v-else> &nbsp; </span>
+            <fill-dummy v-else/>
           </div>
         </div>
         <div class="detail-block-info">
@@ -27,7 +27,7 @@
             <div class="field-name">Hash</div>
             <div class="scroll">
               <div class="number" v-if="block.height">{{ block.hash }}</div>
-              <div class="fill-dummy-grey-big" v-else> &nbsp; </div>
+              <fill-dummy color="grey" size="big" v-else/>
             </div>
 
           </div>
@@ -35,7 +35,7 @@
             <div class="field height">
               <div class="field-name">Height</div>
               <div class="field-value number" v-if="block.height">{{ block.height }}</div>
-              <div class="fill-dummy" v-else> &nbsp; </div>
+              <fill-dummy v-else/>
             </div>
             <div class="field rewarded" v-if="block.target">
               <div class="field-name">Target</div>
@@ -50,7 +50,7 @@
               <div class="field-value number" v-if="block.height">
                 {{ block.time | humanDate }}
               </div>
-              <div class="fill-dummy" v-else> &nbsp; </div>
+              <fill-dummy v-else/>
             </div>
           </div>
           <div class="field hash">
@@ -60,7 +60,7 @@
                 {{ block.prevHash | startAndEnd }}
               </router-link>
             </div>
-            <div class="fill-dummy" v-else> &nbsp; </div>
+            <fill-dummy v-else/>
           </div>
         </div>
         <div class="block-navigation grid" v-if="block.height">
@@ -77,10 +77,10 @@
           <span class="number">{{ block.transactions.length }}</span> Transaction(s)
         </h2>
         <div v-else>
-          <div><span class="fill-dummy-grey">&nbsp;</span></div>
-          <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-          <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
-          <div><span class="fill-dummy-grey-big">&nbsp;</span></div>
+          <div><fill-dummy color="grey"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
         </div>
         <div class="transactions" v-if="block.height">
           <transaction :key="t.hash" v-for="t in block.transactions" :transaction="t"/>
@@ -96,7 +96,7 @@ import { AePanel } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
-import Loader from '../../components/loader'
+import FillDummy from '../../components/fillDummy'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -106,7 +106,7 @@ export default {
   props: [
     'blockId'
   ],
-  components: { AePanel, RelativeTime, Transaction, Loader },
+  components: { AePanel, RelativeTime, Transaction, FillDummy },
   mixins: [currentTime],
   computed: {
     ...mapState('blocks', ['block', 'height']),

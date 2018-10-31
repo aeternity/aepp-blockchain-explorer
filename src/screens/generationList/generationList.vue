@@ -22,35 +22,27 @@
                 {{ generations[i-1].keyBlock.height }}
               </router-link>
             </div>
-            <div class="fill-dummy" v-else>
-              &nbsp;
-            </div>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class="field-name">key-hash</span>
             <span v-if="generations[i-1]" class="number">
                 <ae-hash type="short" :hash="generations[i-1].keyBlock.hash"/>
               </span>
-            <span class="fill-dummy" v-else>
-              &nbsp;
-            </span>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class="number" v-if="generations[i-1]">
               {{ generations[i-1].microBlocksDetailed.length }}
             </span>
-            <span class="fill-dummy-small" v-else>
-              &nbsp;
-            </span>
+            <fill-dummy size="small" v-else/>
             <span class="field-name">Micro Blocks</span>
           </td>
           <td>
             <span class="number" v-if="generations[i-1]">
               {{ generations[i-1].numTransactions }}
             </span>
-            <span class="fill-dummy-small" v-else>
-              &nbsp;
-            </span>
+            <fill-dummy size="small" v-else/>
             <span class="field-name">Transaction(s)</span>
           </td>
           <td>
@@ -60,18 +52,14 @@
                 <named-address :address="generations[i-1].keyBlock.miner"/>
               </router-link>
             </span>
-            <span class="fill-dummy" v-else>
-              &nbsp;
-            </span>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class="field-name">time</span>
             <span class="number" v-if="generations[i-1]">
               <relative-time :ts="currentTime - generations[i-1].keyBlock.time"/>
             </span>
-            <span class="fill-dummy" v-else>
-              &nbsp;
-            </span>
+            <fill-dummy v-else/>
           </td>
         </tr>
       </table>
@@ -90,9 +78,10 @@ import RelativeTime from '../../components/relativeTime'
 import NamedAddress from '../../components/namedAddress'
 import AeHash from '../../components/aeHash'
 import Loader from '../../components/loader'
+import FillDummy from '../../components/fillDummy'
 
 export default {
-  components: { AeButton, RelativeTime, NamedAddress, AeHash, Loader },
+  components: { AeButton, RelativeTime, NamedAddress, AeHash, Loader, FillDummy },
   mixins: [currentTime],
   data: function () {
     return {

@@ -5,12 +5,12 @@
         <ae-identity-avatar :address="address" v-if="account"/>
         <ae-identity-avatar :address="'0'" v-else/>
         <named-address v-if="account" :address="address"/>
-        <div v-else class="fill-dummy-grey-big">&nbsp;</div>
+        <fill-dummy color="grey" size="big" v-else/>
       </h1>
 
       <field name="Balance">
         <span class="number" v-if="account">{{ account.balance }}</span>
-        <span class="fill-dummy-grey-small" v-else>&nbsp;</span>
+        <fill-dummy color="grey" size="small" v-else/>
         <span class="unit">AE</span>
       </field>
 
@@ -18,7 +18,7 @@
         <div class="account-public-key" v-if="account">
           <ae-address :address="address"/>
         </div>
-        <div v-else class="fill-dummy-grey-big">&nbsp;</div>
+        <fill-dummy color="grey" size="big" v-else/>
       </field>
     </header>
 
@@ -30,7 +30,7 @@ import { AeAddress, AeIdentityAvatar, AePanel } from '@aeternity/aepp-components
 import pollAction from '../../mixins/pollAction'
 import NamedAddress from '../../components/namedAddress'
 import Field from '../../components/field'
-import Loader from '../../components/loader'
+import FillDummy from '../../components/fillDummy'
 
 // TODO: There is a reactivity problem in here, The v-if does not work
 export default {
@@ -42,7 +42,7 @@ export default {
     AePanel,
     NamedAddress,
     Field,
-    Loader
+    FillDummy
   },
   mixins: [pollAction('accounts/get', ({ address }) => address)],
   computed: mapState('accounts', {
