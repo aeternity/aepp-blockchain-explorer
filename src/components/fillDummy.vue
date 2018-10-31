@@ -17,7 +17,7 @@ export default {
       type: String,
       default: 'blue'
     }
-  },
+  }
 }
 </script>
 
@@ -48,7 +48,6 @@ export default {
     margin: 5px 0px 2px 5px;
     animation: pulse 2s infinite ease-in-out;
   }
-
 
   @keyframes pulse {
     0% {
