@@ -19,7 +19,7 @@ export default {
     let balance = 0
 
     try {
-      balance = await client.api.getAccountBalance(address)
+      balance = (await client.api.getAccountByPubkey(address)).balance
     } catch (e) {
       balance = 0
     }
