@@ -38,7 +38,7 @@ server {
         location / {
                 include cors.conf;
                 proxy_bind 127.0.0.1;
-                proxy_pass http://localhost:3003/v1/;
+                proxy_pass http://localhost:3013/;
         }
 }
 # /etc/nginx/cors.conf
@@ -63,6 +63,48 @@ server {
                         add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
                         add_header 'Access-Control-Expose-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
                 }
+```
+
+APACHE Example:
+
+```
+Listen 80
+ServerName localhost
+DocumentRoot /var/www/html
+ErrorLog /var/log/error_log
+CustomLog /var/log/access_log combined
+DirectoryIndex index.html index.htm
+
+<Directory /var/www/html>
+  Options -Indexes +IncludesNOEXEC +SymLinksIfOwnerMatch +ExecCGI
+  allow from all
+  AllowOverride All Options=ExecCGI,Includes,IncludesNOEXEC,Indexes,MultiViews,SymLinksIfOwnerMatch
+  Require all granted
+</Directory>
+
+# Changes the response to 204 for the OPTIONS request
+RewriteCond %{REQUEST_METHOD} OPTIONS 
+RewriteRule ^(.*)$ $1 [R=204,L]
+
+# Configures the proxy
+ProxyPass / http://127.0.0.1:3013/
+
+# Common headers
+Header always set "Access-Control-Allow-Methods" "GET, POST, OPTIONS"
+Header always set "Access-Control-Allow-Headers" "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range"
+
+# OPTIONS headers
+Header always set "Access-Control-Max-Age" 1728000  expr=%{REQUEST_METHOD}="OPTIONS"
+Header always set "Content-Type" "text/plain; charset=utf-8" expr=%{REQUEST_METHOD}="OPTIONS"
+Header always set "Access-Control-Max-Age" 1728000 expr=%{REQUEST_METHOD}="OPTIONS"
+Header always set "Content-Length" 0 expr=%{REQUEST_METHOD}="OPTIONS"
+
+# POST headers
+Header always set "Access-Control-Expose-Headers" "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range" expr=%{REQUEST_METHOD}="POST"
+
+# GET headers
+Header always set "Access-Control-Expose-Headers" "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range" expr=%{REQUEST_METHOD}="GET"
+Header always set "Content-Type" "application/json; charset=utf-8" expr=%{REQUEST_METHOD}="GET"
 ```
 
 ## Build Setup
