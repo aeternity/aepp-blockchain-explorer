@@ -1,11 +1,10 @@
 <template>
-  <div :class="'fill-dummy-' + color + '-' + size">
+  <div class="fill-dummy" :class="[color, size]">
     &nbsp;
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'fill-dummy',
   props: {
@@ -21,83 +20,56 @@ export default {
 }
 </script>
 
-<style>
-  .fill-dummy-blue-normal{
-    display: inline-block;
-    width:80px;
+<style lang="scss" scoped>
+@import '../style/variables';
+
+.fill-dummy {
+  display: inline-block;
+  border-radius: 2px;
+  margin: 5px 0 2px 5px;
+
+  &.normal {
+    width: 80px;
     height: 15px;
-    border-radius: 2px;
-    margin: 5px 0px 2px 5px;
-    animation: pulse 2s infinite ease-in-out;
+
+    &.grey {
+      width: 120px;
+      height: 18px;
+    }
   }
 
-  .fill-dummy-blue-small{
-    display: inline-block;
-    width:30px;
+  &.small {
+    width: 30px;
     height: 15px;
-    border-radius: 2px;
-    margin: 5px 0px 2px 5px;
-    animation: pulse 2s infinite ease-in-out;
   }
 
-  .fill-dummy-blue-big{
-    display: inline-block;
-    width:250px;
+  &.big {
+    width: 250px;
     height: 25px;
-    border-radius: 2px;
-    margin: 5px 0px 2px 5px;
-    animation: pulse 2s infinite ease-in-out;
   }
 
-  @keyframes pulse {
-    0% {
-      background-color: rgba(256, 256, 256, 0.1)
-    }
-    50% {
-      background-color: rgba(256, 256, 256, 0.3)
-    }
-    100% {
-      background-color: rgba(256, 256, 256, 0.1)
+  @mixin pulse($name, $color) {
+    @keyframes pulse-#{$name} {
+      0% {
+        background-color: rgba($color, 0.1);
+      }
+      50% {
+        background-color: rgba($color, 0.3);
+      }
+      100% {
+        background-color: rgba($color, 0.1);
+      }
     }
   }
 
-  .fill-dummy-grey-normal{
-    display: inline-block;
-    width:120px;
-    height: 18px;
-    border-radius: 2px;
-    margin: 5px 0px 2px 5px;
+  &.blue {
+    @include pulse(blue, $white);
+    animation: pulse-blue 2s infinite ease-in-out;
+  }
+
+  &.grey {
+    @include pulse(grey, #311B32);
     animation: pulse-grey 2s infinite ease-in-out;
   }
-
-  .fill-dummy-grey-small{
-    display: inline-block;
-    width:30px;
-    height: 15px;
-    border-radius: 2px;
-    margin: 5px 0px 2px 5px;
-    animation: pulse-grey 2s infinite ease-in-out;
-  }
-
-  @keyframes pulse-grey {
-    0% {
-      background-color: rgba(49, 27, 50, 0.1)
-    }
-    50% {
-      background-color: rgba(49, 27, 50, 0.3)
-    }
-    100% {
-      background-color: rgba(49, 27, 50, 0.1)
-    }
-  }
-
-  .fill-dummy-grey-big{
-    display: inline-block;
-    width:250px;
-    height: 25px;
-    border-radius: 2px;
-    margin: 5px 0px 2px 5px;
-    animation: pulse-grey 2s infinite ease-in-out;
-  }
-
+}
 </style>
