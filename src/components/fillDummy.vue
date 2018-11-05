@@ -1,7 +1,5 @@
 <template>
-  <div class="fill-dummy" :class="[color, size]">
-    &nbsp;
-  </div>
+  <div class="fill-dummy" :class="[color, size]" />
 </template>
 
 <script>
