@@ -4,34 +4,34 @@
       <h2>Recent generations</h2>
       <p>View the latest generations on the aeternity blockchain</p>
       <table>
-        <tr v-for='i in 3' :key="i">
+        <tr v-for='(generation, i) in generations' :key="i">
           <td>
-            <div class="block-number" v-if="generations.length">
-              <router-link :to='"/generation/" + generations[i-1].keyBlock.height'>
-                {{generations[i-1].keyBlock.height}}
+            <div class="block-number" v-if="generation">
+              <router-link :to='"/generation/" + generation.keyBlock.height'>
+                {{generation.keyBlock.height}}
               </router-link>
             </div>
             <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>Micro Blocks</span>
-            <span class='field-value number' v-if="generations.length">
-              {{generations[i-1].microBlocksDetailed.length}}
+            <span class='field-value number' v-if="generation">
+              {{generation.microBlocksDetailed.length}}
             </span>
             <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>Transactions</span>
-            <span class='field-value number' v-if="generations.length">
-              {{generations[i-1].numTransactions}}
+            <span class='field-value number' v-if="generation">
+              {{generation.numTransactions}}
             </span>
             <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>mined by</span>
-            <span class="field-value account-address" v-if="generations.length">
-              <router-link :to='"/account/" + generations[i-1].keyBlock.miner'>
-                <named-address :address='generations[i-1].keyBlock.miner' />
+            <span class="field-value account-address" v-if="generation">
+              <router-link :to='"/account/" + generation.keyBlock.miner'>
+                <named-address :address='generation.keyBlock.miner' />
               </router-link>
             </span>
             <fill-dummy v-else/>
@@ -49,7 +49,11 @@ import FillDummy from '../../components/fillDummy'
 export default {
   components: { NamedAddress, FillDummy },
   computed: mapState('blocks', {
-    generations: ({ generations }) => generations.slice(1, 4)
+    generations: ({ generations }) => {
+      const g = generations.slice(1, 4)
+      g.length = 3
+      return g
+    }
   })
 }
 </script>
