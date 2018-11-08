@@ -63,29 +63,6 @@ export default {
    * @param state
    * @param commit
    * @param dispatch
-   * @param from
-   * @param to
-   * @return {Promise<*>}
-   */
-  async getTxsFromBlocksByHeightRange ({ state, commit, dispatch }, { from, to }) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
-    const transactions = await client.api.getTxsListFromBlockRangeByHeight({
-      from,
-      to
-    })
-
-    commit('setTransactions', transactions)
-
-    return transactions
-  },
-
-  /**
-   *
-   * @param state
-   * @param commit
-   * @param dispatch
    * @param hash
    * @return {Promise<*>}
    */
