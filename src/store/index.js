@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import modules from './modules'
-import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
+import { getEpochClient, resetClient } from './aeppsdk'
 
 Vue.use(Vuex)
 
@@ -29,6 +29,8 @@ const store = new Vuex.Store({
      */
     changeNetworkUrl (state, epochUrl) {
       state.epochUrl = epochUrl
+      resetClient()
+      getEpochClient(epochUrl)
     }
   },
 
@@ -41,9 +43,7 @@ const store = new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ state, commit, dispatch }) {
-      const client = await EpochChain({
-        url: this.state.epochUrl
-      })
+      let client = await getEpochClient(this.state.epochUrl)
       const [top, version] = await Promise.all([
         client.api.getCurrentGeneration(),
         client.api.getStatus()

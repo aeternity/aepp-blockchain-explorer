@@ -1,4 +1,4 @@
-import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
+import { getEpochClient } from '../../aeppsdk'
 
 export default {
   /**
@@ -10,9 +10,7 @@ export default {
    * @return {*}
    */
   async get ({ state, commit, dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
+    const client = await getEpochClient()
     const transactions = await client.api.getTxs()
 
     commit('setTransactions', transactions)
@@ -29,9 +27,7 @@ export default {
    * @return {*}
    */
   async mempool ({ state, commit, dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
+    const client = await getEpochClient()
     const mempoolTxs = await client.api.getTxs()
 
     commit('setMempoolTxs', mempoolTxs)
@@ -48,9 +44,7 @@ export default {
    * @return {Promise<*>}
    */
   async getTransactionsFromBlockHash ({ state, commit, dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
+    const client = await getEpochClient()
     const transactions = await client.api.getTxs()
 
     commit('setTransactions', transactions)
@@ -67,9 +61,7 @@ export default {
    * @return {Promise<*>}
    */
   async getTxByHash ({ state, commit, dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
+    const client = await getEpochClient()
     const transaction = await client.api.getTransactionByHash(hash)
 
     commit('setTransaction', transaction)
