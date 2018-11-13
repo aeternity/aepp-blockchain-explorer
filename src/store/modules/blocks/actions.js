@@ -95,9 +95,7 @@ export default {
    */
   async getGenerationFromHeight ({ state, commit, dispatch }, height) {
     if (state.generations[height]) return
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
+    const client = await getEpochClient()
     const generation = await client.api.getGenerationByHeight(height)
     const microBlocksHashes = generation.microBlocks
     generation.microBlocksDetailed = await Promise.all(
