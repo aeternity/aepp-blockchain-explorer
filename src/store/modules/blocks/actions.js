@@ -2,29 +2,6 @@ import times from 'lodash/times'
 import isEqual from 'lodash/isEqual'
 import { wrapActionsWithResolvedEpoch } from '../../utils'
 
-/**
- * @param height
- * @param epoch
- * @returns {Promise<*>}
- */
-async function getGenerationFromHeightWrapper (height, epoch) {
-  const generation = await epoch.api.getGenerationByHeight(height)
-  const microBlocksHashes = generation.microBlocks
-  generation.microBlocksDetailed = await Promise.all(
-    microBlocksHashes.map(
-      async (hash) => {
-        let microBlock = await epoch.api.getMicroBlockHeaderByHash(hash)
-        microBlock.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
-        return microBlock
-      }
-    )
-  )
-  generation.numTransactions = generation.microBlocksDetailed.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
-  )
-  return generation
-}
-
 export default wrapActionsWithResolvedEpoch({
   /**
    * height fetches the block-height
@@ -114,13 +91,26 @@ export default wrapActionsWithResolvedEpoch({
    * @return {*}
    */
   async getGenerationFromHeight ({ state, rootGetters: { epoch }, commit }, height) {
-    const generation = await getGenerationFromHeightWrapper(height, epoch)
-
+    const generation = await epoch.api.getGenerationByHeight(height)
+    const microBlocksHashes = generation.microBlocks
+    generation.microBlocksDetailed = await Promise.all(
+      microBlocksHashes.map(
+        async (hash) => {
+          let microBlock = await epoch.api.getMicroBlockHeaderByHash(hash)
+          microBlock.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
+          return microBlock
+        }
+      )
+    )
+    generation.numTransactions = generation.microBlocksDetailed.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
+    )
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
 
     commit('setGeneration', generation)
+    commit('setGenerations', generation)
 
     return generation
   },
@@ -185,13 +175,12 @@ export default wrapActionsWithResolvedEpoch({
   async getLatestGenerations ({ state, rootGetters: { epoch }, commit, dispatch }, size) {
     await dispatch('height')
     const generations = await Promise.all(
-      times(size, (index) => getGenerationFromHeightWrapper(state.height - index, epoch))
+      times(size, (index) => dispatch('getGenerationFromHeight', state.height - index))
     )
 
     if (!generations.length) {
       return state.generations
     }
-    commit('setGenerations', generations)
     return generations
   },
 

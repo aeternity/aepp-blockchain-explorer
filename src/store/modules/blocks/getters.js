@@ -6,11 +6,13 @@ export default {
    * @param state
    * @return {number}
    */
-  getAverageBlockTime: function (state) {
-    const blockTimes = state.generations.map(
-      (generation, idx, generations) => idx + 1 < generations.length && generations[idx].keyBlock.time - generations[idx + 1].keyBlock.time
-    )
-    blockTimes.pop()
+  getAverageBlockTime: function ({generations}) {
+    const blockTimes = []
+    for (var key in generations) {
+      if (generations.hasOwnProperty(key) && generations.hasOwnProperty(parseInt(key) + 1)) {
+        blockTimes.push(Math.abs(generations[key].keyBlock.time - generations[parseInt(key) + 1].keyBlock.time))
+      }
+    }
     return (blockTimes.reduce((a, b) => a + b, 0) / blockTimes.length)
   },
 
@@ -21,7 +23,7 @@ export default {
    */
   getLastMinedBlockTime: function (state) {
     return function (time) {
-      return state.generations[0] ? time - state.generations[0].keyBlock.time : null
+      return state.generations[state.height] ? time - state.generations[state.height].keyBlock.time : null
     }
   }
 }
