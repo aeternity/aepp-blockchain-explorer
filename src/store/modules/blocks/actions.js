@@ -2,32 +2,6 @@ import times from 'lodash/times'
 import isEqual from 'lodash/isEqual'
 import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
 
-/**
- * @param height
- * @param epochUrl
- * @returns {Promise<*>}
- */
-async function getGenerationFromHeightWrapper (height, epochUrl) {
-  const client = await EpochChain({
-    url: epochUrl
-  })
-  const generation = await client.api.getGenerationByHeight(height)
-  const microBlocksHashes = generation.microBlocks
-  generation.microBlocksDetailed = await Promise.all(
-    microBlocksHashes.map(
-      async (hash) => {
-        let microBlock = await client.api.getMicroBlockHeaderByHash(hash)
-        microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash)).transactions
-        return microBlock
-      }
-    )
-  )
-  generation.numTransactions = generation.microBlocksDetailed.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
-  )
-  return generation
-}
-
 export default {
   /**
    * height fetches the block-height
@@ -126,13 +100,31 @@ export default {
    * @return {*}
    */
   async getGenerationFromHeight ({ state, commit, dispatch }, height) {
-    const generation = await getGenerationFromHeightWrapper(height, this.state.epochUrl)
+    if (state.generations[height]) return
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
+    const generation = await client.api.getGenerationByHeight(height)
+    const microBlocksHashes = generation.microBlocks
+    generation.microBlocksDetailed = await Promise.all(
+      microBlocksHashes.map(
+        async (hash) => {
+          let microBlock = await client.api.getMicroBlockHeaderByHash(hash)
+          microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash)).transactions
+          return microBlock
+        }
+      )
+    )
+    generation.numTransactions = generation.microBlocksDetailed.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
+    )
 
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
 
     commit('setGeneration', generation)
+    commit('setGenerations', generation)
 
     return generation
   },
@@ -199,32 +191,14 @@ export default {
    * @return {*}
    */
   async getLatestGenerations ({ state, commit, dispatch }, size) {
-    let height = await dispatch('height')
-    let genListHeight = state.generations[0] ? state.generations[0].keyBlock.height : 0
-    let genListLength = state.generations.length
-    let generations = []
-    if (height === genListHeight && size <= genListLength) {
-      // if height is same, only the top generation and second needs to refreshed to get latest micros-blocks
-      let tempGenerations = await Promise.all(
-        times(2, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
-      )
-      generations = tempGenerations.concat(state.generations.splice(2))
-    } else if (height === genListHeight && size > genListLength) {
-      // load some more previous generations
-      const numToFetch = size - genListLength
-      let tempGenerations = await Promise.all(
-        times(numToFetch, (index) => getGenerationFromHeightWrapper(genListHeight - genListLength - index, this.state.epochUrl))
-      )
-      generations = state.generations.concat(tempGenerations)
-    } else {
-      // load when new generations has been added
-      let heightDiff = (height - genListHeight > size) ? size : height - genListHeight
-      let tempGenerations = await Promise.all(
-        times(heightDiff, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
-      )
-      generations = tempGenerations.concat(state.generations).slice(0, size)
+    await dispatch('height')
+    const generations = await Promise.all(
+      times(size, (index) => dispatch('getGenerationFromHeight', state.height - index))
+    )
+
+    if (!generations.length) {
+      return state.generations
     }
-    commit('setGenerations', generations)
     return generations
   },
 

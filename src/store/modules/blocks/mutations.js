@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
   /**
    * setHeight mutates the
@@ -28,21 +30,12 @@ export default {
   },
 
   /**
-   * setBlocks mutates the array of blocks
-   * @param {Object} state
-   * @param {Array} blocks
-   */
-  setBlocks (state, blocks) {
-    Object.assign(state, { blocks })
-  },
-
-  /**
    * setGenerations mutates the array of generations
    * @param {Object} state
-   * @param {Array} generations
+   * @param {Object} generation
    */
-  setGenerations (state, generations) {
-    Object.assign(state, { generations })
+  setGenerations (state, generation) {
+    Vue.set(state.generations, generation.keyBlock.height, generation)
   },
 
   /**
@@ -66,7 +59,7 @@ export default {
         generation: {},
         block: {},
         blocks: [],
-        generations: []
+        generations: {}
       }
     )
   }

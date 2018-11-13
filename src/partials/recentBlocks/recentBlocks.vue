@@ -45,16 +45,18 @@
 import { mapState } from 'vuex'
 import NamedAddress from '../../components/namedAddress'
 import FillDummy from '../../components/fillDummy'
+import range from 'lodash/range'
 
 export default {
-  components: { NamedAddress, FillDummy },
-  computed: mapState('blocks', {
-    generations: ({ generations }) => {
-      const g = generations.slice(1, 4)
-      g.length = 3
-      return g
-    }
-  })
+  components: {NamedAddress, FillDummy},
+  computed:
+    mapState('blocks', {
+      generations (state) {
+        return range(state.height - 3, state.height).map(
+          (i) => state.generations[i]
+        )
+      }
+    })
 }
 </script>
 <style src='./recentBlocks.scss' lang='scss' />

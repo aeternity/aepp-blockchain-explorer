@@ -17,47 +17,47 @@
       <table class="transactions">
         <tr v-for="i in numGenerations" :key="i">
           <td>
-            <div class="height" v-if="generations[i-1]">
-              <router-link :to="`/generation/${generations[i-1].keyBlock.height}`">
-                {{ generations[i-1].keyBlock.height }}
+            <div class="height" v-if="generations[height-i+1]">
+              <router-link :to="`/generation/${generations[height-i+1].keyBlock.height}`">
+                {{ generations[height-i+1].keyBlock.height }}
               </router-link>
             </div>
             <fill-dummy v-else/>
           </td>
           <td>
             <span class="field-name">key-hash</span>
-            <span v-if="generations[i-1]" class="number">
-                <ae-hash type="short" :hash="generations[i-1].keyBlock.hash"/>
+            <span v-if="generations[height-i+1]" class="number">
+                <ae-hash type="short" :hash="generations[height-i+1].keyBlock.hash"/>
               </span>
             <fill-dummy v-else/>
           </td>
           <td>
-            <span class="number" v-if="generations[i-1]">
-              {{ generations[i-1].microBlocksDetailed.length }}
+            <span class="number" v-if="generations[height-i+1]">
+              {{ generations[height-i+1].microBlocksDetailed.length }}
             </span>
             <fill-dummy size="small" v-else/>
             <span class="field-name">Micro Blocks</span>
           </td>
           <td>
-            <span class="number" v-if="generations[i-1]">
-              {{ generations[i-1].numTransactions }}
+            <span class="number" v-if="generations[height-i+1]">
+              {{ generations[height-i+1].numTransactions }}
             </span>
             <fill-dummy size="small" v-else/>
             <span class="field-name">Transaction(s)</span>
           </td>
           <td>
             <span class="field-name">mined by</span>
-            <span class="account-address" v-if="generations[i-1]">
-              <router-link :to="`/account/${generations[i-1].keyBlock.miner}`">
-                <named-address :address="generations[i-1].keyBlock.miner"/>
+            <span class="account-address" v-if="generations[height-i+1]">
+              <router-link :to="`/account/${generations[height-i+1].keyBlock.miner}`">
+                <named-address :address="generations[height-i+1].keyBlock.miner"/>
               </router-link>
             </span>
             <fill-dummy v-else/>
           </td>
           <td>
             <span class="field-name">time</span>
-            <span class="number" v-if="generations[i-1]">
-              <relative-time :ts="currentTime - generations[i-1].keyBlock.time"/>
+            <span class="number" v-if="generations[height-i+1]">
+              <relative-time :ts="currentTime - generations[height-i+1].keyBlock.time"/>
             </span>
             <fill-dummy v-else/>
           </td>
@@ -91,7 +91,8 @@ export default {
   },
   computed: {
     ...mapState('blocks', [
-      'generations'
+      'generations',
+      'height'
     ]),
     ...mapGetters('blocks', [
       'getAverageBlockTime',
@@ -102,7 +103,7 @@ export default {
     loadMore: async function () {
       this.isLoadingMore = true
       this.numGenerations += 10
-      await this.$store.dispatch('blocks/getLatestGenerations', this.generations.length + 10)
+      await this.$store.dispatch('blocks/getLatestGenerations', Object.keys(this.generations).length + 10)
       this.isLoadingMore = false
     }
   },
