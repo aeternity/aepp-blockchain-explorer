@@ -82,3 +82,5 @@ VUE_APP_EPOCH_URL='//sdk-testnet.aepps.com/' npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
+# File also use by waffle.io for ticket tracking
