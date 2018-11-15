@@ -1,6 +1,6 @@
 import times from 'lodash/times'
 import isEqual from 'lodash/isEqual'
-import ae from '../../aeppsdk'
+import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
 
 /**
  * @param height
@@ -8,25 +8,23 @@ import ae from '../../aeppsdk'
  * @returns {Promise<*>}
  */
 async function getGenerationFromHeightWrapper (height, epochUrl) {
-  const client = await ae(epochUrl)
-  const generation = await client.api.getGenerationByHeight(height, { txEncoding: 'json' })
+  const client = await EpochChain({
+    url: epochUrl
+  })
+  const generation = await client.api.getGenerationByHeight(height)
   const microBlocksHashes = generation.microBlocks
-  let transactionNumber = 0
-
-  let microBlocks = await Promise.all(
+  generation.microBlocksDetailed = await Promise.all(
     microBlocksHashes.map(
       async (hash) => {
-        return client.api.getBlockByHash(hash, { txEncoding: 'json' })
+        let microBlock = await client.api.getMicroBlockHeaderByHash(hash)
+        microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash)).transactions
+        return microBlock
       }
     )
   )
-  for (const index in microBlocks) {
-    transactionNumber += microBlocks[index].transactions.length
-  }
-
-  generation.micros = microBlocks
-  generation.transactionNumber = transactionNumber
-
+  generation.numTransactions = generation.microBlocksDetailed.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
+  )
   return generation
 }
 
@@ -39,7 +37,9 @@ export default {
    * @return {Object}
    */
   async height ({ state, commit, dispatch }) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const height = await client.height()
 
     if (height === state.height) {
@@ -59,24 +59,23 @@ export default {
    * @returns {Promise<*>}
    */
   async getGenerationFromHash ({ state, commit, dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
-    const generation = await client.api.getGenerationByHash(hash, { txEncoding: 'json' })
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
+    const generation = await client.api.getGenerationByHash(hash)
     const microBlocksHashes = generation.microBlocks
-    let transactionNumber = 0
-
-    const microBlocks = await Promise.all(
+    generation.microBlocksDetailed = await Promise.all(
       microBlocksHashes.map(
         async (hash) => {
-          return client.api.getBlockByHash(hash, { txEncoding: 'json' })
+          let microBlock = await client.api.getMicroBlockHeaderByHash(hash)
+          microBlock.transactions = (await client.api.getMicroBlockTransactionsByHash(hash)).transactions
+          return microBlock
         }
       )
     )
-    for (const index in microBlocks) {
-      transactionNumber += microBlocks[index].transactions.length
-    }
-
-    generation.micros = microBlocks
-    generation.transactionNumber = transactionNumber
+    generation.numTransactions = generation.microBlocksDetailed.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
+    )
 
     if (isEqual(state.generation, generation)) {
       return state.generation
@@ -96,8 +95,17 @@ export default {
    * @return {*}
    */
   async getBlockFromHash ({ state, commit, dispatch }, hash) {
-    const client = await ae(this.state.epochUrl)
-    const block = await client.api.getKeyBlockByHash(hash, { txEncoding: 'json' })
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
+    const isKeyBlock = hash.substr(0, 2) === 'kh'
+    var block
+    if (isKeyBlock) {
+      block = await client.api.getKeyBlockByHash(hash)
+    } else {
+      block = await client.api.getMicroBlockHeaderByHash(hash)
+      block.transactions = (await client.api.getMicroBlockTransactionsByHash(hash)).transactions
+    }
 
     if (isEqual(state.block, block)) {
       return state.block
@@ -120,8 +128,8 @@ export default {
   async getGenerationFromHeight ({ state, commit, dispatch }, height) {
     const generation = await getGenerationFromHeightWrapper(height, this.state.epochUrl)
 
-    if (isEqual(state.block, generation)) {
-      return state.block
+    if (isEqual(state.generation, generation)) {
+      return state.generation
     }
 
     commit('setGeneration', generation)
@@ -138,8 +146,10 @@ export default {
    * @return {*}
    */
   async getBlockFromHeight ({ state, commit, dispatch }, height) {
-    const client = await ae(this.state.epochUrl)
-    const block = await client.api.getKeyBlockByHeight(height, { txEncoding: 'json' })
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
+    const block = await client.api.getKeyBlockByHeight(height)
 
     if (isEqual(state.block, block)) {
       return state.block
@@ -161,11 +171,13 @@ export default {
    */
   async getLatestBlocks ({ state, commit, dispatch }, size) {
     await dispatch('height')
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
-        .getKeyBlockByHeight(state.height - index, { txEncoding: 'json' }))
+        .getKeyBlockByHeight(state.height - index))
     )
 
     if (!blocks.length) {
@@ -193,7 +205,7 @@ export default {
     )
 
     if (!generations.length) {
-      return state.blocks
+      return state.generations
     }
 
     commit('setGenerations', generations)
@@ -212,11 +224,13 @@ export default {
    * @return {*}
    */
   async addBlocksByHeightAndSize ({ state, commit, dispatch }, {height, size}) {
-    const client = await ae(this.state.epochUrl)
+    const client = await EpochChain({
+      url: this.state.epochUrl
+    })
     const blocks = await Promise.all(
       times(size, (index) => client
         .api
-        .getKeyBlockByHeight(height - index, { txEncoding: 'json' }))
+        .getKeyBlockByHeight(height - index))
     )
 
     if (!blocks.length) {

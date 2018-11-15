@@ -1,6 +1,6 @@
 <template>
   <article  class="generation-screen screen">
-    <section v-if="!isLoading">
+    <section>
       <header class="generation-header">
         <h1 class="title title-main">
           Generation:
@@ -8,22 +8,33 @@
         <section class="generation-header__section">
           <div class="basic-gen-info grid">
             <field name="Height">
-              <div class="number">{{ generation.keyBlock.height }}</div>
+              <div v-if="!isLoading" class="number">
+                {{ generation.keyBlock.height }}
+              </div>
+              <fill-dummy v-else size="small"/>
             </field>
             <field name="Micro Blocks">
-              <div class="number">{{ generation.micros.length }}</div>
+              <div v-if="!isLoading" class="number">
+                {{ generation.microBlocksDetailed.length }}
+              </div>
+              <fill-dummy v-else size="small"/>
             </field>
             <field name="Transactions">
-              <div class="number">{{ generation.transactionNumber }}</div>
+              <div v-if="!isLoading" class="number">
+                {{ generation.numTransactions }}
+              </div>
+              <fill-dummy v-else size="small"/>
             </field>
           </div>
           <nav class="gen-navigation grid">
-            <router-link :to="`/generation/${(generation.keyBlock.height - 1)}`">
+            <router-link :to="`/generation/${(generation.keyBlock.height - 1)}`" v-if="!isLoading">
               prev: {{ generation.keyBlock.height - 1 }}
             </router-link>
-            <router-link :to="`/generation/${(generation.keyBlock.height + 1)}`" v-if="generation.keyBlock.height">
+            <fill-dummy v-else/>
+            <router-link :to="`/generation/${(generation.keyBlock.height + 1)}`" v-if="!isLoading">
               next: {{ generation.keyBlock.height + 1 }}
             </router-link>
+            <fill-dummy v-else/>
           </nav>
         </section>
         <h2 class="title title-main">
@@ -32,39 +43,45 @@
         <section class="generation-header__section">
           <div class="basic-gen-info grid">
             <field name="mined by">
-              <router-link :to="`/account/${generation.keyBlock.miner}`" class="account-address">
+              <router-link :to="`/account/${generation.keyBlock.miner}`" class="account-address" v-if="!isLoading">
                 <ae-hash type="short" :hash="generation.keyBlock.miner"/>
               </router-link>
-              <view-and-copy :text='generation.keyBlock.miner'/>
+              <view-and-copy :text='generation.keyBlock.miner' v-if="!isLoading"/>
+              <fill-dummy v-else/>
             </field>
             <field name="time since mined">
-              <relative-time :ts="currentTime - generation.keyBlock.time" spaced />
+              <relative-time :ts="currentTime - generation.keyBlock.time" spaced v-if="!isLoading" />
+              <fill-dummy v-else/>
             </field>
           </div>
           <div class="detail-block-info">
             <field name="Hash" class="hash">
-              <router-link :to="`/block/${generation.keyBlock.hash}`">
+              <router-link :to="`/block/${generation.keyBlock.hash}`" v-if="!isLoading">
                 <ae-hash type="short" :hash="generation.keyBlock.hash"/>
               </router-link>
-              <view-and-copy :text='generation.keyBlock.hash'/>
+              <view-and-copy :text='generation.keyBlock.hash' v-if="!isLoading"/>
+              <fill-dummy v-else/>
             </field>
             <div class="grid">
               <field name="target" class="rewarded">
-                <div class="field-value number">
+                <div class="field-value number" v-if="!isLoading">
                   {{ generation.keyBlock.target }}
                 </div>
+                <fill-dummy v-else size="big"/>
               </field>
-              <field name="time" :content="generation.keyBlock.time" class="time">
-                <time :timedate="generation.keyBlock.time | humanDate" class="field-value number">
+              <field name="time" class="time">
+                <time :timedate="generation.keyBlock.time | humanDate" class="field-value number" v-if="!isLoading">
                   {{ generation.keyBlock.time | humanDate }}
                 </time>
+                <fill-dummy v-else size="big"/>
               </field>
               <field name="parent hash" class="hash">
                 <div class="field-value block-hash">
-                  <router-link :to="`/block/${generation.keyBlock.prevHash}`">
+                  <router-link :to="`/block/${generation.keyBlock.prevHash}`" v-if="!isLoading">
                     <ae-hash type="short" :hash="generation.keyBlock.prevHash"/>
                   </router-link>
-                  <view-and-copy :text='generation.keyBlock.prevHash'/>
+                  <view-and-copy :text='generation.keyBlock.prevHash' v-if="!isLoading"/>
+                  <fill-dummy v-else size="big"/>
                 </div>
               </field>
             </div>
@@ -72,12 +89,18 @@
         </section>
       </header>
 
-      <section class="block-micros">
-        <h2 class="title">
-          <span class="number">{{ generation.micros.length  }}</span>
-          Micro Block{{ generation.micros.length !== 1 ? 's' : '' }}
+      <section class="block-micro-detailed">
+        <h2 class="title" v-if="!isLoading">
+          <span class="number">{{ generation.microBlocksDetailed.length  }}</span>
+          Micro Block{{ generation.microBlocksDetailed.length !== 1 ? 's' : '' }}
         </h2>
-        <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.micros">
+        <div v-else>
+          <div><fill-dummy color="grey"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
+          <div><fill-dummy color="grey" size="big"/></div>
+        </div>
+        <article class="micro-blocks-wrapper" :key="m.hash" v-for="(m, index) in generation.microBlocksDetailed" v-if="!isLoading">
           <h4>
             <span class="number">
               Micro Block No. {{index+1}}
@@ -108,7 +131,7 @@
                 <view-and-copy :text='m.prevHash'/>
               </field>
             </div>
-            
+
             <article class="block-transactions">
               <header class="block-transactions__header">
                 <h2 class="title title-sub">
@@ -125,9 +148,6 @@
 
       </section>
     </section>
-
-    <loader v-else/>
-
   </article>
 </template>
 
@@ -141,8 +161,9 @@ import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import Loader from '../../components/loader'
+import FillDummy from '../../components/fillDummy'
 
-const blockHashRegex = RegExp('^bh\\$[1-9A-HJ-NP-Za-km-z]{48,49}')
+const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
@@ -155,7 +176,7 @@ export default {
   props: [
     'generationId'
   ],
-  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader },
+  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader, FillDummy },
   mixins: [currentTime],
   computed: mapState('blocks', [
     'height',

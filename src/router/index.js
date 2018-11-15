@@ -9,8 +9,6 @@ const Index = () => import(/* webpackChunkName: 'index' */'@/screens/index/index
 const Generation = () =>
   import(/* webpackChunkName: 'transaction' */'@/screens/generation/generation.vue')
 const Block = () => import(/* webpackChunkName: 'transaction' */'@/screens/block/block.vue')
-const Transaction = () =>
-  import(/* webpackChunkName: 'transaction' */'@/screens/transaction/transaction.vue')
 const TransactionDetail = () =>
   import(/* webpackChunkName: 'transaction-detail' */'@/screens/transactionDetail/transactionDetail.vue')
 
@@ -40,10 +38,6 @@ export default new Router({
     path: '/block/:blockId',
     component: Block,
     props: true
-  }, {
-    name: 'Transaction',
-    path: '/tx',
-    component: Transaction
   }, {
     name: 'TransactionDetail',
     path: '/tx/:txId',

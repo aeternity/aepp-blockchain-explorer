@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import modules from './modules'
-import ae from './aeppsdk'
+import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
 
 Vue.use(Vuex)
 
@@ -41,11 +41,12 @@ const store = new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ state, commit, dispatch }) {
-      const client = await ae(state.epochUrl)
-
+      const client = await EpochChain({
+        url: this.state.epochUrl
+      })
       const [top, version] = await Promise.all([
-        client.api.getTop(),
-        client.api.getVersion()
+        client.api.getCurrentGeneration(),
+        client.api.getStatus()
       ])
 
       commit('setNodeStatus', { top, version })

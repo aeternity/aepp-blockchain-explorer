@@ -3,50 +3,57 @@
     <div class="inner">
       <h2>Recent generations</h2>
       <p>View the latest generations on the aeternity blockchain</p>
-      <table v-if="generations.length">
-        <tr v-for='(b, i) in generations' :key="i">
+      <table>
+        <tr v-for='(generation, i) in generations' :key="i">
           <td>
-            <div class="block-number">
-              <router-link :to='"/generation/" + b.keyBlock.height'>
-                {{b.keyBlock.height}}
+            <div class="block-number" v-if="generation">
+              <router-link :to='"/generation/" + generation.keyBlock.height'>
+                {{generation.keyBlock.height}}
               </router-link>
             </div>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>Micro Blocks</span>
-            <span class='field-value number'>
-              {{b.micros.length}}
+            <span class='field-value number' v-if="generation">
+              {{generation.microBlocksDetailed.length}}
             </span>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>Transactions</span>
-            <span class='field-value number'>
-              {{b.transactionNumber}}
+            <span class='field-value number' v-if="generation">
+              {{generation.numTransactions}}
             </span>
+            <fill-dummy v-else/>
           </td>
           <td>
             <span class='field-name'>mined by</span>
-            <span class="field-value account-address">
-              <router-link :to='"/account/" + b.keyBlock.miner'>
-                <named-address :address='b.keyBlock.miner' />
+            <span class="field-value account-address" v-if="generation">
+              <router-link :to='"/account/" + generation.keyBlock.miner'>
+                <named-address :address='generation.keyBlock.miner' />
               </router-link>
             </span>
+            <fill-dummy v-else/>
           </td>
         </tr>
       </table>
-      <loader v-else/>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 import NamedAddress from '../../components/namedAddress'
-import Loader from '../../components/loader'
+import FillDummy from '../../components/fillDummy'
 
 export default {
-  components: { NamedAddress, Loader },
+  components: { NamedAddress, FillDummy },
   computed: mapState('blocks', {
-    generations: ({ generations }) => generations.slice(1, 4)
+    generations: ({ generations }) => {
+      const g = generations.slice(1, 4)
+      g.length = 3
+      return g
+    }
   })
 }
 </script>

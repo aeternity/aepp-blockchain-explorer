@@ -36,8 +36,8 @@
     <div class='body'>
 
       <component
-        v-if="componentForTx"
-        :is="componentForTx"
+        v-if="transaction.tx.type"
+        :is="transaction.tx.type"
         :transaction="transaction"
       />
       <template v-else>
@@ -65,18 +65,6 @@ import NamePreclaimTx from './namePreclaimTx.vue'
 import ContractCallTx from './contractCallTx.vue'
 import ContractCreateTx from './contractCreateTx.vue'
 
-const txTypesComponentsMap = {
-  'contract_call_tx': ContractCallTx,
-  'contract_create_tx': ContractCreateTx,
-  'name_claim_tx': NameClaimTx,
-  'name_preclaim_tx': NamePreclaimTx,
-  'name_update_tx': NameUpdateTx,
-  'oracle_query_tx': OracleQueryTx,
-  'oracle_register_tx': OracleRegisterTx,
-  'oracle_response_tx': OracleResponseTx,
-  'spend_tx': SpendTx
-}
-
 export default {
   name: 'transaction',
   props: [
@@ -99,9 +87,6 @@ export default {
   },
   filters: { txTypeToName },
   computed: {
-    componentForTx () {
-      return txTypesComponentsMap[ this.transaction.tx.type ]
-    },
     responsePrettyJson () {
       if (!this.transaction) return null
       if (!this.transaction.tx.response) return null
