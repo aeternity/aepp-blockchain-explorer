@@ -114,12 +114,12 @@
                 </router-link>
                 <view-and-copy :text='m.hash'/>
               </field>
-              <field name="time since mined">
+              <field name="time since mined" v-cloak>
                 <relative-time :ts="currentTime - m.time" spaced />
               </field>
             </div>
             <div class="grid">
-              <field name="time" class="time">
+              <field name="time" class="time" v-cloak>
                 <time :timedate="m.time | humanDate" class="field-value number">
                   {{ m.time | humanDate }}
                 </time>
