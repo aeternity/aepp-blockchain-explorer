@@ -1,6 +1,7 @@
 @import '../../style/mixins';
 
 .recent-blocks-partial {
+  z-index: -1;
   margin-top:80px;
   position:relative;
   > .inner {
