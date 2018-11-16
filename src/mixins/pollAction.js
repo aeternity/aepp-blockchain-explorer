@@ -7,7 +7,7 @@ export default (actionName, args) => ({
       await this.$store.dispatch(actionName, args)
       intervals[this._uid] = setInterval(
         () => this.$store.dispatch(actionName, args),
-        10000)
+        30000)
     }
 
     if (typeof args === 'function') {

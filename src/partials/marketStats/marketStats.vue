@@ -39,7 +39,10 @@ export default {
     'priceChf',
     'marketCapChf',
     'priceBtc'
-  ])
+  ]),
+  mounted () {
+    pollAction('_marketStats/get')
+  }
 }
 </script>
 <style src='./marketStats.scss' lang='scss' />

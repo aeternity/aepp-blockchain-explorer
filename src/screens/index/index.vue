@@ -83,6 +83,9 @@ export default {
         return null
       }
     }
+  },
+  mounted () {
+    pollAction('blocks/getLatestGenerations', 4)
   }
 }
 </script>

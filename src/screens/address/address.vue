@@ -48,7 +48,10 @@ export default {
     'account': function (state) {
       return state.accounts[this.address]
     }
-  })
+  }),
+  mounted () {
+    pollAction('accounts/get', ({ address }) => address)
+  }
 }
 </script>
 <style src='./address.scss' lang='scss' />

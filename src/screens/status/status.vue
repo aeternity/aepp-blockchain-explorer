@@ -112,6 +112,9 @@ export default {
       this.isNetworkChanging = false
       this.$store.dispatch('blocks/getLatestGenerations', 10)
     }
+  },
+  mounted () {
+    pollAction('getNodeStatus')
   }
 }
 </script>
