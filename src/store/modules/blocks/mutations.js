@@ -35,6 +35,7 @@ export default {
    * @param {Object} generation
    */
   setGenerations (state, generation) {
+    Vue.set(state.hash_to_height, generation.keyBlock.hash, generation.keyBlock.height)
     Vue.set(state.generations, generation.keyBlock.height, generation)
   },
 

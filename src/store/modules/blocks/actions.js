@@ -30,6 +30,11 @@ export default wrapActionsWithResolvedEpoch({
    * @returns {Promise<*>}
    */
   async getGenerationFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
+    if (state.hash_to_height[hash]) {
+      const generation = state.generations[state.hash_to_height[hash]]
+      commit('setGeneration', generation)
+      return generation
+    }
     const generation = await epoch.api.getGenerationByHash(hash)
     const microBlocksHashes = generation.microBlocks
     generation.microBlocksDetailed = await Promise.all(

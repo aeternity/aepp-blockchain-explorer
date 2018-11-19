@@ -2,5 +2,6 @@ export default {
   height: 0,
   generation: {},
   block: {},
-  generations: {}
+  generations: {},
+  hash_to_height: {}
 }
