@@ -163,7 +163,7 @@ import ViewAndCopy from '../../components/viewAndCopy.vue'
 import Loader from '../../components/loader'
 import FillDummy from '../../components/fillDummy'
 
-const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
+const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
