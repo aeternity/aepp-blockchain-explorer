@@ -98,7 +98,7 @@ import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
 import FillDummy from '../../components/fillDummy'
 
-const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,49}$')
+const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
@@ -116,6 +116,7 @@ export default {
   },
   methods: {
     getBlock () {
+      this.$store.commit('blocks/setBlock', {})
       if (blockHeightRegex.test(this.blockId)) {
         this.$store.dispatch('blocks/getBlockFromHeight', Number(this.blockId))
       } else if (blockHashRegex.test(this.blockId)) {
