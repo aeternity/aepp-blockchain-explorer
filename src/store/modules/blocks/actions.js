@@ -91,6 +91,11 @@ export default wrapActionsWithResolvedEpoch({
    * @return {*}
    */
   async getGenerationFromHeight ({ state, rootGetters: { epoch }, commit }, height) {
+    if (!(state.height === height || state.height - 1 === height) && state.generations[height]) {
+      // last two generations are prone to change
+      // return if generation to get is not last or second last, and already exist in memory
+      return state.generations[height]
+    }
     const generation = await epoch.api.getGenerationByHeight(height)
     const microBlocksHashes = generation.microBlocks
     generation.microBlocksDetailed = await Promise.all(
@@ -163,7 +168,7 @@ export default wrapActionsWithResolvedEpoch({
   },
 
   /**
-   * getLatestBlocks pulls a list of blocks based on the
+   * getLatestGenerations pulls a list of blocks based on the
    * size of the payload
    * @param {Object} state
    * @param {Object} rootGetters
