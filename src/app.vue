@@ -63,22 +63,24 @@
 
         </div>
         <div />
-        </div>
+      </div>
     </nav>
     <main>
       <router-view />
     </main>
     <ae-footer />
+    <network-name />
   </div>
 </template>
 
 <script>
 import AeFooter from './partials/footer/footer'
 import SocialLinks from './partials/socialLinks'
+import networkName from './components/networkName'
 
 export default {
   name: 'app',
-  components: { AeFooter, SocialLinks },
+  components: { AeFooter, SocialLinks, networkName },
   data () {
     return {
       isOpened: false,
