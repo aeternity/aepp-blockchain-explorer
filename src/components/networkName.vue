@@ -36,6 +36,7 @@ export default {
 .network-name {
   text-transform:uppercase;
   position:fixed;
+  top: 30px;
   right:20px;
   color: $white;
   @include font-size(xs);
@@ -46,6 +47,7 @@ export default {
 
   @include only-phone {
     width:100%;
+    top: auto;
     bottom:0;
     left:0;
     border-radius:0;
