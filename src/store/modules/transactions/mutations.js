@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export default {
   /**
    * setTransaction object
@@ -5,9 +7,7 @@ export default {
    * @param {Object} transaction
    */
   setTransaction (state, transaction) {
-    const tx = state.transactions.find(tx => tx.hash === transaction.hash)
-    if (tx) return
-    Object.assign(state, { transactions: state.transactions.concat(transaction) })
+    Vue.set(state.transactions, transaction.hash, transaction)
   },
 
   /***
@@ -15,10 +15,6 @@ export default {
    * @param {Object} state
    */
   resetState (state) {
-    Object.assign(state,
-      {
-        transactions: []
-      }
-    )
+    Vue.set(state, 'transactions', {})
   }
 }

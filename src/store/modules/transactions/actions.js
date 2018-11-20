@@ -10,6 +10,8 @@ export default {
    * @return {Promise<*>}
    */
   async getTxByHash ({ state, commit, dispatch }, hash) {
+    if (state.transactions[hash]) return state.transactions[hash]
+
     const client = await EpochChain({
       url: this.state.epochUrl
     })

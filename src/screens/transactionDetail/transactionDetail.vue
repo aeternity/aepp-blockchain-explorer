@@ -84,7 +84,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import {
   AeAddress,
   AeBadge
@@ -131,16 +131,13 @@ export default {
     FillDummy
   },
   filters: { txTypeToName },
-  computed: {
-    ...mapGetters('transactions', [
-      'getTxByHash'
-    ]),
-    transaction () {
-      return this.getTxByHash(this.txId)
+  computed: mapState('transactions', {
+    transaction ({ transactions }) {
+      return transactions[this.txId]
     }
-  },
+  }),
   async mounted () {
-    return this.$store.dispatch('transactions/getTxByHash', this.txId)
+    this.$store.dispatch('transactions/getTxByHash', this.txId)
   }
 }
 </script>
