@@ -10,24 +10,6 @@ export default {
     Object.assign(state, { transactions: state.transactions.concat(transaction) })
   },
 
-  /**
-   * setTransactions array
-   * @param {Object} state
-   * @param {Array} transactions
-   */
-  setTransactions (state, transactions) {
-    Object.assign(state, { transactions })
-  },
-
-  /**
-   * setMempoolTxs
-   * @param {Object} state
-   * @param {Array} mempoolTxs
-   */
-  setMempoolTxs (state, mempoolTxs) {
-    Object.assign(state, { mempoolTxs })
-  },
-
   /***
    * resetAll reset the state of 'transactions' module
    * @param {Object} state
@@ -35,9 +17,7 @@ export default {
   resetState (state) {
     Object.assign(state,
       {
-        transaction: {},
-        transactions: [],
-        mempoolTxs: []
+        transactions: []
       }
     )
   }
