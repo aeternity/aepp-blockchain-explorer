@@ -227,24 +227,4 @@ a {
 .slide-in-top-out {
   animation-direction: reverse;
 }
-.network-name {
-  text-transform:uppercase;
-  position:fixed;
-  right:20px;
-  @include font-size(xs);
-  font-weight:500;
-  padding:5px 7px;
-  background: #F7296E;
-  border-radius: 5px;
-  @include only-phone {
-    width:100%;
-    bottom:0;
-    left:0;
-    border-radius:0;
-    padding:15px 0;
-    margin:0;
-    text-align:center;
-    z-index:1;
-  }
-}
 [v-cloak] {display: none} /*used by v-cloak directive*/

@@ -62,30 +62,25 @@
           </transition>
 
         </div>
-        <div>
-          <span v-if="VUE_APP_SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>
-            {{ networkName }}
-          </span>
-          <!--<router-link to='/search'>-->
-          <!--<img src="@/assets/search.svg" alt=""/>-->
-          <!--</router-link>-->
-        </div>
+        <div />
       </div>
     </nav>
     <main>
       <router-view />
     </main>
     <ae-footer />
+    <network-name />
   </div>
 </template>
 
 <script>
 import AeFooter from './partials/footer/footer'
 import SocialLinks from './partials/socialLinks'
+import networkName from './components/networkName'
 
 export default {
   name: 'app',
-  components: { AeFooter, SocialLinks },
+  components: { AeFooter, SocialLinks, networkName },
   data () {
     return {
       isOpened: false,
@@ -93,18 +88,6 @@ export default {
     }
   },
   computed: {
-    networkName () {
-      let url = this.$store.state.epochUrl
-      let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
-      if (name) {
-        let shortname = name.replace(/([^.]+)-net-api/, '$1')
-        if (shortname) {
-          return `${shortname} network`
-        }
-        return name
-      }
-      return url
-    },
     pageName () {
       return ({
         'Index': 'Dashboard',
