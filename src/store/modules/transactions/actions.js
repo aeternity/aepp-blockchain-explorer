@@ -1,19 +1,15 @@
-import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
+import { wrapActionsWithResolvedEpoch } from '../../utils'
 
-export default {
+export default wrapActionsWithResolvedEpoch({
   /**
    * get the transactions in the mempool
-   * @param {Object} state
+   * @param {Object} rootGetters
    * @param {Function} commit
-   * @param {Function} dispatch
    * @param {String} hash
    * @return {*}
    */
-  async get ({ state, commit, dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
-    const transactions = await client.api.getTxs()
+  async get ({ rootGetters: { epoch }, commit }, hash) {
+    const transactions = await epoch.api.getTxs()
 
     commit('setTransactions', transactions)
 
@@ -22,17 +18,13 @@ export default {
 
   /**
    * get transactions in the mempool
-   * @param {Object} state
+   * @param {Object} rootGetters
    * @param {Function} commit
-   * @param {Function} dispatch
    * @param {String} hash
    * @return {*}
    */
-  async mempool ({ state, commit, dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
-    const mempoolTxs = await client.api.getTxs()
+  async mempool ({ rootGetters: { epoch }, commit }, hash) {
+    const mempoolTxs = await epoch.api.getTxs()
 
     commit('setMempoolTxs', mempoolTxs)
 
@@ -41,17 +33,13 @@ export default {
 
   /**
    *
-   * @param state
+   * @param rootGetters
    * @param commit
-   * @param dispatch
    * @param hash
    * @return {Promise<*>}
    */
-  async getTransactionsFromBlockHash ({ state, commit, dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
-    const transactions = await client.api.getTxs()
+  async getTransactionsFromBlockHash ({ rootGetters: { epoch }, commit }, hash) {
+    const transactions = await epoch.api.getTxs()
 
     commit('setTransactions', transactions)
 
@@ -60,20 +48,16 @@ export default {
 
   /**
    *
-   * @param state
+   * @param rootGetters
    * @param commit
-   * @param dispatch
    * @param hash
    * @return {Promise<*>}
    */
-  async getTxByHash ({ state, commit, dispatch }, hash) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
-    const transaction = await client.api.getTransactionByHash(hash)
+  async getTxByHash ({ rootGetters: { epoch }, commit }, hash) {
+    const transaction = await epoch.api.getTransactionByHash(hash)
 
     commit('setTransaction', transaction)
 
     return transaction
   }
-}
+})
