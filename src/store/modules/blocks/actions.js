@@ -147,33 +147,6 @@ export default wrapActionsWithResolvedEpoch({
   },
 
   /**
-   * getLatestBlocks pulls a list of blocks based on the
-   * size of the payload
-   * @param {Object} state
-   * @param {Function} commit
-   * @param {Function} rootGetters
-   * @param {Function} dispatch
-   * @param {Number} size
-   * @return {*}
-   */
-  async getLatestBlocks ({ state, rootGetters: { epoch }, commit, dispatch }, size) {
-    await dispatch('height')
-    const blocks = await Promise.all(
-      times(size, (index) => epoch
-        .api
-        .getKeyBlockByHeight(state.height - index))
-    )
-
-    if (!blocks.length) {
-      return state.blocks
-    }
-
-    commit('setBlocks', blocks)
-
-    return blocks
-  },
-
-  /**
    * getLatestGenerations pulls a list of blocks based on the
    * size of the payload
    * @param {Object} state
@@ -193,31 +166,5 @@ export default wrapActionsWithResolvedEpoch({
       return state.generations
     }
     return generations
-  },
-
-  /**
-   * addBlocksByHeightAndSize pulls a list of blocks based on the
-   * specified height and size of the pull requested
-   * @param {Object} state
-   * @param {Object} rootGetters
-   * @param {Function} commit
-   * @param {Number} height
-   * @param {Number} size
-   * @return {*}
-   */
-  async addBlocksByHeightAndSize ({ state, rootGetters: { epoch }, commit }, {height, size}) {
-    const blocks = await Promise.all(
-      times(size, (index) => epoch
-        .api
-        .getKeyBlockByHeight(height - index))
-    )
-
-    if (!blocks.length) {
-      return state.blocks
-    }
-
-    commit('addBlocks', blocks)
-
-    return blocks
   }
 })

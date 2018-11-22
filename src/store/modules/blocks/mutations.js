@@ -39,16 +39,6 @@ export default {
     Vue.set(state.generations, generation.keyBlock.height, generation)
   },
 
-  /**
-   * addBlocks appends to the end of the array
-   * the blocks assigned
-   * @param {Object} state
-   * @param {Array} blocks
-   */
-  addBlocks (state, blocks) {
-    Object.assign(state, { blocks: state.blocks.concat(blocks) })
-  },
-
   /***
    * resetAll reset the state of 'blocks' module
    * @param {Object} state
@@ -59,7 +49,6 @@ export default {
         height: 0,
         generation: {},
         block: {},
-        blocks: [],
         generations: {}
       }
     )
