@@ -25,7 +25,11 @@ export default {
       t = Math.floor(t / 60)
       values.unshift({ unit: 'h', number: t % 24 })
       t = Math.floor(t / 24)
-      values.unshift({ unit: 'd', number: t })
+      values.unshift({ unit: 'd', number: t % 30 })
+      t = Math.floor(t / 30)
+      values.unshift({ unit: 'mo.', number: t % 12 })
+      t = Math.floor(t / 12)
+      values.unshift({ unit: 'y', number: t })
       while (values.length && !values[0].number) values.shift()
       return values.map((v, idx) => {
         if (!idx) return v
