@@ -30,8 +30,8 @@ export default wrapActionsWithResolvedEpoch({
    * @returns {Promise<*>}
    */
   async getGenerationFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
-    if (state.hash_to_height[hash]) {
-      const generation = state.generations[state.hash_to_height[hash]]
+    if (state.hashToHeight[hash]) {
+      const generation = state.generations[state.hashToHeight[hash]]
       commit('setGeneration', generation)
       return generation
     }

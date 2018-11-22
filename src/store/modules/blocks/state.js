@@ -3,5 +3,5 @@ export default {
   generation: {},
   block: {},
   generations: {},
-  hash_to_height: {}
+  hashToHeight: {}
 }
