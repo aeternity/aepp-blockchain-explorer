@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import modules from './modules'
 import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
+import { wrapActionsWithResolvedEpoch } from './utils'
 
 Vue.use(Vuex)
 
@@ -11,6 +12,14 @@ const store = new Vuex.Store({
   state: {
     $nodeStatus: {},
     epochUrl: process.env.VUE_APP_EPOCH_URL
+  },
+
+  getters: {
+    epochPromise ({ epochUrl }) {
+      return EpochChain({
+        url: epochUrl
+      })
+    }
   },
 
   mutations: {
@@ -32,28 +41,24 @@ const store = new Vuex.Store({
     }
   },
 
-  actions: {
+  actions: wrapActionsWithResolvedEpoch({
     /**
      * getNodeStatus
-     * @param {Object} state
+     * @param {Object} rootGetters
      * @param {Function} commit
-     * @param {dispatch} dispatch
      * @return {Object}
      */
-    async getNodeStatus ({ state, commit, dispatch }) {
-      const client = await EpochChain({
-        url: this.state.epochUrl
-      })
+    async getNodeStatus ({ rootGetters: { epoch }, commit }) {
       const [top, version] = await Promise.all([
-        client.api.getCurrentGeneration(),
-        client.api.getStatus()
+        epoch.api.getCurrentGeneration(),
+        epoch.api.getStatus()
       ])
 
       commit('setNodeStatus', { top, version })
 
       return { top, version }
     }
-  },
+  }),
 
   modules
 })
