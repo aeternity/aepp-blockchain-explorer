@@ -99,7 +99,8 @@ export default wrapActionsWithResolvedEpoch({
     if (!(state.height === height || state.height - 1 === height) && state.generations[height]) {
       // last two generations are prone to change
       // return if generation to get is not last or second last, and already exist in memory
-      return state.generations[height]
+      commit('setGeneration', state.generations[height])
+      return
     }
     const generation = await epoch.api.getGenerationByHeight(height)
     const microBlocksHashes = generation.microBlocks
