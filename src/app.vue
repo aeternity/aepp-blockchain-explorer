@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-show="firstLoading">
     <nav class="app-nav">
       <div class="inner">
         <router-link class="logo" to="/">
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import AeFooter from './partials/footer/footer'
 import SocialLinks from './partials/socialLinks'
 import networkName from './components/networkName'
@@ -88,6 +89,9 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      firstLoading: 'isFirstLoading'
+    }),
     pageName () {
       return ({
         'Index': 'Dashboard',

@@ -11,7 +11,8 @@ const store = new Vuex.Store({
   state: {
     $nodeStatus: {},
     epochUrl: process.env.VUE_APP_EPOCH_URL,
-    error: ''
+    error: '',
+    isFirstLoading: true
   },
 
   mutations: {
@@ -45,8 +46,15 @@ const store = new Vuex.Store({
      */
     clearError (state) {
       state.error = ''
+    },
+    /**
+     * checkLoading
+     * @param state
+     * @param isFirst
+     */
+    checkLoading (state, isFirst) {
+      state.isFirstLoading = isFirst
     }
-
   },
 
   actions: {
