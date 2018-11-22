@@ -28,7 +28,7 @@ export default {
     AeFilterSeparator
   },
   methods: {
-    backToForm() {
+    backToForm () {
       this.$store.commit('clearError')
       this.$emit('back', false)
     }
