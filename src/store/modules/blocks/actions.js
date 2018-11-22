@@ -11,15 +11,19 @@ export default wrapActionsWithResolvedEpoch({
    * @return {Object}
    */
   async height ({ state, rootGetters: { epoch }, commit }) {
-    const height = await epoch.height()
+    try {
+      const height = await epoch.height()
 
-    if (height === state.height) {
-      return state.height
+      if (height === state.height) {
+        return state.height
+      }
+
+      commit('setHeight', height)
+
+      return height
+    } catch (e) {
+      commit('catchError', 'Error', {root: true})
     }
-
-    commit('setHeight', height)
-
-    return height
   },
 
   /**
@@ -157,14 +161,18 @@ export default wrapActionsWithResolvedEpoch({
    * @return {*}
    */
   async getLatestGenerations ({ state, rootGetters: { epoch }, commit, dispatch }, size) {
-    await dispatch('height')
-    const generations = await Promise.all(
-      times(size, (index) => dispatch('getGenerationFromHeight', state.height - index))
-    )
+    try {
+      await dispatch('height')
+      const generations = await Promise.all(
+        times(size, (index) => dispatch('getGenerationFromHeight', state.height - index))
+      )
 
-    if (!generations.length) {
-      return state.generations
+      if (!generations.length) {
+        return state.generations
+      }
+      return generations
+    } catch (e) {
+      commit('catchError', 'Error', {root: true})
     }
-    return generations
   }
 })
