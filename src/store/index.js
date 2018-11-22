@@ -10,7 +10,8 @@ const store = new Vuex.Store({
 
   state: {
     $nodeStatus: {},
-    epochUrl: process.env.VUE_APP_EPOCH_URL
+    epochUrl: process.env.VUE_APP_EPOCH_URL,
+    error: ''
   },
 
   mutations: {
@@ -29,7 +30,23 @@ const store = new Vuex.Store({
      */
     changeNetworkUrl (state, epochUrl) {
       state.epochUrl = epochUrl
+    },
+    /**
+     * catchError
+     * @param state
+     * @param error
+     */
+    catchError(state, error) {
+      state.error = error
+    },
+    /**
+     * clearError
+     * @param state
+     */
+    clearError(state) {
+      state.error = ''
     }
+
   },
 
   actions: {
@@ -41,18 +58,26 @@ const store = new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ state, commit, dispatch }) {
-      const client = await EpochChain({
-        url: this.state.epochUrl
-      })
-      const [top, version] = await Promise.all([
-        client.api.getCurrentGeneration(),
-        client.api.getStatus()
-      ])
+      try {
+        const client = await EpochChain({
+          url: this.state.epochUrl
+        })
+        const [top, version] = await Promise.all([
+          client.api.getCurrentGeneration(),
+          client.api.getStatus()
+        ])
 
-      commit('setNodeStatus', { top, version })
+        commit('setNodeStatus', { top, version })
 
-      return { top, version }
+        return { top, version }
+
+
+      } catch (e) {
+        commit('catchError', 'Eror', {root: true})
+      }
+
     }
+
   },
 
   modules
