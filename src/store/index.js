@@ -17,7 +17,8 @@ const store = new Vuex.Store({
   getters: {
     epochPromise ({ epochUrl }) {
       return EpochChain({
-        url: epochUrl
+        url: epochUrl,
+        internalUrl: epochUrl
       })
     }
   },
