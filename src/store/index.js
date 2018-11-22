@@ -36,14 +36,14 @@ const store = new Vuex.Store({
      * @param state
      * @param error
      */
-    catchError(state, error) {
+    catchError (state, error) {
       state.error = error
     },
     /**
      * clearError
      * @param state
      */
-    clearError(state) {
+    clearError (state) {
       state.error = ''
     }
 
@@ -71,9 +71,8 @@ const store = new Vuex.Store({
 
         return { top, version }
 
-
       } catch (e) {
-        commit('catchError', 'Eror', {root: true})
+        commit('catchError', 'Error', {root: true})
       }
 
     }
