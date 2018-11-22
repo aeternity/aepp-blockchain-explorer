@@ -37,7 +37,6 @@ export default {
    * @return {Object}
    */
   async height ({ state, commit, dispatch }) {
-
     try {
       const client = await EpochChain({
         url: this.state.epochUrl
@@ -52,11 +51,9 @@ export default {
       commit('setHeight', height)
 
       return height
-
     } catch (e) {
       commit('catchError', 'Error', {root: true})
     }
-
   },
 
   /**
@@ -220,7 +217,6 @@ export default {
       commit('setGenerations', generations)
 
       return generations
-
     } catch (e) {
       commit('catchError', 'Error', {root: true})
     }

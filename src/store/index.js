@@ -70,13 +70,10 @@ const store = new Vuex.Store({
         commit('setNodeStatus', { top, version })
 
         return { top, version }
-
       } catch (e) {
         commit('catchError', 'Error', {root: true})
       }
-
     }
-
   },
 
   modules
