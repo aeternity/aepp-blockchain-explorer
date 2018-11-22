@@ -14,7 +14,7 @@
 <script>
 import {
   AeCard,
-  AeLoader,
+  AeLoader
 } from '@aeternity/aepp-components-3'
 
 export default {
@@ -22,8 +22,8 @@ export default {
   props: ['name'],
   components: {
     AeCard,
-    AeLoader,
-  },
+    AeLoader
+  }
 }
 </script>
 
