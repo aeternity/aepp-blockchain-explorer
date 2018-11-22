@@ -8,7 +8,7 @@ export default {
    */
   getAverageBlockTime: function ({generations}) {
     const blockTimes = []
-    for (var key in generations) {
+    for (let key in generations) {
       if (generations.hasOwnProperty(key) && generations.hasOwnProperty(parseInt(key) + 1)) {
         blockTimes.push(Math.abs(generations[key].keyBlock.time - generations[parseInt(key) + 1].keyBlock.time))
       }

@@ -69,7 +69,7 @@ export default wrapActionsWithResolvedEpoch({
    */
   async getBlockFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
     const isKeyBlock = hash.substr(0, 2) === 'kh'
-    var block
+    let block
     if (isKeyBlock) {
       block = await epoch.api.getKeyBlockByHash(hash)
     } else {
