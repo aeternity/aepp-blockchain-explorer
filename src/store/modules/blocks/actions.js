@@ -37,18 +37,23 @@ export default {
    * @return {Object}
    */
   async height ({ state, commit, dispatch }) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
-    const height = await client.height()
+    try {
+      const client = await EpochChain({
+        url: this.state.epochUrl
+      })
 
-    if (height === state.height) {
-      return state.height
+      const height = await client.height()
+
+      if (height === state.height) {
+        return state.height
+      }
+
+      commit('setHeight', height)
+
+      return height
+    } catch (e) {
+      commit('catchError', 'Error', {root: true})
     }
-
-    commit('setHeight', height)
-
-    return height
   },
 
   /**
@@ -199,18 +204,22 @@ export default {
    * @return {*}
    */
   async getLatestGenerations ({ state, commit, dispatch }, size) {
-    await dispatch('height')
-    const generations = await Promise.all(
-      times(size, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
-    )
+    try {
+      await dispatch('height')
+      const generations = await Promise.all(
+        times(size, (index) => getGenerationFromHeightWrapper(state.height - index, this.state.epochUrl))
+      )
 
-    if (!generations.length) {
-      return state.generations
+      if (!generations.length) {
+        return state.generations
+      }
+
+      commit('setGenerations', generations)
+
+      return generations
+    } catch (e) {
+      commit('catchError', 'Error', {root: true})
     }
-
-    commit('setGenerations', generations)
-
-    return generations
   },
 
   /**
