@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
+import { wrapActionsWithResolvedEpoch } from '../utils'
 
 export default {
   namespaced: true,
@@ -27,26 +27,23 @@ export default {
     }
   },
 
-  actions: {
+  actions: wrapActionsWithResolvedEpoch({
     /**
      *
      * @param state
      * @param commit
-     * @param dispatch
+     * @param {Object} rootGetters
      * @param hash
      * @return {Promise<*>}
      */
-    async getTxByHash ({ state, commit, dispatch }, hash) {
+    async getTxByHash ({ state, commit, rootGetters: { epoch } }, hash) {
       if (state.transactions[hash]) return state.transactions[hash]
 
-      const client = await EpochChain({
-        url: this.state.epochUrl
-      })
-      const transaction = await client.api.getTransactionByHash(hash)
+      const transaction = await epoch.api.getTransactionByHash(hash)
 
       commit('setTransaction', transaction)
 
       return transaction
     }
-  }
+  })
 }
