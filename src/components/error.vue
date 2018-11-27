@@ -6,7 +6,7 @@
     <ae-toolbar slot="footer" class="error-actions">
       <ae-button class="error-actions__btn" face="flat"  @click="backToForm()">try again</ae-button>
       <ae-filter-separator/>
-      <ae-button class="error-actions__btn" face="flat">cancel</ae-button>
+      <ae-button class="error-actions__btn" face="flat" @click="closeNetwork()">cancel</ae-button>
     </ae-toolbar>
   </ae-card>
 </template>
@@ -31,6 +31,9 @@ export default {
     backToForm () {
       this.$store.commit('clearError')
       this.$emit('back', false)
+    },
+    closeNetwork () {
+      this.$emit('closeNetwork')
     }
   }
 }

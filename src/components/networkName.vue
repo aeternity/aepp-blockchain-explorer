@@ -1,6 +1,10 @@
 <template>
   <div>
-    <span v-if="VUE_APP_SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>
+    <!--<span v-if="VUE_APP_SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>-->
+      <!--{{ networkName }}-->
+    <!--</span>-->
+    <span v-if="VUE_APP_SHOW_NETWORK_STATS"  class='network-name network-name_swither'
+          @click="showNetworkList()">
       {{ networkName }}
     </span>
   </div>
@@ -26,6 +30,11 @@ export default {
       }
       return url
     }
+  },
+  methods: {
+    showNetworkList () {
+      this.$emit('showList', true)
+    }
   }
 }
 </script>
@@ -45,16 +54,33 @@ export default {
   background: #F7296E;
   border-radius: 5px;
 
-  @include only-phone {
-    width:100%;
-    top: auto;
-    bottom:0;
-    left:0;
-    border-radius:0;
-    padding:15px 0;
-    margin:0;
-    text-align:center;
-    z-index:1;
+  &_swither{
+    cursor: pointer;
+    padding:5px 25px;
+    &:after{
+      content: '';
+      position: absolute;
+      right: 5%;
+      top: 28%;
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 7px solid #e8e8e8;
+      clear: both;
+    }
   }
+
+  /*<!--@include only-phone {-->*/
+    /*<!--width:100%;-->*/
+    /*<!--top: auto;-->*/
+    /*<!--bottom:0;-->*/
+    /*<!--left:0;-->*/
+    /*<!--border-radius:0;-->*/
+    /*<!--padding:15px 0;-->*/
+    /*<!--margin:0;-->*/
+    /*<!--text-align:center;-->*/
+    /*<!--z-index:1;-->*/
+  /*<!--}-->*/
 }
 </style>
