@@ -102,8 +102,14 @@ export default {
   methods: {
     loadMore: async function () {
       this.isLoadingMore = true
-      this.numGenerations += 10
-      await this.$store.dispatch('blocks/getLatestGenerations', Object.keys(this.generations).length + 10)
+      if (this.height - this.numGenerations >= 10) {
+        this.numGenerations += 10
+        await this.$store.dispatch('blocks/getLatestGenerations', Object.keys(this.generations).length + 10)
+      } else if (this.height > this.numGenerations) {
+        let toAdd = this.height - this.numGenerations
+        this.numGenerations += toAdd
+        await this.$store.dispatch('blocks/getLatestGenerations', Object.keys(this.generations).length + toAdd)
+      }
       this.isLoadingMore = false
     }
   },
