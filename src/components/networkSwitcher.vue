@@ -35,7 +35,7 @@
         </div>
       </ae-list>
       <div class="hendler-wrapper">
-        <error :name="networkName"  @back="closeError" @closeNetwork="" v-if="isError"></error>
+        <error :name="networkName"  @back="closeError"  v-if="isError"></error>
         <loader-item :name="networkName"  v-if="isNetworkChanging" ></loader-item>
       </div>
       <ae-toolbar slot="footer"  v-if="isDisplaying ">
@@ -152,7 +152,7 @@ export default {
     },
     showForm () {
       this.$emit('showForm', true)
-    },
+    }
   },
   computed: {
     ...mapState({

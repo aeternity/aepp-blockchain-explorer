@@ -129,7 +129,7 @@ export default {
       this.isFormAvaible = avaible
     },
     closeNetworkSwitcher () {
-      this.isNetworkAvailable = false,
+      this.isNetworkAvailable = false
       this.isFormAvaible = false
     }
   }

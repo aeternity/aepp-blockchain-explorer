@@ -99,7 +99,6 @@ export default {
       ))
     },
     test () {
-      console.log(this.netWorkData.name.target.value)
       this.$store.commit('catchError', this.netWorkData.url.target.value)
     }
   }
