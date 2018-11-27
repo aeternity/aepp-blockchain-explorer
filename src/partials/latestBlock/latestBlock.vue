@@ -81,8 +81,10 @@ export default {
   components: { AeButton, RelativeTime, AeHash, NamedAddress, FillDummy },
   mixins: [ currentTime ],
   computed: mapState('blocks', {
-    generation: ({ generations }) => generations[0],
-    height: ({ height }) => height
+    height: ({ height }) => height,
+    generation (state) {
+      return state.generations[this.height]
+    }
   })
 }
 </script>

@@ -1,25 +1,21 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
-import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
+import { wrapActionsWithResolvedEpoch } from '../../utils'
 
-export default {
+export default wrapActionsWithResolvedEpoch({
   /**
    * get the account details based on an address
    * @param {Object} state
+   * @param {Object} rootGetters
    * @param {Function} commit
-   * @param {Function} dispatch
    * @param {String} address
    * @return {*}
    */
-  async get ({ state, commit, dispatch }, address) {
-    const client = await EpochChain({
-      url: this.state.epochUrl
-    })
-
+  async get ({ state, rootGetters: { epoch }, commit }, address) {
     let balance = 0
 
     try {
-      balance = await client.balance(address)
+      balance = await epoch.balance(address)
     } catch (e) {
       balance = 0
     }
@@ -33,7 +29,7 @@ export default {
     return account
   },
 
-  async name ({ state, commit, dispatch }, address) {
+  async name ({ state, commit }, address) {
     if (!process.env.VUE_APP_MIDDLEWARE_URL) return
 
     if (!isEmpty(state.names[address]) && (Date.now() - state.names[address].ts < 10000)) return
@@ -50,4 +46,4 @@ export default {
 
     return account
   }
-}
+})
