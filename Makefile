@@ -26,7 +26,7 @@ build:
 docker-build: build
 	@echo build image
 	docker build -t $(DOCKER_IMAGE) -f Dockerfile .
-  docker tag $(DOCKER_IMAGE) $(DOCKER_REGISTRY)/$(DOCKER_IMAGE):$(DOCKER_TAG)
+	docker tag $(DOCKER_IMAGE) $(DOCKER_REGISTRY)/$(DOCKER_IMAGE):$(DOCKER_TAG)
 	@echo done
 
 docker-push:
