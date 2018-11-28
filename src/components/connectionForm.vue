@@ -120,34 +120,27 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  @import '../style/variables';
-  .connect-form{
-    .content{
-      padding: 16px!important;
-
-      h1{
-        font-size: 23px!important;
-        line-height: 28px!important;
-        font-family: "Inter UI";
-        color: $connectBlack!important;
-      }
-    }
-
-    &__input{
-      margin-bottom: 8px;
-      .ae-input{
-        margin: 10px 0 0 0!important;
-      }
-    }
-  }
-</style>
-
 <style scoped lang='scss'>
 @import '../style/mixins';
 
 .connect-form{
   width: 320px;
+
+  .ae-panel{
+    margin: 0 auto;
+
+    & /deep/ .content{
+      padding: 16px;
+
+      h1{
+        font-size: 23px;
+        line-height: 28px;
+        font-family: "Inter UI";
+        color: $connectBlack;
+      }
+    }
+  }
+
   &__subtitle{
     font-size: 23px;
     line-height: 28px;
@@ -156,10 +149,10 @@ export default {
     margin-bottom: 45px;
   }
 
-  &__input{
+  & /deep/ .connect-form__input{
     margin-bottom: 8px;
     .ae-input{
-      margin: 10px 0 0 0!important;
+      margin: 10px 0 0 0;
     }
   }
   &__btn{

@@ -35,7 +35,7 @@
         </div>
       </ae-list>
       <div class="hendler-wrapper">
-        <error :name="networkName"  @back="closeError" @closeNetwork="showNetworkList"  v-if="isError"></error>
+        <error class="error" :name="networkName"  @back="closeError" @closeNetwork="showNetworkList"  v-if="isError"></error>
         <loader-item :name="networkName"  v-if="isNetworkChanging" ></loader-item>
       </div>
       <ae-toolbar slot="footer"  v-if="isDisplaying ">
@@ -170,57 +170,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  @import '../style/variables';
-  .network-switcher{
-
-    &> .ae-card-main{
-      padding: 0!important;
-      flex-direction: column!important;
-      align-items: center!important;
-    }
-
-    .ae-list{
-      width: 100% !important;
-      box-sizing: border-box!important;
-      padding: 0!important;
-      overflow: visible!important;
-
-      .ae-list-item{
-        padding: 20px 0 16px!important;
-      }
-    }
-
-    .network-item{
-      padding: 0 15px;
-    }
-
-    .localnetwork{
-      background-color: $paleGrey;
-
-      .ae-list-item{
-        justify-content: flex-start;
-
-        .ae-check{
-          margin-left: auto;
-        }
-
-        .ae-dropdown-button{
-          justify-content: flex-start;
-          i{
-            margin-left: -6px;
-          }
-        }
-      }
-    }
-
-    .ae-check-button{
-      min-width: 36px!important;
-      padding-left: 0!important;
-    }
-  }
-</style>
-
 <style lang="scss" scoped>
 @import '../style/variables';
 
@@ -230,6 +179,51 @@ export default {
 
 .network-switcher{
   max-width: 320px;
+
+  &> /deep/ .ae-card-main{
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+
+    .ae-list{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0;
+      overflow: visible;
+
+      .ae-list-item{
+        padding: 20px 0 16px;
+      }
+    }
+  }
+
+  & /deep/.ae-check-button{
+    min-width: 36px;
+    padding-left: 0;
+  }
+
+  .network-item{
+    padding: 0 15px;
+  }
+
+  & /deep/ .localnetwork{
+    background-color: $paleGrey;
+
+    .ae-list-item{
+      justify-content: flex-start;
+
+      .ae-check{
+        margin-left: auto;
+      }
+
+      .ae-dropdown-button{
+        justify-content: flex-start;
+        i{
+          margin-left: -6px;
+        }
+      }
+    }
+  }
 
   .hendler-wrapper{
     width: 100%;

@@ -39,29 +39,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
-  .error-wrapper {
-    .ae-card-main {
-      padding: 0!important;
-    }
-
-    .error-actions{
-      &__btn{
-        height: 100%!important;
-      }
-      .ae-filter-separator{
-        height: 15px;
-        width: 3px;
-      }
-    }
-  }
-</style>
-
 <style scoped lang='scss'>
 @import '../style/mixins';
-
 .error-wrapper{
+  & /deep/ .ae-card-main{
+    padding: 0;
+  }
+
   &__message{
     width: 100%;
     box-sizing: border-box;
@@ -84,6 +68,15 @@ export default {
       color: $darkGrey;
       font-weight: 500;
       font-family: "Inter UI";
+    }
+
+    & /deep/ .ae-button{
+      height: 100%;
+    }
+
+    .ae-filter-separator{
+      height: 15px;
+      width: 3px;
     }
   }
 }

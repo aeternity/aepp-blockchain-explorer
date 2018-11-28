@@ -27,23 +27,19 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  @import '../style/variables';
-  .loader-wrapper{
-    width: 100%;
-    box-sizing: border-box;
-    .ae-card-main{
-      background-color: $white;
-      padding: 15px!important;
-    }
-  }
-</style>
-
 <style scoped lang='scss'>
 @import '../style/mixins';
-
  .ae-loader{
   margin: 0;
+ }
+
+ .loader-wrapper{
+    width: 100%;
+    box-sizing: border-box;
+    & /deep/ .ae-card-main{
+      background-color: $white;
+      padding: 15px;
+    }
  }
 
 .loader-info{
