@@ -102,8 +102,8 @@ export default {
           url: 'https://sdk-edgenet.aepps.com/'
         },
         {
-          name: 'test-net-api.aepps',
-          url: 'https://test-net-api.aepps.com/'
+          name: 'sdk-testnet.aepps',
+          url: 'https://sdk-testnet.aepps.com/'
         }
       ],
       isNetworkChanging: false,
