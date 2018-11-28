@@ -6,7 +6,7 @@ DOCKER_REGISTRY = 166568770115.dkr.ecr.eu-central-1.amazonaws.com
 DOCKER_IMAGE = aepp-explorer
 DOCKER_TAG = $(shell git describe --always)
 # epoch url used at build time
-VUE_APP_EPOCH_URL='//sdk-testnet.aepps.com/'
+VUE_APP_EPOCH_URL='//sdk-mainnet.aepps.com/'
 
 
 .PHONY: list

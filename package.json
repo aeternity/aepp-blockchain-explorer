@@ -14,6 +14,7 @@
     "@aeternity/aepp-components": "2.0.13",
     "@aeternity/aepp-components-3": "^3.0.0-alpha.7",
     "@aeternity/aepp-sdk": "1.0.0",
+    "@aeternity/aepp-sdk": "1.0.0",
     "bignumber.js": "^8.0.1",
     "lodash": "^4.17.5",
     "vue": "^2.5.17",
