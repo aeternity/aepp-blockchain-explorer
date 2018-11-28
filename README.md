@@ -21,7 +21,7 @@ The underlying API is currently being developed and improved. The Explorer is de
 - view æternity token market exchange rates via coinmarketcap.com api
 
 ## Requirements
-You need a running Epoch node, version 0.24.0
+You need a running Epoch node, version 0.25.0
 
 ## Build Setup
 
