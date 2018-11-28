@@ -1,6 +1,6 @@
 <template>
   <div class="connect-form" >
-    <ae-panel  :title="'Connect to'" :closeHandler="test" :ratioTop="0.1" :ratioBottom="0.6" v-if="isDisplaying ">
+    <ae-panel  :title="'Connect to'" :closeHandler="showNetwork" :ratioTop="0.1" :ratioBottom="0.6" v-if="isDisplaying ">
       <div class="connect-form__subtitle">
         other network
       </div>
@@ -18,7 +18,7 @@
         <ae-button class="connect-form__btn" face="round" type="exciting"  extend>Connect</ae-button>
       </form>
     </ae-panel>
-    <error :name="netWorkData.name.target.value" v-if="isError" @back="closeError"></error>
+    <error :name="netWorkData.name.target.value" v-if="isError" @back="closeError" @closeNetwork="showNetwork"></error>
     <loader-item :name="netWorkData.name.target.value" v-if="isNetworkChanging" ></loader-item>
   </div>
 
@@ -76,30 +76,44 @@ export default {
       await Promise.all([
         this.$store.dispatch('blocks/height'),
         this.$store.dispatch('getNodeStatus')
-      ])
+      ]).then(success => {
+        this.$store.commit('clearError')
+        this.saveNetworkLocal()
+        this.showNetwork()
+      }).catch(err => {
+        this.isError = true
+        this.isNetworkChanging = false
+        this.$store.commit('catchError', err)
+      })
 
       this.$store.dispatch('blocks/getLatestGenerations', 10)
 
       if (this.connectError.length) {
         this.isError = true
-      } else {
-        this.netWorkData.name = ''
-        this.netWorkData.url = ''
       }
-
       this.isNetworkChanging = false
-
-      localStorage.setItem('localNetwork', JSON.stringify(
-        [
-          {
-            name: this.netWorkData.name.target.value,
-            url: this.netWorkData.url.target.value
-          }
-        ]
-      ))
     },
-    test () {
-      this.$store.commit('catchError', this.netWorkData.url.target.value)
+    showNetwork () {
+      this.$emit('netWork', false)
+    },
+    saveNetworkLocal () {
+      if (localStorage.getItem('localNetwork')) {
+        let localNetworks = JSON.parse(localStorage.getItem('localNetwork'))
+        localNetworks.push({
+          name: this.netWorkData.name.target.value,
+          url: this.netWorkData.url.target.value
+        })
+        localStorage.setItem('localNetwork', JSON.stringify(localNetworks))
+      } else {
+        localStorage.setItem('localNetwork', JSON.stringify(
+          [
+            {
+              name: this.netWorkData.name.target.value,
+              url: this.netWorkData.url.target.value
+            }
+          ]
+        ))
+      }
     }
   }
 

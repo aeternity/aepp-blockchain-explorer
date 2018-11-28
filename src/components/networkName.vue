@@ -4,7 +4,7 @@
       <!--{{ networkName }}-->
     <!--</span>-->
     <span v-if="VUE_APP_SHOW_NETWORK_STATS"  class='network-name network-name_swither'
-          @click="showNetworkList()">
+          @click="showNetworkList(true)">
       {{ networkName }}
     </span>
   </div>
@@ -71,16 +71,5 @@ export default {
     }
   }
 
-  /*<!--@include only-phone {-->*/
-    /*<!--width:100%;-->*/
-    /*<!--top: auto;-->*/
-    /*<!--bottom:0;-->*/
-    /*<!--left:0;-->*/
-    /*<!--border-radius:0;-->*/
-    /*<!--padding:15px 0;-->*/
-    /*<!--margin:0;-->*/
-    /*<!--text-align:center;-->*/
-    /*<!--z-index:1;-->*/
-  /*<!--}-->*/
 }
 </style>

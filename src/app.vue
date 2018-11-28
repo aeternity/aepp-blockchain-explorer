@@ -3,8 +3,8 @@
     <ae-overlay class="custom-overlay" v-if="isNetworkAvailable"
                 @click="closeNetworkSwitcher()">
       <div class="networks-wrap" >
-        <network-switcher class="switcher"  @showForm="showConnectForm" v-if="!isFormAvaible"></network-switcher>
-        <connection-form class="switcher-form" v-if="isFormAvaible"></connection-form>
+        <network-switcher class="switcher"  @showForm="showConnectForm" @showList="hideList" v-if="!isFormAvaible"></network-switcher>
+        <connection-form class="switcher-form" @netWork="hideForm" v-if="isFormAvaible"></connection-form>
       </div>
     </ae-overlay>
     <nav class="app-nav">
@@ -131,6 +131,12 @@ export default {
     closeNetworkSwitcher () {
       this.isNetworkAvailable = false
       this.isFormAvaible = false
+    },
+    hideList (avaible) {
+      this.closeNetworkSwitcher()
+    },
+    hideForm (avaible) {
+      this.isFormAvaible = avaible
     }
   }
 }

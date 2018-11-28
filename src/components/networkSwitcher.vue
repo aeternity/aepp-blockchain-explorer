@@ -35,7 +35,7 @@
         </div>
       </ae-list>
       <div class="hendler-wrapper">
-        <error :name="networkName"  @back="closeError"  v-if="isError"></error>
+        <error :name="networkName"  @back="closeError" @closeNetwork="showNetworkList"  v-if="isError"></error>
         <loader-item :name="networkName"  v-if="isNetworkChanging" ></loader-item>
       </div>
       <ae-toolbar slot="footer"  v-if="isDisplaying ">
@@ -94,16 +94,12 @@ export default {
     return {
       view: null,
       modalVisible: false,
-      networkUrl: undefined,
+      networkUrl: this.$store.state.epochUrl,
       networkName: undefined,
       serverNetworks: [
         {
           name: 'sdk-edgenet.aepps',
           url: 'https://sdk-edgenet.aepps.com/'
-        },
-        {
-          name: 'sdk-testnet.aepps',
-          url: 'https://sdk-testnet.aepps.com/'
         },
         {
           name: 'test-net-api.aepps',
@@ -118,13 +114,12 @@ export default {
     closeError (e) {
       this.isError = e
     },
-    showNetworkList () {
-      this.$emit('showList', true)
+    showNetworkList (isVisible) {
+      this.$emit('showList', isVisible)
     },
     async changeNetwork () {
       this.isNetworkChanging = true
       this.$store.commit('changeNetworkUrl', this.networkUrl)
-      this.networkUrl = ''
       this.$store.commit('blocks/resetState')
       this.$store.commit('accounts/resetState')
       this.$store.commit('transactions/resetState')
@@ -132,15 +127,19 @@ export default {
       await Promise.all([
         this.$store.dispatch('blocks/height'),
         this.$store.dispatch('getNodeStatus')
-      ])
+      ]).then(success => {
+        this.$store.commit('clearError')
+        this.showNetworkList(false)
+      }).catch(err => {
+        this.isError = true
+        this.isNetworkChanging = false
+        this.$store.commit('catchError', err)
+      })
 
       this.$store.dispatch('blocks/getLatestGenerations', 10)
 
       if (this.connectError.length) {
         this.isError = true
-      } else {
-        this.networkUrl = undefined
-        this.networkName = undefined
       }
       this.isNetworkChanging = false
     },
