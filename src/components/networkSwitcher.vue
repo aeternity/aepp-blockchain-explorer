@@ -99,15 +99,15 @@ export default {
       serverNetworks: [
         {
           name: 'sdk-edgenet.aepps',
-          url: 'https://sdk-edgenet.aepps.com/api'
+          url: 'https://sdk-edgenet.aepps.com/'
         },
         {
           name: 'sdk-testnet.aepps',
-          url: 'http://sdk-testnet.aepps.com/api'
+          url: 'https://sdk-testnet.aepps.com/'
         },
         {
           name: 'test-net-api.aepps',
-          url: 'http://test-net-api.aepps.com/api'
+          url: 'https://test-net-api.aepps.com/'
         }
       ],
       isNetworkChanging: false,
@@ -138,12 +138,11 @@ export default {
 
       if (this.connectError.length) {
         this.isError = true
-        this.isNetworkChanging = false
       } else {
         this.networkUrl = undefined
         this.networkName = undefined
-        this.isNetworkChanging = false
       }
+      this.isNetworkChanging = false
     },
     catchNetworkName (name, url) {
       this.networkName = name
