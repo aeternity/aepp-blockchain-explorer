@@ -102,7 +102,7 @@ export default {
   methods: {
     loadMore: async function () {
       this.isLoadingMore = true
-      const toAdd = Math.min(this.height - this.numGenerations, 10)
+      const toAdd = Math.max(Math.min(this.height - this.numGenerations, 10), 0)
       this.numGenerations += toAdd
       await this.$store.dispatch('blocks/getLatestGenerations', Object.keys(this.generations).length + toAdd)
       this.isLoadingMore = false
