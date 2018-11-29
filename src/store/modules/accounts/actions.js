@@ -1,6 +1,6 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
-import { wrapActionsWithResolvedEpoch, yaniToAe } from '../../utils'
+import { wrapActionsWithResolvedEpoch } from '../../utils'
 
 export default wrapActionsWithResolvedEpoch({
   /**
@@ -15,7 +15,7 @@ export default wrapActionsWithResolvedEpoch({
     let balance = 0
 
     try {
-      balance = yaniToAe(await epoch.balance(address))
+      balance = await epoch.balance(address)
     } catch (e) {
       balance = 0
     }

@@ -16,7 +16,7 @@
     </field>
 
     <field v-if='transaction.tx.amount' name="Amount">
-      {{transaction.tx.amount}} AE
+      {{yaniToAe(transaction.tx.amount)}} AE
     </field>
 
   </div>

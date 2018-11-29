@@ -12,7 +12,7 @@
         </router-link>
       </field>
       <field name='amount'>
-        <span class='number'>{{ transaction.tx.amount }}</span>
+        <span class='number'>{{yaniToAe(transaction.tx.amount)}}</span>
         <span class="unit">AE</span>
       </field>
       <field name="gas">

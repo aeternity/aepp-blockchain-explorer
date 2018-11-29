@@ -10,7 +10,7 @@
         <div class="number">{{transaction.tx.ttl}}</div>
       </field>
       <field name="Deposit">
-        <span class='number'>{{transaction.tx.deposit}}</span>
+        <span class='number'>{{yaniToAe(transaction.tx.deposit)}}</span>
         <span class="unit">AE</span>
       </field>
       <field name="Gas">
