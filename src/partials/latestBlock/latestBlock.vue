@@ -3,8 +3,10 @@
     <div class="grid">
       <div class="explanation">
         <h2 class="title">Latest Generation</h2>
-        <ae-button type="exciting" size="small" :to="`/generation/${height}`">view last</ae-button>
-        <ae-button type="exciting" size="small" to="/generations">view all</ae-button>
+        <div class="buttons">
+          <ae-button type="exciting" size="small" :to="`/generation/${height}`">view last</ae-button>
+          <ae-button type="exciting" size="small" to="/generations">view all</ae-button>
+        </div>
       </div>
       <div class="generation-data">
         <h2>Generation</h2>
