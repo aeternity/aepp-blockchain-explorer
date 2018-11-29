@@ -15,7 +15,7 @@ export default wrapActionsWithResolvedEpoch({
     let balance = 0
 
     try {
-      balance = await epoch.balance(address)
+      balance = (await epoch.balance(address)) / (10 ** 18)
     } catch (e) {
       balance = 0
     }
