@@ -16,7 +16,7 @@
       </div>
       </field>
       <field name='amount'>
-      <span class='number'>{{yaniToAe(transaction.tx.amount)}}</span>
+      <span class='number'>{{transaction.tx.amount | yaniToAe}}</span>
       <span class="unit">AE</span>
       </field>
     </div>
