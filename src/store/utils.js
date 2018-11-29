@@ -1,3 +1,5 @@
+import {BigNumber} from 'bignumber.js'
+
 export const wrapActionsWithResolvedEpoch = actions =>
   Object.entries(actions).reduce((p, [actionName, actionFunction]) => ({
     ...p,
@@ -12,3 +14,6 @@ export const wrapActionsWithResolvedEpoch = actions =>
       return actionFunction.call(storeWithResolvedEpoch, storeWithResolvedEpoch, ...args)
     }
   }), {})
+
+export const yaniToAe = yani =>
+  new BigNumber(yani).shiftedBy(-18).toNumber()
