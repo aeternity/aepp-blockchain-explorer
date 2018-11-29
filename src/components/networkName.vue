@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!--<span v-if="VUE_APP_SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>-->
-      <!--{{ networkName }}-->
-    <!--</span>-->
     <span v-if="VUE_APP_SHOW_NETWORK_STATS"  class='network-name network-name_swither'
           @click="showNetworkList(true)">
       {{ networkName }}
