@@ -69,6 +69,7 @@ import {
 export default {
   name: 'network-switcher',
   components: {
+    AeModal,
     AeCard,
     AeList,
     AeListItem,
@@ -83,53 +84,83 @@ export default {
     AePanel,
     AeInput,
     LoaderItem,
-    ErrorItem
+    Error
   },
   data () {
     return {
       view: null,
       modalVisible: false,
       networkUrl: this.$store.state.epochUrl,
-      networkName: undefined
+      networkName: undefined,
+      serverNetworks: [
+        {
+          name: 'sdk-edgenet.aepps',
+          url: 'https://sdk-edgenet.aepps.com/'
+        },
+        {
+          name: 'sdk-testnet.aepps',
+          url: 'https://sdk-testnet.aepps.com/'
+        }
+      ],
+      isNetworkChanging: false,
+      isError: false
     }
   },
   methods: {
+    closeError (e) {
+      this.isError = e
+    },
+    showNetworkList (isVisible) {
+      this.$emit('showList', isVisible)
+    },
     async changeNetwork () {
-      await this.$store.dispatch('changeNetwork', this.networkUrl)
-      this.networkUrl = this.url
+      this.isNetworkChanging = true
+      this.$store.commit('changeNetworkUrl', this.networkUrl)
+      this.$store.commit('blocks/resetState')
+      this.$store.commit('accounts/resetState')
+      this.$store.commit('transactions/resetState')
+
+      await Promise.all([
+        this.$store.dispatch('blocks/height'),
+        this.$store.dispatch('getNodeStatus')
+      ]).then(success => {
+        this.$store.commit('clearError')
+        this.showNetworkList(false)
+      }).catch(err => {
+        this.isError = true
+        this.isNetworkChanging = false
+        this.$store.commit('catchError', err)
+      })
+
+      this.$store.dispatch('blocks/getLatestGenerations', 10)
+
+      if (this.connectError.length) {
+        this.isError = true
+      }
+      this.isNetworkChanging = false
     },
     catchNetworkName (name, url) {
       this.networkName = name
       this.networkUrl = url
       this.changeNetwork()
     },
-    showNetwork () {
-      this.$store.commit('clearError')
-    },
-    closeNetwork () {
-      this.$store.commit('clearError')
-      this.$store.commit('closeNetworkList')
-    },
     showForm () {
-      this.$store.commit('showForm')
+      this.$emit('showForm', true)
     }
   },
   computed: {
     ...mapState({
-      networks: 'networkList',
-      url: 'epochUrl',
-      isLoading: 'loading',
       connectError: 'error'
     }),
     collectedNetworks () {
       if (localStorage.getItem('localNetwork')) {
-        return this.networks.concat(JSON.parse(localStorage.getItem('localNetwork')))
+        return this.serverNetworks.concat(JSON.parse(localStorage.getItem('localNetwork')))
       } else {
-        return this.networks
+        return this.serverNetworks
       }
     },
     isDisplaying () {
-      return !this.isLoading && !this.connectError
+      return !this.isNetworkChanging && !this.isError
     }
   }
 }
