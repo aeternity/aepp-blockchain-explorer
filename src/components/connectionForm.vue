@@ -15,11 +15,11 @@
                   class="connect-form__input"
                   v-model="netWorkData.url">
         </ae-input>
-        <ae-button class="connect-form__btn" face="round" type="exciting"  extend>Connect</ae-button>
+        <ae-button class="connect-form__btn" face="round" type="exciting"  extend >Connect</ae-button>
       </form>
     </ae-panel>
-    <error :name="netWorkData.name.target.value" v-if="isError" @back="closeError" @closeNetwork="showNetwork"></error>
-    <loader-item :name="netWorkData.name.target.value" v-if="isNetworkChanging" ></loader-item>
+    <error-item :name="netWorkData.name.target.value" v-if="connectError" :onTryAgain="showForm" :onCancel="showNetwork"></error-item>
+    <loader-item :name="netWorkData.name.target.value" v-if="isLoading" ></loader-item>
   </div>
 
 </template>
@@ -32,7 +32,7 @@ import {
 import { mapState } from 'vuex'
 
 import LoaderItem from './loaderItem'
-import Error from './error'
+import ErrorItem from './errorItem'
 
 export default {
   name: 'connection-form',
@@ -41,60 +41,41 @@ export default {
     AeInput,
     AeButton,
     LoaderItem,
-    Error
+    ErrorItem
   },
   data: function () {
     return {
       netWorkData: {
         name: '',
         url: ''
-      },
-      isNetworkChanging: false,
-      isError: false
+      }
     }
   },
   computed: {
     ...mapState({
+      url: 'epochUrl',
+      isLoading: 'loading',
       connectError: 'error'
     }),
     isDisplaying () {
-      return !this.isNetworkChanging && !this.isError
+      return !this.isLoading && !this.connectError
     }
   },
   methods: {
-    closeError (e) {
-      this.isError = e
-    },
     async changeNetwork () {
-      this.isNetworkChanging = true
-      this.$store.commit('changeNetworkUrl', this.netWorkData.url.target.value)
-
-      this.$store.commit('blocks/resetState')
-      this.$store.commit('accounts/resetState')
-      this.$store.commit('transactions/resetState')
-
-      await Promise.all([
-        this.$store.dispatch('blocks/height'),
-        this.$store.dispatch('getNodeStatus')
-      ]).then(success => {
-        this.$store.commit('clearError')
+      await this.$store.dispatch('changeNetwork', this.netWorkData.url.target.value)
+      if (!this.connectError) {
         this.saveNetworkLocal()
-        this.showNetwork()
-      }).catch(err => {
-        this.isError = true
-        this.isNetworkChanging = false
-        this.$store.commit('catchError', err)
-      })
-
-      this.$store.dispatch('blocks/getLatestGenerations', 10)
-
-      if (this.connectError.length) {
-        this.isError = true
+        this.$store.commit('closeForm')
       }
-      this.isNetworkChanging = false
     },
     showNetwork () {
-      this.$emit('netWork', false)
+      this.$store.commit('closeForm')
+      this.$store.commit('clearError')
+    },
+    showForm () {
+      this.$store.commit('showForm')
+      this.$store.commit('clearError')
     },
     saveNetworkLocal () {
       if (localStorage.getItem('localNetwork')) {

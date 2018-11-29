@@ -1,12 +1,6 @@
 <template>
   <div id="app">
-    <ae-overlay class="custom-overlay" v-if="isNetworkAvailable"
-                @click="closeNetworkSwitcher()">
-      <div class="networks-wrap" >
-        <network-switcher class="switcher"  @showForm="showConnectForm" @showList="hideList" v-if="!isFormAvaible"></network-switcher>
-        <connection-form class="switcher-form" @netWork="hideForm" v-if="isFormAvaible"></connection-form>
-      </div>
-    </ae-overlay>
+    <network-wrap/>
     <nav class="app-nav">
       <div class="inner">
         <router-link class="logo" to="/">
@@ -76,7 +70,7 @@
       <router-view />
     </main>
     <ae-footer />
-    <network-name @showList="showNetworkList"/>
+    <network-name/>
   </div>
 </template>
 
@@ -84,12 +78,7 @@
 import AeFooter from './partials/footer/footer'
 import SocialLinks from './partials/socialLinks'
 import networkName from './components/networkName'
-import NetworkSwitcher from './components/networkSwitcher'
-import ConnectionForm from './components/connectionForm'
-
-import {
-  AeOverlay
-} from '@aeternity/aepp-components-3'
+import NetworkWrap from './components/networkWrap'
 
 export default {
   name: 'app',
@@ -97,9 +86,7 @@ export default {
     AeFooter,
     SocialLinks,
     networkName,
-    AeOverlay,
-    NetworkSwitcher,
-    ConnectionForm
+    NetworkWrap
   },
   data () {
     return {
@@ -121,22 +108,6 @@ export default {
   methods: {
     toggleMenu: function () {
       this.isOpened = !this.isOpened
-    },
-    showNetworkList (avaible) {
-      this.isNetworkAvailable = avaible
-    },
-    showConnectForm (avaible) {
-      this.isFormAvaible = avaible
-    },
-    closeNetworkSwitcher () {
-      this.isNetworkAvailable = false
-      this.isFormAvaible = false
-    },
-    hideList (avaible) {
-      this.closeNetworkSwitcher()
-    },
-    hideForm (avaible) {
-      this.isFormAvaible = avaible
     }
   }
 }

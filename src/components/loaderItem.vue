@@ -36,7 +36,7 @@ export default {
  .loader-wrapper{
     width: 100%;
     box-sizing: border-box;
-    & /deep/ .ae-card-main{
+    /deep/ .ae-card-main{
       background-color: $white;
       padding: 15px;
     }

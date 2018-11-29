@@ -1,7 +1,7 @@
 <template>
   <div>
     <span v-if="VUE_APP_SHOW_NETWORK_STATS"  class='network-name network-name_swither'
-          @click="showNetworkList(true)">
+          @click="showNetworkList">
       {{ networkName }}
     </span>
   </div>
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     showNetworkList () {
-      this.$emit('showList', true)
+      this.$store.commit('showNetworkList')
     }
   }
 }

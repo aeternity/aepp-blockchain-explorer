@@ -4,9 +4,9 @@
       Unable to connect to {{name}}
     </div>
     <ae-toolbar slot="footer" class="error-actions">
-      <ae-button class="error-actions__btn" face="flat"  @click="backToForm()">try again</ae-button>
+      <ae-button class="error-actions__btn" face="flat"  @click="onTryAgain()">try again</ae-button>
       <ae-filter-separator/>
-      <ae-button class="error-actions__btn" face="flat" @click="closeNetwork()">cancel</ae-button>
+      <ae-button class="error-actions__btn" face="flat" @click="onCancel()">cancel</ae-button>
     </ae-toolbar>
   </ae-card>
 </template>
@@ -19,22 +19,17 @@ import {
 } from '@aeternity/aepp-components-3'
 
 export default {
-  name: 'error',
-  props: ['name'],
+  name: 'error-item',
+  props: {
+    name: String,
+    onTryAgain: Function,
+    onCancel: Function
+  },
   components: {
     AeCard,
     AeToolbar,
     AeButton,
     AeFilterSeparator
-  },
-  methods: {
-    backToForm () {
-      this.$store.commit('clearError')
-      this.$emit('back', false)
-    },
-    closeNetwork () {
-      this.$emit('closeNetwork')
-    }
   }
 }
 </script>
