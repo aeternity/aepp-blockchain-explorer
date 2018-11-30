@@ -39,6 +39,10 @@ export default {
 </script>
 <style scoped lang='scss'>
   @import '../../src/style/mixins';
+  .custom-overlay.ae-overlay {
+    background-image: linear-gradient(to bottom, rgba(237, 243, 247, 0.8), rgba(237, 243, 247, 0.8));
+  }
+
   .networks-wrap{
     max-width: 1040px;
     width: calc(100% - 40px);

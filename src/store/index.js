@@ -9,8 +9,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   plugins: [
     createPersistedState({
-      key: 'localNetwork',
-      paths: ['networkList']
+      paths: ['localNetworkList']
     })
   ],
   strict: process.env.NODE_ENV !== 'production',
@@ -38,7 +37,8 @@ const store = new Vuex.Store({
         url: 'https://sdk-testnet.aepps.com/',
         isLocal: false
       }
-    ]
+    ],
+    localNetworkList: []
   },
 
   getters: {
@@ -130,7 +130,7 @@ const store = new Vuex.Store({
      * @param {Object} network
      */
     updateNetwork (state, network) {
-      state.networkList.push(network)
+      state.localNetworkList.push(network)
     }
   },
 

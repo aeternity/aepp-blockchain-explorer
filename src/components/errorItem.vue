@@ -37,7 +37,7 @@ export default {
 <style scoped lang='scss'>
 @import '../style/mixins';
 .error-wrapper{
-  & /deep/ .ae-card-main{
+  /deep/ .ae-card-main{
     padding: 0;
   }
 
@@ -65,7 +65,7 @@ export default {
       font-family: "Inter UI";
     }
 
-    & /deep/ .ae-button{
+     /deep/ .ae-button{
       height: 100%;
     }
 

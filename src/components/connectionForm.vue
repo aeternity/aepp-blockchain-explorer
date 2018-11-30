@@ -98,7 +98,7 @@ export default {
   .ae-panel{
     margin: 0 auto;
 
-    & /deep/ .content{
+    /deep/ .content{
       padding: 16px;
 
       h1{
@@ -118,7 +118,7 @@ export default {
     margin-bottom: 45px;
   }
 
-  & /deep/ .connect-form__input{
+  /deep/ .connect-form__input{
     margin-bottom: 8px;
     .ae-input{
       margin: 10px 0 0 0;

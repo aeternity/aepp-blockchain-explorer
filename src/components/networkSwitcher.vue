@@ -3,7 +3,7 @@
     <ae-card class="network-switcher">
       <ae-list face="primary" v-if="isDisplaying ">
         <div class="network-item"
-             v-for="(network, index) in networks" :key="index" :class="{localnetwork: network.isLocal}">
+             v-for="(network, index) in collectedNetworks" :key="index" :class="{localnetwork: network.isLocal}">
           <ae-list-item >
             <ae-dropdown direction="left" v-if="network.isLocal">
               <ae-icon name="more" size="20px" slot="button" />
@@ -57,13 +57,8 @@ import {
   AeCheck,
   AeToolbar,
   AeButton,
-  AeDivider,
   AeDropdown,
-  AeIcon,
-  AeLoader,
-  AeFilterSeparator,
-  AePanel,
-  AeInput
+  AeIcon
 } from '@aeternity/aepp-components-3'
 
 export default {
@@ -75,13 +70,8 @@ export default {
     AeCheck,
     AeToolbar,
     AeButton,
-    AeDivider,
     AeDropdown,
     AeIcon,
-    AeLoader,
-    AeFilterSeparator,
-    AePanel,
-    AeInput,
     LoaderItem,
     ErrorItem
   },
@@ -117,10 +107,14 @@ export default {
   computed: {
     ...mapState({
       networks: 'networkList',
+      localNetworks: 'localNetworkList',
       url: 'epochUrl',
       isLoading: 'loading',
       connectError: 'error'
     }),
+    collectedNetworks () {
+      return this.networks.concat(this.localNetworks)
+    },
     isDisplaying () {
       return !this.isLoading && !this.connectError
     }
@@ -138,7 +132,7 @@ export default {
 .network-switcher{
   max-width: 320px;
 
-  &> /deep/ .ae-card-main{
+  > /deep/ .ae-card-main{
     padding: 0;
     flex-direction: column;
     align-items: center;
@@ -164,7 +158,7 @@ export default {
     padding: 0 15px;
   }
 
-  & /deep/ .localnetwork{
+  /deep/ .localnetwork{
     background-color: $paleGrey;
 
     .ae-list-item{
