@@ -108,6 +108,9 @@ export default {
   methods: {
     toggleMenu: function () {
       this.isOpened = !this.isOpened
+      if (this.isOpened) {
+        this.$store.commit('closeNetworkList')
+      }
     }
   }
 }

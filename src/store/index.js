@@ -9,8 +9,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   plugins: [
     createPersistedState({
-      paths: ['networkList'],
-      getState: (key) => JSON.parse(localStorage.getItem(key))
+      key: 'localNetwork',
+      paths: ['networkList']
     })
   ],
   strict: process.env.NODE_ENV !== 'production',
@@ -25,15 +25,18 @@ const store = new Vuex.Store({
     networkList: [
       {
         name: 'Roma',
-        url: 'https://sdk-mainnet.aepps.com/'
+        url: 'https://sdk-mainnet.aepps.com/',
+        isLocal: false
       },
       {
         name: 'sdk-edgenet.aepps',
-        url: 'https://sdk-edgenet.aepps.com/'
+        url: 'https://sdk-edgenet.aepps.com/',
+        isLocal: false
       },
       {
         name: 'sdk-testnet.aepps',
-        url: 'https://sdk-testnet.aepps.com/'
+        url: 'https://sdk-testnet.aepps.com/',
+        isLocal: false
       }
     ]
   },
@@ -120,6 +123,14 @@ const store = new Vuex.Store({
      */
     closeLoading (state) {
       state.loading = false
+    },
+    /**
+     * updateNetwork
+     * @param state
+     * @param {Object} network
+     */
+    updateNetwork (state, network) {
+      state.networkList.push(network)
     }
   },
 
@@ -170,7 +181,6 @@ const store = new Vuex.Store({
         commit('closeLoading')
         commit('clearError')
       } catch (err) {
-        console.log(err)
         commit('closeLoading')
         commit('changeNetworkUrl', currentUrl)
         commit('catchError', err)

@@ -13,7 +13,7 @@ import { mapState } from 'vuex'
 import NetworkSwitcher from '../components/networkSwitcher'
 import ConnectionForm from '../components/connectionForm'
 import {
-    AeOverlay
+  AeOverlay
 } from '@aeternity/aepp-components-3'
 
 export default {
@@ -32,6 +32,7 @@ export default {
   methods: {
     closeNetworkSwitcher () {
       this.$store.commit('closeNetworkList')
+      this.$store.commit('clearError')
     }
   }
 }
@@ -53,7 +54,9 @@ export default {
       @include only-phone{
         right: 0;
         left: 0;
+        top: 110px;
         margin: 0 auto;
+        width: 320px;
       }
     }
 
@@ -66,10 +69,10 @@ export default {
       @include only-phone{
         right: 0;
         left: 0;
+        top: 110px;
         margin: 0 auto;
+        width: 320px;
       }
     }
   }
 </style>
-
-

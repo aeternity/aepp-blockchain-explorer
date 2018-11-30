@@ -78,23 +78,11 @@ export default {
       this.$store.commit('clearError')
     },
     saveNetworkLocal () {
-      if (localStorage.getItem('localNetwork')) {
-        let localNetworks = JSON.parse(localStorage.getItem('localNetwork'))
-        localNetworks.push({
-          name: this.netWorkData.name.target.value,
-          url: this.netWorkData.url.target.value
-        })
-        localStorage.setItem('localNetwork', JSON.stringify(localNetworks))
-      } else {
-        localStorage.setItem('localNetwork', JSON.stringify(
-          [
-            {
-              name: this.netWorkData.name.target.value,
-              url: this.netWorkData.url.target.value
-            }
-          ]
-        ))
-      }
+      this.$store.commit('updateNetwork', {
+        name: this.netWorkData.name.target.value,
+        url: this.netWorkData.url.target.value,
+        isLocal: true
+      })
     }
   }
 

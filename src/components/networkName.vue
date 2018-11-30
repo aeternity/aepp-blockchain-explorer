@@ -50,6 +50,9 @@ export default {
   padding:5px 7px;
   background: #F7296E;
   border-radius: 5px;
+  @include only-phone {
+    top: 60px;
+  }
 
   &_swither{
     cursor: pointer;
