@@ -49,22 +49,7 @@ export default {
     margin: 0 auto;
     position: relative;
 
-    .switcher{
-      min-width: 312px;
-      position: absolute;
-      top: 55px;
-      right: 0;
-
-      @include only-phone{
-        right: 0;
-        left: 0;
-        top: 110px;
-        margin: 0 auto;
-        width: 320px;
-      }
-    }
-
-    .switcher-form{
+    .switcher, .switcher-form {
       min-width: 312px;
       position: absolute;
       top: 55px;
