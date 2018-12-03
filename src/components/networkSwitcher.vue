@@ -104,15 +104,12 @@ export default {
   },
   computed: {
     ...mapState({
-      networks: 'networkList',
-      localNetworks: 'localNetworkList',
       url: 'epochUrl',
       isLoading: 'loading',
-      connectError: 'error'
+      connectError: 'error',
+      collectedNetworks: ({ networkList, localNetworkList }) =>
+        networkList.concat(localNetworkList)
     }),
-    collectedNetworks () {
-      return this.networks.concat(this.localNetworks)
-    },
     isDisplaying () {
       return !this.isLoading && !this.connectError
     }
