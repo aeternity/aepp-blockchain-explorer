@@ -75,8 +75,6 @@ export default {
   },
   data () {
     return {
-      view: null,
-      modalVisible: false,
       networkUrl: this.$store.state.epochUrl,
       networkName: undefined
     }

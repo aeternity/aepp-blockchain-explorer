@@ -53,7 +53,6 @@ export default {
   },
   computed: {
     ...mapState({
-      url: 'epochUrl',
       isLoading: 'loading',
       connectError: 'error'
     }),
