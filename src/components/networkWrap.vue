@@ -2,7 +2,7 @@
     <ae-overlay class="custom-overlay" v-if="networkSwitcher"
                 @click="closeNetworkSwitcher()">
       <div class="networks-wrap" >
-        <network-switcher class="switcher"  v-if="!connectionForm"></network-switcher>
+        <network-switcher class="switcher" :networkList="networkList"  v-if="!connectionForm"></network-switcher>
         <connection-form class="switcher-form" v-if="connectionForm"></connection-form>
       </div>
     </ae-overlay>
@@ -22,6 +22,27 @@ export default {
     NetworkSwitcher,
     ConnectionForm,
     AeOverlay
+  },
+  data () {
+    return {
+      networkList: [
+        {
+          name: 'Roma',
+          url: 'https://sdk-mainnet.aepps.com/',
+          isLocal: false
+        },
+        {
+          name: 'sdk-edgenet.aepps',
+          url: 'https://sdk-edgenet.aepps.com/',
+          isLocal: false
+        },
+        {
+          name: 'sdk-testnet.aepps',
+          url: 'https://sdk-testnet.aepps.com/',
+          isLocal: false
+        }
+      ]
+    }
   },
   computed: {
     ...mapState({

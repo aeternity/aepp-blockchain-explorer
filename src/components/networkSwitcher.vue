@@ -63,6 +63,9 @@ import {
 
 export default {
   name: 'network-switcher',
+  props: {
+    networkList: Array
+  },
   components: {
     AeCard,
     AeList,
@@ -106,10 +109,11 @@ export default {
     ...mapState({
       url: 'epochUrl',
       isLoading: 'loading',
-      connectError: 'error',
-      collectedNetworks: ({ networkList, localNetworkList }) =>
-        networkList.concat(localNetworkList)
+      connectError: 'error'
     }),
+    collectedNetworks () {
+      return this.networkList.concat(this.$store.state.localNetworkList)
+    },
     isDisplaying () {
       return !this.isLoading && !this.connectError
     }
