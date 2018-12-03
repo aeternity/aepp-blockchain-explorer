@@ -13,7 +13,7 @@
 
       <field name='fee' v-if='transaction.tx.fee'>
         <div>
-          <span class='number'>{{ transaction.tx.fee }}</span>
+          <span class='number'>{{transaction.tx.fee | yaniToAe}}</span>
           <span class="unit">AE</span>
         </div>
       </field>

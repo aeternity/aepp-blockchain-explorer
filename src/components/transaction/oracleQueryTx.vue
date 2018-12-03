@@ -35,7 +35,7 @@
       </field>
       <field v-if='transaction.tx.query_fee'>
         <div class='field-name'>QueryFee</div>
-        <span class='number'>{{ transaction.tx.query_fee }}</span>
+        <span class='number'>{{transaction.tx.query_fee | yaniToAe}}</span>
         <span class="unit">AE</span>
       </field>
     </div>

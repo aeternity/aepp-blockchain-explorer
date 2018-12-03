@@ -8,7 +8,7 @@
       </h1>
 
       <field name="Balance">
-        <span class="number" v-if="account">{{ account.balance }}</span>
+        <span class="number" v-if="account">{{account.balance | yaniToAe}}</span>
         <fill-dummy color="grey" size="small" v-else/>
         <span class="unit">AE</span>
       </field>
