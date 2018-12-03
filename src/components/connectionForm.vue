@@ -1,6 +1,6 @@
 <template>
-  <div class="connect-form" >
-    <ae-panel  :title="'Connect to'" :closeHandler="showNetwork" :ratioTop="0.1" :ratioBottom="0.6" v-if="isDisplaying ">
+  <div class="connect-form">
+    <ae-panel title="Connect to" :closeHandler="showNetwork" v-if="isDisplaying">
       <div class="connect-form__subtitle">
         other network
       </div>
@@ -15,14 +15,14 @@
                   class="connect-form__input"
                   v-model="netWorkData.url">
         </ae-input>
-        <ae-button class="connect-form__btn" face="round" type="exciting"  extend >Connect</ae-button>
+        <ae-button class="connect-form__btn" face="round" type="exciting" extend>Connect</ae-button>
       </form>
     </ae-panel>
-    <error-item :name="netWorkData.name.target.value" v-if="connectError" :onTryAgain="showForm" :onCancel="showNetwork"></error-item>
-    <loader-item :name="netWorkData.name.target.value" v-if="isLoading" ></loader-item>
+    <error-item :name="netWorkData.name.target.value" v-if="connectError" :onTryAgain="showForm" :onCancel="showNetwork" />
+    <loader-item :name="netWorkData.name.target.value" v-if="isLoading" />
   </div>
-
 </template>
+
 <script>
 import {
   AePanel,
