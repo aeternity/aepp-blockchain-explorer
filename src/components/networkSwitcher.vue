@@ -1,36 +1,38 @@
 <template>
   <ae-card class="network-switcher">
     <ae-list face="primary" v-if="isDisplaying ">
-      <div class="network-item"
-           v-for="(network, index) in collectedNetworks" :key="index" :class="{localnetwork: network.isLocal}">
-        <ae-list-item >
-          <ae-dropdown direction="left" v-if="network.isLocal">
-            <ae-icon name="more" size="20px" slot="button" />
-            <li>
-              <ae-icon name="copy" />
-              Copy Link
-            </li>
-            <li>
-              <ae-button>
-                <ae-icon name="delete" />
-                Delete
-              </ae-button>
-            </li>
-          </ae-dropdown>
-          <div class="network-info">
-            <div class="network-info__name">
-              {{network.name}}
-            </div>
-            <div class="network-info__url">
-              {{network.url}}
-            </div>
-          </div><ae-check class="network-switcher__action"
-                          v-model="networkUrl"
-                          :value="network.url"
-                          type="radio"
-                          @change="catchNetworkName(network.name, network.url)"/>
-        </ae-list-item>
-      </div>
+      <ae-list-item
+        class="network-item"
+        v-for="(network, index) in collectedNetworks"
+        :key="index"
+        :class="{ 'local-network': network.isLocal }"
+      >
+        <ae-dropdown direction="left" v-if="network.isLocal">
+          <ae-icon name="more" size="20px" slot="button" />
+          <li>
+            <ae-icon name="copy" />
+            Copy Link
+          </li>
+          <li>
+            <ae-button>
+              <ae-icon name="delete" />
+              Delete
+            </ae-button>
+          </li>
+        </ae-dropdown>
+        <div class="network-info">
+          <div class="network-info__name">
+            {{network.name}}
+          </div>
+          <div class="network-info__url">
+            {{network.url}}
+          </div>
+        </div><ae-check class="network-switcher__action"
+                        v-model="networkUrl"
+                        :value="network.url"
+                        type="radio"
+                        @change="catchNetworkName(network.name, network.url)"/>
+      </ae-list-item>
     </ae-list>
     <div class="hendler-wrapper">
       <error-item class="error" :name="networkName" :onTryAgain="showNetwork"  :onCancel="closeNetwork"  v-if="connectError"></error-item>
@@ -140,7 +142,23 @@ export default {
       overflow: visible;
 
       .ae-list-item{
-        padding: 20px 0 16px;
+        padding: 20px 15px 16px;
+
+        &.local-network {
+          background-color: $paleGrey;
+          justify-content: flex-start;
+
+          .ae-check{
+            margin-left: auto;
+          }
+
+          .ae-dropdown-button{
+            justify-content: flex-start;
+            i{
+              margin-left: -6px;
+            }
+          }
+        }
       }
     }
   }
@@ -148,29 +166,6 @@ export default {
   & /deep/.ae-check-button{
     min-width: 36px;
     padding-left: 0;
-  }
-
-  .network-item{
-    padding: 0 15px;
-  }
-
-  /deep/ .localnetwork{
-    background-color: $paleGrey;
-
-    .ae-list-item{
-      justify-content: flex-start;
-
-      .ae-check{
-        margin-left: auto;
-      }
-
-      .ae-dropdown-button{
-        justify-content: flex-start;
-        i{
-          margin-left: -6px;
-        }
-      }
-    }
   }
 
   .hendler-wrapper{
