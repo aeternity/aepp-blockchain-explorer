@@ -143,12 +143,13 @@ const store = new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ rootGetters: { epoch }, commit }) {
-      const [top, version] = await Promise.all([
-        epoch.api.getCurrentGeneration(),
-        epoch.api.getStatus()
-      ])
+      try {
+        const [top, version] = await Promise.all([
+          epoch.api.getCurrentGeneration(),
+          epoch.api.getStatus()
+        ])
 
-      commit('setNodeStatus', { top, version })
+        commit('setNodeStatus', { top, version })
 
         return { top, version }
       } catch (e) {
