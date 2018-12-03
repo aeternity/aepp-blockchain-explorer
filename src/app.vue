@@ -91,9 +91,7 @@ export default {
   data () {
     return {
       isOpened: false,
-      VUE_APP_SHOW_NETWORK_STATS: process.env.VUE_APP_SHOW_NETWORK_STATS,
-      isNetworkAvailable: false,
-      isFormAvaible: false
+      VUE_APP_SHOW_NETWORK_STATS: process.env.VUE_APP_SHOW_NETWORK_STATS
     }
   },
   computed: {
