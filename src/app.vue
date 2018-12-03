@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <network-wrap/>
     <nav class="app-nav">
       <div class="inner">
         <router-link class="logo" to="/">
@@ -71,6 +70,7 @@
     </main>
     <ae-footer />
     <network-name/>
+    <network-wrap/>
   </div>
 </template>
 
@@ -106,9 +106,6 @@ export default {
   methods: {
     toggleMenu: function () {
       this.isOpened = !this.isOpened
-      if (this.isOpened) {
-        this.$store.commit('closeNetworkList')
-      }
     }
   }
 }
