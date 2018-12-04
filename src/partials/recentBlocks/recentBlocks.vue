@@ -28,10 +28,10 @@
             <fill-dummy v-else/>
           </td>
           <td>
-            <span class='field-name'>mined by</span>
+            <span class='field-name'>mining beneficiary</span>
             <span class="field-value account-address" v-if="generation">
-              <router-link :to='"/account/" + generation.keyBlock.miner'>
-                <named-address :address='generation.keyBlock.miner' />
+              <router-link :to='"/account/" + generation.keyBlock.beneficiary'>
+                <named-address :address='generation.keyBlock.beneficiary' />
               </router-link>
             </span>
             <fill-dummy v-else/>

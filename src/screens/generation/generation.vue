@@ -42,11 +42,11 @@
         </h2>
         <section class="generation-header__section">
           <div class="basic-gen-info grid">
-            <field name="mined by">
-              <router-link :to="`/account/${generation.keyBlock.miner}`" class="account-address" v-if="!isLoading">
-                <ae-hash type="short" :hash="generation.keyBlock.miner"/>
+            <field name="mining beneficiary">
+              <router-link :to="`/account/${generation.keyBlock.beneficiary}`" class="account-address" v-if="!isLoading">
+                <ae-hash type="short" :hash="generation.keyBlock.beneficiary"/>
               </router-link>
-              <view-and-copy :text='generation.keyBlock.miner' v-if="!isLoading"/>
+              <view-and-copy :text='generation.keyBlock.beneficiary' v-if="!isLoading"/>
               <fill-dummy v-else/>
             </field>
             <field name="time since mined">

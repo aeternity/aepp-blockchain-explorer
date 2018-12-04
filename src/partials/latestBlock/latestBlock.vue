@@ -50,10 +50,10 @@
             <fill-dummy v-else/>
           </div>
           <div class="field">
-            <div class="field-name">Mined by</div>
+            <div class="field-name">Mining beneficiary</div>
             <div class="field-value account-address" v-if="generation">
-              <router-link :to="`/account/${generation.keyBlock.miner}`">
-                <named-address :address="generation.keyBlock.miner" />
+              <router-link :to="`/account/${generation.keyBlock.beneficiary}`">
+                <named-address :address="generation.keyBlock.beneficiary" />
               </router-link>
             </div>
             <fill-dummy v-else/>

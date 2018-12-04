@@ -46,10 +46,10 @@
             <span class="field-name">Transaction(s)</span>
           </td>
           <td>
-            <span class="field-name">mined by</span>
+            <span class="field-name">mining beneficiary</span>
             <span class="account-address" v-if="generations[height-i+1]">
-              <router-link :to="`/account/${generations[height-i+1].keyBlock.miner}`">
-                <named-address :address="generations[height-i+1].keyBlock.miner"/>
+              <router-link :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
+                <named-address :address="generations[height-i+1].keyBlock.beneficiary"/>
               </router-link>
             </span>
             <fill-dummy v-else/>
