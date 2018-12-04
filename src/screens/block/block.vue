@@ -8,11 +8,11 @@
             <span class="number" v-if="block.height">{{ block.height }}</span>
             <fill-dummy v-else/>
           </div>
-          <div v-if="block.miner">
-            <span class="field-name">mined by</span>
+          <div v-if="block.beneficiary">
+            <span class="field-name">mining beneficiary</span>
             <span class="account-address">
-              <router-link :to="`/account/${block.miner}`">
-                {{ block.miner | startAndEnd }}
+              <router-link :to="`/account/${block.beneficiary}`">
+                {{ block.beneficiary | startAndEnd }}
               </router-link>
             </span>
           </div>
