@@ -10,7 +10,7 @@
       <div>
         <a href="https://aeternity.com/" target="_blank">aeternity.com</a>
         <a href="https://www.aepps.com/imprint/" target="_blank">Imprint</a>
-        <a href="https://forum.aeternity.com/" target="_blank">Get started</a>
+        <a href="https://forum.aeternity.com/" target="_blank">Forum</a>
       </div>
       <social-links />
     </div>

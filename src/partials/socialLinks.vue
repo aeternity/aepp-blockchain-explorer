@@ -11,7 +11,6 @@
 import githubBlack from '../assets/github.svg'
 import redditBlack from '../assets/reddit.svg'
 import mediumBlack from '../assets/medium.svg'
-import slackBlack from '../assets/slack.svg'
 import telegramBlack from '../assets/telegram.svg'
 import facebookBlack from '../assets/facebook.svg'
 import twitterBlack from '../assets/twitter.svg'
