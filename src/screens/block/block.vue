@@ -9,7 +9,7 @@
             <fill-dummy v-else/>
           </div>
           <div v-if="block.beneficiary">
-            <span class="field-name">mining beneficiary</span>
+            <span class="field-name">beneficiary</span>
             <span class="account-address">
               <router-link :to="`/account/${block.beneficiary}`">
                 {{ block.beneficiary | startAndEnd }}
