@@ -1,17 +1,28 @@
 <template>
+  <div>
+    <network-name @networks="showNetworkSwitcher" :name="networkName"/>
     <ae-overlay class="custom-overlay" v-if="networkSwitcher"
                 @click="closeNetworkSwitcher()">
       <div class="networks-wrap" >
-        <network-switcher class="switcher" :networkList="networkList"  v-if="!connectionForm"></network-switcher>
-        <connection-form class="switcher-form" v-if="connectionForm"></connection-form>
+        <div class="switcher-connection">
+          <network-switcher class="switcher" :networkList="networkList" @form="showForm" @networkName="showName"  v-if="!connectionForm && isDisplaying"></network-switcher>
+          <connection-form class="switcher-form"  @form="showForm" @networkName="showName"  v-if="connectionForm && isDisplaying"></connection-form>
+          <error-item class="error" :name="networkName" :isFormOpened="connectionForm" @network="showNetworkSwitcher"  @form="showForm" v-if="connectError"></error-item>
+          <loader-item :name="networkName" v-if="isLoading"></loader-item>
+        </div>
       </div>
     </ae-overlay>
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import NetworkSwitcher from '../components/networkSwitcher'
 import ConnectionForm from '../components/connectionForm'
+import networkName from '../components/networkName'
+import LoaderItem from './loaderItem'
+import ErrorItem from './errorItem'
+import Networks from '../lib/networks'
 import {
   AeOverlay
 } from '@aeternity/aepp-components-3'
@@ -21,39 +32,42 @@ export default {
   components: {
     NetworkSwitcher,
     ConnectionForm,
-    AeOverlay
+    AeOverlay,
+    networkName,
+    LoaderItem,
+    ErrorItem
   },
   data () {
     return {
-      networkList: [
-        {
-          name: 'Roma',
-          url: 'https://sdk-mainnet.aepps.com/',
-          isLocal: false
-        },
-        {
-          name: 'sdk-edgenet.aepps',
-          url: 'https://sdk-edgenet.aepps.com/',
-          isLocal: false
-        },
-        {
-          name: 'sdk-testnet.aepps',
-          url: 'https://sdk-testnet.aepps.com/',
-          isLocal: false
-        }
-      ]
+      networkList: Networks,
+      networkSwitcher: false,
+      connectionForm: false,
+      networkName: ''
     }
   },
   computed: {
     ...mapState({
-      networkSwitcher: 'isNetworkSwitcher',
-      connectionForm: 'isConnectForm'
-    })
+      isLoading: 'loading',
+      connectError: 'error'
+    }),
+    isDisplaying () {
+      return !this.isLoading && !this.connectError
+    }
   },
   methods: {
+    showNetworkSwitcher (event) {
+      this.networkSwitcher = event
+    },
     closeNetworkSwitcher () {
-      this.$store.commit('closeNetworkList')
+      this.networkSwitcher = false
+      this.connectionForm = false
       this.$store.commit('clearError')
+    },
+    showForm (event) {
+      this.connectionForm = event
+    },
+    showName (event) {
+      this.networkName = event
     }
   }
 }
@@ -70,7 +84,7 @@ export default {
     margin: 0 auto;
     position: relative;
 
-    .switcher, .switcher-form {
+    .switcher-connection {
       min-width: 312px;
       position: absolute;
       top: 55px;

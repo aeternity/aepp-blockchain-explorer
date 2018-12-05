@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span v-if="VUE_APP_SHOW_NETWORK_STATS"  class='network-name network-name_swither'
+    <span v-if="VUE_APP_SHOW_NETWORK_STATS"  class='network-name network-name_switcher'
           @click="showNetworkList">
       {{ networkName }}
     </span>
@@ -8,7 +8,11 @@
 </template>
 
 <script>
+import Networks from '../lib/networks'
 export default {
+  props: {
+    name: String
+  },
   data () {
     return {
       VUE_APP_SHOW_NETWORK_STATS: process.env.VUE_APP_SHOW_NETWORK_STATS
@@ -16,21 +20,12 @@ export default {
   },
   computed: {
     networkName () {
-      let url = this.$store.state.epochUrl
-      let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
-      if (name) {
-        let shortname = name.replace(/([^.]+)-net-api/, '$1')
-        if (shortname) {
-          return `${shortname} network`
-        }
-        return name
-      }
-      return url
+      return !this.name ? Networks[0].name : this.name
     }
   },
   methods: {
     showNetworkList () {
-      this.$store.commit('showNetworkList')
+      this.$emit('networks', true)
     }
   }
 }
@@ -42,7 +37,7 @@ export default {
 .network-name {
   text-transform:uppercase;
   position:fixed;
-  top: 30px;
+  top: 60px;
   right:20px;
   color: $white;
   @include font-size(xs);
@@ -54,7 +49,7 @@ export default {
     top: 60px;
   }
 
-  &_swither{
+  &_switcher{
     cursor: pointer;
     padding:5px 25px;
     &:after{

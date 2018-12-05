@@ -19,8 +19,6 @@ const store = new Vuex.Store({
     $nodeStatus: {},
     epochUrl: process.env.VUE_APP_EPOCH_URL,
     error: '',
-    isNetworkSwitcher: false,
-    isConnectForm: false,
     loading: false,
     localNetworkList: []
   },
@@ -67,34 +65,6 @@ const store = new Vuex.Store({
       state.error = ''
     },
     /**
-     * showNetworkList
-     * @param state
-     */
-    showNetworkList (state) {
-      state.isNetworkSwitcher = true
-    },
-    /**
-     * closeNetworkList
-     * @param state
-     */
-    closeNetworkList (state) {
-      state.isNetworkSwitcher = false
-    },
-    /**
-     * showForm
-     * @param state
-     */
-    showForm (state) {
-      state.isConnectForm = true
-    },
-    /**
-     * closeForm
-     * @param state
-     */
-    closeForm (state) {
-      state.isConnectForm = false
-    },
-    /**
      * showLoading
      * @param state
      */
@@ -115,6 +85,14 @@ const store = new Vuex.Store({
      */
     updateNetwork (state, network) {
       state.localNetworkList.push(network)
+    },
+    /**
+     *  deleteNetwork
+     * @param state
+     * @param index
+     */
+    deleteNetwork (state, index) {
+      state.localNetworkList.splice(index,1)
     }
   },
 
@@ -169,6 +147,7 @@ const store = new Vuex.Store({
         commit('changeNetworkUrl', currentUrl)
         commit('catchError', err)
       }
+      console.log('rere')
     }
   }),
 

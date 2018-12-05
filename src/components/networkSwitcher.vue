@@ -1,6 +1,6 @@
 <template>
   <ae-card class="network-switcher">
-    <ae-list face="primary" v-if="isDisplaying ">
+    <ae-list face="primary">
       <ae-list-item
         class="network-item"
         v-for="(network, index) in collectedNetworks"
@@ -14,7 +14,7 @@
             Copy Link
           </li>
           <li>
-            <ae-button>
+            <ae-button @click="deleteLocalNetwork(index)">
               <ae-icon name="delete" />
               Delete
             </ae-button>
@@ -34,11 +34,7 @@
                         @change="catchNetworkName(network.name, network.url)"/>
       </ae-list-item>
     </ae-list>
-    <div class="hendler-wrapper">
-      <error-item class="error" :name="networkName" :onTryAgain="showNetwork"  :onCancel="closeNetwork"  v-if="connectError"></error-item>
-      <loader-item :name="networkName"  v-if="isLoading" ></loader-item>
-    </div>
-    <ae-toolbar slot="footer"  v-if="isDisplaying ">
+    <ae-toolbar slot="footer">
       <ae-button class="network-info__connect" face="flat" @click="showForm()">Connect to other network</ae-button>
     </ae-toolbar>
   </ae-card>
@@ -47,8 +43,6 @@
 <script>
 
 import { mapState } from 'vuex'
-import LoaderItem from './loaderItem'
-import ErrorItem from './errorItem'
 
 import {
   AeCard,
@@ -74,9 +68,7 @@ export default {
     AeToolbar,
     AeButton,
     AeDropdown,
-    AeIcon,
-    LoaderItem,
-    ErrorItem
+    AeIcon
   },
   data () {
     return {
@@ -93,29 +85,26 @@ export default {
       this.networkName = name
       this.networkUrl = url
       this.changeNetwork()
+      this.$emit('networkName', name)
     },
     showNetwork () {
       this.$store.commit('clearError')
     },
-    closeNetwork () {
-      this.$store.commit('clearError')
-      this.$store.commit('closeNetworkList')
-    },
     showForm () {
-      this.$store.commit('showForm')
+      this.$emit('form', true)
+    },
+    deleteLocalNetwork (index) {
+      let itemNumber = index - this.networkList.length
+      this.collectedNetworks.splice(index,1)
+      this.$store.commit('deleteNetwork', itemNumber)
     }
   },
   computed: {
     ...mapState({
-      url: 'epochUrl',
-      isLoading: 'loading',
-      connectError: 'error'
+      url: 'epochUrl'
     }),
     collectedNetworks () {
       return this.networkList.concat(this.$store.state.localNetworkList)
-    },
-    isDisplaying () {
-      return !this.isLoading && !this.connectError
     }
   }
 }
@@ -169,7 +158,7 @@ export default {
     padding-left: 0;
   }
 
-  .hendler-wrapper{
+  .handler-wrapper{
     width: 100%;
   }
   .network-info{

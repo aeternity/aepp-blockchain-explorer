@@ -69,7 +69,6 @@
       <router-view />
     </main>
     <ae-footer />
-    <network-name/>
     <network-wrap/>
   </div>
 </template>
@@ -77,7 +76,6 @@
 <script>
 import AeFooter from './partials/footer/footer'
 import SocialLinks from './partials/socialLinks'
-import networkName from './components/networkName'
 import NetworkWrap from './components/networkWrap'
 
 export default {
@@ -85,7 +83,6 @@ export default {
   components: {
     AeFooter,
     SocialLinks,
-    networkName,
     NetworkWrap
   },
   data () {

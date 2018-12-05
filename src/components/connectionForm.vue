@@ -1,10 +1,10 @@
 <template>
   <div class="connect-form">
-    <ae-panel title="Connect to" :closeHandler="showNetwork" v-if="isDisplaying">
+    <ae-panel title="Connect to" :closeHandler="showNetwork">
       <div class="connect-form__subtitle">
         other network
       </div>
-      <form @submit.prevent="changeNetwork">
+      <form @submit.prevent="seeChangedNetwork">
         <ae-input label="Network Name"
                   type="text"
                   class="connect-form__input"
@@ -18,30 +18,23 @@
         <ae-button class="connect-form__btn" face="round" type="exciting" extend>Connect</ae-button>
       </form>
     </ae-panel>
-    <error-item :name="netWorkData.name.target.value" v-if="connectError" :onTryAgain="showForm" :onCancel="showNetwork" />
-    <loader-item :name="netWorkData.name.target.value" v-if="isLoading" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import {
   AePanel,
   AeInput,
   AeButton
 } from '@aeternity/aepp-components-3'
-import { mapState } from 'vuex'
-
-import LoaderItem from './loaderItem'
-import ErrorItem from './errorItem'
 
 export default {
   name: 'connection-form',
   components: {
     AePanel,
     AeInput,
-    AeButton,
-    LoaderItem,
-    ErrorItem
+    AeButton
   },
   data: function () {
     return {
@@ -53,28 +46,21 @@ export default {
   },
   computed: {
     ...mapState({
-      isLoading: 'loading',
       connectError: 'error'
-    }),
-    isDisplaying () {
-      return !this.isLoading && !this.connectError
-    }
+    })
   },
   methods: {
     async changeNetwork () {
+      let name = this.netWorkData.name.target.value
+      this.$emit('networkName', name)
       await this.$store.dispatch('changeNetwork', this.netWorkData.url.target.value)
       if (!this.connectError) {
         this.saveNetworkLocal()
-        this.$store.commit('closeForm')
       }
     },
-    showNetwork () {
-      this.$store.commit('closeForm')
-      this.$store.commit('clearError')
-    },
-    showForm () {
-      this.$store.commit('showForm')
-      this.$store.commit('clearError')
+    seeChangedNetwork () {
+      this.changeNetwork()
+      this.showNetwork()
     },
     saveNetworkLocal () {
       this.$store.commit('updateNetwork', {
@@ -82,6 +68,10 @@ export default {
         url: this.netWorkData.url.target.value,
         isLocal: true
       })
+      this.showNetwork()
+    },
+    showNetwork () {
+      this.$emit('form', false)
     }
   }
 

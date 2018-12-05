@@ -22,14 +22,26 @@ export default {
   name: 'error-item',
   props: {
     name: String,
-    onTryAgain: Function,
-    onCancel: Function
+    isFormOpened: Boolean
   },
   components: {
     AeCard,
     AeToolbar,
     AeButton,
     AeFilterSeparator
+  },
+  methods: {
+    showNetworkList () {
+      this.$emit('networks', true)
+    },
+    onTryAgain () {
+      this.$store.commit('clearError')
+      this.isFormOpened ? this.$emit('form', true) : this.$emit('form', false)
+    },
+    onCancel () {
+      this.$store.commit('clearError')
+      this.isFormOpened ? this.$emit('form', false) : this.$emit('network', false)
+    }
   }
 }
 </script>
