@@ -3,18 +3,18 @@
     <ae-list face="primary">
       <ae-list-item
         class="network-item"
-        v-for="(network, index) in collectedNetworks"
+        v-for="(network, index) in networks"
         :key="index"
-        :class="{ 'local-network': network.isLocal }"
+        :class="{ 'custom-network': network.isCustom }"
       >
-        <ae-dropdown direction="left" v-if="network.isLocal">
+        <ae-dropdown direction="left" v-if="network.isCustom">
           <ae-icon name="more" size="20px" slot="button" />
           <li>
             <ae-icon name="copy" />
             Copy Link
           </li>
           <li>
-            <ae-button @click="deleteLocalNetwork(index)">
+            <ae-button @click="removeNetwork(index)">
               <ae-icon name="delete" />
               Delete
             </ae-button>
@@ -27,23 +27,28 @@
           <div class="network-info__url">
             {{network.url}}
           </div>
-        </div><ae-check class="network-switcher__action"
-                        v-model="networkUrl"
-                        :value="network.url"
-                        type="radio"
-                        @change="catchNetworkName(network.name, network.url)"/>
+        </div>
+        <ae-check
+          class="network-switcher__action"
+          v-model="networkUrl"
+          :value="network.url"
+          type="radio"
+          @change="$emit('select-network', network)"
+        />
       </ae-list-item>
     </ae-list>
     <ae-toolbar slot="footer">
-      <ae-button class="network-info__connect" face="flat" @click="showForm()">Connect to other network</ae-button>
+      <ae-button
+        class="network-info__connect"
+        face="flat"
+        @click="$emit('show-form')"
+      >Connect to other network</ae-button>
     </ae-toolbar>
   </ae-card>
 </template>
 
 <script>
-
-import { mapState } from 'vuex'
-
+import { mapGetters, mapMutations } from 'vuex'
 import {
   AeCard,
   AeList,
@@ -57,9 +62,6 @@ import {
 
 export default {
   name: 'network-switcher',
-  props: {
-    networkList: Array
-  },
   components: {
     AeCard,
     AeList,
@@ -72,41 +74,11 @@ export default {
   },
   data () {
     return {
-      networkUrl: this.$store.state.epochUrl,
-      networkName: undefined
+      networkUrl: this.$store.state.epochUrl
     }
   },
-  methods: {
-    async changeNetwork () {
-      await this.$store.dispatch('changeNetwork', this.networkUrl)
-      this.networkUrl = this.url
-    },
-    catchNetworkName (name, url) {
-      this.networkName = name
-      this.networkUrl = url
-      this.changeNetwork()
-      this.$emit('networkName', name)
-    },
-    showNetwork () {
-      this.$store.commit('clearError')
-    },
-    showForm () {
-      this.$emit('form', true)
-    },
-    deleteLocalNetwork (index) {
-      let itemNumber = index - this.networkList.length
-      this.collectedNetworks.splice(index, 1)
-      this.$store.commit('deleteNetwork', itemNumber)
-    }
-  },
-  computed: {
-    ...mapState({
-      url: 'epochUrl'
-    }),
-    collectedNetworks () {
-      return this.networkList.concat(this.$store.state.localNetworkList)
-    }
-  }
+  methods: mapMutations(['removeNetwork']),
+  computed: mapGetters(['networks'])
 }
 </script>
 
@@ -134,7 +106,7 @@ export default {
       .ae-list-item{
         padding: 20px 15px 16px;
 
-        &.local-network {
+        &.custom-network {
           background-color: $paleGrey;
           justify-content: flex-start;
 

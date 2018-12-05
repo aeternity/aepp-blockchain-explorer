@@ -1,33 +1,17 @@
 <template>
-  <div>
-    <span v-if="VUE_APP_SHOW_NETWORK_STATS"  class='network-name network-name_switcher'
-          @click="showNetworkList">
-      {{ networkName }}
-    </span>
-  </div>
+  <span
+    class='network-name network-name_switcher'
+    @click="$emit('click')"
+  >
+    {{ currentNetwork.name }}
+  </span>
 </template>
 
 <script>
-import Networks from '../lib/networks'
+import { mapGetters } from 'vuex'
+
 export default {
-  props: {
-    name: String
-  },
-  data () {
-    return {
-      VUE_APP_SHOW_NETWORK_STATS: process.env.VUE_APP_SHOW_NETWORK_STATS
-    }
-  },
-  computed: {
-    networkName () {
-      return !this.name ? Networks[0].name : this.name
-    }
-  },
-  methods: {
-    showNetworkList () {
-      this.$emit('networks', true)
-    }
-  }
+  computed: mapGetters(['currentNetwork'])
 }
 </script>
 

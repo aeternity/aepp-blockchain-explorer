@@ -4,12 +4,21 @@
       Unable to connect to {{name}}
     </div>
     <ae-toolbar slot="footer" class="error-actions">
-      <ae-button class="error-actions__btn" face="flat"  @click="onTryAgain()">try again</ae-button>
+      <ae-button
+        class="error-actions__btn"
+        face="flat"
+        @click="$emit('try-again')"
+      >try again</ae-button>
       <ae-filter-separator/>
-      <ae-button class="error-actions__btn" face="flat" @click="onCancel()">cancel</ae-button>
+      <ae-button
+        class="error-actions__btn"
+        face="flat"
+        @click="$emit('cancel')"
+      >cancel</ae-button>
     </ae-toolbar>
   </ae-card>
 </template>
+
 <script>
 import {
   AeCard,
@@ -21,27 +30,13 @@ import {
 export default {
   name: 'error-item',
   props: {
-    name: String,
-    isFormOpened: Boolean
+    name: String
   },
   components: {
     AeCard,
     AeToolbar,
     AeButton,
     AeFilterSeparator
-  },
-  methods: {
-    showNetworkList () {
-      this.$emit('networks', true)
-    },
-    onTryAgain () {
-      this.$store.commit('clearError')
-      this.isFormOpened ? this.$emit('form', true) : this.$emit('form', false)
-    },
-    onCancel () {
-      this.$store.commit('clearError')
-      this.isFormOpened ? this.$emit('form', false) : this.$emit('network', false)
-    }
   }
 }
 </script>
