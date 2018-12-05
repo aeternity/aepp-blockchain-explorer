@@ -42,7 +42,7 @@
         </h2>
         <section class="generation-header__section">
           <div class="basic-gen-info grid">
-            <field name="mining beneficiary">
+            <field name="beneficiary">
               <router-link :to="`/account/${generation.keyBlock.beneficiary}`" class="account-address" v-if="!isLoading">
                 <ae-hash type="short" :hash="generation.keyBlock.beneficiary"/>
               </router-link>
