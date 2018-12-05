@@ -92,7 +92,7 @@ const store = new Vuex.Store({
      * @param index
      */
     deleteNetwork (state, index) {
-      state.localNetworkList.splice(index,1)
+      state.localNetworkList.splice(index, 1)
     }
   },
 

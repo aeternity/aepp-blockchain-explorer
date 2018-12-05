@@ -95,7 +95,7 @@ export default {
     },
     deleteLocalNetwork (index) {
       let itemNumber = index - this.networkList.length
-      this.collectedNetworks.splice(index,1)
+      this.collectedNetworks.splice(index, 1)
       this.$store.commit('deleteNetwork', itemNumber)
     }
   },
