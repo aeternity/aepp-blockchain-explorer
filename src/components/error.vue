@@ -1,14 +1,28 @@
 <template>
-  <ae-card class="error-wrapper">
+  <AeCard class="error-wrapper">
     <div class="error-wrapper__message">
-      Unable to connect to {{name}}
+      Unable to connect to {{ name }}
     </div>
-    <ae-toolbar slot="footer" class="error-actions">
-      <ae-button class="error-actions__btn" face="flat"  @click="backToForm()">try again</ae-button>
-      <ae-filter-separator/>
-      <ae-button class="error-actions__btn" face="flat">cancel</ae-button>
-    </ae-toolbar>
-  </ae-card>
+    <AeToolbar
+      slot="footer"
+      class="error-actions"
+    >
+      <AeButton
+        class="error-actions__btn"
+        face="flat"
+        @click="backToForm()"
+      >
+        try again
+      </AeButton>
+      <AeFilterSeparator />
+      <AeButton
+        class="error-actions__btn"
+        face="flat"
+      >
+        cancel
+      </AeButton>
+    </AeToolbar>
+  </AeCard>
 </template>
 <script>
 import {
@@ -19,13 +33,18 @@ import {
 } from '@aeternity/aepp-components-3'
 
 export default {
-  name: 'error',
-  props: ['name'],
+  name: 'Error',
   components: {
     AeCard,
     AeToolbar,
     AeButton,
     AeFilterSeparator
+  },
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     backToForm () {

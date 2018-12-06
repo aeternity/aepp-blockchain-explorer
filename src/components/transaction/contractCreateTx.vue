@@ -1,24 +1,36 @@
 <template>
   <div>
     <div class="grid">
-      <field v-if='transaction.tx.owner' name="Account">
-        <router-link :to='`/account/${transaction.tx.owner}`'>
-          <named-address size='short' :address='transaction.tx.owner'/>
-        </router-link>
-      </field>
-      <field name="TTL">
-        <div class="number">{{transaction.tx.ttl}}</div>
-      </field>
-      <field name="Deposit">
-        <span class='number'>{{transaction.tx.deposit | yaniToAe}}</span>
-        <span class="unit">AE</span>
-      </field>
-      <field name="Gas">
-        {{transaction.tx.gas}}
-      </field>
-      <field name="Gas price">
-        {{transaction.tx.gasPrice}}
-      </field>
+      <Field
+        v-if="transaction.tx.owner"
+        name="Account"
+      >
+        <RouterLink :to="`/account/${transaction.tx.owner}`">
+          <NamedAddress
+            :address="transaction.tx.owner"
+            size="short"
+          />
+        </RouterLink>
+      </Field>
+      <Field name="TTL">
+        <div class="number">
+          {{ transaction.tx.ttl }}
+        </div>
+      </Field>
+      <Field name="Deposit">
+        <span class="number">
+          {{ transaction.tx.deposit | yaniToAe }}
+        </span>
+        <span class="unit">
+          AE
+        </span>
+      </Field>
+      <Field name="Gas">
+        {{ transaction.tx.gas }}
+      </Field>
+      <Field name="Gas price">
+        {{ transaction.tx.gasPrice }}
+      </Field>
     </div>
   </div>
 </template>
@@ -27,10 +39,13 @@ import Field from '../field'
 import NamedAddress from '../namedAddress'
 
 export default {
-  name: 'contract-create-tx',
+  name: 'ContractCreateTx',
   components: { Field, NamedAddress },
-  props: [
-    'transaction'
-  ]
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

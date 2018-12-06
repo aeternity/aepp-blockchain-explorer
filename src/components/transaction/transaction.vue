@@ -1,51 +1,70 @@
 <template>
-  <div :class='transaction.tx.type' class='transaction'>
+  <div
+    :class="transaction.tx.type"
+    class="transaction"
+  >
     <div class="header">
-      <field>
-        <ae-badge>{{ transaction.tx.type | txTypeToName }}</ae-badge>
-      </field>
+      <Field>
+        <AeBadge>{{ transaction.tx.type | txTypeToName }}</AeBadge>
+      </Field>
 
-      <field name='nonce' v-if='transaction.tx.nonce'>
+      <Field
+        v-if="transaction.tx.nonce"
+        name="nonce"
+      >
         <div class="number">
           {{ transaction.tx.nonce }}
         </div>
-      </field>
+      </Field>
 
-      <field name='fee' v-if='transaction.tx.fee'>
+      <Field
+        v-if="transaction.tx.fee"
+        name="fee"
+      >
         <div>
-          <span class='number'>{{transaction.tx.fee | yaniToAe}}</span>
-          <span class="unit">AE</span>
+          <span class="number">
+            {{ transaction.tx.fee | yaniToAe }}
+          </span>
+          <span class="unit">
+            AE
+          </span>
         </div>
-      </field>
-      <field name='block'>
-        <div class='number'>
-          <router-link v-if='transaction.blockHeight' :to='"/block/" + transaction.blockHeight'>
+      </Field>
+      <Field name="block">
+        <div class="number">
+          <RouterLink
+            v-if="transaction.blockHeight"
+            :to="&quot;/block/&quot; + transaction.blockHeight"
+          >
             {{ transaction.blockHeight }}
-          </router-link>
+          </RouterLink>
           <template v-else>
             n/a
           </template>
         </div>
-      </field>
-      <field v-if='transaction.hash' name='tx hash'>
-        <router-link :to='"/tx/" + transaction.hash'>
-          <ae-hash type="short" :hash='transaction.hash'/>
-        </router-link>
-      </field>
+      </Field>
+      <Field
+        v-if="transaction.hash"
+        name="tx hash"
+      >
+        <RouterLink :to="&quot;/tx/&quot; + transaction.hash">
+          <AeHash
+            :hash="transaction.hash"
+            type="short"
+          />
+        </RouterLink>
+      </Field>
     </div>
-    <div class='body'>
-
-      <component
-        v-if="transaction.tx.type"
+    <div class="body">
+      <Component
         :is="transaction.tx.type"
+        v-if="transaction.tx.type"
         :transaction="transaction"
       />
       <template v-else>
-        {{transaction}}
+        {{ transaction }}
       </template>
-
     </div>
-
   </div>
 </template>
 <script>
@@ -66,10 +85,7 @@ import ContractCallTx from './contractCallTx.vue'
 import ContractCreateTx from './contractCreateTx.vue'
 
 export default {
-  name: 'transaction',
-  props: [
-    'transaction'
-  ],
+  name: 'Transaction',
   components: {
     AeBadge,
     NamedAddress,
@@ -86,6 +102,12 @@ export default {
     ContractCreateTx
   },
   filters: { txTypeToName },
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     responsePrettyJson () {
       if (!this.transaction) return null

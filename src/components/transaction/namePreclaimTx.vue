@@ -1,17 +1,20 @@
 <template>
   <div>
     <div class="grid">
-      <field name="account">
-        <router-link :to='"/account/" + transaction.tx.account'>
-          <named-address :address='transaction.tx.account'/>
-        </router-link>
-      </field>
-      <field name="commitment">
-        <ae-hash type='short' :hash="transaction.tx.commitment" />
-      </field>
-      <field name="fee">
-        {{transaction.tx.fee}}
-      </field>
+      <Field name="account">
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.account">
+          <NamedAddress :address="transaction.tx.account" />
+        </RouterLink>
+      </Field>
+      <Field name="commitment">
+        <AeHash
+          :hash="transaction.tx.commitment"
+          type="short"
+        />
+      </Field>
+      <Field name="fee">
+        {{ transaction.tx.fee }}
+      </Field>
     </div>
   </div>
 </template>
@@ -21,10 +24,13 @@ import NamedAddress from '../namedAddress'
 import AeHash from '../aeHash'
 
 export default {
-  name: 'name-preclaim-tx',
+  name: 'NamePreclaimTx',
   components: { Field, NamedAddress, AeHash },
-  props: [
-    'transaction'
-  ]
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

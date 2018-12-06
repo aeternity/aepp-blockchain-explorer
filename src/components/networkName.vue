@@ -1,6 +1,11 @@
 <template>
   <div>
-    <span v-if="VUE_APP_SHOW_NETWORK_STATS" is="router-link" to="/status/" class='network-name'>
+    <span
+      is="router-link"
+      v-if="VUE_APP_SHOW_NETWORK_STATS"
+      to="/status/"
+      class="network-name"
+    >
       {{ networkName }}
     </span>
   </div>

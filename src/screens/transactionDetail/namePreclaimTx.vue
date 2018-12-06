@@ -1,9 +1,15 @@
 <template>
   <div>
-    <field v-if='transaction.tx.commitment' name="Commitment">
-      <ae-hash type='short' :hash="transaction.tx.commitment" />
-      <view-and-copy :text='transaction.tx.commitment'/>
-    </field>
+    <Field
+      v-if="transaction.tx.commitment"
+      name="Commitment"
+    >
+      <AeHash
+        :hash="transaction.tx.commitment"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.commitment" />
+    </Field>
   </div>
 </template>
 <script>
@@ -12,8 +18,13 @@ import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy'
 
 export default {
-  name: 'name-preclaim-tx',
+  name: 'NamePreclaimTx',
   components: { Field, AeHash, ViewAndCopy },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

@@ -1,10 +1,14 @@
 <template>
-  <div>
-  </div>
+  <div />
 </template>
 <script>
 export default {
-  name: 'oracle-query-tx',
-  props: ['transaction']
+  name: 'OracleQueryTx',
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

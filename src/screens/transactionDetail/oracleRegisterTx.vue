@@ -1,10 +1,14 @@
 <template>
-  <div>
-  </div>
+  <div />
 </template>
 <script>
 export default {
-  name: 'oracle-register-tx',
-  props: ['transaction']
+  name: 'OracleRegisterTx',
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
