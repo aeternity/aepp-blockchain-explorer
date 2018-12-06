@@ -40,9 +40,9 @@
               v-if="generations[height-i+1]"
               class="height"
             >
-              <RouterLink :to="`/generation/${generations[height-i+1].keyBlock.height}`">
+              <router-link :to="`/generation/${generations[height-i+1].keyBlock.height}`">
                 {{ generations[height-i+1].keyBlock.height }}
-              </RouterLink>
+              </router-link>
             </div>
             <FillDummy v-else />
           </td>
@@ -99,9 +99,9 @@
               v-if="generations[height-i+1]"
               class="account-address"
             >
-              <RouterLink :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
+              <router-link :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
                 <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
-              </RouterLink>
+              </router-link>
             </span>
             <FillDummy v-else />
           </td>

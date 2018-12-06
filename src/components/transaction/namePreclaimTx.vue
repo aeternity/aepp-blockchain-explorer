@@ -2,9 +2,9 @@
   <div>
     <div class="grid">
       <Field name="account">
-        <RouterLink :to="&quot;/account/&quot; + transaction.tx.account">
+        <router-link :to="&quot;/account/&quot; + transaction.tx.account">
           <NamedAddress :address="transaction.tx.account" />
-        </RouterLink>
+        </router-link>
       </Field>
       <Field name="commitment">
         <AeHash

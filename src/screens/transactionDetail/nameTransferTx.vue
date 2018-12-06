@@ -14,12 +14,12 @@
       v-if="transaction.tx.recipientPubkey"
       name="recipientPubkey"
     >
-      <RouterLink :to="`/account/${transaction.tx.recipientPubkey}`">
+      <router-link :to="`/account/${transaction.tx.recipientPubkey}`">
         <NamedAddress
           :address="transaction.tx.recipientPubkey"
           size="short"
         />
-      </RouterLink>
+      </router-link>
       <ViewAndCopy :text="transaction.tx.recipientPubkey" />
     </Field>
   </div>

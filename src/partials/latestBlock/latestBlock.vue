@@ -33,9 +33,9 @@
               v-if="generation"
               class="field-value number"
             >
-              <RouterLink :to="`/generation/${height}`">
+              <router-link :to="`/generation/${height}`">
                 {{ height }}
-              </RouterLink>
+              </router-link>
             </div>
             <FillDummy v-else />
           </div>
@@ -77,12 +77,12 @@
               v-if="generation"
               class="field-value block-hash"
             >
-              <RouterLink :to="`/block/${generation.keyBlock.hash}`">
+              <router-link :to="`/block/${generation.keyBlock.hash}`">
                 <AeHash
                   :hash="generation.keyBlock.hash"
                   type="short"
                 />
-              </RouterLink>
+              </router-link>
             </div>
             <FillDummy v-else />
           </div>
@@ -94,9 +94,9 @@
               v-if="generation"
               class="field-value account-address"
             >
-              <RouterLink :to="`/account/${generation.keyBlock.beneficiary}`">
+              <router-link :to="`/account/${generation.keyBlock.beneficiary}`">
                 <NamedAddress :address="generation.keyBlock.beneficiary" />
-              </RouterLink>
+              </router-link>
             </div>
             <FillDummy v-else />
           </div>

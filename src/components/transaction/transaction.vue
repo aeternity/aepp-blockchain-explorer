@@ -32,12 +32,12 @@
       </Field>
       <Field name="block">
         <div class="number">
-          <RouterLink
+          <router-link
             v-if="transaction.blockHeight"
             :to="&quot;/block/&quot; + transaction.blockHeight"
           >
             {{ transaction.blockHeight }}
-          </RouterLink>
+          </router-link>
           <template v-else>
             n/a
           </template>
@@ -47,12 +47,12 @@
         v-if="transaction.hash"
         name="tx hash"
       >
-        <RouterLink :to="&quot;/tx/&quot; + transaction.hash">
+        <router-link :to="&quot;/tx/&quot; + transaction.hash">
           <AeHash
             :hash="transaction.hash"
             type="short"
           />
-        </RouterLink>
+        </router-link>
       </Field>
     </div>
     <div class="body">

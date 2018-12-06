@@ -4,12 +4,12 @@
       v-if="transaction.tx.ownerId"
       name="Account"
     >
-      <RouterLink :to="`/account/${transaction.tx.ownerId}`">
+      <router-link :to="`/account/${transaction.tx.ownerId}`">
         <NamedAddress
           :address="transaction.tx.ownerId"
           size="short"
         />
-      </RouterLink>
+      </router-link>
     </Field>
     <Field name="TTL">
       <div class="number">

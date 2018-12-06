@@ -20,9 +20,9 @@
               beneficiary
             </span>
             <span class="account-address">
-              <RouterLink :to="`/account/${block.beneficiary}`">
+              <router-link :to="`/account/${block.beneficiary}`">
                 {{ block.beneficiary | startAndEnd }}
-              </RouterLink>
+              </router-link>
             </span>
           </div>
           <div class="center">
@@ -104,9 +104,9 @@
               v-if="block.height"
               class="field-value block-hash"
             >
-              <RouterLink :to="`/block/${block.prevHash}`">
+              <router-link :to="`/block/${block.prevHash}`">
                 {{ block.prevHash | startAndEnd }}
-              </RouterLink>
+              </router-link>
             </div>
             <FillDummy v-else />
           </div>
@@ -115,15 +115,15 @@
           v-if="block.height"
           class="block-navigation grid"
         >
-          <RouterLink :to="`/block/${(block.height - 1)}`">
+          <router-link :to="`/block/${(block.height - 1)}`">
             prev: {{ block.height - 1 }}
-          </RouterLink>
-          <RouterLink
+          </router-link>
+          <router-link
             v-if="block.height"
             :to="`/block/${(block.height + 1)}`"
           >
             next: {{ block.height + 1 }}
-          </RouterLink>
+          </router-link>
         </div>
       </div>
       <div

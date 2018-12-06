@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="app-nav">
       <div class="inner">
-        <RouterLink
+        <router-link
           class="logo"
           to="/"
         >
@@ -10,27 +10,27 @@
           <span class="app-name">
             explorer
           </span>
-        </RouterLink>
+        </router-link>
         <div class="links">
-          <RouterLink
+          <router-link
             class="link"
             to="/"
           >
             Dashboard
-          </RouterLink>
-          <RouterLink
+          </router-link>
+          <router-link
             class="link"
             to="/generations"
           >
             Generations
-          </RouterLink>
-          <RouterLink
+          </router-link>
+          <router-link
             v-if="false"
             class="link"
             to="/tx"
           >
             Transactions
-          </RouterLink>
+          </router-link>
         </div>
         <div class="mobile-nav">
           <div class="pageName">
@@ -71,26 +71,26 @@
                     class="mobile-nav-fixed-main-links"
                     @click="isOpened = false"
                   >
-                    <RouterLink to="/">
+                    <router-link to="/">
                       Dashboard
-                    </RouterLink>
-                    <RouterLink to="/generations">
+                    </router-link>
+                    <router-link to="/generations">
                       Generations
-                    </RouterLink>
-                    <RouterLink to="/tx">
+                    </router-link>
+                    <router-link to="/tx">
                       Transactions
-                    </RouterLink>
+                    </router-link>
                   </div>
                   <div class="mobile-nav-fixed-secondary-links">
-                    <RouterLink to="/">
+                    <router-link to="/">
                       imprint
-                    </RouterLink>
-                    <RouterLink to="/">
+                    </router-link>
+                    <router-link to="/">
                       get started
-                    </RouterLink>
-                    <RouterLink to="/">
+                    </router-link>
+                    <router-link to="/">
                       aeternity.com
-                    </RouterLink>
+                    </router-link>
                   </div>
                   <SocialLinks
                     light
@@ -105,7 +105,7 @@
       </div>
     </nav>
     <main>
-      <RouterView />
+      <router-view />
     </main>
     <AeFooter />
     <NetworkName />
@@ -115,11 +115,11 @@
 <script>
 import AeFooter from './partials/footer/footer'
 import SocialLinks from './partials/socialLinks'
-import networkName from './components/networkName'
+import NetworkName from './components/networkName'
 
 export default {
   name: 'App',
-  components: { AeFooter, SocialLinks, networkName },
+  components: { AeFooter, SocialLinks, NetworkName },
   data () {
     return {
       isOpened: false,

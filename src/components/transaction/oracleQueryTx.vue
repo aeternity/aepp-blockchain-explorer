@@ -6,9 +6,9 @@
           Oracle
         </div>
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracle">
+          <router-link :to="&quot;/account/&quot; + transaction.tx.oracle">
             {{ transaction.tx.oracle | startAndEnd }}
-          </RouterLink>
+          </router-link>
         </div>
       </Field>
       <Field>
@@ -16,9 +16,9 @@
           sender
         </div>
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.sender">
+          <router-link :to="&quot;/account/&quot; + transaction.tx.sender">
             {{ transaction.tx.sender | startAndEnd }}
-          </RouterLink>
+          </router-link>
         </div>
       </Field>
     </div>

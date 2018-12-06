@@ -4,12 +4,12 @@
       v-if="transaction.tx.senderId"
       name="Sender"
     >
-      <RouterLink :to="`/account/${transaction.tx.senderId}`">
+      <router-link :to="`/account/${transaction.tx.senderId}`">
         <NamedAddress
           :address="transaction.tx.senderId"
           size="short"
         />
-      </RouterLink>
+      </router-link>
       <ViewAndCopy :text="transaction.tx.senderId" />
     </Field>
 
@@ -17,12 +17,12 @@
       v-if="transaction.tx.recipientId"
       name="Recipient"
     >
-      <RouterLink :to="`/account/${transaction.tx.recipientId}`">
+      <router-link :to="`/account/${transaction.tx.recipientId}`">
         <NamedAddress
           :address="transaction.tx.recipientId"
           size="short"
         />
-      </RouterLink>
+      </router-link>
       <ViewAndCopy :text="transaction.tx.recipientId" />
     </Field>
 

@@ -2,14 +2,14 @@
   <div>
     <div class="grid">
       <Field name="contract">
-        <RouterLink :to="&quot;/account/&quot; + transaction.tx.contract">
+        <router-link :to="&quot;/account/&quot; + transaction.tx.contract">
           <NamedAddress :address="transaction.tx.contract" />
-        </RouterLink>
+        </router-link>
       </Field>
       <Field name="caller">
-        <RouterLink :to="&quot;/account/&quot; + transaction.tx.caller">
+        <router-link :to="&quot;/account/&quot; + transaction.tx.caller">
           <NamedAddress :address="transaction.tx.caller" />
-        </RouterLink>
+        </router-link>
       </Field>
       <Field name="amount">
         <span class="number">

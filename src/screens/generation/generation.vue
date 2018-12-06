@@ -45,19 +45,19 @@
             </Field>
           </div>
           <nav class="gen-navigation grid">
-            <RouterLink
+            <router-link
               v-if="!isLoading"
               :to="`/generation/${(generation.keyBlock.height - 1)}`"
             >
               prev: {{ generation.keyBlock.height - 1 }}
-            </RouterLink>
+            </router-link>
             <FillDummy v-else />
-            <RouterLink
+            <router-link
               v-if="!isLoading"
               :to="`/generation/${(generation.keyBlock.height + 1)}`"
             >
               next: {{ generation.keyBlock.height + 1 }}
-            </RouterLink>
+            </router-link>
             <FillDummy v-else />
           </nav>
         </section>
@@ -67,7 +67,7 @@
         <section class="generation-header__section">
           <div class="basic-gen-info grid">
             <Field name="beneficiary">
-              <RouterLink
+              <router-link
                 v-if="!isLoading"
                 :to="`/account/${generation.keyBlock.beneficiary}`"
                 class="account-address"
@@ -76,7 +76,7 @@
                   :hash="generation.keyBlock.beneficiary"
                   type="short"
                 />
-              </RouterLink>
+              </router-link>
               <ViewAndCopy
                 v-if="!isLoading"
                 :text="generation.keyBlock.beneficiary"
@@ -97,7 +97,7 @@
               name="Hash"
               class="hash"
             >
-              <RouterLink
+              <router-link
                 v-if="!isLoading"
                 :to="`/block/${generation.keyBlock.hash}`"
               >
@@ -105,7 +105,7 @@
                   :hash="generation.keyBlock.hash"
                   type="short"
                 />
-              </RouterLink>
+              </router-link>
               <ViewAndCopy
                 v-if="!isLoading"
                 :text="generation.keyBlock.hash"
@@ -149,7 +149,7 @@
                 class="hash"
               >
                 <div class="field-value block-hash">
-                  <RouterLink
+                  <router-link
                     v-if="!isLoading"
                     :to="`/block/${generation.keyBlock.prevHash}`"
                   >
@@ -157,7 +157,7 @@
                       :hash="generation.keyBlock.prevHash"
                       type="short"
                     />
-                  </RouterLink>
+                  </router-link>
                   <ViewAndCopy
                     v-if="!isLoading"
                     :text="generation.keyBlock.prevHash"
@@ -221,12 +221,12 @@
                   name="hash"
                   class="hash"
                 >
-                  <RouterLink :to="`/block/${m.hash}`">
+                  <router-link :to="`/block/${m.hash}`">
                     <AeHash
                       :hash="m.hash"
                       type="short"
                     />
-                  </RouterLink>
+                  </router-link>
                   <ViewAndCopy :text="m.hash" />
                 </Field>
                 <Field
@@ -256,12 +256,12 @@
                   name="parent hash"
                   class="hash"
                 >
-                  <RouterLink :to="`/block/${m.prevHash}`">
+                  <router-link :to="`/block/${m.prevHash}`">
                     <AeHash
                       :hash="m.prevHash"
                       type="short"
                     />
-                  </RouterLink>
+                  </router-link>
                   <ViewAndCopy :text="m.prevHash" />
                 </Field>
               </div>

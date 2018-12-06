@@ -6,9 +6,9 @@
           account
         </span>
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.account">
+          <router-link :to="&quot;/account/&quot; + transaction.tx.account">
             <NamedAddress :address="transaction.tx.account" />
-          </RouterLink>
+          </router-link>
         </div>
       </Field>
       <Field name="">

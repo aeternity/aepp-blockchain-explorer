@@ -4,12 +4,12 @@
       v-if="transaction.tx.caller"
       name="Caller"
     >
-      <RouterLink :to="`/account/${transaction.tx.caller}`">
+      <router-link :to="`/account/${transaction.tx.caller}`">
         <NamedAddress
           :address="transaction.tx.caller"
           size="short"
         />
-      </RouterLink>
+      </router-link>
     </Field>
     <Field name="Gas">
       {{ transaction.tx.gas }}

@@ -49,12 +49,12 @@
               v-if="transaction.tx.account"
               name="Account"
             >
-              <RouterLink :to="`/account/${transaction.tx.account}`">
+              <router-link :to="`/account/${transaction.tx.account}`">
                 <NamedAddress
                   :address="transaction.tx.account"
                   size="short"
                 />
-              </RouterLink>
+              </router-link>
               <ViewAndCopy :text="transaction.tx.account" />
             </Field>
 

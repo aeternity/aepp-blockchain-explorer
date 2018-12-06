@@ -3,16 +3,16 @@
     <div class="grid">
       <Field name="sender">
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.senderId">
+          <router-link :to="&quot;/account/&quot; + transaction.tx.senderId">
             <NamedAddress :address="transaction.tx.senderId" />
-          </RouterLink>
+          </router-link>
         </div>
       </Field>
       <Field name="recipient">
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.recipientId">
+          <router-link :to="&quot;/account/&quot; + transaction.tx.recipientId">
             <NamedAddress :address="transaction.tx.recipientId" />
-          </RouterLink>
+          </router-link>
         </div>
       </Field>
       <Field name="amount">
