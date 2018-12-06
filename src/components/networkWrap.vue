@@ -1,14 +1,36 @@
 <template>
   <div>
-    <network-name @networks="showNetworkSwitcher" :name="networkName"/>
-    <ae-overlay class="custom-overlay" v-if="networkSwitcher"
-                @click="closeNetworkSwitcher()">
-      <div class="networks-wrap" >
+    <network-name
+      v-if="mode === ''"
+      @click="mode = 'switcher'"
+    />
+    <ae-overlay
+      v-else
+      class="custom-overlay"
+      @click="mode = ''"
+    >
+      <div class="networks-wrap">
         <div class="switcher-connection">
-          <network-switcher class="switcher" :networkList="networkList" @form="showForm" @networkName="showName"  v-if="!connectionForm && isDisplaying"></network-switcher>
-          <connection-form class="switcher-form"  @form="showForm" @networkName="showName"  v-if="connectionForm && isDisplaying"></connection-form>
-          <error-item class="error" :name="networkName" :isFormOpened="connectionForm" @network="showNetworkSwitcher"  @form="showForm" v-if="connectError"></error-item>
-          <loader-item :name="networkName" v-if="isLoading"></loader-item>
+          <network-switcher
+            v-if="mode === 'switcher'"
+            @select-network="changeNetwork"
+            @show-form="mode = 'form'"
+          />
+          <connection-form
+            v-if="mode === 'form'"
+            @select-network="changeNetwork"
+            @close="mode = 'switcher'"
+          />
+          <error-item
+            v-if="mode === 'error'"
+            :name="tryOutNetwork.name"
+            @try-again="changeNetwork(tryOutNetwork)"
+            @cancel="mode = 'switcher'"
+          />
+          <loader-item
+            v-if="mode === 'loader'"
+            :name="tryOutNetwork.name"
+          />
         </div>
       </div>
     </ae-overlay>
@@ -16,16 +38,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { AeOverlay } from '@aeternity/aepp-components-3'
 import NetworkSwitcher from '../components/networkSwitcher'
 import ConnectionForm from '../components/connectionForm'
-import networkName from '../components/networkName'
+import NetworkName from '../components/networkName'
 import LoaderItem from './loaderItem'
 import ErrorItem from './errorItem'
-import Networks from '../lib/networks'
-import {
-  AeOverlay
-} from '@aeternity/aepp-components-3'
 
 export default {
   name: 'network-wrap',
@@ -33,45 +51,48 @@ export default {
     NetworkSwitcher,
     ConnectionForm,
     AeOverlay,
-    networkName,
+    NetworkName,
     LoaderItem,
     ErrorItem
   },
   data () {
     return {
-      networkList: Networks,
-      networkSwitcher: false,
-      connectionForm: false,
-      networkName: ''
-    }
-  },
-  computed: {
-    ...mapState({
-      isLoading: 'loading',
-      connectError: 'error'
-    }),
-    isDisplaying () {
-      return !this.isLoading && !this.connectError
+      mode: '',
+      tryOutNetwork: null
     }
   },
   methods: {
-    showNetworkSwitcher (event) {
-      this.networkSwitcher = event
-    },
-    closeNetworkSwitcher () {
-      this.networkSwitcher = false
-      this.connectionForm = false
-      this.$store.commit('clearError')
-    },
-    showForm (event) {
-      this.connectionForm = event
-    },
-    showName (event) {
-      this.networkName = event
+    async changeNetwork (network) {
+      const initialUrl = this.$store.state.epochUrl
+      this.tryOutNetwork = network
+      const { name, url, isNew } = network
+      this.mode = 'loader'
+      this.$store.commit('changeNetworkUrl', url)
+      try {
+        await this.$store.getters.epochPromise
+        this.$store.commit('blocks/resetState')
+        this.$store.commit('accounts/resetState')
+        this.$store.commit('transactions/resetState')
+
+        await Promise.all([
+          this.$store.dispatch('blocks/height')
+            .then(() => this.$store.dispatch('blocks/getLatestGenerations', 10)),
+          this.$store.dispatch('getNodeStatus')
+        ])
+      } catch (e) {
+        this.mode = 'error'
+        this.$store.commit('changeNetworkUrl', initialUrl)
+        return
+      }
+      if (isNew) {
+        this.$store.commit('addNetwork', { name, url })
+      }
+      this.mode = ''
     }
   }
 }
 </script>
+
 <style scoped lang='scss'>
   @import '../../src/style/mixins';
   .custom-overlay.ae-overlay {

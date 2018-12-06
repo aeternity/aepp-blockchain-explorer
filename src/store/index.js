@@ -4,30 +4,38 @@ import modules from './modules'
 import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
 import createPersistedState from 'vuex-persistedstate'
 import { wrapActionsWithResolvedEpoch } from './utils'
+import networks from '../lib/networks'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   plugins: [
     createPersistedState({
-      paths: ['localNetworkList']
+      paths: ['epochUrl', 'customNetworks']
     })
   ],
   strict: process.env.NODE_ENV !== 'production',
 
   state: {
     $nodeStatus: {},
-    epochUrl: process.env.VUE_APP_EPOCH_URL,
-    error: '',
-    loading: false,
-    localNetworkList: []
+    epochUrl: process.env.VUE_APP_EPOCH_URL || networks[0].url,
+    customNetworks: []
   },
 
   getters: {
-    epochPromise ({ epochUrl }) {
+    networks ({ customNetworks }) {
+      return [...networks, ...customNetworks.map(network => ({ ...network, isCustom: true }))]
+    },
+    currentNetwork ({ epochUrl }, { networks }) {
+      return networks.find(({ url }) => url === epochUrl) || {
+        name: epochUrl,
+        url: epochUrl
+      }
+    },
+    epochPromise (state, { currentNetwork }) {
       return EpochChain({
-        url: epochUrl,
-        internalUrl: epochUrl
+        url: currentNetwork.url,
+        internalUrl: currentNetwork.url
       })
     }
   },
@@ -50,49 +58,20 @@ const store = new Vuex.Store({
       state.epochUrl = epochUrl
     },
     /**
-     * catchError
-     * @param state
-     * @param error
-     */
-    catchError (state, error) {
-      state.error = error
-    },
-    /**
-     * clearError
-     * @param state
-     */
-    clearError (state) {
-      state.error = ''
-    },
-    /**
-     * showLoading
-     * @param state
-     */
-    showLoading (state) {
-      state.loading = true
-    },
-    /**
-     * closeLoading
-     * @param state
-     */
-    closeLoading (state) {
-      state.loading = false
-    },
-    /**
-     * updateNetwork
+     * addNetwork
      * @param state
      * @param {Object} network
      */
-    updateNetwork (state, network) {
-      state.localNetworkList.push(network)
+    addNetwork (state, network) {
+      state.customNetworks.push(network)
     },
     /**
-     *  deleteNetwork
+     * removeNetwork
      * @param state
      * @param index
      */
-    deleteNetwork (state, index) {
-      state.localNetworkList.splice(index, 1)
+    removeNetwork (state, index) {
+      state.customNetworks.splice(index - networks.length, 1)
     }
   },
 
@@ -104,50 +83,14 @@ const store = new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ rootGetters: { epoch }, commit }) {
-      try {
-        const [top, version] = await Promise.all([
-          epoch.api.getCurrentGeneration(),
-          epoch.api.getStatus()
-        ])
+      const [top, version] = await Promise.all([
+        epoch.api.getCurrentGeneration(),
+        epoch.api.getStatus()
+      ])
 
-        commit('setNodeStatus', { top, version })
+      commit('setNodeStatus', { top, version })
 
-        return { top, version }
-      } catch (e) {
-        commit('catchError', 'Error', {root: true})
-      }
-    },
-    /**
-     * changeNetwork
-     * @param {Object} state
-     * @param {Function} commit
-     * @param {Function} dispatch
-     * @param {String} url
-     */
-    async changeNetwork ({state, commit, dispatch}, url) {
-      let currentUrl = state.epochUrl
-      commit('showLoading')
-      commit('changeNetworkUrl', url)
-      commit('blocks/resetState')
-      commit('accounts/resetState')
-      commit('transactions/resetState')
-
-      try {
-        await Promise.all([
-          dispatch('blocks/height'),
-          dispatch('getNodeStatus')
-        ])
-
-        dispatch('blocks/getLatestGenerations', 10)
-
-        commit('closeLoading')
-        commit('clearError')
-      } catch (err) {
-        commit('closeLoading')
-        commit('changeNetworkUrl', currentUrl)
-        commit('catchError', err)
-      }
-      console.log('rere')
+      return { top, version }
     }
   }),
 

@@ -1,28 +1,40 @@
 <template>
   <div class="connect-form">
-    <ae-panel title="Connect to" :closeHandler="showNetwork">
+    <ae-panel title="Connect to" :closeHandler="() => $emit('close')">
       <div class="connect-form__subtitle">
         other network
       </div>
-      <form @submit.prevent="seeChangedNetwork">
-        <ae-input label="Network Name"
-                  type="text"
-                  class="connect-form__input"
-                  v-model="netWorkData.name">
-        </ae-input>
-        <ae-input label="Network url"
-                  type="text"
-                  class="connect-form__input"
-                  v-model="netWorkData.url">
-        </ae-input>
-        <ae-button class="connect-form__btn" face="round" type="exciting" extend>Connect</ae-button>
+      <form
+        @submit.prevent="$emit('select-network', {
+          name: network.name.target.value,
+          url: network.url.target.value,
+          isNew: true
+        })"
+      >
+        <ae-input
+          label="Network Name"
+          type="text"
+          class="connect-form__input"
+          v-model="network.name"
+        />
+        <ae-input
+          label="Network url"
+          type="text"
+          class="connect-form__input"
+          v-model="network.url"
+        />
+        <ae-button
+          class="connect-form__btn"
+          face="round"
+          type="exciting"
+          extend
+        >Connect</ae-button>
       </form>
     </ae-panel>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import {
   AePanel,
   AeInput,
@@ -36,45 +48,14 @@ export default {
     AeInput,
     AeButton
   },
-  data: function () {
+  data () {
     return {
-      netWorkData: {
+      network: {
         name: '',
         url: ''
       }
     }
-  },
-  computed: {
-    ...mapState({
-      connectError: 'error'
-    })
-  },
-  methods: {
-    async changeNetwork () {
-      let name = this.netWorkData.name.target.value
-      this.$emit('networkName', name)
-      await this.$store.dispatch('changeNetwork', this.netWorkData.url.target.value)
-      if (!this.connectError) {
-        this.saveNetworkLocal()
-      }
-    },
-    seeChangedNetwork () {
-      this.changeNetwork()
-      this.showNetwork()
-    },
-    saveNetworkLocal () {
-      this.$store.commit('updateNetwork', {
-        name: this.netWorkData.name.target.value,
-        url: this.netWorkData.url.target.value,
-        isLocal: true
-      })
-      this.showNetwork()
-    },
-    showNetwork () {
-      this.$emit('form', false)
-    }
   }
-
 }
 </script>
 
