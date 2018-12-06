@@ -1,15 +1,17 @@
 <template>
   <div
     v-if="address"
-    class="named-address">
+    class="named-address"
+  >
     <template v-if="name">
       {{ name }}
     </template>
-    <ae-address
+    <AeAddress
       v-else
       :address="address"
       :show-avatar="false"
-      size="compact" />
+      size="compact"
+    />
   </div>
 </template>
 <script>

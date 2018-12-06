@@ -2,124 +2,159 @@
   <div class="transaction-detail-screen screen">
     <div class="inner">
       <div>
-        <h1 class="title">Transaction Detail</h1>
-        <h2 >
-          <span v-if="transaction">{{ transaction.tx.type | txTypeToName }}</span>
-          <fill-dummy
+        <h1 class="title">
+          Transaction Detail
+        </h1>
+        <h2>
+          <span v-if="transaction">
+            {{ transaction.tx.type | txTypeToName }}
+          </span>
+          <FillDummy
             v-else
             size="big"
-            color="grey"/>
+            color="grey"
+          />
         </h2>
         <div>
-
-          <field name="Type">
-            <ae-badge v-if="transaction">
+          <Field name="Type">
+            <AeBadge v-if="transaction">
               {{ transaction.tx.type | txTypeToName }}
-            </ae-badge>
-            <fill-dummy
+            </AeBadge>
+            <FillDummy
               v-else
-              color="grey"/>
-          </field>
+              color="grey"
+            />
+          </Field>
 
-          <field name="Hash">
-            <ae-hash
+          <Field name="Hash">
+            <AeHash
               v-if="transaction"
               :hash="transaction.hash"
-              type="short"/>
-            <view-and-copy
+              type="short"
+            />
+            <ViewAndCopy
               v-if="transaction"
-              :text="transaction.hash"/>
-            <fill-dummy
+              :text="transaction.hash"
+            />
+            <FillDummy
               v-else
-              color="grey"/>
-          </field>
+              color="grey"
+            />
+          </Field>
 
           <hr>
 
           <div v-if="transaction">
-            <field
+            <Field
               v-if="transaction.tx.account"
-              name="Account">
-              <router-link :to="`/account/${transaction.tx.account}`">
-                <named-address
+              name="Account"
+            >
+              <RouterLink :to="`/account/${transaction.tx.account}`">
+                <NamedAddress
                   :address="transaction.tx.account"
-                  size="short"/>
-              </router-link>
-              <view-and-copy :text="transaction.tx.account"/>
-            </field>
+                  size="short"
+                />
+              </RouterLink>
+              <ViewAndCopy :text="transaction.tx.account" />
+            </Field>
 
-            <component
-              v-if="transaction.tx.type"
+            <Component
               :is="transaction.tx.type"
+              v-if="transaction.tx.type"
               :transaction="transaction"
             />
 
-            <field
+            <Field
               v-if="transaction.tx.data_schema"
-              name="Data Schema">
+              name="Data Schema"
+            >
               {{ transaction.tx.data_schema }}
-            </field>
+            </Field>
 
-            <field
+            <Field
               v-if="transaction.tx.reward"
-              name="Reward">
+              name="Reward"
+            >
               {{ transaction.tx.reward }}
-            </field>
+            </Field>
 
             <hr>
 
-            <field
+            <Field
               v-if="transaction.tx.nonce"
-              name="Nonce">
+              name="Nonce"
+            >
               {{ transaction.tx.nonce }}
-            </field>
+            </Field>
 
-            <field
+            <Field
               v-if="transaction.tx.ttl"
-              name="TTL">
+              name="TTL"
+            >
               {{ transaction.tx.ttl }}
-            </field>
+            </Field>
 
-            <field
+            <Field
               v-if="transaction.tx.vsn"
-              name="Vsn">
+              name="Vsn"
+            >
               {{ transaction.tx.vsn }}
-            </field>
+            </Field>
 
             <div v-if="transaction.signatures">
               <h3>Signatures</h3>
-              <field
+              <Field
                 v-for="(signature, n) in transaction.signatures"
+                :key="n"
                 :name="n"
-                :key="n">
-                <ae-hash
+              >
+                <AeHash
                   :hash="signature"
-                  type="short" />
-                <view-and-copy :text="signature"/>
-              </field>
+                  type="short"
+                />
+                <ViewAndCopy :text="signature" />
+              </Field>
             </div>
           </div>
           <div v-else>
-            <div><fill-dummy color="grey"/></div>
-            <div><fill-dummy
-              color="grey"
-              size="big"/></div>
-            <div><fill-dummy
-              color="grey"
-              size="big"/></div>
-            <div><fill-dummy
-              color="grey"
-              size="big"/></div>
-            <div><fill-dummy color="grey"/></div>
-            <div><fill-dummy
-              color="grey"
-              size="big"/></div>
-            <div><fill-dummy
-              color="grey"
-              size="big"/></div>
-            <div><fill-dummy
-              color="grey"
-              size="big"/></div>
+            <div><FillDummy color="grey" /></div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div><FillDummy color="grey" /></div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
           </div>
         </div>
       </div>

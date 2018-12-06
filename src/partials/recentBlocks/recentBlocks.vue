@@ -6,45 +6,56 @@
       <table>
         <tr
           v-for="(generation, i) in generations"
-          :key="i">
+          :key="i"
+        >
           <td>
             <div
               v-if="generation"
-              class="block-number">
-              <router-link :to="&quot;/generation/&quot; + generation.keyBlock.height">
+              class="block-number"
+            >
+              <RouterLink :to="&quot;/generation/&quot; + generation.keyBlock.height">
                 {{ generation.keyBlock.height }}
-              </router-link>
+              </RouterLink>
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </td>
           <td>
-            <span class="field-name">Micro Blocks</span>
+            <span class="field-name">
+              Micro Blocks
+            </span>
             <span
               v-if="generation"
-              class="field-value number">
+              class="field-value number"
+            >
               {{ generation.microBlocksDetailed.length }}
             </span>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </td>
           <td>
-            <span class="field-name">Transactions</span>
+            <span class="field-name">
+              Transactions
+            </span>
             <span
               v-if="generation"
-              class="field-value number">
+              class="field-value number"
+            >
               {{ generation.numTransactions }}
             </span>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </td>
           <td>
-            <span class="field-name">beneficiary</span>
+            <span class="field-name">
+              beneficiary
+            </span>
             <span
               v-if="generation"
-              class="field-value account-address">
-              <router-link :to="&quot;/account/&quot; + generation.keyBlock.beneficiary">
-                <named-address :address="generation.keyBlock.beneficiary" />
-              </router-link>
+              class="field-value account-address"
+            >
+              <RouterLink :to="&quot;/account/&quot; + generation.keyBlock.beneficiary">
+                <NamedAddress :address="generation.keyBlock.beneficiary" />
+              </RouterLink>
             </span>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </td>
         </tr>
       </table>
@@ -58,7 +69,7 @@ import FillDummy from '../../components/fillDummy'
 import range from 'lodash/range'
 
 export default {
-  components: {NamedAddress, FillDummy},
+  components: { NamedAddress, FillDummy },
   computed:
     mapState('blocks', {
       generations (state) {

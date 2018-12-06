@@ -1,63 +1,70 @@
 <template>
   <div
     :class="transaction.tx.type"
-    class="transaction">
+    class="transaction"
+  >
     <div class="header">
-      <field>
-        <ae-badge>{{ transaction.tx.type | txTypeToName }}</ae-badge>
-      </field>
+      <Field>
+        <AeBadge>{{ transaction.tx.type | txTypeToName }}</AeBadge>
+      </Field>
 
-      <field
+      <Field
         v-if="transaction.tx.nonce"
-        name="nonce">
+        name="nonce"
+      >
         <div class="number">
           {{ transaction.tx.nonce }}
         </div>
-      </field>
+      </Field>
 
-      <field
+      <Field
         v-if="transaction.tx.fee"
-        name="fee">
+        name="fee"
+      >
         <div>
-          <span class="number">{{ transaction.tx.fee | yaniToAe }}</span>
-          <span class="unit">AE</span>
+          <span class="number">
+            {{ transaction.tx.fee | yaniToAe }}
+          </span>
+          <span class="unit">
+            AE
+          </span>
         </div>
-      </field>
-      <field name="block">
+      </Field>
+      <Field name="block">
         <div class="number">
-          <router-link
+          <RouterLink
             v-if="transaction.blockHeight"
-            :to="&quot;/block/&quot; + transaction.blockHeight">
+            :to="&quot;/block/&quot; + transaction.blockHeight"
+          >
             {{ transaction.blockHeight }}
-          </router-link>
+          </RouterLink>
           <template v-else>
             n/a
           </template>
         </div>
-      </field>
-      <field
+      </Field>
+      <Field
         v-if="transaction.hash"
-        name="tx hash">
-        <router-link :to="&quot;/tx/&quot; + transaction.hash">
-          <ae-hash
+        name="tx hash"
+      >
+        <RouterLink :to="&quot;/tx/&quot; + transaction.hash">
+          <AeHash
             :hash="transaction.hash"
-            type="short"/>
-        </router-link>
-      </field>
+            type="short"
+          />
+        </RouterLink>
+      </Field>
     </div>
     <div class="body">
-
-      <component
-        v-if="transaction.tx.type"
+      <Component
         :is="transaction.tx.type"
+        v-if="transaction.tx.type"
         :transaction="transaction"
       />
       <template v-else>
         {{ transaction }}
       </template>
-
     </div>
-
   </div>
 </template>
 <script>

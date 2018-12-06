@@ -6,7 +6,7 @@ export default {
    * @param state
    * @return {number}
    */
-  getAverageBlockTime: function ({generations}) {
+  getAverageBlockTime: function ({ generations }) {
     const blockTimes = []
     for (let key in generations) {
       if (generations.hasOwnProperty(key) && generations.hasOwnProperty(parseInt(key) + 1)) {

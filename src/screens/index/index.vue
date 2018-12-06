@@ -5,32 +5,37 @@
         <div>
           <img
             src="@/assets/logo.svg"
-            alt="">
+            alt=""
+          >
           <h1>Blockchain Explorer</h1>
           <p>Search the æternity network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
         </div>
         <div
           class="search"
-          @keyup.enter="search()">
+          @keyup.enter="search()"
+        >
           <input
             v-model="searchString"
             class="search-input"
             placeholder="Explore Generation, Block, Address"
-            type="text">
+            type="text"
+          >
           <button
             class="search-button"
-            @click="search">
+            @click="search"
+          >
             <img
               src="@/assets/search.svg"
-              alt="">
+              alt=""
+            >
           </button>
         </div>
       </div>
     </header>
 
-    <market-stats v-if="VUE_APP_SHOW_MARKET_STATS"/>
-    <latest-block />
-    <recent-blocks />
+    <MarketStats v-if="VUE_APP_SHOW_MARKET_STATS" />
+    <LatestBlock />
+    <RecentBlocks />
   </div>
 </template>
 

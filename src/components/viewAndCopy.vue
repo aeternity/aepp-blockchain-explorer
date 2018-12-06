@@ -1,23 +1,25 @@
 <template>
   <div class="view-and-copy">
-
-    <popper
+    <Popper
       :options="popperOptions"
-      trigger="click">
+      trigger="click"
+    >
       <div class="popper">
         <div class="inner">
           {{ text }}
         </div>
       </div>
-      <ae-button
+      <AeButton
         slot="reference"
         size="small"
-        plain>
-        <ae-icon
+        plain
+      >
+        <AeIcon
           slot="icon"
-          name="view"/>
-      </ae-button>
-    </popper>
+          name="view"
+        />
+      </AeButton>
+    </Popper>
 
     <textarea
       ref="text"
@@ -25,15 +27,18 @@
       rows="1"
       class="text"
       readonly
-      required />
-    <ae-button
+      required
+    />
+    <AeButton
       size="small"
       plain
-      @click.prevent="copy">
-      <ae-icon
+      @click.prevent="copy"
+    >
+      <AeIcon
         slot="icon"
-        name="copy"/>
-    </ae-button>
+        name="copy"
+      />
+    </AeButton>
   </div>
 </template>
 <script>

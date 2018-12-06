@@ -1,28 +1,36 @@
 <template>
   <div>
     <div class="grid">
-      <field
+      <Field
         v-if="transaction.tx.owner"
-        name="Account">
-        <router-link :to="`/account/${transaction.tx.owner}`">
-          <named-address
+        name="Account"
+      >
+        <RouterLink :to="`/account/${transaction.tx.owner}`">
+          <NamedAddress
             :address="transaction.tx.owner"
-            size="short"/>
-        </router-link>
-      </field>
-      <field name="TTL">
-        <div class="number">{{ transaction.tx.ttl }}</div>
-      </field>
-      <field name="Deposit">
-        <span class="number">{{ transaction.tx.deposit | yaniToAe }}</span>
-        <span class="unit">AE</span>
-      </field>
-      <field name="Gas">
+            size="short"
+          />
+        </RouterLink>
+      </Field>
+      <Field name="TTL">
+        <div class="number">
+          {{ transaction.tx.ttl }}
+        </div>
+      </Field>
+      <Field name="Deposit">
+        <span class="number">
+          {{ transaction.tx.deposit | yaniToAe }}
+        </span>
+        <span class="unit">
+          AE
+        </span>
+      </Field>
+      <Field name="Gas">
         {{ transaction.tx.gas }}
-      </field>
-      <field name="Gas price">
+      </Field>
+      <Field name="Gas price">
         {{ transaction.tx.gasPrice }}
-      </field>
+      </Field>
     </div>
   </div>
 </template>

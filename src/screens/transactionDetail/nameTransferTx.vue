@@ -1,23 +1,27 @@
 <template>
   <div>
-    <field
+    <Field
       v-if="transaction.tx.nameHash"
-      name="Name Hash">
-      <ae-hash
+      name="Name Hash"
+    >
+      <AeHash
         :hash="transaction.tx.nameHash"
-        type="short" />
-      <view-and-copy :text="transaction.tx.nameHash"/>
-    </field>
-    <field
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.nameHash" />
+    </Field>
+    <Field
       v-if="transaction.tx.recipientPubkey"
-      name="recipientPubkey">
-      <router-link :to="`/account/${transaction.tx.recipientPubkey}`">
-        <named-address
+      name="recipientPubkey"
+    >
+      <RouterLink :to="`/account/${transaction.tx.recipientPubkey}`">
+        <NamedAddress
           :address="transaction.tx.recipientPubkey"
-          size="short"/>
-      </router-link>
-      <view-and-copy :text="transaction.tx.recipientPubkey"/>
-    </field>
+          size="short"
+        />
+      </RouterLink>
+      <ViewAndCopy :text="transaction.tx.recipientPubkey" />
+    </Field>
   </div>
 </template>
 <script>

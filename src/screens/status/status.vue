@@ -3,26 +3,29 @@
     <div>
       <h2>Change Connected Network</h2>
       <form @submit.prevent="changeNetwork">
-        <ae-input
+        <AeInput
           v-model="newNetworkUrl"
           placeholder="Network to connect to: "
-          @keyup.enter="changeNetwork"/>
-        <ae-button
+          @keyup.enter="changeNetwork"
+        />
+        <AeButton
           type="exciting"
           size="medium"
         >
           connect
-        </ae-button>
+        </AeButton>
       </form>
       <template for="changing network">
         <h1>Status</h1>
-        <p>Explorer connected to:
-          <strong v-if="!isLoading">
-            {{ node }}
-          </strong>
-          <fill-dummy
-            v-else
-            color="grey"/>
+        <p>
+          Explorer connected to:
+                             <strong v-if="!isLoading">
+                               {{ node }}
+                             </strong>
+                             <FillDummy
+                               v-else
+                               color="grey"
+                             />
         </p>
         <h2>Node and Peers</h2>
         <table>
@@ -45,16 +48,20 @@
           <tr v-else>
             <td
               v-for="i in 6"
-              :key="i"><fill-dummy color="grey"/></td>
+              :key="i"
+            >
+              <FillDummy color="grey" />
+            </td>
           </tr>
         </table>
         <h1>Detail</h1>
         <h2 v-if="!isLoading">
           {{ node }}
         </h2>
-        <fill-dummy
+        <FillDummy
           color="grey"
-          size="big"/>
+          size="big"
+        />
         <h3>version</h3>
         <pre v-if="!isLoading">
           {{ nodeStatus.version }}
@@ -62,7 +69,10 @@
         <div v-else>
           <div
             v-for="i in 3"
-            :key="i"> <fill-dummy color="grey"/> </div>
+            :key="i"
+          >
+            <FillDummy color="grey" />
+          </div>
         </div>
 
         <h3>top</h3>
@@ -72,7 +82,10 @@
         <div v-else>
           <div
             v-for="i in 3"
-            :key="i"> <fill-dummy color="grey"/> </div>
+            :key="i"
+          >
+            <FillDummy color="grey" />
+          </div>
         </div>
       </template>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ae-loader />
+    <AeLoader />
   </div>
 </template>
 

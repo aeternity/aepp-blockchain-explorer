@@ -1,5 +1,7 @@
 <template>
-  <code class="code-view">{{ code }}</code>
+  <code class="code-view">
+    {{ code }}
+  </code>
 </template>
 
 <script>

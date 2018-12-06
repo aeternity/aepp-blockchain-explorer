@@ -1,22 +1,23 @@
 <template>
   <div>
     <div class="grid">
-      <field name="Account">
-        <router-link :to="&quot;/account/&quot; + transaction.tx.account">
-          <named-address :address="transaction.tx.account"/>
-        </router-link>
-      </field>
-      <field name="Name Hash">
-        <ae-hash
+      <Field name="Account">
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.account">
+          <NamedAddress :address="transaction.tx.account" />
+        </RouterLink>
+      </Field>
+      <Field name="Name Hash">
+        <AeHash
           :hash="transaction.tx.name_hash"
-          type="short"/>
-      </field>
-      <field name="Name TTL">
+          type="short"
+        />
+      </Field>
+      <Field name="Name TTL">
         {{ transaction.tx.name_ttl }}
-      </field>
-      <field name="TTL">
+      </Field>
+      <Field name="TTL">
         {{ transaction.tx.ttl }}
-      </field>
+      </Field>
     </div>
   </div>
 </template>

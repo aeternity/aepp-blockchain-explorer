@@ -1,5 +1,5 @@
 <template>
-  <ae-card class="loader-wrapper">
+  <AeCard class="loader-wrapper">
     <div class="loader-info">
       <div class="loader-info__name">
         {{ name }}
@@ -8,8 +8,8 @@
         Connecting...
       </div>
     </div>
-    <ae-loader/>
-  </ae-card>
+    <AeLoader />
+  </AeCard>
 </template>
 <script>
 import {

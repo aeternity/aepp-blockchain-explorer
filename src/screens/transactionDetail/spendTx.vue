@@ -1,34 +1,37 @@
 <template>
   <div>
-
-    <field
+    <Field
       v-if="transaction.tx.senderId"
-      name="Sender">
-      <router-link :to="`/account/${transaction.tx.senderId}`">
-        <named-address
+      name="Sender"
+    >
+      <RouterLink :to="`/account/${transaction.tx.senderId}`">
+        <NamedAddress
           :address="transaction.tx.senderId"
-          size="short"/>
-      </router-link>
-      <view-and-copy :text="transaction.tx.senderId"/>
-    </field>
+          size="short"
+        />
+      </RouterLink>
+      <ViewAndCopy :text="transaction.tx.senderId" />
+    </Field>
 
-    <field
+    <Field
       v-if="transaction.tx.recipientId"
-      name="Recipient">
-      <router-link :to="`/account/${transaction.tx.recipientId}`">
-        <named-address
+      name="Recipient"
+    >
+      <RouterLink :to="`/account/${transaction.tx.recipientId}`">
+        <NamedAddress
           :address="transaction.tx.recipientId"
-          size="short"/>
-      </router-link>
-      <view-and-copy :text="transaction.tx.recipientId"/>
-    </field>
+          size="short"
+        />
+      </RouterLink>
+      <ViewAndCopy :text="transaction.tx.recipientId" />
+    </Field>
 
-    <field
+    <Field
       v-if="transaction.tx.amount"
-      name="Amount">
+      name="Amount"
+    >
       {{ transaction.tx.amount | yaniToAe }} AE
-    </field>
-
+    </Field>
   </div>
 </template>
 <script>

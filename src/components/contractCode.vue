@@ -1,6 +1,6 @@
 <template>
   <div class="contract-code">
-    <ae-switch
+    <AeSwitch
       v-model="view"
       :choices="[
         { label: 'Base58c', value: 'base58c' },
@@ -9,7 +9,7 @@
       name="example"
       default="base58c"
     />
-    <code-view :code="code" />
+    <CodeView :code="code" />
   </div>
 </template>
 

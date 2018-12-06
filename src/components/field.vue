@@ -2,9 +2,12 @@
   <div class="field">
     <div
       v-if="name"
-      class="field-name">{{ name }}</div>
+      class="field-name"
+    >
+      {{ name }}
+    </div>
     <div class="field-value">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>

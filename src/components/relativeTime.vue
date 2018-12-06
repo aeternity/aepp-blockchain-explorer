@@ -1,15 +1,22 @@
 <template>
   <span
     :class="{ big, spaced }"
-    class="relative-time">
+    class="relative-time"
+  >
     <template v-for="(item, idx) in items">
       {{ idx ? ' ' : '' }}
       <span
         :key="`${item.unit}-number`"
-        class="number">{{ item.number }}</span>
+        class="number"
+      >
+        {{ item.number }}
+      </span>
       <span
         :key="item.unit"
-        class="unit">{{ item.unit }}</span>
+        class="unit"
+      >
+        {{ item.unit }}
+      </span>
     </template>
   </span>
 </template>

@@ -4,7 +4,8 @@
       is="router-link"
       v-if="VUE_APP_SHOW_NETWORK_STATS"
       to="/status/"
-      class="network-name">
+      class="network-name"
+    >
       {{ networkName }}
     </span>
   </div>

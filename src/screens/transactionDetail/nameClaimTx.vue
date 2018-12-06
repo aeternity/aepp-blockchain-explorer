@@ -1,15 +1,17 @@
 <template>
   <div>
-    <field
+    <Field
       v-if="transaction.tx.name"
-      name="Name">
+      name="Name"
+    >
       {{ transaction.tx.name }}
-    </field>
-    <field
+    </Field>
+    <Field
       v-if="transaction.tx.nameSalt"
-      name="Name Salt">
+      name="Name Salt"
+    >
       {{ transaction.tx.nameSalt }}
-    </field>
+    </Field>
   </div>
 </template>
 <script>

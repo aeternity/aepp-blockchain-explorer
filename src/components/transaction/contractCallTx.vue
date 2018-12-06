@@ -1,29 +1,33 @@
 <template>
   <div>
     <div class="grid">
-      <field name="contract">
-        <router-link :to="&quot;/account/&quot; + transaction.tx.contract">
-          <named-address :address="transaction.tx.contract"/>
-        </router-link>
-      </field>
-      <field name="caller">
-        <router-link :to="&quot;/account/&quot; + transaction.tx.caller">
-          <named-address :address="transaction.tx.caller"/>
-        </router-link>
-      </field>
-      <field name="amount">
-        <span class="number">{{ transaction.tx.amount | yaniToAe }}</span>
-        <span class="unit">AE</span>
-      </field>
-      <field name="gas">
+      <Field name="contract">
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.contract">
+          <NamedAddress :address="transaction.tx.contract" />
+        </RouterLink>
+      </Field>
+      <Field name="caller">
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.caller">
+          <NamedAddress :address="transaction.tx.caller" />
+        </RouterLink>
+      </Field>
+      <Field name="amount">
+        <span class="number">
+          {{ transaction.tx.amount | yaniToAe }}
+        </span>
+        <span class="unit">
+          AE
+        </span>
+      </Field>
+      <Field name="gas">
         {{ transaction.tx.gas }}
-      </field>
-      <field name="gasPrice">
+      </Field>
+      <Field name="gasPrice">
         {{ transaction.tx.gasPrice }}
-      </field>
-      <field name="ttl">
+      </Field>
+      <Field name="ttl">
         {{ transaction.tx.ttl }}
-      </field>
+      </Field>
     </div>
   </div>
 </template>

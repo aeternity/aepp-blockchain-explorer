@@ -1,29 +1,31 @@
 <template>
   <div>
-    <field
+    <Field
       v-if="transaction.tx.caller"
-      name="Caller">
-      <router-link :to="`/account/${transaction.tx.caller}`">
-        <named-address
+      name="Caller"
+    >
+      <RouterLink :to="`/account/${transaction.tx.caller}`">
+        <NamedAddress
           :address="transaction.tx.caller"
-          size="short"/>
-      </router-link>
-    </field>
-    <field name="Gas">
+          size="short"
+        />
+      </RouterLink>
+    </Field>
+    <Field name="Gas">
       {{ transaction.tx.gas }}
-    </field>
-    <field name="Gas price">
+    </Field>
+    <Field name="Gas price">
       {{ transaction.tx.gasPrice }}
-    </field>
-    <field name="Gas Used">
+    </Field>
+    <Field name="Gas Used">
       {{ transaction.tx.gas }}
-    </field>
-    <field name="VM Version">
-      <code-view :code="transaction.tx.vmVersion " />
-    </field>
-    <field name="Call Data">
-      <code-view :code="transaction.tx.callData " />
-    </field>
+    </Field>
+    <Field name="VM Version">
+      <CodeView :code="transaction.tx.vmVersion " />
+    </Field>
+    <Field name="Call Data">
+      <CodeView :code="transaction.tx.callData " />
+    </Field>
   </div>
 </template>
 <script>

@@ -1,34 +1,37 @@
 <template>
   <div>
-
-    <field
+    <Field
       v-if="transaction.tx.nameHash"
-      name="Name Hash">
-      <ae-hash
+      name="Name Hash"
+    >
+      <AeHash
         :hash="transaction.tx.nameHash"
-        type="short"/>
-      <view-and-copy :text="transaction.tx.nameHash" />
-    </field>
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.nameHash" />
+    </Field>
 
-    <field
+    <Field
       v-if="transaction.tx.nameTtl"
-      name="Name TTL">
+      name="Name TTL"
+    >
       {{ transaction.tx.nameTtl }}
-    </field>
+    </Field>
 
     <div v-if="transaction.tx.pointers">
       <h2>Pointers</h2>
-      <field
+      <Field
         v-for="(pointer, key) in transaction.tx.pointers"
+        :key="key"
         :name="`${key}`"
-        :key="key">
-        <ae-hash
+      >
+        <AeHash
           :hash="pointer"
-          type="short" />
-        <view-and-copy :text="pointer"/>
-      </field>
+          type="short"
+        />
+        <ViewAndCopy :text="pointer" />
+      </Field>
     </div>
-
   </div>
 </template>
 <script>

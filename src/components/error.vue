@@ -1,21 +1,28 @@
 <template>
-  <ae-card class="error-wrapper">
+  <AeCard class="error-wrapper">
     <div class="error-wrapper__message">
       Unable to connect to {{ name }}
     </div>
-    <ae-toolbar
+    <AeToolbar
       slot="footer"
-      class="error-actions">
-      <ae-button
+      class="error-actions"
+    >
+      <AeButton
         class="error-actions__btn"
         face="flat"
-        @click="backToForm()">try again</ae-button>
-      <ae-filter-separator/>
-      <ae-button
+        @click="backToForm()"
+      >
+        try again
+      </AeButton>
+      <AeFilterSeparator />
+      <AeButton
         class="error-actions__btn"
-        face="flat">cancel</ae-button>
-    </ae-toolbar>
-  </ae-card>
+        face="flat"
+      >
+        cancel
+      </AeButton>
+    </AeToolbar>
+  </AeCard>
 </template>
 <script>
 import {

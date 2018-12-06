@@ -1,43 +1,53 @@
 <template>
   <div class="account-screen screen">
-    <header class="header" >
+    <header class="header">
       <h1 class="title">
-        <ae-identity-avatar :address="account ? address : '0'"/>
-        <named-address
+        <AeIdentityAvatar :address="account ? address : '0'" />
+        <NamedAddress
           v-if="account"
-          :address="address"/>
-        <fill-dummy
+          :address="address"
+        />
+        <FillDummy
           v-else
           color="grey"
-          size="big"/>
+          size="big"
+        />
       </h1>
 
-      <field name="Balance">
+      <Field name="Balance">
         <span
           v-if="account"
-          class="number">{{ account.balance | yaniToAe }}</span>
-        <fill-dummy
+          class="number"
+        >
+          {{ account.balance | yaniToAe }}
+        </span>
+        <FillDummy
           v-else
           color="grey"
-          size="small"/>
-        <span class="unit">AE</span>
-      </field>
+          size="small"
+        />
+        <span class="unit">
+          AE
+        </span>
+      </Field>
 
-      <field
+      <Field
         class="pubkey"
-        name="Public Key">
+        name="Public Key"
+      >
         <div
           v-if="account"
-          class="account-public-key">
-          <ae-address :address="address"/>
+          class="account-public-key"
+        >
+          <AeAddress :address="address" />
         </div>
-        <fill-dummy
+        <FillDummy
           v-else
           color="grey"
-          size="big"/>
-      </field>
+          size="big"
+        />
+      </Field>
     </header>
-
   </div>
 </template>
 <script>

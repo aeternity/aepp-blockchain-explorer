@@ -1,48 +1,64 @@
 <template>
   <div>
     <div class="grid">
-      <field>
-        <div class="field-name">Oracle</div>
+      <Field>
+        <div class="field-name">
+          Oracle
+        </div>
         <div class="account-address">
-          <router-link :to="&quot;/account/&quot; + transaction.tx.oracle">
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracle">
             {{ transaction.tx.oracle | startAndEnd }}
-          </router-link>
+          </RouterLink>
         </div>
-      </field>
-      <field>
-        <div class="field-name">sender</div>
+      </Field>
+      <Field>
+        <div class="field-name">
+          sender
+        </div>
         <div class="account-address">
-          <router-link :to="&quot;/account/&quot; + transaction.tx.sender">
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.sender">
             {{ transaction.tx.sender | startAndEnd }}
-          </router-link>
+          </RouterLink>
         </div>
-      </field>
+      </Field>
     </div>
     <div class="grid">
-      <field>
-        <div class="field-name">QueryTTL</div>
+      <Field>
+        <div class="field-name">
+          QueryTTL
+        </div>
         {{ transaction.tx.query_ttl.type }}
         <span class="number">
           {{ transaction.tx.query_ttl.value }}
         </span>
-      </field>
-      <field>
-        <div class="field-name">ResponseTTL</div>
+      </Field>
+      <Field>
+        <div class="field-name">
+          ResponseTTL
+        </div>
         {{ transaction.tx.response_ttl.type }}
         <span class="number">
           {{ transaction.tx.response_ttl.value }}
         </span>
-      </field>
-      <field v-if="transaction.tx.query_fee">
-        <div class="field-name">QueryFee</div>
-        <span class="number">{{ transaction.tx.query_fee | yaniToAe }}</span>
-        <span class="unit">AE</span>
-      </field>
+      </Field>
+      <Field v-if="transaction.tx.query_fee">
+        <div class="field-name">
+          QueryFee
+        </div>
+        <span class="number">
+          {{ transaction.tx.query_fee | yaniToAe }}
+        </span>
+        <span class="unit">
+          AE
+        </span>
+      </Field>
     </div>
-    <field>
-      <div class="field-name">Query</div>
+    <Field>
+      <div class="field-name">
+        Query
+      </div>
       <pre class="query">{{ transaction.tx.query }}</pre>
-    </field>
+    </Field>
   </div>
 </template>
 <script>

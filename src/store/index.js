@@ -77,7 +77,7 @@ const store = new Vuex.Store({
 
         return { top, version }
       } catch (e) {
-        commit('catchError', 'Error', {root: true})
+        commit('catchError', 'Error', { root: true })
       }
     }
   }),

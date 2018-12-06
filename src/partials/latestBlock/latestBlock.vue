@@ -2,16 +2,24 @@
   <div class="latest-generation-partial">
     <div class="grid">
       <div class="explanation">
-        <h2 class="title">Latest Generation</h2>
+        <h2 class="title">
+          Latest Generation
+        </h2>
         <div class="buttons">
-          <ae-button
+          <AeButton
             :to="`/generation/${height}`"
             type="exciting"
-            size="small">view last</ae-button>
-          <ae-button
+            size="small"
+          >
+            view last
+          </AeButton>
+          <AeButton
             type="exciting"
             size="small"
-            to="/generations">view all</ae-button>
+            to="/generations"
+          >
+            view all
+          </AeButton>
         </div>
       </div>
       <div class="generation-data">
@@ -23,28 +31,37 @@
             </div>
             <div
               v-if="generation"
-              class="field-value number">
-              <router-link :to="`/generation/${height}`">{{ height }}</router-link>
+              class="field-value number"
+            >
+              <RouterLink :to="`/generation/${height}`">
+                {{ height }}
+              </RouterLink>
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </div>
           <div class="field">
-            <div class="field-name">Micro Blocks</div>
+            <div class="field-name">
+              Micro Blocks
+            </div>
             <div
               v-if="generation"
-              class="field-value number">
+              class="field-value number"
+            >
               {{ generation.microBlocksDetailed.length }}
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </div>
           <div class="field">
-            <div class="field-name">Transactions</div>
+            <div class="field-name">
+              Transactions
+            </div>
             <div
               v-if="generation"
-              class="field-value number">
+              class="field-value number"
+            >
               {{ generation.numTransactions }}
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </div>
         </div>
 
@@ -53,37 +70,47 @@
         </div>
         <div class="grid block-extended-info">
           <div class="field">
-            <div class="field-name">Hash</div>
+            <div class="field-name">
+              Hash
+            </div>
             <div
               v-if="generation"
-              class="field-value block-hash">
-              <router-link :to="`/block/${generation.keyBlock.hash}`">
-                <ae-hash
+              class="field-value block-hash"
+            >
+              <RouterLink :to="`/block/${generation.keyBlock.hash}`">
+                <AeHash
                   :hash="generation.keyBlock.hash"
-                  type="short"/>
-              </router-link>
+                  type="short"
+                />
+              </RouterLink>
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </div>
           <div class="field">
-            <div class="field-name">Mining beneficiary</div>
+            <div class="field-name">
+              Mining beneficiary
+            </div>
             <div
               v-if="generation"
-              class="field-value account-address">
-              <router-link :to="`/account/${generation.keyBlock.beneficiary}`">
-                <named-address :address="generation.keyBlock.beneficiary" />
-              </router-link>
+              class="field-value account-address"
+            >
+              <RouterLink :to="`/account/${generation.keyBlock.beneficiary}`">
+                <NamedAddress :address="generation.keyBlock.beneficiary" />
+              </RouterLink>
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </div>
           <div class="field">
-            <div class="field-name">Time since mined</div>
+            <div class="field-name">
+              Time since mined
+            </div>
             <div
               v-if="generation"
-              class="field-value number">
-              <relative-time :ts="currentTime - generation.keyBlock.time" />
+              class="field-value number"
+            >
+              <RelativeTime :ts="currentTime - generation.keyBlock.time" />
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </div>
         </div>
       </div>

@@ -1,24 +1,28 @@
 <template>
   <div>
     <div class="grid">
-      <field name="sender">
+      <Field name="sender">
         <div class="account-address">
-          <router-link :to="&quot;/account/&quot; + transaction.tx.senderId">
-            <named-address :address="transaction.tx.senderId"/>
-          </router-link>
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.senderId">
+            <NamedAddress :address="transaction.tx.senderId" />
+          </RouterLink>
         </div>
-      </field>
-      <field name="recipient">
+      </Field>
+      <Field name="recipient">
         <div class="account-address">
-          <router-link :to="&quot;/account/&quot; + transaction.tx.recipientId">
-            <named-address :address="transaction.tx.recipientId"/>
-          </router-link>
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.recipientId">
+            <NamedAddress :address="transaction.tx.recipientId" />
+          </RouterLink>
         </div>
-      </field>
-      <field name="amount">
-        <span class="number">{{ transaction.tx.amount | yaniToAe }}</span>
-        <span class="unit">AE</span>
-      </field>
+      </Field>
+      <Field name="amount">
+        <span class="number">
+          {{ transaction.tx.amount | yaniToAe }}
+        </span>
+        <span class="unit">
+          AE
+        </span>
+      </Field>
     </div>
   </div>
 </template>

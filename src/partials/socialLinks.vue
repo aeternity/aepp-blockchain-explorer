@@ -4,10 +4,12 @@
       v-for="link in links"
       :key="link.href"
       :href="link.href"
-      target="_blank">
+      target="_blank"
+    >
       <img
         :src="link.iconPath"
-        alt="" >
+        alt=""
+      >
       {{ link.name }}
     </a>
   </div>

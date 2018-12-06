@@ -6,22 +6,34 @@
           <img
             class="logo"
             src="@/assets/logo-extended.svg"
-            alt="" >
+            alt=""
+          >
         </div>
-        <p class="claim">Scalable smart contracts interfacing with real world data</p>
+        <p class="claim">
+          Scalable smart contracts interfacing with real world data
+        </p>
       </div>
       <div>
         <a
           href="https://aeternity.com/"
-          target="_blank">aeternity.com</a>
+          target="_blank"
+        >
+          aeternity.com
+        </a>
         <a
           href="https://www.aepps.com/imprint/"
-          target="_blank">Imprint</a>
+          target="_blank"
+        >
+          Imprint
+        </a>
         <a
           href="https://forum.aeternity.com/"
-          target="_blank">Forum</a>
+          target="_blank"
+        >
+          Forum
+        </a>
       </div>
-      <social-links />
+      <SocialLinks />
     </div>
   </footer>
 </template>

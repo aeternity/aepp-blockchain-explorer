@@ -2,99 +2,132 @@
   <div class="generation-list-screen screen">
     <div class="inner">
       <div class="grid">
-        <div class="title">Generations</div>
+        <div class="title">
+          Generations
+        </div>
         <div class="field average-block-time">
-          <span class="field-name">average rate 1 per </span>
-          <relative-time
+          <span class="field-name">
+            average rate 1 per
+          </span>
+          <RelativeTime
             :ts="getAverageBlockTime"
             big
-            spaced/>
+            spaced
+          />
         </div>
         <div>
-          <span class="field-name">last key block mined</span>
-          <relative-time
+          <span class="field-name">
+            last key block mined
+          </span>
+          <RelativeTime
             :ts="getLastMinedBlockTime(currentTime)"
             big
-            spaced/>
-          <span class="field-name">ago</span>
+            spaced
+          />
+          <span class="field-name">
+            ago
+          </span>
         </div>
       </div>
 
       <table class="transactions">
         <tr
           v-for="i in numGenerations"
-          :key="i">
+          :key="i"
+        >
           <td>
             <div
               v-if="generations[height-i+1]"
-              class="height">
-              <router-link :to="`/generation/${generations[height-i+1].keyBlock.height}`">
+              class="height"
+            >
+              <RouterLink :to="`/generation/${generations[height-i+1].keyBlock.height}`">
                 {{ generations[height-i+1].keyBlock.height }}
-              </router-link>
+              </RouterLink>
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </td>
           <td>
-            <span class="field-name">key-hash</span>
-            <span
-              v-if="generations[height-i+1]"
-              class="number">
-              <ae-hash
-                :hash="generations[height-i+1].keyBlock.hash"
-                type="short"/>
+            <span class="field-name">
+              key-hash
             </span>
-            <fill-dummy v-else/>
+            <span
+              v-if="generations[height-i+1]"
+              class="number"
+            >
+              <AeHash
+                :hash="generations[height-i+1].keyBlock.hash"
+                type="short"
+              />
+            </span>
+            <FillDummy v-else />
           </td>
           <td>
             <span
               v-if="generations[height-i+1]"
-              class="number">
+              class="number"
+            >
               {{ generations[height-i+1].microBlocksDetailed.length }}
             </span>
-            <fill-dummy
+            <FillDummy
               v-else
-              size="small"/>
-            <span class="field-name">Micro Blocks</span>
+              size="small"
+            />
+            <span class="field-name">
+              Micro Blocks
+            </span>
           </td>
           <td>
             <span
               v-if="generations[height-i+1]"
-              class="number">
+              class="number"
+            >
               {{ generations[height-i+1].numTransactions }}
             </span>
-            <fill-dummy
+            <FillDummy
               v-else
-              size="small"/>
-            <span class="field-name">Transaction(s)</span>
+              size="small"
+            />
+            <span class="field-name">
+              Transaction(s)
+            </span>
           </td>
           <td>
-            <span class="field-name">beneficiary</span>
+            <span class="field-name">
+              beneficiary
+            </span>
             <span
               v-if="generations[height-i+1]"
-              class="account-address">
-              <router-link :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
-                <named-address :address="generations[height-i+1].keyBlock.beneficiary"/>
-              </router-link>
+              class="account-address"
+            >
+              <RouterLink :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
+                <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
+              </RouterLink>
             </span>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </td>
           <td>
-            <span class="field-name">time</span>
+            <span class="field-name">
+              time
+            </span>
             <span
               v-if="generations[height-i+1]"
-              class="number">
-              <relative-time :ts="currentTime - generations[height-i+1].keyBlock.time"/>
+              class="number"
+            >
+              <RelativeTime :ts="currentTime - generations[height-i+1].keyBlock.time" />
             </span>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </td>
         </tr>
       </table>
       <div class="center">
-        <loader v-if="isLoadingMore" />
-        <ae-button
+        <Loader v-if="isLoadingMore" />
+        <AeButton
           v-else
           type="dramatic"
-          @click="loadMore">load more</ae-button>
+          @click="loadMore"
+        >
+          load more
+        </AeButton>
       </div>
     </div>
   </div>

@@ -4,124 +4,170 @@
       <div class="block-header">
         <div class="basic-block-info grid">
           <div class="center">
-            <span class="field-name">Block: </span>
+            <span class="field-name">
+              Block:
+            </span>
             <span
               v-if="block.height"
-              class="number">{{ block.height }}</span>
-            <fill-dummy v-else/>
+              class="number"
+            >
+              {{ block.height }}
+            </span>
+            <FillDummy v-else />
           </div>
           <div v-if="block.beneficiary">
-            <span class="field-name">beneficiary</span>
+            <span class="field-name">
+              beneficiary
+            </span>
             <span class="account-address">
-              <router-link :to="`/account/${block.beneficiary}`">
+              <RouterLink :to="`/account/${block.beneficiary}`">
                 {{ block.beneficiary | startAndEnd }}
-              </router-link>
+              </RouterLink>
             </span>
           </div>
           <div class="center">
-            <span class="field-name">time since mined: </span>
-            <relative-time
+            <span class="field-name">
+              time since mined:
+            </span>
+            <RelativeTime
               v-if="block.height"
               :ts="currentTime - block.time"
               number
-              spaced />
-            <fill-dummy v-else/>
+              spaced
+            />
+            <FillDummy v-else />
           </div>
         </div>
         <div class="detail-block-info">
           <div class="field hash">
-            <div class="field-name">Hash</div>
+            <div class="field-name">
+              Hash
+            </div>
             <div class="scroll">
               <div
                 v-if="block.height"
-                class="number">{{ block.hash }}</div>
-              <fill-dummy
+                class="number"
+              >
+                {{ block.hash }}
+              </div>
+              <FillDummy
                 v-else
                 color="grey"
-                size="big"/>
+                size="big"
+              />
             </div>
-
           </div>
           <div class="grid">
             <div class="field height">
-              <div class="field-name">Height</div>
+              <div class="field-name">
+                Height
+              </div>
               <div
                 v-if="block.height"
-                class="field-value number">{{ block.height }}</div>
-              <fill-dummy v-else/>
+                class="field-value number"
+              >
+                {{ block.height }}
+              </div>
+              <FillDummy v-else />
             </div>
             <div
               v-if="block.target"
-              class="field rewarded">
-              <div class="field-name">Target</div>
+              class="field rewarded"
+            >
+              <div class="field-name">
+                Target
+              </div>
               <div class="field-value number">
                 {{ block.target }}
               </div>
             </div>
             <div class="field time">
               <div class="field-name">
-                Time (<span class="number">{{ block.time }}</span>)
+                Time (<span class="number">
+                  {{ block.time }}
+                </span>)
               </div>
               <div
                 v-if="block.height"
-                class="field-value number">
+                class="field-value number"
+              >
                 {{ block.time | humanDate }}
               </div>
-              <fill-dummy v-else/>
+              <FillDummy v-else />
             </div>
           </div>
           <div class="field hash">
-            <div class="field-name">Parent Hash</div>
+            <div class="field-name">
+              Parent Hash
+            </div>
             <div
               v-if="block.height"
-              class="field-value block-hash">
-              <router-link :to="`/block/${block.prevHash}`">
+              class="field-value block-hash"
+            >
+              <RouterLink :to="`/block/${block.prevHash}`">
                 {{ block.prevHash | startAndEnd }}
-              </router-link>
+              </RouterLink>
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </div>
         </div>
         <div
           v-if="block.height"
-          class="block-navigation grid">
-          <router-link :to="`/block/${(block.height - 1)}`">
+          class="block-navigation grid"
+        >
+          <RouterLink :to="`/block/${(block.height - 1)}`">
             prev: {{ block.height - 1 }}
-          </router-link>
-          <router-link
+          </RouterLink>
+          <RouterLink
             v-if="block.height"
-            :to="`/block/${(block.height + 1)}`">
+            :to="`/block/${(block.height + 1)}`"
+          >
             next: {{ block.height + 1 }}
-          </router-link>
+          </RouterLink>
         </div>
       </div>
       <div
         v-if="!isKeyBlock"
-        class="block-transactions">
+        class="block-transactions"
+      >
         <h2
           v-if="block.height"
-          class="title">
-          <span class="number">{{ block.transactions.length }}</span> Transaction(s)
+          class="title"
+        >
+          <span class="number">
+            {{ block.transactions.length }}
+          </span> Transaction(s)
         </h2>
         <div v-else>
-          <div><fill-dummy color="grey"/></div>
-          <div><fill-dummy
-            color="grey"
-            size="big"/></div>
-          <div><fill-dummy
-            color="grey"
-            size="big"/></div>
-          <div><fill-dummy
-            color="grey"
-            size="big"/></div>
+          <div><FillDummy color="grey" /></div>
+          <div>
+            <FillDummy
+              color="grey"
+              size="big"
+            />
+          </div>
+          <div>
+            <FillDummy
+              color="grey"
+              size="big"
+            />
+          </div>
+          <div>
+            <FillDummy
+              color="grey"
+              size="big"
+            />
+          </div>
         </div>
         <div
           v-if="block.height"
-          class="transactions">
-          <transaction
+          class="transactions"
+        >
+          <Transaction
             v-for="t in block.transactions"
             :key="t.hash"
-            :transaction="t"/>
+            :transaction="t"
+          />
         </div>
       </div>
     </div>

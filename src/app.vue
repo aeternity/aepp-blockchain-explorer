@@ -2,29 +2,35 @@
   <div id="app">
     <nav class="app-nav">
       <div class="inner">
-        <router-link
+        <RouterLink
           class="logo"
-          to="/">
-          <img src="@/assets/header-logo.svg" >
-          <span class="app-name">explorer</span>
-        </router-link>
+          to="/"
+        >
+          <img src="@/assets/header-logo.svg">
+          <span class="app-name">
+            explorer
+          </span>
+        </RouterLink>
         <div class="links">
-          <router-link
+          <RouterLink
             class="link"
-            to="/">
+            to="/"
+          >
             Dashboard
-          </router-link>
-          <router-link
+          </RouterLink>
+          <RouterLink
             class="link"
-            to="/generations">
+            to="/generations"
+          >
             Generations
-          </router-link>
-          <router-link
+          </RouterLink>
+          <RouterLink
             v-if="false"
             class="link"
-            to="/tx">
+            to="/tx"
+          >
             Transactions
-          </router-link>
+          </RouterLink>
         </div>
         <div class="mobile-nav">
           <div class="pageName">
@@ -32,70 +38,77 @@
           </div>
           <div
             class="burger"
-            @click="toggleMenu">
+            @click="toggleMenu"
+          >
             <img
               src="@/assets/burger.svg"
-              alt="" >
+              alt=""
+            >
           </div>
-          <transition
+          <Transition
             name="custom-toggle-trans"
             enter-active-class="slide-in-top"
-            leave-active-class="slide-in-top-out">
+            leave-active-class="slide-in-top-out"
+          >
             <div
               v-if="isOpened"
-              class="mobile-nav-fixed">
+              class="mobile-nav-fixed"
+            >
               <div class="mobile-nav-fixed-holder">
                 <div class="inner">
                   <div
                     class="mobile-nav-fixed-action"
-                    @click="isOpened = false">
+                    @click="isOpened = false"
+                  >
                     <span>
                       <img
                         src="@/assets/close.svg"
-                        alt="" >
+                        alt=""
+                      >
                     </span>
                   </div>
                   <div
                     class="mobile-nav-fixed-main-links"
-                    @click="isOpened = false">
-                    <router-link to="/">
+                    @click="isOpened = false"
+                  >
+                    <RouterLink to="/">
                       Dashboard
-                    </router-link>
-                    <router-link to="/generations">
+                    </RouterLink>
+                    <RouterLink to="/generations">
                       Generations
-                    </router-link>
-                    <router-link to="/tx">
+                    </RouterLink>
+                    <RouterLink to="/tx">
                       Transactions
-                    </router-link>
+                    </RouterLink>
                   </div>
                   <div class="mobile-nav-fixed-secondary-links">
-                    <router-link to="/">
+                    <RouterLink to="/">
                       imprint
-                    </router-link>
-                    <router-link to="/">
+                    </RouterLink>
+                    <RouterLink to="/">
                       get started
-                    </router-link>
-                    <router-link to="/">
+                    </RouterLink>
+                    <RouterLink to="/">
                       aeternity.com
-                    </router-link>
+                    </RouterLink>
                   </div>
-                  <social-links
+                  <SocialLinks
                     light
-                    hide-names />
+                    hide-names
+                  />
                 </div>
               </div>
             </div>
-          </transition>
-
+          </Transition>
         </div>
         <div />
       </div>
     </nav>
     <main>
-      <router-view />
+      <RouterView />
     </main>
-    <ae-footer />
-    <network-name />
+    <AeFooter />
+    <NetworkName />
   </div>
 </template>
 

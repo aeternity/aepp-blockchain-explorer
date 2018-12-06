@@ -1,13 +1,15 @@
 <template>
   <div>
-    <field
+    <Field
       v-if="transaction.tx.commitment"
-      name="Commitment">
-      <ae-hash
+      name="Commitment"
+    >
+      <AeHash
         :hash="transaction.tx.commitment"
-        type="short" />
-      <view-and-copy :text="transaction.tx.commitment"/>
-    </field>
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.commitment" />
+    </Field>
   </div>
 </template>
 <script>
