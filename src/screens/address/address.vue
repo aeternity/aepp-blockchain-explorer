@@ -52,7 +52,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import { AeAddress, AeIdentityAvatar, AePanel } from '@aeternity/aepp-components'
+import { AeAddress, AeIdentityAvatar } from '@aeternity/aepp-components'
 import pollAction from '../../mixins/pollAction'
 import NamedAddress from '../../components/namedAddress'
 import Field from '../../components/field'
@@ -64,7 +64,6 @@ export default {
   components: {
     AeAddress,
     AeIdentityAvatar,
-    AePanel,
     NamedAddress,
     Field,
     FillDummy

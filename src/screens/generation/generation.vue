@@ -292,14 +292,12 @@
 
 <script>
 import { mapState } from 'vuex'
-import { AePanel } from '@aeternity/aepp-components'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
 import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
-import Loader from '../../components/loader'
 import FillDummy from '../../components/fillDummy'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
@@ -307,7 +305,7 @@ const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
   name: 'Generation',
-  components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader, FillDummy },
+  components: { RelativeTime, Transaction, Field, AeHash, ViewAndCopy, FillDummy },
   mixins: [currentTime],
   props: {
     generationId: {
