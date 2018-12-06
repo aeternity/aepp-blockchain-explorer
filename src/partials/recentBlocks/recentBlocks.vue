@@ -4,37 +4,58 @@
       <h2>Recent generations</h2>
       <p>View the latest generations on the aeternity blockchain</p>
       <table>
-        <tr v-for='(generation, i) in generations' :key="i">
+        <tr
+          v-for="(generation, i) in generations"
+          :key="i"
+        >
           <td>
-            <div class="block-number" v-if="generation">
-              <router-link :to='"/generation/" + generation.keyBlock.height'>
-                {{generation.keyBlock.height}}
-              </router-link>
+            <div
+              v-if="generation"
+              class="block-number"
+            >
+              <RouterLink :to="&quot;/generation/&quot; + generation.keyBlock.height">
+                {{ generation.keyBlock.height }}
+              </RouterLink>
             </div>
-            <fill-dummy v-else/>
+            <FillDummy v-else />
           </td>
           <td>
-            <span class='field-name'>Micro Blocks</span>
-            <span class='field-value number' v-if="generation">
-              {{generation.microBlocksDetailed.length}}
+            <span class="field-name">
+              Micro Blocks
             </span>
-            <fill-dummy v-else/>
+            <span
+              v-if="generation"
+              class="field-value number"
+            >
+              {{ generation.microBlocksDetailed.length }}
+            </span>
+            <FillDummy v-else />
           </td>
           <td>
-            <span class='field-name'>Transactions</span>
-            <span class='field-value number' v-if="generation">
-              {{generation.numTransactions}}
+            <span class="field-name">
+              Transactions
             </span>
-            <fill-dummy v-else/>
+            <span
+              v-if="generation"
+              class="field-value number"
+            >
+              {{ generation.numTransactions }}
+            </span>
+            <FillDummy v-else />
           </td>
           <td>
-            <span class='field-name'>mining beneficiary</span>
-            <span class="field-value account-address" v-if="generation">
-              <router-link :to='"/account/" + generation.keyBlock.beneficiary'>
-                <named-address :address='generation.keyBlock.beneficiary' />
-              </router-link>
+            <span class="field-name">
+              beneficiary
             </span>
-            <fill-dummy v-else/>
+            <span
+              v-if="generation"
+              class="field-value account-address"
+            >
+              <RouterLink :to="&quot;/account/&quot; + generation.keyBlock.beneficiary">
+                <NamedAddress :address="generation.keyBlock.beneficiary" />
+              </RouterLink>
+            </span>
+            <FillDummy v-else />
           </td>
         </tr>
       </table>
@@ -48,7 +69,7 @@ import FillDummy from '../../components/fillDummy'
 import range from 'lodash/range'
 
 export default {
-  components: {NamedAddress, FillDummy},
+  components: { NamedAddress, FillDummy },
   computed:
     mapState('blocks', {
       generations (state) {

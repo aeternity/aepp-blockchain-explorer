@@ -1,15 +1,15 @@
 <template>
-  <ae-card class="loader-wrapper">
+  <AeCard class="loader-wrapper">
     <div class="loader-info">
       <div class="loader-info__name">
-        {{name}}
+        {{ name }}
       </div>
       <div class="loader-info__url">
         Connecting...
       </div>
     </div>
-    <ae-loader/>
-  </ae-card>
+    <AeLoader />
+  </AeCard>
 </template>
 <script>
 import {
@@ -18,11 +18,16 @@ import {
 } from '@aeternity/aepp-components-3'
 
 export default {
-  name: 'loader-item',
-  props: ['name'],
+  name: 'LoaderItem',
   components: {
     AeCard,
     AeLoader
+  },
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
   }
 }
 </script>

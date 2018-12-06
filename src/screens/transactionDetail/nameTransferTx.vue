@@ -1,15 +1,27 @@
 <template>
   <div>
-    <field v-if='transaction.tx.nameHash' name="Name Hash">
-      <ae-hash type='short' :hash="transaction.tx.nameHash" />
-      <view-and-copy :text='transaction.tx.nameHash'/>
-    </field>
-    <field v-if='transaction.tx.recipientPubkey' name="recipientPubkey">
-      <router-link :to='`/account/${transaction.tx.recipientPubkey}`'>
-        <named-address size='short' :address='transaction.tx.recipientPubkey'/>
-      </router-link>
-      <view-and-copy :text='transaction.tx.recipientPubkey'/>
-    </field>
+    <Field
+      v-if="transaction.tx.nameHash"
+      name="Name Hash"
+    >
+      <AeHash
+        :hash="transaction.tx.nameHash"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.nameHash" />
+    </Field>
+    <Field
+      v-if="transaction.tx.recipientPubkey"
+      name="recipientPubkey"
+    >
+      <RouterLink :to="`/account/${transaction.tx.recipientPubkey}`">
+        <NamedAddress
+          :address="transaction.tx.recipientPubkey"
+          size="short"
+        />
+      </RouterLink>
+      <ViewAndCopy :text="transaction.tx.recipientPubkey" />
+    </Field>
   </div>
 </template>
 <script>
@@ -19,8 +31,13 @@ import ViewAndCopy from '../../components/viewAndCopy'
 import NamedAddress from '../../components/namedAddress'
 
 export default {
-  name: 'name-transfer-tx',
+  name: 'NameTransferTx',
   components: { Field, AeHash, ViewAndCopy, NamedAddress },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

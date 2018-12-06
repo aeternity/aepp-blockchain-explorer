@@ -22,7 +22,7 @@ export default wrapActionsWithResolvedEpoch({
 
       return height
     } catch (e) {
-      commit('catchError', 'Error', {root: true})
+      commit('catchError', 'Error', { root: true })
     }
   },
 
@@ -172,7 +172,7 @@ export default wrapActionsWithResolvedEpoch({
       }
       return generations
     } catch (e) {
-      commit('catchError', 'Error', {root: true})
+      commit('catchError', 'Error', { root: true })
     }
   }
 })

@@ -1,11 +1,18 @@
 <template>
-  <code class="code-view">{{ code }}</code>
+  <code class="code-view">
+    {{ code }}
+  </code>
 </template>
 
 <script>
 export default {
-  name: 'code-view',
-  props: ['code']
+  name: 'CodeView',
+  props: {
+    code: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 

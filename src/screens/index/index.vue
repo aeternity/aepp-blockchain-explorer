@@ -1,24 +1,41 @@
 <template>
-  <div class='index-screen screen'>
+  <div class="index-screen screen">
     <header>
       <div class="grid">
         <div>
-          <img src="@/assets/logo.svg" alt=""/>
+          <img
+            src="@/assets/logo.svg"
+            alt=""
+          >
           <h1>Blockchain Explorer</h1>
           <p>Search the æternity network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
         </div>
-        <div class='search' v-on:keyup.enter='search()'>
-          <input class='search-input' placeholder='Explore Generation, Block, Address' v-model='searchString' type="text">
-          <button class='search-button' @click='search'>
-            <img src="@/assets/search.svg" alt=""/>
-            </button>
+        <div
+          class="search"
+          @keyup.enter="search()"
+        >
+          <input
+            v-model="searchString"
+            class="search-input"
+            placeholder="Explore Generation, Block, Address"
+            type="text"
+          >
+          <button
+            class="search-button"
+            @click="search"
+          >
+            <img
+              src="@/assets/search.svg"
+              alt=""
+            >
+          </button>
         </div>
       </div>
     </header>
 
-    <market-stats v-if='VUE_APP_SHOW_MARKET_STATS'/>
-    <latest-block />
-    <recent-blocks />
+    <MarketStats v-if="VUE_APP_SHOW_MARKET_STATS" />
+    <LatestBlock />
+    <RecentBlocks />
   </div>
 </template>
 
@@ -35,13 +52,13 @@ const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
   components: { MarketStats, LatestBlock, RecentBlocks },
-  data: function () {
+  mixins: [pollAction('blocks/getLatestGenerations', 4)],
+  data () {
     return {
       searchString: '',
       VUE_APP_SHOW_MARKET_STATS: process.env.VUE_APP_SHOW_MARKET_STATS
     }
   },
-  mixins: [pollAction('blocks/getLatestGenerations', 4)],
   methods: {
     async search () {
       if (blockHeightRegex.test(this.searchString)) {

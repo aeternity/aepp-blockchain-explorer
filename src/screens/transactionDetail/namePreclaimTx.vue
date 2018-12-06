@@ -1,14 +1,23 @@
 <template>
   <div>
-    <field name="account">
-      <router-link :to='"/account/" + transaction.tx.accountId'>
-        <named-address :address='transaction.tx.accountId'/>
-      </router-link>
-    </field>
-    <field v-if='transaction.tx.commitmentId' name="Commitment">
-      <ae-hash type='short' :hash="transaction.tx.commitmentId" />
-      <view-and-copy :text='transaction.tx.commitmentId'/>
-    </field>
+    <Field
+      v-if="transaction.tx.accountId"
+      name="Account"
+    >
+      <RouterLink :to="&quot;/account/&quot; + transaction.tx.accountId">
+        <NamedAddress :address='transaction.tx.accountId'/>
+      </RouterLink>
+    </Field>
+    <Field
+      v-if="transaction.tx.commitmentId"
+      name="Commitment"
+    >
+      <AeHash
+        :hash="transaction.tx.commitmentId"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.commitmentId" />
+    </Field>
   </div>
 </template>
 <script>
@@ -18,8 +27,13 @@ import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
 
 export default {
-  name: 'name-preclaim-tx',
+  name: 'NamePreclaimTx',
   components: { Field, AeHash, NamedAddress, ViewAndCopy },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

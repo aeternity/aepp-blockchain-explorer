@@ -1,30 +1,42 @@
 <template>
   <div>
-      <field v-if='transaction.tx.ownerId' name="Account">
-        <router-link :to='`/account/${transaction.tx.ownerId}`'>
-          <named-address size='short' :address='transaction.tx.ownerId'/>
-        </router-link>
-      </field>
-      <field name="TTL">
-        <div class="number">{{transaction.tx.ttl}}</div>
-      </field>
-      <field name="Deposit">
-        <span class='number'>{{transaction.tx.deposit | yaniToAe}}</span>
-        <span class="unit">AE</span>
-      </field>
-      <field name="Gas">
-        {{transaction.tx.gas}}
-      </field>
-      <field name="Gas price">
-        {{transaction.tx.gasPrice}}
-      </field>
+    <Field
+      v-if="transaction.tx.ownerId"
+      name="Account"
+    >
+      <RouterLink :to="`/account/${transaction.tx.ownerId}`">
+        <NamedAddress
+          :address="transaction.tx.ownerId"
+          size="short"
+        />
+      </RouterLink>
+    </Field>
+    <Field name="TTL">
+      <div class="number">
+        {{ transaction.tx.ttl }}
+      </div>
+    </Field>
+    <Field name="Deposit">
+      <span class="number">
+        {{ transaction.tx.deposit | yaniToAe }}
+      </span>
+      <span class="unit">
+        AE
+      </span>
+    </Field>
+    <Field name="Gas">
+      {{ transaction.tx.gas }}
+    </Field>
+    <Field name="Gas price">
+      {{ transaction.tx.gasPrice }}
+    </Field>
 
-      <field name="Contract Code">
-        <contract-code :contract-code='transaction.tx.code'/>
-      </field>
-      <field name="Call Data">
-        <code-view :code="transaction.tx.callData " />
-      </field>
+    <Field name="Contract Code">
+      <ContractCode :contract-code="transaction.tx.code" />
+    </Field>
+    <Field name="Call Data">
+      <CodeView :code="transaction.tx.callData " />
+    </Field>
   </div>
 </template>
 <script>
@@ -34,13 +46,18 @@ import Field from '../../components/field.vue'
 import NamedAddress from '../../components/namedAddress.vue'
 
 export default {
-  name: 'contract-create-tx',
-  props: ['transaction'],
+  name: 'ContractCreateTx',
   components: {
     CodeView,
     ContractCode,
     Field,
     NamedAddress
+  },
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>
