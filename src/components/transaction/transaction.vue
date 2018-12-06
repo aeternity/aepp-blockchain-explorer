@@ -1,25 +1,33 @@
 <template>
-  <div :class='transaction.tx.type' class='transaction'>
+  <div
+    :class="transaction.tx.type"
+    class="transaction">
     <div class="header">
       <field>
         <ae-badge>{{ transaction.tx.type | txTypeToName }}</ae-badge>
       </field>
 
-      <field name='nonce' v-if='transaction.tx.nonce'>
+      <field
+        v-if="transaction.tx.nonce"
+        name="nonce">
         <div class="number">
           {{ transaction.tx.nonce }}
         </div>
       </field>
 
-      <field name='fee' v-if='transaction.tx.fee'>
+      <field
+        v-if="transaction.tx.fee"
+        name="fee">
         <div>
-          <span class='number'>{{transaction.tx.fee | yaniToAe}}</span>
+          <span class="number">{{ transaction.tx.fee | yaniToAe }}</span>
           <span class="unit">AE</span>
         </div>
       </field>
-      <field name='block'>
-        <div class='number'>
-          <router-link v-if='transaction.blockHeight' :to='"/block/" + transaction.blockHeight'>
+      <field name="block">
+        <div class="number">
+          <router-link
+            v-if="transaction.blockHeight"
+            :to="&quot;/block/&quot; + transaction.blockHeight">
             {{ transaction.blockHeight }}
           </router-link>
           <template v-else>
@@ -27,13 +35,17 @@
           </template>
         </div>
       </field>
-      <field v-if='transaction.hash' name='tx hash'>
-        <router-link :to='"/tx/" + transaction.hash'>
-          <ae-hash type="short" :hash='transaction.hash'/>
+      <field
+        v-if="transaction.hash"
+        name="tx hash">
+        <router-link :to="&quot;/tx/&quot; + transaction.hash">
+          <ae-hash
+            :hash="transaction.hash"
+            type="short"/>
         </router-link>
       </field>
     </div>
-    <div class='body'>
+    <div class="body">
 
       <component
         v-if="transaction.tx.type"
@@ -41,7 +53,7 @@
         :transaction="transaction"
       />
       <template v-else>
-        {{transaction}}
+        {{ transaction }}
       </template>
 
     </div>
@@ -66,10 +78,7 @@ import ContractCallTx from './contractCallTx.vue'
 import ContractCreateTx from './contractCreateTx.vue'
 
 export default {
-  name: 'transaction',
-  props: [
-    'transaction'
-  ],
+  name: 'Transaction',
   components: {
     AeBadge,
     NamedAddress,
@@ -86,6 +95,9 @@ export default {
     ContractCreateTx
   },
   filters: { txTypeToName },
+  props: [
+    'transaction'
+  ],
   computed: {
     responsePrettyJson () {
       if (!this.transaction) return null

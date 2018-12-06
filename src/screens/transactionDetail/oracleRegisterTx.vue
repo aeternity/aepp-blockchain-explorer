@@ -1,10 +1,9 @@
 <template>
-  <div>
-  </div>
+  <div/>
 </template>
 <script>
 export default {
-  name: 'oracle-register-tx',
+  name: 'OracleRegisterTx',
   props: ['transaction']
 }
 </script>

@@ -3,7 +3,10 @@
     <div>
       <h2>Change Connected Network</h2>
       <form @submit.prevent="changeNetwork">
-        <ae-input placeholder="Network to connect to: " v-model="newNetworkUrl" @keyup.enter="changeNetwork"/>
+        <ae-input
+          v-model="newNetworkUrl"
+          placeholder="Network to connect to: "
+          @keyup.enter="changeNetwork"/>
         <ae-button
           type="exciting"
           size="medium"
@@ -17,7 +20,9 @@
           <strong v-if="!isLoading">
             {{ node }}
           </strong>
-          <fill-dummy color="grey" v-else/>
+          <fill-dummy
+            v-else
+            color="grey"/>
         </p>
         <h2>Node and Peers</h2>
         <table>
@@ -38,20 +43,26 @@
             <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
           </tr>
           <tr v-else>
-            <td v-for="i in 6" :key="i"><fill-dummy color="grey"/></td>
+            <td
+              v-for="i in 6"
+              :key="i"><fill-dummy color="grey"/></td>
           </tr>
         </table>
         <h1>Detail</h1>
         <h2 v-if="!isLoading">
           {{ node }}
         </h2>
-        <fill-dummy color="grey" size="big"/>
+        <fill-dummy
+          color="grey"
+          size="big"/>
         <h3>version</h3>
         <pre v-if="!isLoading">
           {{ nodeStatus.version }}
         </pre>
         <div v-else>
-          <div v-for="i in 3" :key="i"> <fill-dummy color="grey"/> </div>
+          <div
+            v-for="i in 3"
+            :key="i"> <fill-dummy color="grey"/> </div>
         </div>
 
         <h3>top</h3>
@@ -59,7 +70,9 @@
           {{ nodeStatus.top }}
         </pre>
         <div v-else>
-          <div v-for="i in 3" :key="i"> <fill-dummy color="grey"/> </div>
+          <div
+            v-for="i in 3"
+            :key="i"> <fill-dummy color="grey"/> </div>
         </div>
       </template>
     </div>

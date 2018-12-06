@@ -1,19 +1,21 @@
 <template>
   <div>
     <div class="grid">
-      <field name='Account'>
-        <router-link :to='"/account/" + transaction.tx.account'>
-          <named-address :address='transaction.tx.account'/>
+      <field name="Account">
+        <router-link :to="&quot;/account/&quot; + transaction.tx.account">
+          <named-address :address="transaction.tx.account"/>
         </router-link>
       </field>
-      <field name='Name Hash'>
-        <ae-hash type="short" :hash='transaction.tx.name_hash'/>
+      <field name="Name Hash">
+        <ae-hash
+          :hash="transaction.tx.name_hash"
+          type="short"/>
       </field>
       <field name="Name TTL">
-        {{transaction.tx.name_ttl}}
+        {{ transaction.tx.name_ttl }}
       </field>
       <field name="TTL">
-        {{transaction.tx.ttl}}
+        {{ transaction.tx.ttl }}
       </field>
     </div>
   </div>
@@ -24,7 +26,7 @@ import NamedAddress from '../namedAddress'
 import AeHash from '../aeHash'
 
 export default {
-  name: 'name-update-tx',
+  name: 'NameUpdateTx',
   components: { Field, NamedAddress, AeHash },
   props: [
     'transaction'

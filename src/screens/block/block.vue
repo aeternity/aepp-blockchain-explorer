@@ -5,7 +5,9 @@
         <div class="basic-block-info grid">
           <div class="center">
             <span class="field-name">Block: </span>
-            <span class="number" v-if="block.height">{{ block.height }}</span>
+            <span
+              v-if="block.height"
+              class="number">{{ block.height }}</span>
             <fill-dummy v-else/>
           </div>
           <div v-if="block.beneficiary">
@@ -18,7 +20,11 @@
           </div>
           <div class="center">
             <span class="field-name">time since mined: </span>
-            <relative-time :ts="currentTime - block.time" number spaced v-if="block.height" />
+            <relative-time
+              v-if="block.height"
+              :ts="currentTime - block.time"
+              number
+              spaced />
             <fill-dummy v-else/>
           </div>
         </div>
@@ -26,18 +32,27 @@
           <div class="field hash">
             <div class="field-name">Hash</div>
             <div class="scroll">
-              <div class="number" v-if="block.height">{{ block.hash }}</div>
-              <fill-dummy color="grey" size="big" v-else/>
+              <div
+                v-if="block.height"
+                class="number">{{ block.hash }}</div>
+              <fill-dummy
+                v-else
+                color="grey"
+                size="big"/>
             </div>
 
           </div>
           <div class="grid">
             <div class="field height">
               <div class="field-name">Height</div>
-              <div class="field-value number" v-if="block.height">{{ block.height }}</div>
+              <div
+                v-if="block.height"
+                class="field-value number">{{ block.height }}</div>
               <fill-dummy v-else/>
             </div>
-            <div class="field rewarded" v-if="block.target">
+            <div
+              v-if="block.target"
+              class="field rewarded">
               <div class="field-name">Target</div>
               <div class="field-value number">
                 {{ block.target }}
@@ -47,7 +62,9 @@
               <div class="field-name">
                 Time (<span class="number">{{ block.time }}</span>)
               </div>
-              <div class="field-value number" v-if="block.height">
+              <div
+                v-if="block.height"
+                class="field-value number">
                 {{ block.time | humanDate }}
               </div>
               <fill-dummy v-else/>
@@ -55,7 +72,9 @@
           </div>
           <div class="field hash">
             <div class="field-name">Parent Hash</div>
-            <div class="field-value block-hash" v-if="block.height">
+            <div
+              v-if="block.height"
+              class="field-value block-hash">
               <router-link :to="`/block/${block.prevHash}`">
                 {{ block.prevHash | startAndEnd }}
               </router-link>
@@ -63,27 +82,46 @@
             <fill-dummy v-else/>
           </div>
         </div>
-        <div class="block-navigation grid" v-if="block.height">
+        <div
+          v-if="block.height"
+          class="block-navigation grid">
           <router-link :to="`/block/${(block.height - 1)}`">
             prev: {{ block.height - 1 }}
           </router-link>
-          <router-link :to="`/block/${(block.height + 1)}`" v-if="block.height">
+          <router-link
+            v-if="block.height"
+            :to="`/block/${(block.height + 1)}`">
             next: {{ block.height + 1 }}
           </router-link>
         </div>
       </div>
-      <div class="block-transactions" v-if="!isKeyBlock">
-        <h2 class="title" v-if="block.height">
+      <div
+        v-if="!isKeyBlock"
+        class="block-transactions">
+        <h2
+          v-if="block.height"
+          class="title">
           <span class="number">{{ block.transactions.length }}</span> Transaction(s)
         </h2>
         <div v-else>
           <div><fill-dummy color="grey"/></div>
-          <div><fill-dummy color="grey" size="big"/></div>
-          <div><fill-dummy color="grey" size="big"/></div>
-          <div><fill-dummy color="grey" size="big"/></div>
+          <div><fill-dummy
+            color="grey"
+            size="big"/></div>
+          <div><fill-dummy
+            color="grey"
+            size="big"/></div>
+          <div><fill-dummy
+            color="grey"
+            size="big"/></div>
         </div>
-        <div class="transactions" v-if="block.height">
-          <transaction :key="t.hash" v-for="t in block.transactions" :transaction="t"/>
+        <div
+          v-if="block.height"
+          class="transactions">
+          <transaction
+            v-for="t in block.transactions"
+            :key="t.hash"
+            :transaction="t"/>
         </div>
       </div>
     </div>
@@ -103,16 +141,24 @@ const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
   name: 'Block',
+  components: { AePanel, RelativeTime, Transaction, FillDummy },
+  mixins: [currentTime],
   props: [
     'blockId'
   ],
-  components: { AePanel, RelativeTime, Transaction, FillDummy },
-  mixins: [currentTime],
   computed: {
     ...mapState('blocks', ['block', 'height']),
     isKeyBlock () {
       return this.blockId.startsWith('kh')
     }
+  },
+  watch: {
+    blockId () {
+      this.getBlock()
+    }
+  },
+  mounted () {
+    this.getBlock()
   },
   methods: {
     getBlock () {
@@ -123,14 +169,6 @@ export default {
         this.$store.dispatch('blocks/getBlockFromHash', this.blockId)
       }
     }
-  },
-  watch: {
-    blockId () {
-      this.getBlock()
-    }
-  },
-  mounted () {
-    this.getBlock()
   }
 }
 </script>

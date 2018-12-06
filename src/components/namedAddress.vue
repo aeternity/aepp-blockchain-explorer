@@ -1,9 +1,15 @@
 <template>
-  <div class="named-address" v-if="address">
+  <div
+    v-if="address"
+    class="named-address">
     <template v-if="name">
       {{ name }}
     </template>
-    <ae-address :address="address" :show-avatar="false" size="compact" v-else />
+    <ae-address
+      v-else
+      :address="address"
+      :show-avatar="false"
+      size="compact" />
   </div>
 </template>
 <script>
@@ -11,13 +17,13 @@ import { mapGetters } from 'vuex'
 import { AeAddress } from '@aeternity/aepp-components'
 
 export default {
-  name: 'named-address',
-  props: [
-    'address'
-  ],
+  name: 'NamedAddress',
   components: {
     AeAddress
   },
+  props: [
+    'address'
+  ],
   computed: {
     ...mapGetters('accounts', [
       'getName'

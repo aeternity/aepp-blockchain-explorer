@@ -2,7 +2,7 @@
   <ae-card class="loader-wrapper">
     <div class="loader-info">
       <div class="loader-info__name">
-        {{name}}
+        {{ name }}
       </div>
       <div class="loader-info__url">
         Connecting...
@@ -18,12 +18,12 @@ import {
 } from '@aeternity/aepp-components-3'
 
 export default {
-  name: 'loader-item',
-  props: ['name'],
+  name: 'LoaderItem',
   components: {
     AeCard,
     AeLoader
-  }
+  },
+  props: ['name']
 }
 </script>
 

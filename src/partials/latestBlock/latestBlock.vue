@@ -4,8 +4,14 @@
       <div class="explanation">
         <h2 class="title">Latest Generation</h2>
         <div class="buttons">
-          <ae-button type="exciting" size="small" :to="`/generation/${height}`">view last</ae-button>
-          <ae-button type="exciting" size="small" to="/generations">view all</ae-button>
+          <ae-button
+            :to="`/generation/${height}`"
+            type="exciting"
+            size="small">view last</ae-button>
+          <ae-button
+            type="exciting"
+            size="small"
+            to="/generations">view all</ae-button>
         </div>
       </div>
       <div class="generation-data">
@@ -15,21 +21,27 @@
             <div class="field-name">
               Height
             </div>
-            <div class="field-value number"  v-if="generation">
+            <div
+              v-if="generation"
+              class="field-value number">
               <router-link :to="`/generation/${height}`">{{ height }}</router-link>
             </div>
             <fill-dummy v-else/>
           </div>
           <div class="field">
             <div class="field-name">Micro Blocks</div>
-            <div class="field-value number" v-if="generation">
-              {{ generation.microBlocksDetailed.length}}
+            <div
+              v-if="generation"
+              class="field-value number">
+              {{ generation.microBlocksDetailed.length }}
             </div>
             <fill-dummy v-else/>
           </div>
           <div class="field">
             <div class="field-name">Transactions</div>
-            <div class="field-value number" v-if="generation">
+            <div
+              v-if="generation"
+              class="field-value number">
               {{ generation.numTransactions }}
             </div>
             <fill-dummy v-else/>
@@ -42,16 +54,22 @@
         <div class="grid block-extended-info">
           <div class="field">
             <div class="field-name">Hash</div>
-            <div class="field-value block-hash" v-if="generation">
+            <div
+              v-if="generation"
+              class="field-value block-hash">
               <router-link :to="`/block/${generation.keyBlock.hash}`">
-                <ae-hash type='short' :hash="generation.keyBlock.hash"/>
+                <ae-hash
+                  :hash="generation.keyBlock.hash"
+                  type="short"/>
               </router-link>
             </div>
             <fill-dummy v-else/>
           </div>
           <div class="field">
             <div class="field-name">Mining beneficiary</div>
-            <div class="field-value account-address" v-if="generation">
+            <div
+              v-if="generation"
+              class="field-value account-address">
               <router-link :to="`/account/${generation.keyBlock.beneficiary}`">
                 <named-address :address="generation.keyBlock.beneficiary" />
               </router-link>
@@ -60,7 +78,9 @@
           </div>
           <div class="field">
             <div class="field-name">Time since mined</div>
-            <div class="field-value number" v-if="generation">
+            <div
+              v-if="generation"
+              class="field-value number">
               <relative-time :ts="currentTime - generation.keyBlock.time" />
             </div>
             <fill-dummy v-else/>

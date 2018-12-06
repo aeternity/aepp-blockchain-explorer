@@ -8,7 +8,7 @@
 import startAndEnd from '../filters/startAndEnd'
 
 export default {
-  name: 'ae-hash',
+  name: 'AeHash',
   props: {
     /**
      * The hash to display.

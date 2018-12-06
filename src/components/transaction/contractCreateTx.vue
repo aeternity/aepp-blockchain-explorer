@@ -1,23 +1,27 @@
 <template>
   <div>
     <div class="grid">
-      <field v-if='transaction.tx.owner' name="Account">
-        <router-link :to='`/account/${transaction.tx.owner}`'>
-          <named-address size='short' :address='transaction.tx.owner'/>
+      <field
+        v-if="transaction.tx.owner"
+        name="Account">
+        <router-link :to="`/account/${transaction.tx.owner}`">
+          <named-address
+            :address="transaction.tx.owner"
+            size="short"/>
         </router-link>
       </field>
       <field name="TTL">
-        <div class="number">{{transaction.tx.ttl}}</div>
+        <div class="number">{{ transaction.tx.ttl }}</div>
       </field>
       <field name="Deposit">
-        <span class='number'>{{transaction.tx.deposit | yaniToAe}}</span>
+        <span class="number">{{ transaction.tx.deposit | yaniToAe }}</span>
         <span class="unit">AE</span>
       </field>
       <field name="Gas">
-        {{transaction.tx.gas}}
+        {{ transaction.tx.gas }}
       </field>
       <field name="Gas price">
-        {{transaction.tx.gasPrice}}
+        {{ transaction.tx.gasPrice }}
       </field>
     </div>
   </div>
@@ -27,7 +31,7 @@ import Field from '../field'
 import NamedAddress from '../namedAddress'
 
 export default {
-  name: 'contract-create-tx',
+  name: 'ContractCreateTx',
   components: { Field, NamedAddress },
   props: [
     'transaction'

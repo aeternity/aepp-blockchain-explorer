@@ -3,21 +3,38 @@
     <header class="header" >
       <h1 class="title">
         <ae-identity-avatar :address="account ? address : '0'"/>
-        <named-address v-if="account" :address="address"/>
-        <fill-dummy color="grey" size="big" v-else/>
+        <named-address
+          v-if="account"
+          :address="address"/>
+        <fill-dummy
+          v-else
+          color="grey"
+          size="big"/>
       </h1>
 
       <field name="Balance">
-        <span class="number" v-if="account">{{account.balance | yaniToAe}}</span>
-        <fill-dummy color="grey" size="small" v-else/>
+        <span
+          v-if="account"
+          class="number">{{ account.balance | yaniToAe }}</span>
+        <fill-dummy
+          v-else
+          color="grey"
+          size="small"/>
         <span class="unit">AE</span>
       </field>
 
-      <field class="pubkey" name="Public Key">
-        <div class="account-public-key" v-if="account">
+      <field
+        class="pubkey"
+        name="Public Key">
+        <div
+          v-if="account"
+          class="account-public-key">
           <ae-address :address="address"/>
         </div>
-        <fill-dummy color="grey" size="big" v-else/>
+        <fill-dummy
+          v-else
+          color="grey"
+          size="big"/>
       </field>
     </header>
 
@@ -34,7 +51,6 @@ import FillDummy from '../../components/fillDummy'
 // TODO: There is a reactivity problem in here, The v-if does not work
 export default {
   name: 'Address',
-  props: ['address'],
   components: {
     AeAddress,
     AeIdentityAvatar,
@@ -43,6 +59,7 @@ export default {
     Field,
     FillDummy
   },
+  props: ['address'],
   mixins: [pollAction('accounts/get', ({ address }) => address)],
   computed: mapState('accounts', {
     'account': function (state) {

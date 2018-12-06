@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'code-view',
+  name: 'CodeView',
   props: ['code']
 }
 </script>

@@ -1,20 +1,38 @@
 <template>
   <div class="view-and-copy">
 
-    <popper trigger="click" :options="popperOptions">
+    <popper
+      :options="popperOptions"
+      trigger="click">
       <div class="popper">
         <div class="inner">
-          {{text}}
+          {{ text }}
         </div>
       </div>
-      <ae-button slot="reference" size="small" plain>
-        <ae-icon slot="icon" name="view"/>
+      <ae-button
+        slot="reference"
+        size="small"
+        plain>
+        <ae-icon
+          slot="icon"
+          name="view"/>
       </ae-button>
     </popper>
 
-    <textarea rows=1 class="text" readonly v-model="text" ref="text" required />
-    <ae-button @click.prevent="copy" size="small" plain>
-      <ae-icon slot="icon" name="copy"/>
+    <textarea
+      ref="text"
+      v-model="text"
+      rows="1"
+      class="text"
+      readonly
+      required />
+    <ae-button
+      size="small"
+      plain
+      @click.prevent="copy">
+      <ae-icon
+        slot="icon"
+        name="copy"/>
     </ae-button>
   </div>
 </template>
@@ -25,13 +43,13 @@ import {
 } from '@aeternity/aepp-components'
 import Popper from 'vue-popperjs'
 export default {
-  name: 'view-and-copy',
-  props: ['text'],
+  name: 'ViewAndCopy',
   components: {
     AeButton,
     AeIcon,
     Popper
   },
+  props: ['text'],
   data () {
     return {
       popperOptions: {

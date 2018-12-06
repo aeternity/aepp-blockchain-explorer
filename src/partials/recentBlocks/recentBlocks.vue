@@ -4,34 +4,44 @@
       <h2>Recent generations</h2>
       <p>View the latest generations on the aeternity blockchain</p>
       <table>
-        <tr v-for='(generation, i) in generations' :key="i">
+        <tr
+          v-for="(generation, i) in generations"
+          :key="i">
           <td>
-            <div class="block-number" v-if="generation">
-              <router-link :to='"/generation/" + generation.keyBlock.height'>
-                {{generation.keyBlock.height}}
+            <div
+              v-if="generation"
+              class="block-number">
+              <router-link :to="&quot;/generation/&quot; + generation.keyBlock.height">
+                {{ generation.keyBlock.height }}
               </router-link>
             </div>
             <fill-dummy v-else/>
           </td>
           <td>
-            <span class='field-name'>Micro Blocks</span>
-            <span class='field-value number' v-if="generation">
-              {{generation.microBlocksDetailed.length}}
+            <span class="field-name">Micro Blocks</span>
+            <span
+              v-if="generation"
+              class="field-value number">
+              {{ generation.microBlocksDetailed.length }}
             </span>
             <fill-dummy v-else/>
           </td>
           <td>
-            <span class='field-name'>Transactions</span>
-            <span class='field-value number' v-if="generation">
-              {{generation.numTransactions}}
+            <span class="field-name">Transactions</span>
+            <span
+              v-if="generation"
+              class="field-value number">
+              {{ generation.numTransactions }}
             </span>
             <fill-dummy v-else/>
           </td>
           <td>
-            <span class='field-name'>beneficiary</span>
-            <span class="field-value account-address" v-if="generation">
-              <router-link :to='"/account/" + generation.keyBlock.beneficiary'>
-                <named-address :address='generation.keyBlock.beneficiary' />
+            <span class="field-name">beneficiary</span>
+            <span
+              v-if="generation"
+              class="field-value account-address">
+              <router-link :to="&quot;/account/&quot; + generation.keyBlock.beneficiary">
+                <named-address :address="generation.keyBlock.beneficiary" />
               </router-link>
             </span>
             <fill-dummy v-else/>

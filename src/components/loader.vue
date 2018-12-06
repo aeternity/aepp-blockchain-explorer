@@ -9,7 +9,7 @@
 import { AeLoader } from '@aeternity/aepp-components'
 
 export default {
-  name: 'loader',
+  name: 'Loader',
   components: { AeLoader }
 }
 </script>
