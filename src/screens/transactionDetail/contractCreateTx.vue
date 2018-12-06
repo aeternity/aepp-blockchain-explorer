@@ -45,6 +45,11 @@ export default {
     Field,
     NamedAddress
   },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

@@ -21,9 +21,12 @@ export default {
   components: {
     AeAddress
   },
-  props: [
-    'address'
-  ],
+  props: {
+    address: {
+      type: String,
+      default: ''
+    }
+  },
   computed: {
     ...mapGetters('accounts', [
       'getName'

@@ -16,9 +16,9 @@
 <script>
 export default {
   props: {
-    ts: Number,
-    big: Boolean,
-    spaced: Boolean
+    ts: { type: Number, required: true },
+    big: { type: Boolean, default: false },
+    spaced: { type: Boolean, default: false }
   },
   computed: {
     items () {

@@ -173,7 +173,12 @@ export default {
     FillDummy
   },
   filters: { txTypeToName },
-  props: ['txId'],
+  props: {
+    txId: {
+      type: String,
+      required: true
+    }
+  },
   computed: mapState('transactions', {
     transaction ({ transactions }) {
       return transactions[this.txId]

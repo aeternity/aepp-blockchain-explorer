@@ -47,13 +47,13 @@ const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
   components: { MarketStats, LatestBlock, RecentBlocks },
-  data: function () {
+  mixins: [pollAction('blocks/getLatestGenerations', 4)],
+  data () {
     return {
       searchString: '',
       VUE_APP_SHOW_MARKET_STATS: process.env.VUE_APP_SHOW_MARKET_STATS
     }
   },
-  mixins: [pollAction('blocks/getLatestGenerations', 4)],
   methods: {
     async search () {
       if (blockHeightRegex.test(this.searchString)) {

@@ -88,13 +88,18 @@ import {
 import FillDummy from '../../components/fillDummy'
 
 export default {
+  components: {
+    AeButton,
+    AeInput,
+    FillDummy
+  },
+  mixins: [pollAction('getNodeStatus')],
   data: function () {
     return {
       newNetworkUrl: '',
       isNetworkChanging: false
     }
   },
-  mixins: [pollAction('getNodeStatus')],
   computed: {
     ...mapState({
       nodeStatus: '$nodeStatus',
@@ -103,11 +108,6 @@ export default {
     isLoading () {
       return this.isNetworkChanging || !(this.nodeStatus.top && this.nodeStatus.version)
     }
-  },
-  components: {
-    AeButton,
-    AeInput,
-    FillDummy
   },
   methods: {
     async changeNetwork () {

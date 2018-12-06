@@ -29,6 +29,11 @@ import NamedAddress from '../../components/namedAddress'
 export default {
   name: 'NameTransferTx',
   components: { Field, AeHash, ViewAndCopy, NamedAddress },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

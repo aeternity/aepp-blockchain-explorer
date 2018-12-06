@@ -5,7 +5,12 @@
 <script>
 export default {
   name: 'CodeView',
-  props: ['code']
+  props: {
+    code: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 

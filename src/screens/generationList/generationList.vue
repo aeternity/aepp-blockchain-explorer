@@ -13,7 +13,7 @@
         <div>
           <span class="field-name">last key block mined</span>
           <relative-time
-            :ts="getLastMinedBlockTime(this.currentTime)"
+            :ts="getLastMinedBlockTime(currentTime)"
             big
             spaced/>
           <span class="field-name">ago</span>

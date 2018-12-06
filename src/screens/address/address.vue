@@ -59,10 +59,15 @@ export default {
     Field,
     FillDummy
   },
-  props: ['address'],
   mixins: [pollAction('accounts/get', ({ address }) => address)],
+  props: {
+    address: {
+      type: String,
+      required: true
+    }
+  },
   computed: mapState('accounts', {
-    'account': function (state) {
+    account (state) {
       return state.accounts[this.address]
     }
   })

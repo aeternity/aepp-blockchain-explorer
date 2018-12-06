@@ -29,8 +29,11 @@ import NamedAddress from '../namedAddress'
 export default {
   name: 'SpendTx',
   components: { Field, NamedAddress },
-  props: [
-    'transaction'
-  ]
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

@@ -23,7 +23,12 @@ export default {
     AeCard,
     AeLoader
   },
-  props: ['name']
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 

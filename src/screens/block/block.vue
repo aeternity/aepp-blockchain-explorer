@@ -143,9 +143,12 @@ export default {
   name: 'Block',
   components: { AePanel, RelativeTime, Transaction, FillDummy },
   mixins: [currentTime],
-  props: [
-    'blockId'
-  ],
+  props: {
+    blockId: {
+      type: String,
+      required: true
+    }
+  },
   computed: {
     ...mapState('blocks', ['block', 'height']),
     isKeyBlock () {

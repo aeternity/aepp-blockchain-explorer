@@ -33,7 +33,12 @@ export default {
     AeButton,
     AeFilterSeparator
   },
-  props: ['name'],
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
+  },
   methods: {
     backToForm () {
       this.$store.commit('clearError')

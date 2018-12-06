@@ -33,8 +33,11 @@ import NamedAddress from '../namedAddress'
 export default {
   name: 'ContractCreateTx',
   components: { Field, NamedAddress },
-  props: [
-    'transaction'
-  ]
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

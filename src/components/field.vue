@@ -11,7 +11,12 @@
 <script>
 export default {
   name: 'Field',
-  props: ['name']
+  props: {
+    name: {
+      type: String,
+      default: ''
+    }
+  }
 }
 </script>
 <style scoped lang='scss'>

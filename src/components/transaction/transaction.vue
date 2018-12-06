@@ -95,9 +95,12 @@ export default {
     ContractCreateTx
   },
   filters: { txTypeToName },
-  props: [
-    'transaction'
-  ],
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     responsePrettyJson () {
       if (!this.transaction) return null

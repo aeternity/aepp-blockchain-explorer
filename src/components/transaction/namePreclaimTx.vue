@@ -25,8 +25,11 @@ import AeHash from '../aeHash'
 export default {
   name: 'NamePreclaimTx',
   components: { Field, NamedAddress, AeHash },
-  props: [
-    'transaction'
-  ]
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

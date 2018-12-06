@@ -24,7 +24,12 @@ export default {
     AeSwitch,
     CodeView
   },
-  props: ['contractCode'],
+  props: {
+    contractCode: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       view: null

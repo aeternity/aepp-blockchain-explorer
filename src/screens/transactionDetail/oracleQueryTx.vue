@@ -4,6 +4,11 @@
 <script>
 export default {
   name: 'OracleQueryTx',
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

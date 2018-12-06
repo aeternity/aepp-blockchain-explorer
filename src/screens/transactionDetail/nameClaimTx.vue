@@ -18,6 +18,11 @@ import Field from '../../components/field.vue'
 export default {
   name: 'NameClaimTx',
   components: { Field },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

@@ -34,8 +34,11 @@ import NamedAddress from '../namedAddress'
 export default {
   name: 'OracleResponseTx',
   components: { Field, NamedAddress },
-  props: [
-    'transaction'
-  ]
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

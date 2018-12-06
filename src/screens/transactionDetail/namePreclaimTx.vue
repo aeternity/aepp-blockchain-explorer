@@ -18,6 +18,11 @@ import ViewAndCopy from '../../components/viewAndCopy'
 export default {
   name: 'NamePreclaimTx',
   components: { Field, AeHash, ViewAndCopy },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

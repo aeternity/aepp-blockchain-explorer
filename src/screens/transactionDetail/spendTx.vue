@@ -39,6 +39,11 @@ import ViewAndCopy from '../../components/viewAndCopy'
 export default {
   name: 'SpendTx',
   components: { Field, NamedAddress, ViewAndCopy },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

@@ -165,75 +165,76 @@
             color="grey"
             size="big"/></div>
         </div>
-        <article
-          v-for="(m, index) in generation.microBlocksDetailed"
-          v-if="!isLoading"
-          :key="m.hash"
-          class="micro-blocks-wrapper">
-          <h4>
-            <span class="number">
-              Micro Block No. {{ index+1 }}
-            </span>
-          </h4>
-          <section class="micro-block">
-            <div class="grid">
-              <field
-                name="hash"
-                class="hash">
-                <router-link :to="`/block/${m.hash}`">
-                  <ae-hash
-                    :hash="m.hash"
-                    type="short"/>
-                </router-link>
-                <view-and-copy :text="m.hash"/>
-              </field>
-              <field
-                v-cloak
-                name="time since mined">
-                <relative-time
-                  :ts="currentTime - m.time"
-                  spaced />
-              </field>
-            </div>
-            <div class="grid">
-              <field
-                v-cloak
-                name="time"
-                class="time">
-                <time
-                  :timedate="m.time | humanDate"
-                  class="field-value number">
-                  {{ m.time | humanDate }}
-                </time>
-              </field>
-              <field
-                name="parent hash"
-                class="hash">
-                <router-link :to="`/block/${m.prevHash}`">
-                  <ae-hash
-                    :hash="m.prevHash"
-                    type="short"/>
-                </router-link>
-                <view-and-copy :text="m.prevHash"/>
-              </field>
-            </div>
-
-            <article class="block-transactions">
-              <header class="block-transactions__header">
-                <h2 class="title title-sub">
-                  <span class="number">{{ m.transactions.length }}</span> Transaction{{ m.transactions.length !== 1 ? 's' : '' }}
-                </h2>
-              </header>
-              <div class="transactions">
-                <transaction
-                  v-for="t in m.transactions"
-                  :key="t.hash"
-                  :transaction="t"/>
+        <template v-if="!isLoading">
+          <article
+            v-for="(m, index) in generation.microBlocksDetailed"
+            :key="m.hash"
+            class="micro-blocks-wrapper">
+            <h4>
+              <span class="number">
+                Micro Block No. {{ index+1 }}
+              </span>
+            </h4>
+            <section class="micro-block">
+              <div class="grid">
+                <field
+                  name="hash"
+                  class="hash">
+                  <router-link :to="`/block/${m.hash}`">
+                    <ae-hash
+                      :hash="m.hash"
+                      type="short"/>
+                  </router-link>
+                  <view-and-copy :text="m.hash"/>
+                </field>
+                <field
+                  v-cloak
+                  name="time since mined">
+                  <relative-time
+                    :ts="currentTime - m.time"
+                    spaced />
+                </field>
               </div>
-            </article>
+              <div class="grid">
+                <field
+                  v-cloak
+                  name="time"
+                  class="time">
+                  <time
+                    :timedate="m.time | humanDate"
+                    class="field-value number">
+                    {{ m.time | humanDate }}
+                  </time>
+                </field>
+                <field
+                  name="parent hash"
+                  class="hash">
+                  <router-link :to="`/block/${m.prevHash}`">
+                    <ae-hash
+                      :hash="m.prevHash"
+                      type="short"/>
+                  </router-link>
+                  <view-and-copy :text="m.prevHash"/>
+                </field>
+              </div>
 
-          </section>
-        </article>
+              <article class="block-transactions">
+                <header class="block-transactions__header">
+                  <h2 class="title title-sub">
+                    <span class="number">{{ m.transactions.length }}</span> Transaction{{ m.transactions.length !== 1 ? 's' : '' }}
+                  </h2>
+                </header>
+                <div class="transactions">
+                  <transaction
+                    v-for="t in m.transactions"
+                    :key="t.hash"
+                    :transaction="t"/>
+                </div>
+              </article>
+
+            </section>
+          </article>
+        </template>
 
       </section>
     </section>
@@ -259,9 +260,12 @@ export default {
   name: 'Generation',
   components: { AePanel, RelativeTime, Transaction, Field, AeHash, ViewAndCopy, Loader, FillDummy },
   mixins: [currentTime],
-  props: [
-    'generationId'
-  ],
+  props: {
+    generationId: {
+      type: String,
+      required: true
+    }
+  },
   data: function () {
     return {
       isLoading: true

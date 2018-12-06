@@ -49,7 +49,12 @@ export default {
     AeIcon,
     Popper
   },
-  props: ['text'],
+  props: {
+    text: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       popperOptions: {

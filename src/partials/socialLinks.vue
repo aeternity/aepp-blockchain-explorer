@@ -31,8 +31,8 @@ import linkedinLight from '../assets/light/linkedin-light.svg'
 
 export default {
   props: {
-    light: Boolean,
-    hideNames: Boolean
+    light: { type: Boolean, default: false },
+    hideNames: { type: Boolean, default: false }
   },
   computed: {
     links () {

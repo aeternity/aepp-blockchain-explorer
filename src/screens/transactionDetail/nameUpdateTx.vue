@@ -39,6 +39,11 @@ import ViewAndCopy from '../../components/viewAndCopy'
 export default {
   name: 'NameUpdateTx',
   components: { Field, AeHash, ViewAndCopy },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

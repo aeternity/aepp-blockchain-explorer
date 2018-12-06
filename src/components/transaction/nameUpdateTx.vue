@@ -28,8 +28,11 @@ import AeHash from '../aeHash'
 export default {
   name: 'NameUpdateTx',
   components: { Field, NamedAddress, AeHash },
-  props: [
-    'transaction'
-  ]
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

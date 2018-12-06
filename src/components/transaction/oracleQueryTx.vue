@@ -51,8 +51,11 @@ import Field from '../field'
 export default {
   name: 'OracleQueryTx',
   components: { Field },
-  props: [
-    'transaction'
-  ]
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
