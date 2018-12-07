@@ -40,9 +40,6 @@
     tr + tr {
       margin-top:10px;
     }
-    tr td:first-child {
-      width:100%;
-    }
   }
   .account-address {
     color:$magaenta;
@@ -57,7 +54,11 @@
       @include font-size(m);
     }
   }
-  .transactions {
+  .table-wrapper {
+    overflow-x: auto;
     margin-bottom:50px;
+    .transactions {
+      min-width: 969px;
+    }
   }
 }
