@@ -80,7 +80,7 @@ export default {
           alert('not a valid block hash/height/tx, account public key or domain name')
         }
       } else if (accountPublicKeyRegex.test(this.searchString)) {
-        this.$router.push({ path: `/account/${this.searchString}` })
+        this.$router.push({ path: `/generation/${this.searchString}` })
       } else if (nameRegex.test(this.searchString)) {
         // check if name
         const pubKey = await this.fetchDomain(this.searchString)
