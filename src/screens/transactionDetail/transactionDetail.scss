@@ -33,5 +33,12 @@
     margin-left:10px;
 
   }
-
+  .height-item {
+    &__data {
+      color: $magaenta;
+    }
+  }
+  .ae-loader {
+    margin: 0;
+  }
 }
