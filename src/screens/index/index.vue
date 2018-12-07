@@ -75,7 +75,7 @@ export default {
       } else if (transactionHashRegex.test(this.searchString)) {
         try {
           await this.$store.dispatch('transactions/getTxByHash', this.searchString)
-          this.$router.push({ path: `/tx/${this.searchString}` })
+          this.$router.push({ path: `/generation/${this.searchString}` })
         } catch (e) {
           alert('not a valid block hash/height/tx, account public key or domain name')
         }
