@@ -42,6 +42,22 @@
             />
           </Field>
 
+          <div class="height-item">
+            <Field name="Block Height">
+            </Field>
+            <div v-if="!isPending">
+              <span class="height-item__data" v-if="transaction"> {{this.transaction.blockHeight}}</span>
+              <span class="height-item__data" v-if="transaction"> {{this.transaction.blockHeight - this.height}} Block Confirmations</span>
+            </div>
+            <AeLoader v-if="isPending" />
+          </div>
+
+          <div class="status-item" v-if="isPending">
+            <Field name="Status">
+            </Field>
+            <span v-if="isPending">Pending</span>
+          </div>
+
           <hr>
 
           <div v-if="transaction">
@@ -106,7 +122,7 @@
               <Field
                 v-for="(signature, n) in transaction.signatures"
                 :key="n"
-                :name="n"
+                :name="toString(n)"
               >
                 <AeHash
                   :hash="signature"
@@ -165,7 +181,8 @@
 import { mapState } from 'vuex'
 import {
   AeAddress,
-  AeBadge
+  AeBadge,
+  AeLoader
 } from '@aeternity/aepp-components'
 
 import SpendTx from './spendTx.vue'
@@ -205,7 +222,8 @@ export default {
     NameTransferTx,
     ContractCallTx,
     ContractCreateTx,
-    FillDummy
+    FillDummy,
+    AeLoader
   },
   filters: { txTypeToName },
   props: {
@@ -214,13 +232,24 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      height: 0
+    }
+  },
   computed: mapState('transactions', {
     transaction ({ transactions }) {
       return transactions[this.txId]
+    },
+    isPending () {
+      if (this.transaction) {
+        return ((this.transaction.blockHash) === 'none' && (this.transaction.blockHeight === -1))
+      }
     }
   }),
   async mounted () {
-    this.$store.dispatch('transactions/getTxByHash', this.txId)
+    await this.$store.dispatch('transactions/getTxByHash', this.txId)
+    this.height = await this.$store.dispatch('blocks/height')
   }
 }
 </script>
