@@ -47,74 +47,74 @@
               <FillDummy v-else />
             </td>
             <td>
-            <span class="field-name">
-              key-hash
-            </span>
+              <span class="field-name">
+                key-hash
+              </span>
               <span
                 v-if="generations[height-i+1]"
                 class="number"
               >
-              <AeHash
-                :hash="generations[height-i+1].keyBlock.hash"
-                type="short"
-              />
-            </span>
+                <AeHash
+                  :hash="generations[height-i+1].keyBlock.hash"
+                  type="short"
+                />
+              </span>
               <FillDummy v-else />
             </td>
             <td>
-            <span
-              v-if="generations[height-i+1]"
-              class="number"
-            >
-              {{ generations[height-i+1].microBlocksDetailed.length }}
-            </span>
+              <span
+                v-if="generations[height-i+1]"
+                class="number"
+              >
+                {{ generations[height-i+1].microBlocksDetailed.length }}
+              </span>
               <FillDummy
                 v-else
                 size="small"
               />
               <span class="field-name">
-              Micro Blocks
-            </span>
+                Micro Blocks
+              </span>
             </td>
             <td>
-            <span
-              v-if="generations[height-i+1]"
-              class="number"
-            >
-              {{ generations[height-i+1].numTransactions }}
-            </span>
+              <span
+                v-if="generations[height-i+1]"
+                class="number"
+              >
+                {{ generations[height-i+1].numTransactions }}
+              </span>
               <FillDummy
                 v-else
                 size="small"
               />
               <span class="field-name">
-              Tx
-            </span>
+                Tx
+              </span>
             </td>
             <td>
-            <span class="field-name">
-              beneficiary
-            </span>
+              <span class="field-name">
+                beneficiary
+              </span>
               <span
                 v-if="generations[height-i+1]"
                 class="account-address"
               >
-              <RouterLink :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
-                <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
-              </RouterLink>
-            </span>
+                <RouterLink :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
+                  <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
+                </RouterLink>
+              </span>
               <FillDummy v-else />
             </td>
             <td>
-            <span class="field-name">
-              time
-            </span>
+              <span class="field-name">
+                time
+              </span>
               <span
                 v-if="generations[height-i+1]"
                 class="number"
               >
-              <RelativeTime :ts="currentTime - generations[height-i+1].keyBlock.time" />
-            </span>
+                <RelativeTime :ts="currentTime - generations[height-i+1].keyBlock.time" />
+              </span>
               <FillDummy v-else />
             </td>
           </tr>
