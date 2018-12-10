@@ -46,7 +46,7 @@
             <Field name="Block Height">
             </Field>
             <div v-if="!isPending">
-              <span class="height-item__data" v-if="transaction"> {{this.transaction.blockHeight}}</span>
+              <RouterLink v-if="transaction" :to="`/generation/${this.transaction.blockHeight}`"><span class="height-item__data" > {{this.transaction.blockHeight}}</span></RouterLink>
               <span class="field-value" v-if="transaction"> ( {{this.height - this.transaction.blockHeight }} Block Confirmations )</span>
             </div>
             <AeLoader v-if="isPending" />
@@ -55,7 +55,7 @@
           <div class="status-item" v-if="isPending">
             <Field name="Status">
             </Field>
-            <span v-if="isPending">Pending</span>
+            <span v-if="isPending"> Pending </span>
           </div>
 
           <hr>
@@ -122,7 +122,7 @@
               <Field
                 v-for="(signature, n) in transaction.signatures"
                 :key="n"
-                :name="toString(n)"
+                :name="n.toString()"
               >
                 <AeHash
                   :hash="signature"
@@ -187,6 +187,7 @@ import {
 
 import SpendTx from './spendTx.vue'
 import OracleRegisterTx from './oracleRegisterTx.vue'
+import OracleExtendTx from './oracleExtendTx'
 import OracleResponseTx from './oracleResponseTx.vue'
 import OracleQueryTx from './oracleQueryTx.vue'
 import NameClaimTx from './nameClaimTx.vue'
@@ -223,7 +224,8 @@ export default {
     ContractCallTx,
     ContractCreateTx,
     FillDummy,
-    AeLoader
+    AeLoader,
+    OracleExtendTx
   },
   filters: { txTypeToName },
   props: {

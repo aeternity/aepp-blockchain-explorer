@@ -11,6 +11,16 @@
         />
       </RouterLink>
     </Field>
+    <Field name="VmVersion">
+      <div class="number">
+        {{ transaction.tx.vmVersion }}
+      </div>
+    </Field>
+    <Field name="Amount">
+      <div class="number">
+        {{ transaction.tx.amount }}
+      </div>
+    </Field>
     <Field name="TTL">
       <div class="number">
         {{ transaction.tx.ttl }}

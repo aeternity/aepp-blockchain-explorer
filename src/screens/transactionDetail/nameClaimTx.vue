@@ -1,6 +1,17 @@
 <template>
   <div>
     <Field
+      v-if="transaction.tx.accountId"
+      name="Account"
+    >
+      <RouterLink :to="`/account/${transaction.tx.accountId}`">
+        <NamedAddress
+          :address="transaction.tx.accountId"
+          size="short"
+        />
+      </RouterLink>
+    </Field>
+    <Field
       v-if="transaction.tx.name"
       name="Name"
     >
@@ -16,10 +27,14 @@
 </template>
 <script>
 import Field from '../../components/field.vue'
+import NamedAddress from '../../components/namedAddress.vue'
 
 export default {
   name: 'NameClaimTx',
-  components: { Field },
+  components: {
+    Field,
+    NamedAddress
+  },
   props: {
     transaction: {
       type: Object,

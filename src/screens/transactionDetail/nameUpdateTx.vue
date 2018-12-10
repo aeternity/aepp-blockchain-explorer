@@ -1,14 +1,22 @@
 <template>
   <div>
     <Field
-      v-if="transaction.tx.nameHash"
+      v-if="transaction.tx.accountId"
+      name="Account"
+    >
+      <RouterLink :to="&quot;/account/&quot; + transaction.tx.accountId">
+        <NamedAddress :address='transaction.tx.accountId'/>
+      </RouterLink>
+    </Field>
+    <Field
+      v-if="transaction.tx.nameId"
       name="Name Hash"
     >
       <AeHash
-        :hash="transaction.tx.nameHash"
+        :hash="transaction.tx.nameId"
         type="short"
       />
-      <ViewAndCopy :text="transaction.tx.nameHash" />
+      <ViewAndCopy :text="transaction.tx.nameId" />
     </Field>
 
     <Field
@@ -26,10 +34,10 @@
         :name="`${key}`"
       >
         <AeHash
-          :hash="pointer"
+          :hash="pointer.id"
           type="short"
         />
-        <ViewAndCopy :text="pointer" />
+        <ViewAndCopy :text="pointer.id" />
       </Field>
     </div>
   </div>
@@ -38,10 +46,16 @@
 import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy'
+import NamedAddress from '../../components/namedAddress.vue'
 
 export default {
   name: 'NameUpdateTx',
-  components: { Field, AeHash, ViewAndCopy },
+  components: {
+    Field,
+    AeHash,
+    ViewAndCopy,
+    NamedAddress
+  },
   props: {
     transaction: {
       type: Object,
