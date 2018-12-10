@@ -1,23 +1,37 @@
 <template>
   <div>
+    <Field
+      v-if="transaction.tx.nameHash"
+      name="Name Hash"
+    >
+      <AeHash
+        :hash="transaction.tx.nameHash"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.nameHash" />
+    </Field>
 
-    <field v-if='transaction.tx.nameHash' name="Name Hash">
-      <ae-hash type='short' :hash='transaction.tx.nameHash'/>
-      <view-and-copy :text='transaction.tx.nameHash' />
-    </field>
+    <Field
+      v-if="transaction.tx.nameTtl"
+      name="Name TTL"
+    >
+      {{ transaction.tx.nameTtl }}
+    </Field>
 
-    <field v-if='transaction.tx.nameTtl' name="Name TTL">
-      {{transaction.tx.nameTtl}}
-    </field>
-
-    <div v-if='transaction.tx.pointers'>
+    <div v-if="transaction.tx.pointers">
       <h2>Pointers</h2>
-      <field :name="`${key}`" :key="key" v-for='(pointer, key) in transaction.tx.pointers'>
-        <ae-hash type='short' :hash='pointer' />
-        <view-and-copy :text='pointer'/>
-      </field>
+      <Field
+        v-for="(pointer, key) in transaction.tx.pointers"
+        :key="key"
+        :name="`${key}`"
+      >
+        <AeHash
+          :hash="pointer"
+          type="short"
+        />
+        <ViewAndCopy :text="pointer" />
+      </Field>
     </div>
-
   </div>
 </template>
 <script>
@@ -26,8 +40,13 @@ import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy'
 
 export default {
-  name: 'name-update-tx',
+  name: 'NameUpdateTx',
   components: { Field, AeHash, ViewAndCopy },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

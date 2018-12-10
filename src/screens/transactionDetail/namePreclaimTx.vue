@@ -1,19 +1,39 @@
 <template>
   <div>
-    <field v-if='transaction.tx.commitment' name="Commitment">
-      <ae-hash type='short' :hash="transaction.tx.commitment" />
-      <view-and-copy :text='transaction.tx.commitment'/>
-    </field>
+    <Field
+      v-if="transaction.tx.accountId"
+      name="Account"
+    >
+      <RouterLink :to="&quot;/account/&quot; + transaction.tx.accountId">
+        <NamedAddress :address='transaction.tx.accountId'/>
+      </RouterLink>
+    </Field>
+    <Field
+      v-if="transaction.tx.commitmentId"
+      name="Commitment"
+    >
+      <AeHash
+        :hash="transaction.tx.commitmentId"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.commitmentId" />
+    </Field>
   </div>
 </template>
 <script>
 import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
+import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
 
 export default {
-  name: 'name-preclaim-tx',
-  components: { Field, AeHash, ViewAndCopy },
-  props: ['transaction']
+  name: 'NamePreclaimTx',
+  components: { Field, AeHash, NamedAddress, ViewAndCopy },
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

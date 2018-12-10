@@ -11,7 +11,8 @@ const store = new Vuex.Store({
 
   state: {
     $nodeStatus: {},
-    epochUrl: process.env.VUE_APP_EPOCH_URL
+    epochUrl: process.env.VUE_APP_EPOCH_URL,
+    error: ''
   },
 
   getters: {
@@ -39,7 +40,23 @@ const store = new Vuex.Store({
      */
     changeNetworkUrl (state, epochUrl) {
       state.epochUrl = epochUrl
+    },
+    /**
+     * catchError
+     * @param state
+     * @param error
+     */
+    catchError (state, error) {
+      state.error = error
+    },
+    /**
+     * clearError
+     * @param state
+     */
+    clearError (state) {
+      state.error = ''
     }
+
   },
 
   actions: wrapActionsWithResolvedEpoch({
@@ -50,14 +67,18 @@ const store = new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ rootGetters: { epoch }, commit }) {
-      const [top, version] = await Promise.all([
-        epoch.api.getCurrentGeneration(),
-        epoch.api.getStatus()
-      ])
+      try {
+        const [top, version] = await Promise.all([
+          epoch.api.getCurrentGeneration(),
+          epoch.api.getStatus()
+        ])
 
-      commit('setNodeStatus', { top, version })
+        commit('setNodeStatus', { top, version })
 
-      return { top, version }
+        return { top, version }
+      } catch (e) {
+        commit('catchError', 'Error', { root: true })
+      }
     }
   }),
 

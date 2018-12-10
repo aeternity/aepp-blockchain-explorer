@@ -1,19 +1,30 @@
 <template>
   <div>
-    <field v-if='transaction.tx.name' name="Name">
-      {{transaction.tx.name}}
-    </field>
-    <field v-if='transaction.tx.nameSalt' name="Name Salt">
-      {{transaction.tx.nameSalt}}
-    </field>
+    <Field
+      v-if="transaction.tx.name"
+      name="Name"
+    >
+      {{ transaction.tx.name }}
+    </Field>
+    <Field
+      v-if="transaction.tx.nameSalt"
+      name="Name Salt"
+    >
+      {{ transaction.tx.nameSalt }}
+    </Field>
   </div>
 </template>
 <script>
 import Field from '../../components/field.vue'
 
 export default {
-  name: 'name-claim-tx',
+  name: 'NameClaimTx',
   components: { Field },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

@@ -1,15 +1,15 @@
 <template>
   <div class="contract-code">
-    <ae-switch
+    <AeSwitch
       v-model="view"
-      name="example"
       :choices="[
         { label: 'Base58c', value: 'base58c' },
         { label: 'Opcode', value: 'opcode' },
       ]"
+      name="example"
       default="base58c"
     />
-    <code-view :code="code" />
+    <CodeView :code="code" />
   </div>
 </template>
 
@@ -19,11 +19,16 @@ import CodeView from './codeView.vue'
 import aevmDisassembler from '../filters/aevmDisassembler/index'
 
 export default {
-  name: 'contract-code',
-  props: ['contractCode'],
+  name: 'ContractCode',
   components: {
     AeSwitch,
     CodeView
+  },
+  props: {
+    contractCode: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {

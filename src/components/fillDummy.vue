@@ -1,10 +1,13 @@
 <template>
-  <div class="fill-dummy" :class="[color, size]" />
+  <div
+    :class="[color, size]"
+    class="fill-dummy"
+  />
 </template>
 
 <script>
 export default {
-  name: 'fill-dummy',
+  name: 'FillDummy',
   props: {
     size: {
       type: String,

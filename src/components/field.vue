@@ -1,15 +1,25 @@
 <template>
   <div class="field">
-    <div v-if='name' class="field-name">{{name}}</div>
+    <div
+      v-if="name"
+      class="field-name"
+    >
+      {{ name }}
+    </div>
     <div class="field-value">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'field',
-  props: ['name']
+  name: 'Field',
+  props: {
+    name: {
+      type: String,
+      default: ''
+    }
+  }
 }
 </script>
 <style scoped lang='scss'>

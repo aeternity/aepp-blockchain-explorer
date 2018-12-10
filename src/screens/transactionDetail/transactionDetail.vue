@@ -2,81 +2,175 @@
   <div class="transaction-detail-screen screen">
     <div class="inner">
       <div>
-        <h1 class='title'>Transaction Detail</h1>
-        <h2 >
-          <span v-if="transaction">{{ transaction.tx.type | txTypeToName }}</span>
-          <fill-dummy size="big" color="grey" v-else/>
+        <h1 class="title">
+          Transaction Detail
+        </h1>
+        <h2>
+          <span v-if="transaction">
+            {{ transaction.tx.type | txTypeToName }}
+          </span>
+          <FillDummy
+            v-else
+            size="big"
+            color="grey"
+          />
         </h2>
         <div>
-
-          <field name="Type">
-            <ae-badge v-if='transaction'>
+          <Field name="Type">
+            <AeBadge v-if="transaction">
               {{ transaction.tx.type | txTypeToName }}
-            </ae-badge>
-            <fill-dummy color="grey" v-else/>
-          </field>
+            </AeBadge>
+            <FillDummy
+              v-else
+              color="grey"
+            />
+          </Field>
 
-          <field name="Hash">
-            <ae-hash type='short' :hash='transaction.hash' v-if='transaction'/>
-            <view-and-copy :text='transaction.hash' v-if='transaction'/>
-            <fill-dummy color="grey" v-else/>
-          </field>
+          <Field name="Hash">
+            <AeHash
+              v-if="transaction"
+              :hash="transaction.hash"
+              type="short"
+            />
+            <ViewAndCopy
+              v-if="transaction"
+              :text="transaction.hash"
+            />
+            <FillDummy
+              v-else
+              color="grey"
+            />
+          </Field>
+
+          <div class="height-item">
+            <Field name="Block Height">
+            </Field>
+            <div v-if="!isPending">
+              <span class="height-item__data" v-if="transaction"> {{this.transaction.blockHeight}}</span>
+              <span class="field-value" v-if="transaction"> ( {{this.height - this.transaction.blockHeight }} Block Confirmations )</span>
+            </div>
+            <AeLoader v-if="isPending" />
+          </div>
+
+          <div class="status-item" v-if="isPending">
+            <Field name="Status">
+            </Field>
+            <span v-if="isPending">Pending</span>
+          </div>
 
           <hr>
 
           <div v-if="transaction">
-            <field v-if='transaction.tx.account' name="Account">
-              <router-link :to='`/account/${transaction.tx.account}`'>
-                <named-address size='short' :address='transaction.tx.account'/>
-              </router-link>
-              <view-and-copy :text='transaction.tx.account'/>
-            </field>
+            <Field
+              v-if="transaction.tx.account"
+              name="Account"
+            >
+              <RouterLink :to="`/account/${transaction.tx.account}`">
+                <NamedAddress
+                  :address="transaction.tx.account"
+                  size="short"
+                />
+              </RouterLink>
+              <ViewAndCopy :text="transaction.tx.account" />
+            </Field>
 
-            <component
-              v-if="transaction.tx.type"
+            <Component
               :is="transaction.tx.type"
+              v-if="transaction.tx.type"
               :transaction="transaction"
             />
 
-            <field v-if='transaction.tx.data_schema' name='Data Schema'>
-              {{transaction.tx.data_schema}}
-            </field>
+            <Field
+              v-if="transaction.tx.data_schema"
+              name="Data Schema"
+            >
+              {{ transaction.tx.data_schema }}
+            </Field>
 
-            <field v-if='transaction.tx.reward' name="Reward">
-              {{transaction.tx.reward}}
-            </field>
+            <Field
+              v-if="transaction.tx.reward"
+              name="Reward"
+            >
+              {{ transaction.tx.reward }}
+            </Field>
 
             <hr>
 
-            <field v-if='transaction.tx.nonce' name="Nonce">
-              {{transaction.tx.nonce}}
-            </field>
+            <Field
+              v-if="transaction.tx.nonce"
+              name="Nonce"
+            >
+              {{ transaction.tx.nonce }}
+            </Field>
 
-            <field v-if='transaction.tx.ttl' name="TTL">
-              {{transaction.tx.ttl}}
-            </field>
+            <Field
+              v-if="transaction.tx.ttl"
+              name="TTL"
+            >
+              {{ transaction.tx.ttl }}
+            </Field>
 
-            <field v-if='transaction.tx.vsn' name="Vsn">
-              {{transaction.tx.vsn}}
-            </field>
+            <Field
+              v-if="transaction.tx.vsn"
+              name="Vsn"
+            >
+              {{ transaction.tx.vsn }}
+            </Field>
 
-            <div v-if='transaction.signatures'>
+            <div v-if="transaction.signatures">
               <h3>Signatures</h3>
-              <field :name="n" :key='n' v-for='(signature, n) in transaction.signatures'>
-                <ae-hash type='short' :hash='signature' />
-                <view-and-copy :text='signature'/>
-              </field>
+              <Field
+                v-for="(signature, n) in transaction.signatures"
+                :key="n"
+                :name="toString(n)"
+              >
+                <AeHash
+                  :hash="signature"
+                  type="short"
+                />
+                <ViewAndCopy :text="signature" />
+              </Field>
             </div>
           </div>
           <div v-else>
-            <div><fill-dummy color="grey"/></div>
-            <div><fill-dummy color="grey" size="big"/></div>
-            <div><fill-dummy color="grey" size="big"/></div>
-            <div><fill-dummy color="grey" size="big"/></div>
-            <div><fill-dummy color="grey"/></div>
-            <div><fill-dummy color="grey" size="big"/></div>
-            <div><fill-dummy color="grey" size="big"/></div>
-            <div><fill-dummy color="grey" size="big"/></div>
+            <div><FillDummy color="grey" /></div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div><FillDummy color="grey" /></div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
+            <div>
+              <FillDummy
+                color="grey"
+                size="big"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -87,7 +181,8 @@
 import { mapState } from 'vuex'
 import {
   AeAddress,
-  AeBadge
+  AeBadge,
+  AeLoader
 } from '@aeternity/aepp-components'
 
 import SpendTx from './spendTx.vue'
@@ -109,8 +204,7 @@ import txTypeToName from '../../filters/txTypeToName'
 import FillDummy from '../../components/fillDummy'
 
 export default {
-  name: 'transaction-detail',
-  props: ['txId'],
+  name: 'TransactionDetail',
   components: {
     AeAddress,
     AeBadge,
@@ -128,16 +222,34 @@ export default {
     NameTransferTx,
     ContractCallTx,
     ContractCreateTx,
-    FillDummy
+    FillDummy,
+    AeLoader
   },
   filters: { txTypeToName },
+  props: {
+    txId: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      height: 0
+    }
+  },
   computed: mapState('transactions', {
     transaction ({ transactions }) {
       return transactions[this.txId]
+    },
+    isPending () {
+      if (this.transaction) {
+        return ((this.transaction.blockHash) === 'none' && (this.transaction.blockHeight === -1))
+      }
     }
   }),
   async mounted () {
-    this.$store.dispatch('transactions/getTxByHash', this.txId)
+    await this.$store.dispatch('transactions/getTxByHash', this.txId)
+    this.height = await this.$store.dispatch('blocks/height')
   }
 }
 </script>

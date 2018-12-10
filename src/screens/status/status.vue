@@ -3,21 +3,29 @@
     <div>
       <h2>Change Connected Network</h2>
       <form @submit.prevent="changeNetwork">
-        <ae-input placeholder="Network to connect to: " v-model="newNetworkUrl" @keyup.enter="changeNetwork"/>
-        <ae-button
+        <AeInput
+          v-model="newNetworkUrl"
+          placeholder="Network to connect to: "
+          @keyup.enter="changeNetwork"
+        />
+        <AeButton
           type="exciting"
           size="medium"
         >
           connect
-        </ae-button>
+        </AeButton>
       </form>
       <template for="changing network">
         <h1>Status</h1>
-        <p>Explorer connected to:
-          <strong v-if="!isLoading">
-            {{ node }}
-          </strong>
-          <fill-dummy color="grey" v-else/>
+        <p>
+          Explorer connected to:
+                             <strong v-if="!isLoading">
+                               {{ node }}
+                             </strong>
+                             <FillDummy
+                               v-else
+                               color="grey"
+                             />
         </p>
         <h2>Node and Peers</h2>
         <table>
@@ -38,20 +46,33 @@
             <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
           </tr>
           <tr v-else>
-            <td v-for="i in 6" :key="i"><fill-dummy color="grey"/></td>
+            <td
+              v-for="i in 6"
+              :key="i"
+            >
+              <FillDummy color="grey" />
+            </td>
           </tr>
         </table>
         <h1>Detail</h1>
         <h2 v-if="!isLoading">
           {{ node }}
         </h2>
-        <fill-dummy color="grey" size="big"/>
+        <FillDummy
+          color="grey"
+          size="big"
+        />
         <h3>version</h3>
         <pre v-if="!isLoading">
           {{ nodeStatus.version }}
         </pre>
         <div v-else>
-          <div v-for="i in 3" :key="i"> <fill-dummy color="grey"/> </div>
+          <div
+            v-for="i in 3"
+            :key="i"
+          >
+            <FillDummy color="grey" />
+          </div>
         </div>
 
         <h3>top</h3>
@@ -59,7 +80,12 @@
           {{ nodeStatus.top }}
         </pre>
         <div v-else>
-          <div v-for="i in 3" :key="i"> <fill-dummy color="grey"/> </div>
+          <div
+            v-for="i in 3"
+            :key="i"
+          >
+            <FillDummy color="grey" />
+          </div>
         </div>
       </template>
     </div>
@@ -75,13 +101,18 @@ import {
 import FillDummy from '../../components/fillDummy'
 
 export default {
+  components: {
+    AeButton,
+    AeInput,
+    FillDummy
+  },
+  mixins: [pollAction('getNodeStatus')],
   data: function () {
     return {
       newNetworkUrl: '',
       isNetworkChanging: false
     }
   },
-  mixins: [pollAction('getNodeStatus')],
   computed: {
     ...mapState({
       nodeStatus: '$nodeStatus',
@@ -90,11 +121,6 @@ export default {
     isLoading () {
       return this.isNetworkChanging || !(this.nodeStatus.top && this.nodeStatus.version)
     }
-  },
-  components: {
-    AeButton,
-    AeInput,
-    FillDummy
   },
   methods: {
     async changeNetwork () {

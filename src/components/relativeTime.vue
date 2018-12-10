@@ -1,18 +1,31 @@
 <template>
-  <span class="relative-time" :class="{ big, spaced }">
+  <span
+    :class="{ big, spaced }"
+    class="relative-time"
+  >
     <template v-for="(item, idx) in items">
-      {{idx ? ' ' : ''}}
-      <span :key="`${item.unit}-number`" class="number">{{item.number}}</span>
-      <span :key="item.unit" class="unit">{{item.unit}}</span>
+      {{ idx ? ' ' : '' }}
+      <span
+        :key="`${item.unit}-number`"
+        class="number"
+      >
+        {{ item.number }}
+      </span>
+      <span
+        :key="item.unit"
+        class="unit"
+      >
+        {{ item.unit }}
+      </span>
     </template>
   </span>
 </template>
 <script>
 export default {
   props: {
-    ts: Number,
-    big: Boolean,
-    spaced: Boolean
+    ts: { type: Number, required: true },
+    big: { type: Boolean, default: false },
+    spaced: { type: Boolean, default: false }
   },
   computed: {
     items () {

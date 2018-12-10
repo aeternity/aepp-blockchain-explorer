@@ -1,24 +1,37 @@
 <template>
   <div>
+    <Field
+      v-if="transaction.tx.senderId"
+      name="Sender"
+    >
+      <RouterLink :to="`/account/${transaction.tx.senderId}`">
+        <NamedAddress
+          :address="transaction.tx.senderId"
+          size="short"
+        />
+      </RouterLink>
+      <ViewAndCopy :text="transaction.tx.senderId" />
+    </Field>
 
-    <field v-if='transaction.tx.senderId' name="Sender">
-      <router-link :to='`/account/${transaction.tx.senderId}`'>
-        <named-address size='short' :address='transaction.tx.senderId'/>
-      </router-link>
-      <view-and-copy :text='transaction.tx.senderId'/>
-    </field>
+    <Field
+      v-if="transaction.tx.recipientId"
+      name="Recipient"
+    >
+      <RouterLink :to="`/account/${transaction.tx.recipientId}`">
+        <NamedAddress
+          :address="transaction.tx.recipientId"
+          size="short"
+        />
+      </RouterLink>
+      <ViewAndCopy :text="transaction.tx.recipientId" />
+    </Field>
 
-    <field v-if='transaction.tx.recipientId' name="Recipient">
-      <router-link :to='`/account/${transaction.tx.recipientId}`'>
-        <named-address size='short' :address='transaction.tx.recipientId'/>
-      </router-link>
-      <view-and-copy :text='transaction.tx.recipientId'/>
-    </field>
-
-    <field v-if='transaction.tx.amount' name="Amount">
-      {{transaction.tx.amount | yaniToAe}} AE
-    </field>
-
+    <Field
+      v-if="transaction.tx.amount"
+      name="Amount"
+    >
+      {{ transaction.tx.amount | yaniToAe }} AE
+    </Field>
   </div>
 </template>
 <script>
@@ -27,8 +40,13 @@ import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
 
 export default {
-  name: 'spend-tx',
+  name: 'SpendTx',
   components: { Field, NamedAddress, ViewAndCopy },
-  props: ['transaction']
+  props: {
+    transaction: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
