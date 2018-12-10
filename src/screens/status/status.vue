@@ -59,6 +59,7 @@
           {{ node }}
         </h2>
         <FillDummy
+          v-else
           color="grey"
           size="big"
         />
