@@ -1,13 +1,14 @@
 <template>
   <div id="blockchain" class="app">
-    <router-view />
+    <RouterView />
   </div>
 </template>
 <script>
 export default {
-  name: 'app'
+  name: 'App'
 }
 </script>
-<style>
+<style lang="scss">
+@import '../styles/index';
 .app {}
 </style>
