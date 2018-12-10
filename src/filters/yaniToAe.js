@@ -1,4 +1,4 @@
-import {BigNumber} from 'bignumber.js'
+import { BigNumber } from 'bignumber.js'
 
 const prefixes = {
   '-3': 'milli',
@@ -6,25 +6,21 @@ const prefixes = {
   '-9': 'nano',
   '-12': 'pico',
   '-15': 'femto',
-  '-18': 'atto',
-  '-21': 'zepto',
-  '-24': 'yocto'
+  '-18': 'atto'
 }
 
-export default function (yani) {
-  let base = new BigNumber(yani).shiftedBy(-18).toNumber()
-  if (base < 10 ** -2) {
-    base = base * 10 ** 24
+export default function (base) {
+  if (base < 10 ** 16 && base !== 0) {
     let exp = 0
     while (base > 9) {
       base = base / 10
       exp++
     }
     const extra = exp % 3
-    base = base * 10 ** extra
-    base = Math.round(base * 100) / 100
-    exp = exp - 24 - extra
+    base = new BigNumber(base).shiftedBy(extra).toNumber()
+    exp = exp - 18 - extra
     return base.toString() + ' ' + prefixes[exp.toString()]
+  } else {
+    return new BigNumber(base).shiftedBy(-18).toNumber()
   }
-  return base
 }
