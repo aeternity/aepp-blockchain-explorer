@@ -2,13 +2,13 @@
   <div>
     <div class="grid">
       <Field name="account">
-        <RouterLink :to="&quot;/account/&quot; + transaction.tx.account">
-          <NamedAddress :address="transaction.tx.account" />
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.accountId">
+          <NamedAddress :address="transaction.tx.accountId" />
         </RouterLink>
       </Field>
       <Field name="commitment">
         <AeHash
-          :hash="transaction.tx.commitment"
+          :hash="transaction.tx.commitmentId"
           type="short"
         />
       </Field>
