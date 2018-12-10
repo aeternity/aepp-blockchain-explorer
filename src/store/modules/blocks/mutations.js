@@ -37,21 +37,5 @@ export default {
   setGenerations (state, generation) {
     Vue.set(state.hashToHeight, generation.keyBlock.hash, generation.keyBlock.height)
     Vue.set(state.generations, generation.keyBlock.height, generation)
-  },
-
-  /***
-   * resetAll reset the state of 'blocks' module
-   * @param {Object} state
-   */
-  resetState (state) {
-    Object.assign(state,
-      {
-        height: 0,
-        generation: {},
-        block: {},
-        generations: {},
-        hashToHeight: {}
-      }
-    )
   }
 }
