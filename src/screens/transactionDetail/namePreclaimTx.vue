@@ -5,7 +5,7 @@
       name="Account"
     >
       <RouterLink :to="&quot;/account/&quot; + transaction.tx.accountId">
-        <NamedAddress :address='transaction.tx.accountId'/>
+        <NamedAddress :address="transaction.tx.accountId" />
       </RouterLink>
     </Field>
     <Field

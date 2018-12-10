@@ -43,22 +43,29 @@
           </Field>
 
           <div class="height-item">
-            <Field name="Block Height"/>
+            <Field name="Block Height" />
             <div v-if="!isPending">
-              <RouterLink v-if="transaction" :to="`/generation/${this.transaction.blockHeight}`">
-                <span class="height-item__data" >
-                  {{transaction.blockHeight}}
+              <RouterLink
+                v-if="transaction"
+                :to="`/generation/${transaction.blockHeight}`"
+              >
+                <span class="height-item__data">
+                  {{ transaction.blockHeight }}
                 </span>
               </RouterLink>
-              <span class="field-value" v-if="transaction">
-                ( {{height - transaction.blockHeight }} Block Confirmations )
+              <span
+                v-if="transaction"
+                class="field-value"
+              >
+                ( {{ height - transaction.blockHeight }} Block Confirmations )
               </span>
             </div>
             <AeLoader v-if="isPending" />
           </div>
 
-          <div v-if="isPending"
-               class="status-item"
+          <div
+            v-if="isPending"
+            class="status-item"
           >
             <Field name="Status" />
             <span v-if="isPending">

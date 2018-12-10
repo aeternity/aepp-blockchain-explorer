@@ -5,7 +5,7 @@
       name="Account"
     >
       <RouterLink :to="&quot;/account/&quot; + transaction.tx.accountId">
-        <NamedAddress :address='transaction.tx.accountId'/>
+        <NamedAddress :address="transaction.tx.accountId" />
       </RouterLink>
     </Field>
 
@@ -26,15 +26,11 @@
 </template>
 <script>
 import Field from '../../components/field'
-import AeHash from '../../components/aeHash'
-import ViewAndCopy from '../../components/viewAndCopy'
 import NamedAddress from '../../components/namedAddress.vue'
 export default {
   name: 'OracleRegisterTx',
   components: {
     Field,
-    AeHash,
-    ViewAndCopy,
     NamedAddress
   },
   props: {
