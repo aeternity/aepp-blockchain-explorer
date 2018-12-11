@@ -69,7 +69,7 @@ export default {
   methods: {
     async search () {
       if (blockHeightRegex.test(this.searchString) && (this.searchString <= this.height)) {
-          this.$router.push({ path: `/generation/${this.searchString}` })
+        this.$router.push({ path: `/generation/${this.searchString}` })
       } else if (blockHashRegex.test(this.searchString)) {
         try {
           await this.$store.dispatch('blocks/getBlockFromHash', this.searchString)

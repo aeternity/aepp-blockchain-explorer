@@ -17,7 +17,7 @@ export default wrapActionsWithResolvedEpoch({
     try {
       balance = await epoch.balance(address)
     } catch (e) {
-      balance = 0;
+      balance = 0
       throw new Error(e)
     }
 
