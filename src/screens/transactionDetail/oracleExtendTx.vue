@@ -32,18 +32,14 @@
 </template>
 <script>
 import Field from '../../components/field'
-import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
-import FillDummy from '../../components/fillDummy'
 import AeHash from '../../components/aeHash'
 
 export default {
   name: 'OracleExtendTx',
   components: {
     Field,
-    NamedAddress,
     ViewAndCopy,
-    FillDummy,
     AeHash
   },
   props: {

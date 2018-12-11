@@ -58,17 +58,13 @@
 </template>
 <script>
 import Field from '../../components/field'
-import NamedAddress from '../../components/namedAddress.vue'
 import ViewAndCopy from '../../components/viewAndCopy'
-import FillDummy from '../../components/fillDummy'
 import AeHash from '../../components/aeHash'
 export default {
   name: 'OracleResponseTx',
   components: {
     Field,
-    NamedAddress,
     ViewAndCopy,
-    FillDummy,
     AeHash
   },
   props: {

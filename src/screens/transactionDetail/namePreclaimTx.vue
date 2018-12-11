@@ -30,7 +30,6 @@
 </template>
 <script>
 import Field from '../../components/field'
-import AeHash from '../../components/aeHash'
 import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
 import FillDummy from '../../components/fillDummy'
@@ -39,7 +38,6 @@ export default {
   name: 'NamePreclaimTx',
   components: {
     Field,
-    AeHash,
     NamedAddress,
     ViewAndCopy,
     FillDummy

@@ -61,7 +61,7 @@
     </Field>
     <Field name="Response ttl">
       <div class="number">
-        {{ transaction.tx.responseTtl.value  }}
+        {{ transaction.tx.responseTtl.value }}
       </div>
     </Field>
     <Field name="Version">
