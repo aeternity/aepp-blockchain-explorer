@@ -17,7 +17,7 @@
           <input
             v-model="searchString"
             class="search-input"
-            placeholder="Explore Generation, Block, Address"
+            placeholder="Explorer Generation, Block, Tx, Address"
             type="text"
           >
           <button
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import pollAction from '../../mixins/pollAction'
 import MarketStats from '../../partials/marketStats/marketStats'
 import LatestBlock from '../../partials/latestBlock/latestBlock'
@@ -48,6 +49,7 @@ import RecentBlocks from '../../partials/recentBlocks/recentBlocks'
 const blockHeightRegex = RegExp('^[0-9]+$')
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const accountPublicKeyRegex = RegExp('^ak_[1-9A-HJ-NP-Za-km-z]{48,50}$')
+const transactionHashRegex = RegExp('^th_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
@@ -59,24 +61,46 @@ export default {
       VUE_APP_SHOW_MARKET_STATS: process.env.VUE_APP_SHOW_MARKET_STATS
     }
   },
+  computed: {
+    ...mapState('blocks', [
+      'height'
+    ])
+  },
   methods: {
     async search () {
-      if (blockHeightRegex.test(this.searchString)) {
+      if (blockHeightRegex.test(this.searchString) && (this.searchString <= this.height)) {
         this.$router.push({ path: `/generation/${this.searchString}` })
       } else if (blockHashRegex.test(this.searchString)) {
-        this.$router.push({ path: `/block/${this.searchString}` })
+        try {
+          await this.$store.dispatch('blocks/getBlockFromHash', this.searchString)
+          this.$router.push({ path: `/generation/${this.searchString}` })
+        } catch (e) {
+          alert('not a valid block hash/height/tx, account public key or domain name')
+        }
+      } else if (transactionHashRegex.test(this.searchString)) {
+        try {
+          await this.$store.dispatch('transactions/getTxByHash', this.searchString)
+          this.$router.push({ path: `/tx/${this.searchString}` })
+        } catch (e) {
+          alert('not a valid block hash/height/tx, account public key or domain name')
+        }
       } else if (accountPublicKeyRegex.test(this.searchString)) {
-        this.$router.push({ path: `/account/${this.searchString}` })
+        try {
+          await this.$store.dispatch('accounts/get', this.searchString)
+          this.$router.push({ path: `/account/${this.searchString}` })
+        } catch (e) {
+          alert('not a valid block hash/height/tx, account public key or domain name')
+        }
       } else if (nameRegex.test(this.searchString)) {
         // check if name
         const pubKey = await this.fetchDomain(this.searchString)
         if (pubKey) {
           this.$router.push({ path: `/account/${pubKey}` })
         } else {
-          alert('not a valid block hash/height, account public key or domain name')
+          alert('not a valid block hash/height/tx, account public key or domain name')
         }
       } else {
-        alert('not a valid block hash/height or account public key')
+        alert('not a valid block hash/height/tx or account public key')
       }
     },
     async fetchDomain (domain) {
