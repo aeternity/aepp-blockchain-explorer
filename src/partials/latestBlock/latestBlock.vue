@@ -88,7 +88,7 @@
           </div>
           <div class="field">
             <div class="field-name">
-              Mining beneficiary
+              Beneficiary
             </div>
             <div
               v-if="generation"
