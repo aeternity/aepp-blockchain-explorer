@@ -18,7 +18,7 @@
     </Field>
     <Field
       v-if="transaction.tx.nameId"
-      name="Hash"
+      name="Name id"
     >
       <AeHash
         :hash="transaction.tx.nameId"
@@ -29,7 +29,7 @@
 
     <Field
       v-if="transaction.tx.nameTtl"
-      name="TTL"
+      name="NameTTL"
     >
       {{ transaction.tx.nameTtl }}
     </Field>
@@ -41,8 +41,11 @@
     </Field>
     <Field name="Fee">
       <div class="number">
-        {{ transaction.tx.fee }}
+        {{ transaction.tx.fee | yaniToAe }}
       </div>
+      <span class="unit">
+        AE
+      </span>
     </Field>
     <Field name="Version">
       <div class="number">

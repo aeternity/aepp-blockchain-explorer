@@ -32,8 +32,11 @@
     </Field>
     <Field name="Fee">
       <div class="number">
-        {{ transaction.tx.fee }}
+        {{ transaction.tx.fee | yaniToAe }}
       </div>
+      <span class="unit">
+        AE
+      </span>
     </Field>
     <Field name="Oracle ttl">
       <div class="number">
@@ -42,8 +45,11 @@
     </Field>
     <Field name="Query fee">
       <div class="number">
-        {{ transaction.tx.queryFee }}
+        {{ transaction.tx.queryFee | yaniToAe }}
       </div>
+      <span class="unit">
+        AE
+      </span>
     </Field>
     <Field name="Vm version">
       <div class="number">

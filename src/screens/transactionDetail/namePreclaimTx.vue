@@ -16,10 +16,23 @@
         color="grey"
       />
     </Field>
+    <Field
+      v-if="transaction.tx.commitmentId"
+      name="Commitment ID"
+    >
+      <AeHash
+        :hash="transaction.tx.commitmentId"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.commitmentId" />
+    </Field>
     <Field name="Fee">
       <div class="number">
-        {{ transaction.tx.fee }}
+        {{ transaction.tx.fee | yaniToAe }}
       </div>
+      <span class="unit">
+        AE
+      </span>
     </Field>
     <Field name="Version">
       <div class="number">
@@ -33,6 +46,7 @@ import Field from '../../components/field'
 import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
 import FillDummy from '../../components/fillDummy'
+import AeHash from '../../components/aeHash'
 
 export default {
   name: 'NamePreclaimTx',
@@ -40,7 +54,8 @@ export default {
     Field,
     NamedAddress,
     ViewAndCopy,
-    FillDummy
+    FillDummy,
+    AeHash
   },
   props: {
     transaction: {

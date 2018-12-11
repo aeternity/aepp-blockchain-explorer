@@ -46,20 +46,31 @@
     </Field>
     <Field name="Fee">
       <div class="number">
-        {{ transaction.tx.fee }}
+        {{ transaction.tx.fee | yaniToAe }}
       </div>
+      <span class="unit">
+        AE
+      </span>
     </Field>
-    <Field name="Query fee">
+    <Field name="Query Fee">
       <div class="number">
-        {{ transaction.tx.queryFee }}
+        {{ transaction.tx.queryFee | yaniToAe }}
       </div>
+      <span class="unit">
+        AE
+      </span>
     </Field>
-    <Field name="Query ttl">
+    <Field name="Query TTL(Delta) ">
       <div class="number">
         {{ transaction.tx.queryTtl.value }}
       </div>
     </Field>
-    <Field name="Response ttl">
+    <Field name="Type ">
+      <div class="number">
+        {{ transaction.tx.type }}
+      </div>
+    </Field>
+    <Field name="Response TTL">
       <div class="number">
         {{ transaction.tx.responseTtl.value }}
       </div>

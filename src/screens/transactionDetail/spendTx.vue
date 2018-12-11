@@ -24,10 +24,21 @@
         {{ transaction.tx.payload }}
       </div>
     </Field>
+    <Field name="Amount">
+      <div class="number">
+        {{ transaction.tx.amount | yaniToAe }}
+      </div>
+      <span class="unit">
+        AE
+      </span>
+    </Field>
     <Field name="Fee">
       <div class="number">
-        {{ transaction.tx.fee }}
+        {{ transaction.tx.fee | yaniToAe }}
       </div>
+      <span class="unit">
+        AE
+      </span>
     </Field>
     <Field name="Version">
       <div class="number">

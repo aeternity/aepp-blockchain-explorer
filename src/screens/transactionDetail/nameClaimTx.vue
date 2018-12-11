@@ -21,7 +21,20 @@
     </Field>
     <Field name="Fee">
       <div class="number">
-        {{ transaction.tx.fee }}
+        {{ transaction.tx.fee | yaniToAe }}
+      </div>
+      <span class="unit">
+        AE
+      </span>
+    </Field>
+    <Field name="Name">
+      <div class="number">
+        {{ transaction.tx.name }}
+      </div>
+    </Field>
+    <Field name="Name salt">
+      <div class="number">
+        {{ transaction.tx.nameSalt }}
       </div>
     </Field>
     <Field name="Version">
