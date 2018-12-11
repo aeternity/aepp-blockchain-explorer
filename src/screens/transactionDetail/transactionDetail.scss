@@ -1,6 +1,10 @@
 @import '../../style/mixins';
 
 .transaction-detail-screen.screen {
+  .transaction-type {
+    margin-top: 5px;
+    padding: 0 10px;
+  }
   >.inner > div {
     background:$white;
     max-width:777px;

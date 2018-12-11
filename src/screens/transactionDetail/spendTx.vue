@@ -10,27 +10,29 @@
           size="short"
         />
       </RouterLink>
-      <ViewAndCopy :text="transaction.tx.senderId" />
+      <ViewAndCopy
+        v-if="transaction"
+        :text="transaction.tx.senderId"
+      />
+      <FillDummy
+        v-else
+        color="grey"
+      />
     </Field>
-
-    <Field
-      v-if="transaction.tx.recipientId"
-      name="Recipient"
-    >
-      <RouterLink :to="`/account/${transaction.tx.recipientId}`">
-        <NamedAddress
-          :address="transaction.tx.recipientId"
-          size="short"
-        />
-      </RouterLink>
-      <ViewAndCopy :text="transaction.tx.recipientId" />
+    <Field name="Payload">
+      <div class="number">
+        {{ transaction.tx.payload }}
+      </div>
     </Field>
-
-    <Field
-      v-if="transaction.tx.amount"
-      name="Amount"
-    >
-      {{ transaction.tx.amount | yaniToAe }} AE
+    <Field name="Fee">
+      <div class="number">
+        {{ transaction.tx.fee }}
+      </div>
+    </Field>
+    <Field name="Version">
+      <div class="number">
+        {{ transaction.tx.version }}
+      </div>
     </Field>
   </div>
 </template>
@@ -38,10 +40,16 @@
 import Field from '../../components/field'
 import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
+import FillDummy from '../../components/fillDummy'
 
 export default {
   name: 'SpendTx',
-  components: { Field, NamedAddress, ViewAndCopy },
+  components: {
+    Field,
+    NamedAddress,
+    ViewAndCopy,
+    FillDummy
+  },
   props: {
     transaction: {
       type: Object,

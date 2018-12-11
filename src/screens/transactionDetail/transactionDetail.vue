@@ -17,7 +17,7 @@
         </h2>
         <div>
           <Field name="Type">
-            <AeBadge v-if="transaction">
+            <AeBadge v-if="transaction" class="transaction-type">
               {{ transaction.tx.type | txTypeToName }}
             </AeBadge>
             <FillDummy
