@@ -44,12 +44,30 @@
 export default {
   name: 'AppCell',
   props: {
-    title: String,
-    extend: Boolean,
-    content: [String, Number],
-    pow: [String, Number],
-    hash: String,
-    time: [Date, String]
+    title: {
+      type: String,
+      default: String
+    },
+    extend: {
+      type: Boolean,
+      default: false
+    },
+    content: {
+      type: [String, Number],
+      default: String
+    },
+    pow: {
+      type: [String, Number],
+      default: String
+    },
+    hash: {
+      type: [String, Number],
+      default: String
+    },
+    time: {
+      type: [Date, String],
+      default: String
+    }
   }
 }
 </script>
