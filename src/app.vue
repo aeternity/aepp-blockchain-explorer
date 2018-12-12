@@ -1,5 +1,8 @@
 <template>
-  <div id="app" v-if="!hasNewDesigns">
+  <div
+    v-if="!hasNewDesigns"
+    id="app"
+  >
     <nav class="app-nav">
       <div class="inner">
         <RouterLink
