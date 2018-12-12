@@ -1,6 +1,6 @@
 <template>
   <div
-    class="app-row"
+    class="app-table-row"
     :class="{
       extend
     }"
@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../styles/index';
 
-.app-row{
+.app-table-row{
   position: relative;
   display: flex;
   flex-wrap: wrap;

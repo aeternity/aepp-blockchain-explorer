@@ -1,40 +1,29 @@
 <template>
   <div
-    class="app-cell"
-    :class="{
-      extend
-    }
-    "
-  >
-    <span class="title">
+    class="app-table-row-cell" :class="{ extend }">
+    <span class="app-table-row-cell__title">
       {{ title }}
     </span>
-    <span
-      v-if="d"
-      class="d"
-    >
-      {{ d }}
+    <span class=".app-table-row-cell__content" v-if="content">
+      {{ content }}
     </span>
-    <span
-      v-if="time"
-      class="time"
-    >
+    <span class=".app-table-row-cell__time" v-if="time">
       {{ time }}
     </span>
     <span
       v-if="hash"
-      class="content wide mono"
+      class=".app-table-row-cell__content wide mono"
     >
       <RouterLink
         :to=" hash "
-        class="link"
+        class=".app-table-row-cell__link"
       >
         {{ hash }}
       </RouterLink>
     </span>
     <span
       v-if="pow"
-      class="content wide mono"
+      class=".app-table-row-cell__content wide mono"
     >
       {{ hash }}
     </span>
@@ -42,7 +31,7 @@
 </template>
 <script >
 export default {
-  name: 'AppCell',
+  name: 'AppTableRowCell',
   props: {
     title: {
       type: String,
@@ -74,19 +63,19 @@ export default {
 <style lang="scss" scoped>
 @import '../../styles/index';
 
-.app-cell{
+.app-table-row-cell{
   display: block;
   width: 50%;
   padding: 0 .8rem;
 
-    @include sm-lg {
-      display: table-row;
-      &:nth-child(2n) {
-        border-top: 2px solid $color-neutral-positive-2;
-        border-bottom: 2px solid $color-neutral-positive-2;
-      }
-      width: 100%;
+  @include sm-lg {
+    display: table-row;
+    &:nth-child(2n) {
+      border-top: 2px solid $color-neutral-positive-2;
+      border-bottom: 2px solid $color-neutral-positive-2;
     }
+    width: 100%;
+  }
 
   &:not(.extend):nth-child(1) {
     @include xs {
@@ -95,11 +84,24 @@ export default {
   }
 }
 
-.extend {
-  width: 100%;
+.app-table-row-cell__link {
+  color: $color-neutral-negative-1;
+}
+.app-table-row-cell__title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: rem(11px);
+  line-height: 1em;
+  letter-spacing: 0.14em;
 }
 
-.title {
+.app-table-row-cell__content {
+  font-size: rem(15px);
+  line-height: 1.2em;
+  color: $color-neutral-negative-1;
+}
+
+.app-table-row-cell__title {
   margin-bottom: .5rem;
   display: block;
    @include sm-lg {
@@ -113,7 +115,7 @@ export default {
   }
 }
 
-.content {
+.app-table-row-cell__content {
   word-break: break-word;
   @include sm-lg {
     display: table-cell;
@@ -121,26 +123,8 @@ export default {
   }
 }
 
-.wide {
+.app-table-row-cell.extend {
   width: 100%;
 }
-.mono{
-  font-family: $font-mono;
-}
-.link {
-  color: $color-neutral-negative-1;
-}
-.title {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: rem(11px);
-  line-height: 1em;
-  letter-spacing: 0.14em;
-}
 
-.content {
-  font-size: rem(15px);
-  line-height: 1.2em;
-  color: $color-neutral-negative-1;
-}
 </style>

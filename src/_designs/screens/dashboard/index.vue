@@ -5,25 +5,25 @@
     <AppTable
       details
     >
-      <AppRow
+      <AppTableRow
         extend
       >
-        <AppCell
+        <AppTableRowCell
           title="Difficulty"
           content="87472467200"
         />
-        <AppCell
+        <AppTableRowCell
           title="Target"
           content="536930672"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           extend
           title="Hash"
           hash="kh_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N"
         />
-      </AppRow>
+      </AppTableRow>
     </AppTable>
 
     <!-- dynamic table -->
@@ -34,82 +34,82 @@
       :key="transaction.id"
       details
     >
-      <AppRow>
-        <AppCell
+      <AppTableRow>
+        <AppTableRowCell
           extend
           title="Hash"
           :hash="transaction.block_hash"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           title="Difficulty"
           :content="transaction.tx.amount"
         />
-        <AppCell
+        <AppTableRowCell
           title="Target"
           :content="transaction.tx.ttl"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           extend
           title="Miner"
           :hash="transaction.tx.recipient_id"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           title="Nonce"
           :content="transaction.tx.nonce"
         />
-        <AppCell
+        <AppTableRowCell
           title="Version"
           :content="transaction.tx.version"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           extend
           title="Signature"
           :hash="transaction.signatures[0]"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           extend
           title="Prev Hash"
           :hash="transaction.tx.recipient_id"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           extend
           title="Prev Key Hash"
           :hash="transaction.tx.recipient_id"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           extend
           title="State Hash"
           :hash="transaction.tx.recipient_id"
         />
-      </AppRow>
-      <AppRow>
-        <AppCell
+      </AppTableRow>
+      <AppTableRow>
+        <AppTableRowCell
           extend
           title="Pow"
           :hash="transaction.tx.pow"
         />
-      </AppRow>
+      </AppTableRow>
     </AppTable>
   </div>
 </template>
 <script>
 import AppTable from '@/_designs/components/appTable'
-import AppRow from '@/_designs/components/appRow'
-import AppCell from '@/_designs/components/appCell'
+import AppTableRow from '@/_designs/components/appTableRow'
+import AppTableRowCell from '@/_designs/components/appTableRowCell'
 
 const transactions = [
   {
@@ -138,8 +138,8 @@ export default {
   name: 'AppDashboard',
   components: {
     AppTable,
-    AppRow,
-    AppCell
+    AppTableRow,
+    AppTableRowCell
   },
   data: function () {
     return { transactions: transactions }
