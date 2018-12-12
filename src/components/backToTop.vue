@@ -1,8 +1,16 @@
 <template>
-  <span class="btn-wrap" v-if="showing">
-    <ae-button class="top-btn" face="icon" fill="primary"  @click="goOnTop">
-      <ae-icon name="share" />
-    </ae-button>
+  <span
+    v-if="showing"
+    class="btn-wrap"
+  >
+    <AeButton
+      class="top-btn"
+      face="icon"
+      fill="primary"
+      @click="goOnTop"
+    >
+      <AeIcon name="share" />
+    </AeButton>
   </span>
 </template>
 
@@ -29,10 +37,10 @@ export default {
     }
   },
   beforeMount () {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy () {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     goOnTop () {
