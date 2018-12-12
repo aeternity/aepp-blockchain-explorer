@@ -43,19 +43,32 @@
           </Field>
 
           <div class="height-item">
-            <Field name="Block Height">
-            </Field>
+            <Field name="Block Height" />
             <div v-if="!isPending">
-              <span class="height-item__data" v-if="transaction"> {{this.transaction.blockHeight}}</span>
-              <span class="field-value" v-if="transaction"> ( {{this.height - this.transaction.blockHeight }} Block Confirmations )</span>
+              <span
+                v-if="transaction"
+                class="height-item__data"
+              >
+                {{ this.transaction.blockHeight }}
+              </span>
+              <span
+                v-if="transaction"
+                class="field-value"
+              >
+                ( {{ this.height - this.transaction.blockHeight }} Block Confirmations )
+              </span>
             </div>
             <AeLoader v-if="isPending" />
           </div>
 
-          <div class="status-item" v-if="isPending">
-            <Field name="Status">
-            </Field>
-            <span v-if="isPending">Pending</span>
+          <div
+            v-if="isPending"
+            class="status-item"
+          >
+            <Field name="Status" />
+            <span v-if="isPending">
+              Pending
+            </span>
           </div>
 
           <hr>
