@@ -1,21 +1,23 @@
 <template>
-  <div class="app-table"
-  :class="{
-    details
-  }">
-    <slot/>
+  <div
+    class="app-table"
+    :class="{
+      details
+    }"
+  >
+    <slot />
   </div>
 </template>
 <script >
-  export default {
-    name: 'AppTable',
-    props: {
-      /**
+export default {
+  name: 'AppTable',
+  props: {
+    /**
      * Extend the table row full width on mobile
      */
-    details: Boolean,
-    }
+    details: Boolean
   }
+}
 </script>
 <style lang="scss" scoped>
 @import '../../styles/index';

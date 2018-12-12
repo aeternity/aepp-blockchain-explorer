@@ -1,33 +1,62 @@
 <template>
   <div
-  class="app-table-row-cell"
-  :class="{
-    extend
-  }">
-    <div class="title">
+    class="app-cell"
+    :class="{
+      extend
+    }
+    "
+  >
+    <span class="title">
       {{ title }}
-    </div>
-    <div class="text">
-      <slot name="text"/>
-    </div>
+    </span>
+    <span
+      v-if="d"
+      class="d"
+    >
+      {{ d }}
+    </span>
+    <span
+      v-if="time"
+      class="time"
+    >
+      {{ time }}
+    </span>
+    <span
+      v-if="hash"
+      class="content wide mono"
+    >
+      <RouterLink
+        :to=" hash "
+        class="link"
+      >
+        {{ hash }}
+      </RouterLink>
+    </span>
+    <span
+      v-if="pow"
+      class="content wide mono"
+    >
+      {{ hash }}
+    </span>
   </div>
 </template>
 <script >
-  export default {
-    name: 'AppTableRowCell',
-    props: {
-      title: String,
-       /**
-       * Extend the table row full width on mobile
-       */
-      extend: Boolean
-    }
+export default {
+  name: 'AppCell',
+  props: {
+    title: String,
+    extend: Boolean,
+    content: [String, Number],
+    pow: [String, Number],
+    hash: String,
+    time: [Date, String]
   }
+}
 </script>
 <style lang="scss" scoped>
 @import '../../styles/index';
 
-.app-table-row-cell{
+.app-cell{
   display: block;
   width: 50%;
   padding: 0 .8rem;
@@ -40,17 +69,21 @@
       }
       width: 100%;
     }
+
   &:not(.extend):nth-child(1) {
     @include xs {
       border-right: 2px solid $color-neutral-positive-2;
     }
   }
 }
+
 .extend {
   width: 100%;
 }
+
 .title {
   margin-bottom: .5rem;
+  display: block;
    @include sm-lg {
     padding:.8rem;
     margin: 0;
@@ -61,14 +94,24 @@
     border-right: 2px solid $color-neutral-positive-2;
   }
 }
-.text {
+
+.content {
+  word-break: break-word;
   @include sm-lg {
     display: table-cell;
     padding: .8rem;
   }
 }
 
-
+.wide {
+  width: 100%;
+}
+.mono{
+  font-family: $font-mono;
+}
+.link {
+  color: $color-neutral-negative-1;
+}
 .title {
   text-transform: uppercase;
   font-weight: bold;
@@ -77,10 +120,9 @@
   letter-spacing: 0.14em;
 }
 
-.text {
+.content {
   font-size: rem(15px);
   line-height: 1.2em;
   color: $color-neutral-negative-1;
 }
-
 </style>

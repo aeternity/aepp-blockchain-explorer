@@ -1,5 +1,8 @@
 <template>
-  <div id="blockchain" class="app">
+  <div
+    id="blockchain"
+    class="app"
+  >
     <RouterView />
   </div>
 </template>

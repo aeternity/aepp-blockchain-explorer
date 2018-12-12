@@ -19,6 +19,6 @@ export default {
   }, {
     name: 'app/dashboard',
     path: 'dashboard',
-    component: () => import('../screens/dashboard/index.vue'),
+    component: () => import('../screens/dashboard/index.vue')
   }]
-};
+}

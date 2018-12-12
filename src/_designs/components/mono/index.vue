@@ -1,12 +1,12 @@
 <template>
   <span>
-    <slot/>
+    <slot />
   </span>
 </template>
 <script >
-  export default {
-    name: 'Mono',
-  }
+export default {
+  name: 'Mono'
+}
 </script>
 <style lang="scss" scoped>
 @import '../../styles/index';

@@ -1,24 +1,25 @@
 <template>
   <div
-  class="app-table-row"
-  :class="{
-    extend
-  }">
-    <slot/>
+    class="app-row"
+    :class="{
+      extend
+    }"
+  >
+    <slot />
   </div>
 </template>
 <script >
-  export default {
-    name: 'AppTableRow',
-    props: {
-      extend: Boolean
-    }
+export default {
+  name: 'AppTableRow',
+  props: {
+    extend: Boolean
   }
+}
 </script>
 <style lang="scss" scoped>
 @import '../../styles/index';
 
-.app-table-row{
+.app-row{
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -41,7 +42,5 @@
     width: 100%;
   }
 }
-
-
 
 </style>
