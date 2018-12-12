@@ -36,7 +36,7 @@
     </Field>
     <Field name="Deposit">
       <span class="number">
-        {{ transaction.tx.deposit }}
+        {{ transaction.tx.deposit | yaniToAe }}
       </span>
       <span class="unit">
         AE
@@ -46,9 +46,13 @@
       {{ transaction.tx.gas }}
     </Field>
     <Field name="Gas price">
-      {{ transaction.tx.gasPrice }}
+      <div class="number">
+        {{ transaction.tx.gasPrice | yaniToAe }}
+      </div>
+      <span class="unit">
+        AE
+      </span>
     </Field>
-
     <Field name="Contract Code">
       <ContractCode :contract-code="transaction.tx.code" />
     </Field>
