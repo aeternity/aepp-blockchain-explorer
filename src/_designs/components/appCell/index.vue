@@ -61,7 +61,7 @@ export default {
       default: String
     },
     hash: {
-      type: [String, Number],
+      type: String,
       default: String
     },
     time: {
