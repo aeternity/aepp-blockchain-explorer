@@ -45,6 +45,9 @@ html, body {
   display:flex;
   justify-content:center;
   align-items: center;
+  &._relative {
+    position: relative;
+  }
 }
 table {
   width:100%;
