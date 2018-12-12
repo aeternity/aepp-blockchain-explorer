@@ -142,6 +142,7 @@ import NamedAddress from '../../components/namedAddress'
 import AeHash from '../../components/aeHash'
 import Loader from '../../components/loader'
 import FillDummy from '../../components/fillDummy'
+import BackToTop from '../../components/backToTop'
 
 export default {
   components: { AeButton, RelativeTime, NamedAddress, AeHash, Loader, FillDummy },
