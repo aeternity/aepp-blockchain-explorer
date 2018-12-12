@@ -10,10 +10,10 @@
             average rate 1 per
           </span>
           <RelativeTime
+            v-if="getAverageBlockTime"
             :ts="getAverageBlockTime"
             big
             spaced
-            v-if="getAverageBlockTime"
           />
         </div>
         <div>
@@ -21,10 +21,10 @@
             last key block mined
           </span>
           <RelativeTime
+            v-if="getAverageBlockTime"
             :ts="getLastMinedBlockTime(currentTime)"
             big
             spaced
-            v-if="getAverageBlockTime"
           />
           <span class="field-name">
             ago
@@ -38,23 +38,26 @@
             :key="i"
           >
             <td>
-              <transition name="fade">
-                <div
+              <span class="field-name">
+                №
+              </span>
+              <Transition name="fade">
+                <span
                   v-if="generations[height-i+1]"
                   class="height"
                 >
                   <RouterLink :to="`/generation/${generations[height-i+1].keyBlock.height}`">
                     {{ generations[height-i+1].keyBlock.height }}
                   </RouterLink>
-                </div>
-                <FillDummy  v-else />
-              </transition>
+                </span>
+                <FillDummy v-else />
+              </Transition>
             </td>
             <td>
-               <span class="field-name">
-                  key-hash
-                </span>
-              <transition name="fade">
+              <span class="field-name">
+                key-hash
+              </span>
+              <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
@@ -65,13 +68,13 @@
                   />
                 </span>
                 <FillDummy v-else />
-              </transition>
+              </Transition>
             </td>
             <td>
-               <span class="field-name">
-                  Micro Blocks
-                </span>
-              <transition name="fade">
+              <span class="field-name">
+                Micro Blocks
+              </span>
+              <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
@@ -82,13 +85,13 @@
                   v-else
                   size="small"
                 />
-              </transition>
+              </Transition>
             </td>
             <td>
-               <span class="field-name">
-                  Tx
-                </span>
-              <transition name="fade">
+              <span class="field-name">
+                Tx
+              </span>
+              <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
@@ -99,13 +102,13 @@
                   v-else
                   size="small"
                 />
-              </transition>
+              </Transition>
             </td>
             <td>
-               <span class="field-name">
-                  beneficiary
-                </span>
-              <transition name="fade">
+              <span class="field-name">
+                beneficiary
+              </span>
+              <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
                   class="account-address"
@@ -115,21 +118,24 @@
                   </RouterLink>
                 </span>
                 <FillDummy v-else />
-              </transition>
+              </Transition>
             </td>
             <td>
-                <span class="field-name">
-                  time
-                </span>
-              <transition name="fade">
+              <span class="field-name">
+                time
+              </span>
+              <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
                 >
-                  <RelativeTime :ts="currentTime - generations[height-i+1].keyBlock.time" v-if="getAverageBlockTime" />
+                  <RelativeTime
+                    v-if="getAverageBlockTime"
+                    :ts="currentTime - generations[height-i+1].keyBlock.time"
+                  />
                 </span>
                 <FillDummy v-else />
-              </transition>
+              </Transition>
             </td>
           </tr>
         </table>
