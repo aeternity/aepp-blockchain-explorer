@@ -14,7 +14,7 @@ export default function (base) {
       base = base / 10
       exp++
     }
-    const extra = exp > 6 ? exp % 3 : exp - 6
+    const extra = exp % 3
     base = new BigNumber(base).shiftedBy(extra).toNumber()
     exp = exp - 18 - extra
     return base.toString() + ' ' + prefixes[exp.toString()]

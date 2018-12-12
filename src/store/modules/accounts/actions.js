@@ -18,6 +18,7 @@ export default wrapActionsWithResolvedEpoch({
       balance = await epoch.balance(address)
     } catch (e) {
       balance = 0
+      throw new Error(e)
     }
 
     const account = { address, balance }
