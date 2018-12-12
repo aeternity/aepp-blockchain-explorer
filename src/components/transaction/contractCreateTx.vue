@@ -28,9 +28,25 @@
       <Field name="Gas">
         {{ transaction.tx.gas }}
       </Field>
-      <Field name="Gas price">
-        {{ transaction.tx.gasPrice }}
+      <Field name="Fee">
+        <div class="number">
+          {{ transaction.tx.fee | yaniToAe }}
+        </div>
+        <span class="unit">
+          AE
+        </span>
       </Field>
+      <Field name="Version">
+        <div class="number">
+          {{ transaction.tx.version }}
+        </div>
+      </Field>
+      <Field name="Gas price">
+        {{ transaction.tx.gasPrice | yaniToAe }}
+      </Field>
+      <span class="unit">
+        AE
+      </span>
     </div>
   </div>
 </template>

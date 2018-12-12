@@ -1,36 +1,27 @@
 <template>
   <div>
     <Field
-      v-if="transaction.tx.senderId"
-      name="Sender"
+      v-if="transaction.tx.oracleId"
+      name="Oracle"
     >
-      <RouterLink :to="`/account/${transaction.tx.senderId}`">
-        <NamedAddress
-          :address="transaction.tx.senderId"
-          size="short"
-        />
-      </RouterLink>
-      <ViewAndCopy
-        v-if="transaction"
-        :text="transaction.tx.senderId"
+      <AeHash
+        :hash="transaction.tx.oracleId"
+        type="short"
       />
-      <FillDummy
-        v-else
-        color="grey"
-      />
+      <ViewAndCopy :text="transaction.tx.oracleId" />
     </Field>
-    <Field name="Payload">
+    <Field
+      v-if="transaction"
+      name="Oracle TTL(Delta)"
+    >
       <div class="number">
-        {{ transaction.tx.payload }}
+        {{ transaction.tx.oracleTtl.value }}
       </div>
     </Field>
-    <Field name="Amount">
+    <Field name="Type ">
       <div class="number">
-        {{ transaction.tx.amount | yaniToAe }}
+        {{ transaction.tx.type }}
       </div>
-      <span class="unit">
-        AE
-      </span>
     </Field>
     <Field name="Fee">
       <div class="number">
@@ -49,17 +40,15 @@
 </template>
 <script>
 import Field from '../../components/field'
-import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
-import FillDummy from '../../components/fillDummy'
+import AeHash from '../../components/aeHash'
 
 export default {
-  name: 'SpendTx',
+  name: 'OracleExtendTx',
   components: {
     Field,
-    NamedAddress,
     ViewAndCopy,
-    FillDummy
+    AeHash
   },
   props: {
     transaction: {

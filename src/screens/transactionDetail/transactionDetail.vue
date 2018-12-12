@@ -17,7 +17,10 @@
         </h2>
         <div>
           <Field name="Type">
-            <AeBadge v-if="transaction">
+            <AeBadge
+              v-if="transaction"
+              class="transaction-type"
+            >
               {{ transaction.tx.type | txTypeToName }}
             </AeBadge>
             <FillDummy
@@ -43,19 +46,34 @@
           </Field>
 
           <div class="height-item">
-            <Field name="Block Height">
-            </Field>
+            <Field name="Block Height" />
             <div v-if="!isPending">
-              <span class="height-item__data" v-if="transaction"> {{this.transaction.blockHeight}}</span>
-              <span class="field-value" v-if="transaction"> ( {{this.height - this.transaction.blockHeight }} Block Confirmations )</span>
+              <RouterLink
+                v-if="transaction"
+                :to="`/generation/${transaction.blockHeight}`"
+              >
+                <span class="height-item__data">
+                  {{ transaction.blockHeight }}
+                </span>
+              </RouterLink>
+              <span
+                v-if="transaction"
+                class="field-value"
+              >
+                ( {{ height - transaction.blockHeight }} Block Confirmations )
+              </span>
             </div>
             <AeLoader v-if="isPending" />
           </div>
 
-          <div class="status-item" v-if="isPending">
-            <Field name="Status">
-            </Field>
-            <span v-if="isPending">Pending</span>
+          <div
+            v-if="isPending"
+            class="status-item"
+          >
+            <Field name="Status" />
+            <span v-if="isPending">
+              Pending
+            </span>
           </div>
 
           <hr>
@@ -122,7 +140,7 @@
               <Field
                 v-for="(signature, n) in transaction.signatures"
                 :key="n"
-                :name="toString(n)"
+                :name="n.toString()"
               >
                 <AeHash
                   :hash="signature"
@@ -187,6 +205,7 @@ import {
 
 import SpendTx from './spendTx.vue'
 import OracleRegisterTx from './oracleRegisterTx.vue'
+import OracleExtendTx from './oracleExtendTx'
 import OracleResponseTx from './oracleResponseTx.vue'
 import OracleQueryTx from './oracleQueryTx.vue'
 import NameClaimTx from './nameClaimTx.vue'
@@ -223,7 +242,8 @@ export default {
     ContractCallTx,
     ContractCreateTx,
     FillDummy,
-    AeLoader
+    AeLoader,
+    OracleExtendTx
   },
   filters: { txTypeToName },
   props: {
