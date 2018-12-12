@@ -1,62 +1,21 @@
 <template>
-  <div
-    class="app-table-row-cell" :class="{ extend }">
-    <span class="app-table-row-cell__title">
-      {{ title }}
-    </span>
-    <span class=".app-table-row-cell__content" v-if="content">
-      {{ content }}
-    </span>
-    <span class=".app-table-row-cell__time" v-if="time">
-      {{ time }}
-    </span>
-    <span
-      v-if="hash"
-      class=".app-table-row-cell__content wide mono"
-    >
-      <RouterLink
-        :to=" hash "
-        class=".app-table-row-cell__link"
-      >
-        {{ hash }}
-      </RouterLink>
-    </span>
-    <span
-      v-if="pow"
-      class=".app-table-row-cell__content wide mono"
-    >
-      {{ hash }}
-    </span>
+  <div class="app-table-row-cell" :class="{ extend }">
+    <div class="app-table-row-cell__title">
+      <slot name="title"/>
+    </div>
+    <div class="app-table-row-cell__content">
+      <slot name="content"/>
+    </div>
   </div>
 </template>
 <script >
 export default {
   name: 'AppTableRowCell',
   props: {
-    title: {
-      type: String,
-      default: String
-    },
     extend: {
       type: Boolean,
       default: false
     },
-    content: {
-      type: [String, Number],
-      default: String
-    },
-    pow: {
-      type: [String, Number],
-      default: String
-    },
-    hash: {
-      type: String,
-      default: String
-    },
-    time: {
-      type: [Date, String],
-      default: String
-    }
   }
 }
 </script>
@@ -70,34 +29,26 @@ export default {
 
   @include sm-lg {
     display: table-row;
-    &:nth-child(2n) {
-      border-top: 2px solid $color-neutral-positive-2;
-      border-bottom: 2px solid $color-neutral-positive-2;
-    }
+    border-bottom: 2px solid $color-neutral-positive-2;
     width: 100%;
   }
 
-  &:not(.extend):nth-child(1) {
+  &:not(.extend):first-child {
     @include xs {
       border-right: 2px solid $color-neutral-positive-2;
     }
   }
 }
 
-.app-table-row-cell__link {
-  color: $color-neutral-negative-1;
-}
 .app-table-row-cell__title {
   text-transform: uppercase;
   font-weight: bold;
-  font-size: rem(11px);
+  font-size: rem(12px);
   line-height: 1em;
   letter-spacing: 0.14em;
 }
 
 .app-table-row-cell__content {
-  font-size: rem(15px);
-  line-height: 1.2em;
   color: $color-neutral-negative-1;
 }
 

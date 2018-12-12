@@ -2,106 +2,38 @@
   <div class="app-dashboard">
     <h1>App-Dashboard</h1>
     <!-- static table -->
-    <AppTable
-      details
-    >
-      <AppTableRow
-        extend
-      >
-        <AppTableRowCell
-          title="Difficulty"
-          content="87472467200"
-        />
-        <AppTableRowCell
-          title="Target"
-          content="536930672"
-        />
+    <AppTable details>
+      <AppTableRow extend >
+        <AppTableRowCell>
+          <template slot="title">
+              Difficulty
+          </template>
+          <template slot="content">
+            <ae-text face="mono-base">
+              87472467200
+            </ae-text>
+          </template>
+        </AppTableRowCell>
+        <AppTableRowCell>
+          <template slot="title">
+              Target
+          </template>
+          <template slot="content">
+            <ae-text face="mono-base">
+              87472467200
+            </ae-text>
+          </template>
+        </AppTableRowCell>
       </AppTableRow>
       <AppTableRow>
-        <AppTableRowCell
-          extend
-          title="Hash"
-          hash="kh_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N"
-        />
-      </AppTableRow>
-    </AppTable>
-
-    <!-- dynamic table -->
-    <h2>Dynamic table</h2>
-
-    <AppTable
-      v-for="transaction in transactions"
-      :key="transaction.id"
-      details
-    >
-      <AppTableRow>
-        <AppTableRowCell
-          extend
-          title="Hash"
-          :hash="transaction.block_hash"
-        />
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell
-          title="Difficulty"
-          :content="transaction.tx.amount"
-        />
-        <AppTableRowCell
-          title="Target"
-          :content="transaction.tx.ttl"
-        />
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell
-          extend
-          title="Miner"
-          :hash="transaction.tx.recipient_id"
-        />
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell
-          title="Nonce"
-          :content="transaction.tx.nonce"
-        />
-        <AppTableRowCell
-          title="Version"
-          :content="transaction.tx.version"
-        />
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell
-          extend
-          title="Signature"
-          :hash="transaction.signatures[0]"
-        />
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell
-          extend
-          title="Prev Hash"
-          :hash="transaction.tx.recipient_id"
-        />
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell
-          extend
-          title="Prev Key Hash"
-          :hash="transaction.tx.recipient_id"
-        />
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell
-          extend
-          title="State Hash"
-          :hash="transaction.tx.recipient_id"
-        />
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell
-          extend
-          title="Pow"
-          :hash="transaction.tx.pow"
-        />
+        <AppTableRowCell extend>
+          <template slot="title">
+              Hash
+          </template>
+          <template slot="content">
+            <AeAddress value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE" length="flat" />
+          </template>
+        </AppTableRowCell>
       </AppTableRow>
     </AppTable>
   </div>
@@ -110,6 +42,8 @@
 import AppTable from '@/_designs/components/appTable'
 import AppTableRow from '@/_designs/components/appTableRow'
 import AppTableRowCell from '@/_designs/components/appTableRowCell'
+
+import { AeText, AeAddress } from '@aeternity/aepp-components-3'
 
 const transactions = [
   {
@@ -139,7 +73,9 @@ export default {
   components: {
     AppTable,
     AppTableRow,
-    AppTableRowCell
+    AppTableRowCell,
+    AeText,
+    AeAddress
   },
   data: function () {
     return { transactions: transactions }
