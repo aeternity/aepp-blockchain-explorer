@@ -164,7 +164,14 @@ import Loader from '../../components/loader'
 import FillDummy from '../../components/fillDummy'
 
 export default {
-  components: { AeButton, RelativeTime, NamedAddress, AeHash, Loader, FillDummy },
+  components: {
+    AeButton,
+    RelativeTime,
+    NamedAddress,
+    AeHash,
+    Loader,
+    FillDummy
+  },
   mixins: [currentTime],
   data: function () {
     return {

@@ -68,33 +68,33 @@ export default {
   },
   methods: {
     async search () {
-      let trimString = this.searchString.trim()
-      if (blockHeightRegex.test(trimString) && (trimString <= this.height)) {
-        this.$router.push({ path: `/generation/${trimString}` })
-      } else if (blockHashRegex.test(trimString)) {
+      this.searchString = this.searchString.trim()
+      if (blockHeightRegex.test(this.searchString) && (this.searchString <= this.height)) {
+        this.$router.push({ path: `/generation/${this.searchString}` })
+      } else if (blockHashRegex.test(this.searchString)) {
         try {
-          await this.$store.dispatch('blocks/getBlockFromHash', trimString)
-          this.$router.push({ path: `/generation/${trimString}` })
+          await this.$store.dispatch('blocks/getBlockFromHash', this.searchString)
+          this.$router.push({ path: `/generation/${this.searchString}` })
         } catch (e) {
           alert('not a valid block hash/height/tx, account public key or domain name')
         }
-      } else if (transactionHashRegex.test(trimString)) {
+      } else if (transactionHashRegex.test(this.searchString)) {
         try {
-          await this.$store.dispatch('transactions/getTxByHash', trimString)
-          this.$router.push({ path: `/tx/${trimString}` })
+          await this.$store.dispatch('transactions/getTxByHash', this.searchString)
+          this.$router.push({ path: `/tx/${this.searchString}` })
         } catch (e) {
           alert('not a valid block hash/height/tx, account public key or domain name')
         }
-      } else if (accountPublicKeyRegex.test(trimString)) {
+      } else if (accountPublicKeyRegex.test(this.searchString)) {
         try {
-          await this.$store.dispatch('accounts/get', trimString)
-          this.$router.push({ path: `/account/${trimString}` })
+          await this.$store.dispatch('accounts/get', this.searchString)
+          this.$router.push({ path: `/account/${this.searchString}` })
         } catch (e) {
           alert('not a valid block hash/height/tx, account public key or domain name')
         }
-      } else if (nameRegex.test(trimString)) {
+      } else if (nameRegex.test(this.searchString)) {
         // check if name
-        const pubKey = await this.fetchDomain(trimString)
+        const pubKey = await this.fetchDomain(this.searchString)
         if (pubKey) {
           this.$router.push({ path: `/account/${pubKey}` })
         } else {
