@@ -1,6 +1,5 @@
 <template>
   <span
-    v-if="showing"
     class="btn-wrap"
   >
     <AeButton
@@ -9,7 +8,7 @@
       fill="primary"
       @click="goOnTop"
     >
-      <AeIcon name="share" />
+      <AeIcon name="left-more" />
     </AeButton>
   </span>
 </template>
@@ -24,12 +23,6 @@ export default {
   components: {
     AeButton,
     AeIcon
-  },
-  props: {
-    showing: {
-      type: Boolean,
-      required: true
-    }
   },
   data () {
     return {
@@ -62,6 +55,10 @@ export default {
   .btn-wrap {
     /deep/ .ae-button.primary {
       background-color: $magaenta;
+    }
+
+    /deep/ .ae-icon {
+      transform: rotate(-90deg);
     }
   }
 </style>

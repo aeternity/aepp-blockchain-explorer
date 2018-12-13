@@ -285,6 +285,9 @@
             </section>
           </article>
         </template>
+        <div class="action-wrapper">
+          <BackToTop />
+        </div>
       </section>
     </section>
   </article>
@@ -299,13 +302,22 @@ import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import FillDummy from '../../components/fillDummy'
+import BackToTop from '../../components/backToTop'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const blockHeightRegex = RegExp('^[0-9]+')
 
 export default {
   name: 'Generation',
-  components: { RelativeTime, Transaction, Field, AeHash, ViewAndCopy, FillDummy },
+  components: {
+    RelativeTime,
+    Transaction,
+    Field,
+    AeHash,
+    ViewAndCopy,
+    FillDummy,
+    BackToTop
+  },
   mixins: [currentTime],
   props: {
     generationId: {

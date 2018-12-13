@@ -120,7 +120,7 @@
           </tr>
         </table>
       </div>
-      <div class="center _relative">
+      <div class="center">
         <Loader v-if="isLoadingMore" />
         <AeButton
           v-else
@@ -129,10 +129,6 @@
         >
           load more
         </AeButton>
-        <BackToTop
-          class="backToTop"
-          :showing="showMore"
-        />
       </div>
     </div>
   </div>
@@ -146,7 +142,6 @@ import NamedAddress from '../../components/namedAddress'
 import AeHash from '../../components/aeHash'
 import Loader from '../../components/loader'
 import FillDummy from '../../components/fillDummy'
-import BackToTop from '../../components/backToTop'
 
 export default {
   components: {
@@ -155,15 +150,13 @@ export default {
     NamedAddress,
     AeHash,
     Loader,
-    FillDummy,
-    BackToTop
+    FillDummy
   },
   mixins: [currentTime],
   data: function () {
     return {
       isLoadingMore: false,
-      numGenerations: 4,
-      showMore: false
+      numGenerations: 4
     }
   },
   computed: {
@@ -191,7 +184,6 @@ export default {
       this.numGenerations += toAdd
       await this.$store.dispatch('blocks/getLatestGenerations', Object.keys(this.generations).length + toAdd)
       this.isLoadingMore = false
-      this.showMore = true
     }
   }
 }
