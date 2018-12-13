@@ -17,6 +17,7 @@
         <AeIcon
           slot="icon"
           name="view"
+          :type="color"
         />
       </AeButton>
     </Popper>
@@ -37,6 +38,7 @@
       <AeIcon
         slot="icon"
         name="copy"
+        :type="color"
       />
     </AeButton>
   </div>
@@ -58,6 +60,11 @@ export default {
     text: {
       type: String,
       required: true
+    },
+    color: {
+      default: 'exciting',
+      type: String,
+      required: false
     }
   },
   data () {

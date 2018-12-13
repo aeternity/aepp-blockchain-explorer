@@ -79,6 +79,7 @@
               </RouterLink>
               <ViewAndCopy
                 v-if="!isLoading"
+                color="dramatic"
                 :text="generation.keyBlock.beneficiary"
               />
               <FillDummy v-else />
@@ -108,6 +109,7 @@
               </RouterLink>
               <ViewAndCopy
                 v-if="!isLoading"
+                color="dramatic"
                 :text="generation.keyBlock.hash"
               />
               <FillDummy v-else />
@@ -160,6 +162,7 @@
                   </RouterLink>
                   <ViewAndCopy
                     v-if="!isLoading"
+                    color="dramatic"
                     :text="generation.keyBlock.prevHash"
                   />
                   <FillDummy
