@@ -23,11 +23,6 @@ export default {
     AeButton,
     AeIcon
   },
-  data () {
-    return {
-      scrolled: 0
-    }
-  },
   methods: {
     goOnTop () {
       window.scrollTo({
