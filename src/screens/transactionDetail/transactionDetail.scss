@@ -40,6 +40,15 @@
   .height-item {
     &__data {
       color: $magaenta;
+      @include only-phone {
+        display: block;
+      }
+    }
+
+    .confirmations {
+      @include only-phone {
+        font-size: 14px;
+      }
     }
   }
   .ae-loader {
