@@ -58,7 +58,7 @@
               </RouterLink>
               <span
                 v-if="transaction"
-                class="field-value"
+                class="field-value confirmations"
               >
                 ( {{ height - transaction.blockHeight }} Block Confirmations )
               </span>
