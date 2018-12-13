@@ -96,8 +96,7 @@
     opacity:0.4;
   }
   .field-value {
-    margin-top:5px;
-    @include font-size(l);
+    @include font-size(m);
     @include only-phone {
       @include font-size(m);
     }
