@@ -1,7 +1,5 @@
 <template>
-  <span
-    class="btn-wrap"
-  >
+  <span class="btn-wrap">
     <AeButton
       class="top-btn"
       face="icon"
@@ -18,6 +16,7 @@ import {
   AeButton,
   AeIcon
 } from '@aeternity/aepp-components-3'
+
 export default {
   name: 'BackToTop',
   components: {
@@ -29,12 +28,6 @@ export default {
       scrolled: 0
     }
   },
-  beforeMount () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  beforeDestroy () {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
   methods: {
     goOnTop () {
       window.scrollTo({
@@ -42,9 +35,6 @@ export default {
         left: 0,
         behavior: 'smooth'
       })
-    },
-    handleScroll () {
-      this.scrolled = window.scrollY
     }
   }
 }
