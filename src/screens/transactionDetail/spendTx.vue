@@ -19,6 +19,25 @@
         color="grey"
       />
     </Field>
+    <Field
+      v-if="transaction.tx.recipientId"
+      name="Recipient"
+    >
+      <RouterLink :to="`/account/${transaction.tx.recipientId}`">
+        <NamedAddress
+          :address="transaction.tx.recipientId"
+          size="short"
+        />
+      </RouterLink>
+      <ViewAndCopy
+        v-if="transaction"
+        :text="transaction.tx.recipientId"
+      />
+      <FillDummy
+        v-else
+        color="grey"
+      />
+    </Field>
     <Field name="Payload">
       <div class="number">
         {{ transaction.tx.payload }}
