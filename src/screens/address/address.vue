@@ -48,6 +48,38 @@
         />
       </Field>
     </header>
+    <h2>Transactions</h2>
+    <div
+      v-if="account"
+      class="transactions"
+    >
+      <Transaction
+        v-for="t in account.transactions"
+        :key="t.hash"
+        :transaction="t"
+      />
+    </div>
+    <div v-else>
+      <div><FillDummy color="grey" /></div>
+      <div>
+        <FillDummy
+          color="grey"
+          size="big"
+        />
+      </div>
+      <div>
+        <FillDummy
+          color="grey"
+          size="big"
+        />
+      </div>
+      <div>
+        <FillDummy
+          color="grey"
+          size="big"
+        />
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -57,6 +89,7 @@ import pollAction from '../../mixins/pollAction'
 import NamedAddress from '../../components/namedAddress'
 import Field from '../../components/field'
 import FillDummy from '../../components/fillDummy'
+import Transaction from '../../components/transaction/transaction'
 
 // TODO: There is a reactivity problem in here, The v-if does not work
 export default {
@@ -66,7 +99,8 @@ export default {
     AeIdentityAvatar,
     NamedAddress,
     Field,
-    FillDummy
+    FillDummy,
+    Transaction
   },
   mixins: [pollAction('accounts/get', ({ address }) => address)],
   props: {
