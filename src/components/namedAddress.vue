@@ -51,4 +51,10 @@ export default {
   }
 }
 </script>
-<style></style>
+<style lang="scss" scoped>
+  .named-address{
+    .ae-address  /deep/ .address {
+        letter-spacing: 0;
+    }
+  }
+</style>
