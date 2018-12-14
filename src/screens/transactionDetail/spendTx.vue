@@ -4,7 +4,6 @@
       v-if="transaction.tx.senderId"
       name="Sender"
     >
-    
       <RouterLink :to="`/account/${transaction.tx.senderId}`">
         <NamedAddress
           :address="transaction.tx.senderId"
@@ -21,10 +20,9 @@
       />
     </Field>
     <Field
-      v-if="transaction.tx.senderId"
+      v-if="transaction.tx.recipientId"
       name="Recipient"
     >
-    
       <RouterLink :to="`/account/${transaction.tx.recipientId}`">
         <NamedAddress
           :address="transaction.tx.recipientId"
