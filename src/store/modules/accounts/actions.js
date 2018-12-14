@@ -1,6 +1,7 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 import { wrapActionsWithResolvedEpoch } from '../../utils'
+import camelcaseKeysDeep from 'camelcase-keys-deep'
 
 export default wrapActionsWithResolvedEpoch({
   /**
@@ -13,6 +14,7 @@ export default wrapActionsWithResolvedEpoch({
    */
   async get ({ state, rootGetters: { epoch }, commit }, address) {
     let balance = 0
+    let transactions = []
 
     try {
       balance = await epoch.balance(address)
@@ -20,8 +22,15 @@ export default wrapActionsWithResolvedEpoch({
       balance = 0
       throw new Error(e)
     }
+    try {
+      let resp = await fetch('https://mdw.aepps.com/middleware/transactions/account/' + address)
+      transactions = camelcaseKeysDeep((await resp.json()).transactions)
+    } catch (e) {
+      transactions = []
+      throw new Error(e)
+    }
 
-    const account = { address, balance }
+    const account = { address, balance, transactions }
 
     if (isEqual(state.accounts[address], account)) return account
 
