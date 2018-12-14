@@ -38,8 +38,8 @@ export default {
 <style scoped lang='scss'>
   @import '../style/mixins';
   .btn-wrap {
-    /deep/ .ae-button.primary {
-      background-color: $magaenta;
+    /deep/ .ae-button {
+      background: $magaenta;
     }
 
     /deep/ .ae-icon {

@@ -38,9 +38,10 @@
             :key="i"
           >
             <td>
-              <span class="field-name">
-                №
-              </span>
+              <span
+                v-if="!generations[height-i+1]"
+                class="field-name field-name_first "
+              />
               <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
