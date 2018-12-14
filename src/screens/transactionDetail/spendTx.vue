@@ -37,7 +37,7 @@
         v-else
         color="grey"
       />
-    </Field>    
+    </Field>
     <Field name="Payload">
       <div class="number">
         {{ transaction.tx.payload }}
