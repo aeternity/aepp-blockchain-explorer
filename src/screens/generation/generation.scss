@@ -34,8 +34,10 @@
   }
 }
 
-.action-wrapper {
-  text-align: right;
+.backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
 }
 
 .generation-screen {

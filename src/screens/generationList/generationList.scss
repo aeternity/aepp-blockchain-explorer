@@ -7,6 +7,11 @@
   }
   .field-name {
     @include font-size(s);
+    &_first {
+      display: inline-block;
+      width: 20px;
+      height: 38px;
+    }
   }
   .grid {
     border-bottom:2px solid $smoke;

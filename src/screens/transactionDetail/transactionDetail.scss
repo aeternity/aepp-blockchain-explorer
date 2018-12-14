@@ -10,12 +10,18 @@
     max-width:777px;
     margin:30px auto 0 auto;
     padding:35px 70px;
+    @include only-phone {
+      padding:35px 30px;
+    }
   }
   .title {
     margin-top:0;
     margin-bottom:0;
     @include font-size(xxl);
     color:$black;
+    @include only-phone {
+      @include font-size(xl);
+    }
   }
   .title + h2 {
     margin-top:0.3em;
