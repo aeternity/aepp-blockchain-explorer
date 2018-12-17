@@ -218,74 +218,7 @@
                 Micro Block No. {{ index+1 }}
               </span>
             </h4>
-            <section class="micro-block">
-              <div class="grid">
-                <Field
-                  name="hash"
-                  class="hash"
-                >
-                  <RouterLink :to="`/block/${m.hash}`">
-                    <AeHash
-                      :hash="m.hash"
-                      type="short"
-                    />
-                  </RouterLink>
-                  <ViewAndCopy :text="m.hash" />
-                </Field>
-                <Field
-                  v-cloak
-                  name="time since mined"
-                >
-                  <RelativeTime
-                    :ts="currentTime - m.time"
-                    spaced
-                  />
-                </Field>
-              </div>
-              <div class="grid">
-                <Field
-                  v-cloak
-                  name="time"
-                  class="time"
-                >
-                  <time
-                    :timedate="m.time | humanDate"
-                    class="field-value number"
-                  >
-                    {{ m.time | humanDate }}
-                  </time>
-                </Field>
-                <Field
-                  name="parent hash"
-                  class="hash"
-                >
-                  <RouterLink :to="`/block/${m.prevHash}`">
-                    <AeHash
-                      :hash="m.prevHash"
-                      type="short"
-                    />
-                  </RouterLink>
-                  <ViewAndCopy :text="m.prevHash" />
-                </Field>
-              </div>
-
-              <article class="block-transactions">
-                <header class="block-transactions__header">
-                  <h2 class="title title-sub">
-                    <span class="number">
-                      {{ m.transactions.length }}
-                    </span> Transaction{{ m.transactions.length !== 1 ? 's' : '' }}
-                  </h2>
-                </header>
-                <div class="transactions">
-                  <Transaction
-                    v-for="t in m.transactions"
-                    :key="t.hash"
-                    :transaction="t"
-                  />
-                </div>
-              </article>
-            </section>
+            <MicroBlock :micro-block="m" />
           </article>
         </template>
       </section>
@@ -298,12 +231,12 @@
 import { mapState } from 'vuex'
 import currentTime from '../../mixins/currentTime'
 import RelativeTime from '../../components/relativeTime'
-import Transaction from '../../components/transaction/transaction'
 import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import FillDummy from '../../components/fillDummy'
 import BackToTop from '../../components/backToTop'
+import MicroBlock from '../../components/microBlock/microBlock'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -312,12 +245,12 @@ export default {
   name: 'Generation',
   components: {
     RelativeTime,
-    Transaction,
     Field,
     AeHash,
     ViewAndCopy,
     FillDummy,
-    BackToTop
+    BackToTop,
+    MicroBlock
   },
   mixins: [currentTime],
   props: {
