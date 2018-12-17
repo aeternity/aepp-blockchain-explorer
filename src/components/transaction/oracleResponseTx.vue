@@ -1,38 +1,21 @@
 <template>
   <div>
     <div class="grid">
-      <Field>
-        <span class="field-name">
-          Oracle
-        </span>
+      <Field name="Oracle">
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.account">
-            <NamedAddress :address="transaction.tx.account" />
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracleId">
+            <NamedAddress :address="transaction.tx.oracleId" />
           </RouterLink>
         </div>
       </Field>
-      <Field>
-        <span class="field-name">
-          QueryId
-        </span>
-        <div class="">
-          {{ transaction.tx.query_id }}
+      <Field name="Query">
+        <div class="account-address">
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.queryId">
+            <NamedAddress :address="transaction.tx.queryId" />
+          </RouterLink>
         </div>
       </Field>
     </div>
-    <Field>
-      <span class="field-name">
-        Response
-      </span>
-      <pre
-        v-if="responsePrettyJson "
-        class="response"
-      >{{ responsePrettyJson }}</pre>
-      <pre
-        v-else
-        class="response"
-      >{{ transaction.tx.response }}</pre>
-    </Field>
   </div>
 </template>
 <script>

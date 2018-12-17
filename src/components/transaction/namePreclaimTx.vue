@@ -6,15 +6,6 @@
           <NamedAddress :address="transaction.tx.accountId" />
         </RouterLink>
       </Field>
-      <Field name="commitment">
-        <AeHash
-          :hash="transaction.tx.commitmentId"
-          type="short"
-        />
-      </Field>
-      <Field name="fee">
-        {{ transaction.tx.fee }}
-      </Field>
     </div>
   </div>
 </template>

@@ -2,15 +2,12 @@
   <div>
     <div class="grid">
       <Field name="account">
-        <RouterLink :to="&quot;/account/&quot; + transaction.tx.account">
-          <NamedAddress :address="transaction.tx.account" />
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.accountId">
+          <NamedAddress :address="transaction.tx.accountId" />
         </RouterLink>
       </Field>
       <Field name="name">
         {{ transaction.tx.name }}
-      </Field>
-      <Field name="name_salt">
-        {{ transaction.tx.name_salt }}
       </Field>
     </div>
   </div>
