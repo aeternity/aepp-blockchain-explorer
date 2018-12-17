@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="grid">
-      <Field name="Oracle">
-        <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracleId">
-            <NamedAddress :address="transaction.tx.oracleId" />
-          </RouterLink>
-        </div>
-      </Field>
       <Field name="Sender">
         <div class="account-address">
           <RouterLink :to="&quot;/account/&quot; + transaction.tx.senderId">
             <NamedAddress :address="transaction.tx.senderId" />
+          </RouterLink>
+        </div>
+      </Field>
+      <Field name="Oracle">
+        <div class="account-address">
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracleId">
+            <NamedAddress :address="transaction.tx.oracleId" />
           </RouterLink>
         </div>
       </Field>
