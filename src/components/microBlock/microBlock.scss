@@ -36,4 +36,7 @@
   .transactions .transaction:nth-child(even) {
     background:$smoke;
   }
+  .grid .field:not(:last-child) {
+    margin-right:50px;
+  }
 }
