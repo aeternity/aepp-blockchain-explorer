@@ -17,11 +17,10 @@
 <script>
 import Field from '../field'
 import NamedAddress from '../namedAddress'
-import AeHash from '../aeHash'
 
 export default {
   name: 'NameUpdateTx',
-  components: { Field, NamedAddress, AeHash },
+  components: { Field, NamedAddress },
   props: {
     transaction: {
       type: Object,

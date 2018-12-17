@@ -12,11 +12,10 @@
 <script>
 import Field from '../field'
 import NamedAddress from '../namedAddress'
-import AeHash from '../aeHash'
 
 export default {
   name: 'NamePreclaimTx',
-  components: { Field, NamedAddress, AeHash },
+  components: { Field, NamedAddress },
   props: {
     transaction: {
       type: Object,
