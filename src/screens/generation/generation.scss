@@ -121,8 +121,9 @@
       margin-right:50px;
     }
   }
-  .transactions .transaction:nth-child(even) {
-    background:$smoke;
+
+  .transactions {
+    overflow-x: auto;
   }
 
   .micro-block {

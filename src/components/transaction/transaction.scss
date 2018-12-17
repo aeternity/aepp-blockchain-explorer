@@ -2,8 +2,14 @@
 
 .transaction {
   padding:20px 00px;
+  display: flex;
+  min-width: 889px;
+  border-bottom: 2px solid $paleGrey;
+  &:hover {
+    background:$smoke;
+  }
   .header {
-    align-items:top;
+    align-items: center;
   }
   .header ,
   .body .grid {
@@ -17,19 +23,15 @@
   .body .grid > * {
     margin:0 20px;
   }
-  .header .field:first-child {
-    width:35%;
-    min-width:240px;
-  }
   .field {
     display:block !important;
   }
   .field-value .ae-address,
   .field-value {
-    @include font-size(m);
-  }
-  a {
-    color:$magaenta;
+    @include font-size(s);
+    .number, .unit, a {
+      color: $aubergin;
+    }
   }
   .query-spec,
   .response-spec,

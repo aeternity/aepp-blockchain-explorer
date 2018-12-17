@@ -7,42 +7,6 @@
       <Field>
         <AeBadge>{{ transaction.tx.type | txTypeToName }}</AeBadge>
       </Field>
-
-      <Field
-        v-if="transaction.tx.nonce"
-        name="nonce"
-      >
-        <div class="number">
-          {{ transaction.tx.nonce }}
-        </div>
-      </Field>
-
-      <Field
-        v-if="transaction.tx.fee"
-        name="fee"
-      >
-        <div>
-          <span class="number">
-            {{ transaction.tx.fee | yaniToAe }}
-          </span>
-          <span class="unit">
-            AE
-          </span>
-        </div>
-      </Field>
-      <Field name="block">
-        <div class="number">
-          <RouterLink
-            v-if="transaction.blockHeight"
-            :to="&quot;/block/&quot; + transaction.blockHeight"
-          >
-            {{ transaction.blockHeight }}
-          </RouterLink>
-          <template v-else>
-            n/a
-          </template>
-        </div>
-      </Field>
       <Field
         v-if="transaction.hash"
         name="tx hash"
