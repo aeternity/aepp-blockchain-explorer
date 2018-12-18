@@ -95,4 +95,4 @@ export default {
 }
 </script>
 
-<style src='./microBlock.scss' lang='scss' />
+<style scoped src='./microBlock.scss' lang='scss' />
