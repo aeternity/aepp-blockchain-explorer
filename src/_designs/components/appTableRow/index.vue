@@ -17,10 +17,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../styles/index';
+@import "~@aeternity/aepp-components-3/src/styles/variables/colors";
 
 .app-table-row{
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -33,13 +32,14 @@ export default {
   &:not(:last-child) {
     border-bottom: 2px solid $color-neutral-positive-2;
   }
+
   &:last-child {
     border-bottom: none;
   }
 
-  @include sm-lg {
-    display: table;
+  @media (min-width: 450px) {
     width: 100%;
+    padding: 0;
   }
 }
 

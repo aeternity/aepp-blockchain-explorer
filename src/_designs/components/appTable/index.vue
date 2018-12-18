@@ -20,23 +20,16 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../styles/index';
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+
   .app-table{
-    @include xs {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    background-color: $white;
-    display: table;
-    border-collapse: collapse;
     display: flex;
     flex-direction: column
   }
-  .details {
+  .app-table.details {
     background-color: $color-neutral-positive-3;
-
-    @include sm-lg {
-      background-color: $white;
+    @media  (min-width: 450px) {
+      background-color: #FFFFFF;
     }
   }
 </style>

@@ -3,36 +3,43 @@
     <h1>App-Dashboard</h1>
     <!-- static table -->
     <AppTable details>
-      <AppTableRow extend >
+      <AppTableRow extend>
         <AppTableRowCell>
-          <template slot="title">
-              Difficulty
-          </template>
-          <template slot="content">
-            <ae-text face="mono-base">
-              87472467200
-            </ae-text>
-          </template>
+          <AeText
+            slot="title"
+            face="uppercase-base"
+          >
+            Difficulty
+          </AeText>
+          <AeText face="mono-s">
+            87472467200
+          </AeText>
         </AppTableRowCell>
         <AppTableRowCell>
-          <template slot="title">
-              Target
-          </template>
-          <template slot="content">
-            <ae-text face="mono-base">
-              87472467200
-            </ae-text>
-          </template>
+          <AeText
+            slot="title"
+            face="uppercase-base"
+          >
+            Target
+          </AeText>
+          <AeText face="mono-s">
+            87472467200
+          </AeText>
         </AppTableRowCell>
       </AppTableRow>
       <AppTableRow>
         <AppTableRowCell extend>
-          <template slot="title">
-              Hash
-          </template>
-          <template slot="content">
-            <AeAddress value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE" length="flat" />
-          </template>
+          <AeText
+            slot="title"
+            face="uppercase-base"
+          >
+            Hash
+          </AeText>
+          <AeAddress
+            value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
+            length="flat"
+            face="mono-s"
+          />
         </AppTableRowCell>
       </AppTableRow>
     </AppTable>
@@ -83,6 +90,5 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../../styles/index';
 .app-dashboard {}
 </style>
