@@ -19,6 +19,14 @@
     justify-content: space-evenly;
     min-height: 80px;
     max-width: 200px;
+    &__link {
+      width: 100%;
+      @include font-size(xxl);
+      .label {
+        color: $white;
+        font-weight: bold;
+      }
+    }
   }
   .explanation .title {
     margin-top:0;

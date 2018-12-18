@@ -34,6 +34,12 @@
   }
 }
 
+.backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+}
+
 .generation-screen {
   padding-top: 10px;
   .block-transactions,
@@ -96,8 +102,7 @@
     opacity:0.4;
   }
   .field-value {
-    margin-top:5px;
-    @include font-size(l);
+    @include font-size(m);
     @include only-phone {
       @include font-size(m);
     }

@@ -10,6 +10,7 @@
             average rate 1 per
           </span>
           <RelativeTime
+            v-if="getAverageBlockTime"
             :ts="getAverageBlockTime"
             big
             spaced
@@ -20,6 +21,7 @@
             last key block mined
           </span>
           <RelativeTime
+            v-if="getAverageBlockTime"
             :ts="getLastMinedBlockTime(currentTime)"
             big
             spaced
@@ -36,86 +38,105 @@
             :key="i"
           >
             <td>
-              <div
-                v-if="generations[height-i+1]"
-                class="height"
-              >
-                <RouterLink :to="`/generation/${generations[height-i+1].keyBlock.height}`">
-                  {{ generations[height-i+1].keyBlock.height }}
-                </RouterLink>
-              </div>
-              <FillDummy v-else />
+              <span
+                v-if="!generations[height-i+1]"
+                class="field-name field-name_first "
+              />
+              <Transition name="fade">
+                <span
+                  v-if="generations[height-i+1]"
+                  class="height"
+                >
+                  <RouterLink :to="`/generation/${generations[height-i+1].keyBlock.height}`">
+                    {{ generations[height-i+1].keyBlock.height }}
+                  </RouterLink>
+                </span>
+                <FillDummy v-else />
+              </Transition>
             </td>
             <td>
               <span class="field-name">
                 key-hash
               </span>
-              <span
-                v-if="generations[height-i+1]"
-                class="number"
-              >
-                <AeHash
-                  :hash="generations[height-i+1].keyBlock.hash"
-                  type="short"
-                />
-              </span>
-              <FillDummy v-else />
+              <Transition name="fade">
+                <span
+                  v-if="generations[height-i+1]"
+                  class="number"
+                >
+                  <AeHash
+                    :hash="generations[height-i+1].keyBlock.hash"
+                    type="short"
+                  />
+                </span>
+                <FillDummy v-else />
+              </Transition>
             </td>
             <td>
-              <span
-                v-if="generations[height-i+1]"
-                class="number"
-              >
-                {{ generations[height-i+1].microBlocksDetailed.length }}
-              </span>
-              <FillDummy
-                v-else
-                size="small"
-              />
               <span class="field-name">
                 Micro Blocks
               </span>
+              <Transition name="fade">
+                <span
+                  v-if="generations[height-i+1]"
+                  class="number"
+                >
+                  {{ generations[height-i+1].microBlocksDetailed.length }}
+                </span>
+                <FillDummy
+                  v-else
+                  size="small"
+                />
+              </Transition>
             </td>
             <td>
-              <span
-                v-if="generations[height-i+1]"
-                class="number"
-              >
-                {{ generations[height-i+1].numTransactions }}
-              </span>
-              <FillDummy
-                v-else
-                size="small"
-              />
               <span class="field-name">
                 Tx
               </span>
+              <Transition name="fade">
+                <span
+                  v-if="generations[height-i+1]"
+                  class="number"
+                >
+                  {{ generations[height-i+1].numTransactions }}
+                </span>
+                <FillDummy
+                  v-else
+                  size="small"
+                />
+              </Transition>
             </td>
             <td>
               <span class="field-name">
                 beneficiary
               </span>
-              <span
-                v-if="generations[height-i+1]"
-                class="account-address"
-              >
-                <RouterLink :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
-                  <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
-                </RouterLink>
-              </span>
-              <FillDummy v-else />
+              <Transition name="fade">
+                <span
+                  v-if="generations[height-i+1]"
+                  class="account-address"
+                >
+                  <RouterLink :to="`/account/${generations[height-i+1].keyBlock.beneficiary}`">
+                    <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
+                  </RouterLink>
+                </span>
+                <FillDummy v-else />
+              </Transition>
             </td>
             <td>
               <span class="field-name">
                 time
               </span>
-              <span
-                v-if="generations[height-i+1]"
-                class="number"
-              >
-                <RelativeTime :ts="currentTime - generations[height-i+1].keyBlock.time" />
-              </span>
-              <FillDummy v-else />
+              <Transition name="fade">
+                <span
+                  v-if="generations[height-i+1]"
+                  class="number"
+                >
+                  <RelativeTime
+                    v-if="getAverageBlockTime"
+                    :ts="currentTime - generations[height-i+1].keyBlock.time"
+                  />
+                </span>
+                <FillDummy v-else />
+              </Transition>
             </td>
           </tr>
         </table>
@@ -144,7 +165,14 @@ import Loader from '../../components/loader'
 import FillDummy from '../../components/fillDummy'
 
 export default {
-  components: { AeButton, RelativeTime, NamedAddress, AeHash, Loader, FillDummy },
+  components: {
+    AeButton,
+    RelativeTime,
+    NamedAddress,
+    AeHash,
+    Loader,
+    FillDummy
+  },
   mixins: [currentTime],
   data: function () {
     return {

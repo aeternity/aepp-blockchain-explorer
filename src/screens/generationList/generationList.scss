@@ -7,6 +7,11 @@
   }
   .field-name {
     @include font-size(s);
+    &_first {
+      display: inline-block;
+      width: 20px;
+      height: 38px;
+    }
   }
   .grid {
     border-bottom:2px solid $smoke;
@@ -59,6 +64,21 @@
     margin-bottom:50px;
     .transactions {
       min-width: 969px;
+      td {
+        position: relative;
+        .fill-dummy {
+          max-width: 90%;
+          position: absolute;
+          top: 5px;
+          right: 0;
+        }
+      }
     }
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+    opacity: 0;
   }
 }

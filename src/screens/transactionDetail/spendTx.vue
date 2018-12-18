@@ -10,9 +10,15 @@
           size="short"
         />
       </RouterLink>
-      <ViewAndCopy :text="transaction.tx.senderId" />
+      <ViewAndCopy
+        v-if="transaction"
+        :text="transaction.tx.senderId"
+      />
+      <FillDummy
+        v-else
+        color="grey"
+      />
     </Field>
-
     <Field
       v-if="transaction.tx.recipientId"
       name="Recipient"
@@ -23,14 +29,40 @@
           size="short"
         />
       </RouterLink>
-      <ViewAndCopy :text="transaction.tx.recipientId" />
+      <ViewAndCopy
+        v-if="transaction"
+        :text="transaction.tx.recipientId"
+      />
+      <FillDummy
+        v-else
+        color="grey"
+      />
     </Field>
-
-    <Field
-      v-if="transaction.tx.amount"
-      name="Amount"
-    >
-      {{ transaction.tx.amount | yaniToAe }} AE
+    <Field name="Payload">
+      <div class="number">
+        {{ transaction.tx.payload }}
+      </div>
+    </Field>
+    <Field name="Amount">
+      <div class="number">
+        {{ transaction.tx.amount | yaniToAe }}
+      </div>
+      <span class="unit">
+        AE
+      </span>
+    </Field>
+    <Field name="Fee">
+      <div class="number">
+        {{ transaction.tx.fee | yaniToAe }}
+      </div>
+      <span class="unit">
+        AE
+      </span>
+    </Field>
+    <Field name="Version">
+      <div class="number">
+        {{ transaction.tx.version }}
+      </div>
     </Field>
   </div>
 </template>
@@ -38,10 +70,16 @@
 import Field from '../../components/field'
 import NamedAddress from '../../components/namedAddress'
 import ViewAndCopy from '../../components/viewAndCopy'
+import FillDummy from '../../components/fillDummy'
 
 export default {
   name: 'SpendTx',
-  components: { Field, NamedAddress, ViewAndCopy },
+  components: {
+    Field,
+    NamedAddress,
+    ViewAndCopy,
+    FillDummy
+  },
   props: {
     transaction: {
       type: Object,
