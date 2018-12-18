@@ -6,7 +6,7 @@ import Status from '@/screens/status/status.vue'
 import GenerationList from '@/screens/generationList/generationList.vue'
 
 // TODO: To be removed after new designs are completed.
-import newDesignRouters from '../_designs/router';
+import newDesignRouters from '../_designs/router'
 
 const Index = () => import(/* webpackChunkName: 'index' */'@/screens/index/index.vue')
 const Generation = () =>
@@ -51,7 +51,7 @@ export default new Router({
     path: '/status',
     component: Status
   },
-    newDesignRouters
+  newDesignRouters
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'app-view'
+  name: 'AppView'
 }
 </script>
 <style>
