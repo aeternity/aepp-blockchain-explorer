@@ -6,20 +6,24 @@
           Latest Generation
         </h2>
         <div class="buttons">
-          <AeButton
-            :to="`/generation/${height}`"
-            type="exciting"
-            size="small"
-          >
-            view last
-          </AeButton>
-          <AeButton
-            type="exciting"
-            size="small"
-            to="/generations"
-          >
-            view all
-          </AeButton>
+          <RouterLink :to="`/generation/${height}`">
+            <AeButton
+              type="exciting"
+              size="small"
+              class="buttons__link"
+            >
+              view last
+            </AeButton>
+          </RouterLink>
+          <RouterLink :to="`/generations`">
+            <AeButton
+              type="exciting"
+              size="small"
+              class="buttons__link"
+            >
+              view all
+            </AeButton>
+          </RouterLink>
         </div>
       </div>
       <div class="generation-data">

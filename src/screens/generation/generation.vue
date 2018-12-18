@@ -288,11 +288,9 @@
             </section>
           </article>
         </template>
-        <div class="action-wrapper">
-          <BackToTop />
-        </div>
       </section>
     </section>
+    <BackToTop class="backToTop" />
   </article>
 </template>
 
