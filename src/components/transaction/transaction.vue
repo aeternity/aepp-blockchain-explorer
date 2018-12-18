@@ -78,6 +78,7 @@ import SpendTx from './spendTx.vue'
 import OracleRegisterTx from './oracleRegisterTx.vue'
 import OracleResponseTx from './oracleResponseTx.vue'
 import OracleQueryTx from './oracleQueryTx.vue'
+import OracleExtendTx from './oracleExtendTx.vue'
 import NameUpdateTx from './nameUpdateTx.vue'
 import NameClaimTx from './nameClaimTx.vue'
 import NamePreclaimTx from './namePreclaimTx.vue'
@@ -95,6 +96,7 @@ export default {
     OracleRegisterTx,
     OracleResponseTx,
     OracleQueryTx,
+    OracleExtendTx,
     NameUpdateTx,
     NameClaimTx,
     NamePreclaimTx,

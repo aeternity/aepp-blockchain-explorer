@@ -17,7 +17,10 @@
         </h2>
         <div>
           <Field name="Type">
-            <AeBadge v-if="transaction">
+            <AeBadge
+              v-if="transaction"
+              class="transaction-type"
+            >
               {{ transaction.tx.type | txTypeToName }}
             </AeBadge>
             <FillDummy
@@ -45,17 +48,19 @@
           <div class="height-item">
             <Field name="Block Height" />
             <div v-if="!isPending">
+              <RouterLink
+                v-if="transaction"
+                :to="`/generation/${transaction.blockHeight}`"
+              >
+                <span class="height-item__data">
+                  {{ transaction.blockHeight }}
+                </span>
+              </RouterLink>
               <span
                 v-if="transaction"
-                class="height-item__data"
+                class="field-value confirmations"
               >
-                {{ this.transaction.blockHeight }}
-              </span>
-              <span
-                v-if="transaction"
-                class="field-value"
-              >
-                ( {{ this.height - this.transaction.blockHeight }} Block Confirmations )
+                ( {{ height - transaction.blockHeight }} Block Confirmations )
               </span>
             </div>
             <AeLoader v-if="isPending" />
@@ -135,7 +140,7 @@
               <Field
                 v-for="(signature, n) in transaction.signatures"
                 :key="n"
-                :name="toString(n)"
+                :name="n.toString()"
               >
                 <AeHash
                   :hash="signature"
@@ -200,6 +205,7 @@ import {
 
 import SpendTx from './spendTx.vue'
 import OracleRegisterTx from './oracleRegisterTx.vue'
+import OracleExtendTx from './oracleExtendTx'
 import OracleResponseTx from './oracleResponseTx.vue'
 import OracleQueryTx from './oracleQueryTx.vue'
 import NameClaimTx from './nameClaimTx.vue'
@@ -236,7 +242,8 @@ export default {
     ContractCallTx,
     ContractCreateTx,
     FillDummy,
-    AeLoader
+    AeLoader,
+    OracleExtendTx
   },
   filters: { txTypeToName },
   props: {
