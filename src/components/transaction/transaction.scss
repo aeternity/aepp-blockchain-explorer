@@ -8,23 +8,21 @@
   &:hover {
     background:$smoke;
   }
-  .header {
-    align-items: center;
-    .ae-badge{
-      padding: 0 5px;
-    }
-  }
   .header ,
   .body .grid {
     display:flex;
     flex-wrap:wrap;
-    justify-content:space-between;
+    align-items: center;
   }
-  .body .grid {
+  .body {
+    width: 100%;
+    .ae-badge{
+      padding: 0 5px;
+    }
   }
   .header > * ,
   .body .grid > * {
-    margin:0 20px;
+    width: 20%;
   }
   .field {
     display:block !important;
@@ -34,6 +32,10 @@
     @include font-size(s);
     .number, .unit, a {
       color: $aubergin;
+    }
+
+    .ae-hash {
+      color: $magaenta;
     }
   }
   .query-spec,
