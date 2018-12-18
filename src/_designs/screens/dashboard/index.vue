@@ -3,6 +3,7 @@
     <h1>App-Dashboard</h1>
     <!-- static table -->
     <AppTable details>
+      <AppTableHeader />
       <AppTableRow extend>
         <AppTableRowCell>
           <AeText
@@ -49,6 +50,7 @@
 import AppTable from '@/_designs/components/appTable'
 import AppTableRow from '@/_designs/components/appTableRow'
 import AppTableRowCell from '@/_designs/components/appTableRowCell'
+import AppTableHeader from '@/_designs/components/appTableHeader'
 
 import { AeText, AeAddress } from '@aeternity/aepp-components-3'
 
@@ -81,6 +83,7 @@ export default {
     AppTable,
     AppTableRow,
     AppTableRowCell,
+    AppTableHeader,
     AeText,
     AeAddress
   },
