@@ -197,5 +197,11 @@ export default {
 }
 </script>
 <style lang="scss">
+  /* For the AppTable Components
+  // TODO: try and combine AppTableHeader components with AppTable components
+  // TODO: extract AppTableRowCellTitle and AppTableRowCellContent into separate components
+  // TODO: make a AppTableBody component
+  // TODO: make a accordion component with flexible activator, ie can be placed on top and bottom by adding attribute
+  */
 .app-dashboard {}
 </style>
