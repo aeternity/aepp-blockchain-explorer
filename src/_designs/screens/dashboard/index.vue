@@ -3,7 +3,107 @@
     <h1>App-Dashboard</h1>
     <!-- static table -->
     <AppTable details>
-      <AppTableHeader />
+      <AppTableHeader>
+        <AppTableHeaderRow>
+          <AppTableHeaderRowCell extend>
+            <AeText
+              slot="title"
+              face="sans-xs"
+            >
+              blockheight
+            </AeText>
+            <AeText face="mono-xs">
+              6606081
+            </AeText>
+          </AppTableHeaderRowCell>
+          <AppTableHeaderRowCell>
+            <AeText
+              slot="title"
+              face="sans-xs"
+            >
+              blockheight
+            </AeText>
+            <AeText face="mono-xs">
+              6606081
+            </AeText>
+          </AppTableHeaderRowCell>
+          <AppTableHeaderRowCell>
+            <AeText
+              slot="title"
+              face="sans-xs"
+            >
+              blockheight
+            </AeText>
+            <AeText face="mono-xs">
+              6606081
+            </AeText>
+          </AppTableHeaderRowCell>
+        </AppTableHeaderRow>
+        <AppTableHeaderRow>
+          <AppTableHeaderRowCell extend>
+            <AeText
+              slot="title"
+              face="sans-xs"
+            >
+              blockheight
+            </AeText>
+            <AeText face="mono-xs">
+              6606081
+            </AeText>
+          </AppTableHeaderRowCell>
+          <AppTableHeaderRow nested>
+            <AppTableHeaderRowCell>
+              <AeText
+                slot="title"
+                face="sans-xs"
+              >
+                blockheight
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableHeaderRowCell>
+            <AppTableHeaderRowCell>
+              <AeText
+                slot="title"
+                face="sans-xs"
+              >
+                blockheight
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableHeaderRowCell>
+          </AppTableHeaderRow>
+          <AppTableHeaderRow
+            nested
+            extend
+          >
+            <AppTableHeaderRowCell>
+              <AeText
+                slot="title"
+                face="sans-xs"
+              >
+                confirmations
+              </AeText>
+              <AeText face="mono-xs">
+                234
+              </AeText>
+            </AppTableHeaderRowCell>
+            <AppTableHeaderRowCell>
+              <AeText
+                slot="title"
+                face="sans-xs"
+              >
+                blockheight
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableHeaderRowCell>
+          </AppTableHeaderRow>
+        </AppTableHeaderRow>
+      </AppTableHeader>
       <AppTableRow extend>
         <AppTableRowCell>
           <AeText
@@ -27,21 +127,21 @@
             87472467200
           </AeText>
         </AppTableRowCell>
-      </AppTableRow>
-      <AppTableRow>
-        <AppTableRowCell extend>
-          <AeText
-            slot="title"
-            face="uppercase-base"
-          >
-            Hash
-          </AeText>
-          <AeAddress
-            value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
-            length="flat"
-            face="mono-s"
-          />
-        </AppTableRowCell>
+        <AppTableRow>
+          <AppTableRowCell extend>
+            <AeText
+              slot="title"
+              face="uppercase-base"
+            >
+              Hash
+            </AeText>
+            <AeAddress
+              value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
+              length="flat"
+              face="mono-s"
+            />
+          </AppTableRowCell>
+        </AppTableRow>
       </AppTableRow>
     </AppTable>
   </div>
@@ -51,6 +151,8 @@ import AppTable from '@/_designs/components/appTable'
 import AppTableRow from '@/_designs/components/appTableRow'
 import AppTableRowCell from '@/_designs/components/appTableRowCell'
 import AppTableHeader from '@/_designs/components/appTableHeader'
+import AppTableHeaderRow from '@/_designs/components/appTableHeaderRow'
+import AppTableHeaderRowCell from '@/_designs/components/appTableHeaderRowCell'
 
 import { AeText, AeAddress } from '@aeternity/aepp-components-3'
 
@@ -84,6 +186,8 @@ export default {
     AppTableRow,
     AppTableRowCell,
     AppTableHeader,
+    AppTableHeaderRow,
+    AppTableHeaderRowCell,
     AeText,
     AeAddress
   },
