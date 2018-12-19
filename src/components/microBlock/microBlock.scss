@@ -1,0 +1,42 @@
+@import '../../style/mixins';
+
+.micro-block {
+  background: white;
+  color: black;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 5px;
+
+  .title {
+    @include font-size(l);
+    font-weight: bold;
+    &-sub {
+      font-weight: normal;
+    }
+    &-numbers{
+      @include font-size(m);
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+    }
+  }
+
+  .block-transactions, .block-micro-detailed{
+    .title-sub {
+      margin-top: 50px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid $aubergin;
+    }
+
+    .grid .field {
+      margin-top: 20px;
+      margin-right:50px;
+    }
+  }
+  .transactions .transaction:nth-child(even) {
+    background:$smoke;
+  }
+  .grid .field:not(:last-child) {
+    margin-right:50px;
+  }
+}
