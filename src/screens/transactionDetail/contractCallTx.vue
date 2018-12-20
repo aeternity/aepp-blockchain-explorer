@@ -11,6 +11,16 @@
         />
       </RouterLink>
     </Field>
+    <Field
+      v-if="transaction.contractId"
+      name="Contract Id"
+    >
+      <AeHash
+        :hash="transaction.contractId"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.contractId" />
+    </Field>
     <Field name="Gas">
       {{ transaction.tx.gas }}
     </Field>
@@ -32,13 +42,17 @@
 import CodeView from '../../components/codeView.vue'
 import Field from '../../components/field.vue'
 import NamedAddress from '../../components/namedAddress.vue'
+import AeHash from '../../components/aeHash'
+import ViewAndCopy from '../../components/viewAndCopy.vue'
 
 export default {
   name: 'ContractCallTx',
   components: {
     CodeView,
     Field,
-    NamedAddress
+    NamedAddress,
+    AeHash,
+    ViewAndCopy
   },
   props: {
     transaction: {
