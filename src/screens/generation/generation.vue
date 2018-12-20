@@ -84,7 +84,7 @@
               />
               <FillDummy v-else />
             </Field>
-            <Field name="time since mined">
+            <Field name="age">
               <RelativeTime
                 v-if="!isLoading"
                 :ts="currentTime - generation.keyBlock.time"

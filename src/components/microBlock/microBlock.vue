@@ -15,7 +15,7 @@
       </Field>
       <Field
         v-cloak
-        name="time since mined"
+        name="age"
       >
         <RelativeTime
           :ts="currentTime - microBlock.time"
