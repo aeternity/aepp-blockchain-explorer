@@ -19,6 +19,16 @@
         color="grey"
       />
     </Field>
+    <Field
+      v-if="transaction.contractId"
+      name="Contract Id"
+    >
+      <AeHash
+        :hash="transaction.contractId"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.contractId" />
+    </Field>
     <Field name="VmVersion">
       <div class="number">
         {{ transaction.tx.vmVersion }}
@@ -86,6 +96,7 @@ import Field from '../../components/field.vue'
 import NamedAddress from '../../components/namedAddress.vue'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import FillDummy from '../../components/fillDummy'
+import AeHash from '../../components/aeHash'
 
 export default {
   name: 'ContractCreateTx',
@@ -95,7 +106,8 @@ export default {
     ViewAndCopy,
     FillDummy,
     ContractCode,
-    CodeView
+    CodeView,
+    AeHash
   },
   props: {
     transaction: {
