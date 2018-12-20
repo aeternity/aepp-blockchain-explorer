@@ -1,12 +1,12 @@
 @import '../../style/mixins';
 
 .transaction {
-  padding:20px 00px;
+  padding:20px;
   display: flex;
   min-width: 889px;
-  border-bottom: 2px solid $paleGrey;
+  border-top: 2px solid $paleGrey;
   &:hover {
-    background:$smoke;
+    background:$paleGrey;
   }
   .header ,
   .body .grid {
