@@ -28,28 +28,24 @@ export default {
 <style scoped lang="scss">
   @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
 
-    .app-table-header-row-cell {
-      display: flex;
-      flex-wrap: wrap;
-      padding: .8rem;
-      width: 50%;
+  .app-table-header-row-cell {
+    display: flex;
+    flex-direction: column;
+    padding: .8rem;
+    width: 50%;
 
-      &:not(:first-child) {
-        border-left: 2px solid $color-neutral-positive-2;
-        border-bottom: 2px solid $color-neutral-positive-2;
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-      @media (min-width: 450px) {
-        width: 25%;
-        /*order: 3;*/
-        /*&:first-child {*/
-        /*order: 1;*/
-        /*}*/
-      }
+    &:not(:first-child) {
+      border-left: 2px solid $color-neutral-positive-2;
+      border-bottom: 2px solid $color-neutral-positive-2;
     }
+
+    &:last-child {
+      border-bottom: none;
+    }
+    @media (min-width: 450px) {
+      width: 25%;
+    }
+  }
   @media (min-width: 450px) {
   :not(.nested) > .app-table-header-row-cell{
     &:not(:first-child) {
@@ -61,7 +57,7 @@ export default {
     }
   }
   }
-  /*if cell is in nested row */
+  /*when cell is in nested row */
   .nested > .app-table-header-row-cell {
     width: 100%;
     border-left:none;
@@ -93,6 +89,7 @@ export default {
       border-left: 2px solid $color-neutral-positive-2;
     }
   }
+  /*when cell should be large on mobile*/
   .app-table-header-row-cell.extend {
     margin-bottom:  auto;
     @media (min-width: 450px) {
@@ -100,21 +97,31 @@ export default {
       margin-right: auto;
     }
   }
-  .app-table-header-row-cell.float {
-    @media (min-width: 450px) {
-      width: 50%;
+  /*when cell should break natural flow*/
+@media (min-width: 450px) {
+  .app-table-header-row.reorder > .app-table-header-row-cell {
+    order: 3;
+    &:first-child {
+      order: 1;
+      width: auto;
+      margin: 0;
+    }
+    &:last-child {
+      width: auto;
       border: none;
       order: 2;
       margin-right: auto;
     }
   }
+}
 
-    .app-table-header-row-cell-title {
-      display: block;
-    }
+  .app-table-header-row-cell-title {
+    display: block;
+    font-weight: bold;
+  }
 
-    .app-table-header-row-cell-content {
-      display: block;
-    }
+  .app-table-header-row-cell-content {
+    display: block;
+  }
 
 </style>

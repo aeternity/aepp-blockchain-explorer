@@ -4,13 +4,13 @@
     <!-- static table -->
     <AppTable details>
       <AppTableHeader>
-        <AppTableHeaderRow>
+        <AppTableHeaderRow reorder>
           <AppTableHeaderRowCell extend>
             <AeText
               slot="title"
-              face="sans-xs"
+              face="uppercase-xs"
             >
-              blockheight
+              Reordered flow
             </AeText>
             <AeText face="mono-xs">
               6606081
@@ -19,9 +19,9 @@
           <AppTableHeaderRowCell>
             <AeText
               slot="title"
-              face="sans-xs"
+              face="uppercase-xs"
             >
-              blockheight
+              date time
             </AeText>
             <AeText face="mono-xs">
               6606081
@@ -30,12 +30,12 @@
           <AppTableHeaderRowCell>
             <AeText
               slot="title"
-              face="sans-xs"
+              face="uppercase-xs"
             >
-              blockheight
+              confirmations
             </AeText>
             <AeText face="mono-xs">
-              6606081
+              235
             </AeText>
           </AppTableHeaderRowCell>
         </AppTableHeaderRow>
@@ -43,19 +43,43 @@
           <AppTableHeaderRowCell extend>
             <AeText
               slot="title"
-              face="sans-xs"
+              face="uppercase-xs"
             >
-              blockheight
+              natural flow
             </AeText>
             <AeText face="mono-xs">
               6606081
             </AeText>
           </AppTableHeaderRowCell>
-          <AppTableHeaderRow nested>
-            <AppTableHeaderRowCell>
+          <AppTableHeaderRowCell>
+            <AeText
+              slot="title"
+              face="uppercase-xs"
+            >
+              date time
+            </AeText>
+            <AeText face="mono-xs">
+              6606081
+            </AeText>
+          </AppTableHeaderRowCell>
+          <AppTableHeaderRowCell>
+            <AeText
+              slot="title"
+              face="uppercase-xs"
+            >
+              confirmations
+            </AeText>
+            <AeText face="mono-xs">
+              235
+            </AeText>
+          </AppTableHeaderRowCell>
+        </AppTableHeaderRow>
+        <AppTableHeaderRow>
+          <AppTableHeaderColumn>
+            <AppTableHeaderRowCell extend>
               <AeText
                 slot="title"
-                face="sans-xs"
+                face="uppercase-xs"
               >
                 blockheight
               </AeText>
@@ -63,18 +87,33 @@
                 6606081
               </AeText>
             </AppTableHeaderRowCell>
-            <AppTableHeaderRowCell>
-              <AeText
-                slot="title"
-                face="sans-xs"
-              >
-                blockheight
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
-            </AppTableHeaderRowCell>
-          </AppTableHeaderRow>
+          </AppTableHeaderColumn>
+          <AppTableHeaderColumn>
+            <AppTableHeaderRow nested>
+              <AppTableHeaderRowCell>
+                <AeText
+                  slot="title"
+                  face="uppercase-xs"
+                >
+                  blockheight
+                </AeText>
+                <AeText face="mono-xs">
+                  6606081
+                </AeText>
+              </AppTableHeaderRowCell>
+              <AppTableHeaderRowCell>
+                <AeText
+                  slot="title"
+                  face="uppercase-xs"
+                >
+                  blockheight
+                </AeText>
+                <AeText face="mono-xs">
+                  6606081
+                </AeText>
+              </AppTableHeaderRowCell>
+            </AppTableHeaderRow>
+          </AppTableHeaderColumn>
           <AppTableHeaderRow
             nested
             extend
@@ -82,7 +121,7 @@
             <AppTableHeaderRowCell>
               <AeText
                 slot="title"
-                face="sans-xs"
+                face="uppercase-xs"
               >
                 confirmations
               </AeText>
@@ -93,7 +132,7 @@
             <AppTableHeaderRowCell>
               <AeText
                 slot="title"
-                face="sans-xs"
+                face="uppercase-xs"
               >
                 blockheight
               </AeText>
@@ -103,12 +142,12 @@
             </AppTableHeaderRowCell>
           </AppTableHeaderRow>
         </AppTableHeaderRow>
-      </AppTableHeader>
+      </apptableheader>
       <AppTableRow extend>
         <AppTableRowCell>
           <AeText
             slot="title"
-            face="uppercase-base"
+            face="uppercase-xs"
           >
             Difficulty
           </AeText>
@@ -119,7 +158,7 @@
         <AppTableRowCell>
           <AeText
             slot="title"
-            face="uppercase-base"
+            face="uppercase-xs"
           >
             Target
           </AeText>
@@ -131,7 +170,7 @@
           <AppTableRowCell extend>
             <AeText
               slot="title"
-              face="uppercase-base"
+              face="uppercase-xs"
             >
               Hash
             </AeText>
@@ -152,6 +191,7 @@ import AppTableRow from '@/_designs/components/appTableRow'
 import AppTableRowCell from '@/_designs/components/appTableRowCell'
 import AppTableHeader from '@/_designs/components/appTableHeader'
 import AppTableHeaderRow from '@/_designs/components/appTableHeaderRow'
+import AppTableHeaderColumn from '@/_designs/components/appTableHeaderColumn'
 import AppTableHeaderRowCell from '@/_designs/components/appTableHeaderRowCell'
 
 import { AeText, AeAddress } from '@aeternity/aepp-components-3'
@@ -187,6 +227,7 @@ export default {
     AppTableRowCell,
     AppTableHeader,
     AppTableHeaderRow,
+    AppTableHeaderColumn,
     AppTableHeaderRowCell,
     AeText,
     AeAddress
