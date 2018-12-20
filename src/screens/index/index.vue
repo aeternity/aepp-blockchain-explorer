@@ -3,11 +3,7 @@
     <header>
       <div class="grid">
         <div>
-          <img
-            src="@/assets/logo.svg"
-            alt=""
-          >
-          <h1>Blockchain Explorer</h1>
+          <h1>æternity explorer</h1>
           <p>Search the æternity network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
         </div>
         <div
@@ -17,7 +13,7 @@
           <input
             v-model="searchString"
             class="search-input"
-            placeholder="Explorer Generation, Block, Tx, Address"
+            placeholder="Explore Generation, Block, Tx, Address"
             type="text"
           >
           <button

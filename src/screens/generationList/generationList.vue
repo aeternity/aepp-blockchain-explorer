@@ -123,7 +123,7 @@
             </td>
             <td>
               <span class="field-name">
-                time
+                age
               </span>
               <Transition name="fade">
                 <span
