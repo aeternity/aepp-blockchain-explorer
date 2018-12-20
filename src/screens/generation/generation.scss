@@ -6,7 +6,8 @@
    font-weight: bold;
 
     &-main{
-
+      font-weight: normal;
+      color: $white;
     }
     &-sub {
      font-weight: normal;
@@ -40,6 +41,10 @@
   right: 20px;
 }
 
+main .generation-screen .generation-main {
+  padding-top: 45px;
+}
+
 .generation-screen {
   padding-top: 10px;
   .block-transactions,
@@ -50,6 +55,7 @@
 
 
   .generation-header {
+    background-color: $aubergin;
     .gen-navigation,
     .basic-gen-info {
       justify-content:space-between;
@@ -97,6 +103,11 @@
   .field {
     margin-bottom:20px;
   }
+  .hash {
+    a {
+      color: $white;
+    }
+  }
   .field-name {
     @include font-size(xs);
     opacity:0.4;
@@ -132,6 +143,12 @@
     margin: 20px 0;
     padding: 20px;
     border-radius: 5px;
+
+    .hash {
+      a {
+        color: $magaenta;
+      }
+    }
   }
 
 }

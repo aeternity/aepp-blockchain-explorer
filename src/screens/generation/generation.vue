@@ -1,18 +1,58 @@
 <template>
   <article class="generation-screen screen">
-    <section>
+    <section class="generation-main">
       <header class="generation-header">
         <h1 class="title title-main">
-          Generation:
+          Key Block:
         </h1>
         <section class="generation-header__section">
           <div class="basic-gen-info grid">
-            <Field name="Height">
+            <Field name="Block Height">
               <div
                 v-if="!isLoading"
                 class="number"
               >
                 {{ generation.keyBlock.height }}
+              </div>
+              <FillDummy
+                v-else
+                size="small"
+              />
+            </Field>
+            <Field name="Block Confirmation">
+              <div
+                v-if="!isLoading"
+                class="number"
+              >
+                {{ height - generation.keyBlock.height }}
+              </div>
+            </Field>
+            <Field
+              name="Key Block Hash"
+              class="hash"
+            >
+              <RouterLink
+                v-if="!isLoading"
+                :to="`/block/${generation.keyBlock.hash}`"
+              >
+                <AeHash
+                  :hash="generation.keyBlock.hash"
+                  type="short"
+                />
+              </RouterLink>
+              <ViewAndCopy
+                v-if="!isLoading"
+                color="boring"
+                :text="generation.keyBlock.hash"
+              />
+              <FillDummy v-else />
+            </Field>
+            <Field name="Transactions">
+              <div
+                v-if="!isLoading"
+                class="number"
+              >
+                {{ generation.numTransactions }}
               </div>
               <FillDummy
                 v-else
@@ -31,16 +71,37 @@
                 size="small"
               />
             </Field>
-            <Field name="Transactions">
+            <Field name="beneficiary">
+              <RouterLink
+                v-if="!isLoading"
+                :to="`/account/${generation.keyBlock.beneficiary}`"
+                class="account-address"
+              >
+                <AeHash
+                  :hash="generation.keyBlock.beneficiary"
+                  type="short"
+                />
+              </RouterLink>
+              <ViewAndCopy
+                v-if="!isLoading"
+                color="dramatic"
+                :text="generation.keyBlock.beneficiary"
+              />
+              <FillDummy v-else />
+            </Field>
+            <Field
+              name="Target"
+              class="rewarded"
+            >
               <div
                 v-if="!isLoading"
-                class="number"
+                class="field-value number"
               >
-                {{ generation.numTransactions }}
+                {{ generation.keyBlock.target }}
               </div>
               <FillDummy
                 v-else
-                size="small"
+                size="big"
               />
             </Field>
           </div>
@@ -61,29 +122,8 @@
             <FillDummy v-else />
           </nav>
         </section>
-        <h2 class="title title-main">
-          Key Block:
-        </h2>
         <section class="generation-header__section">
           <div class="basic-gen-info grid">
-            <Field name="beneficiary">
-              <RouterLink
-                v-if="!isLoading"
-                :to="`/account/${generation.keyBlock.beneficiary}`"
-                class="account-address"
-              >
-                <AeHash
-                  :hash="generation.keyBlock.beneficiary"
-                  type="short"
-                />
-              </RouterLink>
-              <ViewAndCopy
-                v-if="!isLoading"
-                color="dramatic"
-                :text="generation.keyBlock.beneficiary"
-              />
-              <FillDummy v-else />
-            </Field>
             <Field name="time since mined">
               <RelativeTime
                 v-if="!isLoading"
@@ -94,42 +134,7 @@
             </Field>
           </div>
           <div class="detail-block-info">
-            <Field
-              name="Hash"
-              class="hash"
-            >
-              <RouterLink
-                v-if="!isLoading"
-                :to="`/block/${generation.keyBlock.hash}`"
-              >
-                <AeHash
-                  :hash="generation.keyBlock.hash"
-                  type="short"
-                />
-              </RouterLink>
-              <ViewAndCopy
-                v-if="!isLoading"
-                color="dramatic"
-                :text="generation.keyBlock.hash"
-              />
-              <FillDummy v-else />
-            </Field>
             <div class="grid">
-              <Field
-                name="target"
-                class="rewarded"
-              >
-                <div
-                  v-if="!isLoading"
-                  class="field-value number"
-                >
-                  {{ generation.keyBlock.target }}
-                </div>
-                <FillDummy
-                  v-else
-                  size="big"
-                />
-              </Field>
               <Field
                 name="time"
                 class="time"
@@ -340,8 +345,9 @@ export default {
       this.getGeneration()
     }
   },
-  mounted () {
+  async mounted () {
     this.getGeneration()
+    await this.$store.dispatch('blocks/height')
   },
   methods: {
     async getGeneration () {
@@ -352,6 +358,7 @@ export default {
         await this.$store.dispatch('blocks/getGenerationFromHash', this.generationId)
       }
       this.isLoading = false
+      console.log('gen', this.generation)
     }
   }
 }
