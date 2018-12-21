@@ -107,30 +107,4 @@
       @include font-size(m);
     }
   }
-
-  .block-transactions, .block-micro-detailed{
-    .title-sub {
-      margin-top: 50px;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid $aubergin;
-    }
-
-    .grid .field {
-      margin-top: 20px;
-      margin-right:50px;
-    }
-  }
-  .transactions .transaction:nth-child(even) {
-    background:$smoke;
-  }
-
-  .micro-block {
-    background: white;
-    color: black;
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 5px;
-  }
-
 }
