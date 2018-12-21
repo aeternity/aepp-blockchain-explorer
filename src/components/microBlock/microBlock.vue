@@ -44,7 +44,6 @@
           >
             <RelativeTime
               :ts="currentTime - microBlock.time"
-              spaced
             />
           </Field>
         </div>

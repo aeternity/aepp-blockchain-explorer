@@ -88,7 +88,6 @@
               <RelativeTime
                 v-if="!isLoading"
                 :ts="currentTime - generation.keyBlock.time"
-                spaced
               />
               <FillDummy v-else />
             </Field>
