@@ -23,7 +23,7 @@
         </div>
         <div class="grid grid_last">
           <div class="field transaction-field">
-            {{ microBlocksLength }} Transaction{{ microBlocksLength !== 1 ? 's' : '' }}
+            {{ microBlock.transactions.length }} Transaction{{ microBlock.transactions.length !== 1 ? 's' : '' }}
           </div>
           <Field
             v-cloak
@@ -81,10 +81,6 @@ export default {
       required: true
     },
     microBlockNumber: {
-      type: Number,
-      required: true
-    },
-    microBlocksLength: {
       type: Number,
       required: true
     }

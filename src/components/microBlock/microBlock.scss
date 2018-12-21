@@ -44,6 +44,8 @@
       }
 
       .block-number {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
         @include font-size(l);
       }
       .transaction-field{

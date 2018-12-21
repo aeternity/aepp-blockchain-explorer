@@ -186,7 +186,6 @@
             <MicroBlock
               :micro-block="m"
               :micro-block-number="index"
-              :micro-blocks-length="generation.microBlocksDetailed.length"
             />
           </article>
         </template>
