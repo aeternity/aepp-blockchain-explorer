@@ -47,22 +47,38 @@
         @include font-size(l);
       }
       .transaction-field{
-        .label {
-          @include font-size(s);
-        }
+          @include font-size(l);
       }
 
       .field {
         width: 30%;
+        .field-value, .ae-hash, .relative-time {
+          @include font-size(s);
+          /deep/ .number {
+            margin-left: 0;
+          }
+        }
+
       }
       .block-number,
-      .transaction-field {
+      .transaction-field,
+      .time {
         width: 40%;
+      }
+      .hash {
+        width: 60%;
+        @include only-phone {
+          word-break: break-all;
+        }
+      }
+      .age{
+        width: 20%;
       }
 
       .field {
         @include phone-and-tablet {
           width: 100%;
+          display: block;
           margin-bottom: 15px;
         }
       }
@@ -79,6 +95,6 @@
   }
 
   .transactions .transaction:nth-child(even) {
-    background:$smoke;
+    background: $white;
   }
 }
