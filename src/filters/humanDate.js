@@ -5,5 +5,5 @@
  * @return {string}
  */
 export default function (ts) {
-  return new Date(ts).toISOString()
+  return new Date(ts).toString().split(' ').slice(1, 5).join(' ')
 }
