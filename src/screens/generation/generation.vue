@@ -177,48 +177,17 @@
       </header>
 
       <section class="block-micro-detailed">
-        <h2
-          v-if="!isLoading"
-          class="title"
-        >
-          <span class="number">
-            {{ generation.microBlocksDetailed.length }}
-          </span>
-          Micro Block{{ generation.microBlocksDetailed.length !== 1 ? 's' : '' }}
-        </h2>
-        <div v-else>
-          <div><FillDummy color="grey" /></div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-        </div>
         <template v-if="!isLoading">
           <article
             v-for="(m, index) in generation.microBlocksDetailed"
             :key="m.hash"
             class="micro-blocks-wrapper"
           >
-            <h4>
-              <span class="number">
-                Micro Block No. {{ index+1 }}
-              </span>
-            </h4>
-            <MicroBlock :micro-block="m" />
+            <MicroBlock
+              :micro-block="m"
+              :micro-block-number="index"
+              :micro-blocks-length="generation.microBlocksDetailed.length"
+            />
           </article>
         </template>
       </section>

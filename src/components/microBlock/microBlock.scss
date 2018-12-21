@@ -3,9 +3,10 @@
 .micro-block {
   background: white;
   color: black;
-  margin: 20px 0;
-  padding: 20px;
+  margin-bottom: 25px;
+  padding-top: 20px;
   border-radius: 5px;
+  overflow: hidden;
 
   .title {
     @include font-size(l);
@@ -20,23 +21,64 @@
     }
   }
 
-  .block-transactions, .block-micro-detailed{
-    .title-sub {
-      margin-top: 50px;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid $aubergin;
-    }
+  .block-transactions {
+    &__header {
+      padding: 0 20px 20px;
+      .grid {
+        align-items: center;
+        flex-wrap: wrap;
+        @include phone-and-tablet {
+          flex-direction: column;
+          align-items: flex-start;
+        }
 
-    .grid .field {
-      margin-top: 20px;
-      margin-right:50px;
+        &_last {
+          @include phone-and-tablet {
+            flex-direction: column-reverse;
+          }
+        }
+      }
+
+      .field , a{
+        color: $aubergin;
+      }
+
+      .block-number {
+        @include font-size(l);
+      }
+      .transaction-field{
+        .label {
+          @include font-size(s);
+        }
+      }
+
+      .field {
+        width: 30%;
+      }
+      .block-number,
+      .transaction-field {
+        width: 40%;
+      }
+
+      .field {
+        @include phone-and-tablet {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+      }
+
+      .age {
+        @include only-phone {
+          display: none;
+        }
+      }
     }
   }
+  .transactions {
+    overflow-x: auto;
+  }
+
   .transactions .transaction:nth-child(even) {
     background:$smoke;
-  }
-  .grid .field:not(:last-child) {
-    margin-right:50px;
   }
 }

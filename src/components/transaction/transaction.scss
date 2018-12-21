@@ -3,10 +3,10 @@
 .transaction {
   padding:20px;
   display: flex;
-  min-width: 889px;
+  min-width: 929px;
   border-top: 2px solid $paleGrey;
   &:hover {
-    background:$paleGrey;
+    background: $paleGrey;
   }
   .header ,
   .body .grid {
@@ -29,7 +29,8 @@
   }
   .field-value .ae-address,
   .field-value {
-    @include font-size(s);
+    display: block;
+    @include font-size(xs);
     .number, .unit, a {
       color: $aubergin;
     }

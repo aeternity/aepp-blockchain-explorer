@@ -1,62 +1,68 @@
 <template>
   <section class="micro-block">
-    <div class="grid">
-      <Field
-        name="hash"
-        class="hash"
-      >
-        <RouterLink :to="`/block/${microBlock.hash}`">
-          <AeHash
-            :hash="microBlock.hash"
-            type="short"
-          />
-        </RouterLink>
-        <ViewAndCopy :text="microBlock.hash" />
-      </Field>
-      <Field
-        v-cloak
-        name="age"
-      >
-        <RelativeTime
-          :ts="currentTime - microBlock.time"
-          spaced
-        />
-      </Field>
-    </div>
-    <div class="grid">
-      <Field
-        v-cloak
-        name="time"
-        class="time"
-      >
-        <time
-          :timedate="microBlock.time | humanDate"
-          class="field-value number"
-        >
-          {{ microBlock.time | humanDate }}
-        </time>
-      </Field>
-      <Field
-        name="parent hash"
-        class="hash"
-      >
-        <RouterLink :to="`/block/${microBlock.prevHash}`">
-          <AeHash
-            :hash="microBlock.prevHash"
-            type="short"
-          />
-        </RouterLink>
-        <ViewAndCopy :text="microBlock.prevHash" />
-      </Field>
-    </div>
-
     <article class="block-transactions">
       <header class="block-transactions__header">
-        <h2 class="title title-sub">
-          <span class="number">
-            {{ microBlock.transactions.length }}
-          </span> Transaction{{ microBlock.transactions.length !== 1 ? 's' : '' }}
-        </h2>
+        <div class="grid">
+          <div class="block-number field">
+            Micro Block No. {{ microBlockNumber +1 }}
+          </div>
+          <Field
+            name="Micro Block Hash"
+            class="hash"
+          >
+            <RouterLink :to="`/block/${microBlock.hash}`">
+              <AeHash
+                :hash="microBlock.hash"
+                type="short"
+              />
+            </RouterLink>
+            <ViewAndCopy :text="microBlock.hash" />
+          </Field>
+          <Field
+            name="parent hash"
+            class="hash"
+          >
+            <RouterLink :to="`/block/${microBlock.prevHash}`">
+              <AeHash
+                :hash="microBlock.prevHash"
+                type="short"
+              />
+            </RouterLink>
+            <ViewAndCopy :text="microBlock.prevHash" />
+          </Field>
+        </div>
+        <div class="grid grid_last">
+          <div class="field transaction-field">
+            <div class="field-name label">
+              Transaction{{ microBlocksLength !== 1 ? 's' : '' }}
+            </div>
+            <span class="number">
+              {{ microBlocksLength }}
+            </span>
+          </div>
+          <Field
+            v-cloak
+            name="age"
+            class="age"
+          >
+            <RelativeTime
+              :ts="currentTime - microBlock.time"
+              spaced
+            />
+          </Field>
+          <Field
+            v-cloak
+            name="Time Stamp"
+            class="time"
+          >
+            <time
+              :timedate="microBlock.time | humanDate"
+              class="field-value number"
+            >
+              {{ microBlock.time | humanDate }}
+            </time>
+          </Field>
+        </div>
       </header>
       <div class="transactions">
         <Transaction
@@ -89,6 +95,14 @@ export default {
   props: {
     microBlock: {
       type: Object,
+      required: true
+    },
+    microBlockNumber: {
+      type: Number,
+      required: true
+    },
+    microBlocksLength: {
+      type: Number,
       required: true
     }
   }
