@@ -176,17 +176,16 @@
       </header>
 
       <section class="block-micro-detailed">
-        <template v-if="!isLoading">
-          <article
+        <template
+          v-if="!isLoading"
+          class="micro-blocks-wrapper"
+        >
+          <MicroBlock
             v-for="(m, index) in generation.microBlocksDetailed"
             :key="m.hash"
-            class="micro-blocks-wrapper"
-          >
-            <MicroBlock
-              :micro-block="m"
-              :micro-block-number="index"
-            />
-          </article>
+            :micro-block="m"
+            :micro-block-number="index"
+          />
         </template>
       </section>
     </section>
