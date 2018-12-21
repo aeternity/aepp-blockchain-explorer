@@ -5,9 +5,6 @@
   display: flex;
   min-width: 929px;
   border-top: 2px solid $paleGrey;
-  &:hover {
-    background: $paleGrey;
-  }
   .header ,
   .body .grid {
     display:flex;
