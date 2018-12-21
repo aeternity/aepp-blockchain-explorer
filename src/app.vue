@@ -77,20 +77,26 @@
                     <RouterLink to="/generations">
                       Generations
                     </RouterLink>
-                    <RouterLink to="/tx">
-                      Transactions
-                    </RouterLink>
                   </div>
                   <div class="mobile-nav-fixed-secondary-links">
-                    <RouterLink to="/">
-                      imprint
-                    </RouterLink>
-                    <RouterLink to="/">
-                      get started
-                    </RouterLink>
-                    <RouterLink to="/">
+                    <a
+                      href="https://www.aepps.com/imprint/"
+                      target="_blank"
+                    >
+                      Imprint
+                    </a>
+                    <a
+                      href="https://forum.aeternity.com/"
+                      target="_blank"
+                    >
+                      Forum
+                    </a>
+                    <a
+                      href="https://aeternity.com/"
+                      target="_blank"
+                    >
                       aeternity.com
-                    </RouterLink>
+                    </a>
                   </div>
                   <SocialLinks
                     light
