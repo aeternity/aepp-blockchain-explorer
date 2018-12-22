@@ -31,6 +31,7 @@ import NameClaimTx from './nameClaimTx.vue'
 import NamePreclaimTx from './namePreclaimTx.vue'
 import ContractCallTx from './contractCallTx.vue'
 import ContractCreateTx from './contractCreateTx.vue'
+import ChannelCloseMutualTx from './channelCloseMutualTx.vue'
 
 export default {
   name: 'Transaction',
@@ -48,7 +49,8 @@ export default {
     NameClaimTx,
     NamePreclaimTx,
     ContractCallTx,
-    ContractCreateTx
+    ContractCreateTx,
+    ChannelCloseMutualTx
   },
   props: {
     transaction: {
