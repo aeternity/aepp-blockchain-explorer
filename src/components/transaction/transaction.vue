@@ -5,7 +5,7 @@
   >
     <div class="body">
       <Component
-        :is="transaction.tx.type"
+        :is="components.includes(transaction.tx.type) ? transaction.tx.type: components[0]"
         v-if="transaction.tx.type"
         :transaction="transaction"
       />
@@ -21,6 +21,7 @@ import NamedAddress from '../namedAddress.vue'
 import AeHash from '../aeHash.vue'
 import Field from '../field.vue'
 
+import DefaultTx from './defaultTx.vue'
 import SpendTx from './spendTx.vue'
 import OracleRegisterTx from './oracleRegisterTx.vue'
 import OracleResponseTx from './oracleResponseTx.vue'
@@ -32,6 +33,21 @@ import NamePreclaimTx from './namePreclaimTx.vue'
 import ContractCallTx from './contractCallTx.vue'
 import ContractCreateTx from './contractCreateTx.vue'
 import ChannelCloseMutualTx from './channelCloseMutualTx.vue'
+
+const COMPONENT_MAPPING = [
+  'DefaultTx',
+  'SpendTx',
+  'OracleRegisterTx',
+  'OracleResponseTx',
+  'OracleQueryTx',
+  'OracleExtendTx',
+  'NameUpdateTx',
+  'NameClaimTx',
+  'NamePreclaimTx',
+  'ContractCallTx',
+  'ContractCreateTx',
+  'ChannelCloseMutualTx'
+]
 
 export default {
   name: 'Transaction',
@@ -50,12 +66,18 @@ export default {
     NamePreclaimTx,
     ContractCallTx,
     ContractCreateTx,
-    ChannelCloseMutualTx
+    ChannelCloseMutualTx,
+    DefaultTx
   },
   props: {
     transaction: {
       type: Object,
       required: true
+    }
+  },
+  data () {
+    return {
+      components: COMPONENT_MAPPING
     }
   },
   computed: {
