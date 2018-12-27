@@ -191,6 +191,11 @@
             </div>
           </div>
         </div>
+        <ObjView
+          v-if="transaction"
+          :obj="transaction"
+          class="objView"
+        />
       </div>
     </div>
   </div>
@@ -221,6 +226,7 @@ import NamedAddress from '../../components/namedAddress.vue'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import txTypeToName from '../../filters/txTypeToName'
 import FillDummy from '../../components/fillDummy'
+import ObjView from '../../components/objView.vue'
 
 export default {
   name: 'TransactionDetail',
@@ -243,7 +249,8 @@ export default {
     ContractCreateTx,
     FillDummy,
     AeLoader,
-    OracleExtendTx
+    OracleExtendTx,
+    ObjView
   },
   filters: { txTypeToName },
   props: {
