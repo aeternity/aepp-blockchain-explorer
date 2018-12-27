@@ -76,8 +76,6 @@
             </span>
           </div>
 
-          <hr>
-
           <div v-if="transaction">
             <Field
               v-if="transaction.tx.account"
@@ -111,8 +109,6 @@
             >
               {{ transaction.tx.reward }}
             </Field>
-
-            <hr>
 
             <Field
               v-if="transaction.tx.nonce"
@@ -273,4 +269,25 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  @import '../../style/mixins';
+  .transaction-detail-screen.screen {
+    .field, .height-item {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid $darkGrey;
+      padding: 10px 0;
+      .field-name {
+        width: 20%;
+      }
+      @include only-phone {
+        flex-direction: column;
+        align-items: flex-start;
+        .field-name {
+          width: 100%;
+        }
+      }
+    }
+  }
+</style>
 <style scoped lang='scss' src='./transactionDetail.scss'/>
