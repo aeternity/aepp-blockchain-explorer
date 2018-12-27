@@ -5,3 +5,10 @@
     @include content-max-width;
   }
 }
+
+.table-wrapper {
+  overflow-x: auto;
+  table {
+    width: 100%;
+  }
+}
