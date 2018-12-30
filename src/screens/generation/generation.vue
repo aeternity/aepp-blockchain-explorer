@@ -188,27 +188,6 @@
           />
         </template>
       </section>
-      <div v-if="isLoadingMore">
-        <div><FillDummy color="grey" /></div>
-        <div>
-          <FillDummy
-            color="grey"
-            size="big"
-          />
-        </div>
-        <div>
-          <FillDummy
-            color="grey"
-            size="big"
-          />
-        </div>
-        <div>
-          <FillDummy
-            color="grey"
-            size="big"
-          />
-        </div>
-      </div>
       <div
         v-if="microBlocks[generationId] && needMore"
         class="center"
