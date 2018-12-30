@@ -2,71 +2,52 @@
   <div>
     <div class="grid">
       <Field>
-        <div class="field-name">
-          Oracle
-        </div>
+        <AeBadge>{{ transaction.tx.type | txTypeToName }}</AeBadge>
+      </Field>
+      <Field
+        v-if="transaction.hash"
+        name="tx hash"
+      >
+        <RouterLink :to="&quot;/tx/&quot; + transaction.hash">
+          <AeHash
+            :hash="transaction.hash"
+            type="short"
+          />
+        </RouterLink>
+      </Field>
+      <Field name="Sender">
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracle">
-            {{ transaction.tx.oracle | startAndEnd }}
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.senderId">
+            <NamedAddress :address="transaction.tx.senderId" />
           </RouterLink>
         </div>
       </Field>
-      <Field>
-        <div class="field-name">
-          sender
-        </div>
+      <Field name="Oracle">
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.sender">
-            {{ transaction.tx.sender | startAndEnd }}
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracleId">
+            <NamedAddress :address="transaction.tx.oracleId" />
           </RouterLink>
         </div>
       </Field>
     </div>
-    <div class="grid">
-      <Field>
-        <div class="field-name">
-          QueryTTL
-        </div>
-        {{ transaction.tx.query_ttl.type }}
-        <span class="number">
-          {{ transaction.tx.query_ttl.value }}
-        </span>
-      </Field>
-      <Field>
-        <div class="field-name">
-          ResponseTTL
-        </div>
-        {{ transaction.tx.response_ttl.type }}
-        <span class="number">
-          {{ transaction.tx.response_ttl.value }}
-        </span>
-      </Field>
-      <Field v-if="transaction.tx.query_fee">
-        <div class="field-name">
-          QueryFee
-        </div>
-        <span class="number">
-          {{ transaction.tx.query_fee | yaniToAe }}
-        </span>
-        <span class="unit">
-          AE
-        </span>
-      </Field>
-    </div>
-    <Field>
-      <div class="field-name">
-        Query
-      </div>
-      <pre class="query">{{ transaction.tx.query }}</pre>
-    </Field>
   </div>
 </template>
 <script>
+import txTypeToName from '../../filters/txTypeToName'
 import Field from '../field'
+import NamedAddress from '../namedAddress'
+import AeHash from '../aeHash.vue'
+import { AeBadge } from '@aeternity/aepp-components'
 
 export default {
   name: 'OracleQueryTx',
-  components: { Field },
+  components: {
+    Field,
+    NamedAddress,
+    AeHash,
+    AeBadge
+  },
+  filters: { txTypeToName },
   props: {
     transaction: {
       type: Object,

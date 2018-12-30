@@ -84,11 +84,10 @@
               />
               <FillDummy v-else />
             </Field>
-            <Field name="time since mined">
+            <Field name="age">
               <RelativeTime
                 v-if="!isLoading"
                 :ts="currentTime - generation.keyBlock.time"
-                spaced
               />
               <FillDummy v-else />
             </Field>
@@ -177,84 +176,51 @@
       </header>
 
       <section class="block-micro-detailed">
-        <h2
+        <template
           v-if="!isLoading"
-          class="title"
+          class="micro-blocks-wrapper"
         >
-          <span class="number">
-            {{ generation.microBlocks.length }}
-          </span>
-          Micro Block{{ generation.microBlocks.length !== 1 ? 's' : '' }}
-        </h2>
-        <div v-else>
-          <div><FillDummy color="grey" /></div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-        </div>
-        <template v-if="!isLoading">
-          <article
+          <MicroBlock
             v-for="(m, index) in microBlocks[generationId]"
             :key="m.hash"
-            class="micro-blocks-wrapper"
-          >
-            <h4>
-              <span class="number">
-                Micro Block No. {{ index+1 }}
-              </span>
-            </h4>
-            <MicroBlock :micro-block="m" />
-          </article>
+            :micro-block="m"
+            :micro-block-number="index"
+          />
         </template>
-        <div v-if="isLoadingMore">
-          <div><FillDummy color="grey" /></div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-        </div>
-        <div
-          v-if="microBlocks[generationId] && needMore"
-          class="center"
-        >
-          <AeButton
-            v-if="!isLoadingMore"
-            type="dramatic"
-            @click="loadMore"
-          >
-            load more
-          </AeButton>
-        </div>
       </section>
+      <div v-if="isLoadingMore">
+        <div><FillDummy color="grey" /></div>
+        <div>
+          <FillDummy
+            color="grey"
+            size="big"
+          />
+        </div>
+        <div>
+          <FillDummy
+            color="grey"
+            size="big"
+          />
+        </div>
+        <div>
+          <FillDummy
+            color="grey"
+            size="big"
+          />
+        </div>
+      </div>
+      <div
+        v-if="microBlocks[generationId] && needMore"
+        class="center"
+      >
+        <AeButton
+          v-if="!isLoadingMore"
+          type="dramatic"
+          @click="loadMore"
+        >
+          load more
+        </AeButton>
+      </div>
     </section>
     <BackToTop class="backToTop" />
   </article>
