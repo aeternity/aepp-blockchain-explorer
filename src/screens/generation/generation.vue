@@ -24,7 +24,7 @@
                 v-if="!isLoading"
                 class="number"
               >
-                {{ generation.microBlocksDetailed.length }}
+                {{ generation.microBlocks.length }}
               </div>
               <FillDummy
                 v-else
@@ -182,9 +182,9 @@
           class="title"
         >
           <span class="number">
-            {{ generation.microBlocksDetailed.length }}
+            {{ generation.microBlocks.length }}
           </span>
-          Micro Block{{ generation.microBlocksDetailed.length !== 1 ? 's' : '' }}
+          Micro Block{{ generation.microBlocks.length !== 1 ? 's' : '' }}
         </h2>
         <div v-else>
           <div><FillDummy color="grey" /></div>
@@ -209,7 +209,7 @@
         </div>
         <template v-if="!isLoading">
           <article
-            v-for="(m, index) in generation.microBlocksDetailed"
+            v-for="(m, index) in microBlocks[generationId]"
             :key="m.hash"
             class="micro-blocks-wrapper"
           >
@@ -221,6 +221,39 @@
             <MicroBlock :micro-block="m" />
           </article>
         </template>
+        <div v-if="isLoadingMore">
+          <div><FillDummy color="grey" /></div>
+          <div>
+            <FillDummy
+              color="grey"
+              size="big"
+            />
+          </div>
+          <div>
+            <FillDummy
+              color="grey"
+              size="big"
+            />
+          </div>
+          <div>
+            <FillDummy
+              color="grey"
+              size="big"
+            />
+          </div>
+        </div>
+        <div
+          v-if="microBlocks[generationId] && needMore"
+          class="center"
+        >
+          <AeButton
+            v-if="!isLoadingMore"
+            type="dramatic"
+            @click="loadMore"
+          >
+            load more
+          </AeButton>
+        </div>
       </section>
     </section>
     <BackToTop class="backToTop" />
@@ -237,6 +270,7 @@ import ViewAndCopy from '../../components/viewAndCopy.vue'
 import FillDummy from '../../components/fillDummy'
 import BackToTop from '../../components/backToTop'
 import MicroBlock from '../../components/microBlock/microBlock'
+import { AeButton } from '@aeternity/aepp-components'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -250,7 +284,8 @@ export default {
     ViewAndCopy,
     FillDummy,
     BackToTop,
-    MicroBlock
+    MicroBlock,
+    AeButton
   },
   mixins: [currentTime],
   props: {
@@ -261,20 +296,34 @@ export default {
   },
   data: function () {
     return {
-      isLoading: true
+      isLoading: true,
+      totalBlocks: 0,
+      currentBlocks: 0,
+      isLoadingMore: false
     }
   },
-  computed: mapState('blocks', [
-    'height',
-    'generation'
-  ]),
+  computed: {
+    ...mapState('blocks', [
+      'height',
+      'generation',
+      'microBlocks'
+    ]),
+    needMore () {
+      return this.totalBlocks - this.currentBlocks > 0
+    }
+  },
   watch: {
     generationId () {
       this.getGeneration()
     }
   },
-  mounted () {
-    this.getGeneration()
+  async mounted () {
+    await this.getGeneration()
+    this.totalBlocks = this.generation.microBlocks.length
+    this.currentBlocks = Math.min(this.totalBlocks, 10)
+    this.isLoadingMore = true
+    await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationId), 'numBlocks': this.currentBlocks })
+    this.isLoadingMore = false
   },
   methods: {
     async getGeneration () {
@@ -285,6 +334,14 @@ export default {
         await this.$store.dispatch('blocks/getGenerationFromHash', this.generationId)
       }
       this.isLoading = false
+    },
+    async loadMore () {
+      this.isLoadingMore = true
+      const toAdd = Math.max(Math.min(this.totalBlocks - this.currentBlocks, 10), 0)
+      this.currentBlocks += toAdd
+      this.getGeneration()
+      await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationId), 'numBlocks': this.currentBlocks })
+      this.isLoadingMore = false
     }
   }
 }
