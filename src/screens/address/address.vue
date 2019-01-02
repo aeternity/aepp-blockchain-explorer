@@ -48,13 +48,15 @@
         />
       </Field>
     </header>
-    <h2>Transactions</h2>
+    <h2 v-if="account">
+      Transactions({{ account.transactions.length }})
+    </h2>
     <div
       v-if="account"
       class="transactions"
     >
       <Transaction
-        v-for="t in account.transactions"
+        v-for="t in account.transactions.slice(0, numTransactions)"
         :key="t.hash"
         :transaction="t"
       />
@@ -80,18 +82,29 @@
         />
       </div>
     </div>
+    <div
+      v-if="needMore"
+      class="center"
+    >
+      <AeButton
+        type="dramatic"
+        size="small"
+        @click="loadMore"
+      >
+        more txs
+      </AeButton>
+    </div>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
-import { AeAddress, AeIdentityAvatar } from '@aeternity/aepp-components'
+import { AeAddress, AeIdentityAvatar, AeButton } from '@aeternity/aepp-components'
 import pollAction from '../../mixins/pollAction'
 import NamedAddress from '../../components/namedAddress'
 import Field from '../../components/field'
 import FillDummy from '../../components/fillDummy'
 import Transaction from '../../components/transaction/transaction'
 
-// TODO: There is a reactivity problem in here, The v-if does not work
 export default {
   name: 'Address',
   components: {
@@ -100,7 +113,8 @@ export default {
     NamedAddress,
     Field,
     FillDummy,
-    Transaction
+    Transaction,
+    AeButton
   },
   mixins: [pollAction('accounts/get', ({ address }) => address)],
   props: {
@@ -109,11 +123,26 @@ export default {
       required: true
     }
   },
-  computed: mapState('accounts', {
-    account (state) {
-      return state.accounts[this.address]
+  data: function () {
+    return {
+      numTransactions: 10
     }
-  })
+  },
+  computed: {
+    ...mapState('accounts', {
+      account (state) {
+        return state.accounts[this.address]
+      }
+    }),
+    needMore () {
+      return this.account ? this.account.transactions.length > this.numTransactions : false
+    }
+  },
+  methods: {
+    loadMore () {
+      this.numTransactions = Math.min(this.numTransactions + 10, this.account.transactions.length)
+    }
+  }
 }
 </script>
 <style src='./address.scss' lang='scss' />
