@@ -19,7 +19,7 @@
             last key block mined
           </span>
           <RelativeTime
-            v-if="getAverageBlockTime"
+            v-if="getLastMinedBlockTime(currentTime)"
             :ts="getLastMinedBlockTime(currentTime)"
           />
           <span class="field-name">
