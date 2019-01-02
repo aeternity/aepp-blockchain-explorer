@@ -267,9 +267,11 @@ export default {
       }
     }
   }),
+  async beforeMount () {
+    this.height = await this.$store.dispatch('blocks/height')
+  },
   async mounted () {
     await this.$store.dispatch('transactions/getTxByHash', this.txId)
-    this.height = await this.$store.dispatch('blocks/height')
   }
 }
 </script>
