@@ -267,7 +267,7 @@ export default {
       }
     }
   }),
-  async beforeMount() {
+  async beforeMount () {
     this.height = await this.$store.dispatch('blocks/height')
   },
   async mounted () {
