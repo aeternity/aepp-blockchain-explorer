@@ -34,7 +34,6 @@
             :key="i"
           >
             <td>
-              
               <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
@@ -44,7 +43,10 @@
                     {{ generations[height-i+1].keyBlock.height }}
                   </RouterLink>
                 </span>
-                <FillDummy size="tall" v-else />
+                <FillDummy
+                  v-else
+                  size="tall"
+                />
               </Transition>
             </td>
             <td>
@@ -61,7 +63,10 @@
                     type="short"
                   />
                 </span>
-                <FillDummy size="long" v-else />
+                <FillDummy
+                  v-else
+                  size="long"
+                />
               </Transition>
             </td>
             <td>
@@ -111,7 +116,10 @@
                     <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
                   </RouterLink>
                 </span>
-                <FillDummy size="long" v-else />
+                <FillDummy
+                  v-else
+                  size="long"
+                />
               </Transition>
             </td>
             <td>
