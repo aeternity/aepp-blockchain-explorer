@@ -34,10 +34,7 @@
             :key="i"
           >
             <td>
-              <span
-                v-if="!generations[height-i+1]"
-                class="field-name field-name_first "
-              />
+              
               <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
@@ -47,12 +44,12 @@
                     {{ generations[height-i+1].keyBlock.height }}
                   </RouterLink>
                 </span>
-                <FillDummy v-else />
+                <FillDummy size="tall" v-else />
               </Transition>
             </td>
             <td>
               <span class="field-name">
-                key-hash
+                Key Hash
               </span>
               <Transition name="fade">
                 <span
@@ -64,7 +61,7 @@
                     type="short"
                   />
                 </span>
-                <FillDummy v-else />
+                <FillDummy size="long" v-else />
               </Transition>
             </td>
             <td>
@@ -103,7 +100,7 @@
             </td>
             <td>
               <span class="field-name">
-                beneficiary
+                Beneficiary
               </span>
               <Transition name="fade">
                 <span
@@ -114,12 +111,12 @@
                     <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
                   </RouterLink>
                 </span>
-                <FillDummy v-else />
+                <FillDummy size="long" v-else />
               </Transition>
             </td>
             <td>
               <span class="field-name">
-                age
+                Age
               </span>
               <Transition name="fade">
                 <span
