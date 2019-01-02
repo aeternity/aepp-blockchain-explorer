@@ -2,7 +2,6 @@
   <div class="recent-blocks-partial">
     <div class="inner">
       <h2>Recent generations</h2>
-      <p>View the latest generations on the aeternity blockchain</p>
       <table>
         <tr
           v-for="(generation, i) in generations"
