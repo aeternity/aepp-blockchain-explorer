@@ -408,7 +408,7 @@
       v-if="transaction.tx.payload"
       name="Payload"
     >
-      <div class="number">
+      <div class="number payload">
         {{ transaction.tx.payload }}
       </div>
     </Field>

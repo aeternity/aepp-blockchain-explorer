@@ -76,8 +76,6 @@
             </span>
           </div>
 
-          <hr>
-
           <div v-if="transaction">
             <Field
               v-if="transaction.tx.account"
@@ -108,8 +106,6 @@
             >
               {{ transaction.tx.reward }}
             </Field>
-
-            <hr>
 
             <Field
               v-if="transaction.tx.nonce"
