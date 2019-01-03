@@ -61,4 +61,8 @@
     margin: 0;
   }
 
+  /deep/ .poi {
+    word-break: break-all;
+  }
+
 }

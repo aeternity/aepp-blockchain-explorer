@@ -58,6 +58,25 @@
       />
     </Field>
     <Field
+      v-if="transaction.tx.toId"
+      name="Account"
+    >
+      <RouterLink :to="`/account/${ transaction.tx.toId }`">
+        <NamedAddress
+          :address="transaction.tx.toId"
+          size="short"
+        />
+      </RouterLink>
+      <ViewAndCopy
+        v-if="transaction"
+        :text="transaction.tx.toId"
+      />
+      <FillDummy
+        v-else
+        color="grey"
+      />
+    </Field>
+    <Field
       v-if="transaction.tx.caller"
       name="Caller"
     >
@@ -97,6 +116,16 @@
         type="short"
       />
       <ViewAndCopy :text="transaction.tx.channelId" />
+    </Field>
+    <Field
+      v-if="transaction.tx.stateHash"
+      name="State Hash"
+    >
+      <AeHash
+        :hash="transaction.tx.stateHash"
+        type="short"
+      />
+      <ViewAndCopy :text="transaction.tx.stateHash" />
     </Field>
     <Field
       v-if="transaction.tx.gas"
@@ -368,11 +397,27 @@
       />
     </Field>
     <Field
+      v-if="transaction.tx.poi"
+      name="Poi"
+    >
+      <div class="number poi">
+        {{ transaction.tx.poi }}
+      </div>
+    </Field>
+    <Field
       v-if="transaction.tx.payload"
       name="Payload"
     >
       <div class="number">
         {{ transaction.tx.payload }}
+      </div>
+    </Field>
+    <Field
+      v-if="transaction.tx.round"
+      name="Round"
+    >
+      <div class="number">
+        {{ transaction.tx.round }}
       </div>
     </Field>
     <Field
