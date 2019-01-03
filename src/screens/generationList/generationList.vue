@@ -78,7 +78,7 @@
                   v-if="generations[height-i+1]"
                   class="number"
                 >
-                  {{ generations[height-i+1].microBlocksDetailed.length }}
+                  {{ generations[height-i+1].microBlocks.length }}
                 </span>
                 <FillDummy
                   v-else

@@ -26,7 +26,7 @@
               v-if="generation"
               class="field-value number"
             >
-              {{ generation.microBlocksDetailed.length }}
+              {{ generation.microBlocks.length }}
             </span>
             <FillDummy v-else />
           </td>
