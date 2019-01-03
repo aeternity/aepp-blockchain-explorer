@@ -1,6 +1,6 @@
 <template>
   <span
-    :class="{ big, spaced }"
+    :class="{ big }"
     class="relative-time"
   >
     <template v-for="(item, idx) in items">
@@ -24,8 +24,7 @@
 export default {
   props: {
     ts: { type: Number, required: true },
-    big: { type: Boolean, default: false },
-    spaced: { type: Boolean, default: false }
+    big: { type: Boolean, default: false }
   },
   computed: {
     items () {
@@ -61,6 +60,7 @@ export default {
 .relative-time {
   &.big {
     .number {
+      font-family: Roboto, serif;
       @include font-size(xxl);
       @include phone-and-tablet {
         @include font-size(xl);
@@ -75,10 +75,12 @@ export default {
     }
   }
 
-  &.spaced {
-    .unit + .number {
-      margin-left: 20px;
-    }
+  .number {
+    font-family: Roboto, serif;
+  }
+
+  .unit + .number {
+    margin-left: 5px;
   }
 }
 </style>

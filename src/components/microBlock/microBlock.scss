@@ -1,0 +1,102 @@
+@import '../../style/mixins';
+
+.micro-block {
+  background: white;
+  color: black;
+  margin-bottom: 25px;
+  padding-top: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .title {
+    @include font-size(l);
+    font-weight: bold;
+    &-sub {
+      font-weight: normal;
+    }
+    &-numbers{
+      @include font-size(m);
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+    }
+  }
+
+  .block-transactions {
+    &__header {
+      padding: 0 20px 20px;
+      .grid {
+        align-items: center;
+        flex-wrap: wrap;
+        @include phone-and-tablet {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        &_last {
+          @include phone-and-tablet {
+            flex-direction: column-reverse;
+          }
+        }
+      }
+
+      .field , a{
+        color: $aubergin;
+      }
+
+      .block-number {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        @include font-size(l);
+      }
+      .transaction-field{
+          @include font-size(l);
+      }
+
+      .field {
+        width: 30%;
+        .field-value, .ae-hash, .relative-time {
+          @include font-size(s);
+          /deep/ .number {
+            margin-left: 0;
+          }
+        }
+
+      }
+      .block-number,
+      .transaction-field,
+      .time {
+        width: 40%;
+      }
+      .hash {
+        width: 60%;
+        @include only-phone {
+          word-break: break-all;
+        }
+      }
+      .age{
+        width: 20%;
+      }
+
+      .field {
+        @include phone-and-tablet {
+          width: 100%;
+          display: block;
+          margin-bottom: 15px;
+        }
+      }
+
+      .age {
+        @include only-phone {
+          display: none;
+        }
+      }
+    }
+  }
+  .transactions {
+    overflow-x: auto;
+  }
+
+  .transactions .transaction:nth-child(even) {
+    background: $white;
+  }
+}

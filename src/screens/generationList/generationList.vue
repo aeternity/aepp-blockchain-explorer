@@ -12,8 +12,6 @@
           <RelativeTime
             v-if="getAverageBlockTime"
             :ts="getAverageBlockTime"
-            big
-            spaced
           />
         </div>
         <div>
@@ -21,10 +19,8 @@
             last key block mined
           </span>
           <RelativeTime
-            v-if="getAverageBlockTime"
+            v-if="getLastMinedBlockTime(currentTime)"
             :ts="getLastMinedBlockTime(currentTime)"
-            big
-            spaced
           />
           <span class="field-name">
             ago
@@ -123,12 +119,11 @@
             </td>
             <td>
               <span class="field-name">
-                time
+                age
               </span>
               <Transition name="fade">
                 <span
                   v-if="generations[height-i+1]"
-                  class="number"
                 >
                   <RelativeTime
                     v-if="getAverageBlockTime"

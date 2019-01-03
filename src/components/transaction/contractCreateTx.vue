@@ -1,62 +1,54 @@
 <template>
   <div>
     <div class="grid">
+      <Field>
+        <AeBadge>{{ transaction.tx.type | txTypeToName }}</AeBadge>
+      </Field>
       <Field
-        v-if="transaction.tx.owner"
-        name="Account"
+        v-if="transaction.hash"
+        name="tx hash"
       >
-        <RouterLink :to="`/account/${transaction.tx.owner}`">
-          <NamedAddress
-            :address="transaction.tx.owner"
-            size="short"
+        <RouterLink :to="&quot;/tx/&quot; + transaction.hash">
+          <AeHash
+            :hash="transaction.hash"
+            type="short"
           />
         </RouterLink>
       </Field>
-      <Field name="TTL">
-        <div class="number">
-          {{ transaction.tx.ttl }}
+      <Field name="Owner">
+        <div class="account-address">
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.ownerId">
+            <NamedAddress :address="transaction.tx.ownerId" />
+          </RouterLink>
         </div>
       </Field>
-      <Field name="Deposit">
+      <Field name="amount">
         <span class="number">
-          {{ transaction.tx.deposit | yaniToAe }}
+          {{ transaction.tx.amount | yaniToAe }}
         </span>
         <span class="unit">
           AE
         </span>
       </Field>
-      <Field name="Gas">
-        {{ transaction.tx.gas }}
-      </Field>
-      <Field name="Fee">
-        <div class="number">
-          {{ transaction.tx.fee | yaniToAe }}
-        </div>
-        <span class="unit">
-          AE
-        </span>
-      </Field>
-      <Field name="Version">
-        <div class="number">
-          {{ transaction.tx.version }}
-        </div>
-      </Field>
-      <Field name="Gas price">
-        {{ transaction.tx.gasPrice | yaniToAe }}
-      </Field>
-      <span class="unit">
-        AE
-      </span>
     </div>
   </div>
 </template>
 <script>
+import txTypeToName from '../../filters/txTypeToName'
 import Field from '../field'
 import NamedAddress from '../namedAddress'
+import AeHash from '../aeHash.vue'
+import { AeBadge } from '@aeternity/aepp-components'
 
 export default {
   name: 'ContractCreateTx',
-  components: { Field, NamedAddress },
+  components: {
+    Field,
+    NamedAddress,
+    AeHash,
+    AeBadge
+  },
+  filters: { txTypeToName },
   props: {
     transaction: {
       type: Object,
