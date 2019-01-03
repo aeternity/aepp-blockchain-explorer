@@ -60,6 +60,11 @@
   .ae-loader {
     margin: 0;
   }
+
+  /deep/ .poi {
+    word-break: break-all;
+  }
+
   .objView {
     margin: 0 -70px;
     @include only-phone {
