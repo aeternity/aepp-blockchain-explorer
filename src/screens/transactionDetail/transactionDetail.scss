@@ -51,7 +51,7 @@
     border-top: 1px solid $darkGrey;
     padding: 10px 0;
     .field-name {
-      width: 20%;
+      min-width: 20%;
     }
     @include only-phone {
       flex-direction: column;
@@ -90,7 +90,7 @@
     margin: 0;
   }
 
-  /deep/ .poi {
+  /deep/ .poi, /deep/ .payload {
     word-break: break-all;
   }
 
