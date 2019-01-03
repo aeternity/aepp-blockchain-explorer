@@ -50,10 +50,22 @@
       </header>
       <div class="transactions">
         <Transaction
-          v-for="t in microBlock.transactions"
+          v-for="t in microBlock.transactions.slice(0, numTransactions)"
           :key="t.hash"
           :transaction="t"
         />
+      </div>
+      <div
+        v-if="needMore"
+        class="center"
+      >
+        <AeButton
+          type="dramatic"
+          size="small"
+          @click="loadMore"
+        >
+          more txs
+        </AeButton>
       </div>
     </article>
   </section>
@@ -64,6 +76,7 @@ import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
 import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
+import { AeButton } from '@aeternity/aepp-components'
 
 export default {
   name: 'MicroBlock',
@@ -71,7 +84,8 @@ export default {
     RelativeTime,
     Transaction,
     Field,
-    AeHash
+    AeHash,
+    AeButton
   },
   mixins: [currentTime],
   props: {
@@ -82,6 +96,24 @@ export default {
     microBlockNumber: {
       type: Number,
       required: true
+    }
+  },
+  data: function () {
+    return {
+      numTransactions: Math.min(10, this.microBlock.transactions.length)
+    }
+  },
+  computed: {
+    needMore () {
+      return this.microBlock.transactions.length > this.numTransactions
+    }
+  },
+  methods: {
+    loadMore () {
+      this.numTransactions = Math.min(
+        this.numTransactions + 10,
+        this.microBlock.transactions.length
+      )
     }
   }
 }

@@ -188,6 +188,11 @@
             </div>
           </div>
         </div>
+        <ObjView
+          v-if="transaction"
+          :obj="transaction"
+          class="objView"
+        />
       </div>
     </div>
   </div>
@@ -207,6 +212,7 @@ import NamedAddress from '../../components/namedAddress.vue'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import txTypeToName from '../../filters/txTypeToName'
 import FillDummy from '../../components/fillDummy'
+import ObjView from '../../components/objView.vue'
 
 export default {
   name: 'TransactionDetail',
@@ -218,7 +224,8 @@ export default {
     ViewAndCopy,
     FillDummy,
     AeLoader,
-    TypeTx
+    TypeTx,
+    ObjView
   },
   filters: { txTypeToName },
   props: {
@@ -242,6 +249,9 @@ export default {
       }
     }
   }),
+  async beforeMount () {
+    this.height = await this.$store.dispatch('blocks/height')
+  },
   async mounted () {
     await this.$store.dispatch('transactions/getTxByHash', this.txId)
     this.height = await this.$store.dispatch('blocks/height')

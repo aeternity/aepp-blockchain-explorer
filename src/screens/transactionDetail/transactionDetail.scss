@@ -11,7 +11,7 @@
     margin:30px auto 0 auto;
     padding:35px 70px 0;
     @include only-phone {
-      padding:35px 30px;
+      padding:35px 30px 0;
     }
   }
   .title {
@@ -65,4 +65,10 @@
     word-break: break-all;
   }
 
+  .objView {
+    margin: 0 -70px;
+    @include only-phone {
+      margin: 0 -30px;
+    }
+  }
 }
