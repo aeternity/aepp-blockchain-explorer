@@ -110,7 +110,7 @@ export default wrapActionsWithResolvedEpoch({
     const microBlocksHashes = generation.microBlocks
     generation.numTransactions = 0
     for (let i = 0; i < microBlocksHashes.length; i++) {
-      generation.numTransactions += (await epoch.api.getMicroBlockTransactionsCountByHash(microBlocksHashes[i])).count
+      // generation.numTransactions += (await epoch.api.getMicroBlockTransactionsCountByHash(microBlocksHashes[i])).count
     }
     if (isEqual(state.generation, generation)) {
       return state.generation

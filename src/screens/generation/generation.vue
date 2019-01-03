@@ -197,7 +197,7 @@
           type="dramatic"
           @click="loadMore"
         >
-          load more
+          more blocks
         </AeButton>
       </div>
     </section>
