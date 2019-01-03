@@ -54,6 +54,7 @@
       <ObjView
         v-if="!isLoading"
         :obj="nodeStatus.version"
+        class="objView"
       />
       <div v-else>
         <div
@@ -68,6 +69,7 @@
       <ObjView
         v-if="!isLoading"
         :obj="nodeStatus.top"
+        class="objView"
       />
       <div v-else>
         <div

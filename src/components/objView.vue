@@ -24,7 +24,6 @@ export default {
     background: lighten($black, 20);
     padding: 15px;
     color: darken($white, 10);
-    width: 95%;
     word-wrap: break-word;
     white-space: pre;
     @include font-size(m);

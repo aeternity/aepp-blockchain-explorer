@@ -4,6 +4,10 @@
   > * {
     @include content-max-width;
   }
+
+  .objView {
+    width: 95%;
+  }
 }
 
 .table-wrapper {
