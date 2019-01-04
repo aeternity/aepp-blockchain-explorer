@@ -141,4 +141,4 @@ export default {
   })
 }
 </script>
-<style src='./latestBlock.scss' lang='scss' />
+<style src='./latestGeneration.scss' lang='scss' />
