@@ -274,7 +274,7 @@ export default {
     }
   },
   async mounted () {
-    this.getGeneration()
+    await this.getGeneration()
     await this.$store.dispatch('blocks/height')
     this.totalBlocks = this.generation.microBlocks.length
     this.currentBlocks = Math.min(this.totalBlocks, 10)
