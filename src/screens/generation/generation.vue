@@ -1,13 +1,16 @@
 <template>
   <article class="generation-screen screen">
-    <section>
+    <section class="generation-main">
       <header class="generation-header">
-        <h1 class="title title-main">
-          Generation:
-        </h1>
         <section class="generation-header__section">
+          <h1 class="title title-main">
+            Key Block:
+          </h1>
           <div class="basic-gen-info grid">
-            <Field name="Height">
+            <Field
+              name="Block Height"
+              class="field__height"
+            >
               <div
                 v-if="!isLoading"
                 class="number"
@@ -19,19 +22,43 @@
                 size="small"
               />
             </Field>
-            <Field name="Micro Blocks">
+            <Field
+              name="Block Confirmation"
+              class="field__confirmation"
+            >
               <div
                 v-if="!isLoading"
                 class="number"
               >
-                {{ generation.microBlocks.length }}
+                {{ height - generation.keyBlock.height }}
               </div>
-              <FillDummy
-                v-else
-                size="small"
-              />
             </Field>
-            <Field name="Transactions">
+            <Field
+              name="Key Block Hash"
+              class="field__hash"
+            >
+              <RouterLink
+                v-if="!isLoading"
+                :to="`/block/${generation.keyBlock.hash}`"
+              >
+                <AeHash
+                  :hash="generation.keyBlock.hash"
+                  type="short"
+                />
+              </RouterLink>
+              <ViewAndCopy
+                v-if="!isLoading"
+                color="boring"
+                :text="generation.keyBlock.hash"
+              />
+              <FillDummy v-else />
+            </Field>
+          </div>
+          <div class="basic-gen-info grid">
+            <Field
+              name="Transactions"
+              class="field__transactions"
+            >
               <div
                 v-if="!isLoading"
                 class="number"
@@ -43,30 +70,25 @@
                 size="small"
               />
             </Field>
-          </div>
-          <nav class="gen-navigation grid">
-            <RouterLink
-              v-if="!isLoading"
-              :to="`/generation/${(generation.keyBlock.height - 1)}`"
+            <Field
+              name="Micro Blocks"
+              class="field__micro"
             >
-              prev: {{ generation.keyBlock.height - 1 }}
-            </RouterLink>
-            <FillDummy v-else />
-            <RouterLink
-              v-if="!isLoading"
-              :to="`/generation/${(generation.keyBlock.height + 1)}`"
+              <div
+                v-if="!isLoading"
+                class="number"
+              >
+                {{ generation.microBlocks.length }}
+              </div>
+              <FillDummy
+                v-else
+                size="small"
+              />
+            </Field>
+            <Field
+              name="beneficiary"
+              class="field__beneficiary"
             >
-              next: {{ generation.keyBlock.height + 1 }}
-            </RouterLink>
-            <FillDummy v-else />
-          </nav>
-        </section>
-        <h2 class="title title-main">
-          Key Block:
-        </h2>
-        <section class="generation-header__section">
-          <div class="basic-gen-info grid">
-            <Field name="beneficiary">
               <RouterLink
                 v-if="!isLoading"
                 :to="`/account/${generation.keyBlock.beneficiary}`"
@@ -84,94 +106,79 @@
               />
               <FillDummy v-else />
             </Field>
-            <Field name="age">
+          </div>
+          <div class="basic-gen-info grid">
+            <Field
+              name="Target"
+              class="field__target"
+            >
+              <div
+                v-if="!isLoading"
+                class="field-value number"
+              >
+                {{ generation.keyBlock.target }}
+              </div>
+              <FillDummy
+                v-else
+                size="big"
+              />
+            </Field>
+            <Field
+              name="Time Stamp"
+              class="field__stamp"
+            >
+              <time
+                v-if="!isLoading"
+                :timedate="generation.keyBlock.time | humanDate"
+                class="field-value number"
+              >
+                {{ generation.keyBlock.time | humanDate }}
+              </time>
+              <FillDummy
+                v-else
+                size="big"
+              />
+            </Field>
+            <Field
+              name="Age"
+              class="field__age"
+            >
               <RelativeTime
                 v-if="!isLoading"
                 :ts="currentTime - generation.keyBlock.time"
+                spaced
               />
               <FillDummy v-else />
             </Field>
           </div>
-          <div class="detail-block-info">
-            <Field
-              name="Hash"
-              class="hash"
-            >
+          <nav class="gen-navigation grid">
+            <AeButtonGroup>
               <RouterLink
                 v-if="!isLoading"
-                :to="`/block/${generation.keyBlock.hash}`"
+                :to="`/generation/${(generation.keyBlock.height - 1)}`"
               >
-                <AeHash
-                  :hash="generation.keyBlock.hash"
-                  type="short"
-                />
+                <AeButton
+                  face="round"
+                  fill="primary"
+                >
+                  previous
+                </AeButton>
               </RouterLink>
-              <ViewAndCopy
-                v-if="!isLoading"
-                color="dramatic"
-                :text="generation.keyBlock.hash"
-              />
               <FillDummy v-else />
-            </Field>
-            <div class="grid">
-              <Field
-                name="target"
-                class="rewarded"
+              <RouterLink
+                v-if="!isLoading"
+                :to="`/generation/${(generation.keyBlock.height + 1)}`"
               >
-                <div
-                  v-if="!isLoading"
-                  class="field-value number"
+                <AeButton
+                  face="round"
+                  fill="primary"
                 >
-                  {{ generation.keyBlock.target }}
-                </div>
-                <FillDummy
-                  v-else
-                  size="big"
-                />
-              </Field>
-              <Field
-                name="time"
-                class="time"
-              >
-                <time
-                  v-if="!isLoading"
-                  :timedate="generation.keyBlock.time | humanDate"
-                  class="field-value number"
-                >
-                  {{ generation.keyBlock.time | humanDate }}
-                </time>
-                <FillDummy
-                  v-else
-                  size="big"
-                />
-              </Field>
-              <Field
-                name="parent hash"
-                class="hash"
-              >
-                <div class="field-value block-hash">
-                  <RouterLink
-                    v-if="!isLoading"
-                    :to="`/block/${generation.keyBlock.prevHash}`"
-                  >
-                    <AeHash
-                      :hash="generation.keyBlock.prevHash"
-                      type="short"
-                    />
-                  </RouterLink>
-                  <ViewAndCopy
-                    v-if="!isLoading"
-                    color="dramatic"
-                    :text="generation.keyBlock.prevHash"
-                  />
-                  <FillDummy
-                    v-else
-                    size="big"
-                  />
-                </div>
-              </Field>
-            </div>
-          </div>
+                  next
+                </AeButton>
+              </RouterLink>
+              <FillDummy v-else />
+            </AeButtonGroup>
+          </nav>
         </section>
       </header>
 
@@ -215,7 +222,10 @@ import ViewAndCopy from '../../components/viewAndCopy.vue'
 import FillDummy from '../../components/fillDummy'
 import BackToTop from '../../components/backToTop'
 import MicroBlock from '../../components/microBlock/microBlock'
-import { AeButton } from '@aeternity/aepp-components'
+import {
+  AeButtonGroup,
+  AeButton
+} from '@aeternity/aepp-components-3'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -230,6 +240,7 @@ export default {
     FillDummy,
     BackToTop,
     MicroBlock,
+    AeButtonGroup,
     AeButton
   },
   mixins: [currentTime],
@@ -264,6 +275,7 @@ export default {
   },
   async mounted () {
     await this.getGeneration()
+    await this.$store.dispatch('blocks/height')
     this.totalBlocks = this.generation.microBlocks.length
     this.currentBlocks = Math.min(this.totalBlocks, 10)
     this.isLoadingMore = true
