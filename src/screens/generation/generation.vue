@@ -78,7 +78,7 @@
                 v-if="!isLoading"
                 class="number"
               >
-                {{ generation.microBlocksDetailed.length }}
+                {{ generation.microBlocks.length }}
               </div>
               <FillDummy
                 v-else
@@ -181,26 +181,34 @@
           </nav>
         </section>
       </header>
-      <article class="generation-screen screen">
-        <section class="block-micro-detailed">
-          <template v-if="!isLoading">
-            <article
-              v-for="(m, index) in generation.microBlocksDetailed"
-              :key="m.hash"
-              class="micro-blocks-wrapper"
-            >
-              <h4>
-                <span class="number">
-                  Micro Block No. {{ index+1 }}
-                </span>
-              </h4>
-              <MicroBlock :micro-block="m" />
-            </article>
-          </template>
-        </section>
-        <BackToTop class="backToTop" />
-      </article>
+
+      <section class="block-micro-detailed">
+        <template
+          v-if="!isLoading"
+          class="micro-blocks-wrapper"
+        >
+          <MicroBlock
+            v-for="(m, index) in microBlocks[generationId]"
+            :key="m.hash"
+            :micro-block="m"
+            :micro-block-number="index"
+          />
+        </template>
+      </section>
+      <div
+        v-if="microBlocks[generationId] && needMore"
+        class="center"
+      >
+        <AeButton
+          v-if="!isLoadingMore"
+          type="dramatic"
+          @click="loadMore"
+        >
+          more blocks
+        </AeButton>
+      </div>
     </section>
+    <BackToTop class="backToTop" />
   </article>
 </template>
 
@@ -244,13 +252,22 @@ export default {
   },
   data: function () {
     return {
-      isLoading: true
+      isLoading: true,
+      totalBlocks: 0,
+      currentBlocks: 0,
+      isLoadingMore: false
     }
   },
-  computed: mapState('blocks', [
-    'height',
-    'generation'
-  ]),
+  computed: {
+    ...mapState('blocks', [
+      'height',
+      'generation',
+      'microBlocks'
+    ]),
+    needMore () {
+      return this.totalBlocks - this.currentBlocks > 0
+    }
+  },
   watch: {
     generationId () {
       this.getGeneration()
@@ -259,6 +276,11 @@ export default {
   async mounted () {
     this.getGeneration()
     await this.$store.dispatch('blocks/height')
+    this.totalBlocks = this.generation.microBlocks.length
+    this.currentBlocks = Math.min(this.totalBlocks, 10)
+    this.isLoadingMore = true
+    await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationId), 'numBlocks': this.currentBlocks })
+    this.isLoadingMore = false
   },
   methods: {
     async getGeneration () {
@@ -269,6 +291,14 @@ export default {
         await this.$store.dispatch('blocks/getGenerationFromHash', this.generationId)
       }
       this.isLoading = false
+    },
+    async loadMore () {
+      this.isLoadingMore = true
+      const toAdd = Math.max(Math.min(this.totalBlocks - this.currentBlocks, 10), 0)
+      this.currentBlocks += toAdd
+      this.getGeneration()
+      await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationId), 'numBlocks': this.currentBlocks })
+      this.isLoadingMore = false
     }
   }
 }

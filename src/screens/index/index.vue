@@ -4,7 +4,7 @@
       <div class="grid">
         <div>
           <h1>æternity explorer</h1>
-          <p>Search the æternity network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
+          <p>æternity blockchain explorer shows detailed information on blocks and transactions.</p>
         </div>
         <div
           class="search"

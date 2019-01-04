@@ -1,69 +1,71 @@
 <template>
   <section class="micro-block">
-    <div class="grid">
-      <Field
-        name="hash"
-        class="hash"
-      >
-        <RouterLink :to="`/block/${microBlock.hash}`">
-          <AeHash
-            :hash="microBlock.hash"
-            type="short"
-          />
-        </RouterLink>
-        <ViewAndCopy :text="microBlock.hash" />
-      </Field>
-      <Field
-        v-cloak
-        name="age"
-      >
-        <RelativeTime
-          :ts="currentTime - microBlock.time"
-          spaced
-        />
-      </Field>
-    </div>
-    <div class="grid">
-      <Field
-        v-cloak
-        name="time"
-        class="time"
-      >
-        <time
-          :timedate="microBlock.time | humanDate"
-          class="field-value number"
-        >
-          {{ microBlock.time | humanDate }}
-        </time>
-      </Field>
-      <Field
-        name="parent hash"
-        class="hash"
-      >
-        <RouterLink :to="`/block/${microBlock.prevHash}`">
-          <AeHash
-            :hash="microBlock.prevHash"
-            type="short"
-          />
-        </RouterLink>
-        <ViewAndCopy :text="microBlock.prevHash" />
-      </Field>
-    </div>
-
     <article class="block-transactions">
       <header class="block-transactions__header">
-        <h2 class="title title-sub">
-          <span class="number">
-            {{ microBlock.transactions.length }}
-          </span> Transaction{{ microBlock.transactions.length !== 1 ? 's' : '' }}
-        </h2>
+        <div class="grid">
+          <Field
+            class="block-number field"
+            name="Micro Block"
+          >
+            {{ microBlockNumber + 1 }}
+          </Field>
+          <Field
+            name="Micro Block Hash"
+            class="hash"
+          >
+            <RouterLink :to="`/block/${microBlock.hash}`">
+              <AeHash
+                :hash="microBlock.hash"
+                type="full"
+              />
+            </RouterLink>
+          </Field>
+        </div>
+        <div class="grid grid_last">
+          <div class="field transaction-field">
+            {{ microBlock.transactions.length }} Transaction{{ microBlock.transactions.length !== 1 ? 's' : '' }}
+          </div>
+          <Field
+            v-cloak
+            name="Time Stamp"
+            class="time"
+          >
+            <time
+              :timedate="microBlock.time | humanDate"
+              class="field-value number"
+            >
+              {{ microBlock.time | humanDate }}
+            </time>
+          </Field>
+          <Field
+            v-cloak
+            name="age"
+            class="age"
+          >
+            <RelativeTime
+              :ts="currentTime - microBlock.time"
+            />
+          </Field>
+        </div>
       </header>
       <div class="transactions">
         <Transaction
-          v-for="t in microBlock.transactions"
+          v-for="t in microBlock.transactions.slice(0, numTransactions)"
           :key="t.hash"
           :transaction="t"
         />
+      </div>
+      <div
+        v-if="needMore"
+        class="center"
+      >
+        <AeButton
+          type="dramatic"
+          size="small"
+          @click="loadMore"
+        >
+          more txs
+        </AeButton>
       </div>
     </article>
   </section>
@@ -74,7 +76,7 @@ import RelativeTime from '../../components/relativeTime'
 import Transaction from '../../components/transaction/transaction'
 import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
-import ViewAndCopy from '../../components/viewAndCopy.vue'
+import { AeButton } from '@aeternity/aepp-components'
 
 export default {
   name: 'MicroBlock',
@@ -83,13 +85,35 @@ export default {
     Transaction,
     Field,
     AeHash,
-    ViewAndCopy
+    AeButton
   },
   mixins: [currentTime],
   props: {
     microBlock: {
       type: Object,
       required: true
+    },
+    microBlockNumber: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function () {
+    return {
+      numTransactions: Math.min(10, this.microBlock.transactions.length)
+    }
+  },
+  computed: {
+    needMore () {
+      return this.microBlock.transactions.length > this.numTransactions
+    }
+  },
+  methods: {
+    loadMore () {
+      this.numTransactions = Math.min(
+        this.numTransactions + 10,
+        this.microBlock.transactions.length
+      )
     }
   }
 }

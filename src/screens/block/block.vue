@@ -32,8 +32,6 @@
             <RelativeTime
               v-if="block.height"
               :ts="currentTime - block.time"
-              number
-              spaced
             />
             <FillDummy v-else />
           </div>

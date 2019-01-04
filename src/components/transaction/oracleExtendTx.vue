@@ -2,45 +2,50 @@
   <div>
     <div class="grid">
       <Field>
-        <span class="field-name">
-          Oracle
-        </span>
+        <AeBadge>{{ transaction.tx.type | txTypeToName }}</AeBadge>
+      </Field>
+      <Field
+        v-if="transaction.hash"
+        name="tx hash"
+      >
+        <RouterLink :to="&quot;/tx/&quot; + transaction.hash">
+          <AeHash
+            :hash="transaction.hash"
+            type="short"
+          />
+        </RouterLink>
+      </Field>
+      <Field name="Oracle">
         <div class="account-address">
           <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracleId">
             <NamedAddress :address="transaction.tx.oracleId" />
           </RouterLink>
         </div>
       </Field>
-      <Field>
-        <div class="field-name">
-          OracleTTL
-        </div>
-        {{ transaction.tx.oracleTtl.type }}
-        <span class="number">
-          {{ transaction.tx.oracleTtl.value }}
-        </span>
-      </Field>
     </div>
   </div>
 </template>
 <script>
+import txTypeToName from '../../filters/txTypeToName'
 import Field from '../field'
 import NamedAddress from '../namedAddress'
+import AeHash from '../aeHash.vue'
+import { AeBadge } from '@aeternity/aepp-components'
 
 export default {
   name: 'OracleExtendTx',
   components: {
     Field,
-    NamedAddress
+    NamedAddress,
+    AeHash,
+    AeBadge
   },
+  filters: { txTypeToName },
   props: {
     transaction: {
       type: Object,
       required: true
     }
-  },
-  mounted () {
-    console.log(this.transaction)
   }
 }
 </script>

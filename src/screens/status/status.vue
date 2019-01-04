@@ -13,32 +13,34 @@
                            />
       </p>
       <h2>Node and Peers</h2>
-      <table>
-        <tr>
-          <th>address</th>
-          <th>top.height</th>
-          <th>top.hash</th>
-          <th>top.time</th>
-          <th>version.revision</th>
-          <th>version.genesis_KeyBlock_hash</th>
-        </tr>
-        <tr v-if="!isLoading">
-          <td><strong>{{ node }}</strong></td>
-          <td>{{ nodeStatus.top.keyBlock.height }}</td>
-          <td>{{ nodeStatus.top.keyBlock.hash | startAndEnd }}</td>
-          <td>{{ nodeStatus.top.keyBlock.time }}</td>
-          <td>{{ nodeStatus.version.nodeRevision | startAndEnd }}</td>
-          <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
-        </tr>
-        <tr v-else>
-          <td
-            v-for="i in 6"
-            :key="i"
-          >
-            <FillDummy color="grey" />
-          </td>
-        </tr>
-      </table>
+      <div class="table-wrapper">
+        <table>
+          <tr>
+            <th>address</th>
+            <th>top.height</th>
+            <th>top.hash</th>
+            <th>top.time</th>
+            <th>version.revision</th>
+            <th>version.genesis_KeyBlock_hash</th>
+          </tr>
+          <tr v-if="!isLoading">
+            <td><strong>{{ node }}</strong></td>
+            <td>{{ nodeStatus.top.keyBlock.height }}</td>
+            <td>{{ nodeStatus.top.keyBlock.hash | startAndEnd }}</td>
+            <td>{{ nodeStatus.top.keyBlock.time }}</td>
+            <td>{{ nodeStatus.version.nodeRevision | startAndEnd }}</td>
+            <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
+          </tr>
+          <tr v-else>
+            <td
+              v-for="i in 6"
+              :key="i"
+            >
+              <FillDummy color="grey" />
+            </td>
+          </tr>
+        </table>
+      </div>
       <h1>Detail</h1>
       <h2 v-if="!isLoading">
         {{ node }}
@@ -49,9 +51,11 @@
         size="big"
       />
       <h3>version</h3>
-      <pre v-if="!isLoading">
-        {{ nodeStatus.version }}
-      </pre>
+      <ObjView
+        v-if="!isLoading"
+        :obj="nodeStatus.version"
+        class="objView"
+      />
       <div v-else>
         <div
           v-for="i in 3"
@@ -62,9 +66,11 @@
       </div>
 
       <h3>top</h3>
-      <pre v-if="!isLoading">
-        {{ nodeStatus.top }}
-      </pre>
+      <ObjView
+        v-if="!isLoading"
+        :obj="nodeStatus.top"
+        class="objView"
+      />
       <div v-else>
         <div
           v-for="i in 3"
@@ -80,10 +86,12 @@
 import { mapState } from 'vuex'
 import pollAction from '../../mixins/pollAction'
 import FillDummy from '../../components/fillDummy'
+import ObjView from '../../components/objView'
 
 export default {
   components: {
-    FillDummy
+    FillDummy,
+    ObjView
   },
   mixins: [pollAction('getNodeStatus')],
   data: function () {
