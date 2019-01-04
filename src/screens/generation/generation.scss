@@ -2,31 +2,42 @@
 
 .title {
 
-    @include font-size(l);
-   font-weight: bold;
+  @include font-size(l);
+  font-weight: bold;
 
-    &-main{
-
-    }
-    &-sub {
-     font-weight: normal;
-    }
-    &-numbers{
-      @include font-size(m);
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 500;
-    }
+  &-main {
+    font-weight: normal;
+    color: $white;
+  }
+  &-sub {
+    font-weight: normal;
+  }
+  &-numbers{
+    @include font-size(m);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 500;
+  }
 
 }
 
 .generation-header {
+  padding-bottom: 80px;
   .title {
     margin-left: 10%;
     padding-left: 20px;
+
+    &-main {
+      padding-left: 0;
+      padding-bottom: 20px;
+      margin-left: 0;
+      border-bottom: 2px solid $white;
+      margin-bottom: 35px !important;
+    }
   }
   &__section {
-    width:80%;
-    margin: 0 auto 30px;
+    max-width: 1040px;
+    width: calc(100% - 40px);
+    margin: 0 auto;
     background-color:$aubergin;
     color:$white;
     border-radius: 5px;
@@ -38,6 +49,13 @@
   position: fixed;
   bottom: 30px;
   right: 20px;
+  @include only-phone {
+    bottom: 50px
+  }
+}
+
+main .generation-screen .generation-main {
+  padding-top: 45px;
 }
 
 .generation-screen {
@@ -48,11 +66,47 @@
     @include content-max-width;
   }
 
+  .block-transactions {
+    width: 100%;
+  }
+
 
   .generation-header {
+    background-color: $aubergin;
     .gen-navigation,
     .basic-gen-info {
-      justify-content:space-between;
+      .field {
+        &__height,
+        &__transactions,
+        &__target,
+        &__confirmation,
+        &__micro {
+          width: 20%;
+          @include only-phone {
+            width: 50%;
+            display: inline-block;
+          }
+        }
+        &__stamp,
+        &__age {
+          width: 40%;
+          @include only-phone {
+            width: 100%;
+          }
+        }
+        &__hash, &__beneficiary {
+          width: 60%;
+          @include only-phone {
+            width: 100%;
+          }
+        }
+      }
+
+      .field__hash {
+        a {
+          color: $darkGrey;
+        }
+      }
     }
     .basic-gen-info {
       align-items: baseline;
@@ -60,6 +114,16 @@
     .gen-navigation ,
     .detail-block-info {
       padding: 20px 0;
+    }
+
+    .gen-navigation {
+      position: fixed;
+      bottom: 30px;
+      justify-content: center;
+      padding: 0;
+      @include only-phone {
+        bottom: 50px
+      }
     }
     .detail-block-info .field {
       margin-bottom:15px;
@@ -97,6 +161,11 @@
   .field {
     margin-bottom:20px;
   }
+  .hash {
+    a {
+      color: $white;
+    }
+  }
   .field-name {
     @include font-size(xs);
     opacity:0.4;
@@ -107,4 +176,73 @@
       @include font-size(m);
     }
   }
+
+  .block-micro-detailed {
+    margin-top: -70px;
+  }
+
+  .block-transactions, .block-micro-detailed{
+    .title-sub {
+      margin-top: 50px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+    }
+
+    .grid .field {
+      margin-top: 20px;
+      margin-right:50px;
+    }
+  }
+
+  .transactions {
+    overflow-x: auto;
+  }
+
+  .micro-block {
+    background: white;
+    color: black;
+    margin: 20px 0;
+    padding: 20px 0;
+    border-radius: 5px;
+
+    &__header {
+      padding: 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .field {
+      margin-right: 0!important;
+      &__number {
+        color: $aubergin;
+        width: 30%;
+        @include only-phone {
+          display: block;
+          width: 100%;
+        }
+      }
+      &__hash {
+        width: 70%;
+      }
+      &__time {
+        width: 35%;
+      }
+      &__mined {
+        width: 35%;
+      }
+
+      @include only-phone {
+        display: block;
+        width: 100%;
+      }
+
+    }
+
+    .field-value {
+      .number, .ae-hash, .spaced{
+        color: $aubergin;
+      }
+    }
+
+  }
+
 }
