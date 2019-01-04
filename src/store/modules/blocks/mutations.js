@@ -21,15 +21,6 @@ export default {
   },
 
   /**
-   * setGeneration Mutates the head generation object
-   * @param {Object} state
-   * @param {Object} generation
-   */
-  setGeneration (state, generation) {
-    Object.assign(state, { generation })
-  },
-
-  /**
    * setGenerations mutates the array of generations
    * @param {Object} state
    * @param {Object} generation
