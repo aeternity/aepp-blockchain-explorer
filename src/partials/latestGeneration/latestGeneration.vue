@@ -106,7 +106,7 @@
           </div>
           <div class="field">
             <div class="field-name">
-              Time since mined
+              Age
             </div>
             <div
               v-if="generation"
