@@ -1,8 +1,5 @@
 @import '../../style/mixins';
 .generation-list-screen {
-  .abc{
-    //width: 80px;
-  }
   background: $aubergin;
   color:$white;;
   >.inner {
@@ -57,8 +54,30 @@
     margin-bottom:50px;
     .transactions {
       width: 100%;
+      table-layout: fixed;
+      white-space: nowrap;
+      @include only-desktop{
+        th:nth-child(1) {
+          width: 130px;
+        }
+        th:nth-child(2) {
+          width: 250px;
+        }
+        th:nth-child(5) {
+          width: 250px;
+        }
+      }
       @include phone-and-tablet{
-        min-width: 700px;
+        min-width: 650px;
+        th:nth-child(1) {
+          width: 80px;
+        }
+        th:nth-child(2) {
+          width: 200px;
+        }
+        th:nth-child(5) {
+          width: 200px;
+        }
       }
       td {
         position: relative;

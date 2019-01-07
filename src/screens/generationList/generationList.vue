@@ -19,7 +19,7 @@
         <table class="transactions">
           <thead>
             <tr>
-              <th class="abc">Height</th>
+              <th>Height</th>
               <th>Key Hash</th>
               <th>Blocks</th>
               <th>Txn</th>
