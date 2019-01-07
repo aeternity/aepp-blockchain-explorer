@@ -58,13 +58,13 @@
       white-space: nowrap;
       @include only-desktop{
         th:nth-child(1) {
-          width: 100px;
+          width: 130px;
         }
         th:nth-child(2) {
-          width: 235px;
+          width: 250px;
         }
         th:nth-child(5) {
-          width: 235px;
+          width: 250px;
         }
       }
       @include phone-and-tablet{
