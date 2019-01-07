@@ -5,26 +5,14 @@
         <div class="title">
           Generations
         </div>
-        <div class="field average-block-time">
+        <div>
           <span class="field-name">
-            average rate 1 per
+            Average Block Time&nbsp;
           </span>
           <RelativeTime
             v-if="getAverageBlockTime"
             :ts="getAverageBlockTime"
           />
-        </div>
-        <div>
-          <span class="field-name">
-            last key block mined
-          </span>
-          <RelativeTime
-            v-if="getLastMinedBlockTime(currentTime)"
-            :ts="getLastMinedBlockTime(currentTime)"
-          />
-          <span class="field-name">
-            ago
-          </span>
         </div>
       </div>
       <div class="table-wrapper">
