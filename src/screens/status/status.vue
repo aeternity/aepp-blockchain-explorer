@@ -111,4 +111,4 @@ export default {
   }
 }
 </script>
-<style src='./status.scss' lang='scss' />
+<style scoped src='./status.scss' lang='scss' />
