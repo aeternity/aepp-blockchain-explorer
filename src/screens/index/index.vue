@@ -30,8 +30,8 @@
     </header>
 
     <MarketStats v-if="VUE_APP_SHOW_MARKET_STATS" />
-    <LatestBlock />
-    <RecentBlocks />
+    <LatestGeneration />
+    <RecentGenerations />
   </div>
 </template>
 
@@ -39,8 +39,8 @@
 import { mapState } from 'vuex'
 import pollAction from '../../mixins/pollAction'
 import MarketStats from '../../partials/marketStats/marketStats'
-import LatestBlock from '../../partials/latestBlock/latestBlock'
-import RecentBlocks from '../../partials/recentBlocks/recentBlocks'
+import LatestGeneration from '../../partials/latestGeneration/latestGeneration'
+import RecentGenerations from '../../partials/recentGenerations/recentGenerations'
 
 const blockHeightRegex = RegExp('^[0-9]+$')
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
@@ -49,7 +49,7 @@ const transactionHashRegex = RegExp('^th_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
-  components: { MarketStats, LatestBlock, RecentBlocks },
+  components: { MarketStats, LatestGeneration, RecentGenerations },
   mixins: [pollAction('blocks/getLatestGenerations', 4)],
   data () {
     return {
