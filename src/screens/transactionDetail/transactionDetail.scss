@@ -2,16 +2,15 @@
 
 .transaction-detail-screen.screen {
   .transaction-type {
-    margin-top: 5px;
     padding: 0 10px;
   }
   >.inner > div {
     background:$white;
     max-width:777px;
     margin:30px auto 0 auto;
-    padding:35px 70px;
+    padding:35px 70px 0;
     @include only-phone {
-      padding:35px 30px;
+      padding:35px 10px;
     }
   }
   .title {
@@ -26,11 +25,10 @@
   .title + h2 {
     margin-top:0.3em;
     padding-bottom:1.3rem;
-    margin-bottom:1.3rem;
+    margin-bottom:1rem;
     @include font-size(xl);
     color:$black;
     font-weight:normal;
-    border-bottom:2px solid $black;
   }
   .named-address ,
   /deep/ .ae-address {
@@ -43,12 +41,40 @@
     margin-left:10px;
 
   }
+
+  /deep/ .field, .height-item {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid $darkGrey;
+    padding: 10px 0;
+    .field-name {
+      min-width: 20%;
+    }
+    @include only-phone {
+      flex-direction: column;
+      align-items: flex-start;
+      .field-name {
+        width: 100%;
+      }
+    }
+  }
+
+  .height-item {
+    .field {
+      width: 20%;
+      border-top: none;
+      display: block;
+      /deep/ .field-name {
+        width: 100%;
+      }
+      @include only-phone {
+        width: 100%;
+      }
+    }
+  }
   .height-item {
     &__data {
       color: $magaenta;
-      @include only-phone {
-        display: block;
-      }
     }
 
     .confirmations {
@@ -59,5 +85,16 @@
   }
   .ae-loader {
     margin: 0;
+  }
+
+  /deep/ .poi, /deep/ .payload {
+    word-break: break-all;
+  }
+
+  .objView {
+    margin: 0 -70px;
+    @include only-phone {
+      margin: 0;
+    }
   }
 }

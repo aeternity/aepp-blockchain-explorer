@@ -15,21 +15,64 @@
           />
         </RouterLink>
       </Field>
-      <Field name="sender">
+      <Field
+        v-if="transaction.tx.accountId"
+        name="account"
+      >
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.accountId">
+          <NamedAddress :address="transaction.tx.accountId" />
+        </RouterLink>
+      </Field>
+      <Field
+        v-if="transaction.tx.oracleId"
+        name="Oracle"
+      >
+        <div class="account-address">
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracleId">
+            <NamedAddress :address="transaction.tx.oracleId" />
+          </RouterLink>
+        </div>
+      </Field>
+      <Field
+        v-if="transaction.tx.senderId"
+        name="sender"
+      >
         <div class="account-address">
           <RouterLink :to="&quot;/account/&quot; + transaction.tx.senderId">
             <NamedAddress :address="transaction.tx.senderId" />
           </RouterLink>
         </div>
       </Field>
-      <Field name="recipient">
+      <Field
+        v-if="transaction.tx.ownerId"
+        name="Owner"
+      >
+        <div class="account-address">
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.ownerId">
+            <NamedAddress :address="transaction.tx.ownerId" />
+          </RouterLink>
+        </div>
+      </Field>
+      <Field
+        v-if="transaction.tx.recipientId"
+        name="recipient"
+      >
         <div class="account-address">
           <RouterLink :to="&quot;/account/&quot; + transaction.tx.recipientId">
             <NamedAddress :address="transaction.tx.recipientId" />
           </RouterLink>
         </div>
       </Field>
-      <Field name="amount">
+      <Field
+        v-if="transaction.tx.name"
+        name="name"
+      >
+        {{ transaction.tx.name }}
+      </Field>
+      <Field
+        v-if="transaction.tx.amount"
+        name="amount"
+      >
         <span class="number">
           {{ transaction.tx.amount | yaniToAe }}
         </span>
@@ -48,7 +91,7 @@ import AeHash from '../aeHash.vue'
 import { AeBadge } from '@aeternity/aepp-components'
 
 export default {
-  name: 'SpendTx',
+  name: 'MainTx',
   components: {
     Field,
     NamedAddress,

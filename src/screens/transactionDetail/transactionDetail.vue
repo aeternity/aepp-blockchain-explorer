@@ -76,8 +76,6 @@
             </span>
           </div>
 
-          <hr>
-
           <div v-if="transaction">
             <Field
               v-if="transaction.tx.account"
@@ -91,13 +89,10 @@
               </RouterLink>
               <ViewAndCopy :text="transaction.tx.account" />
             </Field>
-
-            <Component
-              :is="transaction.tx.type"
+            <TypeTx
               v-if="transaction.tx.type"
               :transaction="transaction"
             />
-
             <Field
               v-if="transaction.tx.data_schema"
               name="Data Schema"
@@ -111,8 +106,6 @@
             >
               {{ transaction.tx.reward }}
             </Field>
-
-            <hr>
 
             <Field
               v-if="transaction.tx.nonce"
@@ -191,6 +184,11 @@
             </div>
           </div>
         </div>
+        <ObjView
+          v-if="transaction"
+          :obj="transaction"
+          class="objView"
+        />
       </div>
     </div>
   </div>
@@ -198,22 +196,11 @@
 <script>
 import { mapState } from 'vuex'
 import {
-  AeAddress,
   AeBadge,
   AeLoader
 } from '@aeternity/aepp-components'
 
-import SpendTx from './spendTx.vue'
-import OracleRegisterTx from './oracleRegisterTx.vue'
-import OracleExtendTx from './oracleExtendTx'
-import OracleResponseTx from './oracleResponseTx.vue'
-import OracleQueryTx from './oracleQueryTx.vue'
-import NameClaimTx from './nameClaimTx.vue'
-import NamePreclaimTx from './namePreclaimTx.vue'
-import NameTransferTx from './nameTransferTx.vue'
-import NameUpdateTx from './nameUpdateTx.vue'
-import ContractCallTx from './contractCallTx.vue'
-import ContractCreateTx from './contractCreateTx.vue'
+import TypeTx from './typeTx'
 
 import AeHash from '../../components/aeHash.vue'
 import Field from '../../components/field.vue'
@@ -221,29 +208,20 @@ import NamedAddress from '../../components/namedAddress.vue'
 import ViewAndCopy from '../../components/viewAndCopy.vue'
 import txTypeToName from '../../filters/txTypeToName'
 import FillDummy from '../../components/fillDummy'
+import ObjView from '../../components/objView.vue'
 
 export default {
   name: 'TransactionDetail',
   components: {
-    AeAddress,
     AeBadge,
     AeHash,
     NamedAddress,
     Field,
     ViewAndCopy,
-    SpendTx,
-    OracleRegisterTx,
-    OracleResponseTx,
-    OracleQueryTx,
-    NameUpdateTx,
-    NameClaimTx,
-    NamePreclaimTx,
-    NameTransferTx,
-    ContractCallTx,
-    ContractCreateTx,
     FillDummy,
     AeLoader,
-    OracleExtendTx
+    TypeTx,
+    ObjView
   },
   filters: { txTypeToName },
   props: {
@@ -267,6 +245,9 @@ export default {
       }
     }
   }),
+  async beforeMount () {
+    this.height = await this.$store.dispatch('blocks/height')
+  },
   async mounted () {
     await this.$store.dispatch('transactions/getTxByHash', this.txId)
     this.height = await this.$store.dispatch('blocks/height')

@@ -31,8 +31,7 @@ export default {
     async getTxByHash ({ state, commit, rootGetters: { epoch } }, hash) {
       if (state.transactions[hash]) return state.transactions[hash]
 
-      const transaction = await epoch.api.getTransactionByHash(hash)
-
+      const transaction = await epoch.tx(hash, true)
       commit('setTransaction', transaction)
 
       return transaction

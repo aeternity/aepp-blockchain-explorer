@@ -27,13 +27,11 @@
           </div>
           <div class="center">
             <span class="field-name">
-              time since mined:
+              age:
             </span>
             <RelativeTime
               v-if="block.height"
               :ts="currentTime - block.time"
-              number
-              spaced
             />
             <FillDummy v-else />
           </div>
