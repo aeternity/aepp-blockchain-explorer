@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'app-search'
+  name: 'AppSearch'
 }
 </script>
 <style>
