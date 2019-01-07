@@ -5,6 +5,9 @@ import Address from '@/screens/address/address.vue'
 import Status from '@/screens/status/status.vue'
 import GenerationList from '@/screens/generationList/generationList.vue'
 
+// TODO: To be removed after new designs are completed.
+import newDesignRouters from '../_designs/router'
+
 const Index = () => import(/* webpackChunkName: 'index' */'@/screens/index/index.vue')
 const Generation = () =>
   import(/* webpackChunkName: 'transaction' */'@/screens/generation/generation.vue')
@@ -47,7 +50,9 @@ export default new Router({
     name: 'Status',
     path: '/status',
     component: Status
-  }],
+  },
+  newDesignRouters
+  ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition

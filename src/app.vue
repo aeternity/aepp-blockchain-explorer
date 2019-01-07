@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div
+    v-if="!hasNewDesigns"
+    id="app"
+  >
     <nav class="app-nav">
       <div class="inner">
         <RouterLink
@@ -116,6 +119,7 @@
     <AeFooter />
     <NetworkName />
   </div>
+  <RouterView v-else />
 </template>
 
 <script>
@@ -133,6 +137,14 @@ export default {
     }
   },
   computed: {
+    /**
+     * Checks the route if it includes the Meta: newDesigns
+     * TODO: To be removed after new designs are completed.
+     * @return {boolean}
+     */
+    hasNewDesigns () {
+      return this.$route.matched.some(record => record.meta.newDesigns)
+    },
     pageName () {
       return ({
         'Index': 'Dashboard',
@@ -148,4 +160,5 @@ export default {
   }
 }
 </script>
-<style src='./app.scss' lang='scss' />
+<!-- TODO: Unscope after merging with new designs -->
+<style src='./app.scss' lang='scss' scoped />

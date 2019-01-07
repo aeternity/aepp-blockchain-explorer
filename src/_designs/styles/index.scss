@@ -1,0 +1,20 @@
+//------------------------------
+// *****************************
+// Index
+// *****************************
+//------------------------------
+/**
+ * Global Imports
+ */
+@import "~@aeternity/aepp-components-3/src/styles/globals/mixins";
+@import "~@aeternity/aepp-components-3/src/styles/globals/functions";
+@import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
+@import "~@aeternity/aepp-components-3/src/styles/variables/animations";
+@import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+@import "~@aeternity/aepp-components-3/src/styles/variables/paths";
+@import "~@aeternity/aepp-components-3/src/styles/variables/typography";
+/**
+ * Local Imports
+ */
+@import "rules";
+@import "typography";
