@@ -6,13 +6,28 @@
       to="/status/"
       class="network-name"
     >
-      {{ networkName }}
+      <span v-if="connectionStatus">
+        {{ networkName }}
+      </span>
+      <span v-else>
+        <span
+          class="disabled-text"
+        >
+          Connecting...
+        </span>
+        <AeLoader />
+      </span>
     </span>
   </div>
 </template>
 
 <script>
+import { AeLoader } from '@aeternity/aepp-components'
+import pollAction from '../mixins/pollAction'
+
 export default {
+  components: { AeLoader },
+  mixins: [pollAction('getNodeStatus')],
   data () {
     return {
       VUE_APP_SHOW_NETWORK_STATS: process.env.VUE_APP_SHOW_NETWORK_STATS
@@ -30,6 +45,9 @@ export default {
         return name
       }
       return url
+    },
+    connectionStatus () {
+      return this.$store.getters.isConnected
     }
   }
 }
@@ -61,5 +79,19 @@ export default {
     text-align:center;
     z-index:1;
   }
+}
+
+.ae-loader {
+  margin: 0% !important;
+  border: .2em solid rgb(255, 255, 255) !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+span {
+  display: inline-block;
+}
+.disabled-text {
+  margin-right: 2em;
 }
 </style>
