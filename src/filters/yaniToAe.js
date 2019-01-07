@@ -8,7 +8,7 @@ const prefixes = {
 }
 
 export default function (base) {
-  if (base < 10 ** 16 && base !== 0) {
+  if (base < 10 ** 16 && (base !== '0' || base !== 0)) {
     let exp = 0
     while (base > 9) {
       base = base / 10
@@ -19,6 +19,6 @@ export default function (base) {
     exp = exp - 18 - extra
     return base.toString() + ' ' + prefixes[exp.toString()]
   } else {
-    return new BigNumber(base).shiftedBy(-18).toNumber()
+    return new BigNumber(base).shiftedBy(-18).toString() + '\xa0'
   }
 }

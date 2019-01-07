@@ -37,5 +37,22 @@ export default {
   setGenerations (state, generation) {
     Vue.set(state.hashToHeight, generation.keyBlock.hash, generation.keyBlock.height)
     Vue.set(state.generations, generation.keyBlock.height, generation)
+  },
+
+  /**
+   * addMicroBlocks adds a microBlock to a generation object
+   * @param {Object} state
+   * @param {String} height
+   * @param {Array} microBlocks
+   */
+  addMicroBlocks (state, { height, microBlocks }) {
+    for (const i in microBlocks) {
+      if (!state.microBlocks[height]) {
+        Vue.set(state.microBlocks, height, [])
+        state.microBlocks[height].push(microBlocks[i])
+      } else if (!state.microBlocks[height].includes(microBlocks[i])) {
+        state.microBlocks[height].push(microBlocks[i])
+      }
+    }
   }
 }
