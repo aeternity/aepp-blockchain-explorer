@@ -160,6 +160,7 @@
                 <AeButton
                   face="round"
                   fill="primary"
+                  :disabled="generation.keyBlock.height === 0"
                 >
                   previous
                 </AeButton>
@@ -172,6 +173,7 @@
                 <AeButton
                   face="round"
                   fill="primary"
+                  :disabled="generation.keyBlock.height === height"
                 >
                   next
                 </AeButton>
