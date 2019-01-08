@@ -49,6 +49,7 @@
   position: fixed;
   bottom: 30px;
   right: 20px;
+  z-index: 150;
   @include only-phone {
     bottom: 50px
   }
@@ -121,8 +122,17 @@ main .generation-screen .generation-main {
       bottom: 30px;
       justify-content: center;
       padding: 0;
+      z-index: 100;
       @include only-phone {
         bottom: 50px
+      }
+
+      .ae-button {
+        width: 150px;
+        @include only-phone {
+          width: 80px;
+          @include font-size(xxs);
+        }
       }
     }
     .detail-block-info .field {

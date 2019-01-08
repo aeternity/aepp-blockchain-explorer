@@ -37,20 +37,17 @@
               name="Key Block Hash"
               class="field__hash"
             >
-              <RouterLink
-                v-if="!isLoading"
-                :to="`/block/${generation.keyBlock.hash}`"
-              >
+              <template v-if="!isLoading">
                 <AeHash
                   :hash="generation.keyBlock.hash"
                   type="short"
                 />
-              </RouterLink>
-              <ViewAndCopy
-                v-if="!isLoading"
-                color="boring"
-                :text="generation.keyBlock.hash"
-              />
+                <ViewAndCopy
+                  v-if="!isLoading"
+                  color="boring"
+                  :text="generation.keyBlock.hash"
+                />
+              </template>
               <FillDummy v-else />
             </Field>
           </div>
@@ -158,8 +155,8 @@
                 :to="`/generation/${(generation.keyBlock.height - 1)}`"
               >
                 <AeButton
-                  face="round"
-                  fill="primary"
+                  type="dramatic"
+                  :disabled="generation.keyBlock.height === 0"
                 >
                   previous
                 </AeButton>
@@ -170,8 +167,8 @@
                 :to="`/generation/${(generation.keyBlock.height + 1)}`"
               >
                 <AeButton
-                  face="round"
-                  fill="primary"
+                  type="dramatic"
+                  :disabled="generation.keyBlock.height === height"
                 >
                   next
                 </AeButton>
@@ -201,6 +198,7 @@
       >
         <AeButton
           v-if="!isLoadingMore"
+          size="small"
           type="dramatic"
           @click="loadMore"
         >
@@ -223,9 +221,9 @@ import FillDummy from '../../components/fillDummy'
 import BackToTop from '../../components/backToTop'
 import MicroBlock from '../../components/microBlock/microBlock'
 import {
-  AeButtonGroup,
-  AeButton
+  AeButtonGroup
 } from '@aeternity/aepp-components-3'
+import { AeButton } from '@aeternity/aepp-components'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const blockHeightRegex = RegExp('^[0-9]+')
