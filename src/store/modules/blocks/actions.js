@@ -69,14 +69,8 @@ export default wrapActionsWithResolvedEpoch({
    * @return {*}
    */
   async getBlockFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
-    const isKeyBlock = hash.substr(0, 2) === 'kh'
-    let block
-    if (isKeyBlock) {
-      block = await epoch.api.getKeyBlockByHash(hash)
-    } else {
-      block = await epoch.api.getMicroBlockHeaderByHash(hash)
-      block.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
-    }
+    const block = await epoch.api.getMicroBlockHeaderByHash(hash)
+    block.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
 
     if (isEqual(state.block, block)) {
       return state.block

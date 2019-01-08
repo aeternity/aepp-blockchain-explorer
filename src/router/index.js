@@ -35,7 +35,7 @@ export default new Router({
     props: true
   }, {
     name: 'Block',
-    path: '/block/:blockId',
+    path: '/block/:blockHash',
     component: Block,
     props: true
   }, {
