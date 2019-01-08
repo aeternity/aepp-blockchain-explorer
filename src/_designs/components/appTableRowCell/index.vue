@@ -5,14 +5,7 @@
       extend
     }"
   >
-    <span
-      class="app-table-cell-title"
-    >
-      <slot name="title" />
-    </span>
-    <span class="app-table-cell-content">
-      <slot />
-    </span>
+    <slot />
   </div>
 </template>
 <script>
@@ -29,7 +22,7 @@ export default {
   .app-table-cell {
     display: flex;
     flex-direction: column;
-    padding: .8rem;
+    //padding: .8rem;
     width: 100%;
     @media (min-width: 450px) {
     width: 50%;

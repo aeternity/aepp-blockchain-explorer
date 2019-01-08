@@ -7,132 +7,112 @@
         <AppTableRow>
           <AppTableRowColumn width="large">
             <AppTableCell>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="confirmations"
               >
-                Reordered flow
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
           </AppTableRowColumn>
           <AppTableRowColumn width="small">
             <AppTableCell>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="Date Time"
               >
-                date time
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
           </AppTableRowColumn>
         </AppTableRow>
         <AppTableRow>
           <AppTableRowColumn>
             <AppTableCell extend>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="confirmations"
               >
-                natural flow
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
           </AppTableRowColumn>
           <AppTableRowColumn>
             <AppTableCell>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="Amount"
               >
-                date time
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
+                <AeText face="mono-s">
+                  10.00AE
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
             <AppTableCell>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="confirmations"
               >
-                confirmations
-              </AeText>
-              <AeText face="mono-xs">
-                235
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
           </AppTableRowColumn>
         </AppTableRow>
         <AppTableRow>
           <AppTableRowColumn>
             <AppTableCell extend>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="confirmations"
               >
-                blockheight
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
           </AppTableRowColumn>
           <AppTableRowColumn>
             <AppTableCell>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="confirmations"
               >
-                blockheight2
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
             <AppTableCell>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="confirmations"
               >
-                blockheight
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
           </AppTableRowColumn>
           <AppTableRow
             extend
           >
             <AppTableCell>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="confirmations"
               >
-                confirmations
-              </AeText>
-              <AeText face="mono-xs">
-                234
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
             <AppTableCell>
-              <AeText
-                slot="title"
-                face="uppercase-xs"
+              <AppDefinition
+                title="confirmations"
               >
-                blockheight
-              </AeText>
-              <AeText face="mono-xs">
-                6606081
-              </AeText>
+                <AeText face="mono-s">
+                  235
+                </AeText>
+              </AppDefinition>
             </AppTableCell>
           </AppTableRow>
         </AppTableRow>
@@ -140,43 +120,40 @@
       <AppTableBody>
         <AppTableRow>
           <AppTableCell extend>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
+            <AppDefinition
+              type="list"
+              title="Difficulty"
             >
-              Difficulty
-            </AeText>
-            <AeText face="mono-s">
-              87472467200
-            </AeText>
+              <AeText face="mono-s">
+                87472467200
+              </AeText>
+            </AppDefinition>
           </AppTableCell>
         </AppTableRow>
         <AppTableRow>
           <AppTableCell extend>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
+            <AppDefinition
+              type="list"
+              title="Target"
             >
-              Target
-            </AeText>
-            <AeText face="mono-s">
-              87472467200
-            </AeText>
+              <AeText face="mono-s">
+                87472467200
+              </AeText>
+            </AppDefinition>
           </AppTableCell>
         </AppTableRow>
         <AppTableRow>
           <AppTableCell extend>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
+            <AppDefinition
+              type="list"
+              title="Hash"
             >
-              Hash
-            </AeText>
-            <AeAddress
-              value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
-              length="flat"
-              face="mono-s"
-            />
+              <AeAddress
+                value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
+                length="flat"
+                face="mono-s"
+              />
+            </AppDefinition>
           </AppTableCell>
         </AppTableRow>
       </AppTableBody>
@@ -190,6 +167,7 @@ import AppTableCell from '@/_designs/components/appTableRowCell'
 import AppTableHeader from '@/_designs/components/appTableHeader'
 import AppTableBody from '@/_designs/components/appTableBody'
 import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
+import AppDefinition from '@/_designs/components/appDefinition'
 
 import { AeText, AeAddress } from '@aeternity/aepp-components-3'
 
@@ -225,6 +203,7 @@ export default {
     AppTableHeader,
     AppTableBody,
     AppTableRowColumn,
+    AppDefinition,
     AeText,
     AeAddress
   },
