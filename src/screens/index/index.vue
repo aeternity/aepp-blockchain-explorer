@@ -32,11 +32,19 @@
     <MarketStats v-if="VUE_APP_SHOW_MARKET_STATS" />
     <LatestGeneration />
     <RecentGenerations />
+    <AeModalLight
+      v-if="showError"
+      title="Error..."
+      @close="showError = false; error = ''"
+    >
+      {{ error }}
+    </AeModalLight>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { AeModalLight } from '@aeternity/aepp-components'
 import pollAction from '../../mixins/pollAction'
 import MarketStats from '../../partials/marketStats/marketStats'
 import LatestGeneration from '../../partials/latestGeneration/latestGeneration'
@@ -49,11 +57,13 @@ const transactionHashRegex = RegExp('^th_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
-  components: { MarketStats, LatestGeneration, RecentGenerations },
+  components: { MarketStats, LatestGeneration, RecentGenerations, AeModalLight },
   mixins: [pollAction('blocks/getLatestGenerations', 4)],
   data () {
     return {
       searchString: '',
+      showError: false,
+      error: '',
       VUE_APP_SHOW_MARKET_STATS: process.env.VUE_APP_SHOW_MARKET_STATS
     }
   },
@@ -64,6 +74,11 @@ export default {
   },
   methods: {
     async search () {
+      if (!this.$store.getters.isConnected) {
+        this.showError = true
+        this.error = 'Connection to node is broken. Try again later.'
+        return
+      }
       let validationResult = await this.validateRegex()
       let param = this.searchString
       if (validationResult.valid) {
@@ -84,7 +99,9 @@ export default {
         }
       }
       if (!validationResult.valid) {
-        alert('not a valid block hash/height/tx, account public key or domain name')
+        this.showError = true
+        this.error = 'Not a valid Block Hash/Height/Tx, an Account Public Key or an Æ Domain Name.'
+        this.searchString = ''
       }
     },
     async validateRegex () {
