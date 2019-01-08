@@ -103,7 +103,7 @@ export default wrapActionsWithResolvedEpoch({
       return
     }
     const generation = await epoch.api.getGenerationByHeight(height)
-    const resp = await fetch('https://mdw.aepps.com/middleware/transactions/interval/' + height + '/' + height)
+    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + '/middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = (await resp.json())['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
