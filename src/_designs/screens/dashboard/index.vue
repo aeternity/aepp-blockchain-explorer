@@ -4,79 +4,76 @@
     <!-- static table -->
     <AppTable details>
       <AppTableHeader>
-        <AppTableHeaderRow reorder>
-          <AppTableHeaderRowCell extend>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
-            >
-              Reordered flow
-            </AeText>
-            <AeText face="mono-xs">
-              6606081
-            </AeText>
-          </AppTableHeaderRowCell>
-          <AppTableHeaderRowCell>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
-            >
-              date time
-            </AeText>
-            <AeText face="mono-xs">
-              6606081
-            </AeText>
-          </AppTableHeaderRowCell>
-          <AppTableHeaderRowCell>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
-            >
-              confirmations
-            </AeText>
-            <AeText face="mono-xs">
-              235
-            </AeText>
-          </AppTableHeaderRowCell>
-        </AppTableHeaderRow>
-        <AppTableHeaderRow>
-          <AppTableHeaderRowCell extend>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
-            >
-              natural flow
-            </AeText>
-            <AeText face="mono-xs">
-              6606081
-            </AeText>
-          </AppTableHeaderRowCell>
-          <AppTableHeaderRowCell>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
-            >
-              date time
-            </AeText>
-            <AeText face="mono-xs">
-              6606081
-            </AeText>
-          </AppTableHeaderRowCell>
-          <AppTableHeaderRowCell>
-            <AeText
-              slot="title"
-              face="uppercase-xs"
-            >
-              confirmations
-            </AeText>
-            <AeText face="mono-xs">
-              235
-            </AeText>
-          </AppTableHeaderRowCell>
-        </AppTableHeaderRow>
-        <AppTableHeaderRow>
-          <AppTableHeaderColumn>
-            <AppTableHeaderRowCell extend>
+        <AppTableRow>
+          <AppTableRowColumn width="large">
+            <AppTableCell>
+              <AeText
+                slot="title"
+                face="uppercase-xs"
+              >
+                Reordered flow
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableCell>
+          </AppTableRowColumn>
+          <AppTableRowColumn width="small">
+            <AppTableCell>
+              <AeText
+                slot="title"
+                face="uppercase-xs"
+              >
+                date time
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableCell>
+          </AppTableRowColumn>
+        </AppTableRow>
+        <AppTableRow>
+          <AppTableRowColumn>
+            <AppTableCell extend>
+              <AeText
+                slot="title"
+                face="uppercase-xs"
+              >
+                natural flow
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableCell>
+          </AppTableRowColumn>
+          <AppTableRowColumn>
+            <AppTableCell>
+              <AeText
+                slot="title"
+                face="uppercase-xs"
+              >
+                date time
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableCell>
+            <AppTableCell>
+              <AeText
+                slot="title"
+                face="uppercase-xs"
+              >
+                confirmations
+              </AeText>
+              <AeText face="mono-xs">
+                235
+              </AeText>
+            </AppTableCell>
+          </AppTableRowColumn>
+        </AppTableRow>
+        <AppTableRow>
+          <AppTableRowColumn>
+            <AppTableCell extend>
               <AeText
                 slot="title"
                 face="uppercase-xs"
@@ -86,39 +83,36 @@
               <AeText face="mono-xs">
                 6606081
               </AeText>
-            </AppTableHeaderRowCell>
-          </AppTableHeaderColumn>
-          <AppTableHeaderColumn>
-            <AppTableHeaderRow nested>
-              <AppTableHeaderRowCell>
-                <AeText
-                  slot="title"
-                  face="uppercase-xs"
-                >
-                  blockheight
-                </AeText>
-                <AeText face="mono-xs">
-                  6606081
-                </AeText>
-              </AppTableHeaderRowCell>
-              <AppTableHeaderRowCell>
-                <AeText
-                  slot="title"
-                  face="uppercase-xs"
-                >
-                  blockheight
-                </AeText>
-                <AeText face="mono-xs">
-                  6606081
-                </AeText>
-              </AppTableHeaderRowCell>
-            </AppTableHeaderRow>
-          </AppTableHeaderColumn>
-          <AppTableHeaderRow
-            nested
+            </AppTableCell>
+          </AppTableRowColumn>
+          <AppTableRowColumn>
+            <AppTableCell>
+              <AeText
+                slot="title"
+                face="uppercase-xs"
+              >
+                blockheight2
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableCell>
+            <AppTableCell>
+              <AeText
+                slot="title"
+                face="uppercase-xs"
+              >
+                blockheight
+              </AeText>
+              <AeText face="mono-xs">
+                6606081
+              </AeText>
+            </AppTableCell>
+          </AppTableRowColumn>
+          <AppTableRow
             extend
           >
-            <AppTableHeaderRowCell>
+            <AppTableCell>
               <AeText
                 slot="title"
                 face="uppercase-xs"
@@ -128,8 +122,8 @@
               <AeText face="mono-xs">
                 234
               </AeText>
-            </AppTableHeaderRowCell>
-            <AppTableHeaderRowCell>
+            </AppTableCell>
+            <AppTableCell>
               <AeText
                 slot="title"
                 face="uppercase-xs"
@@ -139,35 +133,39 @@
               <AeText face="mono-xs">
                 6606081
               </AeText>
-            </AppTableHeaderRowCell>
-          </AppTableHeaderRow>
-        </AppTableHeaderRow>
-      </apptableheader>
-      <AppTableRow extend>
-        <AppTableRowCell>
-          <AeText
-            slot="title"
-            face="uppercase-xs"
-          >
-            Difficulty
-          </AeText>
-          <AeText face="mono-s">
-            87472467200
-          </AeText>
-        </AppTableRowCell>
-        <AppTableRowCell>
-          <AeText
-            slot="title"
-            face="uppercase-xs"
-          >
-            Target
-          </AeText>
-          <AeText face="mono-s">
-            87472467200
-          </AeText>
-        </AppTableRowCell>
+            </AppTableCell>
+          </AppTableRow>
+        </AppTableRow>
+      </AppTableHeader>
+      <AppTableBody>
         <AppTableRow>
-          <AppTableRowCell extend>
+          <AppTableCell extend>
+            <AeText
+              slot="title"
+              face="uppercase-xs"
+            >
+              Difficulty
+            </AeText>
+            <AeText face="mono-s">
+              87472467200
+            </AeText>
+          </AppTableCell>
+        </AppTableRow>
+        <AppTableRow>
+          <AppTableCell extend>
+            <AeText
+              slot="title"
+              face="uppercase-xs"
+            >
+              Target
+            </AeText>
+            <AeText face="mono-s">
+              87472467200
+            </AeText>
+          </AppTableCell>
+        </AppTableRow>
+        <AppTableRow>
+          <AppTableCell extend>
             <AeText
               slot="title"
               face="uppercase-xs"
@@ -179,20 +177,19 @@
               length="flat"
               face="mono-s"
             />
-          </AppTableRowCell>
+          </AppTableCell>
         </AppTableRow>
-      </AppTableRow>
+      </AppTableBody>
     </AppTable>
   </div>
 </template>
 <script>
 import AppTable from '@/_designs/components/appTable'
 import AppTableRow from '@/_designs/components/appTableRow'
-import AppTableRowCell from '@/_designs/components/appTableRowCell'
+import AppTableCell from '@/_designs/components/appTableRowCell'
 import AppTableHeader from '@/_designs/components/appTableHeader'
-import AppTableHeaderRow from '@/_designs/components/appTableHeaderRow'
-import AppTableHeaderColumn from '@/_designs/components/appTableHeaderColumn'
-import AppTableHeaderRowCell from '@/_designs/components/appTableHeaderRowCell'
+import AppTableBody from '@/_designs/components/appTableBody'
+import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 
 import { AeText, AeAddress } from '@aeternity/aepp-components-3'
 
@@ -224,11 +221,10 @@ export default {
   components: {
     AppTable,
     AppTableRow,
-    AppTableRowCell,
+    AppTableCell,
     AppTableHeader,
-    AppTableHeaderRow,
-    AppTableHeaderColumn,
-    AppTableHeaderRowCell,
+    AppTableBody,
+    AppTableRowColumn,
     AeText,
     AeAddress
   },
@@ -240,8 +236,8 @@ export default {
 <style lang="scss">
   /* For the AppTable Components
   // TODO: try and combine AppTableHeader components with AppTable components
-  // TODO: extract AppTableRowCellTitle and AppTableRowCellContent into separate components
-  // TODO: make a AppTableBody component
+  // TODO: extract AppTableCellTitle and AppTableCellContent into separate components
+  // TODO: make a appTableBody component
   // TODO: make a accordion component with flexible activator, ie can be placed on top and bottom by adding attribute
   */
 .app-dashboard {}

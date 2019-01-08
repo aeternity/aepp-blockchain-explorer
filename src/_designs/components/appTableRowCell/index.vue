@@ -1,80 +1,53 @@
 <template>
   <div
-    class="app-table-row-cell"
-    :class="{ extend }"
+    class="app-table-cell"
+    :class="{
+      extend
+    }"
   >
-    <div
-      v-if="$slots.title"
-      class="app-table-row-cell-title"
+    <span
+      class="app-table-cell-title"
     >
       <slot name="title" />
-    </div>
-    <div class="app-table-row-cell-content">
+    </span>
+    <span class="app-table-cell-content">
       <slot />
-    </div>
+    </span>
   </div>
 </template>
-<script >
+<script>
 export default {
-  name: 'AppTableRowCell',
+  name: 'AppTableCell',
   props: {
-    extend: {
-      type: Boolean,
-      default: false
-    }
+    extend: Boolean
   }
 }
 </script>
-<style lang="scss" scoped>
-@import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+<style scoped lang="scss">
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
 
-.app-table-row-cell{
-  display: block;
-  width: 50%;
-  padding: 0 .8rem;
-  @media (max-width: 449px) {
-      &:not(:last-child) {
-      border-right: 2px solid $color-neutral-positive-2;
-    }
-  }
-
-  @media (min-width: 450px) {
-    padding: 0;
-    width: 100%;
+  .app-table-cell {
     display: flex;
-    align-items: baseline;
-    &:not(:last-child) {
-      border-bottom: 2px solid $color-neutral-positive-2;
+    flex-direction: column;
+    padding: .8rem;
+    width: 100%;
+    @media (min-width: 450px) {
+    width: 50%;
+    }
+    &:not(:first-child){
+      @media (min-width: 450px) {
+        border-left: 2px solid $color-neutral-positive-2;
+      }
     }
   }
-}
-
-.app-table-row-cell.extend {
-  width: 100%;
-}
-
-.app-table-row-cell-title {
-  font-weight: bold;
-  margin-bottom: .5rem;
-  display: block;
-  @media (min-width: 450px) {
-    padding: 1rem .8rem;
-    margin: 0;
-    width:  30%;
-    height: 100%;
-    min-height: 100%;
-    text-align: right;
-    background-color: $color-neutral-positive-3;
-    border-right: 2px solid $color-neutral-positive-2;
+  /*
+  * When cell should take the full width
+  */
+  .app-table-cell.extend {
+    margin-bottom:  auto;
+    width: 100%;
+    @media (min-width: 450px) {
+      margin-right: auto;
+    }
   }
-}
-
-.app-table-row-cell-content {
-  @media (min-width: 450px) {
-    display: block;
-    padding-left: .8rem;
-    width: 70%;
-  }
-}
-
 </style>
