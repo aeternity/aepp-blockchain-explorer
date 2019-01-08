@@ -121,7 +121,7 @@ export default {
       } else if (accountPublicKeyRegex.test(this.searchString)) {
         endpoint = 'account'
         type = 'accounts/get'
-      } else if (nameRegex.test(this.searchString)) { 
+      } else if (nameRegex.test(this.searchString)) {
         endpoint = 'account'
         type = 'domain'
       } else {
