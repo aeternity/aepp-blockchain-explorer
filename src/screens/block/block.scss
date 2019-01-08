@@ -1,6 +1,9 @@
 @import '../../style/mixins';
 
 .block-screen {
+  .block {
+    padding-top: 80px;
+  }
   .block-header {
     background-color:$aubergin;
     color:$white;
@@ -11,15 +14,51 @@
     @include content-max-width;
   }
 
+  .title {
+    @include font-size(l);
+    font-weight: bold;
+
+    &-main {
+      font-weight: normal;
+      color: $white;
+    }
+  }
+
   .block-header {
+    .title {
+      &-main {
+        padding-bottom: 20px;
+        margin-bottom: 35px;
+        border-bottom: 2px solid $white;
+      }
+    }
+
     .block-navigation,
     .basic-block-info {
       justify-content:space-between;
+
+      &_reverse {
+        flex-direction: row-reverse;
+      }
+      .field-value, .number {
+        @include font-size(m);
+        .ae-hash {
+          color: $white;
+          word-break: break-all;
+        }
+      }
+
+      .field__hash {
+        width: 60%;
+        @include only-phone {
+          width:100%;
+        }
+      }
+
+
     }
     .basic-block-info {
-      border-bottom:2px solid $smoke;
-      align-items:flex-end;
-      line-height:50px;
+      align-items:center;
       padding-bottom:20px;
       margin-bottom:20px;
     }
