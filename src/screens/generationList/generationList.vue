@@ -111,7 +111,6 @@
                 <FillDummy v-else />
               </td>
             </tr>
-
           </tbody>
         </table>
       </div>
