@@ -22,8 +22,13 @@ export default wrapActionsWithResolvedEpoch({
       balance = 0
       throw new Error(e)
     }
-    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + '/middleware/transactions/account/' + address)
-    transactions = camelcaseKeysDeep((await resp.json()).transactions)
+    try {
+      const resp = await fetch(process.env.VUE_APP_EPOCH_URL + '/middleware/transactions/account/' + address)
+      transactions = camelcaseKeysDeep((await resp.json()).transactions)
+    } catch (e) {
+      transactions = []
+      throw new Error(e)
+    }
 
     const account = { address, balance, transactions }
 
