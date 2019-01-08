@@ -261,9 +261,12 @@ export default {
   computed: {
     ...mapState('blocks', [
       'height',
-      'generation',
+      'generations',
       'microBlocks'
     ]),
+    generation () {
+      return this.generations[this.generationId]
+    },
     needMore () {
       return this.totalBlocks - this.currentBlocks > 0
     }

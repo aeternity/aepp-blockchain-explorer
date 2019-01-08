@@ -35,9 +35,7 @@ export default wrapActionsWithResolvedEpoch({
    */
   async getGenerationFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
     if (state.hashToHeight[hash]) {
-      const generation = state.generations[state.hashToHeight[hash]]
-      commit('setGeneration', generation)
-      return generation
+      return state.generations[state.hashToHeight[hash]]
     }
     const generation = await epoch.api.getGenerationByHash(hash)
     const microBlocksHashes = generation.microBlocks
@@ -58,7 +56,6 @@ export default wrapActionsWithResolvedEpoch({
       return state.generation
     }
 
-    commit('setGeneration', generation)
     return generation
   },
 
@@ -103,7 +100,6 @@ export default wrapActionsWithResolvedEpoch({
     if (!(state.height === height || state.height - 1 === height) && state.generations[height]) {
       // last two generations are prone to change
       // return if generation to get is not last or second last, and already exist in memory
-      commit('setGeneration', state.generations[height])
       return
     }
     const generation = await epoch.api.getGenerationByHeight(height)
@@ -116,7 +112,6 @@ export default wrapActionsWithResolvedEpoch({
       return state.generation
     }
 
-    commit('setGeneration', generation)
     commit('setGenerations', generation)
 
     return generation

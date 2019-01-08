@@ -5,36 +5,34 @@
         <div class="title">
           Generations
         </div>
-        <div class="field average-block-time">
+        <div>
           <span class="field-name">
-            average rate 1 per
+            Average Block Time&nbsp;
           </span>
           <RelativeTime
             v-if="getAverageBlockTime"
             :ts="getAverageBlockTime"
           />
         </div>
-        <div>
-          <span class="field-name">
-            last key block mined
-          </span>
-          <RelativeTime
-            v-if="getLastMinedBlockTime(currentTime)"
-            :ts="getLastMinedBlockTime(currentTime)"
-          />
-          <span class="field-name">
-            ago
-          </span>
-        </div>
       </div>
       <div class="table-wrapper">
         <table class="transactions">
-          <tr
-            v-for="i in numGenerations"
-            :key="i"
-          >
-            <td>
-              <Transition name="fade">
+          <thead>
+            <tr>
+              <th>Height</th>
+              <th>Key Hash</th>
+              <th>Blocks</th>
+              <th>Txn</th>
+              <th>Beneficiary</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="i in numGenerations"
+              :key="i"
+            >
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="height"
@@ -47,13 +45,8 @@
                   v-else
                   size="tall"
                 />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                Key Hash
-              </span>
-              <Transition name="fade">
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
@@ -67,13 +60,8 @@
                   v-else
                   size="long"
                 />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                Micro Blocks
-              </span>
-              <Transition name="fade">
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
@@ -84,13 +72,8 @@
                   v-else
                   size="small"
                 />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                Tx
-              </span>
-              <Transition name="fade">
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
@@ -101,13 +84,8 @@
                   v-else
                   size="small"
                 />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                Beneficiary
-              </span>
-              <Transition name="fade">
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="account-address"
@@ -120,13 +98,8 @@
                   v-else
                   size="long"
                 />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                Age
-              </span>
-              <Transition name="fade">
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                 >
@@ -136,9 +109,10 @@
                   />
                 </span>
                 <FillDummy v-else />
-              </Transition>
-            </td>
-          </tr>
+              </td>
+            </tr>
+
+          </tbody>
         </table>
       </div>
       <div class="center">
