@@ -130,4 +130,7 @@
   .transactions .transaction:nth-child(odd) {
     background:white;
   }
+  .transactions {
+    overflow-x: auto;
+  }
 }
