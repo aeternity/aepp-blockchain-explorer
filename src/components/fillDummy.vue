@@ -40,8 +40,8 @@ export default {
   }
 
   &.tall {
-    width: 80px;
-    height: 28px;
+    width: 70px;
+    height: 22px;
   }
 
   &.long {

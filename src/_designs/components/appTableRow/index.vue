@@ -28,16 +28,15 @@ export default {
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: baseline;
-    padding-top: .8rem;
     width: 100%;
     &:not(:last-child) {
       border-bottom: 2px solid $color-neutral-positive-2;
-      padding-bottom: .8rem;
     }
   }
 
   .app-table-row.extend {
-    margin-top: .8rem;
+    margin-top: .6rem;
+    padding-top: .6rem;
     margin-bottom: 0;
     border-left: none;
     border-top: 2px solid $color-neutral-positive-2;

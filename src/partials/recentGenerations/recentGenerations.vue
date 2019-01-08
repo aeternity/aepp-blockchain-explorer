@@ -79,4 +79,4 @@ export default {
     })
 }
 </script>
-<style src='./recentBlocks.scss' lang='scss' />
+<style src='./recentGenerations.scss' lang='scss' />
