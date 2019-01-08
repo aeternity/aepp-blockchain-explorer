@@ -205,8 +205,12 @@ a {
 .screen {
   padding-bottom:130px;
 }
-.app-nav + main > .screen > :first-child{
+.app-nav + main > .screen > :first-child {
   padding-top:100px;
+}
+
+.app-nav + main > .screen > .block {
+  padding-top:80px;
 }
 
 @keyframes slide-in-top {
