@@ -64,41 +64,53 @@ export default {
   },
   methods: {
     async search () {
+      let validationResult = await this.validateRegex()
+      let param = this.searchString
+      if (validationResult.valid) {
+        try {
+          if (validationResult.type === 'domain') {
+            const pubKey = await this.fetchDomain(param)
+            if (pubKey) {
+              param = pubKey
+            } else {
+              throw new Error('Pubkey not found')
+            }
+          } else if (validationResult.type !== 'domain' && validationResult.type !== 'height') {
+            await this.$store.dispatch(validationResult.type, param)
+          }
+          this.$router.push({ path: `/${validationResult.endpoint}/${param}` })
+        } catch (error) {
+          validationResult.valid = false
+        }
+      }
+      if (!validationResult.valid) {
+        alert('not a valid block hash/height/tx, account public key or domain name')
+      }
+    },
+    async validateRegex () {
+      let type = null
+      let valid = true
+      let endpoint = null
       this.searchString = this.searchString.trim()
       if (blockHeightRegex.test(this.searchString) && (this.searchString <= this.height)) {
-        this.$router.push({ path: `/generation/${this.searchString}` })
+        endpoint = 'generation'
+        type = 'height'
       } else if (blockHashRegex.test(this.searchString)) {
-        try {
-          await this.$store.dispatch('blocks/getBlockFromHash', this.searchString)
-          this.$router.push({ path: `/generation/${this.searchString}` })
-        } catch (e) {
-          alert('not a valid block hash/height/tx, account public key or domain name')
-        }
+        endpoint = 'generation'
+        type = 'blocks/getBlockFromHash'
       } else if (transactionHashRegex.test(this.searchString)) {
-        try {
-          await this.$store.dispatch('transactions/getTxByHash', this.searchString)
-          this.$router.push({ path: `/tx/${this.searchString}` })
-        } catch (e) {
-          alert('not a valid block hash/height/tx, account public key or domain name')
-        }
+        endpoint = 'tx'
+        type = 'transactions/getTxByHash'
       } else if (accountPublicKeyRegex.test(this.searchString)) {
-        try {
-          await this.$store.dispatch('accounts/get', this.searchString)
-          this.$router.push({ path: `/account/${this.searchString}` })
-        } catch (e) {
-          alert('not a valid block hash/height/tx, account public key or domain name')
-        }
-      } else if (nameRegex.test(this.searchString)) {
-        // check if name
-        const pubKey = await this.fetchDomain(this.searchString)
-        if (pubKey) {
-          this.$router.push({ path: `/account/${pubKey}` })
-        } else {
-          alert('not a valid block hash/height/tx, account public key or domain name')
-        }
+        endpoint = 'account'
+        type = 'accounts/get'
+      } else if (nameRegex.test(this.searchString)) { 
+        endpoint = 'account'
+        type = 'domain'
       } else {
-        alert('not a valid block hash/height/tx or account public key')
+        valid = false
       }
+      return { valid, type, endpoint }
     },
     async fetchDomain (domain) {
       const BASE_URL = process.env.VUE_APP_EPOCH_URL
@@ -117,7 +129,6 @@ export default {
         }
         return null
       } catch (e) {
-        console.log(e)
         return null
       }
     }
