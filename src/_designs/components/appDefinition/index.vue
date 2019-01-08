@@ -5,7 +5,10 @@
       [type]: Boolean(type)
     }"
   >
-    <div class="app-definition-title">
+    <div
+      v-if="title"
+      class="app-definition-title"
+    >
       {{ title }}
     </div>
     <div class="app-definition-content">
