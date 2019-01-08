@@ -22,13 +22,8 @@ export default wrapActionsWithResolvedEpoch({
       balance = 0
       throw new Error(e)
     }
-    try {
-      const resp = await fetch('https://mdw.aepps.com/middleware/transactions/account/' + address)
-      transactions = camelcaseKeysDeep((await resp.json()).transactions)
-    } catch (e) {
-      transactions = []
-      throw new Error(e)
-    }
+    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + '/middleware/transactions/account/' + address)
+    transactions = camelcaseKeysDeep((await resp.json()).transactions)
 
     const account = { address, balance, transactions }
 

@@ -103,8 +103,19 @@ export default wrapActionsWithResolvedEpoch({
       return
     }
     const generation = await epoch.api.getGenerationByHeight(height)
-    const resp = await fetch('https://mdw.aepps.com/middleware/transactions/interval/' + height + '/' + height)
-    generation.numTransactions = (await resp.json())['transactions'].length
+    try {
+      const resp = await fetch(process.env.VUE_APP_EPOCH_URL + '/middleware/transactions/interval/' + height + '/' + height)
+      generation.numTransactions = (await resp.json())['transactions'].length
+    } catch (e) {
+      debugger
+      const microBlocksHashes = generation.microBlocks
+      generation.numTransactions = 0
+      for (let i = 0; i < microBlocksHashes.length; i++) {
+        generation.numTransactions += (await epoch.api.getMicroBlockTransactionsCountByHash(microBlocksHashes[i])).count
+      }
+      debugger
+    }
+
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
