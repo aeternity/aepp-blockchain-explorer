@@ -17,8 +17,9 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
-  border-top: 2px solid $color-neutral-positive-2;
   border-bottom: 2px solid $color-neutral-positive-2;
+}
+.app-table-header > .app-table-row {
   padding: .6rem 0;
 }
 </style>
