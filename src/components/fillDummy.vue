@@ -39,6 +39,16 @@ export default {
     }
   }
 
+  &.tall {
+    width: 70px;
+    height: 22px;
+  }
+
+  &.long {
+    width: 162px;
+    height: 15px;
+  }
+
   &.small {
     width: 30px;
     height: 15px;

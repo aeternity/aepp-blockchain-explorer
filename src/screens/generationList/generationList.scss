@@ -33,18 +33,8 @@
   .height {
     @include font-size(l);
   }
-  @include only-phone {
-    table, td {
-      display:block;
-    }
-    tr {
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    tr + tr {
-      margin-top:10px;
-    }
+  tr + tr {
+    margin-top:10px;
   }
   .account-address {
     color:$magaenta;
@@ -63,22 +53,39 @@
     overflow-x: auto;
     margin-bottom:50px;
     .transactions {
-      min-width: 969px;
+      width: 100%;
+      table-layout: fixed;
+      white-space: nowrap;
+      @include only-desktop{
+        th:nth-child(1) {
+          width: 130px;
+        }
+        th:nth-child(2) {
+          width: 250px;
+        }
+        th:nth-child(5) {
+          width: 250px;
+        }
+      }
+      @include phone-and-tablet{
+        min-width: 650px;
+        th:nth-child(1) {
+          width: 80px;
+        }
+        th:nth-child(2) {
+          width: 200px;
+        }
+        th:nth-child(5) {
+          width: 200px;
+        }
+      }
       td {
         position: relative;
         .fill-dummy {
           max-width: 90%;
-          position: absolute;
-          top: 5px;
-          right: 0;
+          margin: 0 ;
         }
       }
     }
-  }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity 1s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-    opacity: 0;
   }
 }

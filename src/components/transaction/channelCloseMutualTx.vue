@@ -16,18 +16,9 @@
         </RouterLink>
       </Field>
       <Field name="Sender">
-        <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.senderId">
-            <NamedAddress :address="transaction.tx.senderId" />
-          </RouterLink>
-        </div>
-      </Field>
-      <Field name="Oracle">
-        <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracleId">
-            <NamedAddress :address="transaction.tx.oracleId" />
-          </RouterLink>
-        </div>
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.fromId">
+          <NamedAddress :address="transaction.tx.fromId" />
+        </RouterLink>
       </Field>
     </div>
   </div>
@@ -40,7 +31,7 @@ import AeHash from '../aeHash.vue'
 import { AeBadge } from '@aeternity/aepp-components'
 
 export default {
-  name: 'OracleQueryTx',
+  name: 'ChannelCloseMutualTx',
   components: {
     Field,
     NamedAddress,

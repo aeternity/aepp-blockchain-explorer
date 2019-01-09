@@ -5,44 +5,34 @@
         <div class="title">
           Generations
         </div>
-        <div class="field average-block-time">
+        <div>
           <span class="field-name">
-            average rate 1 per
+            Average Block Time&nbsp;
           </span>
           <RelativeTime
             v-if="getAverageBlockTime"
             :ts="getAverageBlockTime"
-            big
-            spaced
           />
-        </div>
-        <div>
-          <span class="field-name">
-            last key block mined
-          </span>
-          <RelativeTime
-            v-if="getAverageBlockTime"
-            :ts="getLastMinedBlockTime(currentTime)"
-            big
-            spaced
-          />
-          <span class="field-name">
-            ago
-          </span>
         </div>
       </div>
       <div class="table-wrapper">
         <table class="transactions">
-          <tr
-            v-for="i in numGenerations"
-            :key="i"
-          >
-            <td>
-              <span
-                v-if="!generations[height-i+1]"
-                class="field-name field-name_first "
-              />
-              <Transition name="fade">
+          <thead>
+            <tr>
+              <th>Height</th>
+              <th>Key Hash</th>
+              <th>Blocks</th>
+              <th>Txn</th>
+              <th>Beneficiary</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="i in numGenerations"
+              :key="i"
+            >
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="height"
@@ -51,14 +41,12 @@
                     {{ generations[height-i+1].keyBlock.height }}
                   </RouterLink>
                 </span>
-                <FillDummy v-else />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                key-hash
-              </span>
-              <Transition name="fade">
+                <FillDummy
+                  v-else
+                  size="tall"
+                />
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
@@ -68,31 +56,24 @@
                     type="short"
                   />
                 </span>
-                <FillDummy v-else />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                Micro Blocks
-              </span>
-              <Transition name="fade">
+                <FillDummy
+                  v-else
+                  size="long"
+                />
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
                 >
-                  {{ generations[height-i+1].microBlocksDetailed.length }}
+                  {{ generations[height-i+1].microBlocks.length }}
                 </span>
                 <FillDummy
                   v-else
                   size="small"
                 />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                Tx
-              </span>
-              <Transition name="fade">
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="number"
@@ -103,13 +84,8 @@
                   v-else
                   size="small"
                 />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                beneficiary
-              </span>
-              <Transition name="fade">
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
                   class="account-address"
@@ -118,17 +94,14 @@
                     <NamedAddress :address="generations[height-i+1].keyBlock.beneficiary" />
                   </RouterLink>
                 </span>
-                <FillDummy v-else />
-              </Transition>
-            </td>
-            <td>
-              <span class="field-name">
-                time
-              </span>
-              <Transition name="fade">
+                <FillDummy
+                  v-else
+                  size="long"
+                />
+              </td>
+              <td>
                 <span
                   v-if="generations[height-i+1]"
-                  class="number"
                 >
                   <RelativeTime
                     v-if="getAverageBlockTime"
@@ -136,9 +109,9 @@
                   />
                 </span>
                 <FillDummy v-else />
-              </Transition>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div class="center">

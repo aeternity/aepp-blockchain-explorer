@@ -1,35 +1,40 @@
 @import '../../style/mixins';
 
 .transaction {
-  padding:20px 00px;
-  .header {
-    align-items:top;
-  }
+  padding:20px;
+  display: flex;
+  min-width: 929px;
+  border-top: 2px solid $paleGrey;
   .header ,
   .body .grid {
     display:flex;
     flex-wrap:wrap;
-    justify-content:space-between;
+    align-items: center;
   }
-  .body .grid {
+  .body {
+    width: 100%;
+    .ae-badge{
+      padding: 0 5px;
+    }
   }
   .header > * ,
   .body .grid > * {
-    margin:0 20px;
-  }
-  .header .field:first-child {
-    width:35%;
-    min-width:240px;
+    width: 20%;
   }
   .field {
     display:block !important;
   }
   .field-value .ae-address,
   .field-value {
-    @include font-size(m);
-  }
-  a {
-    color:$magaenta;
+    display: block;
+    @include font-size(xs);
+    .number, .unit, a {
+      color: $aubergin;
+    }
+
+    .ae-hash {
+      color: $magaenta;
+    }
   }
   .query-spec,
   .response-spec,

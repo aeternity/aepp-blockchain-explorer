@@ -51,7 +51,7 @@
               v-if="generation"
               class="field-value number"
             >
-              {{ generation.microBlocksDetailed.length }}
+              {{ generation.microBlocks.length }}
             </div>
             <FillDummy v-else />
           </div>
@@ -81,12 +81,10 @@
               v-if="generation"
               class="field-value block-hash"
             >
-              <RouterLink :to="`/block/${generation.keyBlock.hash}`">
-                <AeHash
-                  :hash="generation.keyBlock.hash"
-                  type="short"
-                />
-              </RouterLink>
+              <AeHash
+                :hash="generation.keyBlock.hash"
+                type="short"
+              />
             </div>
             <FillDummy v-else />
           </div>
@@ -106,7 +104,7 @@
           </div>
           <div class="field">
             <div class="field-name">
-              Time since mined
+              Age
             </div>
             <div
               v-if="generation"
@@ -141,4 +139,4 @@ export default {
   })
 }
 </script>
-<style src='./latestBlock.scss' lang='scss' />
+<style src='./latestGeneration.scss' lang='scss' />

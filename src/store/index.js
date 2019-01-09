@@ -21,6 +21,9 @@ const store = new Vuex.Store({
         url: epochUrl,
         internalUrl: epochUrl
       })
+    },
+    isConnected (state) {
+      return state.$nodeStatus.connected
     }
   },
 
@@ -67,16 +70,19 @@ const store = new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ rootGetters: { epoch }, commit }) {
+      let connected = false
       try {
         const [top, version] = await Promise.all([
           epoch.api.getCurrentGeneration(),
           epoch.api.getStatus()
         ])
+        connected = true
+        commit('setNodeStatus', { connected, top, version })
 
-        commit('setNodeStatus', { top, version })
-
-        return { top, version }
+        return { connected, top, version }
       } catch (e) {
+        console.log(e)
+        commit('setNodeStatus', { connected })
         commit('catchError', 'Error', { root: true })
       }
     }

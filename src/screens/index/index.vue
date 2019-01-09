@@ -3,12 +3,8 @@
     <header>
       <div class="grid">
         <div>
-          <img
-            src="@/assets/logo.svg"
-            alt=""
-          >
-          <h1>Blockchain Explorer</h1>
-          <p>Search the æternity network blockchain by block, transaction, address. Or go through the last changes or stats.</p>
+          <h1>æternity explorer</h1>
+          <p>æternity blockchain explorer shows detailed information on blocks and transactions.</p>
         </div>
         <div
           class="search"
@@ -17,7 +13,7 @@
           <input
             v-model="searchString"
             class="search-input"
-            placeholder="Explorer Generation, Block, Tx, Address"
+            placeholder="Explore Generation, Block, Tx, Address"
             type="text"
           >
           <button
@@ -34,30 +30,41 @@
     </header>
 
     <MarketStats v-if="VUE_APP_SHOW_MARKET_STATS" />
-    <LatestBlock />
-    <RecentBlocks />
+    <LatestGeneration />
+    <RecentGenerations />
+    <AeModalLight
+      v-if="showError"
+      title="Error..."
+      @close="showError = false; error = ''"
+    >
+      {{ error }}
+    </AeModalLight>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { AeModalLight } from '@aeternity/aepp-components'
 import pollAction from '../../mixins/pollAction'
 import MarketStats from '../../partials/marketStats/marketStats'
-import LatestBlock from '../../partials/latestBlock/latestBlock'
-import RecentBlocks from '../../partials/recentBlocks/recentBlocks'
+import LatestGeneration from '../../partials/latestGeneration/latestGeneration'
+import RecentGenerations from '../../partials/recentGenerations/recentGenerations'
 
 const blockHeightRegex = RegExp('^[0-9]+$')
-const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
+const keyBlockHashRegex = RegExp('^kh_[1-9A-HJ-NP-Za-km-z]{48,50}$')
+const microBlockHashRegex = RegExp('^mh_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const accountPublicKeyRegex = RegExp('^ak_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const transactionHashRegex = RegExp('^th_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
 
 export default {
-  components: { MarketStats, LatestBlock, RecentBlocks },
+  components: { MarketStats, LatestGeneration, RecentGenerations, AeModalLight },
   mixins: [pollAction('blocks/getLatestGenerations', 4)],
   data () {
     return {
       searchString: '',
+      showError: false,
+      error: '',
       VUE_APP_SHOW_MARKET_STATS: process.env.VUE_APP_SHOW_MARKET_STATS
     }
   },
@@ -68,41 +75,63 @@ export default {
   },
   methods: {
     async search () {
+      if (!this.$store.getters.isConnected) {
+        this.showError = true
+        this.error = 'Connection to node is broken. Try again later.'
+        return
+      }
+      let validationResult = await this.validateRegex()
+      let param = this.searchString
+      if (validationResult.valid) {
+        try {
+          if (validationResult.type === 'domain') {
+            const pubKey = await this.fetchDomain(param)
+            if (pubKey) {
+              param = pubKey
+            } else {
+              throw new Error('Pubkey not found')
+            }
+          } else if (validationResult.type !== 'domain' && validationResult.type !== 'height') {
+            await this.$store.dispatch(validationResult.type, param)
+          }
+          this.$router.push({ path: `/${validationResult.endpoint}/${param}` })
+        } catch (error) {
+          validationResult.valid = false
+        }
+      }
+      if (!validationResult.valid) {
+        this.showError = true
+        this.error = 'Not a valid Block Hash/Height/Tx, an Account Public Key or an Æ Domain Name.'
+        this.searchString = ''
+      }
+    },
+    async validateRegex () {
+      let type = null
+      let valid = true
+      let endpoint = null
       this.searchString = this.searchString.trim()
       if (blockHeightRegex.test(this.searchString) && (this.searchString <= this.height)) {
-        this.$router.push({ path: `/generation/${this.searchString}` })
-      } else if (blockHashRegex.test(this.searchString)) {
-        try {
-          await this.$store.dispatch('blocks/getBlockFromHash', this.searchString)
-          this.$router.push({ path: `/generation/${this.searchString}` })
-        } catch (e) {
-          alert('not a valid block hash/height/tx, account public key or domain name')
-        }
+        endpoint = 'generation'
+        type = 'height'
+      } else if (keyBlockHashRegex.test(this.searchString)) {
+        endpoint = 'generation'
+        type = 'blocks/getGenerationFromHash'
+      } else if (microBlockHashRegex.test(this.searchString)) {
+        endpoint = 'block'
+        type = 'blocks/getBlockFromHash'
       } else if (transactionHashRegex.test(this.searchString)) {
-        try {
-          await this.$store.dispatch('transactions/getTxByHash', this.searchString)
-          this.$router.push({ path: `/tx/${this.searchString}` })
-        } catch (e) {
-          alert('not a valid block hash/height/tx, account public key or domain name')
-        }
+        endpoint = 'tx'
+        type = 'transactions/getTxByHash'
       } else if (accountPublicKeyRegex.test(this.searchString)) {
-        try {
-          await this.$store.dispatch('accounts/get', this.searchString)
-          this.$router.push({ path: `/account/${this.searchString}` })
-        } catch (e) {
-          alert('not a valid block hash/height/tx, account public key or domain name')
-        }
+        endpoint = 'account'
+        type = 'accounts/get'
       } else if (nameRegex.test(this.searchString)) {
-        // check if name
-        const pubKey = await this.fetchDomain(this.searchString)
-        if (pubKey) {
-          this.$router.push({ path: `/account/${pubKey}` })
-        } else {
-          alert('not a valid block hash/height/tx, account public key or domain name')
-        }
+        endpoint = 'account'
+        type = 'domain'
       } else {
-        alert('not a valid block hash/height/tx or account public key')
+        valid = false
       }
+      return { valid, type, endpoint }
     },
     async fetchDomain (domain) {
       const BASE_URL = process.env.VUE_APP_EPOCH_URL
@@ -121,7 +150,6 @@ export default {
         }
         return null
       } catch (e) {
-        console.log(e)
         return null
       }
     }

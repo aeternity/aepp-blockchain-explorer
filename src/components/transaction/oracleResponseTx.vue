@@ -2,46 +2,52 @@
   <div>
     <div class="grid">
       <Field>
-        <span class="field-name">
-          Oracle
-        </span>
+        <AeBadge>{{ transaction.tx.type | txTypeToName }}</AeBadge>
+      </Field>
+      <Field
+        v-if="transaction.hash"
+        name="tx hash"
+      >
+        <RouterLink :to="&quot;/tx/&quot; + transaction.hash">
+          <AeHash
+            :hash="transaction.hash"
+            type="short"
+          />
+        </RouterLink>
+      </Field>
+      <Field name="Oracle">
         <div class="account-address">
-          <RouterLink :to="&quot;/account/&quot; + transaction.tx.account">
-            <NamedAddress :address="transaction.tx.account" />
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.oracleId">
+            <NamedAddress :address="transaction.tx.oracleId" />
           </RouterLink>
         </div>
       </Field>
-      <Field>
-        <span class="field-name">
-          QueryId
-        </span>
-        <div class="">
-          {{ transaction.tx.query_id }}
+      <Field name="Query">
+        <div class="account-address">
+          <RouterLink :to="&quot;/account/&quot; + transaction.tx.queryId">
+            <NamedAddress :address="transaction.tx.queryId" />
+          </RouterLink>
         </div>
       </Field>
     </div>
-    <Field>
-      <span class="field-name">
-        Response
-      </span>
-      <pre
-        v-if="responsePrettyJson "
-        class="response"
-      >{{ responsePrettyJson }}</pre>
-      <pre
-        v-else
-        class="response"
-      >{{ transaction.tx.response }}</pre>
-    </Field>
   </div>
 </template>
 <script>
+import txTypeToName from '../../filters/txTypeToName'
 import Field from '../field'
 import NamedAddress from '../namedAddress'
+import AeHash from '../aeHash.vue'
+import { AeBadge } from '@aeternity/aepp-components'
 
 export default {
   name: 'OracleResponseTx',
-  components: { Field, NamedAddress },
+  components: {
+    Field,
+    NamedAddress,
+    AeHash,
+    AeBadge
+  },
+  filters: { txTypeToName },
   props: {
     transaction: {
       type: Object,

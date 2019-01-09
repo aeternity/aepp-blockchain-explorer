@@ -35,30 +35,19 @@ export default wrapActionsWithResolvedEpoch({
    */
   async getGenerationFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
     if (state.hashToHeight[hash]) {
-      const generation = state.generations[state.hashToHeight[hash]]
-      commit('setGeneration', generation)
-      return generation
+      return state.generations[state.hashToHeight[hash]]
     }
     const generation = await epoch.api.getGenerationByHash(hash)
     const microBlocksHashes = generation.microBlocks
-    generation.microBlocksDetailed = await Promise.all(
-      microBlocksHashes.map(
-        async (hash) => {
-          let microBlock = await epoch.api.getMicroBlockHeaderByHash(hash)
-          microBlock.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
-          return microBlock
-        }
-      )
-    )
-    generation.numTransactions = generation.microBlocksDetailed.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
-    )
-
+    generation.numTransactions = 0
+    for (let i = 0; i < microBlocksHashes.length; i++) {
+      generation.numTransactions += (await epoch.api.getMicroBlockTransactionsCountByHash(microBlocksHashes[i])).count
+    }
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
+    commit('setGenerations', generation)
 
-    commit('setGeneration', generation)
     return generation
   },
 
@@ -72,14 +61,8 @@ export default wrapActionsWithResolvedEpoch({
    * @return {*}
    */
   async getBlockFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
-    const isKeyBlock = hash.substr(0, 2) === 'kh'
-    let block
-    if (isKeyBlock) {
-      block = await epoch.api.getKeyBlockByHash(hash)
-    } else {
-      block = await epoch.api.getMicroBlockHeaderByHash(hash)
-      block.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
-    }
+    const block = await epoch.api.getMicroBlockHeaderByHash(hash)
+    block.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
 
     if (isEqual(state.block, block)) {
       return state.block
@@ -103,31 +86,40 @@ export default wrapActionsWithResolvedEpoch({
     if (!(state.height === height || state.height - 1 === height) && state.generations[height]) {
       // last two generations are prone to change
       // return if generation to get is not last or second last, and already exist in memory
-      commit('setGeneration', state.generations[height])
       return
     }
     const generation = await epoch.api.getGenerationByHeight(height)
     const microBlocksHashes = generation.microBlocks
-    generation.microBlocksDetailed = await Promise.all(
-      microBlocksHashes.map(
+    generation.numTransactions = 0
+    for (let i = 0; i < microBlocksHashes.length; i++) {
+      generation.numTransactions += (await epoch.api.getMicroBlockTransactionsCountByHash(microBlocksHashes[i])).count
+    }
+    if (isEqual(state.generation, generation)) {
+      return state.generation
+    }
+
+    commit('setGenerations', generation)
+
+    return generation
+  },
+  async getMicroBlocksByHeight ({ state, rootGetters: { epoch }, commit }, { height, numBlocks }) {
+    numBlocks = numBlocks || Infinity
+    let generation = state.generations[height]
+    const blocksPresent = state.microBlocks[height] ? state.microBlocks[height].length : 0
+    const numblocksToGet = Math.min(numBlocks, generation.microBlocks.length)
+    const blocksToGet = (await Promise.all(
+      generation.microBlocks.slice(blocksPresent, numblocksToGet).map(
         async (hash) => {
           let microBlock = await epoch.api.getMicroBlockHeaderByHash(hash)
           microBlock.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
           return microBlock
         }
       )
-    )
-    generation.numTransactions = generation.microBlocksDetailed.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
-    )
-    if (isEqual(state.generation, generation)) {
-      return state.generation
-    }
-
-    commit('setGeneration', generation)
-    commit('setGenerations', generation)
-
-    return generation
+    ))
+    let microBlocks = state.microBlocks[height]
+    microBlocks = microBlocks ? microBlocks.concat(blocksToGet) : blocksToGet
+    commit('addMicroBlocks', { height, microBlocks })
+    return microBlocks
   },
 
   /**

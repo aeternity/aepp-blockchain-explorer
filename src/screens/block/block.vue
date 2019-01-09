@@ -1,172 +1,113 @@
 <template>
   <div class="block-screen screen">
-    <div>
+    <div class="block">
       <div class="block-header">
+        <h1 class="title title-main">
+          Micro Blocks:
+        </h1>
+        <div class="basic-block-info basic-block-info_reverse grid ">
+          <Field
+            name="Micro Block Hash"
+            class="field__hash"
+          >
+            <AeHash
+              v-if="!isloading"
+              :hash="blockHash"
+              type="big"
+            />
+            <FillDummy
+              v-else
+              size="big"
+            />
+          </Field>
+        </div>
         <div class="basic-block-info grid">
-          <div class="center">
-            <span class="field-name">
-              Block:
-            </span>
-            <span
-              v-if="block.height"
+          <Field
+            name="Block Height"
+            class="field__height"
+          >
+            <RouterLink
+              v-if="!isloading"
               class="number"
+              :to="`/generation/${block.height}`"
             >
               {{ block.height }}
-            </span>
-            <FillDummy v-else />
-          </div>
-          <div v-if="block.beneficiary">
-            <span class="field-name">
-              beneficiary
-            </span>
-            <span class="account-address">
-              <RouterLink :to="`/account/${block.beneficiary}`">
-                {{ block.beneficiary | startAndEnd }}
-              </RouterLink>
-            </span>
-          </div>
-          <div class="center">
-            <span class="field-name">
-              time since mined:
-            </span>
-            <RelativeTime
-              v-if="block.height"
-              :ts="currentTime - block.time"
-              number
-              spaced
+            </RouterLink>
+            <FillDummy
+              v-else
+              size="small"
             />
-            <FillDummy v-else />
-          </div>
-        </div>
-        <div class="detail-block-info">
-          <div class="field hash">
-            <div class="field-name">
-              Hash
-            </div>
-            <div class="scroll">
-              <div
-                v-if="block.height"
-                class="number"
-              >
-                {{ block.hash }}
-              </div>
-              <FillDummy
-                v-else
-                color="grey"
-                size="big"
-              />
-            </div>
-          </div>
-          <div class="grid">
-            <div class="field height">
-              <div class="field-name">
-                Height
-              </div>
-              <div
-                v-if="block.height"
-                class="field-value number"
-              >
-                {{ block.height }}
-              </div>
-              <FillDummy v-else />
-            </div>
-            <div
-              v-if="block.target"
-              class="field rewarded"
-            >
-              <div class="field-name">
-                Target
-              </div>
-              <div class="field-value number">
-                {{ block.target }}
-              </div>
-            </div>
-            <div class="field time">
-              <div class="field-name">
-                Time (<span class="number">
-                  {{ block.time }}
-                </span>)
-              </div>
-              <div
-                v-if="block.height"
-                class="field-value number"
-              >
-                {{ block.time | humanDate }}
-              </div>
-              <FillDummy v-else />
-            </div>
-          </div>
-          <div class="field hash">
-            <div class="field-name">
-              Parent Hash
-            </div>
-            <div
-              v-if="block.height"
-              class="field-value block-hash"
-            >
-              <RouterLink :to="`/block/${block.prevHash}`">
-                {{ block.prevHash | startAndEnd }}
-              </RouterLink>
-            </div>
-            <FillDummy v-else />
-          </div>
-        </div>
-        <div
-          v-if="block.height"
-          class="block-navigation grid"
-        >
-          <RouterLink :to="`/block/${(block.height - 1)}`">
-            prev: {{ block.height - 1 }}
-          </RouterLink>
-          <RouterLink
-            v-if="block.height"
-            :to="`/block/${(block.height + 1)}`"
+          </Field>
+          <Field
+            name="Previous Key Hash"
+            class="field__hash"
           >
-            next: {{ block.height + 1 }}
-          </RouterLink>
+            <RouterLink
+              v-if="!isloading"
+              :to="`/generation/${block.prevKeyHash}`"
+            >
+              <AeHash
+                :hash="block.prevKeyHash"
+                type="big"
+              />
+            </RouterLink>
+            <FillDummy
+              v-else
+              size="big"
+            />
+          </Field>
+        </div>
+        <div class="basic-block-info grid">
+          <Field
+            name="Block Confirmation"
+            class="field__confirmation"
+          >
+            <div
+              v-if="!isloading"
+              class="number"
+            >
+              {{ height - block.height }}
+            </div>
+            <FillDummy v-else />
+          </Field>
+          <Field
+            name="Previous Hash"
+            class="field__hash"
+          >
+            <RouterLink
+              v-if="!isloading && isPrevKeyBlock"
+              :to="`/generation/${block.prevHash}`"
+            >
+              <AeHash
+                :hash="block.prevHash"
+                type="big"
+              />
+            </RouterLink>
+            <RouterLink
+              v-if="!isloading && !isPrevKeyBlock"
+              :to="`/block/${block.prevHash}`"
+            >
+              <AeHash
+                :hash="block.prevHash"
+                type="big"
+              />
+            </RouterLink>
+            <FillDummy
+              v-if="isloading"
+              size="big"
+            />
+          </Field>
         </div>
       </div>
       <div
-        v-if="!isKeyBlock"
         class="block-transactions"
       >
-        <h2
-          v-if="block.height"
-          class="title"
-        >
-          <span class="number">
-            {{ block.transactions.length }}
-          </span> Transaction(s)
-        </h2>
-        <div v-else>
-          <div><FillDummy color="grey" /></div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-        </div>
         <div
           v-if="block.height"
           class="transactions"
         >
-          <Transaction
-            v-for="t in block.transactions"
-            :key="t.hash"
-            :transaction="t"
+          <MicroBlock
+            :micro-block="block"
           />
         </div>
       </div>
@@ -177,45 +118,57 @@
 <script>
 import { mapState } from 'vuex'
 import currentTime from '../../mixins/currentTime'
-import RelativeTime from '../../components/relativeTime'
-import Transaction from '../../components/transaction/transaction'
 import FillDummy from '../../components/fillDummy'
+import Field from '../../components/field'
+import AeHash from '../../components/aeHash'
+import MicroBlock from '../../components/microBlock/microBlock'
 
-const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
-const blockHeightRegex = RegExp('^[0-9]+')
+const blockHashRegex = RegExp('^mh_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 
 export default {
   name: 'Block',
-  components: { RelativeTime, Transaction, FillDummy },
+  components: {
+    FillDummy,
+    Field,
+    AeHash,
+    MicroBlock
+  },
   mixins: [currentTime],
   props: {
-    blockId: {
+    blockHash: {
       type: String,
       required: true
     }
   },
+  data: function () {
+    return {
+      isloading: true
+    }
+  },
   computed: {
     ...mapState('blocks', ['block', 'height']),
-    isKeyBlock () {
-      return this.blockId.startsWith('kh')
+    isPrevKeyBlock () {
+      return this.block.prevHash.startsWith('kh')
     }
   },
   watch: {
-    blockId () {
+    blockHash () {
       this.getBlock()
     }
   },
-  mounted () {
-    this.getBlock()
+  async mounted () {
+    this.isloading = true
+    await this.$store.dispatch('blocks/height')
+    await this.getBlock()
+    this.isloading = false
   },
   methods: {
-    getBlock () {
-      this.$store.commit('blocks/setBlock', {})
-      if (blockHeightRegex.test(this.blockId)) {
-        this.$store.dispatch('blocks/getBlockFromHeight', Number(this.blockId))
-      } else if (blockHashRegex.test(this.blockId)) {
-        this.$store.dispatch('blocks/getBlockFromHash', this.blockId)
+    async getBlock () {
+      this.isloading = true
+      if (blockHashRegex.test(this.blockHash)) {
+        await this.$store.dispatch('blocks/getBlockFromHash', this.blockHash)
       }
+      this.isloading = false
     }
   }
 }

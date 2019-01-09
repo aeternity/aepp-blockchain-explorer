@@ -2,7 +2,6 @@
   <div class="recent-blocks-partial">
     <div class="inner">
       <h2>Recent generations</h2>
-      <p>View the latest generations on the aeternity blockchain</p>
       <table>
         <tr
           v-for="(generation, i) in generations"
@@ -27,7 +26,7 @@
               v-if="generation"
               class="field-value number"
             >
-              {{ generation.microBlocksDetailed.length }}
+              {{ generation.microBlocks.length }}
             </span>
             <FillDummy v-else />
           </td>
@@ -80,4 +79,4 @@ export default {
     })
 }
 </script>
-<style src='./recentBlocks.scss' lang='scss' />
+<style src='./recentGenerations.scss' lang='scss' />
