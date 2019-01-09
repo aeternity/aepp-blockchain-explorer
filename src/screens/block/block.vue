@@ -87,43 +87,13 @@
         v-if="!isKeyBlock"
         class="block-transactions"
       >
-        <h2
-          v-if="block.height"
-          class="title"
-        >
-          <span class="number">
-            {{ block.transactions.length }}
-          </span> Transaction(s)
-        </h2>
-        <div v-else>
-          <div><FillDummy color="grey" /></div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-          <div>
-            <FillDummy
-              color="grey"
-              size="big"
-            />
-          </div>
-        </div>
         <div
           v-if="block.height"
           class="transactions"
         >
-          <Transaction
-            v-for="t in block.transactions"
-            :key="t.hash"
-            :transaction="t"
+          <MicroBlock
+            :micro-block="block"
+            :micro-block-number="0"
           />
         </div>
       </div>
@@ -134,10 +104,10 @@
 <script>
 import { mapState } from 'vuex'
 import currentTime from '../../mixins/currentTime'
-import Transaction from '../../components/transaction/transaction'
 import FillDummy from '../../components/fillDummy'
 import Field from '../../components/field'
 import AeHash from '../../components/aeHash'
+import MicroBlock from '../../components/microBlock/microBlock'
 
 const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const blockHeightRegex = RegExp('^[0-9]+')
@@ -145,10 +115,10 @@ const blockHeightRegex = RegExp('^[0-9]+')
 export default {
   name: 'Block',
   components: {
-    Transaction,
     FillDummy,
     Field,
-    AeHash
+    AeHash,
+    MicroBlock
   },
   mixins: [currentTime],
   props: {
