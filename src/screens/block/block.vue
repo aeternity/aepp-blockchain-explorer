@@ -27,16 +27,16 @@
             name="Block Height"
             class="field__height"
           >
-            <div
+            <RouterLink
               v-if="block.height"
-              class="number"
+              :to="`/generation/${block.height}`"
             >
-              {{ block.height }}
-            </div>
-            <FillDummy
-              v-else
-              size="small"
-            />
+              <AeHash
+                :hash="block.height.toString()"
+                type="big"
+              />
+            </RouterLink>
+            <FillDummy v-else />
           </Field>
           <Field
             name="Previous Key Hash"
@@ -44,7 +44,7 @@
           >
             <RouterLink
               v-if="block.prevKeyHash"
-              :to="`/account/${block.prevKeyHash}`"
+              :to="`/block/${block.prevKeyHash}`"
             >
               <AeHash
                 :hash="block.prevKeyHash"
@@ -71,8 +71,8 @@
             class="field__hash"
           >
             <RouterLink
-              v-if="block.height"
-              :to="`/block/${block.prevHash}`"
+              v-if="block.prevHash"
+              :to="definePreviusHash()"
             >
               <AeHash
                 :hash="block.prevHash"
@@ -139,7 +139,7 @@ export default {
     }
   },
   async mounted () {
-    this.getBlock()
+    await this.getBlock()
     await this.$store.dispatch('blocks/height')
   },
   methods: {
@@ -150,6 +150,9 @@ export default {
       } else if (blockHashRegex.test(this.blockId)) {
         this.$store.dispatch('blocks/getBlockFromHash', this.blockId)
       }
+    },
+    definePreviusHash () {
+      return this.block.prevHash.startsWith('kh') ? `/generation/${this.block.height}` : `/block/${this.block.prevHash}`
     }
   }
 }
