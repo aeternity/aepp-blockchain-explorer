@@ -57,7 +57,8 @@ export default {
   }
   .app-definition-content {
     color: #76818C;
-    @extend %face-tracked-base;
+    display: flex;
+    @extend %face-mono-xs;
   }
   .app-definition.block {
     padding: .6rem;

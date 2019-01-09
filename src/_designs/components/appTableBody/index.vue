@@ -18,13 +18,15 @@ export default {
   }
   .app-table-body > .app-table-row {
     width: 50%;
-    border-bottom: none;
+    //border-bottom: none;
+    margin-top: 0;
+    padding-top: 0;
     &:first-child {
       border-top: none;
       margin-top: 0;
       padding-top: 0;
     }
-    &:not(.extend):last-child {
+    &:not(.extend) {
       border-left: 2px solid $color-neutral-positive-2;
       @media (min-width: 450px) {
         border-left: none;
