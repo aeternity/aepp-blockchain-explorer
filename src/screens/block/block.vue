@@ -94,7 +94,6 @@
         >
           <MicroBlock
             :micro-block="block"
-            :micro-block-number="0"
           />
         </div>
       </div>
