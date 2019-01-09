@@ -37,20 +37,17 @@
               name="Key Block Hash"
               class="field__hash"
             >
-              <RouterLink
-                v-if="!isLoading"
-                :to="`/block/${generation.keyBlock.hash}`"
-              >
+              <template v-if="!isLoading">
                 <AeHash
                   :hash="generation.keyBlock.hash"
                   type="short"
                 />
-              </RouterLink>
-              <ViewAndCopy
-                v-if="!isLoading"
-                color="boring"
-                :text="generation.keyBlock.hash"
-              />
+                <ViewAndCopy
+                  v-if="!isLoading"
+                  color="boring"
+                  :text="generation.keyBlock.hash"
+                />
+              </template>
               <FillDummy v-else />
             </Field>
           </div>
