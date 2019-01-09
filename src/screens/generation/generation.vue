@@ -40,7 +40,7 @@
               <template v-if="!isLoading">
                 <AeHash
                   :hash="generation.keyBlock.hash"
-                  type="short"
+                  :type="hashSize"
                 />
                 <ViewAndCopy
                   v-if="!isLoading"
@@ -93,7 +93,7 @@
               >
                 <AeHash
                   :hash="generation.keyBlock.beneficiary"
-                  type="short"
+                  :type="hashSize"
                 />
               </RouterLink>
               <ViewAndCopy
@@ -253,7 +253,8 @@ export default {
       isLoading: true,
       totalBlocks: 0,
       currentBlocks: 0,
-      isLoadingMore: false
+      isLoadingMore: false,
+      hashSize: 'short'
     }
   },
   computed: {
@@ -275,6 +276,8 @@ export default {
     }
   },
   async mounted () {
+    this.checkHashSize()
+    window.addEventListener('resize', this.checkHashSize)
     await this.getGeneration()
     await this.$store.dispatch('blocks/height')
     this.totalBlocks = this.generation.microBlocks.length
@@ -300,6 +303,12 @@ export default {
       this.getGeneration()
       await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationId), 'numBlocks': this.currentBlocks })
       this.isLoadingMore = false
+    },
+    checkHashSize () {
+      this.hashSize = 'short'
+      if (window.matchMedia('(min-device-width: 768px)').matches) {
+        this.hashSize = 'chunked'
+      }
     }
   }
 }
