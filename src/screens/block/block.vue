@@ -44,7 +44,7 @@
           >
             <RouterLink
               v-if="block.prevKeyHash"
-              :to="`/block/${block.prevKeyHash}`"
+              :to="`/generation/${block.height}`"
             >
               <AeHash
                 :hash="block.prevKeyHash"
@@ -60,11 +60,12 @@
             class="field__confirmation"
           >
             <div
-              v-if="height"
+              v-if="block.height"
               class="number"
             >
               {{ height - block.height }}
             </div>
+            <FillDummy v-else />
           </Field>
           <Field
             name="Previous Hash"
