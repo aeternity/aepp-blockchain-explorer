@@ -32,6 +32,10 @@
               >
                 {{ height - generation.keyBlock.height }}
               </div>
+              <FillDummy
+                v-else
+                size="small"
+              />
             </Field>
             <Field
               name="Key Block Hash"
