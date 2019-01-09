@@ -7,6 +7,7 @@
   .block-header {
     background-color:$aubergin;
     color:$white;
+    padding-bottom: 80px;
   }
   .block-transactions,
   .block-micro-detailed,
@@ -129,5 +130,8 @@
   }
   .transactions .transaction:nth-child(odd) {
     background:white;
+  }
+  .transactions {
+    margin-top: -50px;
   }
 }
