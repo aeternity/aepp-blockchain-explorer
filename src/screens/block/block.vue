@@ -11,9 +11,9 @@
             class="field__hash"
           >
             <AeHash
-              :hash="block.hash"
-              type="big"
               v-if="!isloading"
+              :hash="blockHash"
+              type="big"
             />
             <FillDummy
               v-else
@@ -26,12 +26,13 @@
             name="Block Height"
             class="field__height"
           >
-            <div
+            <RouterLink
               v-if="!isloading"
               class="number"
+              :to="`/generation/${block.height}`"
             >
               {{ block.height }}
-            </div>
+            </RouterLink>
             <FillDummy
               v-else
               size="small"
@@ -41,11 +42,12 @@
             name="Previous Key Hash"
             class="field__hash"
           >
-            <AeHash
-              :hash="block.prevKeyHash"
-              type="big"
-              v-if="!isloading"
-            />
+            <template v-if="!isloading">
+              <AeHash
+                :hash="block.prevKeyHash"
+                type="big"
+              />
+            </template>
             <FillDummy
               v-else
               size="big"
@@ -72,11 +74,12 @@
             name="Previous Hash"
             class="field__hash"
           >
-            <AeHash
-              :hash="block.prevHash"
-              type="big"
-              v-if="!isloading"
-            />
+            <template v-if="!isloading">
+              <AeHash
+                :hash="block.prevHash"
+                type="big"
+              />
+            </template>
             <FillDummy
               v-else
               size="big"
@@ -149,16 +152,16 @@ export default {
     Field,
     AeHash
   },
-  data: function () {
-    return {
-      isloading: false
-    }
-  },
   mixins: [currentTime],
   props: {
     blockHash: {
       type: String,
       required: true
+    }
+  },
+  data: function () {
+    return {
+      isloading: false
     }
   },
   computed: mapState('blocks', ['block', 'height']),
