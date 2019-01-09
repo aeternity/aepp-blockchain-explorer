@@ -2,162 +2,164 @@
   <div class="app-dashboard">
     <h1>App-Dashboard</h1>
     <!-- static table -->
-    <AppTable details>
-      <AppTableHeader>
-        <AppTableRow>
-          <AppTableRowColumn width="large">
-            <AppTableCell>
-              <AppDefinition
-                title="confirmations"
-              >
-                <AeText face="mono-s">
-                  235
-                </AeText>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRowColumn>
-          <AppTableRowColumn width="small">
-            <AppTableCell>
-              <AppDefinition
-                title="Date Time"
-              >
-                <AeText face="mono-s">
-                  235
-                </AeText>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRowColumn>
-        </AppTableRow>
-        <AppTableRow>
-          <AppTableRowColumn>
+    <AppPanel>
+      <AppTable details>
+        <AppTableHeader>
+          <AppTableRow>
+            <AppTableRowColumn width="large">
+              <AppTableCell>
+                <AppDefinition
+                  title="confirmations"
+                >
+                  <AeText face="mono-s">
+                    235
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+            <AppTableRowColumn width="small">
+              <AppTableCell>
+                <AppDefinition
+                  title="October 11 2018"
+                >
+                  <AeText face="mono-s">
+                    10:59:34 AM +UTC
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+          </AppTableRow>
+          <AppTableRow>
+            <AppTableRowColumn>
+              <AppTableCell extend>
+                <AppDefinition
+                  title="confirmations"
+                >
+                  <AeText face="mono-s">
+                    235
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+            <AppTableRowColumn>
+              <AppTableCell>
+                <AppDefinition
+                  title="Amount"
+                >
+                  <AeText face="mono-s">
+                    10.00AE
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+              <AppTableCell>
+                <AppDefinition
+                  title="confirmations"
+                >
+                  <AeText face="mono-s">
+                    235
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+          </AppTableRow>
+          <AppTableRow>
+            <AppTableRowColumn>
+              <AppTableCell extend>
+                <AppDefinition
+                  title="confirmations"
+                >
+                  <AeText face="mono-s">
+                    235
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+            <AppTableRowColumn>
+              <AppTableCell>
+                <AppDefinition
+                  title="confirmations"
+                >
+                  <AeText face="mono-s">
+                    235
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+              <AppTableCell>
+                <AppDefinition
+                  title="confirmations"
+                >
+                  <AeText face="mono-s">
+                    235
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+            <AppTableRow
+              extend
+            >
+              <AppTableCell>
+                <AppDefinition
+                  title="confirmations"
+                >
+                  <AeText face="mono-s">
+                    235
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+              <AppTableCell>
+                <AppDefinition
+                  title="confirmations"
+                >
+                  <AeText face="mono-s">
+                    235
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+          </AppTableRow>
+        </AppTableHeader>
+        <AppTableBody>
+          <AppTableRow extend>
             <AppTableCell extend>
               <AppDefinition
-                title="confirmations"
+                type="list"
+                title="Hash"
               >
-                <AeText face="mono-s">
-                  235
-                </AeText>
+                <AeAddress
+                  value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
+                  length="flat"
+                  face="mono-s"
+                />
               </AppDefinition>
             </AppTableCell>
-          </AppTableRowColumn>
-          <AppTableRowColumn>
-            <AppTableCell>
-              <AppDefinition
-                title="Amount"
-              >
-                <AeText face="mono-s">
-                  10.00AE
-                </AeText>
-              </AppDefinition>
-            </AppTableCell>
-            <AppTableCell>
-              <AppDefinition
-                title="confirmations"
-              >
-                <AeText face="mono-s">
-                  235
-                </AeText>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRowColumn>
-        </AppTableRow>
-        <AppTableRow>
-          <AppTableRowColumn>
+          </AppTableRow>
+          <AppTableRow>
             <AppTableCell extend>
               <AppDefinition
-                title="confirmations"
+                type="list"
+                title="Difficulty"
               >
                 <AeText face="mono-s">
-                  235
-                </AeText>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRowColumn>
-          <AppTableRowColumn>
-            <AppTableCell>
-              <AppDefinition
-                title="confirmations"
-              >
-                <AeText face="mono-s">
-                  235
-                </AeText>
-              </AppDefinition>
-            </AppTableCell>
-            <AppTableCell>
-              <AppDefinition
-                title="confirmations"
-              >
-                <AeText face="mono-s">
-                  235
-                </AeText>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRowColumn>
-          <AppTableRow
-            extend
-          >
-            <AppTableCell>
-              <AppDefinition
-                title="confirmations"
-              >
-                <AeText face="mono-s">
-                  235
-                </AeText>
-              </AppDefinition>
-            </AppTableCell>
-            <AppTableCell>
-              <AppDefinition
-                title="confirmations"
-              >
-                <AeText face="mono-s">
-                  235
+                  87472467200
                 </AeText>
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
-        </AppTableRow>
-      </AppTableHeader>
-      <AppTableBody>
-        <AppTableRow>
-          <AppTableCell extend>
-            <AppDefinition
-              type="list"
-              title="Difficulty"
-            >
-              <AeText face="mono-s">
-                87472467200
-              </AeText>
-            </AppDefinition>
-          </AppTableCell>
-        </AppTableRow>
-        <AppTableRow>
-          <AppTableCell extend>
-            <AppDefinition
-              type="list"
-              title="Target"
-            >
-              <AeText face="mono-s">
-                87472467200
-              </AeText>
-            </AppDefinition>
-          </AppTableCell>
-        </AppTableRow>
-        <AppTableRow>
-          <AppTableCell extend>
-            <AppDefinition
-              type="list"
-              title="Hash"
-            >
-              <AeAddress
-                value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
-                length="flat"
-                face="mono-s"
-              />
-            </AppDefinition>
-          </AppTableCell>
-        </AppTableRow>
-      </AppTableBody>
-    </AppTable>
+          <AppTableRow>
+            <AppTableCell extend>
+              <AppDefinition
+                type="list"
+                title="Target"
+              >
+                <AeText face="mono-s">
+                  87472467200
+                </AeText>
+              </AppDefinition>
+            </AppTableCell>
+          </AppTableRow>
+        </AppTableBody>
+      </AppTable>
+    </AppPanel>
   </div>
 </template>
 <script>
@@ -168,6 +170,7 @@ import AppTableHeader from '@/_designs/components/appTableHeader'
 import AppTableBody from '@/_designs/components/appTableBody'
 import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
+import AppPanel from '@/_designs/components/appPanel'
 
 import { AeText, AeAddress } from '@aeternity/aepp-components-3'
 
@@ -205,7 +208,8 @@ export default {
     AppTableRowColumn,
     AppDefinition,
     AeText,
-    AeAddress
+    AeAddress,
+    AppPanel
   },
   data: function () {
     return { transactions: transactions }
@@ -214,9 +218,6 @@ export default {
 </script>
 <style lang="scss">
   /* For the AppTable Components
-  // TODO: try and combine AppTableHeader components with AppTable components
-  // TODO: extract AppTableCellTitle and AppTableCellContent into separate components
-  // TODO: make a appTableBody component
   // TODO: make a accordion component with flexible activator, ie can be placed on top and bottom by adding attribute
   */
 .app-dashboard {}
