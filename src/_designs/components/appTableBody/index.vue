@@ -16,4 +16,31 @@ export default {
     display: flex;
     flex-wrap: wrap;
   }
+  .app-table-body > .app-table-row {
+    width: 50%;
+    border-bottom: none;
+    &:first-child {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+    &:not(.extend):last-child {
+      border-left: 2px solid $color-neutral-positive-2;
+      @media (min-width: 450px) {
+        border-left: none;
+      }
+    }
+    @media (min-width: 450px) {
+      width: 100%;
+      border-left: none;
+      border-bottom: 2px solid $color-neutral-positive-2;
+    }
+    &.extend {
+      width: 100%;
+      border-left: none;
+      &:not(:last-child) {
+        border-bottom: 2px solid $color-neutral-positive-2;
+      }
+    }
+  }
 </style>
