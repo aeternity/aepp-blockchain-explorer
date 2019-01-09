@@ -42,12 +42,15 @@
             name="Previous Key Hash"
             class="field__hash"
           >
-            <template v-if="!isloading">
+            <RouterLink
+              v-if="!isloading"
+              :to="`/generation/${block.prevKeyHash}`"
+            >
               <AeHash
                 :hash="block.prevKeyHash"
                 type="big"
               />
-            </template>
+            </RouterLink>
             <FillDummy
               v-else
               size="big"
@@ -74,14 +77,26 @@
             name="Previous Hash"
             class="field__hash"
           >
-            <template v-if="!isloading">
+            <RouterLink
+              v-if="!isloading && isPrevKeyBlock"
+              :to="`/generation/${block.prevHash}`"
+            >
               <AeHash
                 :hash="block.prevHash"
                 type="big"
               />
-            </template>
+            </RouterLink>
+            <RouterLink
+              v-if="!isloading && !isPrevKeyBlock"
+              :to="`/block/${block.prevHash}`"
+            >
+              <AeHash
+                :hash="block.prevHash"
+                type="big"
+              />
+            </RouterLink>
             <FillDummy
-              v-else
+              v-if="isloading"
               size="big"
             />
           </Field>
@@ -161,7 +176,7 @@ export default {
   },
   data: function () {
     return {
-      isloading: false
+      isloading: true
     }
   },
   computed: mapState('blocks', ['block', 'height']),
@@ -183,6 +198,9 @@ export default {
         await this.$store.dispatch('blocks/getBlockFromHash', this.blockHash)
       }
       this.isloading = false
+    },
+    isPrevKeyBlock () {
+      return this.block.prevKeyHash.startsWith('kh')
     }
   }
 }
