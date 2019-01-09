@@ -38,11 +38,10 @@ export default wrapActionsWithResolvedEpoch({
       return state.generations[state.hashToHeight[hash]]
     }
     const generation = await epoch.api.getGenerationByHash(hash)
-    const microBlocksHashes = generation.microBlocks
     generation.numTransactions = 0
-    for (let i = 0; i < microBlocksHashes.length; i++) {
-      generation.numTransactions += (await epoch.api.getMicroBlockTransactionsCountByHash(microBlocksHashes[i])).count
-    }
+    const height = generation.keyBlock.height
+    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + '/middleware/transactions/interval/' + height + '/' + height)
+    generation.numTransactions = (await resp.json())['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
