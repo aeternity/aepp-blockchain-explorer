@@ -25,16 +25,16 @@ export default {
     path: 'generations',
     component: () => import('../screens/generations/index.vue')
   }, {
-    name: 'app/generation',
-    path: 'generation',
+    name: 'app/generations/generation',
+    path: 'generations/generation',
     component: () => import('../screens/generation/index.vue')
   }, {
     name: 'app/transactions',
     path: 'transactions',
     component: () => import('../screens/transactions/index.vue')
   }, {
-    name: 'app/transaction',
-    path: 'transaction',
+    name: 'app/transactions/transaction',
+    path: 'transactions/transaction',
     component: () => import('../screens/transaction/index.vue')
   }
   ]
