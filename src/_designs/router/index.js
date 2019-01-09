@@ -20,5 +20,22 @@ export default {
     name: 'app/dashboard',
     path: 'dashboard',
     component: () => import('../screens/dashboard/index.vue')
-  }]
+  }, {
+    name: 'app/generations',
+    path: 'generations',
+    component: () => import('../screens/generations/index.vue')
+  }, {
+    name: 'app/generations/generation',
+    path: 'generations/generation',
+    component: () => import('../screens/generation/index.vue')
+  }, {
+    name: 'app/transactions',
+    path: 'transactions',
+    component: () => import('../screens/transactions/index.vue')
+  }, {
+    name: 'app/transactions/transaction',
+    path: 'transactions/transaction',
+    component: () => import('../screens/transaction/index.vue')
+  }
+  ]
 }
