@@ -5,7 +5,13 @@
   >
     <AppNav>
       <AppNavLink to="dashboard">
-        dashboard
+        Dashboard
+      </AppNavLink>
+      <AppNavLink to="generations">
+        Generations
+      </AppNavLink>
+      <AppNavLink to="transactions">
+        Transactions
       </AppNavLink>
     </AppNav>
     <RouterView />
