@@ -39,22 +39,14 @@ export default wrapActionsWithResolvedEpoch({
     }
     const generation = await epoch.api.getGenerationByHash(hash)
     const microBlocksHashes = generation.microBlocks
-    generation.microBlocksDetailed = await Promise.all(
-      microBlocksHashes.map(
-        async (hash) => {
-          let microBlock = await epoch.api.getMicroBlockHeaderByHash(hash)
-          microBlock.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
-          return microBlock
-        }
-      )
-    )
-    generation.numTransactions = generation.microBlocksDetailed.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.transactions.length, 0
-    )
-
+    generation.numTransactions = 0
+    for (let i = 0; i < microBlocksHashes.length; i++) {
+      generation.numTransactions += (await epoch.api.getMicroBlockTransactionsCountByHash(microBlocksHashes[i])).count
+    }
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
+    commit('setGenerations', generation)
 
     return generation
   },
@@ -69,14 +61,8 @@ export default wrapActionsWithResolvedEpoch({
    * @return {*}
    */
   async getBlockFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
-    const isKeyBlock = hash.substr(0, 2) === 'kh'
-    let block
-    if (isKeyBlock) {
-      block = await epoch.api.getKeyBlockByHash(hash)
-    } else {
-      block = await epoch.api.getMicroBlockHeaderByHash(hash)
-      block.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
-    }
+    const block = await epoch.api.getMicroBlockHeaderByHash(hash)
+    block.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
 
     if (isEqual(state.block, block)) {
       return state.block

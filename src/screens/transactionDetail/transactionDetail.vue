@@ -33,7 +33,7 @@
             <AeHash
               v-if="transaction"
               :hash="transaction.hash"
-              type="short"
+              :type="hashSize"
             />
             <ViewAndCopy
               v-if="transaction"
@@ -137,7 +137,7 @@
               >
                 <AeHash
                   :hash="signature"
-                  type="short"
+                  :type="hashSize"
                 />
                 <ViewAndCopy :text="signature" />
               </Field>
@@ -232,7 +232,8 @@ export default {
   },
   data () {
     return {
-      height: 0
+      height: 0,
+      hashSize: 'short'
     }
   },
   computed: mapState('transactions', {
@@ -249,8 +250,18 @@ export default {
     this.height = await this.$store.dispatch('blocks/height')
   },
   async mounted () {
+    this.checkHashSize()
+    window.addEventListener('resize', this.checkHashSize)
     await this.$store.dispatch('transactions/getTxByHash', this.txId)
     this.height = await this.$store.dispatch('blocks/height')
+  },
+  methods: {
+    checkHashSize () {
+      this.hashSize = 'short'
+      if (window.matchMedia('(min-device-width: 768px)').matches) {
+        this.hashSize = 'chunked'
+      }
+    }
   }
 }
 </script>
