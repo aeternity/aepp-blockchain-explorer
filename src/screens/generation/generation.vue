@@ -37,7 +37,9 @@
               name="Key Block Hash"
               class="field__hash"
             >
-              <template v-if="!isLoading">
+              <template
+                v-if="!isLoading"
+              >
                 <AeHash
                   :hash="generation.keyBlock.hash"
                   :type="hashSize"
@@ -185,7 +187,7 @@
           class="micro-blocks-wrapper"
         >
           <MicroBlock
-            v-for="(m, index) in microBlocks[generationId]"
+            v-for="(m, index) in microBlocks[generationHeight]"
             :key="m.hash"
             :micro-block="m"
             :micro-block-number="index"
@@ -193,7 +195,7 @@
         </template>
       </section>
       <div
-        v-if="microBlocks[generationId] && needMore"
+        v-if="microBlocks[generationHeight] && needMore"
         class="center"
       >
         <AeButton
@@ -261,13 +263,21 @@ export default {
     ...mapState('blocks', [
       'height',
       'generations',
-      'microBlocks'
+      'microBlocks',
+      'hashToHeight'
     ]),
     generation () {
-      return this.generations[this.generationId]
+      return this.generations[this.generationHeight]
     },
     needMore () {
       return this.totalBlocks - this.currentBlocks > 0
+    },
+    generationHeight () {
+      if (RegExp('^[0-9]+$').test(this.generationId)) {
+        return this.generationId
+      } else {
+        return this.hashToHeight[this.generationId]
+      }
     }
   },
   watch: {
@@ -283,7 +293,7 @@ export default {
     this.totalBlocks = this.generation.microBlocks.length
     this.currentBlocks = Math.min(this.totalBlocks, 10)
     this.isLoadingMore = true
-    await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationId), 'numBlocks': this.currentBlocks })
+    await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationHeight), 'numBlocks': this.currentBlocks })
     this.isLoadingMore = false
   },
   methods: {
@@ -301,7 +311,7 @@ export default {
       const toAdd = Math.max(Math.min(this.totalBlocks - this.currentBlocks, 10), 0)
       this.currentBlocks += toAdd
       this.getGeneration()
-      await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationId), 'numBlocks': this.currentBlocks })
+      await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationHeight), 'numBlocks': this.currentBlocks })
       this.isLoadingMore = false
     },
     checkHashSize () {
