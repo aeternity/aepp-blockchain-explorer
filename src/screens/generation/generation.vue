@@ -44,12 +44,12 @@
                   :hash="generation.keyBlock.hash"
                   type="short"
                 />
+                <ViewAndCopy
+                  v-if="!isLoading"
+                  color="boring"
+                  :text="generation.keyBlock.hash"
+                />
               </template>
-              <ViewAndCopy
-                v-if="!isLoading"
-                color="boring"
-                :text="generation.keyBlock.hash"
-              />
               <FillDummy v-else />
             </Field>
           </div>
