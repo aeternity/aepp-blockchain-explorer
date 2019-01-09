@@ -51,7 +51,8 @@ import LatestGeneration from '../../partials/latestGeneration/latestGeneration'
 import RecentGenerations from '../../partials/recentGenerations/recentGenerations'
 
 const blockHeightRegex = RegExp('^[0-9]+$')
-const blockHashRegex = RegExp('^[km]h_[1-9A-HJ-NP-Za-km-z]{48,50}$')
+const keyBlockHashRegex = RegExp('^kh_[1-9A-HJ-NP-Za-km-z]{48,50}$')
+const microBlockHashRegex = RegExp('^mh_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const accountPublicKeyRegex = RegExp('^ak_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const transactionHashRegex = RegExp('^th_[1-9A-HJ-NP-Za-km-z]{48,50}$')
 const nameRegex = RegExp('^[a-zA-Z]+$')
@@ -112,8 +113,11 @@ export default {
       if (blockHeightRegex.test(this.searchString) && (this.searchString <= this.height)) {
         endpoint = 'generation'
         type = 'height'
-      } else if (blockHashRegex.test(this.searchString)) {
+      } else if (keyBlockHashRegex.test(this.searchString)) {
         endpoint = 'generation'
+        type = 'blocks/getGenerationFromHash'
+      } else if (microBlockHashRegex.test(this.searchString)) {
+        endpoint = 'block'
         type = 'blocks/getBlockFromHash'
       } else if (transactionHashRegex.test(this.searchString)) {
         endpoint = 'tx'

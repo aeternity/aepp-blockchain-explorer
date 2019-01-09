@@ -131,9 +131,14 @@ main .generation-screen .generation-main {
         width: 150px;
         @include only-phone {
           width: 80px;
-          @include font-size(xxs);
+          @include font-size(s);
+        }
+
+        /deep/ .label {
+          padding:  0;
         }
       }
+
     }
     .detail-block-info .field {
       margin-bottom:15px;

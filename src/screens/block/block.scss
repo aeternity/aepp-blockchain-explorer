@@ -7,6 +7,7 @@
   .block-header {
     background-color:$aubergin;
     color:$white;
+    padding-bottom: 80px;
   }
   .block-transactions,
   .block-micro-detailed,
@@ -131,6 +132,6 @@
     background:white;
   }
   .transactions {
-    overflow-x: auto;
+    margin-top: -50px;
   }
 }
