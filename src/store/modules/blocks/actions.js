@@ -40,7 +40,7 @@ export default wrapActionsWithResolvedEpoch({
     const generation = await epoch.api.getGenerationByHash(hash)
     generation.numTransactions = 0
     const height = generation.keyBlock.height
-    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + '/middleware/transactions/interval/' + height + '/' + height)
+    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = (await resp.json())['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
@@ -88,7 +88,7 @@ export default wrapActionsWithResolvedEpoch({
       return
     }
     const generation = await epoch.api.getGenerationByHeight(height)
-    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + '/middleware/transactions/interval/' + height + '/' + height)
+    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = (await resp.json())['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
