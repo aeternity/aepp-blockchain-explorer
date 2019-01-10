@@ -51,9 +51,17 @@
           />
         </Field>
         <Field name="Genesis Key Block Hash">
-          <div v-if="!isLoading">
+          <RouterLink
+            v-if="!isLoading"
+            :to="`/generation/${nodeStatus.version.genesisKeyBlockHash}`"
+          >
             {{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}
-          </div>
+          </RouterLink>
+          <ViewAndCopy
+            v-if="!isLoading"
+            color="boring"
+            :text="nodeStatus.version.genesisKeyBlockHash"
+          />
           <FillDummy
             v-else
             color="grey"
@@ -90,18 +98,29 @@
       <h2>Top</h2>
       <div class="container">
         <Field name="Height">
-          <div v-if="!isLoading">
+          <RouterLink
+            v-if="!isLoading"
+            :to="`/generation/${nodeStatus.top.keyBlock.height}`"
+          >
             {{ nodeStatus.top.keyBlock.height }}
-          </div>
+          </RouterLink>
           <FillDummy
             v-else
             color="grey"
           />
         </Field>
         <Field name="KeyBlock Hash">
-          <div v-if="!isLoading">
+          <RouterLink
+            v-if="!isLoading"
+            :to="`/generation/${nodeStatus.top.keyBlock.hash}`"
+          >
             {{ nodeStatus.top.keyBlock.hash | startAndEnd }}
-          </div>
+          </RouterLink>
+          <ViewAndCopy
+            v-if="!isLoading"
+            color="boring"
+            :text="nodeStatus.top.keyBlock.hash"
+          />
           <FillDummy
             v-else
             color="grey"
@@ -117,18 +136,34 @@
           />
         </Field>
         <Field name="Beneficiary">
-          <div v-if="!isLoading">
+          <RouterLink
+            v-if="!isLoading"
+            :to="`/account/${nodeStatus.top.keyBlock.beneficiary}`"
+          >
             {{ nodeStatus.top.keyBlock.beneficiary | startAndEnd }}
-          </div>
+          </RouterLink>
+          <ViewAndCopy
+            v-if="!isLoading"
+            color="boring"
+            :text="nodeStatus.top.keyBlock.beneficiary"
+          />
           <FillDummy
             v-else
             color="grey"
           />
         </Field>
         <Field name="Miner">
-          <div v-if="!isLoading">
+          <RouterLink
+            v-if="!isLoading"
+            :to="`/account/${nodeStatus.top.keyBlock.miner}`"
+          >
             {{ nodeStatus.top.keyBlock.miner | startAndEnd }}
-          </div>
+          </RouterLink>
+          <ViewAndCopy
+            v-if="!isLoading"
+            color="boring"
+            :text="nodeStatus.top.keyBlock.miner"
+          />
           <FillDummy
             v-else
             color="grey"
@@ -201,12 +236,14 @@ import pollAction from '../../mixins/pollAction'
 import FillDummy from '../../components/fillDummy'
 import ObjView from '../../components/objView'
 import Field from '../../components/field'
+import ViewAndCopy from '../../components/viewAndCopy.vue'
 
 export default {
   components: {
     FillDummy,
     ObjView,
-    Field
+    Field,
+    ViewAndCopy
   },
   mixins: [pollAction('getNodeStatus')],
   data: function () {
