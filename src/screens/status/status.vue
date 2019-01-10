@@ -13,43 +13,156 @@
                            />
       </p>
       <h2>Node and Peers</h2>
-      <div class="table-wrapper">
-        <table>
-          <tr>
-            <th>address</th>
-            <th>top.height</th>
-            <th>top.hash</th>
-            <th>top.time</th>
-            <th>version.revision</th>
-            <th>version.genesis_KeyBlock_hash</th>
-          </tr>
-          <tr v-if="!isLoading">
-            <td><strong>{{ node }}</strong></td>
-            <td>{{ nodeStatus.top.keyBlock.height }}</td>
-            <td>{{ nodeStatus.top.keyBlock.hash | startAndEnd }}</td>
-            <td>{{ nodeStatus.top.keyBlock.time }}</td>
-            <td>{{ nodeStatus.version.nodeRevision | startAndEnd }}</td>
-            <td>{{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}</td>
-          </tr>
-          <tr v-else>
-            <td
-              v-for="i in 6"
-              :key="i"
-            >
-              <FillDummy color="grey" />
-            </td>
-          </tr>
-        </table>
+      <div class="container">
+        <Field name="Difficulty">
+          <div v-if="!isLoading">
+            {{ nodeStatus.version.difficulty }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Peer Count">
+          <div v-if="!isLoading">
+            {{ nodeStatus.version.peerCount }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Network ID">
+          <div v-if="!isLoading">
+            {{ nodeStatus.version.networkId }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Pending Transactions">
+          <div v-if="!isLoading">
+            {{ nodeStatus.version.pendingTransactionsCount }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Genesis Key Block Hash">
+          <div v-if="!isLoading">
+            {{ nodeStatus.version.genesisKeyBlockHash | startAndEnd }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Version NodeRevision">
+          <div v-if="!isLoading">
+            {{ nodeStatus.version.nodeRevision | startAndEnd }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Listening">
+          <div v-if="!isLoading">
+            {{ nodeStatus.version.listening }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Syncing">
+          <div v-if="!isLoading">
+            {{ nodeStatus.version.syncing }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
       </div>
-      <h1>Detail</h1>
-      <h2 v-if="!isLoading">
-        {{ node }}
-      </h2>
-      <FillDummy
-        v-else
-        color="grey"
-        size="big"
-      />
+      <h2>Top</h2>
+      <div class="container">
+        <Field name="Height">
+          <div v-if="!isLoading">
+            {{ nodeStatus.top.keyBlock.height }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="KeyBlock Hash">
+          <div v-if="!isLoading">
+            {{ nodeStatus.top.keyBlock.hash | startAndEnd }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="KeyBlock Age">
+          <div v-if="!isLoading">
+            {{ nodeStatus.top.keyBlock.time | humanDate }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Beneficiary">
+          <div v-if="!isLoading">
+            {{ nodeStatus.top.keyBlock.beneficiary | startAndEnd }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Miner">
+          <div v-if="!isLoading">
+            {{ nodeStatus.top.keyBlock.miner | startAndEnd }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="Nonce">
+          <div v-if="!isLoading">
+            {{ nodeStatus.top.keyBlock.nonce }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="State Hash">
+          <div v-if="!isLoading">
+            {{ nodeStatus.top.keyBlock.stateHash | startAndEnd }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+        <Field name="KeyBlock Age">
+          <div v-if="!isLoading">
+            {{ nodeStatus.top.keyBlock.time | humanDate }}
+          </div>
+          <FillDummy
+            v-else
+            color="grey"
+          />
+        </Field>
+      </div>
+      <h1>Raw Data</h1>
       <h3>version</h3>
       <ObjView
         v-if="!isLoading"
@@ -87,11 +200,13 @@ import { mapState } from 'vuex'
 import pollAction from '../../mixins/pollAction'
 import FillDummy from '../../components/fillDummy'
 import ObjView from '../../components/objView'
+import Field from '../../components/field'
 
 export default {
   components: {
     FillDummy,
-    ObjView
+    ObjView,
+    Field
   },
   mixins: [pollAction('getNodeStatus')],
   data: function () {
