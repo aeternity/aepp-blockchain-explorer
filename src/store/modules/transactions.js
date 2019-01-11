@@ -5,8 +5,7 @@ export default {
   namespaced: true,
 
   state: {
-    transactions: {},
-    txByGeneration: {}
+    transactions: {}
   },
 
   mutations: {
@@ -17,16 +16,6 @@ export default {
      */
     setTransaction (state, transaction) {
       Vue.set(state.transactions, transaction.hash, transaction)
-    },
-    batchTx (state, txList) {
-      for (const tx of txList) {
-        if (!state.transactions[tx.hash]) {
-          Vue.set(state.transactions, tx.hash, tx)
-        }
-      }
-    },
-    setTxByGeneration (state, genList) {
-      state.txByGeneration = genList
     }
   },
   actions: wrapActionsWithResolvedEpoch({
@@ -47,19 +36,8 @@ export default {
       return transaction
     },
     async getTxByGeneration ({ state, commit, rootGetters: { epoch } }, { start, end }) {
-      // let txByGeneration = state.txByGeneration
       const listTxRequest = await fetch(`https://mdw.aepps.com/middleware/transactions/interval/${start}/${end}`) // update url, use env
       const listTx = (await listTxRequest.json())
-      // commit('batchTx', listTx.transactions)
-      /* for (const tx of listTx.transactions) {
-        try {
-          txByGeneration[tx.block_height].add(tx.hash)
-        } catch (error) {
-          txByGeneration[tx.block_height] = new Set()
-          txByGeneration[tx.block_height].add(tx.hash)
-        }
-      } */
-      // commit('setTxByGeneration', txByGeneration)
       return listTx.transactions
     }
   })
