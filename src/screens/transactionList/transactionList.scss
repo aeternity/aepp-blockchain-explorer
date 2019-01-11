@@ -1,3 +1,11 @@
+@import '../../style/mixins';
+
 .transactions {
- padding-top: 5em;
+    overflow: auto;
+}
+
+.tx-list{
+    >.inner {
+      @include content-max-width;
+    }
 }

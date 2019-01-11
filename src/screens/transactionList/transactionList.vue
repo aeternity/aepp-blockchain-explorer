@@ -1,10 +1,14 @@
 <template>
-  <div class="transactions">
-    <Transaction
-      v-for="t in transactions"
-      :key="t.hash"
-      :transaction="t"
-    />
+  <div class="tx-list screen">
+    <div class="inner">
+      <div class="transactions">
+        <Transaction
+          v-for="t in transactions"
+          :key="t.hash"
+          :transaction="t"
+        />
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -22,17 +26,16 @@ export default {
       transactions: []
     }
   },
-  computed: {
-  },
   beforeMount: async function () {
-  },
-  mounted: async function () {
     const { start, end } = this.$route.params
-    console.log(start, end)
-    this.transactions = await this.$store.dispatch('transactions/getTxByGeneration', { start: start, end: end })
-    console.log(this.transactions)
-  },
-  methods: {
+    try {
+      if (Number(start) > Number(end)) {
+        throw new Error('Invalid start and end generation')
+      }
+      this.transactions = await this.$store.dispatch('transactions/getTxByGeneration', { start, end })
+    } catch (error) {
+      this.$router.push({ path: '/' })
+    }
   }
 }
 </script>
