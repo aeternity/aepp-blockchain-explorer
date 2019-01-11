@@ -25,9 +25,8 @@
             Generations
           </RouterLink>
           <RouterLink
-            v-if="false"
             class="link"
-            to="/tx"
+            :to="{ path: '/transactions/'+ (height - 50) + '/' + height }"
           >
             Transactions
           </RouterLink>
@@ -119,6 +118,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import AeFooter from './partials/footer/footer'
 import SocialLinks from './partials/socialLinks'
 import NetworkName from './components/networkName'
@@ -139,7 +139,9 @@ export default {
         'GenerationList': 'Generations',
         'Transaction': 'Transactions'
       })[this.$route.name]
-    }
+    },
+    ...mapState('blocks', {
+      height: ({ height }) => height })
   },
   methods: {
     toggleMenu: function () {
