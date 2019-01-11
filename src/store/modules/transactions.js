@@ -47,18 +47,19 @@ export default {
       return transaction
     },
     async getTxByGeneration ({ state, commit, rootGetters: { epoch } }, { start, end }) {
-      const listTxRequest = await fetch(`http://explorer.newby.org:8000/middleware/transactions/interval/${start}/${end}`) // update url, use env
-      let txByGeneration = state.txByGeneration
+      // let txByGeneration = state.txByGeneration
+      const listTxRequest = await fetch(`https://mdw.aepps.com/middleware/transactions/interval/${start}/${end}`) // update url, use env
       const listTx = (await listTxRequest.json())
-      commit('batchTx', listTx.transactions)
-      for (const tx of listTx.transactions) {
+      // commit('batchTx', listTx.transactions)
+      /* for (const tx of listTx.transactions) {
         try {
           txByGeneration[tx.block_height].add(tx.hash)
         } catch (error) {
           txByGeneration[tx.block_height] = new Set()
+          txByGeneration[tx.block_height].add(tx.hash)
         }
-      }
-      commit('setTxByGeneration', txByGeneration)
+      } */
+      // commit('setTxByGeneration', txByGeneration)
       return listTx.transactions
     }
   })
