@@ -182,15 +182,11 @@
           <div v-if="!isLoading">
             {{ nodeStatus.top.keyBlock.stateHash | startAndEnd }}
           </div>
-          <FillDummy
-            v-else
-            color="grey"
+          <ViewAndCopy
+            v-if="!isLoading"
+            color="boring"
+            :text="nodeStatus.top.keyBlock.stateHash"
           />
-        </Field>
-        <Field name="KeyBlock Age">
-          <div v-if="!isLoading">
-            {{ nodeStatus.top.keyBlock.time | humanDate }}
-          </div>
           <FillDummy
             v-else
             color="grey"
