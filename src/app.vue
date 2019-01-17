@@ -26,7 +26,7 @@
           </RouterLink>
           <RouterLink
             class="link"
-            :to="{ path: '/transactions/'+ (height - 50) + '/' + height }"
+            :to="{ path: '/transactions/'+ getStartGen() + '/' + height }"
           >
             Transactions
           </RouterLink>
@@ -146,6 +146,9 @@ export default {
   methods: {
     toggleMenu: function () {
       this.isOpened = !this.isOpened
+    },
+    getStartGen: function () {
+      return this.height === 0 ? this.height : this.height - 50
     }
   }
 }
