@@ -70,19 +70,14 @@ const store = new Vuex.Store({
      * @return {Object}
      */
     async getNodeStatus ({ rootGetters: { epoch }, commit }) {
-      let connected = false
       try {
         const [top, version] = await Promise.all([
           epoch.api.getCurrentGeneration(),
           epoch.api.getStatus()
         ])
-        connected = true
-        commit('setNodeStatus', { connected, top, version })
-
-        return { connected, top, version }
+        commit('setNodeStatus', { connected: true, top, version })
+        return { connected: true, top, version }
       } catch (e) {
-        console.log(e)
-        commit('setNodeStatus', { connected })
         commit('catchError', 'Error', { root: true })
       }
     }

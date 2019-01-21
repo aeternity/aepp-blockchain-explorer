@@ -153,6 +153,7 @@ export default wrapActionsWithResolvedEpoch({
    * @return {*}
    */
   async getLatestGenerations ({ state, rootGetters: { epoch }, commit, dispatch }, size) {
+    let connected = false
     try {
       await dispatch('height')
       const generations = await Promise.all(
@@ -162,9 +163,12 @@ export default wrapActionsWithResolvedEpoch({
       if (!generations.length) {
         return state.generations
       }
+      connected = true
       return generations
     } catch (e) {
       commit('catchError', 'Error', { root: true })
+    } finally {
+      this.commit('setNodeStatus', { connected }, { root: true })
     }
   }
 })
