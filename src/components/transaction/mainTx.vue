@@ -16,6 +16,46 @@
         </RouterLink>
       </Field>
       <Field
+        v-if="transaction.tx.responderId"
+        name="Responder Id"
+      >
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.responderId">
+          <NamedAddress :address="transaction.tx.responderId" />
+        </RouterLink>
+      </Field>
+      <Field
+        v-if="transaction.tx.channelId"
+        name="Channel Id"
+      >
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.channelId">
+          <NamedAddress :address="transaction.tx.channelId" />
+        </RouterLink>
+      </Field>
+      <Field
+        v-if="transaction.tx.fromId"
+        name="From Id"
+      >
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.fromId">
+          <NamedAddress :address="transaction.tx.fromId" />
+        </RouterLink>
+      </Field>
+      <Field
+        v-if="transaction.tx.toId"
+        name="To Id"
+      >
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.toId">
+          <NamedAddress :address="transaction.tx.toId" />
+        </RouterLink>
+      </Field>
+      <Field
+        v-if="transaction.tx.initiatorId"
+        name="Initiator Id"
+      >
+        <RouterLink :to="&quot;/account/&quot; + transaction.tx.initiatorId">
+          <NamedAddress :address="transaction.tx.initiatorId" />
+        </RouterLink>
+      </Field>
+      <Field
         v-if="transaction.tx.accountId"
         name="account"
       >
