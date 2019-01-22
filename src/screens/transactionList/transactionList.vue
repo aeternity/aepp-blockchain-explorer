@@ -40,11 +40,25 @@
         v-if="loaded"
         class="transactions"
       >
+        <div class="title">
+          Total Transactions: {{ totalTx }}
+        </div>
         <Transaction
-          v-for="t in transactions"
+          v-for="t in displayTx"
           :key="t.hash"
-          :transaction="t"
+          :transaction="camelcaseKeysDeep(t)"
         />
+      </div>
+      <div
+        v-if="isLoadingMore"
+        class="center"
+      >
+        <AeButton
+          type="dramatic"
+          @click="extractTx"
+        >
+          load more
+        </AeButton>
       </div>
     </div>
   </div>
@@ -52,6 +66,7 @@
 <script>
 import { AeLoader, AeInput, AeButton, AeLabel } from '@aeternity/aepp-components'
 import Transaction from '../../components/transaction/transaction'
+import camelcaseKeysDeep from 'camelcase-keys-deep'
 
 export default {
   name: 'TransactionList',
@@ -67,7 +82,10 @@ export default {
       startGeneration: 0,
       endGeneration: 0,
       transactions: [],
-      loaded: false
+      loaded: false,
+      totalTx: 0,
+      isLoadingMore: true,
+      displayTx: []
     }
   },
   beforeMount: async function () {
@@ -89,8 +107,13 @@ export default {
     },
     fetchTx: async function () {
       try {
+        this.transactions = []
+        this.displayTx = []
+        this.isLoadingMore = true
         this.loaded = false
         this.transactions = await this.$store.dispatch('transactions/getTxByGeneration', { start: this.startGeneration, end: this.endGeneration })
+        this.totalTx = this.transactions.length
+        this.extractTx()
         this.loaded = true
       } catch (error) {
       }
@@ -99,7 +122,21 @@ export default {
       if (Number(this.startGeneration) > Number(this.endGenerationd)) {
         throw new Error('Invalid start and end generation')
       }
-    }
+    },
+    extractTx: function (initial = 20) {
+      if (this.transactions.length === 0) {
+        this.transactions = []
+        this.isLoadingMore = false
+      } else if (this.transactions.length < 20) {
+        this.displayTx = [...this.displayTx, ...this.transactions.slice(0, 20)]
+        this.transactions = []
+        this.isLoadingMore = false
+      } else {
+        this.displayTx = [...this.displayTx, ...this.transactions.slice(0, 20)]
+        this.transactions = this.transactions.slice(20)
+      }
+    },
+    camelcaseKeysDeep: camelcaseKeysDeep
   }
 }
 </script>
