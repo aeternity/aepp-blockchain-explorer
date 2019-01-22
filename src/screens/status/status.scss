@@ -8,11 +8,8 @@
   .objView {
     width: 95%;
   }
-}
-
-.table-wrapper {
-  overflow-x: auto;
-  table {
-    width: 100%;
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
 }
