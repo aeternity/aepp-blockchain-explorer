@@ -2,23 +2,21 @@
   <header class="app-header">
     <AppNav>
       <!--<AppNavLink to="generations">-->
-        <!--Generations-->
+      <!--Generations-->
       <!--</AppNavLink>-->
       <!--<AppNavLink to="transactions">-->
-        <!--Transactions-->
+      <!--Transactions-->
       <!--</AppNavLink>-->
     </AppNav>
   </header>
 </template>
 
 <script>
-  import AppNav from '@/_designs/partials/appNav'
-  import AppNavLink from '@/_designs/components/appNavLink'
+import AppNav from '@/_designs/partials/appNav'
 export default {
   name: 'AppHeader',
   components: {
-    AppNav,
-    AppNavLink
+    AppNav
   }
 }
 </script>

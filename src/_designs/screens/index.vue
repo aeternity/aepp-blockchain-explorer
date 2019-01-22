@@ -3,8 +3,7 @@
     id="blockchain"
     class="app"
   >
-    <AppHeader>
-    </AppHeader>
+    <AppHeader />
     <AppView>
       <RouterView />
     </AppView>

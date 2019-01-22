@@ -30,9 +30,9 @@
                 <AppDefinition
                   title="October 11 2018"
                 >
-                  <span face="mono-s">
+                  <AeText face="mono-s">
                     10:59:34 AM +UTC
-                  </span>
+                  </AeText>
                 </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>
@@ -61,18 +61,18 @@
                 <AppDefinition
                   title="Microblocks"
                 >
-                  <span face="mono-s">
+                  <AeText face="mono-s">
                     9
-                  </span>
+                  </AeText>
                 </AppDefinition>
               </AppTableCell>
               <AppTableCell>
                 <AppDefinition
                   title="Transactions"
                 >
-                  <span face="mono-s">
+                  <AeText face="mono-s">
                     1,230
-                  </span>
+                  </AeText>
                 </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>
@@ -83,18 +83,28 @@
                 <AppDefinition
                   title="Total"
                 >
-                  <span face="mono-s">
-                    92,300.10 <abbr class="currency" title="aeternity">AE</abbr>
-                  </span>
+                  <AeText face="mono-s">
+                    92,300.10 <abbr
+                      class="currency"
+                      title="aeternity"
+                    >
+                      AE
+                    </abbr>
+                  </AeText>
                 </AppDefinition>
               </AppTableCell>
               <AppTableCell>
                 <AppDefinition
                   title="Reward"
                 >
-                  <span face="mono-s">
-                    987.00 <abbr class="currency" title="aeternity">AE</abbr>
-                  </span>
+                  <AeText face="mono-s">
+                    987.00 <abbr
+                      class="currency"
+                      title="aeternity"
+                    >
+                      AE
+                    </abbr>
+                  </AeText>
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -119,9 +129,9 @@
                 type="list"
                 title="Difficulty"
               >
-                <span face="mono-s">
+                <AeText face="mono-s">
                   87472467200
-                </span>
+                </AeText>
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -131,9 +141,9 @@
                 type="list"
                 title="Target"
               >
-                <span face="mono-s">
+                <AeText face="mono-s">
                   536930672
-                </span>
+                </AeText>
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -155,9 +165,9 @@
                 type="list"
                 title="Nonce"
               >
-                <span face="mono-s">
+                <AeText face="mono-s">
                   202
-                </span>
+                </AeText>
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -167,9 +177,9 @@
                 type="list"
                 title="Version"
               >
-                <span face="mono-s">
+                <AeText face="mono-s">
                   1
-                </span>
+                </AeText>
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -239,7 +249,7 @@ import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
 
-import { AeAddress, AeIcon, AeIdenticon } from '@aeternity/aepp-components-3'
+import { AeAddress, AeIcon, AeIdenticon, AeText } from '@aeternity/aepp-components-3'
 export default {
   name: 'AppGenerationDetails',
   components: {
@@ -253,7 +263,8 @@ export default {
     AeAddress,
     AeIdenticon,
     AeIcon,
-    AppPanel
+    AppPanel,
+    AeText
   }
 }
 </script>
