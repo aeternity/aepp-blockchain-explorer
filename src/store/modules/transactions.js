@@ -18,7 +18,6 @@ export default {
       Vue.set(state.transactions, transaction.hash, transaction)
     }
   },
-
   actions: wrapActionsWithResolvedEpoch({
     /**
      *
@@ -32,9 +31,15 @@ export default {
       if (state.transactions[hash]) return state.transactions[hash]
 
       const transaction = await epoch.tx(hash, true)
+      console.log(transaction)
       commit('setTransaction', transaction)
 
       return transaction
+    },
+    async getTxByGeneration ({ state, commit, rootGetters: { epoch } }, { start, end }) {
+      const listTxRequest = await fetch(`${process.env.VUE_APP_EPOCH_URL}/middleware/transactions/interval/${start}/${end}`)
+      const listTx = (await listTxRequest.json())
+      return listTx.transactions
     }
   })
 }
