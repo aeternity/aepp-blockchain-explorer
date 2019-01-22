@@ -123,11 +123,11 @@ export default {
         throw new Error('Invalid start and end generation')
       }
     },
-    extractTx: function (initial = 20) {
+    extractTx: function () {
       if (this.transactions.length === 0) {
         this.transactions = []
         this.isLoadingMore = false
-      } else if (this.transactions.length < 20) {
+      } else if (this.transactions.length <= 20) {
         this.displayTx = [...this.displayTx, ...this.transactions.slice(0, 20)]
         this.transactions = []
         this.isLoadingMore = false
