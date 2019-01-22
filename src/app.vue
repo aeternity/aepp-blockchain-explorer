@@ -26,7 +26,7 @@
           </RouterLink>
           <RouterLink
             class="link"
-            :to="{ path: '/transactions/'+ getStartGen() + '/' + height }"
+            :to="{ path: '/transactions/'+ startGen + '/' + height }"
           >
             Transactions
           </RouterLink>
@@ -140,15 +140,14 @@ export default {
         'Transaction': 'Transactions'
       })[this.$route.name]
     },
-    ...mapState('blocks', {
-      height: ({ height }) => height })
+    ...mapState('blocks', ['height']),
+    startGen: function () {
+      return this.height === 0 ? this.height : this.height - 50
+    }
   },
   methods: {
     toggleMenu: function () {
       this.isOpened = !this.isOpened
-    },
-    getStartGen: function () {
-      return this.height === 0 ? this.height : this.height - 50
     }
   }
 }
