@@ -52,7 +52,7 @@ import AppTableHeader from '@/_designs/components/appTableHeader'
 import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
-import LabelType from '@/_designs/components/label'
+import LabelType from '@/_designs/components/labelType'
 
 import {
   AeText
