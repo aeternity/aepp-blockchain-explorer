@@ -27,7 +27,7 @@ export default {
     @media (min-width: 450px) {
       width: 50%;
     }
-    &:not(:first-child){
+    &:not(:first-child) {
       @media (min-width: 450px) {
         border-left: 2px solid $color-neutral-positive-2;
       }
