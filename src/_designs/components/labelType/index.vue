@@ -1,9 +1,7 @@
 <template>
   <span
     class="label-wrapper"
-    :class="{
-      [fill]: Boolean(fill)
-    }"
+    :class="{[fill]: Boolean(fill)}"
   >
     {{ title }}
   </span>
