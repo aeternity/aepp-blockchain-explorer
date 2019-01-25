@@ -57,6 +57,7 @@ export default {
   }
   .app-definition-content {
     color: #76818C;
+    word-break: break-all;
     @extend %face-tracked-base;
   }
   .app-definition.block {
@@ -84,5 +85,4 @@ export default {
       }
     }
   }
-
 </style>
