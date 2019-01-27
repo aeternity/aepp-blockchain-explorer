@@ -22,12 +22,12 @@ export default {
   .app-table-cell {
     display: flex;
     flex-direction: column;
-    //padding: .8rem;
+    height: 100%;
     width: 100%;
     @media (min-width: 450px) {
-    width: 50%;
+      width: 50%;
     }
-    &:not(:first-child){
+    &:not(:first-child) {
       @media (min-width: 450px) {
         border-left: 2px solid $color-neutral-positive-2;
       }
