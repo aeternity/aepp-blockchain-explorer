@@ -58,7 +58,7 @@ export default {
   .app-definition-content {
     color: #76818C;
     word-break: break-all;
-    @extend %face-tracked-base;
+    @extend %face-mono-s;
   }
   .app-definition.block {
     padding: .6rem;
