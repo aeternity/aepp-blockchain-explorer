@@ -49,14 +49,14 @@
       </Field>
     </header>
     <h2 v-if="account">
-      Transactions({{ account.transactions.length }})
+      Total transactions: {{ account.numTransactions }}
     </h2>
     <div
       v-if="account"
       class="transactions"
     >
       <Transaction
-        v-for="t in account.transactions.slice(0, numTransactions)"
+        v-for="t in transactions"
         :key="t.hash"
         :transaction="t"
       />
@@ -125,22 +125,30 @@ export default {
   },
   data: function () {
     return {
-      numTransactions: 10
+      numTransactions: 10,
+      increaseBy: 10
     }
   },
   computed: {
     ...mapState('accounts', {
       account (state) {
         return state.accounts[this.address]
+      },
+      transactions (state) {
+        return state.accountTransactions[this.address]
       }
     }),
     needMore () {
-      return this.account ? this.account.transactions.length > this.numTransactions : false
+      return this.account ? this.account.numTransactions > this.numTransactions : false
     }
   },
+  mounted () {
+    this.$store.dispatch('accounts/getTransactions', { 'address': this.address, 'transactionsToGet': this.numTransactions, 'increaseBy': this.increaseBy })
+  },
   methods: {
-    loadMore () {
-      this.numTransactions = Math.min(this.numTransactions + 10, this.account.transactions.length)
+    async loadMore () {
+      this.numTransactions = Math.min(this.numTransactions + this.increaseBy, this.account.numTransactions)
+      await this.$store.dispatch('accounts/getTransactions', { 'address': this.address, 'transactionsToGet': this.numTransactions, 'increaseBy': this.increaseBy })
     }
   }
 }
