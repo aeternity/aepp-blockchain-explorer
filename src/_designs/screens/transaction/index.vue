@@ -10,7 +10,6 @@
                 <div class="app-block-height">
                   <LabelType
                     title="Block Height"
-                    fill="black"
                   />
                   <span class="app-block-height-num">
                     6606081

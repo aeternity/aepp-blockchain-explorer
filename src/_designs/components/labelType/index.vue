@@ -31,10 +31,11 @@ export default {
   @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   .label-wrapper {
     display: table-caption;
-    padding: 5px;
+    padding: 8px 8px 8px 11px;
     text-transform: uppercase;
     color: white;
     border-radius: 0 5px 5px 0;
+    font-weight: bold;
   }
   .label-wrapper.red {
     background-color: red;
@@ -46,6 +47,6 @@ export default {
     background-color: black;
   }
   .label-wrapper.grey {
-    background-color: grey;
+    background-color: $color-neutral-negative-3;
   }
 </style>
