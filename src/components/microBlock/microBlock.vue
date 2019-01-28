@@ -3,7 +3,12 @@
     <article class="block-transactions">
       <header class="block-transactions__header">
         <div class="grid">
+          <span
+            v-if="microBlockNumber < 0"
+            class="block-number"
+          />
           <Field
+            v-if="microBlockNumber >= 0"
             class="block-number field"
             name="Micro Block"
           >
@@ -95,7 +100,8 @@ export default {
     },
     microBlockNumber: {
       type: Number,
-      required: true
+      required: false,
+      default: -1
     }
   },
   data: function () {

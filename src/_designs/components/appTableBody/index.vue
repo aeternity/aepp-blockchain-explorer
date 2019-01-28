@@ -18,7 +18,6 @@ export default {
   }
   .app-table-body > .app-table-row {
     width: 50%;
-    //border-bottom: none;
     margin-top: 0;
     padding-top: 0;
     &:first-child {

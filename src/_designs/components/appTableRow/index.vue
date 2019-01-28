@@ -27,7 +27,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    align-items: top;
+    align-items: start;
     width: 100%;
     &:not(:last-child) {
       border-bottom: 2px solid $color-neutral-positive-2;
@@ -39,7 +39,6 @@ export default {
     padding-top: .6rem;
     margin-bottom: 0;
     border-left: none;
-    //border-top: 2px solid $color-neutral-positive-2;
     @media (min-width: 450px) {
       width: 50%;
       padding-top: 0;

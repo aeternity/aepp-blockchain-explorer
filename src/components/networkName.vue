@@ -23,11 +23,9 @@
 
 <script>
 import { AeLoader } from '@aeternity/aepp-components'
-import pollAction from '../mixins/pollAction'
 
 export default {
   components: { AeLoader },
-  mixins: [pollAction('getNodeStatus')],
   data () {
     return {
       VUE_APP_SHOW_NETWORK_STATS: process.env.VUE_APP_SHOW_NETWORK_STATS
