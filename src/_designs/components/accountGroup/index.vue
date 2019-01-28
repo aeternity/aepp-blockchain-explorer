@@ -16,12 +16,12 @@ export default {
           position: relative;
           &:after {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: .5rem;
+            height: .5rem;
             background-image: url('./triangle.svg');
             background-repeat: no-repeat;
             position: absolute;
-            bottom: -6px;
+            bottom: -.4rem;
             left: 1.35rem;
           }
         }
