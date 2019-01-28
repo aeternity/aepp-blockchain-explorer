@@ -21,6 +21,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+ .app-nav-link {
+   color: #76818C;
+   line-height: 1.9em;
+ }
 </style>

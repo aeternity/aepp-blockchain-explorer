@@ -127,7 +127,6 @@
               >
                 <AeAddress
                   value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
-                  length="flat"
                   face="mono-s"
                 />
               </AppDefinition>
