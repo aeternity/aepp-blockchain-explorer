@@ -37,7 +37,7 @@ export default {
       return transaction
     },
     async getTxByGeneration ({ state, commit, rootGetters: { epoch } }, { start, end }) {
-      const listTxRequest = await fetch(`${process.env.VUE_APP_EPOCH_URL}/middleware/transactions/interval/${start}/${end}`)
+      const listTxRequest = await fetch(`${process.env.VUE_APP_EPOCH_URL}middleware/transactions/interval/${start}/${end}`)
       const listTx = (await listTxRequest.json())
       return listTx.transactions
     }
