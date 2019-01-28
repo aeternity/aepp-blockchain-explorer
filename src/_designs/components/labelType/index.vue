@@ -31,7 +31,7 @@ export default {
   @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   .label-wrapper {
     display: table-caption;
-    padding: 8px 8px 8px 11px;
+    padding: 0.6rem;
     text-transform: uppercase;
     color: white;
     border-radius: 0 5px 5px 0;
