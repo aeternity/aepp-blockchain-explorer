@@ -47,7 +47,7 @@
 <script>
 import AppTable from '@/_designs/components/appTable'
 import AppTableRow from '@/_designs/components/appTableRow'
-import AppTableCell from '@/_designs/components/appTableRowCell'
+import AppTableCell from '@/_designs/components/appTableCell'
 import AppTableHeader from '@/_designs/components/appTableHeader'
 import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
