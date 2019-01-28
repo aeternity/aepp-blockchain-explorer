@@ -28,17 +28,40 @@
             </AppTableRowColumn>
             <AppTableRowColumn width="small">
               <AppTableCell>
-                <AppDefinition
-                  title="October 11 2018"
-                >
-                  <AeText face="mono-s">
-                    10:59:34 AM +UTC
-                  </AeText>
-                </AppDefinition>
+                <TimeSince
+                  :time="1548668877573"
+                  is-header
+                />
               </AppTableCell>
             </AppTableRowColumn>
           </AppTableRow>
         </AppTableHeader>
+        <AppTableBody>
+          <AppTableRow extend>
+            <AppTableCell extend>
+              <AppDefinition
+                type="list"
+                title="Hash"
+              >
+                <span>
+                  kh_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
+                </span>
+              </AppDefinition>
+            </AppTableCell>
+          </AppTableRow>
+          <AppTableRow extend>
+            <AppTableCell extend>
+              <AppDefinition
+                type="list"
+                title="Data"
+              >
+                <TimeSince
+                  :time="1548668877573"
+                />
+              </AppDefinition>
+            </AppTableCell>
+          </AppTableRow>
+        </AppTableBody>
       </AppTable>
     </AppPanel>
   </div>
@@ -53,10 +76,8 @@ import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
 import LabelType from '@/_designs/components/labelType'
-
-import {
-  AeText
-} from '@aeternity/aepp-components-3'
+import TimeSince from '@/_designs/components/timeSince'
+import AppTableBody from '@/_designs/components/appTableBody'
 
 export default {
   name: 'AppTransaction',
@@ -68,8 +89,9 @@ export default {
     AppTableRowColumn,
     AppDefinition,
     AppPanel,
-    AeText,
-    LabelType
+    LabelType,
+    TimeSince,
+    AppTableBody
   }
 }
 </script>
