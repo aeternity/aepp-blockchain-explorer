@@ -8,14 +8,17 @@
             <AppTableRowColumn width="large">
               <AppTableCell extend>
                 <div class="app-block-height">
-                  <span class="app-block-height-label">
-                    Block Height
-                  </span>
+                  <div>
+                    <LabelType
+                      title="Block Height"
+                      fill="black"
+                    />
+                  </div>
                   <span class="app-block-height-num">
                     6606081
                   </span>
+                  <Confirmations :value="confirmations" />
                 </div>
-                <Confirmations />
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn width="small">
@@ -236,20 +239,22 @@
 </template>
 
 <script>
-  import AppTable from '@/_designs/components/appTable'
-  import AppTableRow from '@/_designs/components/appTableRow'
-  import AppTableCell from '@/_designs/components/appTableCell'
-  import AppTableHeader from '@/_designs/components/appTableHeader'
-  import AppTableBody from '@/_designs/components/appTableBody'
-  import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
-  import AppDefinition from '@/_designs/components/appDefinition'
-  import AppPanel from '@/_designs/components/appPanel'
-  import FormatPow from '@/_designs/components/formatPow'
+import AppTable from '@/_designs/components/appTable'
+import AppTableRow from '@/_designs/components/appTableRow'
+import AppTableCell from '@/_designs/components/appTableCell'
+import AppTableHeader from '@/_designs/components/appTableHeader'
+import AppTableBody from '@/_designs/components/appTableBody'
+import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
+import AppDefinition from '@/_designs/components/appDefinition'
+import AppPanel from '@/_designs/components/appPanel'
+import FormatPow from '@/_designs/components/formatPow'
+import LabelType from '@/_designs/components/labelType'
 
-  import { AeText } from '@aeternity/aepp-components-3'
-  import FormatAddress from '../../components/formatAddress/formatAddress'
-  import Confirmations from '../../components/confirmations'
-  // import AccountGroup from '../../components/accountGroup'
+import { AeText } from '@aeternity/aepp-components-3'
+import FormatAddress from '../../components/formatAddress/formatAddress'
+import Confirmations from '../../components/confirmations'
+
+// import AccountGroup from '../../components/accountGroup'
 // import Account from '../../components/account/index'
 
 const generationData = {
@@ -329,11 +334,13 @@ export default {
     AppDefinition,
     AppPanel,
     AeText,
-    FormatPow
+    FormatPow,
+    LabelType
   },
   data: function () {
     return {
-      data: generationData
+      data: generationData,
+      confirmations: 535
     }
   }
 }
@@ -345,5 +352,23 @@ export default {
     font-size: .7em;
     margin-left: -.5em;
     text-decoration: none;
+  }
+  .app-block-height {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    &-num {
+      margin-left: .6rem;
+      @media (max-width: 449px) {
+        margin-top: .6rem;
+        font-weight: 500;
+      }
+      @media (min-width: 450px) {
+      font-size: 1.7rem;
+    }
+    }
+    &-wrapper {
+      display: flex;
+    }
   }
 </style>
