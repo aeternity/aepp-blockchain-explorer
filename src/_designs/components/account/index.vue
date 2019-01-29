@@ -46,7 +46,6 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-  //test
     .account {
         display: flex;
         justify-content: center;
