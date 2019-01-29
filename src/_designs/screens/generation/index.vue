@@ -40,26 +40,18 @@
           <AppTableRow>
             <AppTableRowColumn width="medium">
               <AppTableCell extend>
-                <!--<AccountGroup>-->
-                <!--<Account-->
-                <!--:value="data.key_block.beneficiary"-->
-                <!--title="Sender"-->
-                <!--icon-->
-                <!--/>-->
-                <!--<Account-->
-                <!--:value="data.key_block.beneficiary"-->
-                <!--title="Recipient"-->
-                <!--icon-->
-                <!--/>-->
-                <!--</AccountGroup>-->
-                <AppDefinition
-                  title="Beneficiary"
-                >
-                  <FormatAddress
+                <AccountGroup>
+                  <Account
                     :value="data.key_block.beneficiary"
-                    length="responsive"
+                    title="Sender"
+                    icon
                   />
-                </AppDefinition>
+                  <Account
+                    :value="data.key_block.beneficiary"
+                    title="Recipient"
+                    icon
+                  />
+                </AccountGroup>
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn>
@@ -254,9 +246,9 @@ import AppPanel from '@/_designs/components/appPanel'
 import FormatPow from '@/_designs/components/formatPow'
 
 import { AeText } from '@aeternity/aepp-components-3'
-import FormatAddress from '../../components/formatAddress/formatAddress'
-// import AccountGroup from '../../components/accountGroup'
-// import Account from '../../components/account/index'
+import FormatAddress from '../../components/formatAddress'
+import AccountGroup from '../../components/accountGroup'
+import Account from '../../components/account/index'
 
 const generationData = {
   'key_block': {
@@ -323,8 +315,8 @@ export default {
   name: 'AppGenerationDetails',
   components: {
     FormatAddress,
-    // Account,
-    // AccountGroup,
+    Account,
+    AccountGroup,
     AppTable,
     AppTableRow,
     AppTableCell,

@@ -14,6 +14,7 @@ export default {
     .account-group {
         & .account:first-child {
           position: relative;
+          margin-bottom: .3rem;
           &:after {
             content: '';
             width: .5rem;
@@ -23,6 +24,10 @@ export default {
             position: absolute;
             bottom: -.4rem;
             left: 1.35rem;
+            @media (max-width: 450px) {
+              left: 1.6rem;
+              bottom: -.2rem;
+            }
           }
         }
     }
