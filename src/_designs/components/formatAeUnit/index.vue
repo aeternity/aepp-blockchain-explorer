@@ -2,8 +2,8 @@
   <span class="format-ae-unit">
     {{ formattedValue }}
     <abbr
+      v-if="unit"
       class="unit"
-      title="aeternity"
     >
       {{ unit }}
     </abbr>
@@ -21,6 +21,7 @@ export default {
       type: String,
       validator: value => [
         'ae',
+        'tx',
         'fee',
         'cost'
       ].includes(value),
@@ -29,7 +30,7 @@ export default {
   },
   computed: {
     formattedValue: function () {
-      if (this.type === 'ae') {
+      if (this.type === 'ae' || 'tx') {
         return this.value.toLocaleString()
       }
       return this.value
@@ -37,6 +38,8 @@ export default {
     unit: function () {
       if (this.type === 'ae') {
         return 'AE'
+      } else if (this.type === 'tx') {
+        return ''
       }
       return 'ATTO'
     }
