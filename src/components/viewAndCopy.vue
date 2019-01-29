@@ -89,7 +89,7 @@ export default {
         textArea.select()
         document.execCommand('copy')
       } catch (err) {
-        console.log('err', err)
+
       }
     }
   }
