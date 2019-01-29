@@ -28,9 +28,9 @@
             </AppTableRowColumn>
             <AppTableRowColumn width="small">
               <AppTableCell>
-                <TimeSince
+                <TimeStamp
                   :time="1548668877573"
-                  is-header
+                  has-title
                 />
               </AppTableCell>
             </AppTableRowColumn>
@@ -55,7 +55,7 @@
                 type="list"
                 title="Data"
               >
-                <TimeSince
+                <TimeStamp
                   :time="1548668877573"
                 />
               </AppDefinition>
@@ -76,7 +76,7 @@ import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
 import LabelType from '@/_designs/components/labelType'
-import TimeSince from '@/_designs/components/timeSince'
+import TimeStamp from '@/_designs/components/timeStamp'
 import AppTableBody from '@/_designs/components/appTableBody'
 
 export default {
@@ -90,7 +90,7 @@ export default {
     AppDefinition,
     AppPanel,
     LabelType,
-    TimeSince,
+    TimeStamp,
     AppTableBody
   }
 }

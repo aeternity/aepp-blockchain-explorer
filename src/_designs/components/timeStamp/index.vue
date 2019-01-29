@@ -1,32 +1,37 @@
 <template>
   <div
-    class="time-wrapper"
-    :class="{ header: isHeader }"
+    class="time-stamp"
+    :class="{ header: hasTitle }"
   >
-    <div
+    <AeText
+      face="mono-s"
       class="time-content"
-      v-html="getData(time)"
+      v-html="date"
     >
-      {{ getData(time) }}
-    </div>
+      {{ date }}
+    </AeText>
   </div>
 </template>
 <script>
+import { AeText } from '@aeternity/aepp-components-3'
 export default {
-  name: 'TimeSince',
+  name: 'TimeStamp',
+  components: {
+    AeText
+  },
   props: {
     time: {
       type: Number,
       required: true
     },
-    isHeader: {
+    hasTitle: {
       type: Boolean,
       default: false
     }
   },
-  methods: {
-    getData (t) {
-      let date = new Date(t).toLocaleString('en-US',
+  computed: {
+    date () {
+      let date = new Date(this.time).toLocaleString('en-US',
         {
           month: 'long',
           day: 'numeric',
@@ -39,18 +44,19 @@ export default {
       let title = date.split(',').slice(0, 2).join('')
       let [, , time] = date.split(',')
       date = date.replace(/,/g, '')
-      return this.isHeader ? `<div class="title">${title}</div> ${time}` : date
+      return this.hasTitle ? `<div class="title">${title}</div> ${time}` : date
     }
   }
 }
 </script>
 <style scoped lang="scss">
   @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
   @import '../../../style/mixins.scss';
-  .time-wrapper {
+  .time-stamp {
     /deep/ .title {
       color: $color-neutral-negative-3;
-      @include font-size(m);
+      @extend %face-sans-base;
     }
 
     .time-content {
