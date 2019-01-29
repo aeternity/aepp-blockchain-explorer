@@ -38,22 +38,28 @@
             </AppTableRowColumn>
           </AppTableRow>
           <AppTableRow>
-            <AppTableRowColumn>
+            <AppTableRowColumn width="medium">
               <AppTableCell extend>
-                <div class="app-definition-account">
-                  <AeIdenticon
-                    address="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
+                <!--<AccountGroup>-->
+                <!--<Account-->
+                <!--:value="data.key_block.beneficiary"-->
+                <!--title="Sender"-->
+                <!--icon-->
+                <!--/>-->
+                <!--<Account-->
+                <!--:value="data.key_block.beneficiary"-->
+                <!--title="Recipient"-->
+                <!--icon-->
+                <!--/>-->
+                <!--</AccountGroup>-->
+                <AppDefinition
+                  title="Beneficiary"
+                >
+                  <FormatAddress
+                    :value="data.key_block.beneficiary"
+                    length="responsive"
                   />
-                  <AppDefinition
-                    title="Beneficiary"
-                  >
-                    <AeAddress
-                      value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
-                      length="short"
-                    />
-                    <AeIcon name="copy" />
-                  </AppDefinition>
-                </div>
+                </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn>
@@ -115,9 +121,10 @@
                 type="list"
                 title="Hash"
               >
-                <span>
-                  kh_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
-                </span>
+                <FormatAddress
+                  :value="data.key_block.hash"
+                  length="full"
+                />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -223,11 +230,7 @@
                 type="list"
                 title="POW"
               >
-                <span>
-                  1877  2156  2740  2933  3223  4184  4388  5679  6076  6368  6397  6542  8218  8653
-                  10525 11377 13894 14969 15654 16121 17697 17741 18383 18420 18833 21641 22692 23027
-                  24838 25814 25933 26069 26464 26903 26944 28659 29277 30479 30642 30865 31523 32336
-                </span>
+                <FormatPow :value="data.key_block.pow" />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -247,11 +250,80 @@ import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
 import Age from '@/_designs/components/age'
+import FormatPow from '@/_designs/components/formatPow'
 
-import { AeAddress, AeIcon, AeIdenticon, AeText } from '@aeternity/aepp-components-3'
+import { AeText } from '@aeternity/aepp-components-3'
+import FormatAddress from '../../components/formatAddress/formatAddress'
+// import AccountGroup from '../../components/accountGroup'
+// import Account from '../../components/account/index'
+
+const generationData = {
+  'key_block': {
+    'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
+    'hash': 'kh_bYoiQhCxsS8RNhbumWan7WVwRb9yqoYmK4fbpVaeK6QxdpGvW',
+    'height': 29520,
+    'miner': 'ak_9sX7cqm1juxd2CQ9KtoF4GUFbAMtz4K3rAkk8nZ1WjsrRaXVz',
+    'nonce': 249211865583603,
+    'pow': [
+      15716933,
+      21248494,
+      31777385,
+      51629097,
+      52307438,
+      60314379,
+      77015848,
+      111225783,
+      129181552,
+      132689424,
+      137592480,
+      147779189,
+      157115594,
+      159419405,
+      196924597,
+      224550827,
+      247674216,
+      255348542,
+      259500283,
+      273293538,
+      274438493,
+      291412994,
+      293670763,
+      302377574,
+      303350137,
+      312112679,
+      334581844,
+      336923970,
+      336983229,
+      354918023,
+      355296365,
+      376120031,
+      392530749,
+      423359953,
+      435415471,
+      438152264,
+      441899177,
+      448727944,
+      491290085,
+      500541757,
+      530335760,
+      531882689
+    ],
+    'prev_hash': 'kh_2QvUEsbG25JRApPGarpSZYootptdS8yrPa3AaABR2b5bTiyZVq',
+    'prev_key_hash': 'kh_2QvUEsbG25JRApPGarpSZYootptdS8yrPa3AaABR2b5bTiyZVq',
+    'state_hash': 'bs_jS1VPZyvoXggfUdQTGtVrpFTZdSRFgWhoHYJKecgbAp6cGeHZ',
+    'target': 504509498,
+    'time': 1548670493483,
+    'version': 1
+  },
+  'micro_blocks': []
+}
+
 export default {
   name: 'AppGenerationDetails',
   components: {
+    FormatAddress,
+    // Account,
+    // AccountGroup,
     AppTable,
     AppTableRow,
     AppTableCell,
@@ -259,28 +331,24 @@ export default {
     AppTableBody,
     AppTableRowColumn,
     AppDefinition,
-    AeAddress,
-    AeIdenticon,
-    AeIcon,
     AppPanel,
     AeText,
     Age
+    FormatPow
+  },
+  data: function () {
+    return {
+      data: generationData
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-  .app-definition-account {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: .8rem;
-  }
 
   .currency {
     font-size: .7em;
     margin-left: -.5em;
     text-decoration: none;
   }
-
 </style>
