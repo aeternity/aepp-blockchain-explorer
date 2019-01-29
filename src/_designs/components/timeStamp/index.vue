@@ -5,10 +5,10 @@
   >
     <AeText
       face="mono-s"
-      class="time-content"
+      class="time-stamp-content"
       v-html="date"
     >
-      {{ date }}
+      {{ date + 'fdfddffd' }}
     </AeText>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
       let title = date.split(',').slice(0, 2).join('')
       let [, , time] = date.split(',')
       date = date.replace(/,/g, '')
-      return this.hasTitle ? `<div class="title">${title}</div> ${time}` : date
+      return this.hasTitle ? `<div class="title">${title}</div> ${time} + UTC` : `${date} + UTC`
     }
   }
 }
@@ -52,15 +52,15 @@ export default {
 <style scoped lang="scss">
   @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
-  @import '../../../style/mixins.scss';
   .time-stamp {
     /deep/ .title {
       color: $color-neutral-negative-3;
       @extend %face-sans-base;
     }
 
-    .time-content {
+    .time-stamp-content {
       color: $color-neutral-negative-1;
+      @extend %face-mono-s;
     }
   }
 
