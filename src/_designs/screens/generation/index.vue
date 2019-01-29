@@ -15,14 +15,7 @@
                     6606081
                   </span>
                 </div>
-                <div class="app-block-confirmations">
-                  <span class="app-block-confirmations-num">
-                    235
-                  </span>
-                  <span class="app-block-confirmations-name">
-                    Block Confirmations
-                  </span>
-                </div>
+                <Confirmations />
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn width="small">
@@ -243,19 +236,20 @@
 </template>
 
 <script>
-import AppTable from '@/_designs/components/appTable'
-import AppTableRow from '@/_designs/components/appTableRow'
-import AppTableCell from '@/_designs/components/appTableCell'
-import AppTableHeader from '@/_designs/components/appTableHeader'
-import AppTableBody from '@/_designs/components/appTableBody'
-import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
-import AppDefinition from '@/_designs/components/appDefinition'
-import AppPanel from '@/_designs/components/appPanel'
-import FormatPow from '@/_designs/components/formatPow'
+  import AppTable from '@/_designs/components/appTable'
+  import AppTableRow from '@/_designs/components/appTableRow'
+  import AppTableCell from '@/_designs/components/appTableCell'
+  import AppTableHeader from '@/_designs/components/appTableHeader'
+  import AppTableBody from '@/_designs/components/appTableBody'
+  import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
+  import AppDefinition from '@/_designs/components/appDefinition'
+  import AppPanel from '@/_designs/components/appPanel'
+  import FormatPow from '@/_designs/components/formatPow'
 
-import { AeText } from '@aeternity/aepp-components-3'
-import FormatAddress from '../../components/formatAddress/formatAddress'
-// import AccountGroup from '../../components/accountGroup'
+  import { AeText } from '@aeternity/aepp-components-3'
+  import FormatAddress from '../../components/formatAddress/formatAddress'
+  import Confirmations from '../../components/confirmations'
+  // import AccountGroup from '../../components/accountGroup'
 // import Account from '../../components/account/index'
 
 const generationData = {
@@ -322,6 +316,7 @@ const generationData = {
 export default {
   name: 'AppGenerationDetails',
   components: {
+    Confirmations,
     FormatAddress,
     // Account,
     // AccountGroup,
