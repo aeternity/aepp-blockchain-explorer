@@ -59,7 +59,7 @@ export default {
         }
         &-identicon {
           @media (max-width:450px) {
-            margin-left: .8rem;
+            margin-left: .6rem;
             margin-top: .3rem;
           }
         }
