@@ -32,9 +32,8 @@ export default {
     font-size: 0.9375rem;
     line-height: 1.4em;
     & > li {
-      margin-right: .5rem;
       text-align: right;
-      min-width: 7em;
+      min-width: 6.3em;
     }
   }
 </style>
