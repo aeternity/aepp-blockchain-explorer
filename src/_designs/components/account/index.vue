@@ -8,9 +8,9 @@
       :title="title"
     >
       <div class="account-content">
-        <AeAddress
+        <FormatAddress
           :value="value"
-          length="short"
+          length="responsive"
         />
         <AeIcon
           v-if="icon"
@@ -22,11 +22,12 @@
 </template>
 <script>
 import AppDefinition from '@/_designs/components/appDefinition'
-import { AeAddress, AeIcon, AeIdenticon } from '@aeternity/aepp-components-3'
+import FormatAddress from '@/_designs/components/formatAddress'
+import { AeIcon, AeIdenticon } from '@aeternity/aepp-components-3'
 
 export default {
   name: 'Account',
-  components: { AppDefinition, AeAddress, AeIcon, AeIdenticon },
+  components: { AppDefinition, FormatAddress, AeIcon, AeIdenticon },
   props: {
     value: {
       type: String,
