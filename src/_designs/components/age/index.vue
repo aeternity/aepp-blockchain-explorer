@@ -55,7 +55,7 @@ export default {
           unit: v.unit,
           number: String(v.number).padStart(2, '0')
         }
-      })
+      }).slice(0, 2)
     }
   }
 }
