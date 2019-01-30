@@ -3,6 +3,9 @@
     <h1>App-Generations</h1>
     <Generations>
       <Generation :data="data" />
+      <Generation :data="data" />
+      <Generation :data="data" />
+      <Generation :data="data" />
     </Generations>
   </div>
 </template>

@@ -108,7 +108,7 @@ export default {
     }
     & span:nth-child(2) {
       @media (max-width: 450px) {
-        margin-left: -.9rem;
+        margin-left: -.5rem;
       }
     }
     & span:nth-child(3) {

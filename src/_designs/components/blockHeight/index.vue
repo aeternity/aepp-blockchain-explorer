@@ -16,12 +16,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .block-height {
-    @media (max-width: 449px) {
-      margin-top: .6rem;
-      font-weight: 500;
-    }
-    @media (min-width: 450px) {
-      font-size: 1.7rem;
-    }
+    font-size: 1.7rem;
+    margin-left: .6rem;
   }
 </style>

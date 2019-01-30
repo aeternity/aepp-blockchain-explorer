@@ -253,7 +253,7 @@ import Age from '@/_designs/components/age'
 import FormatPow from '@/_designs/components/formatPow'
 
 import { AeText } from '@aeternity/aepp-components-3'
-import FormatAddress from '../../components/formatAddress/formatAddress'
+import FormatAddress from '../../components/formatAddress'
 // import AccountGroup from '../../components/accountGroup'
 // import Account from '../../components/account/index'
 
