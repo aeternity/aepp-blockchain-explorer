@@ -4,18 +4,18 @@
   >
     <template v-for="(item, idx) in items">
       {{ idx ? ' ' : '' }}
-      <span
+      <sub
         :key="`${item.unit}-number`"
         class="number"
       >
         {{ item.number }}
-      </span>
-      <span
+      </sub>
+      <sub
         :key="item.unit"
         class="unit"
       >
         {{ item.unit }}
-      </span>
+      </sub>
     </template>
   </span>
 </template>
@@ -61,4 +61,12 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  .age {
+    & .unit {
+      font-size: .7em;
+      margin-left: -.7em;
+      text-decoration: none;
+    }
+  }
+</style>
