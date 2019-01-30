@@ -250,7 +250,7 @@ import FormatPow from '@/_designs/components/formatPow'
 import LabelType from '@/_designs/components/labelType'
 
 import { AeText } from '@aeternity/aepp-components-3'
-import FormatAddress from '../../components/formatAddress/formatAddress'
+import FormatAddress from '../../components/formatAddress'
 import Confirmations from '../../components/confirmations'
 // import AccountGroup from '../../components/accountGroup'
 // import Account from '../../components/account/index'
