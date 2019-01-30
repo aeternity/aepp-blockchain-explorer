@@ -4,12 +4,12 @@
   >
     <template v-for="(item, idx) in items">
       {{ idx ? ' ' : '' }}
-      <sub
+      <span
         :key="`${item.unit}-number`"
         class="number"
       >
         {{ item.number }}
-      </sub>
+      </span>
       <sub
         :key="item.unit"
         class="unit"
