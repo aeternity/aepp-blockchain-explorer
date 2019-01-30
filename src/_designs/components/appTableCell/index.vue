@@ -24,11 +24,11 @@ export default {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       width: 50%;
     }
     &:not(:first-child) {
-      @media (min-width: 450px) {
+      @media (min-width: 550px) {
         border-left: 2px solid $color-neutral-positive-2;
       }
     }
@@ -39,7 +39,7 @@ export default {
   .app-table-cell.extend {
     margin-bottom:  auto;
     width: 100%;
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       margin-right: auto;
     }
   }

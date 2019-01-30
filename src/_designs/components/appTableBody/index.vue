@@ -27,11 +27,11 @@ export default {
     }
     &:not(.extend) {
       border-left: 2px solid $color-neutral-positive-2;
-      @media (min-width: 450px) {
+      @media (min-width: 550px) {
         border-left: none;
       }
     }
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       width: 100%;
       border-left: none;
       border-bottom: 2px solid $color-neutral-positive-2;
