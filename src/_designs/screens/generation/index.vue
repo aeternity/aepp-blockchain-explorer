@@ -65,11 +65,9 @@
             <AppTableRowColumn>
               <AppTableCell>
                 <AppDefinition
-                  title="Microblocks"
+                  title="Age"
                 >
-                  <AeText face="mono-s">
-                    9
-                  </AeText>
+                  <Age :time="1547668877573" />
                 </AppDefinition>
               </AppTableCell>
               <AppTableCell>
@@ -251,6 +249,7 @@ import AppTableBody from '@/_designs/components/appTableBody'
 import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
+import Age from '@/_designs/components/age'
 import FormatPow from '@/_designs/components/formatPow'
 
 import { AeText } from '@aeternity/aepp-components-3'
@@ -334,6 +333,7 @@ export default {
     AppDefinition,
     AppPanel,
     AeText,
+    Age,
     FormatPow
   },
   data: function () {
