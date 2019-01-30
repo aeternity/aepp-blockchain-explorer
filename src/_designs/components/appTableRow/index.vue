@@ -60,4 +60,7 @@ export default {
       width: 50%;
     }
   }
+  .app-table-accordion-content > .app-table-row.extend {
+    width: 100%;
+  }
 </style>
