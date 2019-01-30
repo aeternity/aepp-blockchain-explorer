@@ -7,29 +7,31 @@
             <AppTableRowColumn width="large">
               <AppTableCell>
                 <div>
-                  {{ data.key_block.height }}
-                  {{ confirmations }}
+                  <LabelType
+                    title="Block Height"
+                    fill="black"
+                  />
+                </div>
+                <BlockHeight :value="data.key_block.height" />
+                <div>
+                  <Confirmations :value="dynamicData" />
                 </div>
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn width="small">
               <AppTableCell>
-                <time>
-                  {{ data.key_block.time }}
-                </time>
+                <!--<TimeStamp :time="data.key_block.time" />-->
               </AppTableCell>
             </AppTableRowColumn>
           </AppTableRow>
           <AppTableRow>
             <AppTableRowColumn>
               <AppTableCell extend>
-                <AppDefinition
-                  title="benficiary"
-                >
-                  <AeText face="mono-xs">
-                    {{ data.key_block.beneficiary }}
-                  </AeText>
-                </AppDefinition>
+                <Account
+                  :value="data.key_block.beneficiary"
+                  title="beneficiary"
+                  icon
+                />
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn>
@@ -37,18 +39,17 @@
                 <AppDefinition
                   title="Microblocks"
                 >
-                  <AeText face="mono-s">
-                    {{ data.micro_blocks.length }}
-                  </AeText>
+                  {{ data.micro_blocks.length }}
                 </AppDefinition>
               </AppTableCell>
               <AppTableCell>
                 <AppDefinition
                   title="transactions"
                 >
-                  <AeText face="mono-s">
-                    {{ data.key_block.transactions }}
-                  </AeText>
+                  <FormatAeUnit
+                    :value="data.key_block.tx"
+                    type="tx"
+                  />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>
@@ -59,18 +60,20 @@
                 <AppDefinition
                   title="total"
                 >
-                  <AeText face="mono-s">
-                    {{ data.key_block.total }}
-                  </AeText>
+                  <FormatAeUnit
+                    :value="data.key_block.total"
+                    type="ae"
+                  />
                 </AppDefinition>
               </AppTableCell>
               <AppTableCell>
                 <AppDefinition
                   title="Reward"
                 >
-                  <AeText face="mono-s">
-                    {{ data.key_block.reward }}
-                  </AeText>
+                  <FormatAeUnit
+                    :value="data.key_block.reward"
+                    type="ae"
+                  />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -83,7 +86,10 @@
                 type="list"
                 title="Hash"
               >
-                {{ data.key_block.hash }}
+                <FormatAddress
+                  :value="data.key_block.hash"
+                  length="full"
+                />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -93,9 +99,7 @@
                 type="list"
                 title="Difficulty"
               >
-                <AeText face="mono-s">
-                  87472467200
-                </AeText>
+                87472467200
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -105,9 +109,7 @@
                 type="list"
                 title="Target"
               >
-                <AeText face="mono-s">
-                  {{ data.key_block.target }}
-                </AeText>
+                {{ data.key_block.target }}
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -117,9 +119,10 @@
                 type="list"
                 title="Miner"
               >
-                <AeText face="mono-s">
-                  {{ data.key_block.miner }}
-                </AeText>
+                <FormatAddress
+                  :value="data.key_block.miner"
+                  length="full"
+                />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -129,9 +132,7 @@
                 type="list"
                 title="Nonce"
               >
-                <AeText face="mono-s">
-                  {{ data.key_block.nonce }}
-                </AeText>
+                {{ data.key_block.nonce }}
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -141,9 +142,7 @@
                 type="list"
                 title="Version"
               >
-                <AeText face="mono-s">
-                  {{ data.key_block.version }}
-                </AeText>
+                {{ data.key_block.version }}
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -153,14 +152,14 @@
                 type="list"
                 title="Prev hash"
               >
-                <AeText face="mono-s">
-                  {{ data.key_block.prev_hash }}
-                </AeText>
+                <FormatAddress
+                  :value="data.key_block.prev_hash"
+                  length="full"
+                />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
           <AppTableRow
-            v-if="data.tx.gas"
             extend
           >
             <AppTableCell extend>
@@ -168,9 +167,10 @@
                 type="list"
                 title="Prev key hash"
               >
-                <AeText face="mono-s">
-                  {{ data.key_block.prev_key_hash }}
-                </AeText>
+                <FormatAddress
+                  :value="data.key_block.prev_key_hash"
+                  length="full"
+                />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -180,9 +180,10 @@
                 type="list"
                 title="State hash"
               >
-                <AeText face="mono-s">
-                  {{ data.key_block.state_hash }}
-                </AeText>
+                <FormatAddress
+                  :value="data.key_block.state_hash"
+                  length="full"
+                />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -191,7 +192,9 @@
               <AppDefinition
                 type="list"
                 title="Pow"
-              />
+              >
+                <FormatPow :value="data.key_block.pow" />
+              </AppDefinition>
             </AppTableCell>
           </AppTableRow>
         </AppTableBody>
@@ -209,12 +212,20 @@ import AppTableBody from '@/_designs/components/appTableBody'
 import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
-
-import { AeText } from '@aeternity/aepp-components-3'
+import BlockHeight from '@/_designs/components/blockHeight'
+import LabelType from '@/_designs/components/labelType'
+// import TimeStamp from '@/_designs/components/timeStamp'
+import FormatAeUnit from '@/_designs/components/formatAeUnit'
+import FormatAddress from '@/_designs/components/formatAddress'
+import Account from '@/_designs/components/account'
+import Confirmations from '@/_designs/components/confirmations'
+import FormatPow from '../formatPow/index'
 
 export default {
   name: 'GenerationDetails',
   components: {
+    FormatPow,
+    BlockHeight,
     AppTable,
     AppTableRow,
     AppTableCell,
@@ -222,16 +233,21 @@ export default {
     AppTableBody,
     AppTableRowColumn,
     AppDefinition,
-    AeText,
-    AppPanel
+    AppPanel,
+    Account,
+    LabelType,
+    // TimeStamp,
+    FormatAeUnit,
+    FormatAddress,
+    Confirmations
   },
   props: {
     data: {
       type: Object,
       default: undefined
     },
-    confirmations: {
-      type: String,
+    dynamicData: {
+      type: Number,
       default: undefined
     }
   }

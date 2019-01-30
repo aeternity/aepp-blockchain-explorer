@@ -3,14 +3,76 @@
     <h1>App-Dashboard</h1>
     <GenerationDetails
       :data="generation"
-      :dynamicdata="confirmations"
+      :dynamic-data="confirmations"
       :status="loading"
     />
   </div>
 </template>
 <script>
-import GenerationDetails from '../../components/generationDetails'
-let generation = { 'key_block': { 'beneficiary': 'ak_nv5B93FPzRHrGNmMdTDfGdd5xGZvep3MVSpJqzcQmMp59bBCv', 'hash': 'kh_Va2FsFXHt42RzdVzpTukjHHyVZ4MvSEL7EFx7sbr5fdczncAb', 'height': 26786, 'miner': 'ak_5rqwhQWfUZWJAJiznVNM8jFZHFeauMfHtRpJTpyKeMNiFkA7e', 'nonce': 1.6789561608775383e19, 'pow': [38472579, 46230368, 51512306, 68121257, 69412257, 91251449, 116650308, 136382081, 146501665, 174663127, 195370028, 197616641, 211590209, 213119874, 216245496, 217076105, 217287334, 277608555, 286558564, 293381078, 342303628, 366941486, 380556027, 381586470, 388872653, 394385994, 398582184, 403663819, 422706146, 423839089, 445781230, 455480767, 467163814, 471713947, 471899369, 479429173, 486919464, 495746344, 517065938, 518992932, 525417977, 528014605], 'prev_hash': 'kh_2vi7hJTFHKvujkACyH7DdLm12inPj3QrDgRVVRFoFqo444jvxH', 'prev_key_hash': 'kh_2vi7hJTFHKvujkACyH7DdLm12inPj3QrDgRVVRFoFqo444jvxH', 'state_hash': 'bs_2sFTApvBRkuHVCCf4wX75KM619MUJpC1TMHbzjgMJQJYz2JVC2', 'target': 503932105, 'time': 1548173309689, 'version': 1 }, 'micro_blocks': [] }
+import GenerationDetails from '@/_designs/components/generationDetails'
+const generationData = {
+  'key_block': {
+    'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
+    'hash': 'kh_bYoiQhCxsS8RNhbumWan7WVwRb9yqoYmK4fbpVaeK6QxdpGvW',
+    'height': 29520,
+    'miner': 'ak_9sX7cqm1juxd2CQ9KtoF4GUFbAMtz4K3rAkk8nZ1WjsrRaXVz',
+    'nonce': 249211865583603,
+    'pow': [
+      15716933,
+      21248494,
+      31777385,
+      51629097,
+      52307438,
+      60314379,
+      77015848,
+      111225783,
+      129181552,
+      132689424,
+      137592480,
+      147779189,
+      157115594,
+      159419405,
+      196924597,
+      224550827,
+      247674216,
+      255348542,
+      259500283,
+      273293538,
+      274438493,
+      291412994,
+      293670763,
+      302377574,
+      303350137,
+      312112679,
+      334581844,
+      336923970,
+      336983229,
+      354918023,
+      355296365,
+      376120031,
+      392530749,
+      423359953,
+      435415471,
+      438152264,
+      441899177,
+      448727944,
+      491290085,
+      500541757,
+      530335760,
+      531882689
+    ],
+    'prev_hash': 'kh_2QvUEsbG25JRApPGarpSZYootptdS8yrPa3AaABR2b5bTiyZVq',
+    'prev_key_hash': 'kh_2QvUEsbG25JRApPGarpSZYootptdS8yrPa3AaABR2b5bTiyZVq',
+    'state_hash': 'bs_jS1VPZyvoXggfUdQTGtVrpFTZdSRFgWhoHYJKecgbAp6cGeHZ',
+    'target': 504509498,
+    'time': 1548670493483,
+    'version': 1,
+    'total': 92300.10,
+    'reward': 92300.10,
+    'tx': 1254
+  },
+  'micro_blocks': []
+}
 export default {
   name: 'AppDashboard',
   components: {
@@ -18,8 +80,8 @@ export default {
   },
   data: function () {
     return {
-      generation: generation,
-      confirmations: null,
+      generation: generationData,
+      confirmations: 235,
       loading: true
     }
   }
