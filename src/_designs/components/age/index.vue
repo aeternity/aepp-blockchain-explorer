@@ -10,12 +10,12 @@
       >
         {{ item.number }}
       </span>
-      <span
+      <sub
         :key="item.unit"
         class="unit"
       >
         {{ item.unit }}
-      </span>
+      </sub>
     </template>
   </span>
 </template>
@@ -37,17 +37,17 @@ export default {
       let t = age < 0 ? 0 : age
       t = Math.floor(t / 1000)
       const values = []
-      values.unshift({ unit: 'secs', number: t % 60 })
+      values.unshift({ unit: 'SECS', number: t % 60 })
       t = Math.floor(t / 60)
-      values.unshift({ unit: 'mins', number: t % 60 })
+      values.unshift({ unit: 'MIN', number: t % 60 })
       t = Math.floor(t / 60)
-      values.unshift({ unit: 'h', number: t % 24 })
+      values.unshift({ unit: 'HRS', number: t % 24 })
       t = Math.floor(t / 24)
-      values.unshift({ unit: 'd', number: t % 30 })
+      values.unshift({ unit: 'DAYS', number: t % 30 })
       t = Math.floor(t / 30)
-      values.unshift({ unit: 'mo.', number: t % 12 })
+      values.unshift({ unit: 'MONTHS', number: t % 12 })
       t = Math.floor(t / 12)
-      values.unshift({ unit: 'y', number: t })
+      values.unshift({ unit: 'YEARS', number: t })
       while (values.length && !values[0].number) values.shift()
       return values.map((v, idx) => {
         if (!idx) return v
@@ -55,10 +55,19 @@ export default {
           unit: v.unit,
           number: String(v.number).padStart(2, '0')
         }
-      })
+      }).slice(0, 2)
     }
   }
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+  .age {
+    & .unit {
+      font-size: .7em;
+      margin-left: -.7em;
+      text-decoration: none;
+      position: initial;
+    }
+  }
+</style>
