@@ -31,7 +31,7 @@ export default {
   computed: {
     formattedValue: function () {
       if (this.type === 'ae' || 'tx') {
-        return this.value.toLocaleString()
+        return this.value.toLocaleString(undefined, { minimumFractionDigits: 2 })
       }
       return this.value
     },
