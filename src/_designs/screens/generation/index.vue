@@ -8,20 +8,16 @@
             <AppTableRowColumn width="large">
               <AppTableCell extend>
                 <div class="app-block-height">
-                  <span class="app-block-height-label">
-                    Block Height
-                  </span>
+                  <div>
+                    <LabelType
+                      title="Block Height"
+                      fill="black"
+                    />
+                  </div>
                   <span class="app-block-height-num">
                     6606081
                   </span>
-                </div>
-                <div class="app-block-confirmations">
-                  <span class="app-block-confirmations-num">
-                    235
-                  </span>
-                  <span class="app-block-confirmations-name">
-                    Block Confirmations
-                  </span>
+                  <Confirmations :value="confirmations" />
                 </div>
               </AppTableCell>
             </AppTableRowColumn>
@@ -251,9 +247,11 @@ import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
 import Age from '@/_designs/components/age'
 import FormatPow from '@/_designs/components/formatPow'
+import LabelType from '@/_designs/components/labelType'
 
 import { AeText } from '@aeternity/aepp-components-3'
-import FormatAddress from '../../components/formatAddress'
+import FormatAddress from '../../components/formatAddress/formatAddress'
+import Confirmations from '../../components/confirmations'
 // import AccountGroup from '../../components/accountGroup'
 // import Account from '../../components/account/index'
 
@@ -321,6 +319,7 @@ const generationData = {
 export default {
   name: 'AppGenerationDetails',
   components: {
+    Confirmations,
     FormatAddress,
     // Account,
     // AccountGroup,
@@ -333,12 +332,14 @@ export default {
     AppDefinition,
     AppPanel,
     AeText,
+    LabelType,
     Age,
     FormatPow
   },
   data: function () {
     return {
-      data: generationData
+      data: generationData,
+      confirmations: 535
     }
   }
 }
@@ -350,5 +351,23 @@ export default {
     font-size: .7em;
     margin-left: -.5em;
     text-decoration: none;
+  }
+  .app-block-height {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    &-num {
+      margin-left: .6rem;
+      @media (max-width: 449px) {
+        margin-top: .6rem;
+        font-weight: 500;
+      }
+      @media (min-width: 450px) {
+      font-size: 1.7rem;
+    }
+    }
+    &-wrapper {
+      display: flex;
+    }
   }
 </style>
