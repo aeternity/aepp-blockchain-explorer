@@ -382,7 +382,7 @@
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
-          <AppTableAccordion>
+          <AppTableAccordion type="bottom">
             <AppTableRow extend>
               <AppTableCell extend>
                 <AppDefinition
