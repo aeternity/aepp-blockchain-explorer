@@ -1,20 +1,20 @@
 <template>
   <div class="transaction">
     <div class="transaction-main-info">
-      <div class="transaction-label">
-        <LabelType
-          :title="data.type.replace(/([A-Z])/g, ' $1')"
-          fill="red"
-        />
+      <div class="transaction-main-info-inner">
+        <div class="transaction-label">
+          <LabelType
+            :title="data.type.replace(/([A-Z])/g, ' $1')"
+            fill="red"
+          />
+        </div>
+        <AppDefinition
+          title="Age"
+        >
+          <Age :time="data.time" />
+        </AppDefinition>
       </div>
-      <AppDefinition
-        title="Age"
-      >
-        <Age :time="data.time" />
-      </AppDefinition>
-    </div>
-    <div class="transaction-type-info">
-      <div class="transaction-type-info-item accounts">
+      <div class="transaction-main-info-inner accounts">
         <AccountGroup>
           <Account
             v-if="data.account_id"
@@ -43,6 +43,8 @@
           {{ data.name }}
         </AppDefinition>
       </div>
+    </div>
+    <div class="transaction-type-info">
       <div class="transaction-type-info-item ">
         <AppDefinition
           v-if="data.amount"
@@ -137,17 +139,39 @@ export default {
 
     .transaction-main-info {
       display: flex;
-      flex-direction: row;
       margin-bottom: .6rem;
+      flex-direction: row;
+      width: 100%;
       @media (min-width: 550px) {
-        width: 20%;
-        flex-direction: column;
+        width: 60%;
         justify-content: space-between;
       }
       @media (min-width: 1600px) {
+        width: 65%;
+      }
+
+      &-inner{
         width: 50%;
-        flex-direction: row;
-        justify-content: flex-start;
+        &:not(:first-child) {
+          border-left: 2px solid $color-neutral-positive-2;
+        }
+        @media (min-width: 550px) {
+          &:not(:first-child) {
+            border-left: none;
+          }
+        }
+
+        .name {
+          margin-left: 43px;
+        }
+
+      }
+
+      .accounts {
+        width: 50%;
+        @media (min-width: 550px) {
+          width: 70%;
+        }
       }
 
     }
@@ -157,11 +181,11 @@ export default {
       flex-direction: column;
       justify-content: flex-start;
       @media (min-width: 550px) {
-        width: 80%;
+        width: 40%;
         flex-direction: row;
       }
       @media (min-width: 1600px) {
-        width: 100%;
+        width: 35%;
       }
 
       .transaction-type-info-item {
@@ -170,13 +194,12 @@ export default {
         width: 100%;
         border-top: 2px solid $color-neutral-positive-2;
         padding: .6rem 0;
+        margin-bottom: .6rem;
         @media (min-width: 550px) {
           border-top: none;
-          width: 25%;
+          width: 50%;
           flex-direction: column;
-          &:not(:first-child) {
-            border-left: 2px solid $color-neutral-positive-2;
-          }
+          border-left: 2px solid $color-neutral-positive-2;
         }
 
         .block {
@@ -193,31 +216,6 @@ export default {
         }
       }
 
-      .accounts {
-        display: flex;
-        width: 100%;
-        flex-direction: row;
-        @media (min-width: 550px) {
-          width: 50%;
-          flex-direction: column;
-        }
-
-        .account {
-          margin-bottom: 10px;
-        }
-
-        .block {
-          @media (min-width: 550px) {
-            &:not(:first-child) {
-              border-top: none;
-            }
-          }
-        }
-
-        .name {
-          margin-left: 43px;
-        }
-      }
     }
 
   }
