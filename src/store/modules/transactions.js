@@ -31,7 +31,6 @@ export default {
       if (state.transactions[hash]) return state.transactions[hash]
 
       const transaction = await epoch.tx(hash, true)
-      console.log(transaction)
       commit('setTransaction', transaction)
 
       return transaction
