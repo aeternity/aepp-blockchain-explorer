@@ -9,7 +9,7 @@ navigation: 2
 ## Overview
 This is an explorer for the æternity blockchain. [Here](https://github.com/aeternity/aepp-blockchain-explorer) is the github repository.
 
-The underlying API is currently being developed and improved. The Explorer is designed to work with the latest features of [Epoch](https://github.com/aeternity/epoch).
+The underlying API is currently being developed and improved. The Explorer is designed to work with the latest features of [æternity](https://github.com/aeternity/aeternity) and [æpp-middleware](https://github.com/aeternity/aepp-middleware).
 
 ## Features
 - View a generation, key blocks, micro blocks and transactions
@@ -20,9 +20,6 @@ The underlying API is currently being developed and improved. The Explorer is de
 - Search for blocks, generation, transaction by their hash and by their position in the blockchain
 - View æternity token market exchange rates via coinmarketcap.com api
 
-## Requirements
-- Blockchain explorer can now only be run using a middleware
-- https://roma-net.mdw.aepps.com/
 
 ## Build Setup
 
