@@ -3,22 +3,17 @@
     class="time-stamp"
     :class="{ header: hasTitle }"
   >
-    <AeText
-      face="mono-s"
+    <span
       class="time-stamp-content"
       v-html="date"
     >
-      {{ date + 'fdfddffd' }}
-    </AeText>
+      {{ date }}
+    </span>
   </div>
 </template>
 <script>
-import { AeText } from '@aeternity/aepp-components-3'
 export default {
   name: 'TimeStamp',
-  components: {
-    AeText
-  },
   props: {
     time: {
       type: Number,
