@@ -6,10 +6,13 @@
       :dynamic-data="confirmations"
       :status="loading"
     />
+    <MicroBlocks />
   </div>
 </template>
 <script>
 import GenerationDetails from '@/_designs/components/generationDetails'
+import MicroBlocks from '@/_designs/components/microBlocks'
+
 const generationData = {
   'key_block': {
     'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
@@ -76,6 +79,7 @@ const generationData = {
 export default {
   name: 'AppDashboard',
   components: {
+    MicroBlocks,
     GenerationDetails
   },
   data: function () {
