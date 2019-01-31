@@ -59,12 +59,10 @@ export default {
     @media (min-width: 550px) {
       width: 50%;
     }
-  }
-  
+  }  
   .app-table-row > .app-table-row.extend {
     border-top: 2px solid $color-neutral-positive-2;
   }
-  
   .app-table-accordion-content > .app-table-row.extend {
     width: 100%;
 </style>
