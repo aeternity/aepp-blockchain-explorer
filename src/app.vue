@@ -141,6 +141,9 @@ export default {
       })[this.$route.name]
     }
   },
+  mounted () {
+    this.$store.dispatch('getNodeStatus')
+  },
   methods: {
     toggleMenu: function () {
       this.isOpened = !this.isOpened
