@@ -21,8 +21,8 @@ The underlying API is currently being developed and improved. The Explorer is de
 - View æternity token market exchange rates via coinmarketcap.com api
 
 ## Requirements
-- If using default nodes from roma-net, sdk-testnet, no running node is needed
-- If using local epoch node you need latest running Epoch node
+- Blockchain explorer can now only be run using a middleware
+- https://roma-net.mdw.aepps.com/
 
 ## Build Setup
 
@@ -34,11 +34,10 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run serve
-VUE_APP_EPOCH_URL='https://sdk-testnet.aepps.com/' npm run serve
-VUE_APP_EPOCH_URL='https://roma-net.aepps.com/' npm run serve
+VUE_APP_EPOCH_URL='https://roma-net.mdw.aepps.com/' npm run serve
 
 # build for production with minification
-VUE_APP_EPOCH_URL='https://sdk-testnet.aepps.com/' npm run build
+VUE_APP_EPOCH_URL='https://roma-net.mdw.aepps.com/' npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
