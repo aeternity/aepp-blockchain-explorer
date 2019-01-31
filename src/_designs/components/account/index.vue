@@ -8,7 +8,6 @@
       :title="title"
     >
       <div class="account-content">
-        s
         <FormatAddress
           :value="value"
           length="responsive"
