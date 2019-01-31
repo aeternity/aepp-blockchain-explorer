@@ -243,7 +243,7 @@
                   <span class="app-block-height-num">
                     6606081
                   </span>
-                  <Confirmations :value="confirmations" />
+                  <Confirmations :value="dynamicdata" />
                 </div>
               </AppTableCell>
             </AppTableRowColumn>
@@ -476,7 +476,8 @@ import AppPanel from '@/_designs/components/appPanel'
 import Age from '@/_designs/components/age'
 import FormatPow from '@/_designs/components/formatPow'
 import LabelType from '@/_designs/components/labelType'
-import AppTableAccordion from '@/_designs/components/appTableAccordion/index'
+import AppTableAccordion from '@/_designs/components/appTableAccordion'
+import Confirmations from '@/_designs/components/confirmations'
 
 import { AeText } from '@aeternity/aepp-components-3'
 import FormatAddress from '../../components/formatAddress'
