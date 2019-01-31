@@ -1,19 +1,15 @@
 <template>
-    <article class="micro-blocks">
-      <MicroBlock/>
-    </article>
+  <article class="micro-blocks">
+    <slot />
+  </article>
 </template>
 <script>
-  import MicroBlock from '../microBlock'
-
-  export default {
-    name: 'MicroBlocks',
-    components: { MicroBlock }
-  }
+export default {
+  name: 'MicroBlocks'
+}
 </script>
 <style lang="scss">
-    .micro-blocks {
-        margin-top: 2rem;
-    }
-
+  .micro-blocks {
+      margin-top: 2rem;
+  }
 </style>

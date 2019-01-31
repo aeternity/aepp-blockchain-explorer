@@ -4,25 +4,32 @@
       <AppTable details>
         <AppTableHeader>
           <AppTableRow>
-            <AppTableRowColumn width="large">
-              <AppTableCell>
-                <div>
-                  <LabelType
-                    title="Block Height"
-                    fill="black"
-                  />
+            <AppTableCell extend>
+              <div class="block-height-wrapper">
+                <div class="container container-first">
+                  <div class="container-frist-inner">
+                    <LabelType
+                      title="Block Height"
+                      fill="black"
+                    />
+                  </div>
+                  <BlockHeight :value="data.key_block.height" />
                 </div>
-                <BlockHeight :value="data.key_block.height" />
-                <div>
-                  <Confirmations :value="dynamicData" />
+                <div class="container container-last">
+                  <div class="container-last-inner">
+                    <Confirmations :value="dynamicData" />
+                  </div>
+                  <div class="container-last-inner">
+                    <!--<TimeStamp :time="data.key_block.time" />-->
+                    <AppDefinition
+                      title="Time since mined"
+                    >
+                      <Age :time="data.key_block.time" />
+                    </AppDefinition>
+                  </div>
                 </div>
-              </AppTableCell>
-            </AppTableRowColumn>
-            <AppTableRowColumn width="small">
-              <AppTableCell>
-                <!--<TimeStamp :time="data.key_block.time" />-->
-              </AppTableCell>
-            </AppTableRowColumn>
+              </div>
+            </AppTableCell>
           </AppTableRow>
           <AppTableRow>
             <AppTableRowColumn>
@@ -113,90 +120,92 @@
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="Miner"
-              >
-                <FormatAddress
-                  :value="data.key_block.miner"
-                  length="full"
-                />
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="Nonce"
-              >
-                {{ data.key_block.nonce }}
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="Version"
-              >
-                {{ data.key_block.version }}
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="Prev hash"
-              >
-                <FormatAddress
-                  :value="data.key_block.prev_hash"
-                  length="full"
-                />
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow
-            extend
-          >
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="Prev key hash"
-              >
-                <FormatAddress
-                  :value="data.key_block.prev_key_hash"
-                  length="full"
-                />
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="State hash"
-              >
-                <FormatAddress
-                  :value="data.key_block.state_hash"
-                  length="full"
-                />
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="Pow"
-              >
-                <FormatPow :value="data.key_block.pow" />
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
+          <AppTableAccordion>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Miner"
+                >
+                  <FormatAddress
+                    :value="data.key_block.miner"
+                    length="full"
+                  />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Nonce"
+                >
+                  {{ data.key_block.nonce }}
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Version"
+                >
+                  {{ data.key_block.version }}
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Prev hash"
+                >
+                  <FormatAddress
+                    :value="data.key_block.prev_hash"
+                    length="full"
+                  />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow
+              extend
+            >
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Prev key hash"
+                >
+                  <FormatAddress
+                    :value="data.key_block.prev_key_hash"
+                    length="full"
+                  />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="State hash"
+                >
+                  <FormatAddress
+                    :value="data.key_block.state_hash"
+                    length="full"
+                  />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Pow"
+                >
+                  <FormatPow :value="data.key_block.pow" />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+          </AppTableAccordion>
         </AppTableBody>
       </AppTable>
     </AppPanel>
@@ -209,11 +218,13 @@ import AppTableRow from '@/_designs/components/appTableRow'
 import AppTableCell from '@/_designs/components/appTableCell'
 import AppTableHeader from '@/_designs/components/appTableHeader'
 import AppTableBody from '@/_designs/components/appTableBody'
+import AppTableAccordion from '@/_designs/components/appTableAccordion'
 import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
 import BlockHeight from '@/_designs/components/blockHeight'
 import LabelType from '@/_designs/components/labelType'
+import Age from '@/_designs/components/age'
 // import TimeStamp from '@/_designs/components/timeStamp'
 import FormatAeUnit from '@/_designs/components/formatAeUnit'
 import FormatAddress from '@/_designs/components/formatAddress'
@@ -236,7 +247,9 @@ export default {
     AppPanel,
     Account,
     LabelType,
+    AppTableAccordion,
     // TimeStamp,
+    Age,
     FormatAeUnit,
     FormatAddress,
     Confirmations
@@ -254,4 +267,67 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  .block-height-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    @media (min-width: 550px) {
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+
+    }
+  }
+  .container-first {
+    justify-content: space-between;
+    @media (min-width: 550px) {
+      justify-content: flex-start;
+      width: 50%;
+    }
+
+  }
+  .container-last {
+    flex-direction: column-reverse;
+    border-left: 2px solid $color-neutral-positive-2;
+    padding-right: .6rem;
+    @media (min-width: 550px) {
+      flex-direction: row;
+      justify-content: flex-start;
+      border-left: none;
+      width: 50%;
+      padding-right: 0;
+    }
+    &-inner{
+      &:not(:last-child){
+        border-top: 2px solid $color-neutral-positive-2;
+        @media (min-width: 550px) {
+          border-top: none;
+        }
+      }
+      &:first-child {
+        @media (min-width: 550px) {
+          //margin-right: auto;
+          width: 50%;
+          padding-left: 1rem;
+        }
+      }
+      &:last-child {
+        @media (min-width: 550px) {
+          width: 50%;
+          border-left: 2px solid $color-neutral-positive-2;
+          margin-left: auto;
+          margin-right: -2px;
+        }
+        @media (min-width: 1600px) {
+          width: 14.5%;
+        }
+      }
+    }
+  }
+</style>

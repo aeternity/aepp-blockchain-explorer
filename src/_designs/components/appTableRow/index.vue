@@ -65,5 +65,10 @@ export default {
   }
   .app-table-accordion-content > .app-table-row.extend {
     width: 100%;
+    border-left: none;
+  }
+  .app-table-accordion-content > .app-table-row {
+    margin-top: 0;
+    padding-top: 0;
   }
 </style>

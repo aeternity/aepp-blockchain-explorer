@@ -1,7 +1,9 @@
 <template>
   <div
     class="app-table-accordion"
-    :class="type"
+    :class="
+      open ? 'open' : ''
+    "
   >
     <button
       v-if="type === 'bottom'"
@@ -10,14 +12,15 @@
     >
       {{ open ? 'hide micro block header' : 'show micro block header' }}
     </button>
-    <Transition name="slide-fade">
+    <TransitionExpand>
       <div
         v-show="open"
         class="app-table-accordion-content"
+        :class="type"
       >
         <slot />
       </div>
-    </Transition>
+    </TransitionExpand>
     <button
       v-if="type === 'top'"
       class="app-table-accordion-button"
@@ -29,6 +32,8 @@
 </template>
 
 <script>
+import TransitionExpand from '@/_designs/components/transitionExpand'
+
 export default {
   name: 'AppTableAccordion',
   props: {
@@ -48,6 +53,9 @@ export default {
     toggle () {
       this.open = !this.open
     }
+  },
+  components: {
+    TransitionExpand
   }
 }
 </script>
@@ -68,16 +76,9 @@ export default {
       -webkit-appearance: none;
       border: none;
       padding: .6rem;
-      //box-shadow: inset 0px 10px 30px rgba(27,68,121,0.10);
     }
   }
-  .slide-fade-enter-active,
-  .slide-fade-leave-active {
-    transition: all .3s linear;
-    max-height: 300px;
-  }
-  .slide-fade-enter, .slide-fade-leave-to {
-    max-height: 0;
-    opacity: 0;
+  .app-table-accordion.open .app-table-accordion-content {
+    border-bottom: 2px solid $color-neutral-positive-2;
   }
 </style>
