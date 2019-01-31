@@ -11,6 +11,15 @@ export default {
   },
 
   /**
+   * setTransactions
+   * @param {Object} state
+   * @param {Object} payload
+   */
+  setTransactions (state, payload) {
+    Vue.set(state.accountTransactions, payload.address, payload.transactions)
+  },
+
+  /**
    * setName
    * @param {Object} state
    * @param {Object} payload

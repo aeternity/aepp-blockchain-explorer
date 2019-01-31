@@ -1,6 +1,6 @@
 {
   "name": "aepp-blockchain-explorer",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Blockchain Explorer for Aeternity",
   "author": "Philipp Klein <klein.philipp@gmail.com>",
   "private": false,
@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "@aeternity/aepp-components": "2.0.13",
-    "@aeternity/aepp-components-3": "^3.0.0-alpha.8",
+    "@aeternity/aepp-components-3": "^3.0.0-alpha.9",
     "@aeternity/aepp-sdk": "1.2.1",
     "bignumber.js": "^8.0.1",
+    "camelcase-keys-deep": "^0.1.0",
     "lodash": "^4.17.5",
     "vue": "^2.5.17",
     "vue-popperjs": "^1.2.6",

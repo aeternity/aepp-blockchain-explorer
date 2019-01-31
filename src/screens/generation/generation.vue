@@ -286,21 +286,24 @@ export default {
   },
   watch: {
     generationId () {
-      this.getGeneration()
+      this.getGenerationWithTransactions()
     }
   },
   async mounted () {
     this.checkHashSize()
     window.addEventListener('resize', this.checkHashSize)
-    await this.getGeneration()
     await this.$store.dispatch('blocks/height')
-    this.totalBlocks = this.generation.microBlocks.length
-    this.currentBlocks = Math.min(this.totalBlocks, 10)
-    this.isLoadingMore = true
-    await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationHeight), 'numBlocks': this.currentBlocks })
-    this.isLoadingMore = false
+    await this.getGenerationWithTransactions()
   },
   methods: {
+    async getGenerationWithTransactions () {
+      await this.getGeneration()
+      this.totalBlocks = this.generation.microBlocks.length
+      this.currentBlocks = Math.min(this.totalBlocks, 10)
+      this.isLoadingMore = true
+      await this.$store.dispatch('blocks/getMicroBlocksByHeight', { 'height': Number(this.generationHeight), 'numBlocks': this.currentBlocks })
+      this.isLoadingMore = false
+    },
     async getGeneration () {
       this.isLoading = true
       if (blockHeightRegex.test(this.generationId)) {
