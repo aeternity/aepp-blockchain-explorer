@@ -145,6 +145,9 @@ export default {
       return this.height === 0 ? this.height : this.height - 50
     }
   },
+  mounted () {
+    this.$store.dispatch('getNodeStatus')
+  },
   methods: {
     toggleMenu: function () {
       this.isOpened = !this.isOpened
