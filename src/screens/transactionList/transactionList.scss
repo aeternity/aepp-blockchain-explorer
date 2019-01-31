@@ -1,0 +1,35 @@
+@import '../../style/mixins';
+
+.tx-list{
+    >.inner {
+      @include content-max-width;
+    }
+
+    .transactions {
+        overflow: auto;
+    }
+
+    .title {
+        font-weight:500;
+        @include font-size(xl);
+        @include only-phone {
+          @include font-size(l);
+        }
+    }
+
+    .grid {
+        border-bottom:2px solid $smoke;
+        justify-content:space-between;
+        align-items:flex-end;
+        flex-wrap:wrap;
+        padding-bottom:15px;
+        @include only-phone {
+          display:block;
+        }
+    }
+
+    .ae-input {
+        width: 20% !important;
+        margin: 0 !important;
+    }
+}

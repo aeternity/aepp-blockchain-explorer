@@ -1,4 +1,5 @@
 export default {
   accounts: {},
-  names: {}
+  names: {},
+  accountTransactions: {}
 }
