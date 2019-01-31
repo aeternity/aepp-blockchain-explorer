@@ -27,7 +27,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    align-items: start;
+    align-items: stretch;
     width: 100%;
     &:not(:last-child) {
       border-bottom: 2px solid $color-neutral-positive-2;

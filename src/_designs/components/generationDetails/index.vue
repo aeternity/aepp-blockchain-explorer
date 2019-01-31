@@ -4,32 +4,33 @@
       <AppTable details>
         <AppTableHeader>
           <AppTableRow>
-            <AppTableCell extend>
-              <div class="block-height-wrapper">
-                <div class="container container-first">
-                  <div class="container-frist-inner">
+            <AppTableRowColumn width="large">
+              <AppTableCell extend>
+                <div class="block-height-wrapper">
+                  <div>
                     <LabelType
                       title="Block Height"
                       fill="black"
                     />
                   </div>
                   <BlockHeight :value="data.key_block.height" />
-                </div>
-                <div class="container container-last">
-                  <div class="container-last-inner">
+                  <div>
                     <Confirmations :value="dynamicData" />
                   </div>
-                  <div class="container-last-inner">
-                    <!--<TimeStamp :time="data.key_block.time" />-->
-                    <AppDefinition
-                      title="Time since mined"
-                    >
-                      <Age :time="data.key_block.time" />
-                    </AppDefinition>
-                  </div>
                 </div>
-              </div>
-            </AppTableCell>
+              </AppTableCell>
+            </AppTableRowColumn>
+            <AppTableRowColumn width="small">
+              <AppTableCell>
+                <!--<TimeStamp :time="data.key_block.time" />-->
+                <AppDefinition
+                  class="container-last-inner"
+                  title="Time since mined"
+                >
+                  <Age :time="data.key_block.time" />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
           </AppTableRow>
           <AppTableRow>
             <AppTableRowColumn>
@@ -268,66 +269,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   .block-height-wrapper {
     display: flex;
-    flex-direction: row;
-  }
-  .container {
-    display: flex;
     flex-direction: column;
-    width: 50%;
     @media (min-width: 550px) {
       flex-direction: row;
       align-items: center;
-      position: relative;
-
-    }
-  }
-  .container-first {
-    justify-content: space-between;
-    @media (min-width: 550px) {
-      justify-content: flex-start;
-      width: 50%;
-    }
-
-  }
-  .container-last {
-    flex-direction: column-reverse;
-    border-left: 2px solid $color-neutral-positive-2;
-    padding-right: .6rem;
-    @media (min-width: 550px) {
-      flex-direction: row;
-      justify-content: flex-start;
-      border-left: none;
-      width: 50%;
-      padding-right: 0;
-    }
-    &-inner{
-      &:not(:last-child){
-        border-top: 2px solid $color-neutral-positive-2;
-        @media (min-width: 550px) {
-          border-top: none;
-        }
-      }
-      &:first-child {
-        @media (min-width: 550px) {
-          //margin-right: auto;
-          width: 50%;
-          padding-left: 1rem;
-        }
-      }
-      &:last-child {
-        @media (min-width: 550px) {
-          width: 50%;
-          border-left: 2px solid $color-neutral-positive-2;
-          margin-left: auto;
-          margin-right: -2px;
-        }
-        @media (min-width: 1600px) {
-          width: 14.5%;
-        }
-      }
     }
   }
 </style>
