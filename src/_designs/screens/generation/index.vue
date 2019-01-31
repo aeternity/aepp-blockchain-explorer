@@ -548,7 +548,10 @@ const generationData = {
     'state_hash': 'bs_jS1VPZyvoXggfUdQTGtVrpFTZdSRFgWhoHYJKecgbAp6cGeHZ',
     'target': 504509498,
     'time': 1548670493483,
-    'version': 1
+    'version': 1,
+    'total': 92300.10,
+    'reward': 92300.10,
+    'tx': 1254
   },
   'micro_blocks': []
 }
