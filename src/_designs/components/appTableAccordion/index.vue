@@ -41,7 +41,7 @@ export default {
       default: 'top'
     }
   },
-  data: function () {
+  data () {
     return { open: false }
   },
   methods: {
