@@ -39,7 +39,7 @@ export default {
     padding-top: .6rem;
     margin-bottom: 0;
     border-left: none;
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       width: 50%;
       padding-top: 0;
       margin-top: 0;
@@ -56,8 +56,11 @@ export default {
     &:not(:first-child) {
       border-left:  2px solid $color-neutral-positive-2;
     }
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       width: 50%;
     }
+  }
+  .app-table-row > .app-table-row.extend {
+    border-top: 2px solid $color-neutral-positive-2;
   }
 </style>
