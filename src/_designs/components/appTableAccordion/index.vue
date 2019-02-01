@@ -36,6 +36,9 @@ import TransitionExpand from '@/_designs/components/transitionExpand'
 
 export default {
   name: 'AppTableAccordion',
+  components: {
+    TransitionExpand
+  },
   props: {
     type: {
       type: String,
@@ -53,9 +56,6 @@ export default {
     toggle () {
       this.open = !this.open
     }
-  },
-  components: {
-    TransitionExpand
   }
 }
 </script>

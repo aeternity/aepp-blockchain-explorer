@@ -1,74 +1,101 @@
 <template>
   <div class="app-transaction">
-    <h1>App-Transaction</h1>
-    <AppPanel>
-      <AppTable details>
-        <AppTableHeader>
-          <AppTableRow>
-            <AppTableRowColumn width="large">
-              <AppTableCell extend>
-                <div class="app-block-height">
-                  <LabelType
-                    title="Block Height"
-                  />
-                  <span class="app-block-height-num">
-                    6606081
-                  </span>
-                </div>
-                <div class="app-block-confirmations">
-                  <span class="app-block-confirmations-num">
-                    235
-                  </span>
-                  <span class="app-block-confirmations-name">
-                    Block Confirmations
-                  </span>
-                </div>
-              </AppTableCell>
-            </AppTableRowColumn>
-            <AppTableRowColumn width="small">
-              <AppTableCell>
-                <AppDefinition
-                  title="October 11 2018"
-                >
-                  <AeText face="mono-s">
-                    10:59:34 AM +UTC
-                  </AeText>
-                </AppDefinition>
-              </AppTableCell>
-            </AppTableRowColumn>
-          </AppTableRow>
-        </AppTableHeader>
-      </AppTable>
-    </AppPanel>
+    <h1>Transaction Overview</h1>
+    <TransactionDetails
+      v-for="(tx, index) in transaction"
+      :key="index"
+      :data="tx"
+      :dynamic-data="confirmations"
+      :status="loading"
+    />
   </div>
 </template>
 
 <script>
-import AppTable from '@/_designs/components/appTable'
-import AppTableRow from '@/_designs/components/appTableRow'
-import AppTableCell from '@/_designs/components/appTableCell'
-import AppTableHeader from '@/_designs/components/appTableHeader'
-import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
-import AppDefinition from '@/_designs/components/appDefinition'
-import AppPanel from '@/_designs/components/appPanel'
-import LabelType from '@/_designs/components/labelType'
-
-import {
-  AeText
-} from '@aeternity/aepp-components-3'
+import TransactionDetails from '@/_designs/components/transactionDetails'
+const transactionData = [
+  {
+    block_height: 30546,
+    block_hash: 'mh_rxs89ozj7DXk8aWBRCZPwcUp6D3hxp2KgGDFyQMnFNdn2d5YG',
+    hash: 'th_dQ5fU8PDPxe1X63qiFinhj6b6m5kbu54d7WJxxw8hU3tGgeQw',
+    signatures: [
+      'sg_LWPTCW8LpCX24FfgfTXHJTBxtYjJf6mKa8Zpgx5tow6BN1yUM2brVmwGKiBH8wqQosHr9g7feZR6ASBrmtmotP76zahJ7'
+    ],
+    tx: {
+      account_id: 'ak_2FopJG9xi6bzguKBFao1SR5HQ5aCjKcHCgerKww6tM6Ersundh',
+      client_ttl: 36000,
+      fee: 20000,
+      name_id: 'nm_aNGZZC4RgpNT29gkT75o1wzXJbe9enKGWtKxvAX8rWwwJTsaK',
+      name_ttl: 50000,
+      nonce: 2604,
+      deposit: 14434,
+      amount: 4566,
+      pointers: [
+        {
+          id: 'ak_QSNbDgTDwn1izHWdJHM1EuMiMrmVya9sy7MA1pDtJYVCxFgT6',
+          key: 'account_pubkey'
+        }
+      ],
+      ttl: 60000,
+      time: 1548670493483,
+      type: 'NameUpdateTx',
+      version: 1
+    }
+  },
+  {
+    block_height: 30553,
+    block_hash: 'mh_ifpU929ttQNKWptREmRLAYs1RtoToXqMK5DMXSpzGAVrUgU3n',
+    hash: 'th_24dXRkTJhiB3tkSSQMa73w3urGo9caRcVyXMjpJ8X1RmhBhQqq',
+    signatures: [
+      'sg_2p8JAbeWqVYCC3ApUpp7syDUimUkUpSkG9Pdspf3ZheHfL6g1AAvsgv9KcyTQKHP9iNi6mgc1tzA2Fdw15No8a4Wvi1Jo'
+    ],
+    tx: {
+      amount: 4566,
+      fee: 20260,
+      nonce: 1,
+      payload: '',
+      recipient_id: 'ak_2tNbVhpU6Bo3xGBJYATnqc62uXjR8yBv9e63TeYCpa6ASgEz94',
+      sender_id: 'ak_259aAwV4CmhvhUfHCWcQXGsszdVw1Kq4W3iuVhpCQGcqqRqZmW',
+      ttl: 30563,
+      cost: 3563,
+      time: 1548670493483,
+      type: 'SpendTx',
+      version: 1
+    }
+  },
+  {
+    block_height: 30563,
+    block_hash: 'mh_9GQcovJ2jffvdJBCF5kF5ARn4KafjoVyT8EofMZCdU4pSWPJi',
+    hash: 'th_TjitQ8QrECiDW4rXJ6wjfvYKj2Y923XXXmT2gqF71JvLsXTkR',
+    signatures: [
+      'sg_JytAXV5xDLgrhCh1fuqj9sUDH9jmf7wLLt2mbQPFP2nYYBeR3hK7ZBW9Dxogv3DUUqYhFPXFSPmyDPtvpXaMwDHmCjV5d'
+    ],
+    tx: {
+      account_id: 'ak_24jcHLTZQfsou7NvomRJ1hKEnjyNqbYSq2Az7DmyrAyUHPq8uR',
+      fee: 20000,
+      name: 'ucuc.test',
+      name_salt: 15052732751768221404,
+      nonce: 18434,
+      deposit: 14434,
+      ttl: 31062,
+      time: 1548670493483,
+      type: 'NameClaimTx',
+      version: 1
+    }
+  }
+]
 
 export default {
   name: 'AppTransaction',
   components: {
-    AppTable,
-    AppTableRow,
-    AppTableCell,
-    AppTableHeader,
-    AppTableRowColumn,
-    AppDefinition,
-    AppPanel,
-    AeText,
-    LabelType
+    TransactionDetails
+  },
+  data () {
+    return {
+      transaction: transactionData,
+      confirmations: 535,
+      loading: true
+    }
   }
 }
 </script>
