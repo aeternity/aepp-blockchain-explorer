@@ -34,7 +34,7 @@ export default {
   @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
 
-    .app-page-header{
+    .app-page-header {
       padding: .6rem 0;
       &-title {
         font-size: 1.7rem;
