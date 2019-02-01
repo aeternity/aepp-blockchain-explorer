@@ -33,7 +33,7 @@ export default {
   .app-table-row-column {
     display: flex;
     flex-direction: column;
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       flex-direction: row;
     }
     @media (min-width: 1600px) {
@@ -45,12 +45,12 @@ export default {
   }
   .app-table-row-column > .app-table-cell {
     &:not(:last-child):first-child {
-      @media (max-width: 450px) {
+      @media (max-width: 550px) {
       border-bottom: 2px solid $color-neutral-positive-2;
       }
     }
     &:not(:first-child){
-      @media (min-width: 450px) {
+      @media (min-width: 550px) {
         border-left: 2px solid $color-neutral-positive-2;
       }
     }
@@ -67,7 +67,7 @@ export default {
   .app-table-row-column > .app-table-row {
     width: 100%;
     padding: 0;
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       margin-bottom: 0;
       border-left: none;
     }
@@ -78,7 +78,7 @@ export default {
   }
   .app-table-row-column.large{
     width:50%;
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       width:75%;
     }
   }
@@ -90,7 +90,7 @@ export default {
   }
   .app-table-row-column.small{
     width:50%;
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       width: 25%;
     }
   }

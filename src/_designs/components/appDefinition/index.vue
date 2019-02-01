@@ -58,7 +58,7 @@ export default {
   .app-definition-content {
     color: #76818C;
     word-break: break-all;
-    @extend %face-tracked-base;
+    @extend %face-mono-s;
   }
   .app-definition.block {
     padding: .6rem;
@@ -66,19 +66,19 @@ export default {
   .app-definition.list {
     background-color: $color-neutral-positive-3;
     padding: .6rem;
-    @media (min-width: 450px) {
+    @media (min-width: 550px) {
       flex-direction: row;
       padding: 0;
     }
     & .app-definition-title {
-      @media (min-width: 450px) {
+      @media (min-width: 550px) {
         text-align: right;
         width: 25%;
         padding: .6rem;
       }
     }
     & .app-definition-content {
-      @media (min-width: 450px) {
+      @media (min-width: 550px) {
         padding: .8rem;
         background-color: #FFFFFF;
         width: 75%;

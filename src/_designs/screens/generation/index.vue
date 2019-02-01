@@ -1,27 +1,24 @@
 <template>
   <div class="app-generation-details">
+    <SearchBar placeholder="Search by address / txhash / block / name.aet" />
     <h1>Generation  Details</h1>
     <AppPanel>
-      <AppTable details>
+      <AppTable>
         <AppTableHeader>
           <AppTableRow>
             <AppTableRowColumn width="large">
               <AppTableCell extend>
                 <div class="app-block-height">
-                  <span class="app-block-height-label">
-                    Block Height
-                  </span>
+                  <div>
+                    <LabelType
+                      title="Block Height"
+                      fill="black"
+                    />
+                  </div>
                   <span class="app-block-height-num">
                     6606081
                   </span>
-                </div>
-                <div class="app-block-confirmations">
-                  <span class="app-block-confirmations-num">
-                    235
-                  </span>
-                  <span class="app-block-confirmations-name">
-                    Block Confirmations
-                  </span>
+                  <Confirmations :value="confirmations" />
                 </div>
               </AppTableCell>
             </AppTableRowColumn>
@@ -38,32 +35,36 @@
             </AppTableRowColumn>
           </AppTableRow>
           <AppTableRow>
-            <AppTableRowColumn>
+            <AppTableRowColumn width="medium">
               <AppTableCell extend>
-                <div class="app-definition-account">
-                  <AeIdenticon
-                    address="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
+                <!--<AccountGroup>-->
+                <!--<Account-->
+                <!--:value="data.key_block.beneficiary"-->
+                <!--title="Sender"-->
+                <!--icon-->
+                <!--/>-->
+                <!--<Account-->
+                <!--:value="data.key_block.beneficiary"-->
+                <!--title="Recipient"-->
+                <!--icon-->
+                <!--/>-->
+                <!--</AccountGroup>-->
+                <AppDefinition
+                  title="Beneficiary"
+                >
+                  <FormatAddress
+                    :value="data.key_block.beneficiary"
+                    length="responsive"
                   />
-                  <AppDefinition
-                    title="Beneficiary"
-                  >
-                    <AeAddress
-                      value="ak_QY8VNEkhj7omMUjAvfVBq2NjTDy895LBYbk7qVxQo1qT8VqfE"
-                      length="short"
-                    />
-                    <AeIcon name="copy" />
-                  </AppDefinition>
-                </div>
+                </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn>
               <AppTableCell>
                 <AppDefinition
-                  title="Microblocks"
+                  title="Age"
                 >
-                  <AeText face="mono-s">
-                    9
-                  </AeText>
+                  <Age :time="1547668877573" />
                 </AppDefinition>
               </AppTableCell>
               <AppTableCell>
@@ -117,9 +118,10 @@
                 type="list"
                 title="Hash"
               >
-                <span>
-                  kh_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
-                </span>
+                <FormatAddress
+                  :value="data.key_block.hash"
+                  length="full"
+                />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -147,15 +149,213 @@
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
+          <AppTableAccordion>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Miner"
+                >
+                  <span>
+                    ak_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
+                  </span>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Nonce"
+                >
+                  <AeText face="mono-s">
+                    202
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Version"
+                >
+                  <AeText face="mono-s">
+                    1
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Prev Hash"
+                >
+                  <span>
+                    mh_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
+                  </span>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Prev Key Hash"
+                >
+                  <span>
+                    kh_  s6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N g25 UQc Zb8 caG m8q
+                  </span>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="State Hash"
+                >
+                  <span>
+                    bs_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
+                  </span>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="POW"
+                >
+                  <FormatPow :value="data.key_block.pow" />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+          </AppTableAccordion>
+        </AppTableBody>
+      </AppTable>
+    </AppPanel>
+    <AppPanel>
+      <AppTable>
+        <AppTableHeader>
+          <AppTableRow>
+            <AppTableRowColumn width="large">
+              <AppTableCell extend>
+                <div class="app-block-height">
+                  <div>
+                    <LabelType
+                      title="Block Height"
+                      fill="black"
+                    />
+                  </div>
+                  <span class="app-block-height-num">
+                    6606081
+                  </span>
+                  <Confirmations :value="confirmations" />
+                </div>
+              </AppTableCell>
+            </AppTableRowColumn>
+            <AppTableRowColumn width="small">
+              <AppTableCell>
+                <AppDefinition
+                  title="October 11 2018"
+                >
+                  <AeText face="mono-s">
+                    10:59:34 AM +UTC
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+          </AppTableRow>
+          <AppTableRow>
+            <AppTableRowColumn width="medium">
+              <AppTableCell extend>
+                <!--<AccountGroup>-->
+                <!--<Account-->
+                <!--:value="data.key_block.beneficiary"-->
+                <!--title="Sender"-->
+                <!--icon-->
+                <!--/>-->
+                <!--<Account-->
+                <!--:value="data.key_block.beneficiary"-->
+                <!--title="Recipient"-->
+                <!--icon-->
+                <!--/>-->
+                <!--</AccountGroup>-->
+                <AppDefinition
+                  title="Beneficiary"
+                >
+                  <FormatAddress
+                    :value="data.key_block.beneficiary"
+                    length="responsive"
+                  />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+            <AppTableRowColumn>
+              <AppTableCell>
+                <AppDefinition
+                  title="Age"
+                >
+                  <Age :time="1547668877573" />
+                </AppDefinition>
+              </AppTableCell>
+              <AppTableCell>
+                <AppDefinition
+                  title="Transactions"
+                >
+                  <AeText face="mono-s">
+                    1,230
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRowColumn>
+            <AppTableRow
+              extend
+            >
+              <AppTableCell>
+                <AppDefinition
+                  title="Total"
+                >
+                  <AeText face="mono-s">
+                    92,300.10 <abbr
+                      class="currency"
+                      title="aeternity"
+                    >
+                      AE
+                    </abbr>
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+              <AppTableCell>
+                <AppDefinition
+                  title="Reward"
+                >
+                  <AeText face="mono-s">
+                    987.00 <abbr
+                      class="currency"
+                      title="aeternity"
+                    >
+                      AE
+                    </abbr>
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+          </AppTableRow>
+        </AppTableHeader>
+        <AppTableBody>
           <AppTableRow extend>
             <AppTableCell extend>
               <AppDefinition
                 type="list"
-                title="Miner"
+                title="Hash"
               >
-                <span>
-                  ak_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
-                </span>
+                <FormatAddress
+                  :value="data.key_block.hash"
+                  length="full"
+                />
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -163,10 +363,10 @@
             <AppTableCell extend>
               <AppDefinition
                 type="list"
-                title="Nonce"
+                title="Difficulty"
               >
                 <AeText face="mono-s">
-                  202
+                  87472467200
                 </AeText>
               </AppDefinition>
             </AppTableCell>
@@ -175,64 +375,98 @@
             <AppTableCell extend>
               <AppDefinition
                 type="list"
-                title="Version"
+                title="Target"
               >
                 <AeText face="mono-s">
-                  1
+                  536930672
                 </AeText>
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="Prev Hash"
-              >
-                <span>
-                  mh_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
-                </span>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="Prev Key Hash"
-              >
-                <span>
-                  kh_  s6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N g25 UQc Zb8 caG m8q
-                </span>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="State Hash"
-              >
-                <span>
-                  bs_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
-                </span>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow extend>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
-                title="POW"
-              >
-                <span>
-                  1877  2156  2740  2933  3223  4184  4388  5679  6076  6368  6397  6542  8218  8653
-                  10525 11377 13894 14969 15654 16121 17697 17741 18383 18420 18833 21641 22692 23027
-                  24838 25814 25933 26069 26464 26903 26944 28659 29277 30479 30642 30865 31523 32336
-                </span>
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
+          <AppTableAccordion type="bottom">
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Miner"
+                >
+                  <span>
+                    ak_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
+                  </span>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Nonce"
+                >
+                  <AeText face="mono-s">
+                    202
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Version"
+                >
+                  <AeText face="mono-s">
+                    1
+                  </AeText>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Prev Hash"
+                >
+                  <span>
+                    mh_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
+                  </span>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Prev Key Hash"
+                >
+                  <span>
+                    kh_  s6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N g25 UQc Zb8 caG m8q
+                  </span>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="State Hash"
+                >
+                  <span>
+                    bs_  25 UQc Zb8 caG m8q vs6 nNy KmS eSK Xya AKg ow5 8XL VEZ mBk Pmr L5N
+                  </span>
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="POW"
+                >
+                  <FormatPow :value="data.key_block.pow" />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+          </AppTableAccordion>
         </AppTableBody>
       </AppTable>
     </AppPanel>
@@ -248,11 +482,89 @@ import AppTableBody from '@/_designs/components/appTableBody'
 import AppTableRowColumn from '@/_designs/components/appTableRowColumn'
 import AppDefinition from '@/_designs/components/appDefinition'
 import AppPanel from '@/_designs/components/appPanel'
+import Age from '@/_designs/components/age'
+import FormatPow from '@/_designs/components/formatPow'
+import LabelType from '@/_designs/components/labelType'
+import AppTableAccordion from '@/_designs/components/appTableAccordion/index'
+import SearchBar from '@/_designs/components/searchbar'
 
-import { AeAddress, AeIcon, AeIdenticon, AeText } from '@aeternity/aepp-components-3'
+import { AeText } from '@aeternity/aepp-components-3'
+import FormatAddress from '../../components/formatAddress'
+import Confirmations from '../../components/confirmations'
+// import AccountGroup from '../../components/accountGroup'
+// import Account from '../../components/account/index'
+
+const generationData = {
+  'key_block': {
+    'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
+    'hash': 'kh_bYoiQhCxsS8RNhbumWan7WVwRb9yqoYmK4fbpVaeK6QxdpGvW',
+    'height': 29520,
+    'miner': 'ak_9sX7cqm1juxd2CQ9KtoF4GUFbAMtz4K3rAkk8nZ1WjsrRaXVz',
+    'nonce': 249211865583603,
+    'pow': [
+      15716933,
+      21248494,
+      31777385,
+      51629097,
+      52307438,
+      60314379,
+      77015848,
+      111225783,
+      129181552,
+      132689424,
+      137592480,
+      147779189,
+      157115594,
+      159419405,
+      196924597,
+      224550827,
+      247674216,
+      255348542,
+      259500283,
+      273293538,
+      274438493,
+      291412994,
+      293670763,
+      302377574,
+      303350137,
+      312112679,
+      334581844,
+      336923970,
+      336983229,
+      354918023,
+      355296365,
+      376120031,
+      392530749,
+      423359953,
+      435415471,
+      438152264,
+      441899177,
+      448727944,
+      491290085,
+      500541757,
+      530335760,
+      531882689
+    ],
+    'prev_hash': 'kh_2QvUEsbG25JRApPGarpSZYootptdS8yrPa3AaABR2b5bTiyZVq',
+    'prev_key_hash': 'kh_2QvUEsbG25JRApPGarpSZYootptdS8yrPa3AaABR2b5bTiyZVq',
+    'state_hash': 'bs_jS1VPZyvoXggfUdQTGtVrpFTZdSRFgWhoHYJKecgbAp6cGeHZ',
+    'target': 504509498,
+    'time': 1548670493483,
+    'version': 1,
+    'total': 92300.10,
+    'reward': 92300.10,
+    'tx': 1254
+  },
+  'micro_blocks': []
+}
+
 export default {
   name: 'AppGenerationDetails',
   components: {
+    Confirmations,
+    FormatAddress,
+    // Account,
+    // AccountGroup,
     AppTable,
     AppTableRow,
     AppTableCell,
@@ -260,27 +572,46 @@ export default {
     AppTableBody,
     AppTableRowColumn,
     AppDefinition,
-    AeAddress,
-    AeIdenticon,
-    AeIcon,
     AppPanel,
-    AeText
+    AeText,
+    LabelType,
+    Age,
+    FormatPow,
+    AppTableAccordion,
+    SearchBar
+  },
+  data: function () {
+    return {
+      data: generationData,
+      confirmations: 535
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-  .app-definition-account {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: .8rem;
-  }
 
   .currency {
     font-size: .7em;
     margin-left: -.5em;
     text-decoration: none;
   }
-
+  .app-block-height {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    &-num {
+      margin-left: .6rem;
+      @media (max-width: 449px) {
+        margin-top: .6rem;
+        font-weight: 500;
+      }
+      @media (min-width: 450px) {
+      font-size: 1.7rem;
+    }
+    }
+    &-wrapper {
+      display: flex;
+    }
+  }
 </style>
