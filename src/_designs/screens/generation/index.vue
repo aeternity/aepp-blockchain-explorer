@@ -1,5 +1,6 @@
 <template>
   <div class="app-generation-details">
+    <SearchBar placeholder="Search by address / txhash / block / name.aet" />
     <h1>Generation  Details</h1>
     <AppPanel>
       <AppTable>
@@ -485,6 +486,7 @@ import Age from '@/_designs/components/age'
 import FormatPow from '@/_designs/components/formatPow'
 import LabelType from '@/_designs/components/labelType'
 import AppTableAccordion from '@/_designs/components/appTableAccordion/index'
+import SearchBar from '@/_designs/components/searchbar'
 
 import { AeText } from '@aeternity/aepp-components-3'
 import FormatAddress from '../../components/formatAddress'
@@ -575,7 +577,8 @@ export default {
     LabelType,
     Age,
     FormatPow,
-    AppTableAccordion
+    AppTableAccordion,
+    SearchBar
   },
   data: function () {
     return {
