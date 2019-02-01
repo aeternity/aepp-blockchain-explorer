@@ -1,6 +1,11 @@
 <template>
   <div class="app-generation">
-    <h1>App-Generations</h1>
+    <PageHeader
+      title="Generations"
+      :has-nav="false"
+    >
+      <BreadCrumbs />
+    </PageHeader>
     <Generations>
       <Generation :data="data" />
       <Generation :data="data" />
@@ -21,6 +26,8 @@
 <script>
 import Generations from '@/_designs/components/generations'
 import Generation from '@/_designs/components/generation'
+import PageHeader from '@/_designs/components/PageHeader'
+import BreadCrumbs from '@/_designs/components/BreadCrumbs'
 import { AeButton } from '@aeternity/aepp-components-3'
 const generationData = {
   'key_block': {
@@ -89,7 +96,9 @@ export default {
   components: {
     AeButton,
     Generations,
-    Generation
+    Generation,
+    PageHeader,
+    BreadCrumbs
   },
   data: function () {
     return {
