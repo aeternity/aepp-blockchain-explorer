@@ -1,6 +1,8 @@
 <template>
   <div class="app-transactions">
-    <h1>App-Transactions</h1>
+    <PageHeader title="Dashboard">
+      <BreadCrumbs />
+    </PageHeader>
     <TxList>
       <TXListItem
         v-for="(item, index) in data"
@@ -14,6 +16,8 @@
 <script>
 import TxList from '@/_designs/components/transactions/txList'
 import TXListItem from '@/_designs/components/transactions/txListItem'
+import PageHeader from '@/_designs/components/PageHeader'
+import BreadCrumbs from '@/_designs/components/BreadCrumbs'
 
 const transactionData = [
   {
@@ -91,7 +95,9 @@ export default {
   name: 'AppTransactions',
   components: {
     TxList,
-    TXListItem
+    TXListItem,
+    PageHeader,
+    BreadCrumbs
   },
   data () {
     return {

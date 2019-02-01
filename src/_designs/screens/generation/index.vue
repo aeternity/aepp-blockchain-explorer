@@ -1,7 +1,9 @@
 <template>
   <div class="app-generation-details">
     <SearchBar placeholder="Search by address / txhash / block / name.aet" />
-    <h1>Generation  Details</h1>
+    <PageHeader title="Generation Details">
+      <BreadCrumbs />
+    </PageHeader>
     <AppPanel>
       <AppTable>
         <AppTableHeader>
@@ -478,6 +480,8 @@ import Age from '@/_designs/components/age'
 import FormatPow from '@/_designs/components/formatPow'
 import LabelType from '@/_designs/components/labelType'
 import AppTableAccordion from '@/_designs/components/appTableAccordion'
+import PageHeader from '@/_designs/components/PageHeader'
+import BreadCrumbs from '@/_designs/components/BreadCrumbs'
 import Confirmations from '@/_designs/components/confirmations'
 import SearchBar from '@/_designs/components/searchbar'
 
@@ -570,6 +574,8 @@ export default {
     Age,
     FormatPow,
     AppTableAccordion,
+    PageHeader,
+    BreadCrumbs,
     SearchBar
   },
   data: function () {

@@ -1,10 +1,11 @@
 <template>
   <div class="app-dashboard">
-    <h1>App-Dashboard</h1>
+    <PageHeader title="Dashboard">
+      <BreadCrumbs />
+    </PageHeader>
     <GenerationDetails
       :data="generation"
       :dynamic-data="confirmations"
-      :status="loading"
     />
     <MicroBlocks>
       <MicroBlock :data="generation">
@@ -28,6 +29,9 @@ import MicroBlocks from '@/_designs/components/microBlocks'
 import MicroBlock from '@/_designs/components/microBlock'
 import Generations from '@/_designs/components/generations'
 import Generation from '@/_designs/components/generation'
+import PageHeader from '@/_designs/components/PageHeader'
+import BreadCrumbs from '@/_designs/components/BreadCrumbs'
+
 const generationData = {
   'key_block': {
     'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
@@ -94,17 +98,18 @@ const generationData = {
 export default {
   name: 'AppDashboard',
   components: {
+    PageHeader,
     MicroBlock,
     MicroBlocks,
     GenerationDetails,
     Generations,
-    Generation
+    Generation,
+    BreadCrumbs
   },
   data: function () {
     return {
       generation: generationData,
-      confirmations: 235,
-      loading: true
+      confirmations: 235
     }
   }
 }
