@@ -7,12 +7,21 @@
       <Generation :data="data" />
       <Generation :data="data" />
     </Generations>
+    <div class="btn-container">
+      <AeButton
+        face="round"
+        fill="neutral"
+      >
+        load more
+      </AeButton>
+    </div>
   </div>
 </template>
 
 <script>
 import Generations from '@/_designs/components/generations'
 import Generation from '@/_designs/components/generation'
+import { AeButton } from '@aeternity/aepp-components-3'
 const generationData = {
   'key_block': {
     'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
@@ -78,6 +87,7 @@ const generationData = {
 export default {
   name: 'AppGenerations',
   components: {
+    AeButton,
     Generations,
     Generation
   },
@@ -90,5 +100,10 @@ export default {
 </script>
 
 <style scoped>
-
+.btn-container{
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
