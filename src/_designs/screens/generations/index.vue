@@ -12,14 +12,7 @@
       <Generation :data="data" />
       <Generation :data="data" />
     </Generations>
-    <div class="btn-container">
-      <AeButton
-        face="round"
-        fill="neutral"
-      >
-        load more
-      </AeButton>
-    </div>
+    <LoadMore />
   </div>
 </template>
 
@@ -28,7 +21,7 @@ import Generations from '@/_designs/components/generations'
 import Generation from '@/_designs/components/generation'
 import PageHeader from '@/_designs/components/PageHeader'
 import BreadCrumbs from '@/_designs/components/BreadCrumbs'
-import { AeButton } from '@aeternity/aepp-components-3'
+import LoadMore from '../..//components/loadMore'
 const generationData = {
   'key_block': {
     'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
@@ -94,11 +87,11 @@ const generationData = {
 export default {
   name: 'AppGenerations',
   components: {
-    AeButton,
     Generations,
     Generation,
     PageHeader,
-    BreadCrumbs
+    BreadCrumbs,
+    LoadMore
   },
   data: function () {
     return {
@@ -107,11 +100,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.btn-container{
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-}
-</style>
