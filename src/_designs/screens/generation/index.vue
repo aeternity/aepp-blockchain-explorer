@@ -1,5 +1,6 @@
 <template>
   <div class="app-generation-details">
+    <SearchBar placeholder="Search by address / txhash / block / name.aet" />
     <PageHeader title="Generation Details">
       <BreadCrumbs />
     </PageHeader>
@@ -489,6 +490,7 @@ import LabelType from '@/_designs/components/labelType'
 import AppTableAccordion from '@/_designs/components/appTableAccordion/index'
 import PageHeader from '@/_designs/components/PageHeader'
 import BreadCrumbs from '@/_designs/components/BreadCrumbs'
+import SearchBar from '@/_designs/components/searchbar'
 
 import { AeText } from '@aeternity/aepp-components-3'
 import FormatAddress from '../../components/formatAddress'
@@ -581,7 +583,8 @@ export default {
     FormatPow,
     AppTableAccordion,
     PageHeader,
-    BreadCrumbs
+    BreadCrumbs,
+    SearchBar
   },
   data: function () {
     return {
