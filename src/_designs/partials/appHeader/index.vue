@@ -8,15 +8,18 @@
       <!--Transactions-->
       <!--</AppNavLink>-->
     </AppNav>
+    <NetworkName />
   </header>
 </template>
 
 <script>
 import AppNav from '@/_designs/partials/appNav'
+import NetworkName from '../../components/networkName/networkName'
 export default {
   name: 'AppHeader',
   components: {
-    AppNav
+    AppNav,
+    NetworkName
   }
 }
 </script>
