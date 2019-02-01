@@ -36,8 +36,9 @@ export default {
   .search-bar {
     display: inline-block;
     position: relative;
+    width: 100%;
     &-input {
-      width: 540px;
+      width: 100%;
       border-radius: 4px;
       border: none;
       padding: 1em 2.5em 1em .9em;
