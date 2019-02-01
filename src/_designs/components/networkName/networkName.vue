@@ -22,6 +22,7 @@ export default {}
 
     .container{
       @extend %face-sans-xs;
+      @extend %face-uppercase-xs;
       font-weight:500;
       padding:1rem 1.2rem;
       margin:1.2rem 1.2rem 0 0;
