@@ -40,9 +40,9 @@ export default {
       width: 540px;
       border-radius: 4px;
       border: none;
-      padding: .7em 2.5em .7em .9em;
+      padding: 1em 2.5em 1em .9em;
       color: $color-neutral-negative-1;
-      @extend %face-mono-s;
+      @extend %face-mono-base;
     }
 
     &-button {
@@ -50,11 +50,12 @@ export default {
       background-color: transparent;
       cursor: pointer;
       position: absolute;
-      right: 5px;
-      top: 7px;
+      right: .7em;
+      top: .9em;
 
       .ae-icon {
-        font-size: 22px;
+        font-size: 1.5em;
+        color: $color-neutral;
       }
     }
   }
