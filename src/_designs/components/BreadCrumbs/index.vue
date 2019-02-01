@@ -40,7 +40,7 @@ export default {
               &:after {
                 content: '>';
                 text-align: center;
-                margin: 0 .25rem;
+                margin-right: .25rem;
               }
             }
             &.active {
