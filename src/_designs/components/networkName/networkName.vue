@@ -1,13 +1,9 @@
 <template>
-  <div>
-    <span
-      class="container"
-    >
-      <span class="network-name">
-        Roma net
-      </span>
+  <span class="network-name">
+    <span class="container">
+      Roma net
     </span>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -16,20 +12,22 @@ export default {}
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../style/mixins';
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
 
-  .container {
+  .network-name {
     display: flex;
     justify-content: flex-end;
-    color: $white;
+    color: $color-white;
 
-    .network-name{
-      @include font-size(xs);
+    .container{
+      @extend %face-sans-xs;
       font-weight:500;
-      padding:15px 20px;
-      margin:30px 20px 0 0;
-      background: #F7296E;
-      border-radius: 5px;
+      padding:1rem 1.2rem;
+      margin:1.2rem 1.2rem 0 0;
+      background-color: $color-primary;
+      border-radius: 0.3rem;
     }
+
   }
 </style>
