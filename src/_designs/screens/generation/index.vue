@@ -1,6 +1,8 @@
 <template>
   <div class="app-generation-details">
-    <h1>Generation  Details</h1>
+    <PageHeader title="Generation Details">
+      <BreadCrumbs />
+    </PageHeader>
     <AppPanel>
       <AppTable>
         <AppTableHeader>
@@ -485,6 +487,8 @@ import Age from '@/_designs/components/age'
 import FormatPow from '@/_designs/components/formatPow'
 import LabelType from '@/_designs/components/labelType'
 import AppTableAccordion from '@/_designs/components/appTableAccordion/index'
+import PageHeader from '@/_designs/components/PageHeader'
+import BreadCrumbs from '@/_designs/components/BreadCrumbs'
 
 import { AeText } from '@aeternity/aepp-components-3'
 import FormatAddress from '../../components/formatAddress'
@@ -575,7 +579,9 @@ export default {
     LabelType,
     Age,
     FormatPow,
-    AppTableAccordion
+    AppTableAccordion,
+    PageHeader,
+    BreadCrumbs
   },
   data: function () {
     return {
