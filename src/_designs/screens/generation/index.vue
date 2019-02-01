@@ -37,26 +37,18 @@
           <AppTableRow>
             <AppTableRowColumn width="medium">
               <AppTableCell extend>
-                <!--<AccountGroup>-->
-                <!--<Account-->
-                <!--:value="data.key_block.beneficiary"-->
-                <!--title="Sender"-->
-                <!--icon-->
-                <!--/>-->
-                <!--<Account-->
-                <!--:value="data.key_block.beneficiary"-->
-                <!--title="Recipient"-->
-                <!--icon-->
-                <!--/>-->
-                <!--</AccountGroup>-->
-                <AppDefinition
-                  title="Beneficiary"
-                >
-                  <FormatAddress
+                <AccountGroup>
+                  <Account
                     :value="data.key_block.beneficiary"
-                    length="responsive"
+                    title="Sender"
+                    icon
                   />
-                </AppDefinition>
+                  <Account
+                    :value="data.key_block.beneficiary"
+                    title="Recipient"
+                    icon
+                  />
+                </AccountGroup>
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn>
@@ -252,7 +244,7 @@
                   <span class="app-block-height-num">
                     6606081
                   </span>
-                  <Confirmations :value="confirmations" />
+                  <Confirmations :value="dynamicdata" />
                 </div>
               </AppTableCell>
             </AppTableRowColumn>
@@ -485,14 +477,14 @@ import AppPanel from '@/_designs/components/appPanel'
 import Age from '@/_designs/components/age'
 import FormatPow from '@/_designs/components/formatPow'
 import LabelType from '@/_designs/components/labelType'
-import AppTableAccordion from '@/_designs/components/appTableAccordion/index'
+import AppTableAccordion from '@/_designs/components/appTableAccordion'
+import Confirmations from '@/_designs/components/confirmations'
 import SearchBar from '@/_designs/components/searchbar'
 
 import { AeText } from '@aeternity/aepp-components-3'
 import FormatAddress from '../../components/formatAddress'
-import Confirmations from '../../components/confirmations'
-// import AccountGroup from '../../components/accountGroup'
-// import Account from '../../components/account/index'
+import AccountGroup from '@/_designs/components/accountGroup'
+import Account from '@/_designs/components/account'
 
 const generationData = {
   'key_block': {
@@ -563,8 +555,8 @@ export default {
   components: {
     Confirmations,
     FormatAddress,
-    // Account,
-    // AccountGroup,
+    Account,
+    AccountGroup,
     AppTable,
     AppTableRow,
     AppTableCell,
