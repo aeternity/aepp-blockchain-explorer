@@ -7,7 +7,9 @@
       <AppNavAccordion icon="search">
         <div class="mobile-search">
           <SearchBar />
-          <AeText face="sans-xs">Search by address / txhash / block / name.aet</AeText>
+          <AeText face="sans-xs">
+            Search by address / txhash / block / name.aet
+          </AeText>
         </div>
       </AppNavAccordion>
     </div>
