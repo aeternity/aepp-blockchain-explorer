@@ -35,7 +35,15 @@ export default {
   @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
 
     .app-page-header {
-      padding: .6rem 0;
+      padding: .6rem 3rem;
+      background-color: $color-neutral-positive-1;
+      margin: 0 -3rem;
+      margin-bottom: -2.5rem;
+      padding-bottom: 3rem;
+      @media (min-width: 768px) {
+        padding: .6rem 0;
+        margin: 0;
+      }
       &-title {
         font-size: 1.7rem;
         margin-bottom: 0;

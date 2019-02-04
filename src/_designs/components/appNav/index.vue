@@ -11,5 +11,9 @@ export default {
 </script>
 
 <style scoped>
+  .app-nav {
+    display: flex;
+    flex-direction: column;
+  }
 
 </style>

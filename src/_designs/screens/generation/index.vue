@@ -483,7 +483,7 @@ import AppTableAccordion from '@/_designs/components/appTableAccordion'
 import PageHeader from '@/_designs/components/PageHeader'
 import BreadCrumbs from '@/_designs/components/BreadCrumbs'
 import Confirmations from '@/_designs/components/confirmations'
-import SearchBar from '@/_designs/components/searchbar'
+import SearchBar from '@/_designs/components/searchBar'
 
 import { AeText } from '@aeternity/aepp-components-3'
 import FormatAddress from '../../components/formatAddress'
