@@ -38,7 +38,7 @@ export default {
       default: 'burger'
     }
   },
-  data: function () {
+  data () {
     return { openMenu: false }
   },
   methods: {
