@@ -9,10 +9,8 @@
     />
     <MicroBlocks>
       <MicroBlock :data="generation">
-        <Generations>
-          <Generation :data="generation" />
-          <Generation :data="generation" />
-        </Generations>
+        <Generation :data="generation" />
+        <Generation :data="generation" />
       </MicroBlock>
       <MicroBlock :data="generation">
         <Generations>

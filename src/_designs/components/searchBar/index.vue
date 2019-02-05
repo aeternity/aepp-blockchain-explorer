@@ -25,7 +25,7 @@ export default {
   props: {
     placeholder: {
       type: String,
-      default: 'search'
+      default: 'Search'
     }
   }
 }
@@ -37,26 +37,32 @@ export default {
     display: inline-block;
     position: relative;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    border-radius: .4rem;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
     &-input {
       width: 100%;
-      border-radius: 4px;
       border: none;
-      padding: 1em 2.5em 1em .9em;
+      padding: 1.3rem .6rem;
       color: $color-neutral-negative-1;
-      @extend %face-mono-base;
+      @extend %face-sans-base;
     }
 
     &-button {
       border: none;
       background-color: transparent;
       cursor: pointer;
-      position: absolute;
-      right: .7em;
-      top: .9em;
-
+      justify-content: center;
+      align-items: center;
+      line-height: 0;
+      padding: 1.3rem .6rem;
       .ae-icon {
-        font-size: 1.5em;
-        color: $color-neutral;
+        font-size: 1.5rem;
+        color: $color-neutral-negative-1;
       }
     }
   }
