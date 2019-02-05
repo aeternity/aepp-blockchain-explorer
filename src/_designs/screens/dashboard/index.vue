@@ -3,28 +3,17 @@
     <PageHeader title="Dashboard">
       <BreadCrumbs />
     </PageHeader>
-    <GenerationDetails
-      :data="generation"
-      :dynamic-data="confirmations"
-    />
-    <MicroBlocks>
-      <MicroBlock :data="generation">
-        <Generation :data="generation" />
-        <Generation :data="generation" />
-      </MicroBlock>
-      <MicroBlock :data="generation">
-        <Generations>
-          <Generation :data="generation" />
-          <Generation :data="generation" />
-        </Generations>
-      </MicroBlock>
-    </MicroBlocks>
+    <Generations>
+      <router-link to="generations/generation">
+        <Generation :data="data" />
+      </router-link>
+      <Generation :data="data" />
+      <Generation :data="data" />
+      <Generation :data="data" />
+    </Generations>
   </div>
 </template>
 <script>
-import GenerationDetails from '@/_designs/components/generationDetails'
-import MicroBlocks from '@/_designs/components/microBlocks'
-import MicroBlock from '@/_designs/components/microBlock'
 import Generations from '@/_designs/components/generations'
 import Generation from '@/_designs/components/generation'
 import PageHeader from '@/_designs/components/PageHeader'
@@ -97,16 +86,13 @@ export default {
   name: 'AppDashboard',
   components: {
     PageHeader,
-    MicroBlock,
-    MicroBlocks,
-    GenerationDetails,
     Generations,
     Generation,
     BreadCrumbs
   },
   data: function () {
     return {
-      generation: generationData,
+      data: generationData,
       confirmations: 235
     }
   }
