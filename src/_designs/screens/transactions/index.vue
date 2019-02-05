@@ -10,6 +10,7 @@
         :data="item.tx"
       />
     </TxList>
+    <LoadMoreButton />
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import TxList from '@/_designs/components/transactions/txList'
 import TXListItem from '@/_designs/components/transactions/txListItem'
 import PageHeader from '@/_designs/components/PageHeader'
 import BreadCrumbs from '@/_designs/components/BreadCrumbs'
+import LoadMoreButton from '@/_designs/components/loadMoreButton'
 
 const transactionData = [
   {
@@ -97,7 +99,8 @@ export default {
     TxList,
     TXListItem,
     PageHeader,
-    BreadCrumbs
+    BreadCrumbs,
+    LoadMoreButton
   },
   data () {
     return {
