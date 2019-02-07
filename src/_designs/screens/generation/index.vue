@@ -180,7 +180,7 @@ export default {
     BreadCrumbs,
     TXListItem
   },
-  data: function () {
+  data () {
     return {
       generation: generationData,
       confirmations: 535,
