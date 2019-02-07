@@ -64,8 +64,9 @@ export default {
         }
       &-content {
         display: flex;
-        @media (max-width:450px) {
           & .ae-icon {
+            margin-left: .3rem;
+          @media (max-width:450px) {
             display: none;
           }
         }

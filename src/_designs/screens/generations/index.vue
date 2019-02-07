@@ -1,6 +1,11 @@
 <template>
   <div class="app-generation">
-    <h1>App-Generations</h1>
+    <PageHeader
+      title="Generations"
+      :has-nav="false"
+    >
+      <BreadCrumbs />
+    </PageHeader>
     <Generations>
       <Generation :data="data" />
       <Generation :data="data" />
@@ -13,6 +18,9 @@
 <script>
 import Generations from '@/_designs/components/generations'
 import Generation from '@/_designs/components/generation'
+import PageHeader from '@/_designs/components/PageHeader'
+import BreadCrumbs from '@/_designs/components/BreadCrumbs'
+
 const generationData = {
   'key_block': {
     'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
@@ -79,7 +87,9 @@ export default {
   name: 'AppGenerations',
   components: {
     Generations,
-    Generation
+    Generation,
+    PageHeader,
+    BreadCrumbs
   },
   data: function () {
     return {
