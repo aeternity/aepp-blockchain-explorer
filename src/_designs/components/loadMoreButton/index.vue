@@ -37,7 +37,6 @@ export default {
     }
     .ae-button {
       max-width: 18rem;
-      min-width: 16rem;
       display: block;
       margin: auto;
       z-index: 1;
