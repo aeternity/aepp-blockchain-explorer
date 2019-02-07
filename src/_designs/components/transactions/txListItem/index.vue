@@ -127,6 +127,7 @@ export default {
     border-radius: .4rem;
     box-shadow: 0 0 16px 0 rgba(27,68,121,0.10);
     margin-bottom: 1rem;
+    width: 100%;
     @media (min-width: 550px) {
       flex-direction: row;
       border-radius: 0;
