@@ -27,23 +27,20 @@ export default {
     min-height: 60px;
     &::after {
       content: "";
-      display:block;
-      position:absolute;
+      display: block;
+      position: absolute;
       width: 100%;
-      left:0;
+      left: 0;
       top: 50%;
       border-bottom: 2px solid $color-neutral-positive-2;
+      transform: translateY(-50%);
     }
     .ae-button {
-      max-width: 310px;
-      min-width: 260px;
-      position:absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      max-width: 18rem;
+      min-width: 16rem;
+      display: block;
       margin: auto;
-      z-index: 20;
+      z-index: 1;
     }
   }
 </style>
