@@ -4,9 +4,9 @@
       <BreadCrumbs />
     </PageHeader>
     <Generations>
-      <router-link to="generations/generation">
+      <RouterLink to="generations/generation">
         <Generation :data="data" />
-      </router-link>
+      </RouterLink>
       <Generation :data="data" />
       <Generation :data="data" />
       <Generation :data="data" />

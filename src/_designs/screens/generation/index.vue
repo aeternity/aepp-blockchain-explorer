@@ -31,11 +31,8 @@
 import GenerationDetails from '@/_designs/components/generationDetails'
 import MicroBlocks from '@/_designs/components/microBlocks'
 import MicroBlock from '@/_designs/components/microBlock'
-import Generations from '@/_designs/components/generations'
-import Generation from '@/_designs/components/generation'
 import PageHeader from '@/_designs/components/PageHeader'
 import BreadCrumbs from '@/_designs/components/BreadCrumbs'
-import TxList from '@/_designs/components/transactions/txList'
 import TXListItem from '@/_designs/components/transactions/txListItem'
 
 const transactionData = [
@@ -180,10 +177,7 @@ export default {
     MicroBlock,
     MicroBlocks,
     GenerationDetails,
-    Generations,
-    Generation,
     BreadCrumbs,
-    TxList,
     TXListItem
   },
   data: function () {
