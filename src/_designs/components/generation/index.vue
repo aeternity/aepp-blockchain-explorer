@@ -8,11 +8,11 @@
             fill="black"
           />
         </div>
-        <BlockHeight :value="data.key_block.height" />
+        <BlockHeight :value="data.keyBlock.height" />
       </div>
       <div class="container-first-inner">
         <Account
-          :value="data.key_block.beneficiary"
+          :value="data.keyBlock.beneficiary"
           title="Sender"
           icon
         />
@@ -24,17 +24,14 @@
           class="container-last-inner"
           title="Time since mined"
         >
-          <Age :time="data.key_block.time" />
+          <Age :time="data.keyBlock.time" />
         </AppDefinition>
 
         <AppDefinition
           class="container-last-inner"
           title="Transactions"
         >
-          <FormatAeUnit
-            :value="data.key_block.total"
-            type="tx"
-          />
+          {{ data.numTransactions }}
         </AppDefinition>
       </div>
       <div class="container-last-wrapper">
@@ -43,7 +40,7 @@
           title="Total"
         >
           <FormatAeUnit
-            :value="data.key_block.total"
+            :value="data.keyBlock.target"
             type="ae"
           />
         </AppDefinition>
@@ -52,7 +49,7 @@
           title="Reward"
         >
           <FormatAeUnit
-            :value="data.key_block.total"
+            :value="data.keyBlock.target"
             type="ae"
           />
         </AppDefinition>

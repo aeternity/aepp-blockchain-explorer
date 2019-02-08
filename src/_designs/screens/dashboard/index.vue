@@ -3,13 +3,15 @@
     <PageHeader title="Dashboard">
       <BreadCrumbs />
     </PageHeader>
-    <Generations>
-      <RouterLink to="generations/generation">
-        <Generation :data="data" />
-      </RouterLink>
-      <Generation :data="data" />
-      <Generation :data="data" />
-      <Generation :data="data" />
+    <Generations v-if="generations">
+      <!--<RouterLink to="generations/generation">-->
+      <!--<Generation :data="data" />-->
+      <!--</RouterLink>-->
+      <Generation
+        v-for="(generation, number) in generations"
+        :key="number"
+        :data="generation"
+      />
     </Generations>
   </div>
 </template>
@@ -18,6 +20,7 @@ import Generations from '@/_designs/components/generations'
 import Generation from '@/_designs/components/generation'
 import PageHeader from '@/_designs/components/PageHeader'
 import BreadCrumbs from '@/_designs/components/BreadCrumbs'
+import { mapState } from 'vuex'
 
 const generationData = {
   'key_block': {
@@ -90,11 +93,17 @@ export default {
     Generation,
     BreadCrumbs
   },
-  data: function () {
+  data () {
     return {
-      data: generationData,
-      confirmations: 235
+      data: generationData
     }
+  },
+  computed:
+    mapState('blocks', [
+      'generations'
+    ]),
+  mounted: async function () {
+    await this.$store.dispatch('blocks/getLatestGenerations', 5)
   }
 }
 </script>
