@@ -8,12 +8,12 @@
             fill="black"
           />
         </div>
-        <BlockHeight :value="data.key_block.height" />
+        <BlockHeight :value="data.keyBlock.height" />
       </div>
       <div class="container-first-inner">
         <Account
-          :value="data.key_block.beneficiary"
-          title="Sender"
+          :value="data.keyBlock.beneficiary"
+          title="Beneficiary"
           icon
         />
       </div>
@@ -24,37 +24,14 @@
           class="container-last-inner"
           title="Time since mined"
         >
-          <Age :time="data.key_block.time" />
+          <Age :time="data.keyBlock.time" />
         </AppDefinition>
 
         <AppDefinition
           class="container-last-inner"
           title="Transactions"
         >
-          <FormatAeUnit
-            :value="data.key_block.total"
-            type="tx"
-          />
-        </AppDefinition>
-      </div>
-      <div class="container-last-wrapper">
-        <AppDefinition
-          class="container-last-inner"
-          title="Total"
-        >
-          <FormatAeUnit
-            :value="data.key_block.total"
-            type="ae"
-          />
-        </AppDefinition>
-        <AppDefinition
-          class="container-last-inner"
-          title="Reward"
-        >
-          <FormatAeUnit
-            :value="data.key_block.total"
-            type="ae"
-          />
+          {{ data.numTransactions }}
         </AppDefinition>
       </div>
     </div>
@@ -64,7 +41,6 @@
 <script>
 
 import AppDefinition from '@/_designs/components/appDefinition'
-import FormatAeUnit from '@/_designs/components/formatAeUnit'
 import Account from '@/_designs/components/account'
 import Age from '@/_designs/components/age'
 import LabelType from '@/_designs/components/labelType'
@@ -76,7 +52,6 @@ export default {
     BlockHeight,
     LabelType,
     AppDefinition,
-    FormatAeUnit,
     Account,
     Age
   },
