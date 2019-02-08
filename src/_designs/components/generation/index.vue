@@ -13,7 +13,7 @@
       <div class="container-first-inner">
         <Account
           :value="data.keyBlock.beneficiary"
-          title="Sender"
+          title="Beneficiary"
           icon
         />
       </div>
@@ -34,26 +34,6 @@
           {{ data.numTransactions }}
         </AppDefinition>
       </div>
-      <div class="container-last-wrapper">
-        <AppDefinition
-          class="container-last-inner"
-          title="Total"
-        >
-          <FormatAeUnit
-            :value="data.keyBlock.target"
-            type="ae"
-          />
-        </AppDefinition>
-        <AppDefinition
-          class="container-last-inner"
-          title="Reward"
-        >
-          <FormatAeUnit
-            :value="data.keyBlock.target"
-            type="ae"
-          />
-        </AppDefinition>
-      </div>
     </div>
   </div>
 </template>
@@ -61,7 +41,6 @@
 <script>
 
 import AppDefinition from '@/_designs/components/appDefinition'
-import FormatAeUnit from '@/_designs/components/formatAeUnit'
 import Account from '@/_designs/components/account'
 import Age from '@/_designs/components/age'
 import LabelType from '@/_designs/components/labelType'
@@ -73,7 +52,6 @@ export default {
     BlockHeight,
     LabelType,
     AppDefinition,
-    FormatAeUnit,
     Account,
     Age
   },
