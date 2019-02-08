@@ -7,9 +7,7 @@
           <SearchBar placeholder="Search by address / txhash / block / name.aet" />
         </div>
         <div class="network">
-          <div class="network">
-            network
-          </div>
+          <NetworkName />
         </div>
       </div>
     </div>
@@ -19,11 +17,13 @@
 <script>
 import AppMainNav from '@/_designs/partials/appMainNav'
 import SearchBar from '@/_designs/components/searchBar'
+import NetworkName from '@/_designs/components/networkName'
 export default {
   name: 'AppHeader',
   components: {
     AppMainNav,
-    SearchBar
+    SearchBar,
+    NetworkName
   }
 }
 </script>
