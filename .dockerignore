@@ -1,10 +1,3 @@
 Dockerfile
 Makefile
-babel.config.js
-deploy.enc
 node_modules
-package-lock.json
-package.json
-public
-src
-yarn.lock
