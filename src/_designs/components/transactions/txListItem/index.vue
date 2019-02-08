@@ -9,6 +9,7 @@
           />
         </div>
         <AppDefinition
+          v-if="data.time"
           title="Age"
         >
           <Age :time="data.time" />

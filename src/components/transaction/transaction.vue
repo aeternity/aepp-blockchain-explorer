@@ -41,4 +41,4 @@ export default {
   }
 }
 </script>
-<style src='./transaction.scss' lang='scss' />
+<style scoped src='./transaction.scss' lang='scss' />
