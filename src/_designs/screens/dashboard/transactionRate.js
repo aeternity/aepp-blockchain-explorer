@@ -51,6 +51,17 @@ export const transactionRate = {
           }
         }
       ]
+    },
+    tooltips: {
+      displayColors: false,
+      callbacks: {
+        label: function (tooltipItem) {
+          return tooltipItem.xLabel + ': ' + tooltipItem.yLabel
+        },
+        title: function (tooltipItem, data) {}
+      },
+      bodyFontColor: '#fff',
+      backgroundColor: '#FF0D6A'
     }
   }
 }

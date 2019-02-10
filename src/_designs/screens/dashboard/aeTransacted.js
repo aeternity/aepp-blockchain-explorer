@@ -6,7 +6,7 @@ export const aeTransacted = {
     datasets: [
       {
         label: 'Transactions',
-        data: [1110, 1111110, 1, 11111, 2111, 6711111, 6111112, 27111111, 14],
+        data: [1111110, 1110, 1, 11111, 27111111, 6711111, 6111112, 2110, 14],
         fill: false,
         borderColor: [
           '#FF0D6A'
@@ -33,7 +33,7 @@ export const aeTransacted = {
             beginAtZero: true,
             padding: 25,
             callback: function (label, index, labels) {
-              return label / 1000 + 'AE'
+              return label / 1000 + 'k AE'
             },
             fontSize: 12
           },
@@ -51,7 +51,19 @@ export const aeTransacted = {
           }
         }
       ]
+    },
+    tooltips: {
+      displayColors: false,
+      callbacks: {
+        label: function (tooltipItem) {
+          return tooltipItem.xLabel + ': ' + tooltipItem.yLabel
+        },
+        title: function (tooltipItem, data) {}
+      },
+      bodyFontColor: '#fff',
+      backgroundColor: '#FF0D6A'
     }
+
   }
 }
 

@@ -1,10 +1,10 @@
 <template>
   <div class="app-dashboard">
-    <div class="graphs">
-      <div class="graph-transaction-rate">
+    <div class="graphs-container">
+      <div class="graph">
         <canvas id="transaction-rate" />
       </div>
-      <div class="graph-ae-transacted">
+      <div class="graph">
         <canvas id="ae-transacted" />
       </div>
     </div>
@@ -31,16 +31,16 @@ export default {
     Generations,
     Generation
   },
-  computed:
-    mapState('blocks', [
-      'generations'
-    ]),
   data () {
     return {
       transactionRate: transactionRate,
       aeTransacted: aeTransacted
     }
   },
+  computed:
+    mapState('blocks', [
+      'generations'
+    ]),
   mounted: async function () {
     this.createChart('transaction-rate', this.transactionRate)
     this.createChart('ae-transacted', this.aeTransacted)
@@ -49,7 +49,7 @@ export default {
   methods: {
     createChart (chartId, chartData) {
       const ctx = document.getElementById(chartId)
-      new Chart(ctx, {
+      return new Chart(ctx, {
         type: chartData.type,
         data: chartData.data,
         options: chartData.options
@@ -59,21 +59,21 @@ export default {
 }
 </script>
 <style lang="scss">
+@import "~@aeternity/aepp-components-3/src/styles/fallback/mixins";
 .app-dashboard {
-  .graphs{
-    canvas{
-      width:100%;
-      height: auto;
-    }
-    .graph-transaction-rate{
-      max-width:40em;
-      max-height: 20em;
-      margin-bottom: 10em;
-    }
-    .graph-ae-transacted{
-      margin-bottom: 10em;
-      max-width:40em;
-      max-height: 20em;
+  .graphs-container{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    .graph{
+      width: 30em;
+      height: 15em;
+      margin: 0 2em 3em 0;
+      @include phone {
+        width: 20em;
+        height: 10em;
+      }
     }
   }
 }
