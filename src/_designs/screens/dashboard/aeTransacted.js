@@ -24,7 +24,7 @@ export const aeTransacted = {
     title: {
       display: true,
       text: 'AE transacted per day',
-      fontSize: 18
+      fontSize: 15
     },
     scales: {
       yAxes: [
@@ -35,19 +35,19 @@ export const aeTransacted = {
             callback: function (label, index, labels) {
               return label / 1000 + 'k AE'
             },
-            fontSize: 12
+            fontSize: 10
           },
           scaleLabel: {
             display: true,
             labelString: '1k = 1000',
-            fontSize: 12
+            fontSize: 10
           }
         }
       ],
       xAxes: [
         {
           ticks: {
-            fontSize: 12
+            fontSize: 10
           }
         }
       ]

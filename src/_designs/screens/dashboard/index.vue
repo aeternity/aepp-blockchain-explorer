@@ -67,10 +67,11 @@ export default {
     flex-wrap: wrap;
 
     .graph{
-      width: 30em;
-      height: 15em;
-      margin: 0 2em 3em 0;
+      width: 22em;
+      height: 11em;
+      margin: 2em 1em 1em 0;
       @include phone {
+        margin: 5em 1em 1em 0;
         width: 20em;
         height: 10em;
       }

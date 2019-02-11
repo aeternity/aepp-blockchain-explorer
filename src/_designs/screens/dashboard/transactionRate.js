@@ -24,7 +24,7 @@ export const transactionRate = {
     title: {
       display: true,
       text: 'Transactions per day',
-      fontSize: 18
+      fontSize: 15
     },
     scales: {
       yAxes: [
@@ -35,19 +35,19 @@ export const transactionRate = {
             callback: function (label, index, labels) {
               return label / 1000 + 'k'
             },
-            fontSize: 12
+            fontSize: 10
           },
           scaleLabel: {
             display: true,
             labelString: '1k = 1000',
-            fontSize: 12
+            fontSize: 10
           }
         }
       ],
       xAxes: [
         {
           ticks: {
-            fontSize: 12
+            fontSize: 10
           }
         }
       ]
