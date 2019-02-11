@@ -16,6 +16,8 @@
 <script>
 // import Generations from '~/components/generations'
 // import Generation from '~/components/generation'
+import '@aeternity/aepp-components-3/dist/aepp.components.css'
+import '@aeternity/aepp-components-3/dist/aepp.fonts.css'
 import PageHeader from '~/components/PageHeader'
 import BreadCrumbs from '~/components/BreadCrumbs'
 
