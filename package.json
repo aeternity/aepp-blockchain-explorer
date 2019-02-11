@@ -1,36 +1,34 @@
 {
-  "name": "aepp-blockchain-explorer",
-  "version": "0.5.0",
+  "name": "aepps-blockchain-explorer",
+  "version": "1.0.0",
   "description": "Blockchain Explorer for Aeternity",
-  "author": "Philipp Klein <klein.philipp@gmail.com>",
+  "author": "dev@aeternity.com",
   "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint --no-fix",
-    "test": "npm run lint"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
   },
   "dependencies": {
-    "@aeternity/aepp-components": "2.0.13",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.0.0",
+    "@nuxtjs/axios": "^5.0.0",
     "@aeternity/aepp-components-3": "^3.0.0-alpha.8",
     "@aeternity/aepp-sdk": "1.2.1",
     "bignumber.js": "^8.0.1",
-    "lodash": "^4.17.5",
-    "vue": "^2.5.17",
-    "vue-popperjs": "^1.2.6",
-    "vue-router": "^3.0.2",
-    "vuex": "^3.0.1"
+    "lodash": "^4.17.5"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
-    "@vue/eslint-config-standard": "^4.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.17"
+    "nodemon": "^1.11.0",
+    "babel-eslint": "^8.2.1",
+    "eslint": "^5.0.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-vue": "^4.0.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "2.6.2",
+    "prettier": "1.14.3"
   }
 }
