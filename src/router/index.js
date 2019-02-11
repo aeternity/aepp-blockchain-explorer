@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Address from '@/screens/address/address.vue'
 import Status from '@/screens/status/status.vue'
 import GenerationList from '@/screens/generationList/generationList.vue'
+import TransactionList from '@/screens/transactionList/transactionList.vue'
 
 // TODO: To be removed after new designs are completed.
 import newDesignRouters from '../_designs/router'
@@ -31,6 +32,10 @@ export default new Router({
     name: 'GenerationList',
     path: '/generations',
     component: GenerationList
+  }, {
+    name: TransactionList,
+    path: '/transactions/:start/:end',
+    component: TransactionList
   }, {
     name: 'Generation',
     path: '/generation/:generationId',

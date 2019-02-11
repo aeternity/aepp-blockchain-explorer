@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. This change
 log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.7.0]
+### Added
+- Transaction history for an account
+- Transactions page to show transactions between two generations
+- Rebased blockchain explorer on [aepp-middleware](https://github.com/aeternity/aepp-middleware)
+
+
+[0.7.0]: https://github.com/aeternity/aepp-blockchain-explorer/compare/0.6.0...0.7.0
+
+
 ## [0.6.0]
 ### Added
 - Show contract ID in contract transcations
