@@ -3,23 +3,33 @@
     <PageHeader title="Dashboard">
       <BreadCrumbs />
     </PageHeader>
-    <h1>Generations</h1>
-    <Generations v-if="generations">
-      <Generation
-        v-for="(generation, number) in generations"
-        :key="number"
-        :data="generation"
-      />
-    </Generations>
+    <div
+      v-if="Object.keys(generations).length"
+      class="generations-wrapper"
+    >
+      <h1>Generations</h1>
+      <Generations>
+        <Generation
+          v-for="(generation, number) in generations"
+          :key="number"
+          :data="generation"
+        />
+      </Generations>
+    </div>
     <br>
-    <h1>Transactions</h1>
-    <TxList v-if="transactionsList.length">
-      <TXListItem
-        v-for="(transaction, index) in transactionsList"
-        :key="index"
-        :data="transaction.tx"
-      />
-    </TxList>
+    <div
+      v-if="transactionsList.length"
+      class="transactions-wrapper"
+    >
+      <h1>Transactions</h1>
+      <TxList>
+        <TXListItem
+          v-for="(transaction, index) in transactionsList"
+          :key="index"
+          :data="transaction.tx"
+        />
+      </TxList>
+    </div>
   </div>
 </template>
 <script>
