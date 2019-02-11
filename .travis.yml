@@ -5,7 +5,7 @@ cache:
   directories:
    - node_modules
 env:
-- VUE_APP_EPOCH_URL='https://roma-net.aepps.com/'
+- VUE_APP_EPOCH_URL='https://roma-net.mdw.aepps.com/'
 install:
 - travis_wait npm install
 script:
