@@ -7,7 +7,7 @@
         <span class="visually-hidden">
           previous page
         </span>
-        <AeIcon name="back" />
+        <!--<AeIcon name="back" />-->
       </li>
       <li class="page-nav-list-item next">
         <span class="visually-hidden">
@@ -19,7 +19,11 @@
   </nav>
 </template>
 <script>
-import { AeIcon } from '@aeternity/aepp-components-3'
+let AeIcon
+if (process.browser) {
+  console.log(process.browser)
+  AeIcon = require('@aeternity/aepp-components-3')
+}
 export default {
   name: 'PageNav',
   components: {

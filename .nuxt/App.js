@@ -2,8 +2,9 @@ import Vue from 'vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
 import _6f6c098b from '../layouts/default.vue'
+import _777ba69c from '../layouts/index.vue'
 
-const layouts = { "_default": _6f6c098b }
+const layouts = { "_default": _6f6c098b,"_index": _777ba69c }
 
 export default {
   head: {"title":"aepps-blockchain-explorer","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Blockchain Explorer for Aeternity"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},

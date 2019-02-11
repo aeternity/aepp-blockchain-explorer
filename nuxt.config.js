@@ -32,8 +32,10 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [{
+    src: '~plugins/vue-touch',
+    ssr: false
+  }],
 
   /*
   ** Nuxt.js modules
@@ -56,6 +58,11 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    resolve: {
+      alias: {
+        vue: 'vue/dist/vue.js'
+      }
+    },
     extend (config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

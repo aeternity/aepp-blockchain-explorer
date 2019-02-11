@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import { AeIcon } from '~@aeternity/aepp-components-3'
+import { AeIcon } from '@aeternity/aepp-components-3'
 
 export default {
   name: 'AppNavAccordion',

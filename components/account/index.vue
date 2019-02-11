@@ -23,7 +23,7 @@
 <script>
 import AppDefinition from '~/components/appDefinition'
 import FormatAddress from '~/components/formatAddress'
-import { AeIcon, AeIdenticon } from '~@aeternity/aepp-components-3'
+import { AeIcon, AeIdenticon } from '@aeternity/aepp-components-3'
 
 export default {
   name: 'Account',

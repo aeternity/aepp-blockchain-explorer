@@ -1,3 +1,4 @@
+<!--
 <template>
   <div
     id="app"
@@ -15,6 +16,7 @@ import AppHeader from '~/partials/appHeader'
 import AppView from '~/partials/appView'
 
 export default {
+  layout: 'default',
   name: 'App',
   components: {
     AppHeader,
@@ -22,8 +24,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-@import '../styles/index';
+<style >
 .app {
   background-color: #F7FAFC;
   padding-bottom: 2rem;
@@ -34,3 +35,4 @@ export default {
     font-weight: normal;
   }
 </style>
+-->

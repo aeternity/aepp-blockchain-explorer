@@ -20,7 +20,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-  @import "@aeternity/aepp-components-3/src/styles/variables/colors";~
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
 
   .app-table-cell {
     display: flex;

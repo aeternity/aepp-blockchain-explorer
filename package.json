@@ -13,6 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@aeternity/aepp-components": "2.0.13",
     "@aeternity/aepp-components-3": "^3.0.0-alpha.8",
     "@aeternity/aepp-sdk": "1.2.1",
     "@nuxtjs/axios": "^5.0.0",
@@ -20,7 +21,10 @@
     "bignumber.js": "^8.0.1",
     "cross-env": "^5.2.0",
     "lodash": "^4.17.5",
-    "nuxt": "^2.0.0"
+    "node-sass": "^4.11.0",
+    "nuxt": "^2.4.3",
+    "sass-loader": "^7.1.0",
+    "vue-touch": "^1.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

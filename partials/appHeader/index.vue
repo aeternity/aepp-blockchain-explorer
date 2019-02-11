@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import AppMainNav from '@/_designs/partials/appMainNav'
-import SearchBar from '@/_designs/components/searchBar'
-import NetworkName from '@/_designs/components/networkName'
+import AppMainNav from '~/partials/appMainNav'
+import SearchBar from '~/components/searchBar'
+import NetworkName from '~/components/networkName'
 export default {
   name: 'AppHeader',
   components: {
@@ -29,8 +29,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/placeholders/typography";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
 .app-header {
   background-color: #D3DCE6;
   height: 30vh;

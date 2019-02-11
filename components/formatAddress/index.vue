@@ -39,8 +39,8 @@
   </div>
 </template>
 <script>
-import copyToClipboard from '~@aeternity/aepp-components-3/src/directives/copyToClipboard'
-import removeSpacesOnCopy from '~@aeternity/aepp-components-3/src/directives/removeSpacesOnCopy'
+import copyToClipboard from '@aeternity/aepp-components-3/src/directives/copyToClipboard'
+import removeSpacesOnCopy from '@aeternity/aepp-components-3/src/directives/removeSpacesOnCopy'
 
 export default {
   name: 'FormatAddress',

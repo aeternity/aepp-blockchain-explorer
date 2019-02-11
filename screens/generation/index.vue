@@ -189,10 +189,8 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-
-  .currency {
+<style scoped >
+  /*.currency {
     font-size: .7em;
     margin-left: -.5em;
     text-decoration: none;
@@ -214,5 +212,5 @@ export default {
     &-wrapper {
       display: flex;
     }
-  }
+  }*/
 </style>

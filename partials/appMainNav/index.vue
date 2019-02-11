@@ -30,12 +30,12 @@
 </template>
 
 <script>
-import Logo from '@/_designs/components/logo'
+import Logo from '~/components/logo'
 import { AeText } from '@aeternity/aepp-components-3'
-import AppNavAccordion from '@/_designs/components/appNavAccordion'
-import SearchBar from '@/_designs/components/searchBar'
-import AppNav from '@/_designs/components/appNav'
-import AppNavLink from '@/_designs/components/appNavLink'
+import AppNavAccordion from '~/components/appNavAccordion'
+import SearchBar from '~/components/searchBar'
+import AppNav from '~/components/appNav'
+import AppNavLink from '~/components/appNavLink'
 
 export default {
   name: 'AppMainNav',
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   .app-main-nav {
     min-height: 3rem;
     display: flex;
