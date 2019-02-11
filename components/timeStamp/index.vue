@@ -1,7 +1,7 @@
 <template>
   <div
-    class="time-stamp"
     :class="{ header: hasTitle }"
+    class="time-stamp"
   >
     <span
       class="time-stamp-content"
@@ -45,8 +45,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/placeholders/typography";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
   .time-stamp {
     /deep/ .title {
       color: $color-neutral-negative-3;

@@ -1,8 +1,8 @@
 <template>
   <div class="account">
     <AeIdenticon
-      class="account-identicon"
       :address="value"
+      class="account-identicon"
     />
     <AppDefinition
       :title="title"
@@ -21,9 +21,9 @@
   </div>
 </template>
 <script>
-import AppDefinition from '@/_designs/components/appDefinition'
-import FormatAddress from '@/_designs/components/formatAddress'
-import { AeIcon, AeIdenticon } from '@aeternity/aepp-components-3'
+import AppDefinition from '~/components/appDefinition'
+import FormatAddress from '~/components/formatAddress'
+import { AeIcon, AeIdenticon } from '~@aeternity/aepp-components-3'
 
 export default {
   name: 'Account',

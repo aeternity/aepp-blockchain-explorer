@@ -30,10 +30,7 @@ export default {
   },
   computed: {
     formattedValue: function () {
-      if (this.type === 'ae' || 'tx') {
-        return this.value.toLocaleString(undefined, { minimumFractionDigits: 2 })
-      }
-      return this.value
+      return this.filterType
     },
     unit: function () {
       if (this.type === 'ae') {
@@ -42,6 +39,17 @@ export default {
         return ''
       }
       return 'ATTO'
+    }
+  },
+  methods: {
+    filterType () {
+      if (this.type === 'ae') {
+        return this.value.toLocaleString(undefined, { minimumFractionDigits: 2 })
+      } else if (this.type === 'tx') {
+        return this.value.toLocaleString(undefined, { minimumFractionDigits: 2 })
+      } else {
+        return this.value
+      }
     }
   }
 }

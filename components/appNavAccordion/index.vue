@@ -1,9 +1,9 @@
 <template>
   <div
-    class="app-nav-accordion"
     :class="
       openMenu ? 'open' : ''
     "
+    class="app-nav-accordion"
   >
     <button
       class="app-nav-accordion-btn"
@@ -26,7 +26,8 @@
   </div>
 </template>
 <script>
-import { AeIcon } from '@aeternity/aepp-components-3'
+import { AeIcon } from '~@aeternity/aepp-components-3'
+
 export default {
   name: 'AppNavAccordion',
   components: {
@@ -53,7 +54,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-    @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+    @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
     .app-nav-accordion {
       position: relative;
       width: 2rem;
@@ -61,8 +62,7 @@ export default {
       @media (min-width: 769px) {
         width: auto;
         height: auto;
-        margin: auto 0;
-        margin-left: -1rem;
+        margin: auto 0 auto -1rem;
       }
     }
     .app-nav-accordion-btn {

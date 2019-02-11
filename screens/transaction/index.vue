@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import GenerationDetails from '@/_designs/components/generationDetails'
-import TransactionDetails from '@/_designs/components/transactionDetails'
+import GenerationDetails from '~/components/generationDetails'
+import TransactionDetails from '~/components/transactionDetails'
 const generationData = {
   'key_block': {
     'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',

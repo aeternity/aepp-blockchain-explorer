@@ -119,15 +119,15 @@
   </section>
 </template>
 <script>
-import AppTable from '@/_designs/components/appTable'
-import AppTableRow from '@/_designs/components/appTableRow'
-import AppTableCell from '@/_designs/components/appTableCell'
-import AppTableBody from '@/_designs/components/appTableBody'
-import AppTableAccordion from '@/_designs/components/appTableAccordion'
-import AppDefinition from '@/_designs/components/appDefinition'
-import AppPanel from '@/_designs/components/appPanel'
-// import TimeStamp from '@/_designs/components/timeStamp'
-import FormatAddress from '@/_designs/components/formatAddress'
+import AppTable from '~/components/appTable'
+import AppTableRow from '~/components/appTableRow'
+import AppTableCell from '~/components/appTableCell'
+import AppTableBody from '~/components/appTableBody'
+import AppTableAccordion from '~/components/appTableAccordion'
+import AppDefinition from '~/components/appDefinition'
+import AppPanel from '~/components/appPanel'
+// import TimeStamp from '~/components/timeStamp'
+import FormatAddress from '~/components/formatAddress'
 
 export default {
   name: 'MicroBlock',
@@ -151,7 +151,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
     .micro-block {
       margin-bottom: 2rem;
       position: relative;

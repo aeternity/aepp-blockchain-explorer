@@ -1,8 +1,8 @@
 <template>
   <div class="app-generation">
     <PageHeader
-      title="Generations"
       :has-nav="false"
+      title="Generations"
     >
       <BreadCrumbs />
     </PageHeader>
@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import Generations from '@/_designs/components/generations'
-import Generation from '@/_designs/components/generation'
-import PageHeader from '@/_designs/components/PageHeader'
-import BreadCrumbs from '@/_designs/components/BreadCrumbs'
+import Generations from '~/components/generations'
+import Generation from '~/components/generation'
+import PageHeader from '~/components/PageHeader'
+import BreadCrumbs from '~/components/BreadCrumbs'
 
 const generationData = {
   'key_block': {

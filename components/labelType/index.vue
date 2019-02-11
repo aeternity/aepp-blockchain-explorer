@@ -1,7 +1,7 @@
 <template>
   <span
-    class="label-type"
     :class="{[fill]: Boolean(fill)}"
+    class="label-type"
   >
     {{ title }}
   </span>
@@ -28,9 +28,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/placeholders/typography";
-  @import "../../../style/variables";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
   .label-type {
     display: table-caption;
     padding: 0.6rem;
@@ -41,7 +40,7 @@ export default {
     @extend %face-uppercase-xs;
   }
   .label-type.red {
-    background-color: $error;
+    background-color: $color-primary;
   }
   .label-type.green {
     background-color: $color-alternative;

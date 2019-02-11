@@ -1,9 +1,9 @@
 <template>
   <div
-    class="app-table-accordion"
     :class="
       open ? 'open' : ''
     "
+    class="app-table-accordion"
   >
     <button
       v-if="type === 'bottom'"
@@ -15,8 +15,8 @@
     <TransitionExpand>
       <div
         v-show="open"
-        class="app-table-accordion-content"
         :class="type"
+        class="app-table-accordion-content"
       >
         <slot />
       </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import TransitionExpand from '@/_designs/components/transitionExpand'
+import TransitionExpand from '~/components/transitionExpand'
 
 export default {
   name: 'AppTableAccordion',
@@ -61,8 +61,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/placeholders/typography";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
 
   .app-table-accordion {
     width: 100%;

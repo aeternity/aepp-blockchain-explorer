@@ -1,6 +1,6 @@
 <template>
   <div
-    id="blockchain"
+    id="app"
     class="app"
   >
     <AppHeader />
@@ -11,8 +11,8 @@
 </template>
 <script>
 
-import AppHeader from '@/_designs/partials/appHeader'
-import AppView from '@/_designs/partials/appView'
+import AppHeader from '~/partials/appHeader'
+import AppView from '~/partials/appView'
 
 export default {
   name: 'App',

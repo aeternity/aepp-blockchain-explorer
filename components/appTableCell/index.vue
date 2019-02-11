@@ -1,9 +1,9 @@
 <template>
   <div
-    class="app-table-cell"
     :class="{
       extend
     }"
+    class="app-table-cell"
   >
     <slot />
   </div>
@@ -12,12 +12,15 @@
 export default {
   name: 'AppTableCell',
   props: {
-    extend: Boolean
+    extend: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "@aeternity/aepp-components-3/src/styles/variables/colors";~
 
   .app-table-cell {
     display: flex;

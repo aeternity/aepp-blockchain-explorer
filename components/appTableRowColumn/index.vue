@@ -1,8 +1,8 @@
 <template>
   <div
-    class="app-table-row-column"
     :class="{ [width]: Boolean(width)
     }"
+    class="app-table-row-column"
   >
     <slot />
   </div>
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   .app-table-row-column {
     display: flex;
     flex-direction: column;

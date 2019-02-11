@@ -5,8 +5,8 @@
   >
     <div class="app-nav-logo">
       <div
-        class="graphics"
         :class="fill"
+        class="graphics"
       >
         <svg
           class="logo"
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
 
   .app-nav-logo {
     display: flex;

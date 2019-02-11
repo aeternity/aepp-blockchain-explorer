@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   .app-table-body {
     display: flex;
     flex-wrap: wrap;

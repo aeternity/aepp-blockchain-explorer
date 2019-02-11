@@ -1,11 +1,11 @@
 <template>
   <div
-    class="app-table-row"
     :class="{
       extend,
       nested,
       reorder
     }"
+    class="app-table-row"
   >
     <slot />
   </div>
@@ -14,14 +14,23 @@
 export default {
   name: 'AppTableRow',
   props: {
-    extend: Boolean,
-    nested: Boolean,
-    reorder: Boolean
+    extend: {
+      type: Boolean,
+      default: false
+    },
+    nested: {
+      type: Boolean,
+      default: false
+    },
+    reorder: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
 
   .app-table-row {
     display: flex;

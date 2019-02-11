@@ -1,9 +1,9 @@
 <template>
   <div
-    class="app-definition"
     :class="{
       [type]: Boolean(type)
     }"
+    class="app-definition"
   >
     <div
       v-if="title"
@@ -42,8 +42,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/placeholders/typography";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
   .app-definition {
     display: flex;
     margin: 0;

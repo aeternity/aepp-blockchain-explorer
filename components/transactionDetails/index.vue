@@ -71,14 +71,14 @@
 </template>
 
 <script>
-import AppTable from '@/_designs/components/appTable'
-import AppTableRow from '@/_designs/components/appTableRow'
-import AppTableCell from '@/_designs/components/appTableCell'
-import AppTableBody from '@/_designs/components/appTableBody'
-import AppDefinition from '@/_designs/components/appDefinition'
-import AppPanel from '@/_designs/components/appPanel'
-import FormatAddress from '@/_designs/components/formatAddress'
-import TxlistItem from '@/_designs/components/transactions/txListItem'
+import AppTable from '~/components/appTable'
+import AppTableRow from '~/components/appTableRow'
+import AppTableCell from '~/components/appTableCell'
+import AppTableBody from '~/components/appTableBody'
+import AppDefinition from '~/components/appDefinition'
+import AppPanel from '~/components/appPanel'
+import FormatAddress from '~/components/formatAddress'
+import TxlistItem from '~/components/transactions/txListItem'
 
 export default {
   name: 'TransactionDetails',

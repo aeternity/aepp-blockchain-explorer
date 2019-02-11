@@ -1,8 +1,8 @@
 <template>
   <div class="search-bar">
     <input
-      class="search-bar-input"
       :placeholder="placeholder"
+      class="search-bar-input"
       type="text"
     >
     <button
@@ -31,8 +31,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/placeholders/typography";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
   .search-bar {
     display: inline-block;
     position: relative;

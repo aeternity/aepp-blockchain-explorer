@@ -12,7 +12,7 @@
   </header>
 </template>
 <script>
-import PageNav from '@/_designs/components/PageNav'
+import PageNav from '~/components/PageNav'
 export default {
   name: 'PageHeader',
   components: {
@@ -31,8 +31,8 @@ export default {
 }
 </script>
 <style lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/placeholders/typography";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
 
     .app-page-header {
       padding: .6rem 3rem;

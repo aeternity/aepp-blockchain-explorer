@@ -40,11 +40,11 @@
 
 <script>
 
-import AppDefinition from '@/_designs/components/appDefinition'
-import Account from '@/_designs/components/account'
-import Age from '@/_designs/components/age'
-import LabelType from '@/_designs/components/labelType'
-import BlockHeight from '@/_designs/components/blockHeight'
+import AppDefinition from '~/components/appDefinition'
+import Account from '~/components/account'
+import Age from '~/components/age'
+import LabelType from '~/components/labelType'
+import BlockHeight from '~/components/blockHeight'
 
 export default {
   name: 'Index',
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   .generation {
     background-color: #FFFFFF;
     display: flex;

@@ -13,22 +13,24 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "cross-env": "^5.2.0",
-    "nuxt": "^2.0.0",
-    "@nuxtjs/axios": "^5.0.0",
     "@aeternity/aepp-components-3": "^3.0.0-alpha.8",
     "@aeternity/aepp-sdk": "1.2.1",
+    "@nuxtjs/axios": "^5.0.0",
+    "@vue/eslint-config-standard": "^4.0.0",
     "bignumber.js": "^8.0.1",
-    "lodash": "^4.17.5"
+    "cross-env": "^5.2.0",
+    "lodash": "^4.17.5",
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0",
     "babel-eslint": "^8.2.1",
-    "eslint": "^5.0.1",
-    "eslint-loader": "^2.0.0",
-    "eslint-plugin-vue": "^4.0.0",
+    "eslint": "^5.13.0",
     "eslint-config-prettier": "^3.1.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-prettier": "2.6.2",
+    "eslint-plugin-vue": "^4.0.0",
+    "nodemon": "^1.11.0",
     "prettier": "1.14.3"
   }
 }

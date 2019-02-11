@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import TxList from '@/_designs/components/transactions/txList'
-import TXListItem from '@/_designs/components/transactions/txListItem'
-import PageHeader from '@/_designs/components/PageHeader'
-import BreadCrumbs from '@/_designs/components/BreadCrumbs'
-import LoadMoreButton from '@/_designs/components/loadMoreButton'
+import TxList from '~/components/transactions/txList'
+import TXListItem from '~/components/transactions/txListItem'
+import PageHeader from '~/components/PageHeader'
+import BreadCrumbs from '~/components/BreadCrumbs'
+import LoadMoreButton from '~/components/loadMoreButton'
 
 const transactionData = [
   {

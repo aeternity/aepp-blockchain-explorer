@@ -4,7 +4,7 @@
   </AppTable>
 </template>
 <script>
-import AppTable from '@/_designs/components/appTable'
+import AppTable from '~/components/appTable'
 export default {
   name: 'TxList',
   components: { AppTable }

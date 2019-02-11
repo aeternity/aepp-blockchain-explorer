@@ -13,11 +13,10 @@
   </div>
 </template>
 <script>
-import Generations from '@/_designs/components/generations'
-import Generation from '@/_designs/components/generation'
-import PageHeader from '@/_designs/components/PageHeader'
-import BreadCrumbs from '@/_designs/compnents/BreadCrumbs'
-import { mapState } from 'vuex'
+import Generations from '~/components/generations'
+import Generation from '~/components/generation'
+import PageHeader from '~/components/PageHeader'
+import BreadCrumbs from '~/compnents/BreadCrumbs'
 
 export default {
   name: 'AppDashboard',
@@ -27,12 +26,10 @@ export default {
     Generation,
     BreadCrumbs
   },
-  computed:
-    mapState('blocks', [
-      'generations'
-    ]),
-  mounted: async function () {
-    await this.$store.dispatch('blocks/getLatestGenerations', 5)
+  data () {
+    return {
+      generations: {}
+    }
   }
 }
 </script>

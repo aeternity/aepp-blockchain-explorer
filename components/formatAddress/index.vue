@@ -1,11 +1,11 @@
 <template>
   <div
-    ref="address"
     v-copy-to-clipboard="value"
     v-remove-spaces-on-copy
-    class="format-address"
+    ref="address"
     :class="[ length ]"
     :title="value"
+    class="format-address"
   >
     <template v-if="length === 'responsive'">
       <span class="first-chunk">
@@ -39,8 +39,8 @@
   </div>
 </template>
 <script>
-import copyToClipboard from '@aeternity/aepp-components-3/src/directives/copyToClipboard'
-import removeSpacesOnCopy from '@aeternity/aepp-components-3/src/directives/removeSpacesOnCopy'
+import copyToClipboard from '~@aeternity/aepp-components-3/src/directives/copyToClipboard'
+import removeSpacesOnCopy from '~@aeternity/aepp-components-3/src/directives/removeSpacesOnCopy'
 
 export default {
   name: 'FormatAddress',
@@ -54,7 +54,10 @@ export default {
       type: String,
       default: 'full'
     },
-    enableCopyToClipboard: Boolean
+    enableCopyToClipboard: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     copyToClipboard () {
@@ -67,8 +70,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "../../../node_modules/@aeternity/aepp-components-3/src/styles/placeholders/typography";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
   .format-address {
     color: inherit;
     font-family: inherit;
@@ -78,7 +81,6 @@ export default {
     position: relative;
     &.v-copied-to-clipboard:before {
       @extend %face-mono-base;
-
       content: 'address copied';
       display: flex;
       justify-content: center;
@@ -96,7 +98,6 @@ export default {
   .format-address.full{
     flex-wrap: wrap;
     & span {
-      //margin-left: .5rem;
       min-width: 2.7em;
     }
   }

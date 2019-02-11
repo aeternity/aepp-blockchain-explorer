@@ -1,9 +1,9 @@
 <template>
   <div
-    class="app-table"
     :class="{
       details
     }"
+    class="app-table"
   >
     <slot />
   </div>
@@ -15,7 +15,10 @@ export default {
     /**
      * Extend the table row full width on mobile
      */
-    details: Boolean
+    details: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>
