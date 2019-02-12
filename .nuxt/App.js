@@ -1,18 +1,12 @@
 import Vue from 'vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '../node_modules/@aeternity/aepp-components-3/dist/aepp.components.css'
-
-import '../node_modules/@aeternity/aepp-components-3/dist/aepp.fonts.css'
-
-import '../styles/index.scss'
-
 import _6f6c098b from '../layouts/default.vue'
 
 const layouts = { "_default": _6f6c098b }
 
 export default {
-  head: {"title":"aepps-blockchain-explorer","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Blockchain Explorer for Aeternity"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
+  head: {"meta":[],"link":[],"style":[],"script":[]},
 
   render(h, props) {
     const loadingEl = h('NuxtLoading', { ref: 'loading' })
