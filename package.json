@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@aeternity/aepp-components": "2.0.13",
-    "@aeternity/aepp-components-3": "^3.0.0-alpha.8",
+    "@aeternity/aepp-components-3": "^3.0.0-alpha.9",
     "@aeternity/aepp-sdk": "1.2.1",
     "@nuxtjs/axios": "^5.0.0",
     "@vue/eslint-config-standard": "^4.0.0",

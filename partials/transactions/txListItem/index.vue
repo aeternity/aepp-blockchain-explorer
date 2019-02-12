@@ -9,6 +9,7 @@
           />
         </div>
         <AppDefinition
+          v-if="data.time"
           title="Age"
         >
           <Age :time="data.time" />
@@ -51,8 +52,7 @@
           title="Amount"
         >
           <FormatAeUnit
-            :value="data.amount"
-            type="ae"
+            :value="data.amount "
           />
         </AppDefinition>
         <AppDefinition
@@ -61,18 +61,15 @@
         >
           <FormatAeUnit
             :value="data.deposit"
-            type="ae"
           />
         </AppDefinition>
       </div>
       <div class="transaction-type-info-item ">
         <AppDefinition
           v-if="data.fee"
-          title="Amount"
         >
           <FormatAeUnit
             :value="data.fee"
-            type="fee"
           />
         </AppDefinition>
         <AppDefinition
@@ -81,7 +78,6 @@
         >
           <FormatAeUnit
             :value="data.cost"
-            type="fee"
           />
         </AppDefinition>
       </div>

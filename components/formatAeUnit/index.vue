@@ -1,31 +1,19 @@
 <template>
   <span class="format-ae-unit">
-    {{ formattedValue }}
-    <abbr
-      v-if="unit"
-      class="unit"
-    >
-      {{ unit }}
-    </abbr>
+    {{ value | yaniToAe }}
   </span>
 </template>
 <script>
+
+import txTypeToName from '../../../filters/txTypeToName'
+
 export default {
   name: 'FormatAeUnit',
+  filters: { txTypeToName },
   props: {
     value: {
       type: Number,
       required: true
-    },
-    type: {
-      type: String,
-      validator: value => [
-        'ae',
-        'tx',
-        'fee',
-        'cost'
-      ].includes(value),
-      default: 'ae'
     }
   },
   computed: {
