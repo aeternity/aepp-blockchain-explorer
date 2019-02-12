@@ -1,5 +1,5 @@
 <template>
-  <header class="app-page-header">
+  <section class="app-page-header">
     <div class="app-page-header-container">
       <h1 class="app-page-header-title">
         {{ title }}
@@ -9,7 +9,7 @@
     <div class="app-page-header-container">
       <slot />
     </div>
-  </header>
+  </section>
 </template>
 <script>
 import PageNav from '~/components/PageNav'

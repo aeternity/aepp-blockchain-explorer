@@ -1,9 +1,9 @@
 <template>
   <div class="account">
-    <AeIdenticon
+    <no-ssr><AeIdenticon
       :address="value"
       class="account-identicon"
-    />
+    /></no-ssr>
     <AppDefinition
       :title="title"
     >
@@ -12,10 +12,10 @@
           :value="value"
           length="responsive"
         />
-        <AeIcon
+        <no-ssr><AeIcon
           v-if="icon"
           name="copy"
-        />
+        /></no-ssr>
       </div>
     </AppDefinition>
   </div>
@@ -23,7 +23,12 @@
 <script>
 import AppDefinition from '~/components/appDefinition'
 import FormatAddress from '~/components/formatAddress'
-import { AeIcon, AeIdenticon } from '@aeternity/aepp-components-3'
+let AeIcon
+let AeIdenticon
+if (process.browser) {
+  AeIcon = require('@aeternity/aepp-components-3').AeIcon
+  AeIdenticon = require('@aeternity/aepp-components-3').AeIdenticon
+}
 
 export default {
   name: 'Account',

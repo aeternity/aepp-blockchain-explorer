@@ -78,7 +78,7 @@ import AppTableBody from '~/components/appTableBody'
 import AppDefinition from '~/components/appDefinition'
 import AppPanel from '~/components/appPanel'
 import FormatAddress from '~/components/formatAddress'
-import TxlistItem from '~/components/transactions/txListItem'
+import TxlistItem from '~/partials/transactions/txListItem'
 
 export default {
   name: 'TransactionDetails',

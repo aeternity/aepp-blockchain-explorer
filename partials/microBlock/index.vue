@@ -151,7 +151,7 @@ export default {
 }
 </script>
 <style lang="scss">
-  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
     .micro-block {
       margin-bottom: 2rem;
       position: relative;

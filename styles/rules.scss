@@ -43,3 +43,13 @@ html, body {
     box-sizing: inherit;
   }
 }
+
+body {
+  background-color: $color-neutral-positive-3;
+}
+
+h1 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  font-weight: normal;
+}

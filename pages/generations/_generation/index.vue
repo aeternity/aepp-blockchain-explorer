@@ -28,12 +28,12 @@
 
 <script>
 
-import GenerationDetails from '~/components/generationDetails'
-import MicroBlocks from '~/components/microBlocks'
-import MicroBlock from '~/components/microBlock'
+import GenerationDetails from '~/partials/generationDetails'
+import MicroBlocks from '~/partials/microBlocks'
+import MicroBlock from '~/partials/microBlock'
 import PageHeader from '~/components/PageHeader'
 import BreadCrumbs from '~/components/BreadCrumbs'
-import TXListItem from '~/components/transactions/txListItem'
+import TXListItem from '~/partials/transactions/txListItem'
 
 const transactionData = [
   {

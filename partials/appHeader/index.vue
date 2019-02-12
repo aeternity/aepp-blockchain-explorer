@@ -2,14 +2,14 @@
   <header class="app-header">
     <AppMainNav />
     <div class="app-header-content">
-      <div class="inner">
+      <section class="inner">
         <div class="searchbar">
           <SearchBar placeholder="Search by address / txhash / block / name.aet" />
         </div>
         <div class="network">
           <NetworkName />
         </div>
-      </div>
+      </section>
     </div>
   </header>
 </template>
@@ -29,61 +29,56 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
-  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
+@import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+@import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
+
 .app-header {
   background-color: #D3DCE6;
-  height: 30vh;
-  margin-bottom: -20%;
-  @media (min-width: 450px) {
-    margin-bottom: -15%;
+  min-height: 30vh;
+  @media (min-width:765px) {
+    margin-bottom: -7rem;
   }
   @media (min-width: 769px) {
-    height: 50vh;
-    margin-bottom: -10%;
+    min-height: 60vh;
     display: flex;
+
   }
   &-content {
     margin-left: auto;
     width: 80%;
     padding: 0 5%;
+    display: flex;
+    flex-direction: column;
     @media (min-width:1080px) {
       width: 85%;
     }
-
+  }
+  &-title {
+    margin-bottom: 3rem;
   }
 }
-  .inner {
-    width: 100%;
-    margin-top: 1.5rem;
-    display: flex;
-    align-items: center;
-    @media (min-width:769px) {
-      margin-top: 3rem;
-    }
+.inner {
+  width: 100%;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  @media (min-width:769px) {
+    margin: 3rem 0 auto 0;
+  }
 
-    & .searchbar {
-      width: 60%;
-      max-width: 30rem;
-      @media (max-width: 768px) {
-        display: none;
-      }
+  & .searchbar {
+   width: 60%;
+   max-width: 30rem;
+   @media (max-width: 768px) {
+     display: none;
+   }
+ }
+  & .network {
+    width: auto;
+    margin-left: auto;
+    @media (max-width:768px) {
+      margin-right: -.7rem;
     }
-    & .network {
-      width: auto;
-      margin-left: auto;
-      @media (max-width:768px) {
-        margin-right: -.7rem;
-      }
-      & .network {
-        background-color: $color-primary;
-        color: #FFFFFF;
-        font-weight: bold;
-        padding: .5rem;
-        height: 2rem;
-        border-radius: .4rem;
-        @extend %face-uppercase-xs;
-      }
-    }
+  }
   }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <RouterLink
+  <NuxtLink
     :to="to"
     class="app-nav-link"
     active-class="active"
     exact
   >
     <slot />
-  </RouterLink>
+  </NuxtLink>
 </template>
 
 <script>

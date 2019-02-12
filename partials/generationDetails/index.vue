@@ -231,7 +231,7 @@ import FormatAeUnit from '~/components/formatAeUnit'
 import FormatAddress from '~/components/formatAddress'
 import Account from '~/components/account'
 import Confirmations from '~/components/confirmations'
-import FormatPow from '../formatPow'
+import FormatPow from '../../components/formatPow'
 
 export default {
   name: 'GenerationDetails',

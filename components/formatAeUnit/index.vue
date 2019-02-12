@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     formattedValue: function () {
-      return this.filterType
+      return this.filterType(this.type, this.value)
     },
     unit: function () {
       if (this.type === 'ae') {
@@ -42,13 +42,13 @@ export default {
     }
   },
   methods: {
-    filterType () {
-      if (this.type === 'ae') {
-        return this.value.toLocaleString(undefined, { minimumFractionDigits: 2 })
-      } else if (this.type === 'tx') {
-        return this.value.toLocaleString(undefined, { minimumFractionDigits: 2 })
+    filterType (type, value) {
+      if (type === 'ae') {
+        return value.toLocaleString(undefined, { minimumFractionDigits: 2 })
+      } else if (type === 'tx') {
+        return value.toLocaleString(undefined, { minimumFractionDigits: 2 })
       } else {
-        return this.value
+        return value
       }
     }
   }

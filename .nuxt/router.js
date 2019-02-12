@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
+const _e8b28efe = () => interopDefault(import('../pages/generations/index.vue' /* webpackChunkName: "pages/generations/index" */))
+const _08ddd6c5 = () => interopDefault(import('../pages/transactions/index.vue' /* webpackChunkName: "pages/transactions/index" */))
+const _38b74eae = () => interopDefault(import('../pages/generations/_generation/index.vue' /* webpackChunkName: "pages/generations/_generation/index" */))
+const _0208f4ff = () => interopDefault(import('../pages/transactions/_transaction/index.vue' /* webpackChunkName: "pages/transactions/_transaction/index" */))
 const _0ba007b5 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
@@ -60,11 +64,27 @@ export function createRouter() {
   return new Router({
     mode: 'history',
     base: '/',
-    linkActiveClass: 'nuxt-link-active',
-    linkExactActiveClass: 'nuxt-link-exact-active',
+    linkActiveClass: 'active-link',
+    linkExactActiveClass: 'exact-active-link',
     scrollBehavior,
 
     routes: [{
+      path: "/generations",
+      component: _e8b28efe,
+      name: "generations"
+    }, {
+      path: "/transactions",
+      component: _08ddd6c5,
+      name: "transactions"
+    }, {
+      path: "/generations/:generation",
+      component: _38b74eae,
+      name: "generations-generation"
+    }, {
+      path: "/transactions/:transaction",
+      component: _0208f4ff,
+      name: "transactions-transaction"
+    }, {
       path: "/",
       component: _0ba007b5,
       name: "index"

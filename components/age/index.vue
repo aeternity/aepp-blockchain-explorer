@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import currentTime from '../../mixins/currentTime'
+import currentTime from '~/mixins/currentTime'
 export default {
   name: 'Age',
   mixins: [currentTime],

@@ -8,14 +8,17 @@
     <button
       class="search-bar-button"
     >
-      <AeIcon
+      <no-ssr><AeIcon
         name="search"
-      />
+      /></no-ssr>
     </button>
   </div>
 </template>
 <script>
-import { AeIcon } from '@aeternity/aepp-components-3'
+let AeIcon
+if (process.browser) {
+  AeIcon = require('@aeternity/aepp-components-3').AeIcon
+}
 
 export default {
   name: 'SearchBar',

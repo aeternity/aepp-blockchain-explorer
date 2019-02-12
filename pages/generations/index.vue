@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import Generations from '~/components/generations'
-import Generation from '~/components/generation'
+import Generations from '~/partials/generations'
+import Generation from '~/partials/generation'
 import PageHeader from '~/components/PageHeader'
 import BreadCrumbs from '~/components/BreadCrumbs'
 
 const generationData = {
-  'key_block': {
+  'keyBlock': {
     'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',
     'hash': 'kh_bYoiQhCxsS8RNhbumWan7WVwRb9yqoYmK4fbpVaeK6QxdpGvW',
     'height': 29520,

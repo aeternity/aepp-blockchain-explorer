@@ -39,8 +39,12 @@
   </div>
 </template>
 <script>
-import copyToClipboard from '@aeternity/aepp-components-3/src/directives/copyToClipboard'
-import removeSpacesOnCopy from '@aeternity/aepp-components-3/src/directives/removeSpacesOnCopy'
+let copyToClipboard
+let removeSpacesOnCopy
+if (process.browser) {
+  copyToClipboard = require('@aeternity/aepp-components-3/src/directives/').copyToClipboard
+  removeSpacesOnCopy = require('@aeternity/aepp-components-3/src/directives/').removeSpacesOnCopy
+}
 
 export default {
   name: 'FormatAddress',

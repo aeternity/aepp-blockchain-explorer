@@ -7,15 +7,15 @@
       <AppNavAccordion icon="search">
         <div class="mobile-search">
           <SearchBar />
-          <AeText face="sans-xs">
+          <p class="mobile-search-info">
             Search by address / txhash / block / name.aet
-          </AeText>
+          </p>
         </div>
       </AppNavAccordion>
     </div>
     <AppNavAccordion>
       <AppNav>
-        <AppNavLink to="dashboard">
+        <AppNavLink to="/">
           Dashboard
         </AppNavLink>
         <AppNavLink to="generations">
@@ -31,7 +31,6 @@
 
 <script>
 import Logo from '~/components/logo'
-import { AeText } from '@aeternity/aepp-components-3'
 import AppNavAccordion from '~/components/appNavAccordion'
 import SearchBar from '~/components/searchBar'
 import AppNav from '~/components/appNav'
@@ -44,7 +43,6 @@ export default {
     AppNav,
     AppNavLink,
     SearchBar,
-    AeText,
     Logo
   }
 }
@@ -52,6 +50,8 @@ export default {
 
 <style scoped lang="scss">
   @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
+
   .app-main-nav {
     min-height: 3rem;
     display: flex;
@@ -87,7 +87,8 @@ export default {
   }
   .mobile-search {
     padding: 1.5rem;
-    & > .ae-text{
+    &-info{
+      @extend %face-sans-s;
       margin-top: 1rem;
       color: $color-neutral-negative-1;
     }
