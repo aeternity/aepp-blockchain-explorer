@@ -1,15 +1,15 @@
 <template>
   <span class="format-ae-unit">
-    {{ value | yaniToAe }}
+    {{ formattedValue }}
   </span>
 </template>
 <script>
 
-import txTypeToName from '../../../filters/txTypeToName'
+// import txTypeToName from '../../../filters/txTypeToName'
 
 export default {
   name: 'FormatAeUnit',
-  filters: { txTypeToName },
+  // filters: { txTypeToName },
   props: {
     value: {
       type: Number,
