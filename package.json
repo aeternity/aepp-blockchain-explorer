@@ -19,6 +19,7 @@
     "@nuxtjs/axios": "^5.0.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "bignumber.js": "^8.0.1",
+    "camelcase-keys-deep": "^0.1.0",
     "cross-env": "^5.2.0",
     "lodash": "^4.17.5",
     "node-sass": "^4.11.0",

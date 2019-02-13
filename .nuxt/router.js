@@ -2,7 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _0de8c634 = () => interopDefault(import('../node_modules/@nuxt/vue-app/template/pages/index.vue' /* webpackChunkName: "" */))
+const _0d088572 = () => interopDefault(import('../pages/generations/index.vue' /* webpackChunkName: "pages/generations/index" */))
+const _55a96abf = () => interopDefault(import('../pages/transactions/index.vue' /* webpackChunkName: "pages/transactions/index" */))
+const _812b3722 = () => interopDefault(import('../pages/generations/_generation/index.vue' /* webpackChunkName: "pages/generations/_generation/index" */))
+const _047b2745 = () => interopDefault(import('../pages/transactions/_transaction/index.vue' /* webpackChunkName: "pages/transactions/_transaction/index" */))
+const _3771857b = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -60,13 +64,30 @@ export function createRouter() {
   return new Router({
     mode: 'history',
     base: '/',
-    linkActiveClass: 'nuxt-link-active',
-    linkExactActiveClass: 'nuxt-link-exact-active',
+    linkActiveClass: 'active-link',
+    linkExactActiveClass: 'exact-active-link',
     scrollBehavior,
 
     routes: [{
-      path: "",
-      component: _0de8c634
+      path: "/generations",
+      component: _0d088572,
+      name: "generations"
+    }, {
+      path: "/transactions",
+      component: _55a96abf,
+      name: "transactions"
+    }, {
+      path: "/generations/:generation",
+      component: _812b3722,
+      name: "generations-generation"
+    }, {
+      path: "/transactions/:transaction",
+      component: _047b2745,
+      name: "transactions-transaction"
+    }, {
+      path: "/",
+      component: _3771857b,
+      name: "index"
     }],
 
     fallback: false
