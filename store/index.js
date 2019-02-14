@@ -1,5 +1,5 @@
-import NodeChain from '@aeternity/aepp-sdk/es/chain/node'
 import { wrapActionsWithResolvedEpoch } from './utils'
+const { ChainNode } = require('@aeternity/aepp-sdk')
 
 export const state = () => ({
   $nodeStatus: {},
@@ -9,7 +9,7 @@ export const state = () => ({
 
 export const getters = {
   epochPromise ({ epochUrl }) {
-    return NodeChain({
+    return ChainNode({
       url: epochUrl,
       internalUrl: epochUrl,
       forceCompatibility: true
