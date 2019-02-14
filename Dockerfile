@@ -1,8 +1,10 @@
 FROM node:10.15.1-alpine as explorer-build
+ARG VUE_APP_NODE_URL
 WORKDIR /app
 COPY . .
 RUN apk add --no-cache --virtual .build-deps make gcc g++ python git && \
-    npm install --only=prod && npm run build && \
+    npm install --only=prod && \
+    VUE_APP_NODE_URL=$VUE_APP_NODE_URL npm run build && \
     npm cache clean --force && \
     apk del .build-deps
 
