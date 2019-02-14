@@ -64,6 +64,9 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    transpile: [
+      '@aeternity/aepp-sdk/es/chain/node'
+    ],
     extend (config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
