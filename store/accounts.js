@@ -94,7 +94,7 @@ export const actions = wrapActionsWithResolvedNode({
     const page = typeof transactionsToGet === 'undefined' ? 1 : Math.ceil(transactionsToGet / increaseBy)
     let transactions = state.accountTransactions[address] ? state.accountTransactions[address] : []
     try {
-      const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/account/' + address + '?limit=' + increaseBy + '&page=' + page)
+      const resp = await this.$axios.$get(state.nodeUrl + 'middleware/transactions/account/' + address + '?limit=' + increaseBy + '&page=' + page)
       transactions = transactions.concat(camelcaseKeysDeep((await resp.json()).transactions))
     } catch (e) {
       throw new Error(e)

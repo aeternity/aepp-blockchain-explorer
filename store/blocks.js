@@ -176,7 +176,7 @@ export const actions = wrapActionsWithResolvedNode({
       return
     }
     const generation = await node.api.getGenerationByHeight(height)
-    const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
+    const resp = await this.$axios.$get(state.nodeUrl + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = (await resp.json())['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
