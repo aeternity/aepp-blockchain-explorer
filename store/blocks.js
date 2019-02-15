@@ -255,7 +255,7 @@ export const actions = wrapActionsWithResolvedNode({
   },
   nuxtServerInit ({ dispatch }, context) {
     return Promise.all([
-      dispatch('getLatestGenerations', 10)
+      dispatch('getLatestGenerations', 5)
     ])
   }
 })
