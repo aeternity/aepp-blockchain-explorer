@@ -29,7 +29,7 @@ export const mutations = {
   /**
    * changeNetwork
    * @param state
-   * @param epochUrl
+   * @param nodeUrl
    */
   changeNetworkUrl (state, nodeUrl) {
     state.nodeUrl = nodeUrl
