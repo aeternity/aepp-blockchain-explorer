@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import times from 'lodash/times'
 import isEqual from 'lodash/isEqual'
+import axios from 'axios'
 import { wrapActionsWithResolvedNode } from './utils'
 
 export const state = () => ({
@@ -128,8 +129,8 @@ export const actions = wrapActionsWithResolvedNode({
     const generation = await node.api.getGenerationByHash(hash)
     generation.numTransactions = 0
     const height = generation.keyBlock.height
-    const resp = await this.$axios.$get(state.nodeUrl + 'middleware/transactions/interval/' + height + '/' + height)
-    generation.numTransactions = (await resp.json())['transactions'].length
+    const resp = await axios.get(process.env.NUXT_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
+    generation.numTransactions = resp['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
@@ -176,8 +177,8 @@ export const actions = wrapActionsWithResolvedNode({
       return
     }
     const generation = await node.api.getGenerationByHeight(height)
-    const resp = await this.$axios.$get(state.nodeUrl + 'middleware/transactions/interval/' + height + '/' + height)
-    generation.numTransactions = (await resp.json())['transactions'].length
+    const resp = await axios.get(process.env.NUXT_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
+    generation.numTransactions = resp.data.transactions.length
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
@@ -248,7 +249,13 @@ export const actions = wrapActionsWithResolvedNode({
       }
       return generations
     } catch (e) {
+      console.log(e)
       commit('catchError', 'Error', { root: true })
     }
+  },
+  nuxtServerInit ({ dispatch }, context) {
+    return Promise.all([
+      dispatch('getLatestGenerations', 10)
+    ])
   }
 })
