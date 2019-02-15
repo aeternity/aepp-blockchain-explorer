@@ -23,7 +23,7 @@ export const actions = {
      * Pulling market stats
      * @type {Response}
      */
-    const market = await fetch('https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF')
+    const market = await this.$axios.$get('https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF')
 
     /**
      * Renaming variables
