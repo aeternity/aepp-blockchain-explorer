@@ -15,7 +15,7 @@
   "dependencies": {
     "@aeternity/aepp-components": "2.0.13",
     "@aeternity/aepp-components-3": "^3.0.0-alpha.9",
-    "@aeternity/aepp-sdk": "2.0.0",
+    "@aeternity/aepp-sdk": "2.1.1-0.1.0-next",
     "@nuxtjs/axios": "^5.0.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "bignumber.js": "^8.0.1",

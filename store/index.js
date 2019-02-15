@@ -1,5 +1,5 @@
 import { wrapActionsWithResolvedNode } from './utils'
-const { ChainNode } = require('@aeternity/aepp-sdk')
+import { ChainNode } from '@aeternity/aepp-sdk'
 
 export const state = () => ({
   $nodeStatus: {},
