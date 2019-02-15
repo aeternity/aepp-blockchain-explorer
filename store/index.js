@@ -1,17 +1,17 @@
-import { wrapActionsWithResolvedEpoch } from './utils'
+import { wrapActionsWithResolvedNode } from './utils'
 const { ChainNode } = require('@aeternity/aepp-sdk')
 
 export const state = () => ({
   $nodeStatus: {},
-  epochUrl: process.env.VUE_APP_EPOCH_URL,
+  nodeUrl: process.env.VUE_APP_NODE_URL,
   error: ''
 })
 
 export const getters = {
-  epochPromise ({ epochUrl }) {
+  nodePromise ({ nodeUrl }) {
     return ChainNode({
-      url: epochUrl,
-      internalUrl: epochUrl,
+      url: nodeUrl,
+      internalUrl: nodeUrl,
       forceCompatibility: true
     })
   }
@@ -31,8 +31,8 @@ export const mutations = {
    * @param state
    * @param epochUrl
    */
-  changeNetworkUrl (state, epochUrl) {
-    state.epochUrl = epochUrl
+  changeNetworkUrl (state, nodeUrl) {
+    state.nodeUrl = nodeUrl
   },
   /**
    * catchError
@@ -51,18 +51,18 @@ export const mutations = {
   }
 }
 
-export const actions = wrapActionsWithResolvedEpoch({
+export const actions = wrapActionsWithResolvedNode({
   /**
    * getNodeStatus
    * @param {Object} rootGetters
    * @param {Function} commit
    * @return {Object}
    */
-  async getNodeStatus ({ rootGetters: { epoch }, commit }) {
+  async getNodeStatus ({ rootGetters: { node }, commit }) {
     try {
       const [top, version] = await Promise.all([
-        epoch.api.getCurrentGeneration(),
-        epoch.api.getStatus()
+        node.api.getCurrentGeneration(),
+        node.api.getStatus()
       ])
       commit('setNodeStatus', { connected: true, top, version })
       return { connected: true, top, version }
