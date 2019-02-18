@@ -1,6 +1,4 @@
 import Vue from 'vue'
-import isEqual from 'lodash/isEqual'
-import isEmpty from 'lodash/isEmpty'
 import { wrapActionsWithResolvedNode } from './utils'
 import camelcaseKeysDeep from 'camelcase-keys-deep'
 import axios from 'axios'
@@ -86,7 +84,6 @@ export const actions = wrapActionsWithResolvedNode({
       throw new Error(e)
     }
     const account = { address, balance, numTransactions }
-    if (isEqual(state.accounts[address], account)) return account
     commit('setAccount', account)
     return account
   },
@@ -101,27 +98,17 @@ export const actions = wrapActionsWithResolvedNode({
       throw new Error(e)
     }
     const account = { address, transactions }
-    const stateTransactions = state.accounts[address] ? state.accounts[address].transactions : []
-    if (isEqual(stateTransactions, transactions)) return (state.accounts[address])
     commit('setTransactions', { address, transactions })
     return account
   },
 
   async name ({ state, commit }, address) {
     if (!process.env.NUXT_APP_MIDDLEWARE_URL) return
-
-    if (!isEmpty(state.names[address]) && (Date.now() - state.names[address].ts < 10000)) return
-
-    if (isEmpty(state.names[address])) commit('setName', { address, ts: Date.now(), name: null })
-
+    if (state.names[address].length !== 0 && (Date.now() - state.names[address].ts < 10000)) return
+    if (state.names[address].length === 0) commit('setName', { address, ts: Date.now(), name: null })
     const { name } = await axios.get(`${process.env.NUXT_APP_MIDDLEWARE_URL}${address}`).data
-
     const account = { address, ts: Date.now(), name }
-
-    if (isEqual(state.names[address], account)) return account
-
     commit('setName', account)
-
     return account
   }
 })

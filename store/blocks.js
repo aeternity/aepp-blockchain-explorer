@@ -1,8 +1,6 @@
 import Vue from 'vue'
-import times from 'lodash/times'
-import isEqual from 'lodash/isEqual'
 import axios from 'axios'
-import { wrapActionsWithResolvedNode } from './utils'
+import { wrapActionsWithResolvedNode, times } from './utils'
 
 export const state = () => ({
   height: 0,
@@ -130,12 +128,8 @@ export const actions = wrapActionsWithResolvedNode({
     generation.numTransactions = 0
     const height = generation.keyBlock.height
     const resp = await axios.get(process.env.NUXT_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
-    generation.numTransactions = resp['transactions'].length
-    if (isEqual(state.generation, generation)) {
-      return state.generation
-    }
+    generation.numTransactions = resp.data.transactions.length
     commit('setGenerations', generation)
-
     return generation
   },
 
@@ -151,13 +145,7 @@ export const actions = wrapActionsWithResolvedNode({
   async getBlockFromHash ({ state, rootGetters: { node }, commit }, hash) {
     const block = await node.api.getMicroBlockHeaderByHash(hash)
     block.transactions = (await node.api.getMicroBlockTransactionsByHash(hash)).transactions
-
-    if (isEqual(state.block, block)) {
-      return state.block
-    }
-
     commit('setBlock', block)
-
     return block
   },
 
@@ -171,20 +159,10 @@ export const actions = wrapActionsWithResolvedNode({
    * @return {*}
    */
   async getGenerationFromHeight ({ state, rootGetters: { node }, commit }, height) {
-    if (!(state.height === height || state.height - 1 === height) && state.generations[height]) {
-      // last two generations are prone to change
-      // return if generation to get is not last or second last, and already exist in memory
-      return
-    }
     const generation = await node.api.getGenerationByHeight(height)
     const resp = await axios.get(process.env.NUXT_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = resp.data.transactions.length
-    if (isEqual(state.generation, generation)) {
-      return state.generation
-    }
-
     commit('setGenerations', generation)
-
     return generation
   },
   async getMicroBlocksByHeight ({ state, rootGetters: { node }, commit }, { height, numBlocks }) {
@@ -217,13 +195,7 @@ export const actions = wrapActionsWithResolvedNode({
    */
   async getBlockFromHeight ({ state, rootGetters: { node }, commit }, height) {
     const block = await node.api.getKeyBlockByHeight(height)
-
-    if (isEqual(state.block, block)) {
-      return state.block
-    }
-
     commit('setBlock', block)
-
     return block
   },
 
@@ -234,20 +206,16 @@ export const actions = wrapActionsWithResolvedNode({
    * @param {Object} rootGetters
    * @param {Function} commit
    * @param {Function} dispatch
-   * @param {Number} size
+   * @param {Number} maxBlocks
    * @return {*}
    */
-  async getLatestGenerations ({ state, rootGetters: { node }, commit, dispatch }, size) {
+  getLatestGenerations: async function ({ state, rootGetters: { node }, commit, dispatch }, maxBlocks) {
     try {
       await dispatch('height')
-      const generations = await Promise.all(
-        times(size, (index) => dispatch('getGenerationFromHeight', state.height - index))
+      const array = Promise.all(
+        times(maxBlocks, (index) => dispatch('getGenerationFromHeight', state.height - index))
       )
-
-      if (!generations.length) {
-        return state.generations
-      }
-      return generations
+      return array
     } catch (e) {
       console.log(e)
       commit('catchError', 'Error', { root: true })

@@ -5,9 +5,9 @@
   "author": "dev@aeternity.com",
   "private": false,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
+    "dev": "NUXT_APP_NODE_URL='https://roma-net.mdw.aepps.com/' nuxt",
+    "build": "NUXT_APP_NODE_URL='https://roma-net.mdw.aepps.com/' nuxt build",
+    "start": "NUXT_APP_NODE_URL='https://roma-net.mdw.aepps.com/' nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
