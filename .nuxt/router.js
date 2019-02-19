@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
+const _24e32a80 = () => interopDefault(import('../pages/dashboard/index.vue' /* webpackChunkName: "pages/dashboard/index" */))
 const _0d088572 = () => interopDefault(import('../pages/generations/index.vue' /* webpackChunkName: "pages/generations/index" */))
 const _55a96abf = () => interopDefault(import('../pages/transactions/index.vue' /* webpackChunkName: "pages/transactions/index" */))
 const _812b3722 = () => interopDefault(import('../pages/generations/_generation/index.vue' /* webpackChunkName: "pages/generations/_generation/index" */))
@@ -69,6 +70,10 @@ export function createRouter() {
     scrollBehavior,
 
     routes: [{
+      path: "/dashboard",
+      component: _24e32a80,
+      name: "dashboard"
+    }, {
       path: "/generations",
       component: _0d088572,
       name: "generations"

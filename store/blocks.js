@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import times from 'lodash/times'
+import axios from 'axios'
 import isEqual from 'lodash/isEqual'
 import { wrapActionsWithResolvedNode } from './utils'
 
@@ -169,15 +170,15 @@ export const actions = wrapActionsWithResolvedNode({
    * @param {String} height
    * @return {*}
    */
-  async getGenerationFromHeight ({ state, rootGetters: { node }, commit }, height) {
+  async getGenerationFromHeight ({ state, rootState, rootGetters: { node }, commit }, height) {
     if (!(state.height === height || state.height - 1 === height) && state.generations[height]) {
       // last two generations are prone to change
       // return if generation to get is not last or second last, and already exist in memory
       return
     }
     const generation = await node.api.getGenerationByHeight(height)
-    const resp = await this.$axios.$get(state.nodeUrl + 'middleware/transactions/interval/' + height + '/' + height)
-    generation.numTransactions = (await resp.json())['transactions'].length
+    const resp = await axios.get(rootState.nodeUrl + '/middleware/transactions/interval/' + height + '/' + height)
+    generation.numTransactions = resp.data['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
     }
@@ -246,6 +247,7 @@ export const actions = wrapActionsWithResolvedNode({
       if (!generations.length) {
         return state.generations
       }
+
       return generations
     } catch (e) {
       commit('catchError', 'Error', { root: true })

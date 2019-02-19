@@ -1,108 +1,39 @@
 <template>
-  <div class="transaction">
-    <div class="transaction-main-info">
-      <div class="transaction-main-info-inner">
-        <div class="transaction-label">
-          <LabelType
-            :title="data.type.replace(/([A-Z])/g, ' $1')"
-            fill="red"
-          />
-        </div>
-        <AppDefinition
-          v-if="data.time"
-          title="Age"
-        >
-          <Age :time="data.time" />
-        </AppDefinition>
-      </div>
-      <div class="transaction-main-info-inner accounts">
-        <AccountGroup>
-          <Account
-            v-if="data.account_id"
-            :value="data.account_id"
-            title="account"
-            icon
-          />
-          <Account
-            v-if="data.sender_id"
-            :value="data.sender_id"
-            title="Sender"
-            icon
-          />
-          <Account
-            v-if="data.recipient_id"
-            :value="data.recipient_id"
-            title="recipient"
-            icon
-          />
-        </AccountGroup>
-        <AppDefinition
-          v-if="data.name"
-          title="name"
-          class="name"
-        >
-          {{ data.name }}
-        </AppDefinition>
-      </div>
-    </div>
-    <div class="transaction-type-info">
-      <div class="transaction-type-info-item ">
-        <AppDefinition
-          v-if="data.amount"
-          title="Amount"
-        >
-          <FormatAeUnit
-            :value="data.amount "
-          />
-        </AppDefinition>
-        <AppDefinition
-          v-if="data.deposit"
-          title="Deposit"
-        >
-          <FormatAeUnit
-            :value="data.deposit"
-          />
-        </AppDefinition>
-      </div>
-      <div class="transaction-type-info-item ">
-        <AppDefinition
-          v-if="data.fee"
-        >
-          <FormatAeUnit
-            :value="data.fee"
-          />
-        </AppDefinition>
-        <AppDefinition
-          v-if="data.cost"
-          title="tx cost"
-        >
-          <FormatAeUnit
-            :value="data.cost"
-          />
-        </AppDefinition>
-      </div>
-    </div>
-  </div>
+  <Component
+    v-if="data.type"
+    :is="data.type"
+    :transaction="data"
+  />
 </template>
 
 <script>
 
-import AppDefinition from '~/components/appDefinition'
-import FormatAeUnit from '~/components/formatAeUnit'
-import AccountGroup from '~/components/accountGroup'
-import Account from '~/components/account'
-import Age from '~/components/age'
-import LabelType from '~/components/labelType'
+import SpendTx from '~/partials/transactions/txListType/spendTx.vue'
+import OracleRegisterTx from '~/partials/transactions/txListType/oracleRegisterTx.vue'
+import OracleExtendTx from '~/partials/transactions/txListType/oracleExtendTx.vue'
+import OracleResponseTx from '~/partials/transactions/txListType/oracleResponseTx.vue'
+import OracleQueryTx from '~/partials/transactions/txListType/oracleQueryTx.vue'
+import NameClaimTx from '~/partials/transactions/txListType/nameClaimTx.vue'
+import NamePreclaimTx from '~/partials/transactions/txListType/namePreclaimTx.vue'
+import NameTransferTx from '~/partials/transactions/txListType/nameTransferTx.vue'
+import NameUpdateTx from '~/partials/transactions/txListType/nameUpdateTx.vue'
+import ContractCallTx from '~/partials/transactions/txListType/contractCallTx.vue'
+import ContractCreateTx from '~/partials/transactions/txListType/contractCreateTx.vue'
 
 export default {
   name: 'TXListItem',
   components: {
-    LabelType,
-    AppDefinition,
-    FormatAeUnit,
-    AccountGroup,
-    Account,
-    Age
+    SpendTx,
+    OracleRegisterTx,
+    OracleExtendTx,
+    OracleResponseTx,
+    OracleQueryTx,
+    NameClaimTx,
+    NamePreclaimTx,
+    NameTransferTx,
+    NameUpdateTx,
+    ContractCallTx,
+    ContractCreateTx
   },
   props: {
     data: {
@@ -114,7 +45,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../../node_modules/@aeternity/aepp-components-3/src/styles/variables/colors";
+  @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   .transaction {
     background-color: #FFFFFF;
     display: flex;
@@ -134,7 +65,7 @@ export default {
       }
     }
 
-    .transaction-main-info {
+    /deep/ .transaction-main-info {
       display: flex;
       margin-bottom: .6rem;
       flex-direction: row;
@@ -164,7 +95,7 @@ export default {
 
       }
 
-      .accounts {
+       .accounts {
         width: 50%;
         @media (min-width: 550px) {
           width: 70%;
@@ -173,7 +104,7 @@ export default {
 
     }
 
-    .transaction-type-info {
+    /deep/ .transaction-type-info {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -185,7 +116,7 @@ export default {
         width: 35%;
       }
 
-      .transaction-type-info-item {
+       .transaction-type-info-item {
         display: flex;
         flex-direction: row;
         width: 100%;
@@ -199,7 +130,7 @@ export default {
           border-left: 2px solid $color-neutral-positive-2;
         }
 
-        .block {
+         .block {
           &:not(:first-child) {
             border-left: 2px solid $color-neutral-positive-2;
             border-top: none;
