@@ -3,7 +3,7 @@ import { ChainNode } from '@aeternity/aepp-sdk'
 
 export const state = () => ({
   $nodeStatus: {},
-  nodeUrl: process.env.NUXT_APP_NODE_URL,
+  nodeUrl: process.env.middlewareURL,
   error: ''
 })
 

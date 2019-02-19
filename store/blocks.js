@@ -127,8 +127,11 @@ export const actions = wrapActionsWithResolvedNode({
     const generation = await node.api.getGenerationByHash(hash)
     generation.numTransactions = 0
     const height = generation.keyBlock.height
-    const resp = await axios.get(process.env.NUXT_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
+    const resp = await axios.get(process.env.middlewareURL + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = resp.data.transactions.length
+    for (const tx of resp.data.transactions) {
+      commit('transactions/setTransaction', tx, { root: true })
+    }
     commit('setGenerations', generation)
     return generation
   },
@@ -160,8 +163,11 @@ export const actions = wrapActionsWithResolvedNode({
    */
   async getGenerationFromHeight ({ state, rootGetters: { node }, commit }, height) {
     const generation = await node.api.getGenerationByHeight(height)
-    const resp = await axios.get(process.env.NUXT_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
+    const resp = await axios.get(process.env.middlewareURL + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = resp.data.transactions.length
+    for (const tx of resp.data.transactions) {
+      commit('transactions/setTransaction', tx, { root: true })
+    }
     commit('setGenerations', generation)
     return generation
   },

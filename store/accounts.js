@@ -76,7 +76,7 @@ export const actions = wrapActionsWithResolvedNode({
     let numTransactions = 0
     try {
       balance = await node.balance(address, { format: false })
-      const resp = await axios.get(process.env.NUXT_APP_NODE_URL + 'middleware/transactions/account/' + address + '/count')
+      const resp = await axios.get(process.env.middlewareURL + 'middleware/transactions/account/' + address + '/count')
       numTransactions = resp.data.count
     } catch (e) {
       balance = 0
@@ -103,10 +103,10 @@ export const actions = wrapActionsWithResolvedNode({
   },
 
   async name ({ state, commit }, address) {
-    if (!process.env.NUXT_APP_MIDDLEWARE_URL) return
+    if (!process.env.middlewareURL) return
     if (state.names[address].length !== 0 && (Date.now() - state.names[address].ts < 10000)) return
     if (state.names[address].length === 0) commit('setName', { address, ts: Date.now(), name: null })
-    const { name } = await axios.get(`${process.env.NUXT_APP_MIDDLEWARE_URL}${address}`).data
+    const { name } = await axios.get(`${process.env.middlewareURL}${address}`).data
     const account = { address, ts: Date.now(), name }
     commit('setName', account)
     return account
