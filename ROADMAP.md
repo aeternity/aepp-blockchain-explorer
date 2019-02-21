@@ -38,6 +38,16 @@ show data such as:
 suggestions welcome
 ### Accounts
 - QR code generator along with view/copy button. For use in base aepp.
+- list of top accounts with balance and age(first transaction/last transaction)
+#### 1. Account overview
+- filter transactions:
+  - contracts
+  - in / out
+- show contracts
+- verified accounts
+#### 2. Verify account
+create verifaction tool to test for maliciuos accounts(to be explained)
+
 ### Name Services
 suggestions welcome
 ### Nodes
