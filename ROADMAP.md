@@ -5,6 +5,7 @@
 - showcase data about `aeternity blockchain` such as: 
   - show `streamgraph` of number of tx per time interval
   - show size of blockchain 
+  - show reward, blocks mined, difficulty, peers
 - show list of 10 latest generations
 - show list of 10 latest transactions 
 ### Statistics
@@ -47,7 +48,8 @@ suggestions welcome
 - verified accounts
 #### 2. Verify account
 create verifaction tool to test for maliciuos accounts(to be explained)
-
+### Contracts
+list of contracts links to accounts, and transactions
 ### Name Services
 suggestions welcome
 ### Nodes
