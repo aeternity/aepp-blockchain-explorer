@@ -26,7 +26,20 @@
         >
           <Age :time="data.keyBlock.time" />
         </AppDefinition>
-
+        <AppDefinition
+          class="container-last-inner"
+          title="Nonce"
+        >
+          {{ data.keyBlock.nonce }}
+        </AppDefinition>
+      </div>
+      <div class="container-last-wrapper">
+        <AppDefinition
+          class="container-last-inner"
+          title="Target"
+        >
+          {{ data.keyBlock.target }}
+        </AppDefinition>
         <AppDefinition
           class="container-last-inner"
           title="Transactions"
