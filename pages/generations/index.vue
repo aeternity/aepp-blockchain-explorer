@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import Generations from '~/partials/generations'
 import Generation from '~/partials/generation'
 import PageHeader from '~/components/PageHeader'
@@ -34,15 +34,7 @@ export default {
     ...mapState('generations', [
       'generations',
       'height'
-    ]),
-    ...mapGetters('blocks', [
-      'getAverageBlockTime',
-      'getLastMinedBlockTime'
     ])
   }
 }
 </script>
-
-<style scoped>
-
-</style>

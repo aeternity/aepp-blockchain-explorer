@@ -4,7 +4,8 @@ import { ChainNode } from '@aeternity/aepp-sdk'
 export const state = () => ({
   $nodeStatus: {},
   nodeUrl: process.env.middlewareURL,
-  error: ''
+  error: '',
+  height: 0
 })
 
 export const getters = {
@@ -48,6 +49,15 @@ export const mutations = {
    */
   clearError (state) {
     state.error = ''
+  },
+  /**
+   * setHeight mutates the
+   * state property height
+   * @param {Object} state
+   * @param {Number} height
+   */
+  setHeight (state, height) {
+    Object.assign(state, { height })
   }
 }
 
@@ -70,9 +80,26 @@ export const actions = wrapActionsWithResolvedNode({
       commit('catchError', 'Error', { root: true })
     }
   },
-  nuxtServerInit ({ commit, dispatch }, { context }) {
-    return Promise.all([
-      dispatch('generations/nuxtServerInit', context)
+  async height ({ state, rootGetters: { node }, commit }) {
+    try {
+      const height = await node.height()
+
+      if (height === state.height) {
+        return state.height
+      }
+
+      commit('setHeight', height)
+
+      return height
+    } catch (e) {
+      commit('catchError', 'Error', { root: true })
+    }
+  },
+  async nuxtServerInit ({ commit, dispatch }, { context }) {
+    await dispatch('height')
+    await Promise.all([
+      dispatch('generations/nuxtServerInit', context),
+      dispatch('transactions/nuxtServerInit', context)
     ])
   }
 })
