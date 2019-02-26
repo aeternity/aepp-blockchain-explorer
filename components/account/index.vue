@@ -1,6 +1,6 @@
 <template>
   <div class="account">
-    <no-ssr><AeIdenticon
+    <no-ssr><AppIdenticon
       :address="value"
       class="account-identicon"
     /></no-ssr>
@@ -12,10 +12,11 @@
           :value="value"
           length="responsive"
         />
-        <no-ssr><AeIcon
+        <AppIconBase
           v-if="icon"
           name="copy"
-        /></no-ssr>
+          size="18"
+        />
       </div>
     </AppDefinition>
   </div>
@@ -23,16 +24,12 @@
 <script>
 import AppDefinition from '~/components/appDefinition'
 import FormatAddress from '~/components/formatAddress'
-let AeIcon
-let AeIdenticon
-if (process.browser) {
-  AeIcon = require('@aeternity/aepp-components-3').AeIcon
-  AeIdenticon = require('@aeternity/aepp-components-3').AeIdenticon
-}
+import AppIdenticon from '~/components/AppIdenticon'
+import AppIconBase from '~/components/AppIconBase'
 
 export default {
   name: 'Account',
-  components: { AppDefinition, FormatAddress, AeIcon, AeIdenticon },
+  components: { AppDefinition, FormatAddress, AppIdenticon, AppIconBase },
   props: {
     value: {
       type: String,
@@ -69,7 +66,7 @@ export default {
         }
       &-content {
         display: flex;
-          & .ae-icon {
+          & .app-icon {
             margin-left: .3rem;
           @media (max-width:450px) {
             display: none;

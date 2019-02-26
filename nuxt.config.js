@@ -27,15 +27,16 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    { src: '@aeternity/aepp-components-3/dist/aepp.components.css' },
-    { src: '@aeternity/aepp-components-3/dist/aepp.fonts.css' },
     { src: 'styles/index.scss', lang: 'scss' }
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/directives/copyToClipboard.js' },
+    { src: '~/plugins/directives/removeSpacesOnCopy.js' }
+  ],
   /*
     ** Router config
     */
