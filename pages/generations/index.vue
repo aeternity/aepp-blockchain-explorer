@@ -32,8 +32,7 @@ export default {
   },
   computed: {
     ...mapState('generations', [
-      'generations',
-      'height'
+      'generations'
     ])
   }
 }
