@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import axios from 'axios'
 import { wrapActionsWithResolvedNode } from './utils'
 
 export const state = () => ({
@@ -33,9 +34,8 @@ export const actions = wrapActionsWithResolvedNode({
 
     return transaction
   },
-  async getTxByGeneration ({ state, commit, rootGetters: { node } }, { start, end }) {
-    const listTxRequest = await this.$axios.$get(`${state.nodeUrl}middleware/transactions/interval/${start}/${end}`)
-    const listTx = (await listTxRequest.json())
-    return listTx.transactions
+  async getTxByGeneration ({ state }, { start, end }) {
+    const listTx = await axios.get(`${state.nodeUrl}middleware/transactions/interval/${start}/${end}`)
+    return listTx.data.transactions
   }
 })

@@ -3,7 +3,7 @@ import { ChainNode } from '@aeternity/aepp-sdk'
 
 export const state = () => ({
   $nodeStatus: {},
-  nodeUrl: process.env.VUE_APP_NODE_URL,
+  nodeUrl: process.env.middlewareURL,
   error: ''
 })
 
@@ -69,5 +69,10 @@ export const actions = wrapActionsWithResolvedNode({
     } catch (e) {
       commit('catchError', 'Error', { root: true })
     }
+  },
+  nuxtServerInit ({ commit, dispatch }, { context }) {
+    return Promise.all([
+      dispatch('blocks/nuxtServerInit', context)
+    ])
   }
 })

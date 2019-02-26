@@ -1,3 +1,4 @@
+import axios from 'axios'
 export const state = () => ({
   priceChf: null,
   marketCapChf: null,
@@ -23,7 +24,7 @@ export const actions = {
      * Pulling market stats
      * @type {Response}
      */
-    const market = await this.$axios.$get('https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF')
+    const market = await axios.get('https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF').data
 
     /**
      * Renaming variables
