@@ -24,7 +24,7 @@
           class="container-last-inner"
           title="Time since mined"
         >
-          <Age :time="data.time_" />
+          <Age :time="data.time" />
         </AppDefinition>
 
         <AppDefinition

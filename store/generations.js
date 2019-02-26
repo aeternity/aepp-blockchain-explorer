@@ -59,14 +59,12 @@ export const actions = wrapActionsWithResolvedNode({
     }
   },
 
-  getLatestGenerations: async function ({ state, rootGetters: { node }, commit, dispatch }, maxBlocks) {
+  getLatestGenerations: async function ({ state, rootState: { nodeUrl }, commit, dispatch }, maxBlocks) {
     try {
       await dispatch('height')
-      // TODO replace following url with commented out one, once the endpoint is live
-      // return await axios.get(process.env.VUE_APP_EPOCH_URL + '/middleware/generations/' + (state.height - maxBlocks).toString() + '/' + state.height.toString())
-      const generations = await axios.get('https://gist.githubusercontent.com/shekhar-shubhendu/0fb81ee9b5f7d9d282b4b824c34991f6/raw/d5eabb80721c499d57d8480b109ed266547a8c9f/gistfile1.txt')
-      commit('setGenerations', generations.data.slice(150, 165))
-      return generations.data.slice(42800, 43150)
+      const generations = await axios.get(nodeUrl + '/middleware/generations/' + (state.height - maxBlocks).toString() + '/' + state.height.toString())
+      commit('setGenerations', generations.data)
+      return generations.data
     } catch (e) {
       console.log(e)
       commit('catchError', 'Error', { root: true })

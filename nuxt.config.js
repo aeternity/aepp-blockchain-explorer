@@ -32,7 +32,7 @@ module.exports = {
     { src: 'styles/index.scss', lang: 'scss' }
   ],
   env: {
-    middlewareURL: process.env.NUXT_APP_NODE_URL || 'https://roma-net.mdw.aepps.com/'
+    middlewareURL: process.env.NUXT_APP_NODE_URL || 'http://localhost:8080/'
   },
   /*
   ** Plugins to load before mounting the App
