@@ -13,9 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@aeternity/aepp-components": "2.0.13",
     "@aeternity/aepp-components-3": "^3.0.0-alpha.9",
-    "@aeternity/aepp-sdk": "2.1.1-0.1.0-next",
     "@download/blockies": "^1.0.3",
     "@nuxtjs/axios": "^5.0.0",
     "@nuxtjs/svg-sprite": "^0.2.0",
