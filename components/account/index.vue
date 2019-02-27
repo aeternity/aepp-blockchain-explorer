@@ -10,12 +10,8 @@
       <div class="account-content">
         <FormatAddress
           :value="value"
+          :icon="icon"
           length="responsive"
-        />
-        <AppIconBase
-          v-if="icon"
-          name="copy"
-          size="18"
         />
       </div>
     </AppDefinition>
@@ -25,11 +21,10 @@
 import AppDefinition from '~/components/appDefinition'
 import FormatAddress from '~/components/formatAddress'
 import AppIdenticon from '~/components/AppIdenticon'
-import AppIconBase from '~/components/AppIconBase'
 
 export default {
   name: 'Account',
-  components: { AppDefinition, FormatAddress, AppIdenticon, AppIconBase },
+  components: { AppDefinition, FormatAddress, AppIdenticon },
   props: {
     value: {
       type: String,
@@ -48,29 +43,20 @@ export default {
 </script>
 <style scoped lang="scss">
     .account {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-left: .6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: .6rem;
+      @media (max-width:450px) {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding-left: 0;
+      }
+      &-identicon {
         @media (max-width:450px) {
-          flex-direction: column;
-          justify-content: start;
-          align-items: start;
-          padding-left: 0;
-        }
-        &-identicon {
-          @media (max-width:450px) {
-            margin-left: .6rem;
-            margin-top: .3rem;
-          }
-        }
-      &-content {
-        display: flex;
-          & .app-icon {
-            margin-left: .3rem;
-          @media (max-width:450px) {
-            display: none;
-          }
+          margin-left: .6rem;
+          margin-top: .3rem;
         }
       }
     }
