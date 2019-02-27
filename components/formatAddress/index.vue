@@ -37,14 +37,15 @@
     <div
       v-copy-to-clipboard="value"
       v-remove-spaces-on-copy
+      v-if="icon"
       class="format-address-clipboard"
     >
-      <AppIcon name="copy" />
+      <AppIcon name="copy"/>
     </div>
   </div>
 </template>
 <script>
-import AppIcon from '~/components/AppIcon'
+import AppIcon from '~/components/appIcon'
 export default {
   name: 'FormatAddress',
   components: {
