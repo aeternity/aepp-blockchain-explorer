@@ -1,9 +1,11 @@
 <template>
   <div class="account">
-    <no-ssr><AppIdenticon
-      :address="value"
-      class="account-identicon"
-    /></no-ssr>
+    <no-ssr>
+      <AppIdenticon
+        :address="value"
+        class="account-identicon"
+      />
+    </no-ssr>
     <AppDefinition
       :title="title"
     >

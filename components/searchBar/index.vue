@@ -8,22 +8,17 @@
     <button
       class="search-bar-button"
     >
-      <no-ssr><AeIcon
-        name="search"
-      /></no-ssr>
+      <AppIcon name="search" />
     </button>
   </div>
 </template>
 <script>
-let AeIcon
-if (process.browser) {
-  AeIcon = require('@aeternity/aepp-components-3').AeIcon
-}
+import AppIcon from '~/components/appIcon'
 
 export default {
   name: 'SearchBar',
   components: {
-    AeIcon
+    AppIcon
   },
   props: {
     placeholder: {
@@ -37,7 +32,6 @@ export default {
   @import "~@aeternity/aepp-components-3/src/styles/variables/colors";
   @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
   .search-bar {
-    display: inline-block;
     position: relative;
     width: 100%;
     display: flex;
@@ -63,10 +57,8 @@ export default {
       align-items: center;
       line-height: 0;
       padding: 1.3rem .6rem;
-      .ae-icon {
-        font-size: 1.5rem;
-        color: $color-neutral-negative-1;
-      }
+      font-size: 1.5rem;
+      color: $color-neutral-negative-1;
     }
   }
 </style>
