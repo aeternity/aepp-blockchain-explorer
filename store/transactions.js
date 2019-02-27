@@ -1,41 +1,37 @@
-// import Vue from 'vue'
-// import { wrapActionsWithResolvedNode } from './utils'
-//
-// export const state = () => ({
-//   transactions: {}
-// })
-//
-// export const mutations = {
-//   /**
-//    * setTransaction object
-//    * @param {Object} state
-//    * @param {Object} transaction
-//    */
-//   setTransaction (state, transaction) {
-//     Vue.set(state.transactions, transaction.hash, transaction)
-//   }
-// }
-//
-// export const actions = wrapActionsWithResolvedNode({
-//   /**
-//    *
-//    * @param state
-//    * @param commit
-//    * @param {Object} rootGetters
-//    * @param hash
-//    * @return {Promise<*>}
-//    */
-//   async getTxByHash ({ state, commit, rootGetters: { node } }, hash) {
-//     if (state.transactions[hash]) return state.transactions[hash]
-//
-//     const transaction = await node.tx(hash, true)
-//     commit('setTransaction', transaction)
-//
-//     return transaction
-//   },
-//   async getTxByGeneration ({ state, commit, rootGetters: { node } }, { start, end }) {
-//     const listTxRequest = await this.$axios.$get(`${state.nodeUrl}middleware/transactions/interval/${start}/${end}`)
-//     const listTx = (await listTxRequest.json())
-//     return listTx.transactions
-//   }
-// })
+import Vue from 'vue'
+import axios from 'axios'
+
+export const state = () => ({
+  transactions: {}
+})
+
+export const mutations = {
+  setTransactions (state, transactions) {
+    for (let i = 0; i < transactions.length; i++) {
+      const transaction = transactions[i]
+      if (!state.transactions.hasOwnProperty(transaction.hash)) {
+        Vue.set(state.transactions, transaction.hash, transaction)
+      }
+    }
+  }
+}
+
+export const actions = {
+  getLatestTransactions: async function ({ state, rootState: { nodeUrl, height }, commit, dispatch }, payload) {
+    const page = payload.page
+    const maxTransactions = payload.numTransactions
+    try {
+      const transactions = await axios.get(nodeUrl + 'middleware/transactions/interval/1/' + height.toString() + '?limit=' + maxTransactions + '&page=' + page)
+      commit('setTransactions', transactions.data.transactions)
+      return transactions.data.transactions
+    } catch (e) {
+      console.log(e)
+      commit('catchError', 'Error', { root: true })
+    }
+  },
+  nuxtServerInit ({ dispatch }, context) {
+    return (
+      dispatch('getLatestTransactions', { 'page': 1, 'numTransactions': 20 })
+    )
+  }
+}
