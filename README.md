@@ -1,9 +1,4 @@
----
-layout: page
-title: Blockchain Explorer
-navigation: 2
----
-
+[![Waffle.io - Issues in progress](https://badge.waffle.io/aeternity/aepp-blockchain-explorer.png?label=in%20progress&title=In%20Progress)](http://waffle.io/aeternity/aepp-blockchain-explorer)
 # æternity Blockchain Explorer
 
 ## Overview
