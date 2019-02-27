@@ -1,21 +1,13 @@
-import { wrapActionsWithResolvedNode } from './utils'
-import { ChainNode } from '@aeternity/aepp-sdk'
-
+import axios from 'axios'
+console.log(process.env)
 export const state = () => ({
   $nodeStatus: {},
-  nodeUrl: process.env.middlewareURL,
+  nodeUrl: process.env.NUXT_APP_NODE_URL,
   error: '',
   height: 0
 })
 
 export const getters = {
-  nodePromise ({ nodeUrl }) {
-    return ChainNode({
-      url: nodeUrl,
-      internalUrl: nodeUrl,
-      forceCompatibility: true
-    })
-  }
 }
 
 export const mutations = {
@@ -61,28 +53,16 @@ export const mutations = {
   }
 }
 
-export const actions = wrapActionsWithResolvedNode({
+export const actions = {
   /**
    * getNodeStatus
    * @param {Object} rootGetters
    * @param {Function} commit
    * @return {Object}
    */
-  async getNodeStatus ({ rootGetters: { node }, commit }) {
+  async height ({ state, rootState: { nodeUrl }, commit }) {
     try {
-      const [top, version] = await Promise.all([
-        node.api.getCurrentGeneration(),
-        node.api.getStatus()
-      ])
-      commit('setNodeStatus', { connected: true, top, version })
-      return { connected: true, top, version }
-    } catch (e) {
-      commit('catchError', 'Error', { root: true })
-    }
-  },
-  async height ({ state, rootGetters: { node }, commit }) {
-    try {
-      const height = await node.height()
+      const { height } = await axios.get(nodeUrl + '/v2/key-blocks/current/height').data
 
       if (height === state.height) {
         return state.height
@@ -102,4 +82,4 @@ export const actions = wrapActionsWithResolvedNode({
       dispatch('transactions/nuxtServerInit', context)
     ])
   }
-})
+}
