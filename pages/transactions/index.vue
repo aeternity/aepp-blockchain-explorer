@@ -18,7 +18,7 @@
 import TxList from '~/partials/transactions/txList'
 import TXListItem from '~/partials/transactions/txListItem'
 import PageHeader from '~/components/PageHeader'
-import BreadCrumbs from '~/components/BreadCrumbs'
+import BreadCrumbs from '~/components/breadCrumbs'
 import LoadMoreButton from '~/components/loadMoreButton'
 
 const transactionData = [

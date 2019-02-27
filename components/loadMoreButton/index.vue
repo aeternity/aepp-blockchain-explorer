@@ -1,21 +1,21 @@
 <template>
   <div class="load-more-button-wrapper">
-    <AeButton
+    <AppButton
       face="round"
       fill="neutral"
       extend
     >
       Load More
-    </AeButton>
+    </AppButton>
   </div>
 </template>
 <script>
-import { AeButton } from '@aeternity/aepp-components-3'
+import AppButton from '~/components/appButton'
 
 export default {
   name: 'LoadMoreButton',
   components: {
-    AeButton
+    AppButton
   }
 }
 </script>

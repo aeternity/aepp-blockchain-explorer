@@ -27,15 +27,16 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    { src: '@aeternity/aepp-components-3/dist/aepp.components.css' },
-    { src: '@aeternity/aepp-components-3/dist/aepp.fonts.css' },
     { src: 'styles/index.scss', lang: 'scss' }
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/directives/copyToClipboard.js' },
+    { src: '~/plugins/directives/removeSpacesOnCopy.js' }
+  ],
   /*
     ** Router config
     */
@@ -48,7 +49,8 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/svg-sprite'
   ],
   /*
   ** Axios module configuration

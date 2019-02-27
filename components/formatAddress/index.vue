@@ -1,7 +1,5 @@
 <template>
   <div
-    v-copy-to-clipboard="value"
-    v-remove-spaces-on-copy
     ref="address"
     :class="[ length ]"
     :title="value"
@@ -36,19 +34,23 @@
         {{ chunk }}
       </span>
     </template>
+    <div
+      v-copy-to-clipboard="value"
+      v-remove-spaces-on-copy
+      v-if="icon"
+      class="format-address-clipboard"
+    >
+      <AppIcon name="copy"/>
+    </div>
   </div>
 </template>
 <script>
-let copyToClipboard
-let removeSpacesOnCopy
-if (process.browser) {
-  copyToClipboard = require('@aeternity/aepp-components-3/src/directives/').copyToClipboard
-  removeSpacesOnCopy = require('@aeternity/aepp-components-3/src/directives/').removeSpacesOnCopy
-}
-
+import AppIcon from '~/components/appIcon'
 export default {
   name: 'FormatAddress',
-  directives: { copyToClipboard, removeSpacesOnCopy },
+  components: {
+    AppIcon
+  },
   props: {
     value: {
       type: String,
@@ -59,6 +61,10 @@ export default {
       default: 'full'
     },
     enableCopyToClipboard: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
       type: Boolean,
       default: false
     }
@@ -83,6 +89,21 @@ export default {
     font-size: inherit;
     word-break: normal;
     position: relative;
+  }
+  .format-address.full{
+    flex-wrap: wrap;
+    & span {
+      min-width: 2.7em;
+    }
+  }
+  .format-address-clipboard {
+    display: flex;
+    & .app-icon {
+      margin-left: .3rem;
+      /*@media (max-width:450px) {*/
+        /*display: none;*/
+      /*}*/
+    }
     &.v-copied-to-clipboard:before {
       @extend %face-mono-base;
       content: 'address copied';
@@ -97,12 +118,6 @@ export default {
       right: 0;
       left: 0;
       bottom: 0;
-    }
-  }
-  .format-address.full{
-    flex-wrap: wrap;
-    & span {
-      min-width: 2.7em;
     }
   }
   .first-chunk {
