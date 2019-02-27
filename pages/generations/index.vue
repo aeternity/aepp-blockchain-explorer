@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import Generations from '~/partials/generations'
 import Generation from '~/partials/generation'
 import PageHeader from '~/components/PageHeader'
@@ -31,18 +31,9 @@ export default {
     BreadCrumbs
   },
   computed: {
-    ...mapState('blocks', [
-      'generations',
-      'height'
-    ]),
-    ...mapGetters('blocks', [
-      'getAverageBlockTime',
-      'getLastMinedBlockTime'
+    ...mapState('generations', [
+      'generations'
     ])
   }
 }
 </script>
-
-<style scoped>
-
-</style>
