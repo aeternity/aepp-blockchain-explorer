@@ -134,7 +134,7 @@ export default {
       return { valid, type, endpoint }
     },
     async fetchDomain (domain) {
-      const BASE_URL = process.env.VUE_APP_EPOCH_URL
+      const BASE_URL = process.env.VUE_APP_NODE_URL
       domain = domain.toLowerCase().trim()
       if (!domain.endsWith('.aet')) {
         domain += '.aet'

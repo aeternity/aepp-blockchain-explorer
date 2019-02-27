@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import modules from './modules'
-import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
-import { wrapActionsWithResolvedEpoch } from './utils'
+import NodeChain from '@aeternity/aepp-sdk/es/chain/epoch'
+import { wrapActionsWithResolvedNode } from './utils'
 
 Vue.use(Vuex)
 
@@ -11,15 +11,15 @@ const store = new Vuex.Store({
 
   state: {
     $nodeStatus: {},
-    epochUrl: process.env.VUE_APP_EPOCH_URL,
+    nodeUrl: process.env.VUE_APP_NODE_URL,
     error: ''
   },
 
   getters: {
-    epochPromise ({ epochUrl }) {
-      return EpochChain({
-        url: epochUrl,
-        internalUrl: epochUrl
+    nodePromise ({ nodeUrl }) {
+      return NodeChain({
+        url: nodeUrl,
+        internalUrl: nodeUrl
       })
     },
     isConnected (state) {
@@ -39,10 +39,10 @@ const store = new Vuex.Store({
     /**
      * changeNetwork
      * @param state
-     * @param epochUrl
+     * @param nodeUrl
      */
-    changeNetworkUrl (state, epochUrl) {
-      state.epochUrl = epochUrl
+    changeNetworkUrl (state, nodeUrl) {
+      state.nodeUrl = nodeUrl
     },
     /**
      * catchError
@@ -62,18 +62,18 @@ const store = new Vuex.Store({
 
   },
 
-  actions: wrapActionsWithResolvedEpoch({
+  actions: wrapActionsWithResolvedNode({
     /**
      * getNodeStatus
      * @param {Object} rootGetters
      * @param {Function} commit
      * @return {Object}
      */
-    async getNodeStatus ({ rootGetters: { epoch }, commit }) {
+    async getNodeStatus ({ rootGetters: { node }, commit }) {
       try {
         const [top, version] = await Promise.all([
-          epoch.api.getCurrentGeneration(),
-          epoch.api.getStatus()
+          node.api.getCurrentGeneration(),
+          node.api.getStatus()
         ])
         commit('setNodeStatus', { connected: true, top, version })
         return { connected: true, top, version }

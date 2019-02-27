@@ -1,9 +1,9 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
-import { wrapActionsWithResolvedEpoch } from '../../utils'
+import { wrapActionsWithResolvedNode } from '../../utils'
 import camelcaseKeysDeep from 'camelcase-keys-deep'
 
-export default wrapActionsWithResolvedEpoch({
+export default wrapActionsWithResolvedNode({
   /**
    * get the account details based on an address
    * @param {Object} state
@@ -12,12 +12,12 @@ export default wrapActionsWithResolvedEpoch({
    * @param {String} address
    * @return {*}
    */
-  async get ({ state, rootGetters: { epoch }, commit }, address) {
+  async get ({ state, rootGetters: { node }, commit }, address) {
     let balance = 0
     let numTransactions = 0
     try {
-      balance = await epoch.balance(address, { format: false })
-      const resp = await fetch(process.env.VUE_APP_EPOCH_URL + 'middleware/transactions/account/' + address + '/count')
+      balance = await node.balance(address, { format: false })
+      const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/account/' + address + '/count')
       numTransactions = (await resp.json())['count']
     } catch (e) {
       balance = 0
@@ -30,11 +30,11 @@ export default wrapActionsWithResolvedEpoch({
     return account
   },
 
-  async getTransactions ({ state, rootGetters: { epoch }, commit }, { address, transactionsToGet, increaseBy = 10 }) {
+  async getTransactions ({ state, rootGetters: { node }, commit }, { address, transactionsToGet, increaseBy = 10 }) {
     const page = typeof transactionsToGet === 'undefined' ? 1 : Math.ceil(transactionsToGet / increaseBy)
     let transactions = state.accountTransactions[address] ? state.accountTransactions[address] : []
     try {
-      const resp = await fetch(process.env.VUE_APP_EPOCH_URL + 'middleware/transactions/account/' + address + '?limit=' + increaseBy + '&page=' + page)
+      const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/account/' + address + '?limit=' + increaseBy + '&page=' + page)
       transactions = transactions.concat(camelcaseKeysDeep((await resp.json()).transactions))
     } catch (e) {
       throw new Error(e)

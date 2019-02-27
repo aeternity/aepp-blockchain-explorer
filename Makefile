@@ -5,8 +5,8 @@ OUTPUTFOLDER = dist
 DOCKER_REGISTRY = 166568770115.dkr.ecr.eu-central-1.amazonaws.com
 DOCKER_IMAGE = aepp-explorer
 DOCKER_TAG = $(shell git describe --always)
-# epoch url used at build time
-VUE_APP_EPOCH_URL='//sdk-mainnet.aepps.com/'
+# node url used at build time
+VUE_APP_NODE_URL='//sdk-mainnet.aepps.com/'
 
 
 .PHONY: list
@@ -20,7 +20,7 @@ clean:
 
 build:
 	@echo build release
-	npm install && VUE_APP_EPOCH_URL='$(VUE_APP_EPOCH_URL)' npm run build
+	npm install && VUE_APP_NODE_URL='$(VUE_APP_NODE_URL)' npm run build
 	@echo done
 
 docker-build: build
@@ -35,4 +35,4 @@ docker-push:
 	@echo done
 
 debug-start:
-	npm install && VUE_APP_EPOCH_URL='$(VUE_APP_EPOCH_URL)' npm run serve
+	npm install && VUE_APP_NODE_URL='$(VUE_APP_NODE_URL)' npm run serve

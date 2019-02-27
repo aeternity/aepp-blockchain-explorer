@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     networkName () {
-      let url = this.$store.state.epochUrl
+      let url = this.$store.state.nodeUrl
       let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
       if (name) {
         let shortname = name.replace(/([^.]+)-net-api/, '$1')
