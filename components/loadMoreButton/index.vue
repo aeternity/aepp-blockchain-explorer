@@ -4,6 +4,7 @@
       face="round"
       fill="neutral"
       extend
+      @click="loadMore()"
     >
       Load More
     </AeButton>
@@ -16,6 +17,11 @@ export default {
   name: 'LoadMoreButton',
   components: {
     AeButton
+  },
+  methods: {
+    loadMore () {
+      this.$emit('update')
+    }
   }
 }
 </script>
