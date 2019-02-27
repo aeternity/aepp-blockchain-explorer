@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import modules from './modules'
-import EpochChain from '@aeternity/aepp-sdk/es/chain/epoch'
+import NodeChain from '@aeternity/aepp-sdk/es/chain/node'
 import { wrapActionsWithResolvedEpoch } from './utils'
 
 Vue.use(Vuex)
@@ -17,9 +17,10 @@ const store = new Vuex.Store({
 
   getters: {
     epochPromise ({ epochUrl }) {
-      return EpochChain({
+      return NodeChain({
         url: epochUrl,
-        internalUrl: epochUrl
+        internalUrl: epochUrl,
+        forceCompatibility: true
       })
     },
     isConnected (state) {
