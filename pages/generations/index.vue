@@ -39,7 +39,7 @@ export default {
     BreadCrumbs,
     LoadMoreButton
   },
-  asyncData () {
+  data () {
     return {
       limitGen: 10
     }
@@ -49,13 +49,9 @@ export default {
       'generations'
     ])
   },
-  async fetch ({ store }) {
-    await store.dispatch('height')
-    await store.dispatch('generations/nuxtServerInit')
-  },
   methods: {
     async loadMoreGen () {
-      this.limitGen = this.limitGen + 10
+      this.limitGen += 10
       await this.$store.dispatch('generations/getLatestGenerations', this.limitGen)
     }
   }

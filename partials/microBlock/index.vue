@@ -8,6 +8,46 @@
               <AppTableCell extend>
                 <AppDefinition
                   type="list"
+                  title="Hash"
+                >
+                  {{ data.hash }}
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Time"
+                >
+                  <TimeStamp :time="data.time" />
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="Pof"
+                >
+                  {{ data.pof_hash }}
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="txs_hash"
+                >
+                  {{ data.txs_hash }}
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
                   title="Version"
                 >
                   {{ data.version }}
@@ -70,7 +110,7 @@ import AppTableBody from '~/components/appTableBody'
 import AppTableAccordion from '~/components/appTableAccordion'
 import AppDefinition from '~/components/appDefinition'
 import AppPanel from '~/components/appPanel'
-// import TimeStamp from '~/components/timeStamp'
+import TimeStamp from '~/components/timeStamp'
 import FormatAddress from '~/components/formatAddress'
 
 export default {
@@ -83,7 +123,7 @@ export default {
     AppDefinition,
     AppPanel,
     AppTableAccordion,
-    // TimeStamp,
+    TimeStamp,
     FormatAddress
   },
   props: {

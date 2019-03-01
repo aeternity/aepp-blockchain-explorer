@@ -9,7 +9,7 @@
     />
     <MicroBlocks>
       <MicroBlock
-        v-for="(microBlock, number) in Object.values(microBlocks)"
+        v-for="(microBlock, number) in generation.micro_blocks"
         :key="number"
         :data="microBlock"
       >
@@ -48,15 +48,6 @@ export default {
     },
     generation () {
       return this.$store.state.generations.generations[[this.$route.params.generation]]
-    },
-    microBlocks () {
-      return this.$store.state.microBlock.microBlocks
-    }
-  },
-  async fetch ({ store, params }) {
-    const microBlocks = store.state.generations.generations[params.generation].micro_blocks
-    if (microBlocks.length) {
-      await store.dispatch('microBlock/getMicroBlocks', microBlocks)
     }
   }
 }
