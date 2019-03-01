@@ -8,9 +8,9 @@
     />
     <Generations>
       <nuxt-link
-        v-for="(generation, number) in generations"
+        v-for="(generation, number) in Object.values(generations).reverse()"
         :key="number"
-        :to="`/generations/${generation.keyBlock.height}`"
+        :to="`/generations/${generation.height}`"
         class="generation-link"
       >
         <Generation
@@ -28,6 +28,7 @@ import Generation from '~/partials/generation'
 import PageHeader from '~/components/PageHeader'
 import BreadCrumbs from '~/components/BreadCrumbs'
 import LoadMoreButton from '~/components/loadMoreButton'
+import { mapState } from 'vuex'
 
 export default {
   name: 'AppGenerations',
@@ -44,17 +45,18 @@ export default {
     }
   },
   computed: {
-    generations () {
-      return Object.values(this.$store.state.blocks.generations).reverse()
-    }
+    ...mapState('generations', [
+      'generations'
+    ])
   },
   async fetch ({ store }) {
-    return store.dispatch('blocks/getLatestGenerations', 10)
+    await store.dispatch('height')
+    await store.dispatch('generations/nuxtServerInit')
   },
   methods: {
     async loadMoreGen () {
       this.limitGen = this.limitGen + 10
-      await this.$store.dispatch('blocks/getLatestGenerations', this.limitGen)
+      await this.$store.dispatch('generations/getLatestGenerations', this.limitGen)
     }
   }
 }

@@ -8,11 +8,11 @@
             fill="black"
           />
         </div>
-        <BlockHeight :value="data.keyBlock.height" />
+        <BlockHeight :value="data.height" />
       </div>
       <div class="container-first-inner">
         <Account
-          :value="data.keyBlock.beneficiary"
+          :value="data.beneficiary"
           title="Beneficiary"
           icon
         />
@@ -24,14 +24,14 @@
           class="container-last-inner"
           title="Time since mined"
         >
-          <Age :time="data.keyBlock.time" />
+          <Age :time="data.time" />
         </AppDefinition>
 
         <AppDefinition
           class="container-last-inner"
           title="Transactions"
         >
-          {{ data.numTransactions }}
+          {{ numTransactions }}
         </AppDefinition>
       </div>
     </div>
@@ -60,6 +60,14 @@ export default {
       type: Object,
       required: true
     }
+  },
+  computed: {
+    numTransactions () {
+      return (this.$props.data.micro_blocks.length === 0) ? 0 : this.$props.data.micro_blocks.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.transactions.length
+        , 0
+      )
+    }
   }
 }
 </script>
@@ -79,9 +87,7 @@ export default {
       border-radius: 0;
       box-shadow: none;
       margin-bottom: 0;
-      &:not(:last-child) {
-        border-bottom: 2px solid $color-neutral-positive-2;
-      }
+      border-bottom: 2px solid $color-neutral-positive-2;
     }
   }
   .container-first {
