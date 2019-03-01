@@ -31,7 +31,7 @@ export const actions = {
   },
   nuxtServerInit ({ dispatch }, context) {
     return (
-      dispatch('getLatestTransactions', { 'page': 1, 'numTransactions': 20 })
+      dispatch('getLatestTransactions', { 'page': 1, 'numTransactions': 10 })
     )
   }
 }
