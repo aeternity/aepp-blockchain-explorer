@@ -3,33 +3,60 @@
     <PageHeader title="Generation Details">
       <BreadCrumbs/>
     </PageHeader>
-    {{ height }}
     <GenerationDetails
       :data="generation"
       :dynamic-data="height"
     />
+    <MicroBlocks>
+      <MicroBlock
+        v-for="(microBlock, number) in Object.values(microBlocks)"
+        :key="number"
+        :data="microBlock"
+      >
+        <TXListItem
+          v-for="(transaction, index) in microBlock.transactions"
+          :key="index"
+          :data="transaction.tx"
+        />
+      </MicroBlock>
+    </MicroBlocks>
   </div>
 </template>
 
 <script>
 
 import GenerationDetails from '~/partials/generationDetails'
+import MicroBlocks from '~/partials/microBlocks'
+import MicroBlock from '~/partials/microBlock'
 import PageHeader from '~/components/PageHeader'
 import BreadCrumbs from '~/components/BreadCrumbs'
+import TXListItem from '~/partials/transactions/txListItem'
 
 export default {
   name: 'AppGenerationDetails',
   components: {
     PageHeader,
     GenerationDetails,
-    BreadCrumbs
+    BreadCrumbs,
+    MicroBlocks,
+    MicroBlock,
+    TXListItem
   },
   computed: {
     height () {
-      return this.$store.state.blocks.height
+      return this.$store.state.height
     },
     generation () {
-      return this.$store.state.blocks.generations[[this.$route.params.generation]]
+      return this.$store.state.generations.generations[[this.$route.params.generation]]
+    },
+    microBlocks () {
+      return this.$store.state.microBlock.microBlocks
+    }
+  },
+  async fetch ({ store, params }) {
+    const microBlocks = store.state.generations.generations[params.generation].micro_blocks
+    if (microBlocks.length) {
+      await store.dispatch('microBlock/getMicroBlocks', microBlocks)
     }
   }
 }

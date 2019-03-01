@@ -13,11 +13,11 @@
                       fill="black"
                     />
                   </div>
-                  <BlockHeight :value="data.keyBlock.height" />
+                  <BlockHeight :value="data.height" />
                   <div>
                     <Confirmations
                       :max-height="dynamicData"
-                      :height="data.keyBlock.height"
+                      :height="data.height"
                     />
                   </div>
                 </div>
@@ -30,7 +30,7 @@
                   class="container-last-inner"
                   title="Time since mined"
                 >
-                  <Age :time="data.keyBlock.time" />
+                  <Age :time="data.time" />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>
@@ -39,7 +39,7 @@
             <AppTableRowColumn>
               <AppTableCell extend>
                 <Account
-                  :value="data.keyBlock.beneficiary"
+                  :value="data.beneficiary"
                   title="beneficiary"
                   icon
                 />
@@ -50,17 +50,7 @@
                 <AppDefinition
                   title="Microblocks"
                 >
-                  {{ data.microBlocks.length }}
-                </AppDefinition>
-              </AppTableCell>
-              <AppTableCell>
-                <AppDefinition
-                  title="transactions"
-                >
-                  <FormatAeUnit
-                    :value="data.numTransactions"
-                    type="tx"
-                  />
+                  {{ data.micro_blocks.length }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>
@@ -74,7 +64,7 @@
                 title="Hash"
               >
                 <FormatAddress
-                  :value="data.keyBlock.hash"
+                  :value="data.hash"
                   length="full"
                 />
               </AppDefinition>
@@ -86,7 +76,7 @@
                 type="list"
                 title="Target"
               >
-                {{ data.keyBlock.target }}
+                {{ data.target }}
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -98,7 +88,7 @@
                   title="Miner"
                 >
                   <FormatAddress
-                    :value="data.keyBlock.miner"
+                    :value="data.miner"
                     length="full"
                   />
                 </AppDefinition>
@@ -110,7 +100,7 @@
                   type="list"
                   title="Nonce"
                 >
-                  {{ data.keyBlock.nonce }}
+                  {{ data.nonce }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -120,7 +110,7 @@
                   type="list"
                   title="Version"
                 >
-                  {{ data.keyBlock.version }}
+                  {{ data.version }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -131,7 +121,7 @@
                   title="Prev hash"
                 >
                   <FormatAddress
-                    :value="data.keyBlock.prevHash"
+                    :value="data.prev_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -146,7 +136,7 @@
                   title="Prev key hash"
                 >
                   <FormatAddress
-                    :value="data.keyBlock.prevKeyHash"
+                    :value="data.prev_key_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -159,7 +149,7 @@
                   title="State hash"
                 >
                   <FormatAddress
-                    :value="data.keyBlock.stateHash"
+                    :value="data.state_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -171,7 +161,7 @@
                   type="list"
                   title="Pow"
                 >
-                  <FormatPow :value="data.keyBlock.pow" />
+                  <FormatPow :value="data.pow.replace(/\[|\]/g, '').split(', ')" />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>

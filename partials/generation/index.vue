@@ -88,9 +88,7 @@ export default {
       border-radius: 0;
       box-shadow: none;
       margin-bottom: 0;
-      &:not(:last-child) {
-        border-bottom: 2px solid $color-neutral-positive-2;
-      }
+      border-bottom: 2px solid $color-neutral-positive-2;
     }
   }
   .container-first {
