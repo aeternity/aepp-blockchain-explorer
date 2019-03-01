@@ -1,14 +1,11 @@
 import axios from 'axios'
-console.log(process.env)
+
 export const state = () => ({
   $nodeStatus: {},
-  nodeUrl: process.env.NUXT_APP_NODE_URL,
+  nodeUrl: process.env.middlewareURL,
   error: '',
   height: 0
 })
-
-export const getters = {
-}
 
 export const mutations = {
   /**
@@ -62,14 +59,11 @@ export const actions = {
    */
   async height ({ state, rootState: { nodeUrl }, commit }) {
     try {
-      const { height } = await axios.get(nodeUrl + '/v2/key-blocks/current/height').data
-
+      const { height } = (await axios.get(nodeUrl + '/v2/key-blocks/current/height')).data
       if (height === state.height) {
         return state.height
       }
-
       commit('setHeight', height)
-
       return height
     } catch (e) {
       commit('catchError', 'Error', { root: true })

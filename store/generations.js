@@ -21,11 +21,9 @@ export const mutations = {
 export const actions = {
   getLatestGenerations: async function ({ state, rootState: { nodeUrl, height }, commit, dispatch }, maxBlocks) {
     try {
-      const generations = await axios.get(nodeUrl + '/middleware/generations/' + (height - maxBlocks).toString() + '/' + height.toString())
-      commit('setGenerations', generations.data)
-      return generations.data
+      const generations = await axios.get(nodeUrl + '/middleware/generations/' + (height - maxBlocks) + '/' + height)
+      return generations.data.data
     } catch (e) {
-      console.log(e)
       commit('catchError', 'Error', { root: true })
     }
   },
