@@ -33,6 +33,11 @@ export default {
     BreadCrumbs,
     LoadMoreButton
   },
+  data () {
+    return {
+      limitGen: 10
+    }
+  },
   computed: {
     ...mapState('generations', [
       'generations'
@@ -40,8 +45,8 @@ export default {
   },
   methods: {
     async loadMoreGen () {
-      this.limitGen = this.limitGen + 10
-      await this.$store.dispatch('blocks/getLatestGenerations', this.limitGen)
+      this.limitGen += 10
+      await this.$store.dispatch('generations/getLatestGenerations', this.limitGen)
     }
   }
 }

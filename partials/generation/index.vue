@@ -63,8 +63,9 @@ export default {
   },
   computed: {
     numTransactions () {
-      return (this.$props.data.micro_blocks.length === 0) ? 0 : this.$props.data.micro_blocks.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.transactions.length
+      const keys = Object.keys(this.$props.data.micro_blocks)
+      return (keys.length === 0) ? 0 : keys.reduce(
+        (accumulator, currentValue) => accumulator + Object.keys(this.$props.data.micro_blocks[currentValue].transactions).length
         , 0
       )
     }
