@@ -18,7 +18,7 @@
         />
       </nuxt-link>
     </Generations>
-    <LoadMoreButton @update="loadMoreGen" />
+    <LoadMoreButton @click.native="loadMoreGen" />
   </div>
 </template>
 
