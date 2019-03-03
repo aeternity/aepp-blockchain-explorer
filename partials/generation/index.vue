@@ -40,11 +40,11 @@
 
 <script>
 
-import AppDefinition from '~/components/appDefinition'
-import Account from '~/components/account'
-import Age from '~/components/age'
-import LabelType from '~/components/labelType'
-import BlockHeight from '~/components/blockHeight'
+import AppDefinition from '../../components/appDefinition'
+import Account from '../../components/account'
+import Age from '../../components/age'
+import LabelType from '../../components/labelType'
+import BlockHeight from '../../components/blockHeight'
 
 export default {
   name: 'Index',

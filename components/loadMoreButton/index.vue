@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-let AeButton
+import AppButton from '../appButton'
 
 if (process.browser) {
   AeButton = require('@aeternity/aepp-components-3').AeButton

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import TransitionExpand from '~/components/transitionExpand'
+import TransitionExpand from '../transitionExpand'
 
 export default {
   name: 'AppTableAccordion',

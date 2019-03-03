@@ -19,6 +19,13 @@ import NameUpdateTx from '~/partials/transactions/txListType/nameUpdateTx.vue'
 import ContractCallTx from '~/partials/transactions/txListType/contractCallTx.vue'
 import ContractCreateTx from '~/partials/transactions/txListType/contractCreateTx.vue'
 
+import AppDefinition from '../../../components/appDefinition'
+import FormatAeUnit from '../../../components/formatAeUnit'
+import AccountGroup from '../../../components/accountGroup'
+import Account from '../../../components/account'
+import Age from '../../../components/age'
+import LabelType from '../../../components/labelType'
+
 export default {
   name: 'TXListItem',
   components: {

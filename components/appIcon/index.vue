@@ -1,7 +1,8 @@
 <template>
   <svg-icon
     :name="name"
-    class="app-icon" />
+    class="app-icon"
+  />
 </template>
 
 <script>

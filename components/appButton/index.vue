@@ -7,7 +7,8 @@
       extend
     }"
     class="ae-button"
-    type="button">
+    type="button"
+  >
     <slot />
   </button>
 </template>

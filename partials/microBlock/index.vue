@@ -103,15 +103,15 @@
   </section>
 </template>
 <script>
-import AppTable from '~/components/appTable'
-import AppTableRow from '~/components/appTableRow'
-import AppTableCell from '~/components/appTableCell'
-import AppTableBody from '~/components/appTableBody'
-import AppTableAccordion from '~/components/appTableAccordion'
-import AppDefinition from '~/components/appDefinition'
-import AppPanel from '~/components/appPanel'
-import TimeStamp from '~/components/timeStamp'
-import FormatAddress from '~/components/formatAddress'
+import AppTable from '../../components/appTable'
+import AppTableRow from '../../components/appTableRow'
+import AppTableCell from '../../components/appTableCell'
+import AppTableBody from '../../components/appTableBody'
+import AppTableAccordion from '../../components/appTableAccordion'
+import AppDefinition from '../../components/appDefinition'
+import AppPanel from '../../components/appPanel'
+// import TimeStamp from '../../components/timeStamp'
+import FormatAddress from '../../components/formatAddress'
 
 export default {
   name: 'MicroBlock',

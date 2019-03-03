@@ -25,12 +25,12 @@
 
 <script>
 
-import GenerationDetails from '~/partials/generationDetails'
-import MicroBlocks from '~/partials/microBlocks'
-import MicroBlock from '~/partials/microBlock'
-import PageHeader from '~/components/PageHeader'
-import BreadCrumbs from '~/components/breadCrumbs'
-import TXListItem from '~/partials/transactions/txListItem'
+import GenerationDetails from '../../../partials/generationDetails'
+import MicroBlocks from '../../../partials/microBlocks'
+import MicroBlock from '../../../partials/microBlock'
+import PageHeader from '../../../components/PageHeader'
+import BreadCrumbs from '../../../components/breadCrumbs'
+import TXListItem from '../../../partials/transactions/txListItem'
 
 export default {
   name: 'AppGenerationDetails',
