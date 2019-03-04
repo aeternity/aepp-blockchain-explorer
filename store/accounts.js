@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
-import { wrapActionsWithResolvedNode } from './utils'
 import camelcaseKeysDeep from 'camelcase-keys-deep'
 
 export const state = () => ({
@@ -63,7 +62,7 @@ export const mutations = {
   }
 }
 
-export const actions = wrapActionsWithResolvedNode({
+export const actions = {
   /**
    * get the account details based on an address
    * @param {Object} state
@@ -123,4 +122,4 @@ export const actions = wrapActionsWithResolvedNode({
 
     return account
   }
-})
+}

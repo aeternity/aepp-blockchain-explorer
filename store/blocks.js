@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import times from 'lodash/times'
 import isEqual from 'lodash/isEqual'
-import { wrapActionsWithResolvedNode } from './utils'
 
 export const state = () => ({
   height: 0,
@@ -90,7 +89,7 @@ export const mutations = {
   }
 }
 
-export const actions = wrapActionsWithResolvedNode({
+export const actions = {
   /**
    * height fetches the block-height
    * @param {Object} state
@@ -251,4 +250,4 @@ export const actions = wrapActionsWithResolvedNode({
       commit('catchError', 'Error', { root: true })
     }
   }
-})
+}
