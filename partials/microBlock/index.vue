@@ -20,7 +20,7 @@
                   type="list"
                   title="Time"
                 >
-                  <TimeStamp :time="data.time" />
+                  <age :time="data.time" />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -110,7 +110,7 @@ import AppTableBody from '../../components/appTableBody'
 import AppTableAccordion from '../../components/appTableAccordion'
 import AppDefinition from '../../components/appDefinition'
 import AppPanel from '../../components/appPanel'
-import TimeStamp from '../../components/timeStamp'
+import Age from '../../components/age'
 import FormatAddress from '../../components/formatAddress'
 
 export default {
@@ -123,7 +123,7 @@ export default {
     AppDefinition,
     AppPanel,
     AppTableAccordion,
-    TimeStamp,
+    Age,
     FormatAddress
   },
   props: {
