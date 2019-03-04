@@ -63,7 +63,11 @@ export default {
   },
   computed: {
     numTransactions () {
-      return (this.$props.data.micro_blocks.length === 0) ? 0 : Object.keys(this.$props.data.micro_blocks).length
+      const keys = Object.keys(this.$props.data.micro_blocks)
+      return (keys.length === 0) ? 0 : keys.reduce(
+        (accumulator, currentValue) => accumulator + Object.keys(this.$props.data.micro_blocks[currentValue].transactions).length
+        , 0
+      )
     }
   }
 }
@@ -84,9 +88,7 @@ export default {
       border-radius: 0;
       box-shadow: none;
       margin-bottom: 0;
-      &:not(:last-child) {
-        border-bottom: 2px solid $color-neutral-positive-2;
-      }
+      border-bottom: 2px solid $color-neutral-positive-2;
     }
   }
   .container-first {

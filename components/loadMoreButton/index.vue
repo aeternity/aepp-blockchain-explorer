@@ -16,6 +16,11 @@ export default {
   name: 'LoadMoreButton',
   components: {
     AppButton
+  },
+  methods: {
+    loadMore () {
+      this.$emit('update')
+    }
   }
 }
 </script>

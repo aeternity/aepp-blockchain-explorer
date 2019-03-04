@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const state = () => ({
   $nodeStatus: {},
-  nodeUrl: process.env.middlewareURL,
+  nodeUrl: process.env.NUXT_APP_NODE_URL,
   error: '',
   height: 0
 })

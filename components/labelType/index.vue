@@ -1,6 +1,6 @@
 <template>
   <span
-    :class="{[fill]: Boolean(fill)}"
+    :class="type"
     class="label-type"
   >
     {{ title }}
@@ -13,16 +13,22 @@ export default {
     title: {
       type: String,
       required: true
-    },
-    fill: {
-      type: String,
-      validator: value => [
-        'red',
-        'green',
-        'black',
-        'grey'
-      ].includes(value),
-      default: 'grey'
+    }
+  },
+  computed: {
+    type () {
+      switch (this.title.match(/[^\s]+/g)[0]) {
+        case 'Spend':
+          return 'red'
+        case 'Name':
+          return 'grey'
+        case 'Contract':
+          return 'green'
+        case 'Oracle':
+          return 'purple'
+        default:
+          return 'black'
+      }
     }
   }
 }
@@ -40,7 +46,7 @@ export default {
     @extend %face-uppercase-xs;
   }
   .label-type.red {
-    background-color: $color-primary;
+    background-color: $color-red;
   }
   .label-type.green {
     background-color: $color-alternative;
@@ -48,7 +54,11 @@ export default {
   .label-type.black {
     background-color:  $color-neutral-negative-3;
   }
+  .label-type.purple {
+    background-color: $color-secondary;
+  }
   .label-type.grey {
     background-color: $color-neutral;
   }
+
 </style>
