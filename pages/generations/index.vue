@@ -7,11 +7,16 @@
       title="Generations"
     />
     <Generations>
-      <Generation
-        v-for="item in Object.keys(generations).slice().reverse()"
-        :key="item"
-        :data="generations[item]"
-      />
+      <nuxt-link
+        v-for="(generation, number) in Object.values(generations).reverse()"
+        :key="number"
+        :to="`/generations/${generation.height}`"
+        class="generation-link"
+      >
+        <Generation
+          :data="generation"
+        />
+      </nuxt-link>
     </Generations>
     <LoadMoreButton @update="loadMoreGen" />
   </div>
@@ -23,7 +28,8 @@ import { mapState } from 'vuex'
 import Generations from '../../partials/generations'
 import Generation from '../../partials/generation'
 import PageHeader from '../../components/PageHeader'
-import BreadCrumbs from '../../components/breadCrumbs'
+import LoadMoreButton from '../../components/loadMoreButton'
+// import BreadCrumbs from '../../components/breadCrumbs'
 
 export default {
   name: 'AppGenerations',
@@ -31,7 +37,7 @@ export default {
     Generations,
     Generation,
     PageHeader,
-    BreadCrumbs,
+    // BreadCrumbs,
     LoadMoreButton
   },
   data () {
@@ -47,7 +53,6 @@ export default {
   methods: {
     async loadMoreGen () {
       this.limitGen += 10
-      await this.$store.dispatch('generations/getLatestGenerations', this.limitGen)
     }
   }
 }

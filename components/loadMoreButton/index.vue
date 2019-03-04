@@ -4,6 +4,7 @@
       face="round"
       fill="neutral"
       extend
+      @click="loadMore()"
     >
       Load More
     </AppButton>
@@ -11,10 +12,6 @@
 </template>
 <script>
 import AppButton from '../appButton'
-
-if (process.browser) {
-  AeButton = require('@aeternity/aepp-components-3').AeButton
-}
 
 export default {
   name: 'LoadMoreButton',
