@@ -1,7 +1,5 @@
 import Vue from 'vue'
-import times from 'lodash/times'
-import isEqual from 'lodash/isEqual'
-import { wrapActionsWithResolvedNode } from './utils'
+import { times } from './utils'
 
 export const state = () => ({
   height: 0,
@@ -90,7 +88,7 @@ export const mutations = {
   }
 }
 
-export const actions = wrapActionsWithResolvedNode({
+export const actions = {
   /**
    * height fetches the block-height
    * @param {Object} state
@@ -130,9 +128,7 @@ export const actions = wrapActionsWithResolvedNode({
     const height = generation.keyBlock.height
     const resp = await this.$axios.$get(state.nodeUrl + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = (await resp.json())['transactions'].length
-    if (isEqual(state.generation, generation)) {
-      return state.generation
-    }
+
     commit('setGenerations', generation)
 
     return generation
@@ -150,10 +146,6 @@ export const actions = wrapActionsWithResolvedNode({
   async getBlockFromHash ({ state, rootGetters: { node }, commit }, hash) {
     const block = await node.api.getMicroBlockHeaderByHash(hash)
     block.transactions = (await node.api.getMicroBlockTransactionsByHash(hash)).transactions
-
-    if (isEqual(state.block, block)) {
-      return state.block
-    }
 
     commit('setBlock', block)
 
@@ -178,9 +170,6 @@ export const actions = wrapActionsWithResolvedNode({
     const generation = await node.api.getGenerationByHeight(height)
     const resp = await this.$axios.$get(state.nodeUrl + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = (await resp.json())['transactions'].length
-    if (isEqual(state.generation, generation)) {
-      return state.generation
-    }
 
     commit('setGenerations', generation)
 
@@ -217,10 +206,6 @@ export const actions = wrapActionsWithResolvedNode({
   async getBlockFromHeight ({ state, rootGetters: { node }, commit }, height) {
     const block = await node.api.getKeyBlockByHeight(height)
 
-    if (isEqual(state.block, block)) {
-      return state.block
-    }
-
     commit('setBlock', block)
 
     return block
@@ -251,4 +236,4 @@ export const actions = wrapActionsWithResolvedNode({
       commit('catchError', 'Error', { root: true })
     }
   }
-})
+}
