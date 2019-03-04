@@ -18,10 +18,10 @@
         <AppNavLink to="/">
           Dashboard
         </AppNavLink>
-        <AppNavLink to="generations">
+        <AppNavLink to="/generations">
           Generations
         </AppNavLink>
-        <AppNavLink to="transactions">
+        <AppNavLink to="/transactions">
           Transactions
         </AppNavLink>
       </AppNav>
