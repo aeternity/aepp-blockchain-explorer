@@ -8,11 +8,13 @@ export const state = () => ({
 
 export const mutations = {
   setGenerations (state, generations) {
-    for (let i = 0; i < generations.length; i++) {
-      const generation = generations[i]
-      if (!state.generations.hasOwnProperty(generation.height)) {
-        Vue.set(state.hashToHeight, generation.hash, generation.height)
-        Vue.set(state.generations, generation.height, generation)
+    for (var key in generations) {
+      if (generations.hasOwnProperty(key)) {
+        const generation = generations[key]
+        if (!state.generations.hasOwnProperty(generation.height)) {
+          Vue.set(state.hashToHeight, generation.hash, generation.height)
+          Vue.set(state.generations, generation.height, generation)
+        }
       }
     }
   }
