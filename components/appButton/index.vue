@@ -81,6 +81,8 @@ export default {
   user-select: none;
   position: relative;
   display: flex;
+  max-width: 18rem;
+  margin: auto;
   justify-content: center;
   align-items: center;
   font-family: inherit;
@@ -95,6 +97,7 @@ export default {
   box-shadow: 0 0 16px $color-shadow-alpha-15;
   padding: 0 2rem;
   letter-spacing: em(1.3px);
+  z-index: 1;
 
   &:hover,
   &:focus {
