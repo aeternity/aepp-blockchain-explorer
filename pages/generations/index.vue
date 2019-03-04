@@ -29,7 +29,6 @@ import PageHeader from '~/components/PageHeader'
 import BreadCrumbs from '~/components/breadCrumbs'
 import LoadMoreButton from '~/components/loadMoreButton'
 import { mapState } from 'vuex'
-
 export default {
   name: 'AppGenerations',
   components: {
