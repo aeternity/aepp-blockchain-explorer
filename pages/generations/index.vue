@@ -23,6 +23,7 @@
 </template>
 
 <script>
+
 import { mapState } from 'vuex'
 import Generations from '../../partials/generations'
 import Generation from '../../partials/generation'
