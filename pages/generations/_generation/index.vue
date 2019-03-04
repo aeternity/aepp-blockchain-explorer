@@ -1,7 +1,7 @@
 <template>
   <div class="app-generation-details">
     <PageHeader title="Generation Details">
-      <BreadCrumbs/>
+      <BreadCrumbs />
     </PageHeader>
     <GenerationDetails
       :data="generation"

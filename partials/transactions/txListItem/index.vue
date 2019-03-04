@@ -1,30 +1,23 @@
 <template>
   <Component
-    v-if="data.type"
     :is="data.type"
+    v-if="data.type"
     :transaction="data"
   />
 </template>
 
 <script>
-import SpendTx from '~/partials/transactions/txListType/spendTx.vue'
-import OracleRegisterTx from '~/partials/transactions/txListType/oracleRegisterTx.vue'
-import OracleExtendTx from '~/partials/transactions/txListType/oracleExtendTx.vue'
-import OracleResponseTx from '~/partials/transactions/txListType/oracleResponseTx.vue'
-import OracleQueryTx from '~/partials/transactions/txListType/oracleQueryTx.vue'
-import NameClaimTx from '~/partials/transactions/txListType/nameClaimTx.vue'
-import NamePreclaimTx from '~/partials/transactions/txListType/namePreclaimTx.vue'
-import NameTransferTx from '~/partials/transactions/txListType/nameTransferTx.vue'
-import NameUpdateTx from '~/partials/transactions/txListType/nameUpdateTx.vue'
-import ContractCallTx from '~/partials/transactions/txListType/contractCallTx.vue'
-import ContractCreateTx from '~/partials/transactions/txListType/contractCreateTx.vue'
-
-import AppDefinition from '../../../components/appDefinition'
-import FormatAeUnit from '../../../components/formatAeUnit'
-import AccountGroup from '../../../components/accountGroup'
-import Account from '../../../components/account'
-import Age from '../../../components/age'
-import LabelType from '../../../components/labelType'
+import SpendTx from '../txListType/spendTx.vue'
+import OracleRegisterTx from '../txListType/oracleRegisterTx.vue'
+import OracleExtendTx from '../txListType/oracleExtendTx.vue'
+import OracleResponseTx from '../txListType/oracleResponseTx.vue'
+import OracleQueryTx from '../txListType/oracleQueryTx.vue'
+import NameClaimTx from '../txListType/nameClaimTx.vue'
+import NamePreclaimTx from '../txListType/namePreclaimTx.vue'
+import NameTransferTx from '../txListType/nameTransferTx.vue'
+import NameUpdateTx from '../txListType/nameUpdateTx.vue'
+import ContractCallTx from '../txListType/contractCallTx.vue'
+import ContractCreateTx from '../txListType/contractCreateTx.vue'
 
 export default {
   name: 'TXListItem',

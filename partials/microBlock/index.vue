@@ -110,7 +110,7 @@ import AppTableBody from '../../components/appTableBody'
 import AppTableAccordion from '../../components/appTableAccordion'
 import AppDefinition from '../../components/appDefinition'
 import AppPanel from '../../components/appPanel'
-// import TimeStamp from '../../components/timeStamp'
+import TimeStamp from '../../components/timeStamp'
 import FormatAddress from '../../components/formatAddress'
 
 export default {
