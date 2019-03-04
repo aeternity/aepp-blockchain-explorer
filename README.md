@@ -18,7 +18,7 @@ The underlying API is currently being developed and improved. The Explorer is de
 
 ## Build Setup
 
-The epoch api url can be configured from `.env` file or environment variable `VUE_APP_EPOCH_URL`.
+The node api url can be configured from `.env` file or environment variable `VUE_APP_NODE_URL`.
 
 ```bash
 # install dependencies
@@ -26,10 +26,10 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run serve
-VUE_APP_EPOCH_URL='https://roma-net.mdw.aepps.com/' npm run serve
+VUE_APP_NODE_URL='https://roma-net.mdw.aepps.com/' npm run serve
 
 # build for production with minification
-VUE_APP_EPOCH_URL='https://roma-net.mdw.aepps.com/' npm run build
+VUE_APP_NODE_URL='https://roma-net.mdw.aepps.com/' npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report

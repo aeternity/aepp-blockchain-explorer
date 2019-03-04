@@ -1,10 +1,10 @@
 FROM node:10.15.1-alpine as aepp-explorer-build
-ARG VUE_APP_EPOCH_URL
+ARG VUE_APP_NODE_URL
 WORKDIR /app
 RUN apk add make gcc g++ python git
 COPY  . .
 RUN npm install
-RUN VUE_APP_EPOCH_URL=$VUE_APP_EPOCH_URL npm run build
+RUN VUE_APP_NODE_URL=$VUE_APP_NODE_URL npm run build
 
 FROM nginx:1.13.7-alpine
 
