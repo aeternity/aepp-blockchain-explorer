@@ -27,7 +27,6 @@
 </template>
 <script>
 import AppIcon from '../appIcon'
-
 export default {
   name: 'AppNavAccordion',
   components: {
