@@ -25,10 +25,9 @@
             </AppTableRowColumn>
             <AppTableRowColumn width="small">
               <AppTableCell>
-                <!--<TimeStamp :time="data.key_block.time" />-->
                 <AppDefinition
                   class="container-last-inner"
-                  title="Time since mined"
+                  title="Age"
                 >
                   <Age :time="data.time" />
                 </AppDefinition>
@@ -161,7 +160,7 @@
                   type="list"
                   title="Pow"
                 >
-                  <FormatPow :value="data.pow.replace(/\[|\]/g, '').split(', ')" />
+                  <FormatPow :value="data.pow" />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>

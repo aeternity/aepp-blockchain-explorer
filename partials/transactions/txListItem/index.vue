@@ -83,6 +83,7 @@ export default {
           border-left: 2px solid $color-neutral-positive-2;
         }
         @media (min-width: 550px) {
+          width: 30%;
           &:not(:first-child) {
             border-left: none;
           }

@@ -1,6 +1,7 @@
 <template>
-  <span
+  <time
     class="age"
+    :datetime="time | dateTime"
   >
     <template v-for="(item, idx) in items">
       {{ idx ? ' ' : '' }}
@@ -17,13 +18,20 @@
         {{ item.unit }}
       </sub>
     </template>
-  </span>
+  </time>
 </template>
 
 <script>
 import currentTime from '~/mixins/currentTime'
 export default {
   name: 'Age',
+  filters: {
+    dateTime (value) {
+      if (!value) return ''
+      value = new Date(value).toISOString()
+      return value
+    }
+  },
   mixins: [currentTime],
   props: {
     time: {
@@ -63,6 +71,10 @@ export default {
 
 <style scoped lang="scss">
   .age {
+    & * {
+      display: inline-block;
+      vertical-align: baseline;
+    }
     & .unit {
       font-size: .7em;
       margin-left: -.7em;

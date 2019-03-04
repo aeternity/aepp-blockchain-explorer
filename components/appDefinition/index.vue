@@ -66,6 +66,8 @@ export default {
   .app-definition.list {
     background-color: $color-neutral-positive-3;
     padding: .6rem;
+    align-items: flex-start;
+    height: 100%;
     @media (min-width: 550px) {
       flex-direction: row;
       padding: 0;
@@ -78,6 +80,7 @@ export default {
       }
     }
     & .app-definition-content {
+      height: 100%;
       @media (min-width: 550px) {
         padding: .8rem;
         background-color: #FFFFFF;
