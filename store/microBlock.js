@@ -1,4 +1,4 @@
-import { wrapActionsWithResolvedNode } from './utils'
+import axios from '@nuxtjs/axios'
 
 export const state = () => ({
   microBlock: {}
@@ -10,11 +10,11 @@ export const mutations = {
   }
 }
 
-export const actions = wrapActionsWithResolvedNode({
-  async getMicroBlockFromHash ({ state, rootGetters: { node }, commit }, hash) {
-    const block = await node.api.getMicroBlockHeaderByHash(hash)
-    block.transactions = (await node.api.getMicroBlockTransactionsByHash(hash)).transactions
+export const actions = {
+  async getMicroBlockFromHash ({ state, rootState: { nodeUrl }, commit }, hash) {
+    const block = (await axios.get(`${nodeUrl}/v2/micro-blocks/hash/${hash}/header`)).data
+    block.transactions = (await axios.get(`${nodeUrl}/v2/micro-blocks/hash/${hash}/transactions`)).data.transactions
     commit('setMicroBlock', block)
     return block
   }
-})
+}

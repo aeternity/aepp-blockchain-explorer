@@ -1,7 +1,7 @@
 <template>
   <div class="confirmations">
     <span class="confirmations-num">
-      {{ value }}
+      {{ maxHeight - height }}
     </span>
     <span class="confirmations-name">
       <span>
@@ -18,7 +18,11 @@
 export default {
   name: 'Confirmations',
   props: {
-    value: {
+    maxHeight: {
+      type: Number,
+      required: true
+    },
+    height: {
       type: Number,
       required: true
     }
