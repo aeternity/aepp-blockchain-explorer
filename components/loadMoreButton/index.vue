@@ -41,11 +41,5 @@ export default {
       border-bottom: 2px solid $color-neutral-positive-2;
       transform: translateY(-50%);
     }
-    .ae-button {
-      max-width: 18rem;
-      display: block;
-      margin: auto;
-      z-index: 1;
-    }
   }
 </style>
