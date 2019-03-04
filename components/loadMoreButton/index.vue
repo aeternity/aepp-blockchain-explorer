@@ -1,28 +1,22 @@
 <template>
   <div class="load-more-button-wrapper">
-    <no-ssr>
-      <AeButton
-        face="round"
-        fill="neutral"
-        extend
-        @click="loadMore()"
-      >
-        Load More
-      </AeButton>
-    </no-ssr>
+    <AppButton
+      face="round"
+      fill="neutral"
+      extend
+      @click="loadMore()"
+    >
+      Load More
+    </AppButton>
   </div>
 </template>
 <script>
 import AppButton from '../appButton'
 
-if (process.browser) {
-  AeButton = require('@aeternity/aepp-components-3').AeButton
-}
-
 export default {
   name: 'LoadMoreButton',
   components: {
-    AeButton
+    AppButton
   },
   methods: {
     loadMore () {
