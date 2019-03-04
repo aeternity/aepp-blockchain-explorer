@@ -37,7 +37,8 @@ module.exports = {
   */
   plugins: [
     { src: '~/plugins/directives/copyToClipboard.js' },
-    { src: '~/plugins/directives/removeSpacesOnCopy.js' }
+    { src: '~/plugins/directives/removeSpacesOnCopy.js' },
+    { src: '~/plugins/filters/prefixedAmount.js' }
   ],
   /*
     ** Router config

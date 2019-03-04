@@ -23,6 +23,7 @@ export const actions = {
     try {
       const generations = await axios.get(nodeUrl + '/middleware/generations/' + (height - maxBlocks).toString() + '/' + height.toString())
       commit('setGenerations', generations.data.data)
+      // console.log('test' + generations.data.data)
       return generations.data.data
     } catch (e) {
       commit('catchError', 'Error', { root: true })

@@ -22,16 +22,30 @@
       <div class="container-last-wrapper">
         <AppDefinition
           class="container-last-inner"
-          title="Time since mined"
+          title="Transactions"
+        >
+          {{ numTransactions }}
+        </AppDefinition>
+        <AppDefinition
+          class="container-last-inner"
+          title="Age"
         >
           <Age :time="data.time" />
+        </AppDefinition>
+      </div>
+      <div class="container-last-wrapper">
+        <AppDefinition
+          class="container-last-inner"
+          title="Microblocks"
+        >
+          {{ numMicroBlocks }}
         </AppDefinition>
 
         <AppDefinition
           class="container-last-inner"
-          title="Transactions"
+          title="Target"
         >
-          {{ numTransactions }}
+          {{ data.target | prefixedAmount }}
         </AppDefinition>
       </div>
     </div>
@@ -45,9 +59,11 @@ import Account from '../../components/account'
 import Age from '../../components/age'
 import LabelType from '../../components/labelType'
 import BlockHeight from '../../components/blockHeight'
+import prefixedAmount from '../../plugins/filters/prefixedAmount.js'
 
 export default {
   name: 'Index',
+  filters: { prefixedAmount },
   components: {
     BlockHeight,
     LabelType,
@@ -63,6 +79,9 @@ export default {
   },
   computed: {
     numTransactions () {
+      return (this.$props.data.micro_blocks.length === 0) ? 0 : Object.keys(this.$props.data.micro_blocks).length
+    },
+    numMicroBlocks () {
       return (this.$props.data.micro_blocks.length === 0) ? 0 : Object.keys(this.$props.data.micro_blocks).length
     }
   }
