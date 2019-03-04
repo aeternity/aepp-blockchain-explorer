@@ -40,11 +40,11 @@
 
 <script>
 
-import AppDefinition from '~/components/appDefinition'
-import Account from '~/components/account'
-import Age from '~/components/age'
-import LabelType from '~/components/labelType'
-import BlockHeight from '~/components/blockHeight'
+import AppDefinition from '../../components/appDefinition'
+import Account from '../../components/account'
+import Age from '../../components/age'
+import LabelType from '../../components/labelType'
+import BlockHeight from '../../components/blockHeight'
 
 export default {
   name: 'Index',
@@ -63,11 +63,7 @@ export default {
   },
   computed: {
     numTransactions () {
-      const keys = Object.keys(this.$props.data.micro_blocks)
-      return (keys.length === 0) ? 0 : keys.reduce(
-        (accumulator, currentValue) => accumulator + Object.keys(this.$props.data.micro_blocks[currentValue].transactions).length
-        , 0
-      )
+      return (this.$props.data.micro_blocks.length === 0) ? 0 : Object.keys(this.$props.data.micro_blocks).length
     }
   }
 }
