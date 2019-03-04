@@ -20,9 +20,9 @@
   </div>
 </template>
 <script>
-import AppDefinition from '~/components/appDefinition'
-import FormatAddress from '~/components/formatAddress'
-import AppIdenticon from '~/components/AppIdenticon'
+import AppDefinition from '../appDefinition'
+import FormatAddress from '../formatAddress'
+import AppIdenticon from '../appIdenticon'
 
 export default {
   name: 'Account',

@@ -23,19 +23,21 @@
 </template>
 
 <script>
-import Generations from '~/partials/generations'
-import Generation from '~/partials/generation'
-import PageHeader from '~/components/PageHeader'
-import BreadCrumbs from '~/components/breadCrumbs'
-import LoadMoreButton from '~/components/loadMoreButton'
+
 import { mapState } from 'vuex'
+import Generations from '../../partials/generations'
+import Generation from '../../partials/generation'
+import PageHeader from '../../components/PageHeader'
+import LoadMoreButton from '../../components/loadMoreButton'
+// import BreadCrumbs from '../../components/breadCrumbs'
+
 export default {
   name: 'AppGenerations',
   components: {
     Generations,
     Generation,
     PageHeader,
-    BreadCrumbs,
+    // BreadCrumbs,
     LoadMoreButton
   },
   data () {
@@ -51,7 +53,6 @@ export default {
   methods: {
     async loadMoreGen () {
       this.limitGen += 10
-      await this.$store.dispatch('generations/getLatestGenerations', this.limitGen)
     }
   }
 }

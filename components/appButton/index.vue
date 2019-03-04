@@ -6,14 +6,15 @@
       [face]: Boolean(face),
       extend
     }"
-    class="ae-button"
-    type="button">
+    class="app-button"
+    type="button"
+  >
     <slot />
   </button>
 </template>
 <script>
 export default {
-  name: 'AeButton',
+  name: 'AppButton',
   props: {
     /**
      * Fill property changes the color state of the button
@@ -76,7 +77,7 @@ export default {
 @import '~@aeternity/aepp-components-3/src/styles/variables/colors';
 @import '~@aeternity/aepp-components-3/src/styles/placeholders/typography';
 
-.ae-button {
+.app-button {
   user-select: none;
   position: relative;
   display: flex;
@@ -113,7 +114,7 @@ export default {
   }
 }
 
-.ae-button.extend {
+.app-button.extend {
   padding: 0;
   width: 100%;
 }

@@ -71,13 +71,13 @@
 </template>
 
 <script>
-import AppTable from '~/components/appTable'
-import AppTableRow from '~/components/appTableRow'
-import AppTableCell from '~/components/appTableCell'
-import AppTableBody from '~/components/appTableBody'
-import AppDefinition from '~/components/appDefinition'
-import AppPanel from '~/components/appPanel'
-import FormatAddress from '~/components/formatAddress'
+import AppTable from '../../components/appTable'
+import AppTableRow from '../../components/appTableRow'
+import AppTableCell from '../../components/appTableCell'
+import AppTableBody from '../../components/appTableBody'
+import AppDefinition from '../../components/appDefinition'
+import AppPanel from '../../components/appPanel'
+import FormatAddress from '../../components/formatAddress'
 import TxlistItem from '~/partials/transactions/txListItem'
 
 export default {

@@ -4,13 +4,14 @@
       face="round"
       fill="neutral"
       extend
+      @click="loadMore()"
     >
       Load More
     </AppButton>
   </div>
 </template>
 <script>
-import AppButton from '~/components/appButton'
+import AppButton from '../appButton'
 
 export default {
   name: 'LoadMoreButton',

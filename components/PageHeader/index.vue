@@ -12,7 +12,7 @@
   </section>
 </template>
 <script>
-import PageNav from '~/components/PageNav'
+import PageNav from '../PageNav'
 export default {
   name: 'PageHeader',
   components: {

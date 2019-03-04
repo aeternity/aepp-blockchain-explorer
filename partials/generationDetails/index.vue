@@ -173,23 +173,23 @@
 </template>
 
 <script>
-import AppTable from '~/components/appTable'
-import AppTableRow from '~/components/appTableRow'
-import AppTableCell from '~/components/appTableCell'
-import AppTableHeader from '~/components/appTableHeader'
-import AppTableBody from '~/components/appTableBody'
-import AppTableAccordion from '~/components/appTableAccordion'
-import AppTableRowColumn from '~/components/appTableRowColumn'
-import AppDefinition from '~/components/appDefinition'
-import AppPanel from '~/components/appPanel'
-import BlockHeight from '~/components/blockHeight'
-import LabelType from '~/components/labelType'
-import Age from '~/components/age'
-// import TimeStamp from '~/components/timeStamp'
-import FormatAeUnit from '~/components/formatAeUnit'
-import FormatAddress from '~/components/formatAddress'
-import Account from '~/components/account'
-import Confirmations from '~/components/confirmations'
+import AppTable from '../../components/appTable'
+import AppTableRow from '../../components/appTableRow'
+import AppTableCell from '../../components/appTableCell'
+import AppTableHeader from '../../components/appTableHeader'
+import AppTableBody from '../../components/appTableBody'
+import AppTableAccordion from '../../components/appTableAccordion'
+import AppTableRowColumn from '../../components/appTableRowColumn'
+import AppDefinition from '../../components/appDefinition'
+import AppPanel from '../../components/appPanel'
+import BlockHeight from '../../components/blockHeight'
+import LabelType from '../../components/labelType'
+import Age from '../../components/age'
+// import TimeStamp from '../../components/timeStamp'
+// import FormatAeUnit from '../../components/formatAeUnit'
+import FormatAddress from '../../components/formatAddress'
+import Account from '../../components/account'
+import Confirmations from '../../components/confirmations'
 import FormatPow from '../../components/formatPow'
 
 export default {
@@ -210,7 +210,7 @@ export default {
     AppTableAccordion,
     // TimeStamp,
     Age,
-    FormatAeUnit,
+    // FormatAeUnit,
     FormatAddress,
     Confirmations
   },
