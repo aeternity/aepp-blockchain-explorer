@@ -10,30 +10,7 @@
                   type="list"
                   title="Hash"
                 >
-                  <FormatAddress
-                    :value="data.key_block.hash"
-                    length="full"
-                  />
-                </AppDefinition>
-              </AppTableCell>
-            </AppTableRow>
-            <AppTableRow>
-              <AppTableCell extend>
-                <AppDefinition
-                  type="list"
-                  title="Difficulty"
-                >
-                  87472467200
-                </AppDefinition>
-              </AppTableCell>
-            </AppTableRow>
-            <AppTableRow>
-              <AppTableCell extend>
-                <AppDefinition
-                  type="list"
-                  title="Target"
-                >
-                  {{ data.key_block.target }}
+                  {{ data.hash }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -41,12 +18,9 @@
               <AppTableCell extend>
                 <AppDefinition
                   type="list"
-                  title="Miner"
+                  title="Time"
                 >
-                  <FormatAddress
-                    :value="data.key_block.miner"
-                    length="full"
-                  />
+                  <age :time="data.time" />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -54,9 +28,19 @@
               <AppTableCell extend>
                 <AppDefinition
                   type="list"
-                  title="Nonce"
+                  title="Pof"
                 >
-                  {{ data.key_block.nonce }}
+                  {{ data.pof_hash }}
+                </AppDefinition>
+              </AppTableCell>
+            </AppTableRow>
+            <AppTableRow extend>
+              <AppTableCell extend>
+                <AppDefinition
+                  type="list"
+                  title="txs_hash"
+                >
+                  {{ data.txs_hash }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -66,7 +50,7 @@
                   type="list"
                   title="Version"
                 >
-                  {{ data.key_block.version }}
+                  {{ data.version }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -77,7 +61,7 @@
                   title="Prev hash"
                 >
                   <FormatAddress
-                    :value="data.key_block.prev_hash"
+                    :value="data.prev_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -92,7 +76,7 @@
                   title="Prev key hash"
                 >
                   <FormatAddress
-                    :value="data.key_block.prev_key_hash"
+                    :value="data.prev_key_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -105,7 +89,7 @@
                   title="State hash"
                 >
                   <FormatAddress
-                    :value="data.key_block.state_hash"
+                    :value="data.state_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -119,15 +103,15 @@
   </section>
 </template>
 <script>
-import AppTable from '~/components/appTable'
-import AppTableRow from '~/components/appTableRow'
-import AppTableCell from '~/components/appTableCell'
-import AppTableBody from '~/components/appTableBody'
-import AppTableAccordion from '~/components/appTableAccordion'
-import AppDefinition from '~/components/appDefinition'
-import AppPanel from '~/components/appPanel'
-// import TimeStamp from '~/components/timeStamp'
-import FormatAddress from '~/components/formatAddress'
+import AppTable from '../../components/appTable'
+import AppTableRow from '../../components/appTableRow'
+import AppTableCell from '../../components/appTableCell'
+import AppTableBody from '../../components/appTableBody'
+import AppTableAccordion from '../../components/appTableAccordion'
+import AppDefinition from '../../components/appDefinition'
+import AppPanel from '../../components/appPanel'
+import Age from '../../components/age'
+import FormatAddress from '../../components/formatAddress'
 
 export default {
   name: 'MicroBlock',
@@ -139,7 +123,7 @@ export default {
     AppDefinition,
     AppPanel,
     AppTableAccordion,
-    // TimeStamp,
+    Age,
     FormatAddress
   },
   props: {

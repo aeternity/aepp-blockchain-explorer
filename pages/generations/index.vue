@@ -1,26 +1,35 @@
 <template>
-  <div class="app-generation">
+  <div
+    class="generations-wrapper"
+  >
     <PageHeader
       :has-nav="false"
       title="Generations"
-    >
-      <BreadCrumbs />
-    </PageHeader>
+    />
     <Generations>
-      <Generation
-        v-for="item in Object.keys(generations).slice().reverse()"
-        :key="item"
-        :data="generations[item]" />
+      <nuxt-link
+        v-for="(generation, number) in Object.values(generations).reverse()"
+        :key="number"
+        :to="`/generations/${generation.height}`"
+        class="generation-link"
+      >
+        <Generation
+          :data="generation"
+        />
+      </nuxt-link>
     </Generations>
+    <LoadMoreButton @update="loadMoreGen" />
   </div>
 </template>
 
 <script>
+
 import { mapState } from 'vuex'
-import Generations from '~/partials/generations'
-import Generation from '~/partials/generation'
-import PageHeader from '~/components/PageHeader'
-import BreadCrumbs from '~/components/BreadCrumbs'
+import Generations from '../../partials/generations'
+import Generation from '../../partials/generation'
+import PageHeader from '../../components/PageHeader'
+import LoadMoreButton from '../../components/loadMoreButton'
+// import BreadCrumbs from '../../components/breadCrumbs'
 
 export default {
   name: 'AppGenerations',
@@ -28,12 +37,33 @@ export default {
     Generations,
     Generation,
     PageHeader,
-    BreadCrumbs
+    // BreadCrumbs,
+    LoadMoreButton
+  },
+  data () {
+    return {
+      limitGen: 10
+    }
   },
   computed: {
     ...mapState('generations', [
       'generations'
     ])
+  },
+  methods: {
+    async loadMoreGen () {
+      this.limitGen += 10
+    }
   }
 }
 </script>
+
+<style scoped lang='scss'>
+  .generations-wrapper {
+    .generation-link {
+      &:hover {
+        color: #000000;
+      }
+    }
+  }
+</style>

@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import AppMainNav from '~/partials/appMainNav'
-import SearchBar from '~/components/searchBar'
-import NetworkName from '~/components/networkName'
+import AppMainNav from '../../partials/appMainNav'
+import SearchBar from '../../components/searchBar'
+import NetworkName from '../../components/networkName'
 export default {
   name: 'AppHeader',
   components: {

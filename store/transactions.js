@@ -25,7 +25,6 @@ export const actions = {
       commit('setTransactions', transactions.data.transactions)
       return transactions.data.transactions
     } catch (e) {
-      console.log(e)
       commit('catchError', 'Error', { root: true })
     }
   },

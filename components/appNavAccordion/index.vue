@@ -9,7 +9,7 @@
       class="app-nav-accordion-btn"
       @click="toggleNav"
     >
-      <no-ssr><AeIcon :name="icon" /></no-ssr>
+      <AppIcon :name="icon" />
     </button>
     <div
       class="app-nav-accordion-content"
@@ -19,22 +19,18 @@
         class="app-nav-accordion-btn close"
         @click="toggleNav"
       >
-        <no-ssr><AeIcon name="close" /></no-ssr>
+        <AppIcon name="close" />
       </button>
       <slot />
     </div>
   </div>
 </template>
 <script>
-let AeIcon
-if (process.browser) {
-  AeIcon = require('@aeternity/aepp-components-3').AeIcon
-}
-
+import AppIcon from '../appIcon'
 export default {
   name: 'AppNavAccordion',
   components: {
-    AeIcon
+    AppIcon
   },
   props: {
     icon: {

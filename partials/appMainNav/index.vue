@@ -18,10 +18,10 @@
         <AppNavLink to="/">
           Dashboard
         </AppNavLink>
-        <AppNavLink to="generations">
+        <AppNavLink to="/generations">
           Generations
         </AppNavLink>
-        <AppNavLink to="transactions">
+        <AppNavLink to="/transactions">
           Transactions
         </AppNavLink>
       </AppNav>
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import Logo from '~/components/logo'
-import AppNavAccordion from '~/components/appNavAccordion'
-import SearchBar from '~/components/searchBar'
-import AppNav from '~/components/appNav'
-import AppNavLink from '~/components/appNavLink'
+import Logo from '../../components/logo'
+import AppNavAccordion from '../../components/appNavAccordion'
+import SearchBar from '../../components/searchBar'
+import AppNav from '../../components/appNav'
+import AppNavLink from '../../components/appNavLink'
 
 export default {
   name: 'AppMainNav',

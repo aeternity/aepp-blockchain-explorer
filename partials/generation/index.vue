@@ -22,16 +22,31 @@
       <div class="container-last-wrapper">
         <AppDefinition
           class="container-last-inner"
-          title="Time since mined"
+          title="Transactions"
+        >
+          {{ numTransactions }}
+        </AppDefinition>
+        <AppDefinition
+          class="container-last-inner"
+          title="Age"
         >
           <Age :time="data.time" />
+        </AppDefinition>
+      </div>
+      <div class="container-last-wrapper">
+        <AppDefinition
+          class="container-last-inner"
+          title="Microblocks"
+        >
+          {{ numMicroBlocks }}
         </AppDefinition>
 
         <AppDefinition
           class="container-last-inner"
-          title="Transactions"
+          title="Target"
         >
-          {{ numTransactions }}
+          <!--{{ data.target | prefixedAmount }}-->
+          <FormatAeUnit :value="data.target" />
         </AppDefinition>
       </div>
     </div>
@@ -40,19 +55,23 @@
 
 <script>
 
-import AppDefinition from '~/components/appDefinition'
-import Account from '~/components/account'
-import Age from '~/components/age'
-import LabelType from '~/components/labelType'
-import BlockHeight from '~/components/blockHeight'
+import AppDefinition from '../../components/appDefinition'
+import Account from '../../components/account'
+import Age from '../../components/age'
+import LabelType from '../../components/labelType'
+import BlockHeight from '../../components/blockHeight'
+import FormatAeUnit from '../../components/formatAeUnit'
+import prefixedAmount from '../../plugins/filters/prefixedAmount.js'
 
 export default {
   name: 'Index',
+  filters: { prefixedAmount },
   components: {
     BlockHeight,
     LabelType,
     AppDefinition,
     Account,
+    FormatAeUnit,
     Age
   },
   props: {
@@ -63,10 +82,10 @@ export default {
   },
   computed: {
     numTransactions () {
-      return (this.$props.data.micro_blocks.length === 0) ? 0 : this.$props.data.micro_blocks.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.transactions.length
-        , 0
-      )
+      return (this.$props.data.micro_blocks.length === 0) ? 0 : Object.keys(this.$props.data.micro_blocks).length
+    },
+    numMicroBlocks () {
+      return (this.$props.data.micro_blocks.length === 0) ? 0 : Object.keys(this.$props.data.micro_blocks).length
     }
   }
 }
@@ -87,9 +106,7 @@ export default {
       border-radius: 0;
       box-shadow: none;
       margin-bottom: 0;
-      &:not(:last-child) {
-        border-bottom: 2px solid $color-neutral-positive-2;
-      }
+      border-bottom: 2px solid $color-neutral-positive-2;
     }
   }
   .container-first {

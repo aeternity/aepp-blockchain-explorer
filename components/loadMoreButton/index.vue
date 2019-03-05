@@ -1,21 +1,27 @@
 <template>
   <div class="load-more-button-wrapper">
-    <AeButton
+    <AppButton
       face="round"
       fill="neutral"
       extend
+      @click="loadMore()"
     >
       Load More
-    </AeButton>
+    </AppButton>
   </div>
 </template>
 <script>
-import { AeButton } from '@aeternity/aepp-components-3'
+import AppButton from '../appButton'
 
 export default {
   name: 'LoadMoreButton',
   components: {
-    AeButton
+    AppButton
+  },
+  methods: {
+    loadMore () {
+      this.$emit('update')
+    }
   }
 }
 </script>
@@ -34,12 +40,6 @@ export default {
       top: 50%;
       border-bottom: 2px solid $color-neutral-positive-2;
       transform: translateY(-50%);
-    }
-    .ae-button {
-      max-width: 18rem;
-      display: block;
-      margin: auto;
-      z-index: 1;
     }
   }
 </style>

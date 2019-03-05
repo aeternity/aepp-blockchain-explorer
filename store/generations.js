@@ -8,7 +8,7 @@ export const state = () => ({
 
 export const mutations = {
   setGenerations (state, generations) {
-    for (let i = 0; i < generations.length; i++) {
+    for (let i of Object.keys(generations)) {
       const generation = generations[i]
       if (!state.generations.hasOwnProperty(generation.height)) {
         Vue.set(state.hashToHeight, generation.hash, generation.height)
@@ -22,10 +22,10 @@ export const actions = {
   getLatestGenerations: async function ({ state, rootState: { nodeUrl, height }, commit, dispatch }, maxBlocks) {
     try {
       const generations = await axios.get(nodeUrl + '/middleware/generations/' + (height - maxBlocks).toString() + '/' + height.toString())
-      commit('setGenerations', generations.data)
-      return generations.data
+      commit('setGenerations', generations.data.data)
+      // console.log('test' + generations.data.data)
+      return generations.data.data
     } catch (e) {
-      console.log(e)
       commit('catchError', 'Error', { root: true })
     }
   },

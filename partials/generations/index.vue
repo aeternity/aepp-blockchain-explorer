@@ -4,7 +4,7 @@
   </AppTable>
 </template>
 <script>
-import AppTable from '~/components/appTable'
+import AppTable from '../../components/appTable'
 export default {
   name: 'Index',
   components: { AppTable }

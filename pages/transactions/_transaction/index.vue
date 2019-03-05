@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import GenerationDetails from '~/partials/generationDetails'
-import TransactionDetails from '~/partials/transactionDetails'
+import GenerationDetails from '../../../partials/generationDetails'
+import TransactionDetails from '../../../partials/transactionDetails'
 const generationData = {
   'key_block': {
     'beneficiary': 'ak_542o93BKHiANzqNaFj6UurrJuDuxU61zCGr9LJCwtTUg34kWt',

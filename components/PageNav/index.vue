@@ -7,27 +7,24 @@
         <span class="visually-hidden">
           previous page
         </span>
-        <no-ssr><AeIcon name="back" /></no-ssr>
+        <AppIcon name="back" />
       </li>
       <li class="page-nav-list-item next">
         <span class="visually-hidden">
           next page
         </span>
-        <no-ssr><AeIcon name="back" /></no-ssr>
+        <AppIcon name="back" />
       </li>
     </ul>
   </nav>
 </template>
 <script>
+import AppIcon from '../appIcon'
 
-let AeIcon
-if (process.browser) {
-  AeIcon = require('@aeternity/aepp-components-3').AeIcon
-}
 export default {
   name: 'PageNav',
   components: {
-    AeIcon
+    AppIcon
   }
 }
 </script>
@@ -53,7 +50,7 @@ export default {
         &.prev {
           margin-right: 1rem;
         }
-        &.next > .ae-icon {
+        &.next > .app-icon {
           transform: rotate(180deg);
         }
       }

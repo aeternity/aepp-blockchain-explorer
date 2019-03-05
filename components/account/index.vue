@@ -1,38 +1,32 @@
 <template>
   <div class="account">
-    <no-ssr><AeIdenticon
-      :address="value"
-      class="account-identicon"
-    /></no-ssr>
+    <no-ssr>
+      <AppIdenticon
+        :address="value"
+        class="account-identicon"
+      />
+    </no-ssr>
     <AppDefinition
       :title="title"
     >
       <div class="account-content">
         <FormatAddress
           :value="value"
+          :icon="icon"
           length="responsive"
         />
-        <no-ssr><AeIcon
-          v-if="icon"
-          name="copy"
-        /></no-ssr>
       </div>
     </AppDefinition>
   </div>
 </template>
 <script>
-import AppDefinition from '~/components/appDefinition'
-import FormatAddress from '~/components/formatAddress'
-let AeIcon
-let AeIdenticon
-if (process.browser) {
-  AeIcon = require('@aeternity/aepp-components-3').AeIcon
-  AeIdenticon = require('@aeternity/aepp-components-3').AeIdenticon
-}
+import AppDefinition from '../appDefinition'
+import FormatAddress from '../formatAddress'
+import AppIdenticon from '../appIdenticon'
 
 export default {
   name: 'Account',
-  components: { AppDefinition, FormatAddress, AeIcon, AeIdenticon },
+  components: { AppDefinition, FormatAddress, AppIdenticon },
   props: {
     value: {
       type: String,
@@ -51,29 +45,20 @@ export default {
 </script>
 <style scoped lang="scss">
     .account {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-left: .6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-left: .6rem;
+      @media (max-width:450px) {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding-left: 0;
+      }
+      &-identicon {
         @media (max-width:450px) {
-          flex-direction: column;
-          justify-content: start;
-          align-items: start;
-          padding-left: 0;
-        }
-        &-identicon {
-          @media (max-width:450px) {
-            margin-left: .6rem;
-            margin-top: .3rem;
-          }
-        }
-      &-content {
-        display: flex;
-          & .ae-icon {
-            margin-left: .3rem;
-          @media (max-width:450px) {
-            display: none;
-          }
+          margin-left: .6rem;
+          margin-top: .3rem;
         }
       }
     }

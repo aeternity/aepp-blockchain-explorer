@@ -13,21 +13,23 @@
                       fill="black"
                     />
                   </div>
-                  <BlockHeight :value="data.key_block.height" />
+                  <BlockHeight :value="data.height" />
                   <div>
-                    <Confirmations :value="dynamicData" />
+                    <Confirmations
+                      :max-height="dynamicData"
+                      :height="data.height"
+                    />
                   </div>
                 </div>
               </AppTableCell>
             </AppTableRowColumn>
             <AppTableRowColumn width="small">
               <AppTableCell>
-                <!--<TimeStamp :time="data.key_block.time" />-->
                 <AppDefinition
                   class="container-last-inner"
-                  title="Time since mined"
+                  title="Age"
                 >
-                  <Age :time="data.key_block.time" />
+                  <Age :time="data.time" />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>
@@ -36,7 +38,7 @@
             <AppTableRowColumn>
               <AppTableCell extend>
                 <Account
-                  :value="data.key_block.beneficiary"
+                  :value="data.beneficiary"
                   title="beneficiary"
                   icon
                 />
@@ -50,41 +52,7 @@
                   {{ data.micro_blocks.length }}
                 </AppDefinition>
               </AppTableCell>
-              <AppTableCell>
-                <AppDefinition
-                  title="transactions"
-                >
-                  <FormatAeUnit
-                    :value="data.key_block.tx"
-                    type="tx"
-                  />
-                </AppDefinition>
-              </AppTableCell>
             </AppTableRowColumn>
-            <AppTableRow
-              extend
-            >
-              <AppTableCell>
-                <AppDefinition
-                  title="total"
-                >
-                  <FormatAeUnit
-                    :value="data.key_block.total"
-                    type="ae"
-                  />
-                </AppDefinition>
-              </AppTableCell>
-              <AppTableCell>
-                <AppDefinition
-                  title="Reward"
-                >
-                  <FormatAeUnit
-                    :value="data.key_block.reward"
-                    type="ae"
-                  />
-                </AppDefinition>
-              </AppTableCell>
-            </AppTableRow>
           </AppTableRow>
         </AppTableHeader>
         <AppTableBody>
@@ -95,7 +63,7 @@
                 title="Hash"
               >
                 <FormatAddress
-                  :value="data.key_block.hash"
+                  :value="data.hash"
                   length="full"
                 />
               </AppDefinition>
@@ -105,19 +73,9 @@
             <AppTableCell extend>
               <AppDefinition
                 type="list"
-                title="Difficulty"
-              >
-                87472467200
-              </AppDefinition>
-            </AppTableCell>
-          </AppTableRow>
-          <AppTableRow>
-            <AppTableCell extend>
-              <AppDefinition
-                type="list"
                 title="Target"
               >
-                {{ data.key_block.target }}
+                {{ data.target }}
               </AppDefinition>
             </AppTableCell>
           </AppTableRow>
@@ -129,7 +87,7 @@
                   title="Miner"
                 >
                   <FormatAddress
-                    :value="data.key_block.miner"
+                    :value="data.miner"
                     length="full"
                   />
                 </AppDefinition>
@@ -141,7 +99,7 @@
                   type="list"
                   title="Nonce"
                 >
-                  {{ data.key_block.nonce }}
+                  {{ data.nonce }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -151,7 +109,7 @@
                   type="list"
                   title="Version"
                 >
-                  {{ data.key_block.version }}
+                  {{ data.version }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -162,7 +120,7 @@
                   title="Prev hash"
                 >
                   <FormatAddress
-                    :value="data.key_block.prev_hash"
+                    :value="data.prev_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -177,7 +135,7 @@
                   title="Prev key hash"
                 >
                   <FormatAddress
-                    :value="data.key_block.prev_key_hash"
+                    :value="data.prev_key_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -190,7 +148,7 @@
                   title="State hash"
                 >
                   <FormatAddress
-                    :value="data.key_block.state_hash"
+                    :value="data.state_hash"
                     length="full"
                   />
                 </AppDefinition>
@@ -202,7 +160,7 @@
                   type="list"
                   title="Pow"
                 >
-                  <FormatPow :value="data.key_block.pow" />
+                  <FormatPow :value="data.pow" />
                 </AppDefinition>
               </AppTableCell>
             </AppTableRow>
@@ -214,23 +172,23 @@
 </template>
 
 <script>
-import AppTable from '~/components/appTable'
-import AppTableRow from '~/components/appTableRow'
-import AppTableCell from '~/components/appTableCell'
-import AppTableHeader from '~/components/appTableHeader'
-import AppTableBody from '~/components/appTableBody'
-import AppTableAccordion from '~/components/appTableAccordion'
-import AppTableRowColumn from '~/components/appTableRowColumn'
-import AppDefinition from '~/components/appDefinition'
-import AppPanel from '~/components/appPanel'
-import BlockHeight from '~/components/blockHeight'
-import LabelType from '~/components/labelType'
-import Age from '~/components/age'
-// import TimeStamp from '~/components/timeStamp'
-import FormatAeUnit from '~/components/formatAeUnit'
-import FormatAddress from '~/components/formatAddress'
-import Account from '~/components/account'
-import Confirmations from '~/components/confirmations'
+import AppTable from '../../components/appTable'
+import AppTableRow from '../../components/appTableRow'
+import AppTableCell from '../../components/appTableCell'
+import AppTableHeader from '../../components/appTableHeader'
+import AppTableBody from '../../components/appTableBody'
+import AppTableAccordion from '../../components/appTableAccordion'
+import AppTableRowColumn from '../../components/appTableRowColumn'
+import AppDefinition from '../../components/appDefinition'
+import AppPanel from '../../components/appPanel'
+import BlockHeight from '../../components/blockHeight'
+import LabelType from '../../components/labelType'
+import Age from '../../components/age'
+// import TimeStamp from '../../components/timeStamp'
+// import FormatAeUnit from '../../components/formatAeUnit'
+import FormatAddress from '../../components/formatAddress'
+import Account from '../../components/account'
+import Confirmations from '../../components/confirmations'
 import FormatPow from '../../components/formatPow'
 
 export default {
@@ -251,7 +209,7 @@ export default {
     AppTableAccordion,
     // TimeStamp,
     Age,
-    FormatAeUnit,
+    // FormatAeUnit,
     FormatAddress,
     Confirmations
   },
