@@ -1,36 +1,38 @@
 <template>
   <div>
-    <div
-      v-if="localGenerations.length"
-      class="generations-wrapper"
-    >
-      <PageHeader
-        :has-nav="false"
-        title="Generations"
-      />
-      <Generations>
-        <Generation
-          v-for="(generation, index) in localGenerations.slice(0,5)"
-          :key="index"
-          :data="generation"
+    <no-ssr>
+      <div
+        v-if="localGenerations.length"
+        class="generations-wrapper"
+      >
+        <PageHeader
+          :has-nav="false"
+          title="Generations"
         />
-      </Generations>
-    </div>
-    <div
-      class="transactions-wrapper"
-    >
-      <PageHeader
-        :has-nav="false"
-        title="Transactions"
-      />
-      <TxList>
-        <TXListItem
-          v-for="(transaction, index) in localTransactions.slice(0,5)"
-          :key="index"
-          :data="transaction.tx"
+        <Generations>
+          <Generation
+            v-for="(generation, index) in localGenerations.slice(0,5)"
+            :key="index"
+            :data="generation"
+          />
+        </Generations>
+      </div>
+      <div
+        class="transactions-wrapper"
+      >
+        <PageHeader
+          :has-nav="false"
+          title="Transactions"
         />
-      </TxList>
-    </div>
+        <TxList>
+          <TXListItem
+            v-for="(transaction, index) in localTransactions.slice(0,5)"
+            :key="index"
+            :data="transaction.tx"
+          />
+        </TxList>
+      </div>
+    </no-ssr>
   </div>
 </template>
 
@@ -55,6 +57,7 @@ export default {
     return {
       data: {},
       currentGen: {},
+      microBlocks: [],
       localGenerations: [],
       localTransactions: []
     }
@@ -72,8 +75,8 @@ export default {
     })
   },
   beforeMount () {
-    let data1 = JSON.parse(JSON.stringify(this.generations))
-    let data2 = JSON.parse(JSON.stringify(this.transactions))
+    let data1 = this.generations
+    let data2 = this.transactions
     this.localGenerations = data1
     this.localTransactions = data2
   },
@@ -82,6 +85,7 @@ export default {
 
     exampleSocket.onopen = e => {
       exampleSocket.send('{"op":"subscribe", "payload": "key_blocks"}')
+      exampleSocket.send('{"op":"subscribe", "payload": "micro_blocks"}')
       exampleSocket.send('{"op":"subscribe", "payload": "transactions"}')
 
       exampleSocket.onmessage = e => {
@@ -100,17 +104,30 @@ export default {
         if (this.data.beneficiary) {
           this.updateGenList(this.data)
         }
+
+        if (this.data.key_block_id) {
+          this.updateMicroBlocks(this.data)
+        }
       }
     },
     updateTxList (tx) {
       this.localTransactions.splice(0, 0, tx)
     },
+    updateMicroBlocks (mb) {
+      this.microBlocks.push({ ...{}, ...mb })
+    },
     updateGenList (gen) {
       if (!Object.keys(this.currentGen).length) {
         this.currentGen = { ...{}, ...gen, micro_blocks: [] }
       } else {
-        this.currentGen.micro_blocks = this.localTransactions.filter(tx => tx.block_height === this.currentGen.height)
+        // this.currentGen.micro_blocks = this.localTransactions.filter(tx => tx.block_height === this.currentGen.height)
+        this.currentGen.micro_blocks = this.microBlocks
+          .filter(mb => mb.prev_key_hash === this.currentGen.hash)
+          .map(mb => {
+            return { ...{}, ...mb, transactions: this.localTransactions.filter(tx => tx.block_hash === mb.hash) }
+          })
         this.localGenerations.splice(0, 0, this.currentGen)
+        this.microBlocks = []
         this.currentGen = { ...{}, ...gen, micro_blocks: [] }
       }
     }
