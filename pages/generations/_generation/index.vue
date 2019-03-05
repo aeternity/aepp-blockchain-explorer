@@ -1,8 +1,14 @@
 <template>
   <div class="app-generation-details">
-    <PageHeader title="Generation Details">
-      <BreadCrumbs />
-    </PageHeader>
+    <PageHeader
+      title="Generation Details"
+      :has-crumbs="true"
+      :has-nav="true"
+      :page="{to: '/generations', name: 'Generations'}"
+      :subpage="{to: `/generations/${$route.params.generation}`, name: 'Generation Details'}"
+      :prev="prev"
+      :next="next"
+    />
     <GenerationDetails
       :data="generation"
       :dynamic-data="height"
@@ -29,7 +35,6 @@ import GenerationDetails from '../../../partials/generationDetails'
 import MicroBlocks from '../../../partials/microBlocks'
 import MicroBlock from '../../../partials/microBlock'
 import PageHeader from '../../../components/PageHeader'
-import BreadCrumbs from '../../../components/breadCrumbs'
 import TXListItem from '../../../partials/transactions/txListItem'
 
 export default {
@@ -37,7 +42,6 @@ export default {
   components: {
     PageHeader,
     GenerationDetails,
-    BreadCrumbs,
     MicroBlocks,
     MicroBlock,
     TXListItem
@@ -48,6 +52,26 @@ export default {
     },
     generation () {
       return this.$store.state.generations.generations[[this.$route.params.generation]]
+    },
+    prev () {
+      const current = this.generation.height
+      const last = Number(Object.keys(this.$store.state.generations.generations)[0])
+      const prev = this.$store.state.generations.generations[current - 1]
+      return last === current ? '' : `/generations/${prev.height}`
+    },
+    next () {
+      const current = this.generation.height
+      const next = this.$store.state.generations.generations[current + 1]
+      return this.height === current ? '' : `/generations/${next.height}`
+    }
+  },
+  methods: {
+    getLast () {
+      let heights = []
+      for (let generation of this.$store.state.generations.generations) {
+        heights.push(generation.height)
+      }
+      return heights.reverse()[0]
     }
   }
 }
