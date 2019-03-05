@@ -10,9 +10,8 @@
       />
       <Generations>
         <Generation
-          v-for="(generation, index) in localGenerations"
+          v-for="(generation, index) in localGenerations.slice(0,5)"
           :key="index"
-          :v-if="index < 10"
           :data="generation"
         />
       </Generations>
@@ -26,9 +25,8 @@
       />
       <TxList>
         <TXListItem
-          v-for="(transaction, index) in localTransactions"
+          v-for="(transaction, index) in localTransactions.slice(0,5)"
           :key="index"
-          :v-if="index < 10"
           :data="transaction.tx"
         />
       </TxList>
