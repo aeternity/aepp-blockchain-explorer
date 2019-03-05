@@ -2,20 +2,64 @@
   <nav class="breadcrumbs">
     <ul class="breadcrumbs-list">
       <li class="breadcrumbs-list-item">
-        root
+        <NuxtLink
+          to="/"
+          active-class="active"
+          exact
+        >
+          Home
+        </NuxtLink>
       </li>
-      <li class="breadcrumbs-list-item">
-        page
+      <li
+        v-if="page.to"
+        class="breadcrumbs-list-item"
+      >
+        <NuxtLink
+          :to="page.to"
+          active-class="active"
+          exact
+        >
+          {{ page.name }}
+        </NuxtLink>
       </li>
-      <li class="breadcrumbs-list-item active">
-        subpage
+      <li
+        v-if="subpage.to"
+        class="breadcrumbs-list-item"
+      >
+        <NuxtLink
+          :to="subpage.to"
+          active-class="active"
+          exact
+        >
+          {{ subpage.name }}
+        </NuxtLink>
       </li>
     </ul>
   </nav>
 </template>
 <script>
 export default {
-  name: 'BreadCrumbs'
+  name: 'BreadCrumbs',
+  props: {
+    root: {
+      type: Object,
+      default: () => {
+        return { to: '/', name: 'home' }
+      }
+    },
+    page: {
+      type: Object,
+      default: () => {
+        return { to: '', name: '' }
+      }
+    },
+    subpage: {
+      type: Object,
+      default: () => {
+        return { to: '', name: '' }
+      }
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -43,8 +87,11 @@ export default {
                 margin-right: .25rem;
               }
             }
-            &.active {
+            & .active {
               color: $color-neutral-negative-1;
+              &:hover {
+                color: $color-primary;
+              }
             }
           }
       }

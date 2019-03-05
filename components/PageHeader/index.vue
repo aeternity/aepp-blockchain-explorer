@@ -1,31 +1,88 @@
 <template>
   <section class="app-page-header">
     <div class="app-page-header-container">
-      <h1 class="app-page-header-title">
+      <h1
+        v-if="isMain"
+        class="app-page-header-title"
+      >
         {{ title }}
       </h1>
-      <PageNav v-if="hasNav" />
+      <h2
+        v-else
+        class="app-page-header-title"
+      >
+        {{ title }}
+      </h2>
+      <PageNav
+        v-if="hasNav"
+        :prev="prev"
+        :next="next"
+      />
     </div>
-    <div class="app-page-header-container">
-      <slot />
+    <div
+      v-if="hasCrumbs"
+      class="app-page-header-container"
+    >
+      <BreadCrumbs
+        :root="root"
+        :page="page"
+        :subpage="subpage"
+      />
     </div>
   </section>
 </template>
 <script>
 import PageNav from '../PageNav'
+import BreadCrumbs from '../breadCrumbs'
+
 export default {
   name: 'PageHeader',
   components: {
-    PageNav
+    PageNav,
+    BreadCrumbs
   },
   props: {
     title: {
       type: String,
       required: true
     },
-    hasNav: {
+    isMain: {
       type: Boolean,
       default: true
+    },
+    hasNav: {
+      type: Boolean,
+      default: false
+    },
+    hasCrumbs: {
+      type: Boolean,
+      default: false
+    },
+    root: {
+      type: Object,
+      default: () => {
+        return { to: '/', name: 'home' }
+      }
+    },
+    page: {
+      type: Object,
+      default: () => {
+        return { to: '', name: '' }
+      }
+    },
+    subpage: {
+      type: Object,
+      default: () => {
+        return { to: '', name: '' }
+      }
+    },
+    prev: {
+      type: String,
+      default: ''
+    },
+    next: {
+      type: String,
+      default: ''
     }
   }
 }

@@ -49,7 +49,7 @@
                 <AppDefinition
                   title="Microblocks"
                 >
-                  {{ data.micro_blocks.length }}
+                  {{ data.micro_blocks.length || 0 }}
                 </AppDefinition>
               </AppTableCell>
             </AppTableRowColumn>

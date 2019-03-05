@@ -6,7 +6,7 @@
         class="generations-wrapper"
       >
         <PageHeader
-          :has-nav="false"
+          :is-main="false"
           title="Generations"
         />
         <Generations>
@@ -21,7 +21,7 @@
         class="transactions-wrapper"
       >
         <PageHeader
-          :has-nav="false"
+          :is-main="false"
           title="Transactions"
         />
         <TxList>
