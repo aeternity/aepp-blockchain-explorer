@@ -10,7 +10,7 @@
         :data="item.tx"
       />
     </TxList>
-    <LoadMoreButton @update="loadmore" />
+    <LoadMoreButton @update="loadmore"/>
   </div>
 </template>
 

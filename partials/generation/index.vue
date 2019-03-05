@@ -88,6 +88,9 @@ export default {
     },
     numMicroBlocks () {
       return (this.$props.data.micro_blocks.length === 0) ? 0 : Object.keys(this.$props.data.micro_blocks).length
+    },
+    numMicroBlocks () {
+      return (this.$props.data.micro_blocks.length === 0) ? 0 : Object.keys(this.$props.data.micro_blocks).length
     }
   }
 }
