@@ -10,8 +10,8 @@
   </div>
 </template>
 <script>
-import Generations from '~/partials/generations'
-import Generation from '~/partials/generation'
+import Generations from '../partials/generations'
+import Generation from '../partials/generation'
 
 export default {
   name: 'AppDashboard',

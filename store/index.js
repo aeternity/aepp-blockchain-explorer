@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const state = () => ({
   $nodeStatus: {},
-  nodeUrl: process.env.middlewareURL,
+  nodeUrl: 'https://unstable.mdw.aepps.com/',
   error: '',
   height: 0
 })
