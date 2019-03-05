@@ -1,6 +1,7 @@
 <template>
   <div>
     <div
+      v-if="localGenerations.length"
       class="generations-wrapper"
     >
       <PageHeader
@@ -9,9 +10,9 @@
       />
       <Generations>
         <Generation
-          v-for="(generation, number) in localGenerations.reverse()"
-          :key="number"
-          :v-if="number < 10"
+          v-for="(generation, index) in localGenerations"
+          :key="index"
+          :v-if="index < 10"
           :data="generation"
         />
       </Generations>
@@ -25,7 +26,7 @@
       />
       <TxList>
         <TXListItem
-          v-for="(transaction, index) in localTransactions.reverse()"
+          v-for="(transaction, index) in localTransactions"
           :key="index"
           :v-if="index < 10"
           :data="transaction.tx"
@@ -63,7 +64,7 @@ export default {
   computed: {
     ...mapState('generations', {
       generations (state) {
-        return Object.values(state.generations)
+        return Object.values(state.generations).reverse()
       }
     }),
     ...mapState('transactions', {
@@ -104,13 +105,14 @@ export default {
       }
     },
     updateTxList (tx) {
-      this.localTransactions.push(tx)
+      this.localTransactions.splice(0, 0, tx)
     },
     updateGenList (gen) {
       if (!Object.keys(this.currentGen).length) {
         this.currentGen = { ...{}, ...gen, micro_blocks: [] }
       } else {
-        this.localGenerations.push(this.currentGen)
+        this.currentGen.micro_blocks = this.localTransactions.filter(tx => tx.block_height === this.currentGen.height)
+        this.localGenerations.splice(0, 0, this.currentGen)
         this.currentGen = { ...{}, ...gen, micro_blocks: [] }
       }
     }
