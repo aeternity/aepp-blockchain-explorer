@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import AppMainNav from '~/partials/appMainNav'
+import AppMainNav from '../../partials/appMainNav'
 import SearchBar from '../../components/searchBar'
 import NetworkName from '../../components/networkName'
 export default {

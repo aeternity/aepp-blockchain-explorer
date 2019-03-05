@@ -57,12 +57,12 @@
   </div>
 </template>
 <script>
-import AppDefinition from '~/components/appDefinition'
-import FormatAeUnit from '~/components/formatAeUnit'
-import AccountGroup from '~/components/accountGroup'
-import Account from '~/components/account'
-import Age from '~/components/age'
-import LabelType from '~/components/labelType'
+import AppDefinition from '../../../components/appDefinition'
+import FormatAeUnit from '../../../components/formatAeUnit'
+import AccountGroup from '../../../components/accountGroup'
+import Account from '../../../components/account'
+import Age from '../../../components/age'
+import LabelType from '../../../components/labelType'
 
 export default {
   name: 'SpendTx',
