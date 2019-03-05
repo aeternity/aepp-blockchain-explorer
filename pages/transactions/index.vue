@@ -10,7 +10,7 @@
         :data="item.tx"
       />
     </TxList>
-    <LoadMoreButton />
+    <LoadMoreButton @update="loadmore"/>
   </div>
 </template>
 
@@ -42,6 +42,12 @@ export default {
     ...mapState('transactions', [
       'transactions'
     ])
+  },
+  methods: {
+    loadmore () {
+      this.page += 1
+      this.$store.dispatch('transactions/getLatestTransactions', { 'page': this.page, 'numTransactions': 10 })
+    }
   }
 }
 </script>
