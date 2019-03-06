@@ -79,14 +79,14 @@ export default {
     this.localTransactions = this.transactions
   },
   mounted () {
-    const exampleSocket = new WebSocket('ws://127.0.0.1:3020')
+    const mdwWebsocket = new WebSocket('ws://127.0.0.1:3020')
 
-    exampleSocket.onopen = e => {
-      exampleSocket.send('{"op":"subscribe", "payload": "key_blocks"}')
-      exampleSocket.send('{"op":"subscribe", "payload": "micro_blocks"}')
-      exampleSocket.send('{"op":"subscribe", "payload": "transactions"}')
+    mdwWebsocket.onopen = e => {
+      mdwWebsocket.send('{"op":"subscribe", "payload": "key_blocks"}')
+      mdwWebsocket.send('{"op":"subscribe", "payload": "micro_blocks"}')
+      mdwWebsocket.send('{"op":"subscribe", "payload": "transactions"}')
 
-      exampleSocket.onmessage = e => {
+      mdwWebsocket.onmessage = e => {
         this.getWsData(e.data)
       }
     }
