@@ -92,7 +92,7 @@ export default {
   @import "~@aeternity/aepp-components-3/src/styles/placeholders/typography";
 
     .app-page-header {
-      background-color: $color-neutral-positive-1;
+      background-color: transparent;
       margin: 0 -3rem;
       margin-bottom: -2.5rem;
       padding: .6rem 3rem 3rem;

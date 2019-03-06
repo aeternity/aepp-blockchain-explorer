@@ -18,6 +18,10 @@ import NameTransferTx from '../txListType/nameTransferTx.vue'
 import NameUpdateTx from '../txListType/nameUpdateTx.vue'
 import ContractCallTx from '../txListType/contractCallTx.vue'
 import ContractCreateTx from '../txListType/contractCreateTx.vue'
+import ChannelCreateTx from '../txListType/channelCreateTx.vue'
+import ChannelForceProgressTx from '../txListType/channelForceProgressTx.vue'
+import ChannelDepositTx from '../txListType/channelDepositTx.vue'
+import ChannelCloseMutualTx from '../txListType/channelCloseMutualTx.vue'
 
 export default {
   name: 'TXListItem',
@@ -32,7 +36,11 @@ export default {
     NameTransferTx,
     NameUpdateTx,
     ContractCallTx,
-    ContractCreateTx
+    ContractCreateTx,
+    ChannelCreateTx,
+    ChannelForceProgressTx,
+    ChannelDepositTx,
+    ChannelCloseMutualTx
   },
   props: {
     data: {
