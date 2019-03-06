@@ -14,6 +14,7 @@ export default {
     flex-direction: column;
     width: 100%;
     padding: 0 .8rem;
+    margin-bottom: 3rem;
     @media (min-width: 450px) {
     padding: 0 2rem;
   }

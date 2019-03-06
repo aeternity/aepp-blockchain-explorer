@@ -15,7 +15,7 @@
     </div>
     <AppNavAccordion>
       <AppNav>
-        <AppNavLink to="dashboard">
+        <AppNavLink to="/">
           Dashboard
         </AppNavLink>
         <AppNavLink to="/generations">
