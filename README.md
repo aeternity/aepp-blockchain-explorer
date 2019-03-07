@@ -6,6 +6,9 @@ This is an explorer for the æternity blockchain. [Here](https://github.com/aete
 
 The underlying API is currently being developed and improved. The Explorer is designed to work with the latest features of [æternity](https://github.com/aeternity/aeternity) and [æpp-middleware](https://github.com/aeternity/aepp-middleware).
 
+## Upcoming
+We are workin on the next version and the designs are available [here](https://sketch.cloud/s/JaY59). We are looking for input on what data we should show, and would appreciate your voice. Feel free to open a ticket and mark it with the `proposal` label
+
 ## Features
 - View a generation, key blocks, micro blocks and transactions
 - View the list of generations from the latest all the way back to the genesis block
