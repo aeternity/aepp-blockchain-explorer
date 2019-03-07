@@ -105,6 +105,7 @@ export default {
         margin-bottom: 0;
         line-height: 1;
         text-transform: capitalize;
+        font-weight: normal;
       }
       &-container {
         display: flex;
