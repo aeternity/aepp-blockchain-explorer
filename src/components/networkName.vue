@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     networkName () {
-      let url = this.$store.state.nodeUrl
+      const url = this.$store.state.nodeUrl
       if (process.env.VUE_APP_NETWORK) {
         return `${process.env.VUE_APP_NETWORK} network`
       }
