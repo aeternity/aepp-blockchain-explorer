@@ -7,6 +7,7 @@ DOCKER_IMAGE = aepp-explorer
 DOCKER_TAG = $(shell git describe --always)
 # node url used at build time
 VUE_APP_NODE_URL='//sdk-mainnet.aepps.com/'
+VUE_APP_NETWORK = 'Minerva'
 
 
 .PHONY: list
