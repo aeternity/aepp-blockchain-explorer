@@ -29,7 +29,7 @@ export default wrapActionsWithResolvedNode({
     return account
   },
 
-  async getTransactions ({ state, rootGetters: { node }, commit }, { address, transactionsToGet, increaseBy = 10 }) {
+  async getTransactions ({ state, commit }, { address, transactionsToGet, increaseBy = 10 }) {
     const page = typeof transactionsToGet === 'undefined' ? 1 : Math.ceil(transactionsToGet / increaseBy)
     const transactions = state.accountTransactions[address] ? state.accountTransactions[address] : []
     let totalTx = []
