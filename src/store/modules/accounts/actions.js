@@ -22,7 +22,6 @@ export default wrapActionsWithResolvedNode({
     } catch (e) {
       balance = 0
       numTransactions = 0
-      throw new Error(e)
     }
     const account = { address, balance, numTransactions }
     if (isEqual(state.accounts[address], account)) return account
