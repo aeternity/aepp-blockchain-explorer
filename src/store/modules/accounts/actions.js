@@ -29,19 +29,21 @@ export default wrapActionsWithResolvedNode({
     return account
   },
 
-  async getTransactions ({ state, rootGetters: { node }, commit }, { address, transactionsToGet, increaseBy = 10 }) {
+  async getTransactions ({ state, commit }, { address, transactionsToGet, increaseBy = 10 }) {
     const page = typeof transactionsToGet === 'undefined' ? 1 : Math.ceil(transactionsToGet / increaseBy)
-    let transactions = state.accountTransactions[address] ? state.accountTransactions[address] : []
+    const transactions = state.accountTransactions[address] ? state.accountTransactions[address] : []
+    let totalTx = []
     try {
       const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/account/' + address + '?limit=' + increaseBy + '&page=' + page)
-      transactions = transactions.concat(camelcaseKeysDeep((await resp.json()).transactions))
+      const transactions2 = camelcaseKeysDeep((await resp.json()).transactions)
+      totalTx = transactions2.map(obj => transactions.find(o => o.hash === obj.hash) || obj)
     } catch (e) {
       throw new Error(e)
     }
-    const account = { address, transactions }
+    const account = { address, transactions: totalTx }
     const stateTransactions = state.accounts[address] ? state.accounts[address].transactions : []
-    if (isEqual(stateTransactions, transactions)) return (state.accounts[address])
-    commit('setTransactions', { address, transactions })
+    if (isEqual(stateTransactions, totalTx)) return (state.accounts[address])
+    commit('setTransactions', { address, transactions: totalTx })
     return account
   },
 
