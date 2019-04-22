@@ -35,7 +35,7 @@ export default wrapActionsWithResolvedNode({
     let totalTx = []
     try {
       const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/account/' + address + '?limit=' + increaseBy + '&page=' + page)
-      const transactions2 = camelcaseKeysDeep((await resp.json()).transactions)
+      const transactions2 = camelcaseKeysDeep((await resp.json()))
       totalTx = transactions2.map(obj => transactions.find(o => o.hash === obj.hash) || obj)
     } catch (e) {
       throw new Error(e)
