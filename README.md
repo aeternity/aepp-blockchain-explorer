@@ -16,7 +16,7 @@ We are workin on the next version and the designs are available [here](https://s
 - View an account and see its balance
 - Search for accounts by public key
 - Search for blocks, generation, transaction by their hash and by their position in the blockchain
-- View æternity token market exchange rates via coinmarketcap.com api
+- View æternity token market exchange rates via coingecko.com api
 
 
 ## Build Setup

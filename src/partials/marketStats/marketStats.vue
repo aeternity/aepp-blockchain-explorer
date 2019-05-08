@@ -41,10 +41,10 @@
     </div>
     <div class="source">
       data provided by: <a
-        href="https://coinmarketcap.com/currencies/aeternity"
+        href="https://www.coingecko.com/en/coins/aeternity"
         target="_blank"
       >
-        coinmarketcap.com
+        coingecko.com
       </a>
     </div>
   </div>
