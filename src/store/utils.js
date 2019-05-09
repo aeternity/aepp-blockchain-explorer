@@ -1,14 +1,14 @@
-export const wrapActionsWithResolvedEpoch = actions =>
+export const wrapActionsWithResolvedNode = actions =>
   Object.entries(actions).reduce((p, [actionName, actionFunction]) => ({
     ...p,
     async [actionName] (store, ...args) {
-      const storeWithResolvedEpoch = {
+      const storeWithResolvedNode = {
         ...store,
         rootGetters: {
           ...store.rootGetters,
-          epoch: await store.rootGetters.epochPromise
+          node: await store.rootGetters.nodePromise
         }
       }
-      return actionFunction.call(storeWithResolvedEpoch, storeWithResolvedEpoch, ...args)
+      return actionFunction.call(storeWithResolvedNode, storeWithResolvedNode, ...args)
     }
   }), {})

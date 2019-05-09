@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { wrapActionsWithResolvedEpoch } from '../utils'
+import { wrapActionsWithResolvedNode } from '../utils'
 
 export default {
   namespaced: true,
@@ -18,7 +18,7 @@ export default {
       Vue.set(state.transactions, transaction.hash, transaction)
     }
   },
-  actions: wrapActionsWithResolvedEpoch({
+  actions: wrapActionsWithResolvedNode({
     /**
      *
      * @param state
@@ -27,16 +27,16 @@ export default {
      * @param hash
      * @return {Promise<*>}
      */
-    async getTxByHash ({ state, commit, rootGetters: { epoch } }, hash) {
+    async getTxByHash ({ state, commit, rootGetters: { node } }, hash) {
       if (state.transactions[hash]) return state.transactions[hash]
 
-      const transaction = await epoch.tx(hash, true)
+      const transaction = await node.tx(hash, true)
       commit('setTransaction', transaction)
 
       return transaction
     },
-    async getTxByGeneration ({ state, commit, rootGetters: { epoch } }, { start, end }) {
-      const listTxRequest = await fetch(`${process.env.VUE_APP_EPOCH_URL}middleware/transactions/interval/${start}/${end}`)
+    async getTxByGeneration ({ state, commit, rootGetters: { node } }, { start, end }) {
+      const listTxRequest = await fetch(`${process.env.VUE_APP_NODE_URL}middleware/transactions/interval/${start}/${end}`)
       const listTx = (await listTxRequest.json())
       return listTx.transactions
     }

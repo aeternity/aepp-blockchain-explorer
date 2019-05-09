@@ -23,16 +23,22 @@ export default {
        * Pulling market stats
        * @type {Response}
        */
-      const market = await fetch('https://api.coinmarketcap.com/v1/ticker/aeternity/?convert=CHF')
+      const marketCHF = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=aeternity&vs_currencies=chf&include_market_cap=true')
+      const marketBTC = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=aeternity&vs_currencies=btc&include_market_cap=true')
+      const { aeternity: aeCHF } = await marketCHF.json()
+      const { aeternity: aeBTC } = await marketBTC.json()
 
       /**
        * Renaming variables
        */
       const {
-        price_btc: priceBtc,
-        market_cap_chf: marketCapChf,
-        price_chf: priceChf
-      } = (await market.json())[0]
+        chf_market_cap: marketCapChf,
+        chf: priceChf
+      } = aeCHF
+
+      const {
+        btc: priceBtc
+      } = aeBTC
 
       /**
        * committing to the state

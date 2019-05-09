@@ -10,9 +10,7 @@
         {{ networkName }}
       </span>
       <span v-else>
-        <span
-          class="disabled-text"
-        >
+        <span class="disabled-text">
           Connecting...
         </span>
         <AeLoader />
@@ -33,14 +31,9 @@ export default {
   },
   computed: {
     networkName () {
-      let url = this.$store.state.epochUrl
-      let name = url.replace(/(?:http(?:s)?:)?\/\/([^.]+).*/, '$1')
-      if (name) {
-        let shortname = name.replace(/([^.]+)-net-api/, '$1')
-        if (shortname) {
-          return `${shortname} network`
-        }
-        return name
+      const url = this.$store.state.nodeUrl
+      if (process.env.VUE_APP_NETWORK) {
+        return `${process.env.VUE_APP_NETWORK} network`
       }
       return url
     },
@@ -52,36 +45,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/mixins.scss';
+@import "../style/mixins.scss";
 
 .network-name {
-  text-transform:uppercase;
-  position:fixed;
+  text-transform: uppercase;
+  position: fixed;
   top: 30px;
-  right:20px;
+  right: 20px;
   color: $white;
   @include font-size(xs);
-  font-weight:500;
-  padding:5px 7px;
-  background: #F7296E;
+  font-weight: 500;
+  padding: 5px 7px;
+  background: #f7296e;
   border-radius: 5px;
 
   @include only-phone {
-    width:100%;
+    width: 100%;
     top: auto;
-    bottom:0;
-    left:0;
-    border-radius:0;
-    padding:15px 0;
-    margin:0;
-    text-align:center;
-    z-index:1;
+    bottom: 0;
+    left: 0;
+    border-radius: 0;
+    padding: 15px 0;
+    margin: 0;
+    text-align: center;
+    z-index: 1;
   }
 }
 
 .ae-loader {
   margin: 0% !important;
-  border: .2em solid rgb(255, 255, 255) !important;
+  border: 0.2em solid rgb(255, 255, 255) !important;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
 }
