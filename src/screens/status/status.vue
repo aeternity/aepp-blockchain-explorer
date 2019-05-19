@@ -251,7 +251,7 @@ export default {
   computed: {
     ...mapState({
       nodeStatus: '$nodeStatus',
-      node: 'epochUrl'
+      node: 'nodeUrl'
     }),
     isLoading () {
       return !(this.nodeStatus.top && this.nodeStatus.version)

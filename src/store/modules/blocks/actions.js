@@ -1,8 +1,8 @@
 import times from 'lodash/times'
 import isEqual from 'lodash/isEqual'
-import { wrapActionsWithResolvedEpoch } from '../../utils'
+import { wrapActionsWithResolvedNode } from '../../utils'
 
-export default wrapActionsWithResolvedEpoch({
+export default wrapActionsWithResolvedNode({
   /**
    * height fetches the block-height
    * @param {Object} state
@@ -10,9 +10,9 @@ export default wrapActionsWithResolvedEpoch({
    * @param {Function} commit
    * @return {Object}
    */
-  async height ({ state, rootGetters: { epoch }, commit }) {
+  async height ({ state, rootGetters: { node }, commit }) {
     try {
-      const height = await epoch.height()
+      const height = await node.height()
 
       if (height === state.height) {
         return state.height
@@ -33,14 +33,14 @@ export default wrapActionsWithResolvedEpoch({
    * @param hash
    * @returns {Promise<*>}
    */
-  async getGenerationFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
+  async getGenerationFromHash ({ state, rootGetters: { node }, commit }, hash) {
     if (state.hashToHeight[hash]) {
       return state.generations[state.hashToHeight[hash]]
     }
-    const generation = await epoch.api.getGenerationByHash(hash)
+    const generation = await node.api.getGenerationByHash(hash)
     generation.numTransactions = 0
     const height = generation.keyBlock.height
-    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + 'middleware/transactions/interval/' + height + '/' + height)
+    const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = (await resp.json())['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
@@ -59,9 +59,9 @@ export default wrapActionsWithResolvedEpoch({
    * @param {String} hash
    * @return {*}
    */
-  async getBlockFromHash ({ state, rootGetters: { epoch }, commit }, hash) {
-    const block = await epoch.api.getMicroBlockHeaderByHash(hash)
-    block.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
+  async getBlockFromHash ({ state, rootGetters: { node }, commit }, hash) {
+    const block = await node.api.getMicroBlockHeaderByHash(hash)
+    block.transactions = (await node.api.getMicroBlockTransactionsByHash(hash)).transactions
 
     if (isEqual(state.block, block)) {
       return state.block
@@ -81,14 +81,14 @@ export default wrapActionsWithResolvedEpoch({
    * @param {String} height
    * @return {*}
    */
-  async getGenerationFromHeight ({ state, rootGetters: { epoch }, commit }, height) {
+  async getGenerationFromHeight ({ state, rootGetters: { node }, commit }, height) {
     if (!(state.height === height || state.height - 1 === height) && state.generations[height]) {
       // last two generations are prone to change
       // return if generation to get is not last or second last, and already exist in memory
       return
     }
-    const generation = await epoch.api.getGenerationByHeight(height)
-    const resp = await fetch(process.env.VUE_APP_EPOCH_URL + 'middleware/transactions/interval/' + height + '/' + height)
+    const generation = await node.api.getGenerationByHeight(height)
+    const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/interval/' + height + '/' + height)
     generation.numTransactions = (await resp.json())['transactions'].length
     if (isEqual(state.generation, generation)) {
       return state.generation
@@ -98,7 +98,7 @@ export default wrapActionsWithResolvedEpoch({
 
     return generation
   },
-  async getMicroBlocksByHeight ({ state, rootGetters: { epoch }, commit }, { height, numBlocks }) {
+  async getMicroBlocksByHeight ({ state, rootGetters: { node }, commit }, { height, numBlocks }) {
     numBlocks = numBlocks || Infinity
     let generation = state.generations[height]
     const blocksPresent = state.microBlocks[height] ? state.microBlocks[height].length : 0
@@ -106,8 +106,8 @@ export default wrapActionsWithResolvedEpoch({
     const blocksToGet = (await Promise.all(
       generation.microBlocks.slice(blocksPresent, numblocksToGet).map(
         async (hash) => {
-          let microBlock = await epoch.api.getMicroBlockHeaderByHash(hash)
-          microBlock.transactions = (await epoch.api.getMicroBlockTransactionsByHash(hash)).transactions
+          let microBlock = await node.api.getMicroBlockHeaderByHash(hash)
+          microBlock.transactions = (await node.api.getMicroBlockTransactionsByHash(hash)).transactions
           return microBlock
         }
       )
@@ -126,8 +126,8 @@ export default wrapActionsWithResolvedEpoch({
    * @param {String} height
    * @return {*}
    */
-  async getBlockFromHeight ({ state, rootGetters: { epoch }, commit }, height) {
-    const block = await epoch.api.getKeyBlockByHeight(height)
+  async getBlockFromHeight ({ state, rootGetters: { node }, commit }, height) {
+    const block = await node.api.getKeyBlockByHeight(height)
 
     if (isEqual(state.block, block)) {
       return state.block
@@ -148,7 +148,7 @@ export default wrapActionsWithResolvedEpoch({
    * @param {Number} size
    * @return {*}
    */
-  async getLatestGenerations ({ state, rootGetters: { epoch }, commit, dispatch }, size) {
+  async getLatestGenerations ({ state, rootGetters: { node }, commit, dispatch }, size) {
     try {
       await dispatch('height')
       const generations = await Promise.all(

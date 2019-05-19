@@ -1,9 +1,9 @@
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
-import { wrapActionsWithResolvedEpoch } from '../../utils'
+import { wrapActionsWithResolvedNode } from '../../utils'
 import camelcaseKeysDeep from 'camelcase-keys-deep'
 
-export default wrapActionsWithResolvedEpoch({
+export default wrapActionsWithResolvedNode({
   /**
    * get the account details based on an address
    * @param {Object} state
@@ -12,17 +12,16 @@ export default wrapActionsWithResolvedEpoch({
    * @param {String} address
    * @return {*}
    */
-  async get ({ state, rootGetters: { epoch }, commit }, address) {
+  async get ({ state, rootGetters: { node }, commit }, address) {
     let balance = 0
     let numTransactions = 0
     try {
-      balance = await epoch.balance(address, { format: false })
-      const resp = await fetch(process.env.VUE_APP_EPOCH_URL + 'middleware/transactions/account/' + address + '/count')
+      balance = await node.balance(address, { format: false })
+      const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/account/' + address + '/count')
       numTransactions = (await resp.json())['count']
     } catch (e) {
       balance = 0
       numTransactions = 0
-      throw new Error(e)
     }
     const account = { address, balance, numTransactions }
     if (isEqual(state.accounts[address], account)) return account
@@ -30,19 +29,21 @@ export default wrapActionsWithResolvedEpoch({
     return account
   },
 
-  async getTransactions ({ state, rootGetters: { epoch }, commit }, { address, transactionsToGet, increaseBy = 10 }) {
+  async getTransactions ({ state, commit }, { address, transactionsToGet, increaseBy = 10 }) {
     const page = typeof transactionsToGet === 'undefined' ? 1 : Math.ceil(transactionsToGet / increaseBy)
-    let transactions = state.accountTransactions[address] ? state.accountTransactions[address] : []
+    const transactions = state.accountTransactions[address] ? state.accountTransactions[address] : []
+    let totalTx = []
     try {
-      const resp = await fetch(process.env.VUE_APP_EPOCH_URL + 'middleware/transactions/account/' + address + '?limit=' + increaseBy + '&page=' + page)
-      transactions = transactions.concat(camelcaseKeysDeep((await resp.json()).transactions))
+      const resp = await fetch(process.env.VUE_APP_NODE_URL + 'middleware/transactions/account/' + address + '?limit=' + increaseBy + '&page=' + page)
+      const transactions2 = camelcaseKeysDeep((await resp.json()))
+      totalTx = transactions2.map(obj => transactions.find(o => o.hash === obj.hash) || obj)
     } catch (e) {
       throw new Error(e)
     }
-    const account = { address, transactions }
+    const account = { address, transactions: totalTx }
     const stateTransactions = state.accounts[address] ? state.accounts[address].transactions : []
-    if (isEqual(stateTransactions, transactions)) return (state.accounts[address])
-    commit('setTransactions', { address, transactions })
+    if (isEqual(stateTransactions, totalTx)) return (state.accounts[address])
+    commit('setTransactions', { address, transactions: totalTx })
     return account
   },
 
