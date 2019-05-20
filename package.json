@@ -13,7 +13,7 @@
   "dependencies": {
     "@aeternity/aepp-components": "2.0.13",
     "@aeternity/aepp-components-3": "^3.0.0-alpha.9",
-    "@aeternity/aepp-sdk": "3.0.0",
+    "@aeternity/aepp-sdk": "3.3.0",
     "bignumber.js": "^8.0.1",
     "camelcase-keys-deep": "^0.1.0",
     "lodash": "^4.17.5",
