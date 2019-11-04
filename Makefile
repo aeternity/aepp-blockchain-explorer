@@ -6,8 +6,8 @@ DOCKER_REGISTRY = 166568770115.dkr.ecr.eu-central-1.amazonaws.com
 DOCKER_IMAGE = aepp-explorer
 DOCKER_TAG = $(shell git describe --always)
 # node url used at build time
-VUE_APP_NODE_URL=https://roma-net.mdw.aepps.com/
-VUE_APP_NETWORK=Minerva
+VUE_APP_NODE_URL=https://mainnet.aeternal.io/
+VUE_APP_NETWORK=Mainnet
 
 .PHONY: list
 list:
